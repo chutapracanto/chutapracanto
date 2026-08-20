@@ -179,68 +179,53 @@
     </div>
   </footer>
 
-  <script>
-    // 1. CARREGAR NOTÍCIAS DO NOTICIAS.JSON
-    async function fetchNews() {
-      try {
-        const response = await fetch('./noticias.json');
-        const news = await response.json();
+ <script>
+async function carregarNoticias() {
+  try {
+    const response = await fetch('https://api.github.com/repos/chutapracanto/chutapracanto/contents/content/noticias');
+    if (!response.ok) return;
+    
+    const files = await response.json();
+    const noticiasContainer = document.querySelector('.news-grid') || document.getElementById('noticias-container');
+    
+    if (!noticiasContainer) return;
+    
+    noticiasContainer.innerHTML = '';
 
-        const mainNews = news.find(item => item.tipo === 'destaque') || news[0];
-        const subNews = news.filter(item => item !== mainNews);
+    for (const file of files) {
+      if (file.name.endsWith('.md')) {
+        const res = await fetch(file.download_url);
+        const text = await res.text();
+        
+        const titleMatch = text.match(/title:\s*"(.*?)"/);
+        const tagMatch = text.match(/tag:\s*"(.*?)"/);
+        const imgMatch = text.match(/imagem:\s*"(.*?)"/);
+        const descMatch = text.match(/descricao:\s*"(.*?)"/);
+        
+        const title = titleMatch ? titleMatch[1] : 'Sem título';
+        const tag = tagMatch ? tagMatch[1] : 'Geral';
+        const imagem = imgMatch ? imgMatch[1] : 'https://via.placeholder.com/600x400';
+        const descricao = descMatch ? descMatch[1] : '';
 
-        document.getElementById('main-news-container').innerHTML = `
-          <div class="news-img" style="background-image: url('${mainNews.imagem}')"></div>
-          <div class="news-content">
-            <div class="tag">${mainNews.tag}</div>
-            <h3 class="news-title">${mainNews.titulo}</h3>
-            <p class="news-desc">${mainNews.descricao}</p>
-            <a href="${mainNews.link}" class="see-more">LER ARTIGO COMPLETO →</a>
+        const card = document.createElement('div');
+        card.className = 'news-card';
+        card.innerHTML = `
+          <img src="${imagem}" alt="${title}" style="width:100%; height:200px; object-fit:cover; border-radius:8px;">
+          <div style="padding: 1rem 0;">
+            <span style="color: var(--neon-green, #39ff14); font-size: 0.8rem; font-weight: bold; text-transform: uppercase;">${tag}</span>
+            <h3 style="margin: 0.5rem 0; font-size: 1.1rem;">${title}</h3>
+            <p style="color: #a0a0a0; font-size: 0.9rem;">${descricao}</p>
           </div>
         `;
-
-        const subContainer = document.getElementById('sub-news-container');
-        subContainer.innerHTML = subNews.map(item => `
-          <a href="${item.link}" class="sub-news-item">
-            <div class="tag">${item.tag}</div>
-            <h4>${item.titulo}</h4>
-          </a>
-        `).join('');
-      } catch (err) {
-        console.error('Erro ao carregar notícias:', err);
+        noticiasContainer.appendChild(card);
       }
     }
+  } catch (error) {
+    console.error('Erro ao carregar notícias:', error);
+  }
+}
 
-    // 2. CARREGAR SHORTS DO YOUTUBE AUTOMATICAMENTE
-    async function fetchYouTubeShorts() {
-      const channelId = 'UC_PLACEHOLDER'; // Atualiza quando tiveres o Channel ID
-      const rssFeedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
-      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssFeedUrl)}`;
-
-      try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-
-        if (data.status === 'ok' && data.items.length > 0) {
-          const container = document.getElementById('shorts-container');
-          container.innerHTML = data.items.slice(0, 4).map(item => {
-            const videoId = item.link.split('v=')[1] || item.guid.split(':')[2];
-            const thumbUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
-            return `
-              <a href="${item.link}" target="_blank" class="short-card">
-                <img class="short-thumb" src="${thumbUrl}" alt="${item.title}">
-                <p style="font-weight: 700; font-size: 0.85rem;">${item.title}</p>
-              </a>
-            `;
-          }).join('');
-        }
-      } catch (err) {
-        console.error('Erro ao carregar YouTube:', err);
-      }
-    }
-
-    fetchNews();
-    fetchYouTubeShorts();
-  </script>
+document.addEventListener('DOMContentLoaded', carregarNoticias);
+</script>
 </body>
 </html>
