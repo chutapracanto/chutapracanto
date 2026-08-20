@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">ChutaPraCanto</title>
+    <title id="page-title">ChutaPraCanto | Notícia</title>
+    <!-- Importa o mesmo CSS da home para manter o design -->
+    <link rel="stylesheet" href="style.css">
     
     <!-- Meta Tags para Redes Sociais -->
     <meta property="og:type" content="article" />
@@ -11,35 +13,43 @@
     <meta property="og:description" id="meta-desc" content="Notícias e opinião sobre futebol." />
     <meta property="og:image" id="meta-image" content="" />
     <meta name="twitter:card" content="summary_large_image" />
-
-    <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #333; background: #f9fafb; margin: 0; padding: 0; }
-        .article-container { max-width: 700px; margin: 40px auto; background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
-        h1 { font-size: 28px; color: #111; margin-bottom: 10px; }
-        .meta-info { font-size: 14px; color: #666; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
-        .cover-image { width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px; margin-bottom: 25px; }
-        .content { font-size: 17px; color: #222; margin-bottom: 40px; }
-        
-        /* Botão Único de Partilha Nativo */
-        .share-section { border-top: 1px solid #eee; padding-top: 25px; margin-top: 40px; text-align: center; }
-        .btn-share { background: #2563eb; color: #fff; border: none; padding: 12px 24px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: background 0.2s; }
-        .btn-share:hover { background: #1d4ed8; }
-    </style>
 </head>
 <body>
 
-<div class="article-container">
-    <div id="article-content">
+<header>
+  <a href="index.html" class="logo-link">
+    <img src="images/logo.png" alt="ChutaPraCanto" class="site-logo">
+  </a>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="noticias.html">Notícias</a></li>
+      <li><a href="media.html">Média</a></li>
+      <li><a href="index.html#equipa">Equipa</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="container" style="padding: 40px 0; color: #fff;">
+    <div id="article-content" style="max-width: 800px; margin: 0 auto;">
         <p>A carregar notícia...</p>
     </div>
 
     <!-- Botão Único de Partilha -->
-    <div class="share-section" id="share-box" style="display:none;">
-        <button class="btn-share" onclick="partilharNoticia()">
+    <div class="share-section" id="share-box" style="display:none; text-align: center; margin-top: 40px;">
+        <button class="btn-neon" onclick="partilharNoticia()" style="cursor: pointer; padding: 12px 24px; font-size: 16px;">
             🔗 Partilhar Notícia
         </button>
     </div>
 </div>
+
+<footer>
+    <p>© 2026 ChutaPraCanto. Futebol e opinião tática.</p>
+    <div class="footer-links">
+      <a href="#">Sobre Nós</a>
+      <a href="#">Contacto</a>
+    </div>
+</footer>
 
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
@@ -72,21 +82,21 @@
             const date = getMeta('date');
             const imagem = getMeta('imagem');
 
-            // Atualizar Meta Tags
             document.getElementById('page-title').innerText = title + " | ChutaPraCanto";
             document.getElementById('meta-title').content = title;
             document.getElementById('meta-desc').content = subtitulo;
             if(imagem) document.getElementById('meta-image').content = window.location.origin + imagem;
 
-            // Desenhar conteúdo
             const htmlBody = marked.parse(markdownBody);
+            
+            // Aqui usamos as classes do teu CSS (como .news-card, etc, se necessário)
             document.getElementById('article-content').innerHTML = `
-                <span style="background: #e0e7ff; color: #3730a3; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold;">${categoria || 'SL BENFICA'}</span>
-                <h1>${title}</h1>
-                <div class="meta-info">Por ChutaPraCanto • ${date}</div>
-                ${imagem ? `<img src="${imagem}" class="cover-image" alt="${title}">` : ''}
-                <p style="font-size: 18px; font-weight: 500; color: #555;">${subtitulo}</p>
-                <div class="content">${htmlBody}</div>
+                <span class="tag">${categoria || 'SL BENFICA'}</span>
+                <h1 style="margin: 15px 0;">${title}</h1>
+                <div class="meta-info" style="color: #888; margin-bottom: 20px;">Por ChutaPraCanto • ${date}</div>
+                ${imagem ? `<img src="${imagem}" style="width: 100%; border-radius: 8px; margin-bottom: 25px;" alt="${title}">` : ''}
+                <p style="font-size: 1.2rem; color: #ccc; margin-bottom: 30px;">${subtitulo}</p>
+                <div class="article-body" style="font-size: 1.1rem; line-height: 1.8;">${htmlBody}</div>
             `;
             
             document.getElementById('share-box').style.display = "block";
@@ -96,28 +106,18 @@
         }
     }
 
-    // Função de Partilha Nativa (abre o menu do telemóvel/PC ou copia o link)
     async function partilharNoticia() {
         const title = document.getElementById('meta-title').content;
         const url = window.location.href;
-
         if (navigator.share) {
-            try {
-                await navigator.share({
-                    title: title,
-                    url: url
-                });
-            } catch (err) {
-                console.log('Partilha cancelada');
-            }
+            await navigator.share({ title, url }).catch(() => {});
         } else {
             navigator.clipboard.writeText(url);
-            alert('Link copiado para a área de transferência!');
+            alert('Link copiado!');
         }
     }
 
     loadArticle();
 </script>
-
 </body>
 </html>
