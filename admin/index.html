@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Gestão | ChutaPraCanto</title>
+    <title>Publicar Notícia | ChutaPraCanto</title>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f4f6f8; margin: 0; padding: 20px; color: #333; }
-        .container { max-width: 650px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        h2 { margin-top: 0; color: #1a1a1a; font-size: 22px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
-        .form-group { margin-bottom: 18px; }
-        label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 13px; color: #444; }
-        input[type="text"], textarea, input[type="date"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        h2 { margin-top: 0; color: #1a1a1a; font-size: 22px; border-bottom: 2px solid #f0f0f0; padding-bottom: 15px; margin-bottom: 20px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; color: #444; }
+        input[type="text"], textarea, input[type="date"], select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px; background: #fafafa; }
         textarea { height: 120px; resize: vertical; }
-        button { background: #2563eb; color: #fff; border: none; padding: 12px 20px; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; }
+        .image-input-container { display: flex; gap: 10px; }
+        .image-input-container input { flex: 1; }
+        button { background: #2563eb; color: #fff; border: none; padding: 14px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; transition: background 0.2s; }
         button:hover { background: #1d4ed8; }
-        #status { margin-top: 15px; font-weight: bold; text-align: center; font-size: 14px; }
+        #status { margin-top: 20px; font-weight: bold; text-align: center; font-size: 14px; padding: 10px; border-radius: 6px; }
         .login-box { text-align: center; padding: 40px 0; }
     </style>
 </head>
@@ -22,53 +24,45 @@
 
 <div class="container" id="app">
     <div id="login-screen" class="login-box">
-        <h2>Painel ChutaPraCanto</h2>
-        <p style="color: #666; margin-bottom: 20px;">Insere o teu Personal Access Token do GitHub para entrar.</p>
+        <h2>Acesso ao Painel</h2>
         <div class="form-group">
             <input type="password" id="github-token" placeholder="GitHub Personal Access Token">
         </div>
-        <button onclick="salvarToken()">Entrar no Painel</button>
+        <button onclick="salvarToken()">Entrar</button>
     </div>
 
     <div id="admin-screen" style="display: none;">
         <h2>Nova Notícia</h2>
-        
         <div class="form-group">
-            <label>Title</label>
-            <input type="text" id="noticia-title" placeholder="Ex: Benfica bate adversário...">
+            <label>Título</label>
+            <input type="text" id="noticia-titulo" placeholder="Título da notícia...">
         </div>
-
         <div class="form-group">
-            <label>Content</label>
-            <textarea id="noticia-content" style="height: 180px;" placeholder="Escreve aqui o texto completo da notícia..."></textarea>
+            <label>Subtítulo / Descrição Curta</label>
+            <textarea id="noticia-subtitulo" placeholder="Breve resumo..."></textarea>
         </div>
-
         <div class="form-group">
-            <label>Subtitle</label>
-            <input type="text" id="noticia-subtitle" placeholder="Subtítulo ou resumo curto...">
+            <label>Categoria</label>
+            <input type="text" id="noticia-categoria" value="SL BENFICA">
         </div>
-
         <div class="form-group">
-            <label>Category</label>
-            <input type="text" id="noticia-category" value="SL BENFICA">
+            <label>Data</label>
+            <input type="date" id="noticia-data">
         </div>
-
         <div class="form-group">
-            <label>Published</label>
-            <input type="date" id="noticia-published">
+            <label>Autor</label>
+            <input type="text" id="noticia-autor" value="ChutaPraCanto">
         </div>
-
         <div class="form-group">
-            <label>Author</label>
-            <input type="text" id="noticia-author" value="ChutaPraCanto">
+            <label>Imagem (URL ou Upload)</label>
+            <input type="file" id="image-upload" accept="image/*" style="margin-bottom: 5px;">
+            <input type="text" id="noticia-imagem-url" placeholder="Ou cola aqui o URL da imagem...">
         </div>
-
         <div class="form-group">
-            <label>Featured Image</label>
-            <input type="text" id="noticia-image" placeholder="/images/uploads/exemplo.jpg">
+            <label>Conteúdo (Markdown)</label>
+            <textarea id="noticia-body" style="height: 250px;" placeholder="Escreve o artigo..."></textarea>
         </div>
-
-        <button onclick="publicarNoticia()">Publicar Notícia no Site</button>
+        <button onclick="publicarNoticia()">Publicar Notícia</button>
         <div id="status"></div>
     </div>
 </div>
@@ -76,101 +70,88 @@
 <script>
     const REPO = "chutapracanto/chutapracanto";
     const BRANCH = "main";
-
-    window.onload = function() {
-        const savedToken = localStorage.getItem("gh_token_cpc");
-        if (savedToken) {
-            document.getElementById("login-screen").style.display = "none";
-            document.getElementById("admin-screen").style.display = "block";
-            // Preencher data de hoje por defeito
-            document.getElementById("noticia-published").valueAsDate = new Date();
-        }
-    };
+    document.getElementById("noticia-data").valueAsDate = new Date();
 
     function salvarToken() {
         const token = document.getElementById("github-token").value.trim();
-        if(!token) return alert("Insere um token válido!");
         localStorage.setItem("gh_token_cpc", token);
         location.reload();
     }
 
+    async function uploadImage() {
+        const fileInput = document.getElementById('image-upload');
+        if (fileInput.files.length > 0) {
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            return new Promise((resolve) => {
+                reader.onloadend = () => {
+                    const base64Content = reader.result.split(',')[1];
+                    resolve({ name: file.name, content: base64Content });
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+        return null;
+    }
+
     async function publicarNoticia() {
         const token = localStorage.getItem("gh_token_cpc");
-        const title = document.getElementById("noticia-title").value.trim();
-        const content = document.getElementById("noticia-content").value.trim();
-        const subtitle = document.getElementById("noticia-subtitle").value.trim();
-        const category = document.getElementById("noticia-category").value.trim();
-        const published = document.getElementById("noticia-published").value;
-        const author = document.getElementById("noticia-author").value.trim();
-        const image = document.getElementById("noticia-image").value.trim();
+        const titulo = document.getElementById("noticia-titulo").value.trim();
+        const subtitulo = document.getElementById("noticia-subtitulo").value.trim();
+        const categoria = document.getElementById("noticia-categoria").value.trim();
+        const data = document.getElementById("noticia-data").value;
+        const autor = document.getElementById("noticia-autor").value.trim();
+        const imgUrl = document.getElementById("noticia-imagem-url").value.trim();
+        const body = document.getElementById("noticia-body").value.trim();
         const statusEl = document.getElementById("status");
 
-        if(!title || !content) {
-            alert("Os campos Title e Content são obrigatórios!");
-            return;
+        statusEl.innerText = "A processar...";
+        
+        let finalImageUrl = imgUrl;
+        const imageData = await uploadImage();
+        if(imageData) {
+            const uploadResp = await fetch(`https://api.github.com/repos/${REPO}/contents/images/uploads/${imageData.name}`, {
+                method: "PUT",
+                headers: { "Authorization": `token ${token}`, "Content-Type": "application/json" },
+                body: JSON.stringify({ message: "Upload imagem", content: imageData.content })
+            });
+            finalImageUrl = `/images/uploads/${imageData.name}`;
         }
 
-        statusEl.style.color = "#333";
-        statusEl.innerText = "A publicar notícia...";
-
-        // Criar slug limpo para o nome do ficheiro baseado no Title
-        const slug = title.toLowerCase()
-            .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-            .replace(/[^a-z0-9]+/g, "-")
-            .replace(/^-+|-+$/g, "");
-        
+        const slug = titulo.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-");
         const filename = `content/noticias/${slug}.md`;
-
-        // Gerar o frontmatter idêntico ao do Framer
+        
         const fileContent = `---
-title: "${title}"
-subtitle: "${subtitle}"
-category: "${category}"
-published: "${published}"
-author: "${author}"
-image: "${image}"
+title: "${titulo}"
+subtitulo: "${subtitulo}"
+categoria: "${categoria}"
+date: "${data}"
+author: "${autor}"
+imagem: "${finalImageUrl}"
 ---
-${content}`;
+${body}`;
 
-        const contentEncoded = btoa(unescape(encodeURIComponent(fileContent)));
+        const response = await fetch(`https://api.github.com/repos/${REPO}/contents/${filename}`, {
+            method: "PUT",
+            headers: { "Authorization": `token ${token}`, "Content-Type": "application/json" },
+            body: JSON.stringify({ message: "Nova notícia: " + titulo, content: btoa(unescape(encodeURIComponent(fileContent))), branch: BRANCH })
+        });
 
-        try {
-            const response = await fetch(`https://api.github.com/repos/${REPO}/contents/${filename}`, {
-                method: "PUT",
-                headers: {
-                    "Authorization": `token ${token}`,
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    message: `Nova notícia: ${title}`,
-                    content: contentEncoded,
-                    branch: BRANCH
-                })
-            });
-
-            if(response.ok) {
-                statusEl.style.color = "green";
-                statusEl.innerText = "Notícia publicada com sucesso! O site vai atualizar em segundos.";
-                // Limpar campos principais
-                document.getElementById("noticia-title").value = "";
-                document.getElementById("noticia-content").value = "";
-                document.getElementById("noticia-subtitle").value = "";
-                document.getElementById("noticia-image").value = "";
-            } else {
-                const err = await response.json();
-                throw new Error(err.message || "Erro ao comunicar com o GitHub");
-            }
-        } catch (error) {
-            statusEl.style.color = "red";
-            statusEl.innerText = "Erro: " + error.message;
-            if(error.message.includes("Bad credentials")) {
-                localStorage.removeItem("gh_token_cpc");
-                alert("O teu Token expirou ou é inválido. Inicia sessão novamente.");
-                location.reload();
-            }
+        if(response.ok) {
+            statusEl.style.backgroundColor = "#dcfce7";
+            statusEl.innerText = "Publicado com sucesso!";
+        } else {
+            statusEl.style.backgroundColor = "#fee2e2";
+            statusEl.innerText = "Erro ao publicar.";
         }
     }
-</script>
 
+    window.onload = () => {
+        if (localStorage.getItem("gh_token_cpc")) {
+            document.getElementById("login-screen").style.display = "none";
+            document.getElementById("admin-screen").style.display = "block";
+        }
+    };
+</script>
 </body>
 </html>
