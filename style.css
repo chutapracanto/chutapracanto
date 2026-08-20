@@ -262,7 +262,7 @@ header {
 }
 
 .site-logo {
-  height: 90px;      /* Força a imagem a ter 90px de altura */
+  height: 110px;      /* Força a imagem a ter 110px de altura */
   width: auto;       /* Mantém a proporção original */
   max-width: 280px;  /* Define uma largura máxima generosa */
   object-fit: contain;
