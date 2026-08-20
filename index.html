@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChutaPraCanto | Futebol & Opinião Tática</title>
+  <style>
+    :root {
+      --neon-green: #39ff14;
+      --bg-black: #080808;
+      --card-bg: #121212;
+      --border-color: #222222;
+      --text-gray: #a0a0a0;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+    body { background-color: var(--bg-black); color: #ffffff; line-height: 1.5; }
+    a { color: inherit; text-decoration: none; }
+
+    /* HEADER */
+    header {
+      background-color: #000;
+      border-bottom: 1px solid var(--border-color);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo { font-size: 1.4rem; font-weight: 900; color: var(--neon-green); letter-spacing: -0.5px; }
+    nav ul { display: flex; gap: 1.5rem; list-style: none; font-weight: 600; font-size: 0.9rem; }
+    nav a:hover { color: var(--neon-green); }
+
+    .container { max-width: 1140px; margin: 0 auto; padding: 2rem 1rem; }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 4rem 1rem;
+      background: radial-gradient(circle at center, #152512 0%, var(--bg-black) 70%);
+      border-radius: 16px;
+      margin-bottom: 3rem;
+      border: 1px solid #1e3318;
+    }
+    .hero-tag { color: var(--neon-green); font-size: 0.85rem; font-weight: 800; letter-spacing: 1.5px; margin-bottom: 0.8rem; }
+    .hero h1 { font-size: 2.8rem; font-weight: 900; margin-bottom: 1rem; line-height: 1.2; }
+    .hero p { color: var(--text-gray); max-width: 600px; margin: 0 auto 2rem; font-size: 1.1rem; }
+    
+    .btn-neon {
+      background-color: var(--neon-green);
+      color: #000;
+      padding: 0.9rem 2rem;
+      font-weight: 800;
+      border-radius: 50px;
+      display: inline-block;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      transition: 0.2s;
+    }
+    .btn-neon:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(57, 255, 20, 0.4); }
+
+    /* SECÇÕES */
+    .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.5rem; }
+    .section-title { font-size: 1.5rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px; }
+    .see-more { color: var(--neon-green); font-size: 0.85rem; font-weight: 700; }
+
+    /* NOTÍCIAS */
+    .news-grid { display: grid; grid-template-columns: 1.8fr 1fr; gap: 1.5rem; margin-bottom: 4rem; }
+    .main-news, .sub-news-item { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; }
+    .main-news { display: flex; flex-direction: column; }
+    .news-img { width: 100%; height: 260px; background-color: #222; background-size: cover; background-position: center; }
+    .news-content { padding: 1.5rem; }
+    .tag { color: var(--neon-green); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; margin-bottom: 0.5rem; }
+    .news-title { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.8rem; }
+    .news-desc { color: var(--text-gray); font-size: 0.9rem; margin-bottom: 1rem; }
+
+    .sub-news-list { display: flex; flex-direction: column; gap: 1rem; }
+    .sub-news-item { padding: 1rem; transition: border-color 0.2s; }
+    .sub-news-item:hover { border-color: var(--neon-green); }
+    .sub-news-item h4 { font-size: 0.95rem; font-weight: 700; margin-top: 0.3rem; }
+
+    /* SHORTS */
+    .shorts-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 4rem; }
+    .short-card { background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border-color); padding: 0.8rem; text-align: center; transition: transform 0.2s; }
+    .short-card:hover { transform: translateY(-4px); border-color: var(--neon-green); }
+    .short-thumb { width: 100%; height: 320px; background: #222; border-radius: 8px; margin-bottom: 0.8rem; object-fit: cover; }
+
+    /* EQUIPA */
+    .team-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 4rem; }
+    .team-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 2rem; border-radius: 12px; text-align: center; }
+    .team-card h3 { font-size: 1.2rem; margin-bottom: 0.2rem; }
+    .team-card p { color: var(--neon-green); font-size: 0.8rem; font-weight: 800; text-transform: uppercase; }
+
+    /* FOOTER */
+    footer { background: #000; border-top: 1px solid var(--border-color); padding: 3rem 1rem; text-align: center; color: var(--text-gray); font-size: 0.85rem; }
+    .footer-links { margin: 1rem 0; display: flex; justify-content: center; gap: 1.5rem; }
+
+    @media (max-width: 768px) {
+      .news-grid, .team-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">ChutaPraCanto</div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#news">Notícias</a></li>
+        <li><a href="#shorts">Shorts</a></li>
+        <li><a href="#podcast">Podcast</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+
+    <section class="hero">
+      <div class="hero-tag">AO VIVO · FUTEBOL SEM FILTRO</div>
+      <h1>Análise Tática, Debate Pós-Jogo e Opinião</h1>
+      <p>O jogo não acaba aos 90. Acompanhamos cada detalhe, cada transferência e cada decisão que muda a época.</p>
+      <a href="https://www.youtube.com/@chutapracanto" target="_blank" class="btn-neon">Ver Canal no YouTube</a>
+    </section>
+
+    <!-- NOTÍCIAS (CARREGADAS VIA JSON) -->
+    <section id="news">
+      <div class="section-header">
+        <h2 class="section-title">Em Destaque</h2>
+      </div>
+      
+      <div class="news-grid">
+        <div class="main-news" id="main-news-container">
+          <!-- Carregado via JS -->
+        </div>
+
+        <div class="sub-news-list" id="sub-news-container">
+          <!-- Carregado via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- SHORTS (AUTOMÁTICOS DO YOUTUBE) -->
+    <section id="shorts">
+      <div class="section-header">
+        <h2 class="section-title">Shorts Recentes</h2>
+        <a href="https://www.youtube.com/@chutapracanto/shorts" target="_blank" class="see-more">VER TODOS NO YOUTUBE →</a>
+      </div>
+      <div class="shorts-grid" id="shorts-container">
+        <p style="color: var(--text-gray);">A carregar os vídeos mais recentes...</p>
+      </div>
+    </section>
+
+    <!-- EQUIPA -->
+    <section>
+      <div class="section-header">
+        <h2 class="section-title">A Equipa</h2>
+      </div>
+      <div class="team-grid">
+        <div class="team-card">
+          <h3>RUTE COSTA</h3>
+          <p>Moderation</p>
+        </div>
+        <div class="team-card">
+          <h3>PEDRO SOARES</h3>
+          <p>Technical Analysis</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <p>© 2026 ChutaPraCanto. Futebol e opinião tática.</p>
+    <div class="footer-links">
+      <a href="#">Sobre Nós</a>
+      <a href="#">Contacto</a>
+    </div>
+  </footer>
+
+  <script>
+    // 1. CARREGAR NOTÍCIAS DO NOTICIAS.JSON
+    async function fetchNews() {
+      try {
+        const response = await fetch('./noticias.json');
+        const news = await response.json();
+
+        const mainNews = news.find(item => item.tipo === 'destaque') || news[0];
+        const subNews = news.filter(item => item !== mainNews);
+
+        document.getElementById('main-news-container').innerHTML = `
+          <div class="news-img" style="background-image: url('${mainNews.imagem}')"></div>
+          <div class="news-content">
+            <div class="tag">${mainNews.tag}</div>
+            <h3 class="news-title">${mainNews.titulo}</h3>
+            <p class="news-desc">${mainNews.descricao}</p>
+            <a href="${mainNews.link}" class="see-more">LER ARTIGO COMPLETO →</a>
+          </div>
+        `;
+
+        const subContainer = document.getElementById('sub-news-container');
+        subContainer.innerHTML = subNews.map(item => `
+          <a href="${item.link}" class="sub-news-item">
+            <div class="tag">${item.tag}</div>
+            <h4>${item.titulo}</h4>
+          </a>
+        `).join('');
+      } catch (err) {
+        console.error('Erro ao carregar notícias:', err);
+      }
+    }
+
+    // 2. CARREGAR SHORTS DO YOUTUBE AUTOMATICAMENTE
+    async function fetchYouTubeShorts() {
+      const channelId = 'UC_PLACEHOLDER'; // Atualiza quando tiveres o Channel ID
+      const rssFeedUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`;
+      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssFeedUrl)}`;
+
+      try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+
+        if (data.status === 'ok' && data.items.length > 0) {
+          const container = document.getElementById('shorts-container');
+          container.innerHTML = data.items.slice(0, 4).map(item => {
+            const videoId = item.link.split('v=')[1] || item.guid.split(':')[2];
+            const thumbUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+            return `
+              <a href="${item.link}" target="_blank" class="short-card">
+                <img class="short-thumb" src="${thumbUrl}" alt="${item.title}">
+                <p style="font-weight: 700; font-size: 0.85rem;">${item.title}</p>
+              </a>
+            `;
+          }).join('');
+        }
+      } catch (err) {
+        console.error('Erro ao carregar YouTube:', err);
+      }
+    }
+
+    fetchNews();
+    fetchYouTubeShorts();
+  </script>
+</body>
+</html>
