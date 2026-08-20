@@ -4,58 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Notícia | ChutaPraCanto</title>
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <style>
-    :root {
-      --neon-green: #39ff14;
-      --bg-black: #080808;
-      --card-bg: #121212;
-      --border-color: #222222;
-      --text-gray: #a0a0a0;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
-    body { background-color: var(--bg-black); color: #ffffff; line-height: 1.6; }
-    a { color: inherit; text-decoration: none; }
-    
-    header { background-color: #000; border-bottom: 1px solid var(--border-color); padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; }
-    .logo { font-size: 1.4rem; font-weight: 900; color: var(--neon-green); letter-spacing: -0.5px; }
-    nav ul { display: flex; gap: 1.5rem; list-style: none; font-weight: 600; font-size: 0.9rem; }
-    nav a:hover { color: var(--neon-green); }
-
-    main { max-width: 800px; margin: 2rem auto; padding: 0 1.5rem; }
-    .article-tag { color: var(--neon-green); font-weight: bold; text-transform: uppercase; font-size: 0.85rem; }
-    .article-title { font-size: 2.2rem; margin: 0.5rem 0 1rem 0; line-height: 1.2; }
-    .article-hero { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 12px; margin-bottom: 2rem; border: 1px solid var(--border-color); }
-    .article-content { font-size: 1.1rem; color: #e0e0e0; }
-    .article-content p { margin-bottom: 1.2rem; }
-    .article-content h2, .article-content h3 { color: #fff; margin: 1.5rem 0 0.8rem 0; }
-
-    footer { border-top: 1px solid var(--border-color); padding: 2rem; text-align: center; color: var(--text-gray); font-size: 0.85rem; margin-top: 4rem; }
-  </style>
 </head>
 <body>
 
   <header>
-    <a href="index.html" class="logo">ChutaPraCanto</a>
+    <div class="logo">ChutaPraCanto</div>
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
         <li><a href="noticias.html">Notícias</a></li>
-        <li><a href="shorts.html">Shorts</a></li>
+        <li><a href="index.html#shorts">Shorts</a></li>
       </ul>
     </nav>
   </header>
 
-  <main>
-    <div id="loading" style="text-align: center; padding: 3rem; color: var(--text-gray);">A carregar notícia...</div>
-    <article id="article" style="display: none;">
-      <span class="article-tag" id="tag"></span>
-      <h1 class="article-title" id="title"></h1>
-      <img id="hero-img" class="article-hero" src="" alt="">
-      <div class="article-content" id="body"></div>
+  <div class="container" style="max-width: 800px; margin-top: 2rem;">
+    <article id="artigo-container">
+      <p style="color: var(--text-gray);">A carregar o artigo...</p>
     </article>
-  </main>
+  </div>
 
   <footer>
     <p>© 2026 ChutaPraCanto. Futebol e opinião tática.</p>
@@ -65,33 +35,44 @@
     async function carregarArtigo() {
       const urlParams = new URLSearchParams(window.location.search);
       const slug = urlParams.get('slug');
-      
+
       if (!slug) {
-        window.location.href = 'index.html';
+        window.location.href = 'noticias.html';
         return;
       }
 
       try {
         const response = await fetch(`https://raw.githubusercontent.com/chutapracanto/chutapracanto/main/content/noticias/${slug}.md`);
-        if (!response.ok) throw new Error('Notícia não encontrada');
+        if (!response.ok) {
+          document.getElementById('artigo-container').innerHTML = '<h2>Artigo não encontrado.</h2>';
+          return;
+        }
 
         const text = await response.text();
         const parts = text.split('---');
+
         if (parts.length < 3) return;
 
-        const data = jsyaml.load(parts[1]);
-        const bodyContent = parts.slice(2).join('---');
+        const metadata = jsyaml.load(parts[1]);
+        const markdownContent = parts.slice(2).join('---');
+        const htmlContent = marked.parse(markdownContent);
 
-        document.title = `${data.title} | ChutaPraCanto`;
-        document.getElementById('tag').innerText = data.tag || 'Geral';
-        document.getElementById('title').innerText = data.title;
-        document.getElementById('hero-img').src = data.imagem || 'https://via.placeholder.com/800x450';
-        document.getElementById('body').innerHTML = marked.parse(bodyContent);
+        const container = document.getElementById('artigo-container');
+        document.title = `${metadata.title} | ChutaPraCanto`;
 
-        document.getElementById('loading').style.display = 'none';
-        document.getElementById('article').style.display = 'block';
-      } catch (err) {
-        document.getElementById('loading').innerText = 'Erro ao carregar o artigo.';
+        container.innerHTML = `
+          <span class="tag" style="font-size: 0.9rem;">${metadata.tag || 'Geral'}</span>
+          <h1 style="font-size: 2.2rem; margin: 0.8rem 0; line-height: 1.2;">${metadata.title}</h1>
+          ${metadata.imagem ? `<img src="${metadata.imagem}" alt="${metadata.title}" style="width: 100%; border-radius: 12px; margin: 1.5rem 0;">` : ''}
+          <div style="font-size: 1.1rem; line-height: 1.8; color: #d0d0d0;" class="artigo-corpo">
+            ${htmlContent}
+          </div>
+          <div style="margin-top: 3rem;">
+            <a href="noticias.html" class="btn-neon">← Voltar às Notícias</a>
+          </div>
+        `;
+      } catch (error) {
+        console.error('Erro ao carregar o artigo:', error);
       }
     }
 
