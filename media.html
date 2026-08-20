@@ -1,53 +1,123 @@
-<!-- SECÇÃO 1: VÍDEOS CURTOS -->
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Média | ChutaPraCanto</title>
+  <link rel="icon" type="image/png" href="images/logo.png">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* GARANTIA DE ESTILOS DA PÁGINA DE MÉDIA */
+    body {
+      background-color: #0b0e14;
+      color: #ffffff;
+      font-family: system-ui, -apple-system, sans-serif;
+      margin: 0;
+    }
+    .media-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+    .section-header-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .section-title-green {
+      color: #00ff66;
+      font-size: 1.3rem;
+      margin: 0;
+      font-weight: 700;
+    }
+    .btn-external {
+      display: inline-flex;
+      align-items: center;
+      background-color: transparent;
+      color: #00ff66;
+      border: 1px solid #00ff66;
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .btn-external:hover {
+      background-color: #00ff66;
+      color: #000;
+    }
+    .media-grid-shorts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .media-card {
+      background-color: #121824;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #1f293d;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a href="index.html" class="logo-link">
+      <img src="images/logo.png" alt="ChutaPraCanto" class="site-logo">
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="noticias.html">Notícias</a></li>
+        <li><a href="media.html" class="active">Média</a></li>
+        <li><a href="index.html#equipa">Equipa</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="media-container">
+    
+    <div style="margin-bottom: 2.5rem;">
+      <h1 style="color: #fff; font-size: 2rem; margin: 0;">Central de Média</h1>
+    </div>
+
+    <!-- SECÇÃO 1: VÍDEOS CURTOS -->
     <section style="margin-bottom: 3.5rem;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
-        <h2 style="color: var(--neon-green, #00ff66); font-size: 1.3rem; margin: 0;">
-          ⚡ VÍDEOS CURTOS
-        </h2>
-        <div style="display: flex; align-items: center; gap: 0.8rem;">
-          <a href="https://www.youtube.com/@ChutaPraCanto/shorts" target="_blank" rel="noopener noreferrer" class="btn-external">
-            Vê no YouTube ↗
-          </a>
-          <div>
-            <button class="arrow-btn" onclick="scrollCarousel('carousel-shorts', -1)">‹</button>
-            <button class="arrow-btn" onclick="scrollCarousel('carousel-shorts', 1)">›</button>
-          </div>
-        </div>
+      <div class="section-header-flex">
+        <h2 class="section-title-green">⚡ VÍDEOS CURTOS</h2>
+        <a href="https://www.youtube.com/@ChutaPraCanto/shorts" target="_blank" rel="noopener noreferrer" class="btn-external">
+          Vê no YouTube ↗
+        </a>
       </div>
 
-      <div class="media-carousel vertical-aspect" id="carousel-shorts">
-        <p style="color: #888;">A carregar Vídeos Curtos...</p>
+      <div class="media-card" style="height: 500px;">
+        <iframe src="https://www.youtube.com/embed/videoseries?list=PLUXnJ5IDIDWU" title="Vídeos Curtos - ChutaPraCanto" width="100%" height="100%" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </section>
 
     <!-- SECÇÃO 2: VIDEO PODCASTS -->
     <section style="margin-bottom: 3.5rem;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
-        <h2 style="color: var(--neon-green, #00ff66); font-size: 1.3rem; margin: 0;">
-          🎙️ VIDEO PODCASTS & EPISÓDIOS
-        </h2>
-        <div style="display: flex; align-items: center; gap: 0.8rem;">
-          <a href="https://www.youtube.com/@ChutaPraCanto/podcasts" target="_blank" rel="noopener noreferrer" class="btn-external">
-            Vê no YouTube ↗
-          </a>
-          <div>
-            <button class="arrow-btn" onclick="scrollCarousel('carousel-podcasts', -1)">‹</button>
-            <button class="arrow-btn" onclick="scrollCarousel('carousel-podcasts', 1)">›</button>
-          </div>
-        </div>
+      <div class="section-header-flex">
+        <h2 class="section-title-green">🎙️ VIDEO PODCASTS & EPISÓDIOS</h2>
+        <a href="https://www.youtube.com/@ChutaPraCanto/podcasts" target="_blank" rel="noopener noreferrer" class="btn-external">
+          Vê no YouTube ↗
+        </a>
       </div>
 
-      <div class="media-carousel horizontal-aspect" id="carousel-podcasts">
-        <p style="color: #888;">A carregar Podcasts...</p>
+      <div class="media-card" style="height: 450px;">
+        <iframe src="https://www.youtube.com/embed/videoseries?list=PLIhiPRVaH-qs" title="Video Podcasts - ChutaPraCanto" width="100%" height="100%" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
       </div>
     </section>
 
     <!-- SECÇÃO 3: PODCAST NO SPOTIFY -->
     <section style="margin-bottom: 3.5rem;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
-        <h2 style="color: var(--neon-green, #00ff66); font-size: 1.3rem; margin: 0;">
-          🎧 PODCAST NO SPOTIFY
-        </h2>
+      <div class="section-header-flex">
+        <h2 class="section-title-green">🎧 PODCAST NO SPOTIFY</h2>
         <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" rel="noopener noreferrer" class="btn-external">
           Ouve no Spotify ↗
         </a>
@@ -57,3 +127,12 @@
         <iframe style="border-radius:12px" src="https://open.spotify.com/embed/show/0340sfCl6p2dYzSyU7J3Tv?utm_source=generator&theme=0" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
       </div>
     </section>
+
+  </div>
+
+  <footer>
+    <p>© 2026 ChutaPraCanto. Futebol e opinião tática.</p>
+  </footer>
+
+</body>
+</html>
