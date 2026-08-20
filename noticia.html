@@ -7,6 +7,9 @@
     <!-- CSS oficial do site -->
     <link rel="stylesheet" href="style.css">
     
+    <!-- Biblioteca JS-YAML para ler o cabeçalho das notícias perfeitamente -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+
     <!-- Meta Tags para Redes Sociais -->
     <meta property="og:type" content="article" />
     <meta property="og:title" id="meta-title" content="ChutaPraCanto" />
@@ -15,7 +18,6 @@
     <meta name="twitter:card" content="summary_large_image" />
 
     <style>
-        /* Estilo personalizado para mimetizar o visual limpo dos botões do Spotify */
         .btn-spotify-style {
             display: inline-flex;
             align-items: center;
@@ -90,31 +92,30 @@
             if(!res.ok) throw new Error("Artigo não existe");
             const text = await res.text();
 
-            const parts = text.split("---");
-            const frontmatter = parts[1];
-            const markdownBody = parts.slice(2).join("---");
+            const parts = text.split('---');
+            if (parts.length < 3) throw new Error("Formato do artigo inválido");
 
-            const getMeta = (key) => {
-                const match = frontmatter.match(new RegExp(`${key}:\\s*"([^"]+)"`));
-                return match ? match[1] : '';
-            };
+            // Usar js-yaml para ler corretamente os dados do frontmatter
+            const data = jsyaml.load(parts[1]);
+            const markdownBody = parts.slice(2).join('---');
 
-            const title = getMeta('title');
-            const subtitulo = getMeta('subtitulo');
-            const categoria = getMeta('categoria');
-            const date = getMeta('date');
-            const imagem = getMeta('imagem');
+            const title = data.title || 'Sem título';
+            const subtitulo = data.subtitulo || data.descricao || '';
+            const categoria = data.tag || data.categoria || 'SL BENFICA';
+            const date = data.date || '';
+            const imagem = data.imagem || '';
 
+            // Atualizar Meta Tags para as Redes Sociais
             document.getElementById('page-title').innerText = title + " | ChutaPraCanto";
             document.getElementById('meta-title').content = title;
             document.getElementById('meta-desc').content = subtitulo;
-            if(imagem) document.getElementById('meta-image').content = window.location.origin + imagem;
+            if(imagem) document.getElementById('meta-image').content = window.location.origin + '/' + imagem.replace(/^\//, '');
 
             const htmlBody = marked.parse(markdownBody);
             
-            // Renderização estruturada com a imagem de capa bem visível
+            // Renderização do artigo com a imagem de capa em destaque absoluto
             document.getElementById('article-content').innerHTML = `
-                <span class="tag">${categoria || 'SL BENFICA'}</span>
+                <span class="tag">${categoria}</span>
                 <h1 style="margin: 15px 0 10px 0; font-size: 2.2rem; line-height: 1.2;">${title}</h1>
                 <div class="meta-info" style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 25px;">Por ChutaPraCanto • ${date}</div>
                 
@@ -127,6 +128,7 @@
             document.getElementById('share-box').style.display = "block";
 
         } catch (e) {
+            console.error(e);
             document.getElementById('article-content').innerHTML = "<h2>Erro ao carregar a notícia.</h2>";
         }
     }
