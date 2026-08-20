@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">ChutaPraCanto</title>
     
-    <!-- Meta Tags Dinâmicas para Redes Sociais (Facebook, Twitter, WhatsApp, Threads) -->
+    <!-- Meta Tags para Redes Sociais -->
     <meta property="og:type" content="article" />
     <meta property="og:title" id="meta-title" content="ChutaPraCanto" />
     <meta property="og:description" id="meta-desc" content="Notícias e opinião sobre futebol." />
@@ -20,15 +20,10 @@
         .cover-image { width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px; margin-bottom: 25px; }
         .content { font-size: 17px; color: #222; margin-bottom: 40px; }
         
-        /* Secção de Partilha */
-        .share-section { border-top: 1px solid #eee; padding-top: 25px; margin-top: 40px; }
-        .share-section h3 { font-size: 16px; margin-bottom: 15px; color: #444; }
-        .share-buttons { display: flex; gap: 10px; flex-wrap: wrap; }
-        .share-btn { padding: 10px 16px; border-radius: 6px; font-weight: bold; font-size: 14px; text-decoration: none; color: #fff; display: inline-flex; align-items: center; gap: 6px; cursor: pointer; border: none; }
-        .btn-whatsapp { background: #25d366; }
-        .btn-facebook { background: #1877f2; }
-        .btn-twitter { background: #000000; }
-        .btn-reddit { background: #ff4500; }
+        /* Botão Único de Partilha Nativo */
+        .share-section { border-top: 1px solid #eee; padding-top: 25px; margin-top: 40px; text-align: center; }
+        .btn-share { background: #2563eb; color: #fff; border: none; padding: 12px 24px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: background 0.2s; }
+        .btn-share:hover { background: #1d4ed8; }
     </style>
 </head>
 <body>
@@ -38,19 +33,14 @@
         <p>A carregar notícia...</p>
     </div>
 
-    <!-- Botões de Partilha por baixo da notícia -->
+    <!-- Botão Único de Partilha -->
     <div class="share-section" id="share-box" style="display:none;">
-        <h3>Partilha esta notícia:</h3>
-        <div class="share-buttons">
-            <a id="share-whatsapp" href="#" target="_blank" class="share-btn btn-whatsapp">WhatsApp</a>
-            <a id="share-facebook" href="#" target="_blank" class="share-btn btn-facebook">Facebook</a>
-            <a id="share-twitter" href="#" target="_blank" class="share-btn btn-twitter">X / Twitter</a>
-            <a id="share-reddit" href="#" target="_blank" class="share-btn btn-reddit">Reddit</a>
-        </div>
+        <button class="btn-share" onclick="partilharNoticia()">
+            🔗 Partilhar Notícia
+        </button>
     </div>
 </div>
 
-<!-- Biblioteca simples para ler Markdown no browser -->
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
     async function loadArticle() {
@@ -67,12 +57,10 @@
             if(!res.ok) throw new Error("Artigo não existe");
             const text = await res.text();
 
-            // Separar frontmatter do conteúdo markdown
             const parts = text.split("---");
             const frontmatter = parts[1];
             const markdownBody = parts.slice(2).join("---");
 
-            // Extrair dados do frontmatter YAML de forma simples
             const getMeta = (key) => {
                 const match = frontmatter.match(new RegExp(`${key}:\\s*"([^"]+)"`));
                 return match ? match[1] : '';
@@ -84,37 +72,47 @@
             const date = getMeta('date');
             const imagem = getMeta('imagem');
 
-            // Atualizar Meta Tags da Página para as Redes Sociais puxarem corretamente
+            // Atualizar Meta Tags
             document.getElementById('page-title').innerText = title + " | ChutaPraCanto";
             document.getElementById('meta-title').content = title;
             document.getElementById('meta-desc').content = subtitulo;
-            document.getElementById('meta-image').content = window.location.origin + imagem;
+            if(imagem) document.getElementById('meta-image').content = window.location.origin + imagem;
 
-            // Desenhar o conteúdo no HTML
+            // Desenhar conteúdo
             const htmlBody = marked.parse(markdownBody);
             document.getElementById('article-content').innerHTML = `
-                <span style="background: #e0e7ff; color: #3730a3; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold;">${categoria}</span>
+                <span style="background: #e0e7ff; color: #3730a3; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold;">${categoria || 'SL BENFICA'}</span>
                 <h1>${title}</h1>
                 <div class="meta-info">Por ChutaPraCanto • ${date}</div>
                 ${imagem ? `<img src="${imagem}" class="cover-image" alt="${title}">` : ''}
                 <p style="font-size: 18px; font-weight: 500; color: #555;">${subtitulo}</p>
                 <div class="content">${htmlBody}</div>
             `;
-
-            // Configurar links dos botões de partilha
-            const currentUrl = window.location.href;
-            const encodedUrl = encodeURIComponent(currentUrl);
-            const encodedTitle = encodeURIComponent(title);
-
-            document.getElementById('share-whatsapp').href = `https://api.whatsapp.com/send?text=${encodedTitle}%20-%20${encodedUrl}`;
-            document.getElementById('share-facebook').href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-            document.getElementById('share-twitter').href = `https://twitter.com/intent/tweet?text=${encodedTitle}&url=${encodedUrl}`;
-            document.getElementById('share-reddit').href = `https://reddit.com/submit?url=${encodedUrl}&title=${encodedTitle}`;
             
             document.getElementById('share-box').style.display = "block";
 
         } catch (e) {
             document.getElementById('article-content').innerHTML = "<h2>Erro ao carregar a notícia.</h2>";
+        }
+    }
+
+    // Função de Partilha Nativa (abre o menu do telemóvel/PC ou copia o link)
+    async function partilharNoticia() {
+        const title = document.getElementById('meta-title').content;
+        const url = window.location.href;
+
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: title,
+                    url: url
+                });
+            } catch (err) {
+                console.log('Partilha cancelada');
+            }
+        } else {
+            navigator.clipboard.writeText(url);
+            alert('Link copiado para a área de transferência!');
         }
     }
 
