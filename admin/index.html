@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Publicar Notícia | ChutaPraCanto</title>
-    <!-- Importar ícones e estilos para a barra de formatação -->
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f4f6f8; margin: 0; padding: 20px; color: #333; }
         .container { max-width: 650px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
@@ -12,9 +11,9 @@
         .form-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; color: #444; }
         input[type="text"], textarea, input[type="date"] { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px; background: #fafafa; }
-        textarea { height: 120px; resize: vertical; }
+        textarea { height: 150px; resize: vertical; }
         
-        /* Barra de ferramentas de formatação estilo Framer */
+        /* Barra de ferramentas de formatação */
         .toolbar { display: flex; gap: 6px; background: #f1f5f9; padding: 8px; border-radius: 8px 8px 0 0; border: 1px solid #ddd; border-bottom: none; flex-wrap: wrap; }
         .toolbar button { background: #fff; border: 1px solid #cbd5e1; padding: 6px 10px; font-size: 13px; font-weight: bold; border-radius: 4px; cursor: pointer; color: #334155; width: auto; }
         .toolbar button:hover { background: #e2e8f0; }
@@ -46,7 +45,7 @@
         </div>
         <div class="form-group">
             <label>Subtítulo / Descrição Curta</label>
-            <textarea id="noticia-subtitulo" placeholder="Breve resumo..."></textarea>
+            <textarea id="noticia-subtitulo" placeholder="Breve resumo..." style="height: 80px;"></textarea>
         </div>
         <div class="form-group">
             <label>Categoria</label>
@@ -67,7 +66,7 @@
         </div>
         <div class="form-group">
             <label>Conteúdo do Artigo</label>
-            <!-- Barra de botões para formatação rica -->
+            <!-- Barra de botões para formatação -->
             <div class="toolbar">
                 <button type="button" onclick="formatText('**', '**')"><b>B</b> (Negrito)</button>
                 <button type="button" onclick="formatText('*', '*')"><i>I</i> (Itálico)</button>
@@ -76,7 +75,7 @@
                 <button type="button" onclick="formatText('- ', '')">Lista</button>
                 <button type="button" onclick="formatText('[Texto do Link](https://)', '')">Link</button>
             </div>
-            <textarea id="noticia-body" placeholder="Escreve o artigo aqui... Podes usar os botões em cima para formatar."></textarea>
+            <textarea id="noticia-body" placeholder="Escreve o artigo aqui... Podes colar texto formatado diretamente."></textarea>
         </div>
         <button class="main-btn" onclick="publicarNoticia()">Publicar Notícia</button>
         <div id="status"></div>
@@ -94,7 +93,6 @@
         location.reload();
     }
 
-    // Função para inserir formatação automaticamente onde o cursor está no textarea
     function formatText(wrapperStart, wrapperEnd) {
         const textarea = document.getElementById('noticia-body');
         const start = textarea.selectionStart;
@@ -106,6 +104,30 @@
         textarea.focus();
         textarea.setSelectionRange(start + wrapperStart.length, end + wrapperStart.length);
     }
+
+    // Capturar o evento de colar (Paste) para converter HTML formatado (negritos, listas) em Markdown automaticamente
+    document.getElementById('noticia-body').addEventListener('paste', function(e) {
+        const html = e.clipboardData.getData('text/html');
+        if (html) {
+            e.preventDefault();
+            // Conversor básico de HTML colado para Markdown limpo
+            let tempDiv = document.createElement('div');
+            tempDiv.innerHTML = html;
+            
+            // Converter tags comuns
+            tempDiv.querySelectorAll('b, strong').forEach(el => el.replaceWith(`**${el.textContent}**`));
+            tempDiv.querySelectorAll('i, em').forEach(el => el.replaceWith(`*${el.textContent}*`));
+            tempDiv.querySelectorAll('li').forEach(el => el.replaceWith(`- ${el.textContent}\n`));
+            tempDiv.querySelectorAll('p').forEach(el => el.replaceWith(`${el.textContent}\n\n`));
+            
+            const cleanText = tempDiv.textContent || tempDiv.innerText || "";
+            
+            const textarea = this;
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            textarea.value = textarea.value.substring(0, start) + cleanText + textarea.value.substring(end);
+        }
+    });
 
     async function uploadImage() {
         const fileInput = document.getElementById('image-upload');
