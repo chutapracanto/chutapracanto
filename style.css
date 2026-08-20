@@ -242,3 +242,18 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+.logo-link {
+  display: flex;
+  align-items: center;
+}
+
+.site-logo {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.site-logo:hover {
+  transform: scale(1.05);
+}
