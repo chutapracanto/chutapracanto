@@ -242,13 +242,27 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+header {
+  background-color: #000;
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: 90px; /* Aumentado para dar espaço ao logo */
+}
+
 .logo-link {
   display: flex;
   align-items: center;
+  height: 100%;
 }
 
 .site-logo {
-  height: 45px;
+  height: 80px; /* Aumenta a altura visível */
   width: auto;
   object-fit: contain;
   transition: transform 0.2s ease;
