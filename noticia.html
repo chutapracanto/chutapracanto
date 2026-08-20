@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">ChutaPraCanto | Notícia</title>
-    <!-- Importa o mesmo CSS da home para manter o design -->
+    <!-- CSS oficial do site -->
     <link rel="stylesheet" href="style.css">
     
     <!-- Meta Tags para Redes Sociais -->
@@ -13,6 +13,29 @@
     <meta property="og:description" id="meta-desc" content="Notícias e opinião sobre futebol." />
     <meta property="og:image" id="meta-image" content="" />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <style>
+        /* Estilo personalizado para mimetizar o visual limpo dos botões do Spotify */
+        .btn-spotify-style {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: transparent;
+            color: #22c55e;
+            border: 1px solid #22c55e;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .btn-spotify-style:hover {
+            background-color: rgba(34, 197, 94, 0.1);
+            transform: scale(1.02);
+        }
+    </style>
 </head>
 <body>
 
@@ -30,15 +53,15 @@
   </nav>
 </header>
 
-<div class="container" style="padding: 40px 0; color: #fff;">
+<div class="container" style="padding: 40px 20px; color: #fff;">
     <div id="article-content" style="max-width: 800px; margin: 0 auto;">
-        <p>A carregar notícia...</p>
+        <p style="color: var(--text-gray);">A carregar notícia...</p>
     </div>
 
-    <!-- Botão Único de Partilha -->
-    <div class="share-section" id="share-box" style="display:none; text-align: center; margin-top: 40px;">
-        <button class="btn-neon" onclick="partilharNoticia()" style="cursor: pointer; padding: 12px 24px; font-size: 16px;">
-            🔗 Partilhar Notícia
+    <!-- Botão de Partilha Estilo Spotify -->
+    <div class="share-section" id="share-box" style="display:none; max-width: 800px; margin: 40px auto 0 auto; text-align: right;">
+        <button class="btn-spotify-style" onclick="partilharNoticia()">
+            Partilhar Notícia ↗
         </button>
     </div>
 </div>
@@ -89,14 +112,16 @@
 
             const htmlBody = marked.parse(markdownBody);
             
-            // Aqui usamos as classes do teu CSS (como .news-card, etc, se necessário)
+            // Renderização estruturada com a imagem de capa bem visível
             document.getElementById('article-content').innerHTML = `
                 <span class="tag">${categoria || 'SL BENFICA'}</span>
-                <h1 style="margin: 15px 0;">${title}</h1>
-                <div class="meta-info" style="color: #888; margin-bottom: 20px;">Por ChutaPraCanto • ${date}</div>
-                ${imagem ? `<img src="${imagem}" style="width: 100%; border-radius: 8px; margin-bottom: 25px;" alt="${title}">` : ''}
-                <p style="font-size: 1.2rem; color: #ccc; margin-bottom: 30px;">${subtitulo}</p>
-                <div class="article-body" style="font-size: 1.1rem; line-height: 1.8;">${htmlBody}</div>
+                <h1 style="margin: 15px 0 10px 0; font-size: 2.2rem; line-height: 1.2;">${title}</h1>
+                <div class="meta-info" style="color: var(--text-gray); font-size: 0.9rem; margin-bottom: 25px;">Por ChutaPraCanto • ${date}</div>
+                
+                ${imagem ? `<div style="width: 100%; aspect-ratio: 16/9; overflow: hidden; border-radius: 12px; margin-bottom: 30px;"><img src="${imagem}" style="width: 100%; height: 100%; object-fit: cover;" alt="${title}"></div>` : ''}
+                
+                <p style="font-size: 1.15rem; color: #d1d5db; margin-bottom: 30px; font-weight: 500; line-height: 1.5;">${subtitulo}</p>
+                <div class="article-body" style="font-size: 1.05rem; line-height: 1.8; color: #e5e7eb;">${htmlBody}</div>
             `;
             
             document.getElementById('share-box').style.display = "block";
@@ -113,7 +138,7 @@
             await navigator.share({ title, url }).catch(() => {});
         } else {
             navigator.clipboard.writeText(url);
-            alert('Link copiado!');
+            alert('Link copiado para a área de transferência!');
         }
     }
 
