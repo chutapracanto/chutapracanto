@@ -3,112 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChutaPraCanto - Notícia</title>
+    <title id="page-title">ChutaPraCanto | Notícia</title>
+    <!-- CSS oficial do site -->
     <link rel="stylesheet" href="style.css">
-    <!-- Biblioteca para ler Markdown -->
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+    
+    <!-- Meta Tags para Redes Sociais -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" id="meta-title" content="ChutaPraCanto" />
+    <meta property="og:description" id="meta-desc" content="Notícias e opinião sobre futebol." />
+    <meta property="og:image" id="meta-image" content="" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <style>
+        /* Estilo personalizado para mimetizar o visual limpo dos botões do Spotify */
+        .btn-spotify-style {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: transparent;
+            color: #22c55e;
+            border: 1px solid #22c55e;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .btn-spotify-style:hover {
+            background-color: rgba(34, 197, 94, 0.1);
+            transform: scale(1.02);
+        }
+    </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
-    <a href="index.html" class="logo-link">
-        <img src="assets/logo.png" alt="ChutaPraCanto" class="site-logo">
-    </a>
-    <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="index.html#noticias">Notícias</a></li>
-            <li><a href="media.html">Média</a></li>
-            <li><a href="equipa.html">Equipa</a></li>
-        </ul>
-    </nav>
+  <a href="index.html" class="logo-link">
+    <img src="images/logo.png" alt="ChutaPraCanto" class="site-logo">
+  </a>
+  <nav>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="noticias.html">Notícias</a></li>
+      <li><a href="media.html">Média</a></li>
+      <li><a href="index.html#equipa">Equipa</a></li>
+    </ul>
+  </nav>
 </header>
 
-<!-- CONTEÚDO DA NOTÍCIA -->
-<div class="article-container">
-    <!-- Botão Voltar -->
-    <a href="index.html" class="back-btn">← VOLTAR ÀS NOTÍCIAS</a>
+<div class="article-container" style="max-width: 800px; margin: 40px auto; padding: 0 20px; color: #fff;">
+    <!-- Botão Voltar (Estilo Framer / Site) -->
+    <a href="index.html" class="back-btn" style="display: inline-block; background: #111; color: #22c55e; border: 1px solid #22c55e; padding: 8px 14px; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: bold; margin-bottom: 25px;">← VOLTAR ÀS NOTÍCIAS</a>
 
     <div id="article-content">
         <p style="color: var(--text-gray);">A carregar notícia...</p>
     </div>
 
-    <!-- Botão de Partilha -->
-    <div class="share-section" id="share-box" style="display:none; margin-top: 40px; text-align: right;">
-        <button class="btn-neon" onclick="partilharNoticia()">
+    <!-- Botão de Partilha Estilo Spotify -->
+    <div class="share-section" id="share-box" style="display:none; margin: 40px 0 0 0; text-align: right;">
+        <button class="btn-spotify-style" onclick="partilharNoticia()">
             Partilhar Notícia ↗
         </button>
     </div>
 </div>
 
-<!-- FOOTER -->
 <footer>
     <p>© 2026 ChutaPraCanto. Futebol e opinião tática.</p>
+    <div class="footer-links">
+      <a href="#">Sobre Nós</a>
+      <a href="#">Contacto</a>
+    </div>
 </footer>
 
-<!-- SCRIPT DE LEITURA DA NOTÍCIA -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
-    async function carregarNoticia() {
+    async function loadArticle() {
         const urlParams = new URLSearchParams(window.location.search);
         const slug = urlParams.get('slug');
-        const contentDiv = document.getElementById('article-content');
-
-        if (!slug) {
-            contentDiv.innerHTML = '<p style="color: red;">Notícia não encontrada.</p>';
+        
+        if(!slug) {
+            document.getElementById('article-content').innerHTML = "<h2>Notícia não encontrada.</h2>";
             return;
         }
 
         try {
-            // Vai buscar o ficheiro .md correspondente ao slug na pasta content/noticias/
-            const response = await fetch(`content/noticias/${slug}.md`);
-            if (!response.ok) throw new Error("Erro ao carregar o artigo");
+            const res = await fetch(`content/noticias/${slug}.md`);
+            if(!res.ok) throw new Error("Artigo não existe");
+            const text = await res.text();
 
-            const text = await response.text();
-            
-            // Separar o Frontmatter (metadados YAML) do corpo da notícia (Markdown)
-            const parts = text.split('---');
-            if (parts.length < 3) throw new Error("Formato do artigo inválido");
+            const parts = text.split("---");
+            const frontmatter = parts[1];
+            const markdownBody = parts.slice(2).join("---");
 
-            const metadata = jsyaml.load(parts[1]);
-            const markdownBody = parts.slice(2).join('---');
+            const getMeta = (key) => {
+                const match = frontmatter.match(new RegExp(`${key}:\\s*"([^"]+)"`));
+                return match ? match[1] : '';
+            };
+
+            const title = getMeta('title');
+            const subtitulo = getMeta('subtitulo');
+            const categoria = getMeta('categoria');
+            const date = getMeta('date');
+            const imagem = getMeta('imagem');
+
+            document.getElementById('page-title').innerText = title + " | ChutaPraCanto";
+            document.getElementById('meta-title').content = title;
+            document.getElementById('meta-desc').content = subtitulo;
+            if(imagem) document.getElementById('meta-image').content = window.location.origin + imagem;
+
             const htmlBody = marked.parse(markdownBody);
-
-            // Injetar na ordem exata pretendida (igual ao Framer)
-            contentDiv.innerHTML = `
-                <span class="article-category">${metadata.categoria || "SL BENFICA"}</span>
-                <h1 id="art-titulo">${metadata.title}</h1>
-                <p class="art-subtitulo">${metadata.subtitulo || ""}</p>
-                <div class="art-meta">Publicado em ${metadata.date || ""} por ${metadata.author || "ChutaPraCanto"}</div>
+            
+            // Ordem rigorosa igual ao Framer: Categoria -> Título -> Subtítulo -> Data/Autor -> Imagem -> Corpo
+            document.getElementById('article-content').innerHTML = `
+                <span class="tag" style="color: #22c55e; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; display: block; margin-bottom: 10px;">${categoria || 'SL BENFICA'}</span>
+                <h1 style="margin: 0 0 15px 0; font-size: 2.2rem; line-height: 1.2; font-weight: 900; color: #fff;">${title}</h1>
+                <p style="font-size: 1.1rem; color: #a3a3a3; line-height: 1.5; margin-bottom: 15px; font-weight: 400;">${subtitulo}</p>
+                <div class="meta-info" style="color: #737373; font-size: 0.85rem; margin-bottom: 30px;">Publicado em ${date || 'recente'} por ChutaPraCanto</div>
                 
-                ${metadata.imagem ? `<img src="${metadata.imagem}" alt="${metadata.title}" class="art-img">` : ''}
+                ${imagem ? `<div style="width: 100%; max-height: 450px; overflow: hidden; border-radius: 12px; margin-bottom: 35px;"><img src="${imagem}" style="width: 100%; height: 100%; object-fit: cover;" alt="${title}"></div>` : ''}
                 
-                <div class="art-body">${htmlBody}</div>
+                <div class="article-body" style="font-size: 1.05rem; line-height: 1.8; color: #e5e7eb;">${htmlBody}</div>
             `;
             
             document.getElementById('share-box').style.display = "block";
 
-        } catch (error) {
-            console.error(error);
-            contentDiv.innerHTML = '<p style="color: red;">Erro ao carregar o conteúdo da notícia.</p>';
+        } catch (e) {
+            document.getElementById('article-content').innerHTML = "<h2>Erro ao carregar a notícia.</h2>";
         }
     }
 
-    function partilharNoticia() {
+    async function partilharNoticia() {
+        const title = document.getElementById('meta-title').content;
+        const url = window.location.href;
         if (navigator.share) {
-            navigator.share({
-                title: document.title,
-                url: window.location.href
-            }).catch(console.error);
+            await navigator.share({ title, url }).catch(() => {});
         } else {
-            navigator.clipboard.writeText(window.location.href);
-            alert("Link copiado para a área de transferência!");
+            navigator.clipboard.writeText(url);
+            alert('Link copiado para a área de transferência!');
         }
     }
 
-    carregarNoticia();
+    loadArticle();
 </script>
-
 </body>
 </html>
