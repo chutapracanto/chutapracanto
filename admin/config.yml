@@ -3,7 +3,8 @@ backend:
   repo: chutapracanto/chutapracanto
   branch: main
   client_id: Ov23lie311oPNaXeE4jO
-
+  auth_endpoint: https://github.com/login/oauth/authorize
+  
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
