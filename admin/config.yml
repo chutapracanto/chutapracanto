@@ -1,0 +1,23 @@
+backend:
+  name: github
+  repo: chutapracanto/chutapracanto
+  branch: main
+  client_id: Ov23lie311oPNaXeE4jO
+  auth_type: implicit
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - name: "noticias"
+    label: "Notícias"
+    folder: "content/noticias"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Tag / Categoria", name: "tag", widget: "string", default: "SL BENFICA" }
+      - { label: "Descrição Curta", name: "descricao", widget: "text" }
+      - { label: "Imagem de Capa", name: "imagem", widget: "image" }
+      - { label: "Data de Publicação", name: "date", widget: "datetime" }
+      - { label: "Conteúdo da Notícia", name: "body", widget: "markdown" }
