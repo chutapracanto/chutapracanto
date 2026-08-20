@@ -2,6 +2,7 @@ backend:
   name: github
   repo: chutapracanto/chutapracanto
   branch: main
+  client_id: Ov23lie311oPNaXeE4jO
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
