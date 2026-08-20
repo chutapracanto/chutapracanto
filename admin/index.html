@@ -6,7 +6,11 @@
   <title>Painel de Gestão | ChutaPraCanto</title>
 </head>
 <body>
-  <!-- Script oficial do Static CMS (substituto moderno e independente do Decap CMS) -->
+  <!-- O Static CMS injeta-se automaticamente se o script carregar a app -->
   <script src="https://unpkg.com/@staticcms/core@^3.0.0/dist/static-cms-app.js"></script>
+  <script>
+    // Inicialização explícita para evitar o ecrã branco
+    CMS.init();
+  </script>
 </body>
 </html>
