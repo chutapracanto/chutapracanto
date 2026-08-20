@@ -13,13 +13,11 @@
     .section-title-green { color: #00ff66; font-size: 1.3rem; margin: 0; font-weight: 700; }
     
     /* BOTÕES */
-    .btn-external { padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.85rem; text-decoration: none; font-weight: 600; transition: all 0.2s; }
+    .btn-external { color: #00ff66; border: 1px solid #00ff66; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.85rem; text-decoration: none; font-weight: 600; transition: all 0.2s; }
+    .btn-external:hover { background-color: #00ff66; color: #000; }
     
-    .btn-youtube { color: #fff; border: 1px solid #ff0000; }
-    .btn-youtube:hover { background-color: #ff0000; color: #fff; }
-    
-    .btn-spotify { color: #00ff66; border: 1px solid #00ff66; }
-    .btn-spotify:hover { background-color: #00ff66; color: #000; }
+    /* BOTÃO YOUTUBE: Moldura verde por defeito, fica vermelho ao passar o rato */
+    .btn-youtube:hover { background-color: #ff0000; border-color: #ff0000; color: #fff; }
     
     /* CARROSSEL GERAL (YOUTUBE) */
     .media-carousel { display: flex; gap: 1.25rem; overflow-x: auto; scroll-behavior: smooth; padding: 0.5rem 0; scrollbar-width: none; min-height: 200px; }
