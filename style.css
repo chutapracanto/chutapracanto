@@ -40,20 +40,32 @@ h1, h2, h3, .logo, .btn-neon, .tag, .hero-tag {
 header {
   background-color: #000;
   border-bottom: 1px solid var(--border-color);
-  padding: 1rem 2rem;
+  padding: 0.5rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: sticky;
   top: 0;
   z-index: 100;
+  min-height: 110px;
 }
 
-.logo {
-  font-size: 1.4rem;
-  font-weight: 900;
-  color: var(--neon-green);
-  letter-spacing: -0.5px;
+.logo-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.site-logo {
+  height: 110px;
+  width: auto;
+  max-width: 280px;
+  object-fit: contain;
+  transition: transform 0.2s ease;
+}
+
+.site-logo:hover {
+  transform: scale(1.03);
 }
 
 nav ul {
@@ -242,36 +254,6 @@ footer {
     grid-template-columns: 1fr;
   }
 }
-header {
-  background-color: #000;
-  border-bottom: 1px solid var(--border-color);
-  padding: 0.5rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  min-height: 110px; /* Aumenta a altura da barra preta para dar espaço */
-}
-
-.logo-link {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-}
-
-.site-logo {
-  height: 110px;      /* Força a imagem a ter 110px de altura */
-  width: auto;       /* Mantém a proporção original */
-  max-width: 280px;  /* Define uma largura máxima generosa */
-  object-fit: contain;
-  transition: transform 0.2s ease;
-}
-
-.site-logo:hover {
-  transform: scale(1.03);
-}
 
 /* ==========================================================================
    ESTILOS DA PÁGINA DE MÉDIA & CARROSSÉIS
@@ -283,11 +265,11 @@ header {
   overflow-x: auto;
   scroll-behavior: smooth;
   padding: 0.5rem 0;
-  scrollbar-width: none; /* Oculta a barra no Firefox */
+  scrollbar-width: none;
 }
 
 .media-carousel::-webkit-scrollbar {
-  display: none; /* Oculta a barra no Chrome / Safari */
+  display: none;
 }
 
 .carousel-item {
@@ -304,15 +286,14 @@ header {
   border: none;
 }
 
-/* Dimensões Específicas */
 .vertical-aspect .carousel-item {
   width: 240px;
-  height: 425px; /* Formato 9:16 para Shorts */
+  height: 425px;
 }
 
 .horizontal-aspect .carousel-item {
   width: 380px;
-  height: 215px; /* Formato 16:9 para YouTube Longo */
+  height: 215px;
 }
 
 .spotify-aspect .carousel-item {
@@ -321,11 +302,10 @@ header {
   height: 152px;
 }
 
-/* Botões com Setas */
 .arrow-btn {
   background: #1a1a1a;
-  color: var(--neon-green, #00ff66);
-  border: 1px solid var(--neon-green, #00ff66);
+  color: var(--neon-green);
+  border: 1px solid var(--neon-green);
   font-size: 1.2rem;
   width: 36px;
   height: 36px;
@@ -336,17 +316,16 @@ header {
 }
 
 .arrow-btn:hover {
-  background: var(--neon-green, #00ff66);
+  background: var(--neon-green);
   color: #000;
 }
 
-/* BOTÕES EXTERNOS DA PÁGINA DE MÉDIA */
 .btn-external {
   display: inline-flex;
   align-items: center;
   background-color: transparent;
-  color: var(--neon-green, #00ff66);
-  border: 1px solid var(--neon-green, #00ff66);
+  color: var(--neon-green);
+  border: 1px solid var(--neon-green);
   padding: 0.4rem 0.8rem;
   border-radius: 6px;
   font-size: 0.85rem;
@@ -356,7 +335,101 @@ header {
 }
 
 .btn-external:hover {
-  background-color: var(--neon-green, #00ff66);
+  background-color: var(--neon-green);
   color: #000;
   transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   ESTILOS DA PÁGINA DE LEITURA DE NOTÍCIA (ESTILO FRAMER)
+   ========================================================================== */
+
+.article-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.back-btn {
+  display: inline-block;
+  background: #111;
+  color: var(--neon-green);
+  border: 1px solid var(--neon-green);
+  padding: 8px 14px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 25px;
+  transition: background 0.2s;
+  font-family: var(--font-title);
+}
+
+.back-btn:hover {
+  background: var(--neon-green);
+  color: #000;
+}
+
+.article-category {
+  color: var(--neon-green);
+  font-weight: 800;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 10px;
+  font-family: var(--font-title);
+}
+
+h1#art-titulo {
+  font-size: 2.2rem;
+  font-weight: 900;
+  line-height: 1.2;
+  color: var(--text-white);
+  margin-bottom: 15px;
+  font-family: var(--font-title);
+}
+
+.art-subtitulo {
+  font-size: 1.1rem;
+  color: var(--text-gray);
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.art-meta {
+  font-size: 0.85rem;
+  color: #737373;
+  margin-bottom: 30px;
+}
+
+.art-img {
+  width: 100%;
+  max-height: 450px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 35px;
+}
+
+.art-body {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #e5e7eb;
+}
+
+.art-body p {
+  margin-bottom: 20px;
+}
+
+.art-body ul {
+  margin: 20px 0;
+  padding-left: 20px;
+}
+
+.art-body li {
+  margin-bottom: 10px;
+  list-style-type: disc; /* Garante os pontos circulares nas listas em vez de números */
+}
+
+.art-body strong {
+  color: var(--text-white);
 }
