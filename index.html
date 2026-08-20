@@ -180,7 +180,7 @@
     </div>
   </footer>
 
- <script>
+<script>
 async function carregarNoticias() {
   try {
     const response = await fetch('https://api.github.com/repos/chutapracanto/chutapracanto/contents/content/noticias');
@@ -197,25 +197,30 @@ async function carregarNoticias() {
         const res = await fetch(file.download_url);
         const text = await res.text();
         
-        // Separa o cabeçalho do CMS (YAML)
         const parts = text.split('---');
         if (parts.length < 3) continue;
         
         const data = jsyaml.load(parts[1]);
+        const slug = file.name.replace('.md', '');
         
         const title = data.title || 'Sem título';
         const tag = data.tag || 'Geral';
         const imagem = data.imagem || 'https://via.placeholder.com/600x400';
         const descricao = data.descricao || data.resumo || '';
 
-        const card = document.createElement('div');
+        const card = document.createElement('a');
+        card.href = `noticia.html?slug=${slug}`;
         card.className = 'news-card';
+        card.style.cssText = 'text-decoration: none; color: inherit; display: block; border-radius: 8px; overflow: hidden; background: var(--card-bg, #121212); border: 1px solid var(--border-color, #222222);';
+        
         card.innerHTML = `
-          <img src="${imagem}" alt="${title}" style="width:100%; height:200px; object-fit:cover; object-position: center top; border-radius:8px;">
-          <div style="padding: 1rem 0;">
+          <div style="width: 100%; aspect-ratio: 16/9; overflow: hidden;">
+            <img src="${imagem}" alt="${title}" style="width: 100%; height: 100%; object-fit: cover; object-position: center 25%;">
+          </div>
+          <div style="padding: 1.25rem;">
             <span style="color: var(--neon-green, #39ff14); font-size: 0.8rem; font-weight: bold; text-transform: uppercase;">${tag}</span>
-            <h3 style="margin: 0.5rem 0; font-size: 1.1rem;">${title}</h3>
-            <p style="color: #a0a0a0; font-size: 0.9rem;">${descricao}</p>
+            <h3 style="margin: 0.5rem 0; font-size: 1.1 rem; line-height: 1.4;">${title}</h3>
+            <p style="color: #a0a0a0; font-size: 0.9rem; margin-top: 0.5rem;">${descricao}</p>
           </div>
         `;
         noticiasContainer.appendChild(card);
