@@ -9,20 +9,20 @@
   <style>
     body { background-color: #0b0e14; color: #fff; font-family: system-ui, sans-serif; margin: 0; }
     .media-container { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
-    .section-header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+    .section-header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
     .section-title-green { color: #00ff66; font-size: 1.3rem; margin: 0; font-weight: 700; }
-    .btn-external { color: #00ff66; border: 1px solid #00ff66; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.85rem; text-decoration: none; font-weight: 600; }
+    .btn-external { color: #00ff66; border: 1px solid #00ff66; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.85rem; text-decoration: none; font-weight: 600; transition: all 0.2s; }
     .btn-external:hover { background-color: #00ff66; color: #000; }
     
-    /* CARROSSEL DE MÉDIA */
-    .media-carousel { display: flex; gap: 1.25rem; overflow-x: auto; scroll-behavior: smooth; padding: 0.5rem 0; scrollbar-width: none; }
+    /* CARROSSEL */
+    .media-carousel { display: flex; gap: 1.25rem; overflow-x: auto; scroll-behavior: smooth; padding: 0.5rem 0; scrollbar-width: none; min-height: 200px; }
     .media-carousel::-webkit-scrollbar { display: none; }
     
     .carousel-item { flex: 0 0 auto; background: #121824; border-radius: 12px; overflow: hidden; border: 1px solid #1f293d; }
     .carousel-item iframe { width: 100%; height: 100%; border: none; }
     
     /* DIMENSÕES VERTICAIS E HORIZONTAIS */
-    .vertical-aspect .carousel-item { width: 250px; height: 440px; }
+    .vertical-aspect .carousel-item { width: 240px; height: 425px; }
     .horizontal-aspect .carousel-item { width: 360px; height: 202px; }
 
     .arrow-btn { background: #121824; color: #00ff66; border: 1px solid #00ff66; font-size: 1.2rem; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; transition: all 0.2s; }
@@ -63,18 +63,7 @@
       </div>
 
       <div class="media-carousel vertical-aspect" id="carousel-shorts">
-        <div class="carousel-item">
-          <iframe src="https://www.youtube-nocookie.com/embed/nFq2UnVmpI8" title="Short 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <div class="carousel-item">
-          <iframe src="https://www.youtube-nocookie.com/embed/L_KJgW5WCw8" title="Short 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <div class="carousel-item">
-          <iframe src="https://www.youtube-nocookie.com/embed/1iIneaOGnDg" title="Short 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-        <div class="carousel-item">
-          <iframe src="https://www.youtube-nocookie.com/embed/uIpsarJTwe3" title="Short 4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
+        <p style="color: #888; padding: 1rem;">A carregar Vídeos Curtos...</p>
       </div>
     </section>
 
@@ -92,9 +81,7 @@
       </div>
 
       <div class="media-carousel horizontal-aspect" id="carousel-podcasts">
-        <div class="carousel-item">
-          <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=PLIhiPRVaH-qs" title="Podcast Playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
+        <p style="color: #888; padding: 1rem;">A carregar Podcasts...</p>
       </div>
     </section>
 
@@ -117,6 +104,41 @@
       const carousel = document.getElementById(id);
       carousel.scrollBy({ left: direction * 300, behavior: 'smooth' });
     }
+
+    // Carrega os vídeos das playlists via API Feed
+    async function carregarPlaylist(playlistId, containerId) {
+      const container = document.getElementById(containerId);
+      const rssUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`;
+      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+
+      try {
+        const res = await fetch(apiUrl);
+        const data = await res.json();
+
+        if (data.status === 'ok' && data.items.length > 0) {
+          container.innerHTML = '';
+          data.items.forEach(item => {
+            // Extrai o ID real de cada vídeo da playlist
+            let videoId = item.link.includes('v=') 
+              ? item.link.split('v=')[1].split('&')[0] 
+              : item.guid.split(':')[2];
+
+            const div = document.createElement('div');
+            div.className = 'carousel-item';
+            div.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" title="${item.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            container.appendChild(div);
+          });
+        } else {
+          container.innerHTML = '<p style="color:#888; padding: 1rem;">Nenhum vídeo encontrado na playlist.</p>';
+        }
+      } catch (e) {
+        container.innerHTML = '<p style="color:#888; padding: 1rem;">Erro ao carregar conteúdo.</p>';
+      }
+    }
+
+    // Executa usando os IDs das tuas playlists
+    carregarPlaylist('PLUXnJ5IDIDWU', 'carousel-shorts');
+    carregarPlaylist('PLFJ6oHgZs4WU', 'carousel-podcasts');
   </script>
 </body>
 </html>
