@@ -15,16 +15,15 @@
     .btn-external:hover { background-color: #00ff66; color: #000; }
     
     /* CARROSSEL GERÁL */
-    .media-carousel { display: flex; gap: 1.25rem; overflow-x: auto; scroll-behavior: smooth; padding: 0.5rem 0; scrollbar-width: none; min-height: 160px; }
+    .media-carousel { display: flex; gap: 1.25rem; overflow-x: auto; scroll-behavior: smooth; padding: 0.5rem 0; scrollbar-width: none; min-height: 200px; }
     .media-carousel::-webkit-scrollbar { display: none; }
     
     .carousel-item { flex: 0 0 auto; background: #121824; border-radius: 12px; overflow: hidden; border: 1px solid #1f293d; }
     .carousel-item iframe { width: 100%; height: 100%; border: none; }
     
-    /* DIMENSÕES ESPECÍFICAS PARA CADA TIPO DE MÉDIA */
+    /* DIMENSÕES ESPECÍFICAS */
     .vertical-aspect .carousel-item { width: 240px; height: 425px; }
     .horizontal-aspect .carousel-item { width: 360px; height: 202px; }
-    .spotify-aspect .carousel-item { width: 320px; height: 152px; }
 
     .arrow-btn { background: #121824; color: #00ff66; border: 1px solid #00ff66; font-size: 1.2rem; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; transition: all 0.2s; }
     .arrow-btn:hover { background: #00ff66; color: #000; }
@@ -86,21 +85,15 @@
       </div>
     </section>
 
-    <!-- SECÇÃO 3: PODCAST NO SPOTIFY (CARROSSEL DE EPISÓDIOS) -->
+    <!-- SECÇÃO 3: PODCAST NO SPOTIFY -->
     <section style="margin-bottom: 3.5rem;">
       <div class="section-header-flex">
         <h2 class="section-title-green">🎧 PODCAST NO SPOTIFY</h2>
-        <div style="display: flex; align-items: center; gap: 0.8rem;">
-          <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" rel="noopener noreferrer" class="btn-external">Ouve no Spotify ↗</a>
-          <div>
-            <button class="arrow-btn" onclick="scrollCarousel('carousel-spotify', -1)">‹</button>
-            <button class="arrow-btn" onclick="scrollCarousel('carousel-spotify', 1)">›</button>
-          </div>
-        </div>
+        <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" rel="noopener noreferrer" class="btn-external">Ouve no Spotify ↗</a>
       </div>
 
-      <div class="media-carousel spotify-aspect" id="carousel-spotify">
-        <p style="color: #888; padding: 1rem;">A carregar Episódios do Spotify...</p>
+      <div style="background: #121824; border-radius: 12px; border: 1px solid #1f293d; overflow: hidden; padding: 8px;">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/show/0340sfCl6p2dYzSyU7J3Tv?utm_source=generator&theme=0" width="100%" height="350" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
       </div>
     </section>
   </div>
@@ -112,7 +105,7 @@
   <script>
     function scrollCarousel(id, direction) {
       const carousel = document.getElementById(id);
-      carousel.scrollBy({ left: direction * 320, behavior: 'smooth' });
+      carousel.scrollBy({ left: direction * 300, behavior: 'smooth' });
     }
 
     // Carrega vídeos do YouTube via Playlist RSS
@@ -143,36 +136,9 @@
       }
     }
 
-    // Carrega episódios do Spotify via Anchor RSS Feed
-    async function carregarSpotify(rssFeedUrl, containerId) {
-      const container = document.getElementById(containerId);
-      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssFeedUrl)}`;
-
-      try {
-        const res = await fetch(apiUrl);
-        const data = await res.json();
-
-        if (data.status === 'ok' && data.items.length > 0) {
-          container.innerHTML = '';
-          data.items.forEach(item => {
-            // Extrai a URL do leitor do Spotify
-            let spotifyEmbedUrl = item.link.replace('open.spotify.com/', 'open.spotify.com/embed/');
-            
-            const div = document.createElement('div');
-            div.className = 'carousel-item';
-            div.innerHTML = `<iframe src="${spotifyEmbedUrl}?theme=0" loading="lazy" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>`;
-            container.appendChild(div);
-          });
-        }
-      } catch (e) {
-        container.innerHTML = '<p style="color:#888; padding: 1rem;">Erro ao carregar Spotify.</p>';
-      }
-    }
-
-    // Inicialização dos 3 carrosséis
+    // Carrega os carrosséis do YouTube
     carregarYouTube('PLUXnJ5IDIDWU', 'carousel-shorts');
     carregarYouTube('PLFJ6oHgZs4WU', 'carousel-podcasts');
-    carregarSpotify('https://anchor.fm/s/1159ff964/podcast/rss', 'carousel-spotify');
   </script>
 </body>
 </html>
