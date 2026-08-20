@@ -4,12 +4,15 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Painel de Gestão | ChutaPraCanto</title>
+  <link rel="stylesheet" href="https://unpkg.com/@keystatic/core@latest/dist/keystatic.css" />
 </head>
 <body>
-  <!-- Div onde o Keystatic vai construir a interface -->
   <div id="root"></div>
 
-  <!-- Script do Keystatic -->
   <script src="https://unpkg.com/@keystatic/core@latest/dist/keystatic.umd.js"></script>
+  <script type="module">
+    import keystaticConfig from './keystatic.config.js';
+    // O Keystatic arranca automaticamente quando deteta o config
+  </script>
 </body>
 </html>
