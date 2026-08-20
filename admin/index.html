@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Publicar Notícia | ChutaPraCanto</title>
+    <title>Painel de Gestão | ChutaPraCanto</title>
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f4f6f8; margin: 0; padding: 20px; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-        h2 { margin-top: 0; color: #1a1a1a; font-size: 22px; }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; }
-        input[type="text"], textarea, input[type="datetime-local"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        .container { max-width: 650px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        h2 { margin-top: 0; color: #1a1a1a; font-size: 22px; border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
+        .form-group { margin-bottom: 18px; }
+        label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 13px; color: #444; }
+        input[type="text"], textarea, input[type="date"] { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
         textarea { height: 120px; resize: vertical; }
         button { background: #2563eb; color: #fff; border: none; padding: 12px 20px; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; }
         button:hover { background: #1d4ed8; }
@@ -23,7 +23,7 @@
 <div class="container" id="app">
     <div id="login-screen" class="login-box">
         <h2>Painel ChutaPraCanto</h2>
-        <p style="color: #666; margin-bottom: 20px;">Insere o teu Personal Access Token do GitHub para autenticar.</p>
+        <p style="color: #666; margin-bottom: 20px;">Insere o teu Personal Access Token do GitHub para entrar.</p>
         <div class="form-group">
             <input type="password" id="github-token" placeholder="GitHub Personal Access Token">
         </div>
@@ -32,26 +32,42 @@
 
     <div id="admin-screen" style="display: none;">
         <h2>Nova Notícia</h2>
+        
         <div class="form-group">
-            <label>Título da Notícia</label>
-            <input type="text" id="noticia-titulo" placeholder="Ex: Grande vitória do Benfica!">
+            <label>Title</label>
+            <input type="text" id="noticia-title" placeholder="Ex: Benfica bate adversário...">
         </div>
+
         <div class="form-group">
-            <label>Tag / Categoria</label>
-            <input type="text" id="noticia-tag" value="SL BENFICA">
+            <label>Content</label>
+            <textarea id="noticia-content" style="height: 180px;" placeholder="Escreve aqui o texto completo da notícia..."></textarea>
         </div>
+
         <div class="form-group">
-            <label>Descrição Curta</label>
-            <textarea id="noticia-desc" placeholder="Resumo rápido para a lista de notícias..."></textarea>
+            <label>Subtitle</label>
+            <input type="text" id="noticia-subtitle" placeholder="Subtítulo ou resumo curto...">
         </div>
+
         <div class="form-group">
-            <label>Link da Imagem de Capa</label>
-            <input type="text" id="noticia-img" placeholder="/images/uploads/exemplo.jpg">
+            <label>Category</label>
+            <input type="text" id="noticia-category" value="SL BENFICA">
         </div>
+
         <div class="form-group">
-            <label>Conteúdo (Markdown suportado)</label>
-            <textarea id="noticia-body" style="height: 200px;" placeholder="Escreve aqui o artigo completo..."></textarea>
+            <label>Published</label>
+            <input type="date" id="noticia-published">
         </div>
+
+        <div class="form-group">
+            <label>Author</label>
+            <input type="text" id="noticia-author" value="ChutaPraCanto">
+        </div>
+
+        <div class="form-group">
+            <label>Featured Image</label>
+            <input type="text" id="noticia-image" placeholder="/images/uploads/exemplo.jpg">
+        </div>
+
         <button onclick="publicarNoticia()">Publicar Notícia no Site</button>
         <div id="status"></div>
     </div>
@@ -66,6 +82,8 @@
         if (savedToken) {
             document.getElementById("login-screen").style.display = "none";
             document.getElementById("admin-screen").style.display = "block";
+            // Preencher data de hoje por defeito
+            document.getElementById("noticia-published").valueAsDate = new Date();
         }
     };
 
@@ -73,45 +91,46 @@
         const token = document.getElementById("github-token").value.trim();
         if(!token) return alert("Insere um token válido!");
         localStorage.setItem("gh_token_cpc", token);
-        document.getElementById("login-screen").style.display = "none";
-        document.getElementById("admin-screen").style.display = "block";
+        location.reload();
     }
 
     async function publicarNoticia() {
         const token = localStorage.getItem("gh_token_cpc");
-        const titulo = document.getElementById("noticia-titulo").value.trim();
-        const tag = document.getElementById("noticia-tag").value.trim();
-        const desc = document.getElementById("noticia-desc").value.trim();
-        const img = document.getElementById("noticia-img").value.trim();
-        const body = document.getElementById("noticia-body").value.trim();
+        const title = document.getElementById("noticia-title").value.trim();
+        const content = document.getElementById("noticia-content").value.trim();
+        const subtitle = document.getElementById("noticia-subtitle").value.trim();
+        const category = document.getElementById("noticia-category").value.trim();
+        const published = document.getElementById("noticia-published").value;
+        const author = document.getElementById("noticia-author").value.trim();
+        const image = document.getElementById("noticia-image").value.trim();
         const statusEl = document.getElementById("status");
 
-        if(!titulo || !body) {
-            alert("O título e o conteúdo são obrigatórios!");
+        if(!title || !content) {
+            alert("Os campos Title e Content são obrigatórios!");
             return;
         }
 
         statusEl.style.color = "#333";
         statusEl.innerText = "A publicar notícia...";
 
-        // Criar slug limpo para o nome do ficheiro
-        const slug = titulo.toLowerCase()
+        // Criar slug limpo para o nome do ficheiro baseado no Title
+        const slug = title.toLowerCase()
             .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
             .replace(/[^a-z0-9]+/g, "-")
             .replace(/^-+|-+$/g, "");
         
         const filename = `content/noticias/${slug}.md`;
-        const dateNow = new Date().toISOString();
 
-        // Estrutura do ficheiro Markdown com frontmatter
+        // Gerar o frontmatter idêntico ao do Framer
         const fileContent = `---
-title: "${titulo}"
-tag: "${tag}"
-descricao: "${desc}"
-imagem: "${img}"
-date: "${dateNow}"
+title: "${title}"
+subtitle: "${subtitle}"
+category: "${category}"
+published: "${published}"
+author: "${author}"
+image: "${image}"
 ---
-${body}`;
+${content}`;
 
         const contentEncoded = btoa(unescape(encodeURIComponent(fileContent)));
 
@@ -123,7 +142,7 @@ ${body}`;
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    message: `Nova notícia: ${titulo}`,
+                    message: `Nova notícia: ${title}`,
                     content: contentEncoded,
                     branch: BRANCH
                 })
@@ -132,10 +151,11 @@ ${body}`;
             if(response.ok) {
                 statusEl.style.color = "green";
                 statusEl.innerText = "Notícia publicada com sucesso! O site vai atualizar em segundos.";
-                // Limpar campos
-                document.getElementById("noticia-titulo").value = "";
-                document.getElementById("noticia-desc").value = "";
-                document.getElementById("noticia-body").value = "";
+                // Limpar campos principais
+                document.getElementById("noticia-title").value = "";
+                document.getElementById("noticia-content").value = "";
+                document.getElementById("noticia-subtitle").value = "";
+                document.getElementById("noticia-image").value = "";
             } else {
                 const err = await response.json();
                 throw new Error(err.message || "Erro ao comunicar com o GitHub");
