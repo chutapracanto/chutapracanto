@@ -2,6 +2,7 @@
 <html lang="pt">
 <head>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ChutaPraCanto | Futebol & Opinião Tática</title>
@@ -187,7 +188,6 @@ async function carregarNoticias() {
     
     const files = await response.json();
     const noticiasContainer = document.querySelector('.news-grid') || document.getElementById('noticias-container');
-    
     if (!noticiasContainer) return;
     
     noticiasContainer.innerHTML = '';
@@ -197,15 +197,16 @@ async function carregarNoticias() {
         const res = await fetch(file.download_url);
         const text = await res.text();
         
-        const titleMatch = text.match(/title:\s*"(.*?)"/);
-        const tagMatch = text.match(/tag:\s*"(.*?)"/);
-        const imgMatch = text.match(/imagem:\s*"(.*?)"/);
-        const descMatch = text.match(/descricao:\s*"(.*?)"/);
+        // Separa o cabeçalho do CMS (YAML)
+        const parts = text.split('---');
+        if (parts.length < 3) continue;
         
-        const title = titleMatch ? titleMatch[1] : 'Sem título';
-        const tag = tagMatch ? tagMatch[1] : 'Geral';
-        const imagem = imgMatch ? imgMatch[1] : 'https://via.placeholder.com/600x400';
-        const descricao = descMatch ? descMatch[1] : '';
+        const data = jsyaml.load(parts[1]);
+        
+        const title = data.title || 'Sem título';
+        const tag = data.tag || 'Geral';
+        const imagem = data.imagem || 'https://via.placeholder.com/600x400';
+        const descricao = data.descricao || data.resumo || '';
 
         const card = document.createElement('div');
         card.className = 'news-card';
