@@ -11,8 +11,15 @@
     .media-container { max-width: 1200px; margin: 0 auto; padding: 2rem 1rem; }
     .section-header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
     .section-title-green { color: #00ff66; font-size: 1.3rem; margin: 0; font-weight: 700; }
-    .btn-external { color: #00ff66; border: 1px solid #00ff66; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.85rem; text-decoration: none; font-weight: 600; transition: all 0.2s; }
-    .btn-external:hover { background-color: #00ff66; color: #000; }
+    
+    /* BOTÕES */
+    .btn-external { padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.85rem; text-decoration: none; font-weight: 600; transition: all 0.2s; }
+    
+    .btn-youtube { color: #fff; border: 1px solid #ff0000; }
+    .btn-youtube:hover { background-color: #ff0000; color: #fff; }
+    
+    .btn-spotify { color: #00ff66; border: 1px solid #00ff66; }
+    .btn-spotify:hover { background-color: #00ff66; color: #000; }
     
     /* CARROSSEL GERAL (YOUTUBE) */
     .media-carousel { display: flex; gap: 1.25rem; overflow-x: auto; scroll-behavior: smooth; padding: 0.5rem 0; scrollbar-width: none; min-height: 200px; }
@@ -26,15 +33,17 @@
     .arrow-btn { background: #121824; color: #00ff66; border: 1px solid #00ff66; font-size: 1.2rem; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; transition: all 0.2s; }
     .arrow-btn:hover { background: #00ff66; color: #000; }
 
-    /* SECÇÃO PODCAST SPOTIFY / RSS FEED */
+    /* SECÇÃO PODCAST SPOTIFY */
     .spotify-grid { display: grid; grid-template-columns: 280px 1fr; gap: 1.5rem; background: #121824; border-radius: 12px; border: 1px solid #1f293d; padding: 1.2rem; }
     @media (max-width: 768px) { .spotify-grid { grid-template-columns: 1fr; } }
 
     .podcast-main-cover { width: 100%; border-radius: 8px; border: 1px solid #1f293d; }
+    
+    /* SCROLL PERSONALIZADO */
     .episodes-scroll { display: flex; flex-direction: column; gap: 0.8rem; max-height: 280px; overflow-y: auto; padding-right: 0.5rem; }
     .episodes-scroll::-webkit-scrollbar { width: 6px; }
-    .episodes-scroll::-webkit-scrollbar-thumb { background: #1f293d; border-radius: 4px; }
-    .episodes-scroll::-webkit-scrollbar-thumb:hover { background: #00ff66; }
+    .episodes-scroll::-webkit-scrollbar-thumb { background: #00ff66; border-radius: 4px; }
+    .episodes-scroll::-webkit-scrollbar-thumb:active { background: #005522; }
 
     .episode-card { background: #0b0e14; border: 1px solid #1f293d; border-radius: 8px; padding: 0.8rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
     .episode-info { display: flex; flex-direction: column; gap: 0.2rem; }
@@ -45,11 +54,8 @@
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
-    <a href="index.html" class="logo-link">
-      <img src="images/logo.png" alt="ChutaPraCanto" class="site-logo">
-    </a>
+    <a href="index.html" class="logo-link"><img src="images/logo.png" alt="ChutaPraCanto" class="site-logo"></a>
     <nav>
       <ul>
         <li><a href="index.html">Home</a></li>
@@ -63,137 +69,90 @@
   <div class="media-container">
     <h1 style="font-size: 2rem; margin-bottom: 2.5rem;">Central de Média</h1>
 
-    <!-- SECÇÃO 1: VÍDEOS CURTOS -->
     <section style="margin-bottom: 3.5rem;">
       <div class="section-header-flex">
         <h2 class="section-title-green">⚡ VÍDEOS CURTOS</h2>
         <div style="display: flex; align-items: center; gap: 0.8rem;">
-          <a href="https://www.youtube.com/@ChutaPraCanto/shorts" target="_blank" rel="noopener noreferrer" class="btn-external">Vê no YouTube ↗</a>
+          <a href="https://www.youtube.com/@ChutaPraCanto/shorts" target="_blank" class="btn-external btn-youtube">Vê no YouTube ↗</a>
           <div>
             <button class="arrow-btn" onclick="scrollCarousel('carousel-shorts', -1)">‹</button>
             <button class="arrow-btn" onclick="scrollCarousel('carousel-shorts', 1)">›</button>
           </div>
         </div>
       </div>
-
-      <div class="media-carousel vertical-aspect" id="carousel-shorts">
-        <p style="color: #888; padding: 1rem;">A carregar Vídeos Curtos...</p>
-      </div>
+      <div class="media-carousel vertical-aspect" id="carousel-shorts"><p style="color: #888; padding: 1rem;">A carregar...</p></div>
     </section>
 
-    <!-- SECÇÃO 2: VIDEO PODCASTS -->
     <section style="margin-bottom: 3.5rem;">
       <div class="section-header-flex">
-        <h2 class="section-title-green">🎙️ VIDEO PODCASTS & EPISÓDIOS</h2>
+        <h2 class="section-title-green">🎙️ VIDEO PODCASTS</h2>
         <div style="display: flex; align-items: center; gap: 0.8rem;">
-          <a href="https://www.youtube.com/@ChutaPraCanto/podcasts" target="_blank" rel="noopener noreferrer" class="btn-external">Vê no YouTube ↗</a>
+          <a href="https://www.youtube.com/@ChutaPraCanto/podcasts" target="_blank" class="btn-external btn-youtube">Vê no YouTube ↗</a>
           <div>
             <button class="arrow-btn" onclick="scrollCarousel('carousel-podcasts', -1)">‹</button>
             <button class="arrow-btn" onclick="scrollCarousel('carousel-podcasts', 1)">›</button>
           </div>
         </div>
       </div>
-
-      <div class="media-carousel horizontal-aspect" id="carousel-podcasts">
-        <p style="color: #888; padding: 1rem;">A carregar Podcasts...</p>
-      </div>
+      <div class="media-carousel horizontal-aspect" id="carousel-podcasts"><p style="color: #888; padding: 1rem;">A carregar...</p></div>
     </section>
 
-    <!-- SECÇÃO 3: PODCAST EM ÁUDIO (FEED RSS ANCHOR/SPOTIFY) -->
     <section style="margin-bottom: 3.5rem;">
       <div class="section-header-flex">
         <h2 class="section-title-green">🎧 PODCAST NO SPOTIFY</h2>
-        <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" rel="noopener noreferrer" class="btn-external">Ouve no Spotify ↗</a>
+        <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" class="btn-external btn-spotify">Ouve no Spotify ↗</a>
       </div>
-
       <div class="spotify-grid">
-        <!-- Capa Principal da Série -->
         <div>
-          <img id="podcast-cover" src="images/logo.png" alt="ChutaPraCanto Podcast" class="podcast-main-cover">
+          <img id="podcast-cover" src="images/logo.png" alt="Podcast" class="podcast-main-cover">
           <p style="margin: 0.8rem 0 0 0; font-weight: 700; font-size: 1.1rem;" id="podcast-title">ChutaPraCanto</p>
-          <p style="margin: 0.2rem 0 0 0; color: #888; font-size: 0.85rem;">Todos os episódios em áudio</p>
         </div>
-
-        <!-- Lista/Feed dos Episódios Recentes -->
-        <div class="episodes-scroll" id="episodes-container">
-          <p style="color: #888;">A carregar episódios do feed...</p>
-        </div>
+        <div class="episodes-scroll" id="episodes-container"><p style="color: #888;">A carregar episódios...</p></div>
       </div>
     </section>
   </div>
 
-  <footer>
-    <p>© 2026 ChutaPraCanto. Futebol e opinião tática.</p>
-  </footer>
+  <footer><p>© 2026 ChutaPraCanto. Futebol e opinião tática.</p></footer>
 
   <script>
     function scrollCarousel(id, direction) {
       const carousel = document.getElementById(id);
       carousel.scrollBy({ left: direction * 300, behavior: 'smooth' });
     }
-
-    // YouTube RSS Feed Parser
     async function carregarYouTube(playlistId, containerId) {
       const container = document.getElementById(containerId);
-      const rssUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`;
-      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-
+      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`)}`;
       try {
         const res = await fetch(apiUrl);
         const data = await res.json();
-
-        if (data.status === 'ok' && data.items.length > 0) {
+        if (data.status === 'ok') {
           container.innerHTML = '';
           data.items.forEach(item => {
-            let videoId = item.link.includes('v=') 
-              ? item.link.split('v=')[1].split('&')[0] 
-              : item.guid.split(':')[2];
-
+            let videoId = item.link.includes('v=') ? item.link.split('v=')[1].split('&')[0] : item.guid.split(':')[2];
             const div = document.createElement('div');
             div.className = 'carousel-item';
-            div.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" title="${item.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            div.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>`;
             container.appendChild(div);
           });
         }
-      } catch (e) {
-        container.innerHTML = '<p style="color:#888; padding: 1rem;">Erro ao carregar conteúdo.</p>';
-      }
+      } catch (e) { container.innerHTML = '<p>Erro.</p>'; }
     }
-
-    // Spotify/Anchor RSS Feed Parser
     async function carregarFeedSpotify(rssUrl) {
-      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
       const container = document.getElementById('episodes-container');
-      const coverImg = document.getElementById('podcast-cover');
-
+      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
       try {
         const res = await fetch(apiUrl);
         const data = await res.json();
-
         if (data.status === 'ok') {
-          if (data.feed.image) { coverImg.src = data.feed.image; }
+          if (data.feed.image) document.getElementById('podcast-cover').src = data.feed.image;
           container.innerHTML = '';
-
           data.items.forEach(ep => {
             const dateStr = new Date(ep.pubDate).toLocaleDateString('pt-PT', { day: '2-digit', month: 'short', year: 'numeric' });
-            
-            const itemHtml = `
-              <div class="episode-card">
-                <div class="episode-info">
-                  <p class="episode-title">${ep.title}</p>
-                  <span class="episode-date">${dateStr}</span>
-                </div>
-                <audio controls class="audio-player" src="${ep.enclosure.link}"></audio>
-              </div>
-            `;
-            container.innerHTML += itemHtml;
+            container.innerHTML += `<div class="episode-card"><div class="episode-info"><p class="episode-title">${ep.title}</p><span class="episode-date">${dateStr}</span></div><audio controls class="audio-player" src="${ep.enclosure.link}"></audio></div>`;
           });
         }
-      } catch (e) {
-        container.innerHTML = '<p style="color:#888;">Erro ao carregar os episódios do feed.</p>';
-      }
+      } catch (e) { container.innerHTML = '<p>Erro ao carregar episódios.</p>'; }
     }
-
     carregarYouTube('PLUXnJ5IDIDWU', 'carousel-shorts');
     carregarYouTube('PLFJ6oHgZs4WU', 'carousel-podcasts');
     carregarFeedSpotify('https://anchor.fm/s/1159ff964/podcast/rss');
