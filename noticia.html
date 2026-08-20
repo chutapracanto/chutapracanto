@@ -1,4 +1,17 @@
-<!-- HEADER (Mantém o teu header atual) -->
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChutaPraCanto - Notícia</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Biblioteca para ler Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+</head>
+<body>
+
+<!-- HEADER -->
 <header>
     <a href="index.html" class="logo-link">
         <img src="assets/logo.png" alt="ChutaPraCanto" class="site-logo">
@@ -14,74 +27,88 @@
 </header>
 
 <!-- CONTEÚDO DA NOTÍCIA -->
-<div class="container" style="padding: 40px 20px; color: #fff;">
+<div class="article-container">
+    <!-- Botão Voltar -->
+    <a href="index.html" class="back-btn">← VOLTAR ÀS NOTÍCIAS</a>
 
-    <div id="article-content" style="max-width: 800px; margin: 0 auto;">
-
+    <div id="article-content">
         <p style="color: var(--text-gray);">A carregar notícia...</p>
-
     </div>
 
-    <!-- Botão de Partilha Estilo Spotify -->
-
-    <div class="share-section" id="share-box" style="display:none; max-width: 800px; margin: 40px auto 0 auto; text-align: right;">
-
-        <button class="btn-spotify-style" onclick="partilharNoticia()">
-
+    <!-- Botão de Partilha -->
+    <div class="share-section" id="share-box" style="display:none; margin-top: 40px; text-align: right;">
+        <button class="btn-neon" onclick="partilharNoticia()">
             Partilhar Notícia ↗
-
         </button>
-
     </div>
-
-</div> 
-
+</div>
 
 <!-- FOOTER -->
 <footer>
     <p>© 2026 ChutaPraCanto. Futebol e opinião tática.</p>
 </footer>
 
-<!-- SCRIPT DE CARREGAMENTO -->
+<!-- SCRIPT DE LEITURA DA NOTÍCIA -->
 <script>
-    // Função para ler o parâmetro 'slug' do link (ex: ?slug=benfica-fecha-acordo)
-    const urlParams = new URLSearchParams(window.location.search);
-    const slug = urlParams.get('slug');
-
-    // Aqui assume-se que vais buscar os dados à tua fonte (ficheiro JSON ou markdown)
-    // Certifica-te que estás a usar a tua lógica de fetch existente, mas aplica esta estrutura visual:
     async function carregarNoticia() {
-        try {
-            // Exemplo: se tens uma função ou ficheiro que lista as notícias
-            // Substitui esta parte pela tua lógica atual de leitura, mas usa os campos abaixo:
-            
-            // Simulação dos campos que vêm do teu sistema:
-            // let titulo = ...;
-            // let categoria = ...;
-            // let subtitulo = ...;
-            // let data = ...;
-            // let imagem = ...;
-            // let corpoHtml = ...;
+        const urlParams = new URLSearchParams(window.location.search);
+        const slug = urlParams.get('slug');
+        const contentDiv = document.getElementById('article-content');
 
-            // Se já tens o teu script a funcionar e só queres ordenar os elementos, 
-            // certifica-te que a ordem de inserção no innerHTML é esta:
-            document.getElementById('article-content').innerHTML = `
-                <span class="article-category">${categoria || "SL BENFICA"}</span>
-                <h1 id="art-titulo">${titulo}</h1>
-                <p class="art-subtitulo">${subtitulo || ""}</p>
-                <div class="art-meta">Publicado em ${data || "recente"} por ChutaPraCanto</div>
+        if (!slug) {
+            contentDiv.innerHTML = '<p style="color: red;">Notícia não encontrada.</p>';
+            return;
+        }
+
+        try {
+            // Vai buscar o ficheiro .md correspondente ao slug na pasta content/noticias/
+            const response = await fetch(`content/noticias/${slug}.md`);
+            if (!response.ok) throw new Error("Erro ao carregar o artigo");
+
+            const text = await response.text();
+            
+            // Separar o Frontmatter (metadados YAML) do corpo da notícia (Markdown)
+            const parts = text.split('---');
+            if (parts.length < 3) throw new Error("Formato do artigo inválido");
+
+            const metadata = jsyaml.load(parts[1]);
+            const markdownBody = parts.slice(2).join('---');
+            const htmlBody = marked.parse(markdownBody);
+
+            // Injetar na ordem exata pretendida (igual ao Framer)
+            contentDiv.innerHTML = `
+                <span class="article-category">${metadata.categoria || "SL BENFICA"}</span>
+                <h1 id="art-titulo">${metadata.title}</h1>
+                <p class="art-subtitulo">${metadata.subtitulo || ""}</p>
+                <div class="art-meta">Publicado em ${metadata.date || ""} por ${metadata.author || "ChutaPraCanto"}</div>
                 
-                ${imagem ? `<img src="${imagem}" alt="${titulo}" class="art-img">` : ''}
+                ${metadata.imagem ? `<img src="${metadata.imagem}" alt="${metadata.title}" class="art-img">` : ''}
                 
-                <div class="art-body">${corpoHtml}</div>
+                <div class="art-body">${htmlBody}</div>
             `;
             
             document.getElementById('share-box').style.display = "block";
+
         } catch (error) {
-            console.log("Erro ao carregar:", error);
+            console.error(error);
+            contentDiv.innerHTML = '<p style="color: red;">Erro ao carregar o conteúdo da notícia.</p>';
         }
     }
 
-    // Podes manter a tua função de fetch original, apenas garante que os elementos 
-    // aparecem nesta exata sequência no HTML gerado!
+    function partilharNoticia() {
+        if (navigator.share) {
+            navigator.share({
+                title: document.title,
+                url: window.location.href
+            }).catch(console.error);
+        } else {
+            navigator.clipboard.writeText(window.location.href);
+            alert("Link copiado para a área de transferência!");
+        }
+    }
+
+    carregarNoticia();
 </script>
+
+</body>
+</html>
