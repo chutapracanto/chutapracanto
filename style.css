@@ -339,3 +339,24 @@ header {
   background: var(--neon-green, #00ff66);
   color: #000;
 }
+
+/* BOTÕES EXTERNOS DA PÁGINA DE MÉDIA */
+.btn-external {
+  display: inline-flex;
+  align-items: center;
+  background-color: transparent;
+  color: var(--neon-green, #00ff66);
+  border: 1px solid var(--neon-green, #00ff66);
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-external:hover {
+  background-color: var(--neon-green, #00ff66);
+  color: #000;
+  transform: translateY(-2px);
+}
