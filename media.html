@@ -43,19 +43,7 @@
       </div>
 
       <div class="media-carousel vertical-aspect" id="carousel-shorts">
-        <!-- Adiciona aqui mais blocos para novos Shorts -->
-        <div class="carousel-item short-item">
-          <iframe src="https://www.youtube.com/embed/videoseries?list=PLUXnJ5IDIDWU&index=1" title="Shorts 1" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div class="carousel-item short-item">
-          <iframe src="https://www.youtube.com/embed/videoseries?list=PLUXnJ5IDIDWU&index=2" title="Shorts 2" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div class="carousel-item short-item">
-          <iframe src="https://www.youtube.com/embed/videoseries?list=PLUXnJ5IDIDWU&index=3" title="Shorts 3" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div class="carousel-item short-item">
-          <iframe src="https://www.youtube.com/embed/videoseries?list=PLUXnJ5IDIDWU&index=4" title="Shorts 4" frameborder="0" allowfullscreen></iframe>
-        </div>
+        <p style="color: #888;">A carregar Shorts...</p>
       </div>
     </section>
 
@@ -72,16 +60,7 @@
       </div>
 
       <div class="media-carousel horizontal-aspect" id="carousel-podcasts">
-        <!-- Adiciona aqui mais blocos para novos Podcasts -->
-        <div class="carousel-item video-item">
-          <iframe src="https://www.youtube.com/embed/videoseries?list=PLIhiPRVaH-qs&index=1" title="Podcasts 1" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div class="carousel-item video-item">
-          <iframe src="https://www.youtube.com/embed/videoseries?list=PLIhiPRVaH-qs&index=2" title="Podcasts 2" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <div class="carousel-item video-item">
-          <iframe src="https://www.youtube.com/embed/videoseries?list=PLIhiPRVaH-qs&index=3" title="Podcasts 3" frameborder="0" allowfullscreen></iframe>
-        </div>
+        <p style="color: #888;">A carregar Podcasts...</p>
       </div>
     </section>
 
@@ -98,8 +77,8 @@
       </div>
 
       <div class="media-carousel spotify-aspect" id="carousel-spotify">
-        <div class="carousel-item spotify-item">
-          <iframe style="border-radius:12px" src="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <div class="carousel-item spotify-item" style="width: 100%; max-width: 100%;">
+          <iframe style="border-radius:12px" src="https://open.spotify.com/embed/show/0340sfCl6p2dYzSyU7J3Tv?utm_source=generator&theme=0" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
         </div>
       </div>
     </section>
@@ -116,6 +95,36 @@
       const scrollAmount = 320;
       carousel.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
     }
+
+    // Função para carregar playlists do YouTube via RSS2JSON (Automático)
+    async function carregarPlaylist(playlistId, containerId) {
+      const url = `https://api.rss2json.com/v1/api.json?rss_url=https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`;
+      const container = document.getElementById(containerId);
+
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+
+        if (data.status === 'ok' && data.items.length > 0) {
+          container.innerHTML = '';
+          data.items.forEach(item => {
+            const videoId = item.link.split('v=')[1];
+            const div = document.createElement('div');
+            div.className = 'carousel-item';
+            div.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" title="${item.title}" frameborder="0" allowfullscreen></iframe>`;
+            container.appendChild(div);
+          });
+        } else {
+          container.innerHTML = '<p style="color:#888;">Nenhum vídeo encontrado.</p>';
+        }
+      } catch (err) {
+        container.innerHTML = '<p style="color:#888;">Erro ao carregar vídeos.</p>';
+      }
+    }
+
+    // Executa ao carregar a página
+    carregarPlaylist('PLUXnJ5IDIDWU', 'carousel-shorts');
+    carregarPlaylist('PLIhiPRVaH-qs', 'carousel-podcasts');
   </script>
 
 </body>
