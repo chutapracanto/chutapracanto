@@ -55,19 +55,28 @@
   </nav>
 </header>
 
-<div class="container" style="padding: 40px 20px; color: #fff;">
-    <div id="article-content" style="max-width: 800px; margin: 0 auto;">
-        <p style="color: var(--text-gray);">A carregar notícia...</p>
-    </div>
+<div class="article-container">
+    <!-- 1. Botão Voltar -->
+    <a href="/" class="back-btn">← VOLTAR ÀS NOTÍCIAS</a>
 
-    <!-- Botão de Partilha Estilo Spotify -->
-    <div class="share-section" id="share-box" style="display:none; max-width: 800px; margin: 40px auto 0 auto; text-align: right;">
-        <button class="btn-spotify-style" onclick="partilharNoticia()">
-            Partilhar Notícia ↗
-        </button>
-    </div>
+    <!-- 2. Categoria -->
+    <span class="article-category" id="art-categoria">SL BENFICA</span>
+
+    <!-- 3. Título -->
+    <h1 id="art-titulo"></h1>
+
+    <!-- 4. Subtítulo / Descrição Curta -->
+    <p class="art-subtitulo" id="art-subtitulo"></p>
+
+    <!-- 5. Data e Autor -->
+    <div class="art-meta" id="art-meta"></div>
+
+    <!-- 6. Imagem de Capa -->
+    <img id="art-imagem" src="" alt="Capa da Notícia" class="art-img">
+
+    <!-- 7. Corpo do Artigo (com espaçamento e listas corretas) -->
+    <div class="art-body" id="art-body"></div>
 </div>
-
 <footer>
     <p>© 2026 ChutaPraCanto. Futebol e opinião tática.</p>
     <div class="footer-links">
