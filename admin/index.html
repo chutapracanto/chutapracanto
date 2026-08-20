@@ -4,18 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Publicar Notícia | ChutaPraCanto</title>
+    <!-- Importar ícones e estilos para a barra de formatação -->
     <style>
         body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f4f6f8; margin: 0; padding: 20px; color: #333; }
-        .container { max-width: 600px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        .container { max-width: 650px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         h2 { margin-top: 0; color: #1a1a1a; font-size: 22px; border-bottom: 2px solid #f0f0f0; padding-bottom: 15px; margin-bottom: 20px; }
         .form-group { margin-bottom: 20px; }
         label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 14px; color: #444; }
-        input[type="text"], textarea, input[type="date"], select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px; background: #fafafa; }
+        input[type="text"], textarea, input[type="date"] { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 14px; background: #fafafa; }
         textarea { height: 120px; resize: vertical; }
-        .image-input-container { display: flex; gap: 10px; }
-        .image-input-container input { flex: 1; }
-        button { background: #2563eb; color: #fff; border: none; padding: 14px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; transition: background 0.2s; }
-        button:hover { background: #1d4ed8; }
+        
+        /* Barra de ferramentas de formatação estilo Framer */
+        .toolbar { display: flex; gap: 6px; background: #f1f5f9; padding: 8px; border-radius: 8px 8px 0 0; border: 1px solid #ddd; border-bottom: none; flex-wrap: wrap; }
+        .toolbar button { background: #fff; border: 1px solid #cbd5e1; padding: 6px 10px; font-size: 13px; font-weight: bold; border-radius: 4px; cursor: pointer; color: #334155; width: auto; }
+        .toolbar button:hover { background: #e2e8f0; }
+        
+        #noticia-body { border-radius: 0 0 8px 8px; height: 250px; font-family: inherit; }
+        
+        .main-btn { background: #2563eb; color: #fff; border: none; padding: 14px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; width: 100%; transition: background 0.2s; margin-top: 10px; }
+        .main-btn:hover { background: #1d4ed8; }
         #status { margin-top: 20px; font-weight: bold; text-align: center; font-size: 14px; padding: 10px; border-radius: 6px; }
         .login-box { text-align: center; padding: 40px 0; }
     </style>
@@ -28,7 +35,7 @@
         <div class="form-group">
             <input type="password" id="github-token" placeholder="GitHub Personal Access Token">
         </div>
-        <button onclick="salvarToken()">Entrar</button>
+        <button class="main-btn" onclick="salvarToken()">Entrar</button>
     </div>
 
     <div id="admin-screen" style="display: none;">
@@ -54,15 +61,24 @@
             <input type="text" id="noticia-autor" value="ChutaPraCanto">
         </div>
         <div class="form-group">
-            <label>Imagem (URL ou Upload)</label>
+            <label>Imagem (Upload ou URL)</label>
             <input type="file" id="image-upload" accept="image/*" style="margin-bottom: 5px;">
             <input type="text" id="noticia-imagem-url" placeholder="Ou cola aqui o URL da imagem...">
         </div>
         <div class="form-group">
-            <label>Conteúdo (Markdown)</label>
-            <textarea id="noticia-body" style="height: 250px;" placeholder="Escreve o artigo..."></textarea>
+            <label>Conteúdo do Artigo</label>
+            <!-- Barra de botões para formatação rica -->
+            <div class="toolbar">
+                <button type="button" onclick="formatText('**', '**')"><b>B</b> (Negrito)</button>
+                <button type="button" onclick="formatText('*', '*')"><i>I</i> (Itálico)</button>
+                <button type="button" onclick="formatText('### ', '')">Título H3</button>
+                <button type="button" onclick="formatText('> ', '')">Citação</button>
+                <button type="button" onclick="formatText('- ', '')">Lista</button>
+                <button type="button" onclick="formatText('[Texto do Link](https://)', '')">Link</button>
+            </div>
+            <textarea id="noticia-body" placeholder="Escreve o artigo aqui... Podes usar os botões em cima para formatar."></textarea>
         </div>
-        <button onclick="publicarNoticia()">Publicar Notícia</button>
+        <button class="main-btn" onclick="publicarNoticia()">Publicar Notícia</button>
         <div id="status"></div>
     </div>
 </div>
@@ -76,6 +92,19 @@
         const token = document.getElementById("github-token").value.trim();
         localStorage.setItem("gh_token_cpc", token);
         location.reload();
+    }
+
+    // Função para inserir formatação automaticamente onde o cursor está no textarea
+    function formatText(wrapperStart, wrapperEnd) {
+        const textarea = document.getElementById('noticia-body');
+        const start = textarea.selectionStart;
+        const end = textarea.selectionEnd;
+        const text = textarea.value;
+        const selectedText = text.substring(start, end);
+        
+        textarea.value = text.substring(0, start) + wrapperStart + selectedText + wrapperEnd + text.substring(end);
+        textarea.focus();
+        textarea.setSelectionRange(start + wrapperStart.length, end + wrapperStart.length);
     }
 
     async function uploadImage() {
@@ -105,12 +134,17 @@
         const body = document.getElementById("noticia-body").value.trim();
         const statusEl = document.getElementById("status");
 
-        statusEl.innerText = "A processar...";
+        if(!titulo || !body) {
+            alert("O título e o conteúdo são obrigatórios!");
+            return;
+        }
+
+        statusEl.innerText = "A publicar...";
         
         let finalImageUrl = imgUrl;
         const imageData = await uploadImage();
         if(imageData) {
-            const uploadResp = await fetch(`https://api.github.com/repos/${REPO}/contents/images/uploads/${imageData.name}`, {
+            await fetch(`https://api.github.com/repos/${REPO}/contents/images/uploads/${imageData.name}`, {
                 method: "PUT",
                 headers: { "Authorization": `token ${token}`, "Content-Type": "application/json" },
                 body: JSON.stringify({ message: "Upload imagem", content: imageData.content })
@@ -118,7 +152,7 @@
             finalImageUrl = `/images/uploads/${imageData.name}`;
         }
 
-        const slug = titulo.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-");
+        const slug = titulo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-");
         const filename = `content/noticias/${slug}.md`;
         
         const fileContent = `---
@@ -139,9 +173,11 @@ ${body}`;
 
         if(response.ok) {
             statusEl.style.backgroundColor = "#dcfce7";
-            statusEl.innerText = "Publicado com sucesso!";
+            statusEl.style.color = "#166534";
+            statusEl.innerText = "Notícia publicada com sucesso!";
         } else {
             statusEl.style.backgroundColor = "#fee2e2";
+            statusEl.style.color = "#991b1b";
             statusEl.innerText = "Erro ao publicar.";
         }
     }
