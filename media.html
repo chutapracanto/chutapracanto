@@ -14,19 +14,16 @@
     .btn-external { color: #00ff66; border: 1px solid #00ff66; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.85rem; text-decoration: none; font-weight: 600; }
     .btn-external:hover { background-color: #00ff66; color: #000; }
     
-    /* CARROSSEL */
+    /* CARROSSEL DE MÉDIA */
     .media-carousel { display: flex; gap: 1.25rem; overflow-x: auto; scroll-behavior: smooth; padding: 0.5rem 0; scrollbar-width: none; }
     .media-carousel::-webkit-scrollbar { display: none; }
-    .carousel-item { flex: 0 0 auto; background: #121824; border-radius: 12px; overflow: hidden; border: 1px solid #1f293d; position: relative; }
     
-    /* CARTÕES DE SHORTS (CAPA + PLAY) */
-    .short-card-link { display: block; width: 220px; height: 390px; text-decoration: none; position: relative; }
-    .short-card-link img { width: 100%; height: 100%; object-fit: cover; }
-    .play-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(0,0,0,0.7); border-radius: 50%; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border: 2px solid #00ff66; }
-    .play-overlay::after { content: '▶'; color: #00ff66; font-size: 1.2rem; margin-left: 3px; }
-
+    .carousel-item { flex: 0 0 auto; background: #121824; border-radius: 12px; overflow: hidden; border: 1px solid #1f293d; }
+    .carousel-item iframe { width: 100%; height: 100%; border: none; }
+    
+    /* DIMENSÕES VERTICAIS E HORIZONTAIS */
+    .vertical-aspect .carousel-item { width: 250px; height: 440px; }
     .horizontal-aspect .carousel-item { width: 360px; height: 202px; }
-    .horizontal-aspect iframe { width: 100%; height: 100%; border: none; }
 
     .arrow-btn { background: #121824; color: #00ff66; border: 1px solid #00ff66; font-size: 1.2rem; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; transition: all 0.2s; }
     .arrow-btn:hover { background: #00ff66; color: #000; }
@@ -65,34 +62,18 @@
         </div>
       </div>
 
-      <div class="media-carousel" id="carousel-shorts">
-        <!-- Short 1 -->
+      <div class="media-carousel vertical-aspect" id="carousel-shorts">
         <div class="carousel-item">
-          <a href="https://www.youtube.com/shorts/nFq2UnVmpI8" target="_blank" class="short-card-link">
-            <img src="https://img.youtube.com/vi/nFq2UnVmpI8/hqdefault.jpg" alt="Short 1">
-            <div class="play-overlay"></div>
-          </a>
+          <iframe src="https://www.youtube-nocookie.com/embed/nFq2UnVmpI8" title="Short 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <!-- Short 2 -->
         <div class="carousel-item">
-          <a href="https://www.youtube.com/shorts/L_KJgW5WCw8" target="_blank" class="short-card-link">
-            <img src="https://img.youtube.com/vi/L_KJgW5WCw8/hqdefault.jpg" alt="Short 2">
-            <div class="play-overlay"></div>
-          </a>
+          <iframe src="https://www.youtube-nocookie.com/embed/L_KJgW5WCw8" title="Short 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <!-- Short 3 -->
         <div class="carousel-item">
-          <a href="https://www.youtube.com/shorts/1iIneaOGnDg" target="_blank" class="short-card-link">
-            <img src="https://img.youtube.com/vi/1iIneaOGnDg/hqdefault.jpg" alt="Short 3">
-            <div class="play-overlay"></div>
-          </a>
+          <iframe src="https://www.youtube-nocookie.com/embed/1iIneaOGnDg" title="Short 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <!-- Short 4 -->
         <div class="carousel-item">
-          <a href="https://www.youtube.com/shorts/uIpsarJTwe31" target="_blank" class="short-card-link">
-            <img src="https://img.youtube.com/vi/uIpsarJTwe31/hqdefault.jpg" alt="Short 4">
-            <div class="play-overlay"></div>
-          </a>
+          <iframe src="https://www.youtube-nocookie.com/embed/uIpsarJTwe3" title="Short 4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
       </div>
     </section>
@@ -111,7 +92,9 @@
       </div>
 
       <div class="media-carousel horizontal-aspect" id="carousel-podcasts">
-        <div class="carousel-item"><iframe src="https://www.youtube.com/embed/videoseries?list=PLIhiPRVaH-qs" allowfullscreen></iframe></div>
+        <div class="carousel-item">
+          <iframe src="https://www.youtube-nocookie.com/embed/videoseries?list=PLIhiPRVaH-qs" title="Podcast Playlist" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
       </div>
     </section>
 
