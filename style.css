@@ -252,22 +252,23 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  height: 90px; /* Aumentado para dar espaço ao logo */
+  min-height: 110px; /* Aumenta a altura da barra preta para dar espaço */
 }
 
 .logo-link {
   display: flex;
   align-items: center;
-  height: 100%;
+  text-decoration: none;
 }
 
 .site-logo {
-  height: 80px; /* Aumenta a altura visível */
-  width: auto;
+  height: 90px;      /* Força a imagem a ter 90px de altura */
+  width: auto;       /* Mantém a proporção original */
+  max-width: 280px;  /* Define uma largura máxima generosa */
   object-fit: contain;
   transition: transform 0.2s ease;
 }
 
 .site-logo:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
