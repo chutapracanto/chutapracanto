@@ -14,19 +14,22 @@
     .btn-external { color: #00ff66; border: 1px solid #00ff66; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.85rem; text-decoration: none; font-weight: 600; transition: all 0.2s; }
     .btn-external:hover { background-color: #00ff66; color: #000; }
     
-    /* CARROSSEL GERÁL */
+    /* CARROSSEL GERAL */
     .media-carousel { display: flex; gap: 1.25rem; overflow-x: auto; scroll-behavior: smooth; padding: 0.5rem 0; scrollbar-width: none; min-height: 200px; }
     .media-carousel::-webkit-scrollbar { display: none; }
     
     .carousel-item { flex: 0 0 auto; background: #121824; border-radius: 12px; overflow: hidden; border: 1px solid #1f293d; }
     .carousel-item iframe { width: 100%; height: 100%; border: none; }
     
-    /* DIMENSÕES ESPECÍFICAS */
+    /* DIMENSÕES */
     .vertical-aspect .carousel-item { width: 240px; height: 425px; }
     .horizontal-aspect .carousel-item { width: 360px; height: 202px; }
 
     .arrow-btn { background: #121824; color: #00ff66; border: 1px solid #00ff66; font-size: 1.2rem; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; transition: all 0.2s; }
     .arrow-btn:hover { background: #00ff66; color: #000; }
+
+    /* CARD RETÂNGULO DO SPOTIFY */
+    .spotify-card { background: #121824; border-radius: 12px; border: 1px solid #1f293d; overflow: hidden; padding: 12px; }
   </style>
 </head>
 <body>
@@ -92,8 +95,9 @@
         <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" rel="noopener noreferrer" class="btn-external">Ouve no Spotify ↗</a>
       </div>
 
-      <div style="background: #121824; border-radius: 12px; border: 1px solid #1f293d; overflow: hidden; padding: 8px;">
-        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/show/0340sfCl6p2dYzSyU7J3Tv?utm_source=generator&theme=0" width="100%" height="350" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      <!-- RETÂNGULO COM O LEITOR PEQUENO DE ÁUDIO -->
+      <div class="spotify-card">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/show/0340sfCl6p2dYzSyU7J3Tv?utm_source=generator&theme=0" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
       </div>
     </section>
   </div>
@@ -108,7 +112,6 @@
       carousel.scrollBy({ left: direction * 300, behavior: 'smooth' });
     }
 
-    // Carrega vídeos do YouTube via Playlist RSS
     async function carregarYouTube(playlistId, containerId) {
       const container = document.getElementById(containerId);
       const rssUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`;
@@ -136,7 +139,6 @@
       }
     }
 
-    // Carrega os carrosséis do YouTube
     carregarYouTube('PLUXnJ5IDIDWU', 'carousel-shorts');
     carregarYouTube('PLFJ6oHgZs4WU', 'carousel-podcasts');
   </script>
