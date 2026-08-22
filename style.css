@@ -41,54 +41,54 @@ h1, h2, h3, .logo, .btn-neon, .tag, .hero-tag {
   text-transform: uppercase;
 }
 
-/* HEADER */
+/* ==========================================
+   HEADER COM REDES SOCIAIS (TOPO)
+   ========================================== */
 header {
-  background-color: #000;
-  border-bottom: 1px solid var(--border-color);
-  padding: 0.5rem 2rem;
+  background: #080b11;
+  border-bottom: 1px solid #1a2332;
+  padding: 0.8rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  min-height: 110px;
-}
-
-.logo-link {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
 }
 
 .site-logo {
-  height: 110px;
+  height: 38px;
   width: auto;
-  max-width: 280px;
-  object-fit: contain;
-  transition: transform 0.2s ease;
+  display: block;
 }
 
-.site-logo:hover {
-  transform: scale(1.03);
-}
-
-nav ul {
+/* Redes Sociais no Topo */
+.header-socials {
   display: flex;
-  gap: 1.5rem;
-  list-style: none;
-  font-weight: 600;
-  font-size: 0.9rem;
+  align-items: center;
+  gap: 1.2rem;
 }
 
-nav a:hover {
+.header-socials a {
+  color: var(--text-gray);
+  font-size: 1.1rem;
+  transition: all 0.2s ease;
+}
+
+.header-socials a:hover {
   color: var(--neon-green);
+  transform: translateY(-2px);
 }
 
-.container {
-  max-width: 1140px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
+@media (max-width: 768px) {
+  .header-socials {
+    display: none; /* Esconde no telemóvel para não sobrecarregar o menu */
+  }
 }
 
 /* HERO */
@@ -238,7 +238,7 @@ nav a:hover {
 }
 
 /* ==========================================
-   FOOTER MODERNO & CLEAN (ESTILO FRAMER)
+   FOOTER MODERNO & CLEAN
    ========================================== */
 footer {
   background: #080b11;
@@ -252,7 +252,7 @@ footer {
   max-width: 1200px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1.5fr;
+  grid-template-columns: 1.4fr 0.8fr 1fr 1.4fr;
   gap: 2.5rem;
   padding-bottom: 3rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -270,15 +270,8 @@ footer {
   }
 }
 
-/* BRANDING & LOGO AJUSTADO */
-.footer-brand {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
 .footer-logo {
-  height: 45px; /* Tamanho controlado e proporcional */
+  height: 42px;
   width: auto;
   align-self: flex-start;
   object-fit: contain;
@@ -286,12 +279,11 @@ footer {
 
 .footer-brand p {
   color: var(--text-gray);
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   line-height: 1.5;
-  margin: 0;
+  margin-top: 0.8rem;
 }
 
-/* MENUS DE NAVEGAÇÃO E LEGAL */
 .footer-links {
   display: flex;
   flex-direction: column;
@@ -301,7 +293,7 @@ footer {
 .footer-links h4, 
 .footer-socials-col h4 {
   color: #fff;
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
@@ -319,25 +311,32 @@ footer {
   color: var(--neon-green);
 }
 
-/* REDES SOCIAIS ESTILO BADGES / PILLS */
+/* BOTÕES SOCIAIS NO FOOTER COM ÍCONES */
 .footer-social-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.6rem;
 }
 
 .social-pill {
   display: inline-flex;
   align-items: center;
-  padding: 6px 14px;
+  gap: 0.5rem;
+  padding: 7px 14px;
   background: #121824;
   border: 1px solid #1a2332;
   border-radius: 20px;
   color: #fff;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
   font-weight: 500;
   text-decoration: none;
   transition: all 0.2s ease;
+}
+
+.social-pill i {
+  font-size: 0.95rem;
+  color: var(--text-gray);
+  transition: color 0.2s ease;
 }
 
 .social-pill:hover {
@@ -347,29 +346,17 @@ footer {
   transform: translateY(-2px);
 }
 
-/* RODAPÉ INFERIOR (COPYRIGHT) */
+.social-pill:hover i {
+  color: var(--neon-green);
+}
+
 .footer-bottom {
   max-width: 1200px;
   margin: 0 auto;
   padding-top: 1.5rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  text-align: center;
   color: var(--text-gray);
   font-size: 0.8rem;
-}
-
-.footer-links {
-  margin: 1rem 0;
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-}
-
-@media (max-width: 768px) {
-  .team-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* ==========================================================================
