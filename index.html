@@ -10,39 +10,85 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
   
   <style>
-    /* ESTILOS DOS CARROSSEIS E SPOTIFY INTEGRADOS */
-    .section-header-flex { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem; }
-    .section-title-green { color: #00ff66; font-size: 1.3rem; margin: 0; font-weight: 700; text-transform: uppercase; font-family: var(--font-title); }
+    /* BOTÕES DE NAVEGAÇÃO DOS CARROSSEIS */
+    .arrow-btn { 
+      background: #121824; 
+      color: var(--neon-green); 
+      border: 1px solid var(--neon-green); 
+      font-size: 1.2rem; 
+      width: 36px; 
+      height: 36px; 
+      border-radius: 50%; 
+      cursor: pointer; 
+      transition: all 0.2s; 
+    }
+    .arrow-btn:hover { 
+      background: var(--neon-green); 
+      color: #000; 
+    }
     
-    .btn-external { color: #00ff66; border: 1px solid #00ff66; padding: 0.4rem 0.8rem; border-radius: 6px; font-size: 0.85rem; text-decoration: none; font-weight: 600; transition: all 0.2s; }
-    .btn-external:hover { background-color: #00ff66; color: #000; }
-    .btn-youtube:hover { background-color: #ff0000; border-color: #ff0000; color: #fff; }
-    
-    .media-carousel { display: flex; gap: 1.25rem; overflow-x: auto; scroll-behavior: smooth; padding: 0.5rem 0; scrollbar-width: none; min-height: 200px; }
+    /* CARROSSEIS DE VÍDEO */
+    .media-carousel { 
+      display: flex; 
+      gap: 1.25rem; 
+      overflow-x: auto; 
+      scroll-behavior: smooth; 
+      padding: 0.5rem 0; 
+      scrollbar-width: none; 
+      min-height: 200px; 
+    }
     .media-carousel::-webkit-scrollbar { display: none; }
-    .carousel-item { flex: 0 0 auto; background: #121824; border-radius: 12px; overflow: hidden; border: 1px solid #1f293d; }
+    
+    .carousel-item { 
+      flex: 0 0 auto; 
+      background: #121824; 
+      border-radius: 12px; 
+      overflow: hidden; 
+      border: 1px solid var(--border-color); 
+    }
     .carousel-item iframe { width: 100%; height: 100%; border: none; }
     
     .vertical-aspect .carousel-item { width: 240px; height: 425px; }
     .horizontal-aspect .carousel-item { width: 360px; height: 202px; }
 
-    .arrow-btn { background: #121824; color: #00ff66; border: 1px solid #00ff66; font-size: 1.2rem; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; transition: all 0.2s; }
-    .arrow-btn:hover { background: #00ff66; color: #000; }
-
-    .spotify-grid { display: grid; grid-template-columns: 280px 1fr; gap: 1.5rem; background: #121824; border-radius: 12px; border: 1px solid #1f293d; padding: 1.2rem; }
+    /* SPOTIFY */
+    .spotify-grid { 
+      display: grid; 
+      grid-template-columns: 280px 1fr; 
+      gap: 1.5rem; 
+      background: var(--card-bg); 
+      border-radius: 12px; 
+      border: 1px solid var(--border-color); 
+      padding: 1.2rem; 
+    }
     @media (max-width: 768px) { .spotify-grid { grid-template-columns: 1fr; } }
 
-    .podcast-main-cover { width: 100%; border-radius: 8px; border: 1px solid #1f293d; }
+    .podcast-main-cover { width: 100%; border-radius: 8px; border: 1px solid var(--border-color); }
     
-    .episodes-scroll { display: flex; flex-direction: column; gap: 0.8rem; max-height: 280px; overflow-y: auto; padding-right: 0.5rem; }
+    .episodes-scroll { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 0.8rem; 
+      max-height: 280px; 
+      overflow-y: auto; 
+      padding-right: 0.5rem; 
+    }
     .episodes-scroll::-webkit-scrollbar { width: 6px; }
-    .episodes-scroll::-webkit-scrollbar-thumb { background: #00ff66; border-radius: 4px; }
-    .episodes-scroll::-webkit-scrollbar-thumb:active { background: #005522; }
+    .episodes-scroll::-webkit-scrollbar-thumb { background: var(--neon-green); border-radius: 4px; }
 
-    .episode-card { background: #0b0e14; border: 1px solid #1f293d; border-radius: 8px; padding: 0.8rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+    .episode-card { 
+      background: #0b0e14; 
+      border: 1px solid var(--border-color); 
+      border-radius: 8px; 
+      padding: 0.8rem; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      gap: 1rem; 
+    }
     .episode-info { display: flex; flex-direction: column; gap: 0.2rem; }
     .episode-title { font-size: 0.95rem; font-weight: 600; color: #fff; margin: 0; }
-    .episode-date { font-size: 0.75rem; color: #888; }
+    .episode-date { font-size: 0.75rem; color: var(--text-gray); }
     .audio-player { height: 32px; max-width: 220px; }
   </style>
 </head>
@@ -85,10 +131,10 @@
 
     <!-- SHORTS / REELS -->
     <section style="margin-bottom: 3.5rem;">
-      <div class="section-header-flex">
-        <h2 class="section-title-green">⚡ VÍDEOS CURTOS</h2>
+      <div class="section-header">
+        <h2 class="section-title">SHORTS / REELS</h2>
         <div style="display: flex; align-items: center; gap: 0.8rem;">
-          <a href="https://www.youtube.com/@ChutaPraCanto/shorts" target="_blank" class="btn-external btn-youtube">Vê no YouTube ↗</a>
+          <a href="https://www.youtube.com/@ChutaPraCanto/shorts" target="_blank" class="see-more">VER NO YOUTUBE →</a>
           <div>
             <button class="arrow-btn" onclick="scrollCarousel('carousel-shorts', -1)">‹</button>
             <button class="arrow-btn" onclick="scrollCarousel('carousel-shorts', 1)">›</button>
@@ -96,16 +142,16 @@
         </div>
       </div>
       <div class="media-carousel vertical-aspect" id="carousel-shorts">
-        <p style="color: #888; padding: 1rem;">A carregar...</p>
+        <p style="color: var(--text-gray); padding: 1rem;">A carregar...</p>
       </div>
     </section>
 
     <!-- VIDEO PODCASTS -->
     <section style="margin-bottom: 3.5rem;">
-      <div class="section-header-flex">
-        <h2 class="section-title-green">🎙️ VIDEO PODCASTS</h2>
+      <div class="section-header">
+        <h2 class="section-title">VIDEO PODCASTS</h2>
         <div style="display: flex; align-items: center; gap: 0.8rem;">
-          <a href="https://www.youtube.com/@ChutaPraCanto/podcasts" target="_blank" class="btn-external btn-youtube">Vê no YouTube ↗</a>
+          <a href="https://www.youtube.com/@ChutaPraCanto/podcasts" target="_blank" class="see-more">VER NO YOUTUBE →</a>
           <div>
             <button class="arrow-btn" onclick="scrollCarousel('carousel-podcasts', -1)">‹</button>
             <button class="arrow-btn" onclick="scrollCarousel('carousel-podcasts', 1)">›</button>
@@ -113,23 +159,23 @@
         </div>
       </div>
       <div class="media-carousel horizontal-aspect" id="carousel-podcasts">
-        <p style="color: #888; padding: 1rem;">A carregar...</p>
+        <p style="color: var(--text-gray); padding: 1rem;">A carregar...</p>
       </div>
     </section>
 
     <!-- PODCAST SPOTIFY -->
     <section style="margin-bottom: 3.5rem;">
-      <div class="section-header-flex">
-        <h2 class="section-title-green">🎧 PODCAST NO SPOTIFY</h2>
-        <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" class="btn-external btn-spotify">Ouve no Spotify ↗</a>
+      <div class="section-header">
+        <h2 class="section-title">PODCAST NO SPOTIFY</h2>
+        <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" class="see-more">OUVIR NO SPOTIFY →</a>
       </div>
       <div class="spotify-grid">
         <div>
           <img id="podcast-cover" src="images/logo.png" alt="Podcast" class="podcast-main-cover">
-          <p style="margin: 0.8rem 0 0 0; font-weight: 700; font-size: 1.1rem;" id="podcast-title">ChutaPraCanto</p>
+          <p style="margin: 0.8rem 0 0 0; font-weight: 700; font-size: 1.1rem; color: #fff;" id="podcast-title">ChutaPraCanto</p>
         </div>
         <div class="episodes-scroll" id="episodes-container">
-          <p style="color: #888;">A carregar episódios...</p>
+          <p style="color: var(--text-gray);">A carregar episódios...</p>
         </div>
       </div>
     </section>
@@ -161,13 +207,13 @@
   </footer>
 
   <script>
-    // 1. CARROSSEIS
+    // 1. NAVEGAÇÃO DOS CARROSSEIS
     function scrollCarousel(id, direction) {
       const carousel = document.getElementById(id);
       carousel.scrollBy({ left: direction * 300, behavior: 'smooth' });
     }
 
-    // 2. FEEDS YOUTUBE
+    // 2. FEEDS DO YOUTUBE
     async function carregarYouTube(playlistId, containerId) {
       const container = document.getElementById(containerId);
       const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`)}`;
@@ -184,10 +230,10 @@
             container.appendChild(div);
           });
         }
-      } catch (e) { container.innerHTML = '<p style="color: #888;">Erro ao carregar vídeos.</p>'; }
+      } catch (e) { container.innerHTML = '<p style="color: var(--text-gray);">Erro ao carregar vídeos.</p>'; }
     }
 
-    // 3. FEED SPOTIFY
+    // 3. FEED DO SPOTIFY
     async function carregarFeedSpotify(rssUrl) {
       const container = document.getElementById('episodes-container');
       const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
@@ -209,10 +255,10 @@
               </div>`;
           });
         }
-      } catch (e) { container.innerHTML = '<p style="color: #888;">Erro ao carregar episódios.</p>'; }
+      } catch (e) { container.innerHTML = '<p style="color: var(--text-gray);">Erro ao carregar episódios.</p>'; }
     }
 
-    // 4. NOTÍCIAS CMS
+    // 4. NOTÍCIAS DO CMS (GITHUB)
     async function carregarNoticias() {
       try {
         const response = await fetch('https://api.github.com/repos/chutapracanto/chutapracanto/contents/content/noticias');
