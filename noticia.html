@@ -78,6 +78,7 @@
     </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <script>
     async function loadArticle() {
@@ -95,19 +96,21 @@
             const text = await res.text();
 
             const parts = text.split("---");
-            const frontmatter = parts[1];
+            if (parts.length < 3) throw new Error("Formato inválido");
+
+            // Parser correto usando JS-YAML
+            const frontmatter = jsyaml.load(parts[1]);
             const markdownBody = parts.slice(2).join("---");
 
-            const getMeta = (key) => {
-                const match = frontmatter.match(new RegExp(`${key}:\\s*"([^"]+)"`));
-                return match ? match[1] : '';
-            };
+            // Leitura flexível dos campos
+            const title = frontmatter.title || 'Sem título';
+            const subtitulo = frontmatter.subtitle || frontmatter.subtitulo || frontmatter.descricao || frontmatter.resumo || '';
+            const categoria = frontmatter.category || frontmatter.categoria || frontmatter.tag || 'Geral';
+            const date = frontmatter.published || frontmatter.date || 'Recente';
+            const imagem = frontmatter.image || frontmatter.imagem || frontmatter.featured_image || frontmatter.featuredImage || '';
 
-            const title = getMeta('title');
-            const subtitulo = getMeta('subtitulo');
-            const categoria = getMeta('categoria');
-            const date = getMeta('date');
-            const imagem = getMeta('imagem');
+            // Formatação da data (caso venha em ISO String)
+            const dataFormatada = date.includes('T') ? date.split('T')[0] : date;
 
             document.getElementById('page-title').innerText = title + " | ChutaPraCanto";
             document.getElementById('meta-title').content = title;
@@ -116,12 +119,11 @@
 
             const htmlBody = marked.parse(markdownBody);
             
-            // Ordem correta aproveitando as classes limpas do style.css (pontos nas listas, fontes corretas, etc.)
             document.getElementById('article-content').innerHTML = `
-                <span class="article-category">${categoria || 'SL BENFICA'}</span>
+                <span class="article-category">${categoria.toUpperCase()}</span>
                 <h1 id="art-titulo">${title}</h1>
-                <p class="art-subtitulo">${subtitulo}</p>
-                <div class="art-meta">Publicado em ${date || 'recente'} por ChutaPraCanto</div>
+                ${subtitulo ? `<p class="art-subtitulo">${subtitulo}</p>` : ''}
+                <div class="art-meta">Publicado em ${dataFormatada} por ChutaPraCanto</div>
                 
                 ${imagem ? `<img src="${imagem}" alt="${title}" class="art-img">` : ''}
                 
@@ -131,6 +133,7 @@
             document.getElementById('share-box').style.display = "block";
 
         } catch (e) {
+            console.error(e);
             document.getElementById('article-content').innerHTML = "<h2>Erro ao carregar a notícia.</h2>";
         }
     }
