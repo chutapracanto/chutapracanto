@@ -612,3 +612,16 @@ h1#art-titulo {
   object-fit: cover;
   object-position: center 20%;
 }
+
+/* recolora a imagem do logótipo para a cor verde neon da página */
+.site-logo {
+  filter: drop-shadow(0 0 0 var(--neon-green)) 
+          brightness(0) 
+          saturate(100%) 
+          invert(74%) 
+          sepia(95%) 
+          saturate(1354%) 
+          hue-rotate(60deg) 
+          brightness(103%) 
+          contrast(106%);
+}
