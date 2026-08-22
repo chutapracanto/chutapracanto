@@ -11,19 +11,28 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
   
   <style>
-    /* BARRA DE FILTROS */
-    .filter-container {
+    /* BARRA DE FERRAMENTAS & FILTROS CLEAN */
+    .filter-toolbar {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
       margin: 1.5rem 0 2rem 0;
+    }
+
+    .filter-pills {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
     }
 
     .filter-btn {
       background-color: var(--card-bg);
       color: var(--text-gray);
       border: 1px solid var(--border-color);
-      padding: 0.4rem 0.85rem;
+      padding: 0.45rem 0.9rem;
       border-radius: 20px;
       font-size: 0.75rem;
       font-weight: 700;
@@ -31,6 +40,9 @@
       cursor: pointer;
       transition: all 0.2s ease;
       text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .filter-btn:hover,
@@ -38,6 +50,85 @@
       background-color: var(--neon-green);
       color: #000;
       border-color: var(--neon-green);
+    }
+
+    /* DROPDOWN 'MAIS CATEGORIAS' */
+    .dropdown-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 110%;
+      left: 0;
+      background-color: #121212;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      min-width: 220px;
+      z-index: 100;
+      padding: 0.5rem 0;
+      overflow: hidden;
+    }
+
+    .dropdown-wrapper.open .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-item {
+      display: block;
+      width: 100%;
+      padding: 0.6rem 1rem;
+      color: var(--text-gray);
+      font-size: 0.75rem;
+      font-weight: 700;
+      font-family: var(--font-title);
+      text-transform: uppercase;
+      background: none;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .dropdown-item:hover {
+      background-color: rgba(57, 255, 20, 0.1);
+      color: var(--neon-green);
+    }
+
+    /* BARRA DE PESQUISA CLEAN */
+    .search-box {
+      position: relative;
+      min-width: 200px;
+      flex-grow: 1;
+      max-width: 300px;
+    }
+
+    .search-box input {
+      width: 100%;
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 0.45rem 1rem 0.45rem 2.2rem;
+      color: #fff;
+      font-size: 0.8rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .search-box input:focus {
+      border-color: var(--neon-green);
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 0.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-gray);
+      font-size: 0.75rem;
     }
 
     /* LAYOUT DE LISTA DA PÁGINA NOTÍCIAS */
@@ -52,7 +143,7 @@
     .news-list-card {
       display: grid;
       grid-template-columns: 220px 1fr;
-      height: 140px; /* ALTURA FIXA PARA MANTER CONGRUÊNCIA */
+      height: 140px;
       background-color: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 10px;
@@ -67,7 +158,6 @@
       transform: translateY(-2px);
     }
 
-    /* FIXAÇÃO E CORTE DAS IMAGENS ALTAS */
     .news-list-img {
       width: 100%;
       height: 100%;
@@ -78,8 +168,8 @@
     .news-list-img img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* CORTE AUTOMÁTICO */
-      object-position: center 20%; /* FOCO NO TOPO/ROSTO */
+      object-fit: cover;
+      object-position: center 20%;
       display: block;
     }
 
@@ -91,15 +181,26 @@
       overflow: hidden;
     }
 
-    /* CATEGORIAS/TAGS A VERDE E MAIS PEQUENAS */
+    /* META INFO (TAG + DATA) */
+    .news-list-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 0.25rem;
+    }
+
     .news-list-content .tag {
       color: var(--neon-green);
       font-size: 0.7rem;
       font-weight: 800;
       letter-spacing: 0.5px;
       text-transform: uppercase;
-      margin-bottom: 0.25rem;
-      display: inline-block;
+    }
+
+    .news-list-content .date {
+      color: #777;
+      font-size: 0.7rem;
+      font-weight: 500;
     }
 
     .news-list-content h3 {
@@ -121,6 +222,13 @@
     }
 
     @media (max-width: 650px) {
+      .filter-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .search-box {
+        max-width: 100%;
+      }
       .news-list-card {
         grid-template-columns: 130px 1fr;
         height: 130px;
@@ -167,22 +275,39 @@
       <p style="color: var(--neon-green); font-size: 0.75rem; font-weight: 800; font-family: var(--font-title); letter-spacing: 1px; margin-bottom: 0.3rem;">CHUTAPRACANTO · ATUALIDADE</p>
       <h1 class="section-title">TODAS AS NOTÍCIAS</h1>
 
-      <!-- FILTROS DE CATEGORIA -->
-      <div class="filter-container">
-        <button class="filter-btn active" onclick="filtrarNoticias('todos', this)">Todas</button>
-        <button class="filter-btn" onclick="filtrarNoticias('sl benfica', this)">SL Benfica</button>
-        <button class="filter-btn" onclick="filtrarNoticias('fc porto', this)">FC Porto</button>
-        <button class="filter-btn" onclick="filtrarNoticias('sporting sc', this)">Sporting SC</button>
-        <button class="filter-btn" onclick="filtrarNoticias('sc braga', this)">SC Braga</button>
-        <button class="filter-btn" onclick="filtrarNoticias('premier league', this)">Premier League</button>
-        <button class="filter-btn" onclick="filtrarNoticias('liga europa', this)">Liga Europa</button>
-        <button class="filter-btn" onclick="filtrarNoticias('liga conferência', this)">Liga Conferência</button>
-        <button class="filter-btn" onclick="filtrarNoticias('supertaça europeia', this)">Supertaça Europeia</button>
-        <button class="filter-btn" onclick="filtrarNoticias('liga portugal betclic', this)">Liga Portugal Betclic</button>
-        <button class="filter-btn" onclick="filtrarNoticias('liga portugal 2 meusuper', this)">Liga Portugal 2 MeuSuper</button>
-        <button class="filter-btn" onclick="filtrarNoticias('la liga', this)">La Liga</button>
-        <button class="filter-btn" onclick="filtrarNoticias('supertaça inglaterra', this)">Supertaça Inglaterra</button>
-        <button class="filter-btn" onclick="filtrarNoticias('futebol nacional', this)">Futebol Nacional</button>
+      <!-- BARRA DE FILTROS CLEAN COM PESQUISA -->
+      <div class="filter-toolbar">
+        <div class="filter-pills">
+          <button class="filter-btn active" onclick="filtrarNoticias('todos', this)">Todas</button>
+          <button class="filter-btn" onclick="filtrarNoticias('sl benfica', this)">SL Benfica</button>
+          <button class="filter-btn" onclick="filtrarNoticias('fc porto', this)">FC Porto</button>
+          <button class="filter-btn" onclick="filtrarNoticias('sporting sc', this)">Sporting SC</button>
+          <button class="filter-btn" onclick="filtrarNoticias('premier league', this)">Premier League</button>
+          
+          <!-- DROPDOWN MAIS CATEGORIAS -->
+          <div class="dropdown-wrapper" id="dropdownWrapper">
+            <button class="filter-btn" onclick="toggleDropdown(event)">
+              Mais <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem;"></i>
+            </button>
+            <div class="dropdown-menu">
+              <button class="dropdown-item" onclick="filtrarNoticias('sc braga', this)">SC Braga</button>
+              <button class="dropdown-item" onclick="filtrarNoticias('liga portugal betclic', this)">Liga Portugal Betclic</button>
+              <button class="dropdown-item" onclick="filtrarNoticias('liga europa', this)">Liga Europa</button>
+              <button class="dropdown-item" onclick="filtrarNoticias('liga conferência', this)">Liga Conferência</button>
+              <button class="dropdown-item" onclick="filtrarNoticias('supertaça europeia', this)">Supertaça Europeia</button>
+              <button class="dropdown-item" onclick="filtrarNoticias('liga portugal 2 meusuper', this)">Liga Portugal 2 MeuSuper</button>
+              <button class="dropdown-item" onclick="filtrarNoticias('la liga', this)">La Liga</button>
+              <button class="dropdown-item" onclick="filtrarNoticias('supertaça inglaterra', this)">Supertaça Inglaterra</button>
+              <button class="dropdown-item" onclick="filtrarNoticias('futebol nacional', this)">Futebol Nacional</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PESQUISA RÁPIDA -->
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" placeholder="Pesquisar notícias..." onkeyup="pesquisarNoticias()">
+        </div>
       </div>
     </div>
 
@@ -234,6 +359,7 @@
 
   <script>
     let todasAsNoticias = [];
+    let filtroAtual = 'todos';
 
     async function carregarTodasNoticias() {
       try {
@@ -254,18 +380,28 @@
             const data = jsyaml.load(parts[1]);
             if (!data) continue;
 
+            let dateRaw = data.published || data.date || '';
+            let dateFormatted = '';
+            if (dateRaw) {
+              const d = new Date(dateRaw);
+              if (!isNaN(d)) {
+                dateFormatted = d.toLocaleDateString('pt-PT', { day: '2-digit', month: '2-digit', year: 'numeric' });
+              }
+            }
+
             todasAsNoticias.push({
               slug: file.name.replace('.md', ''),
               title: data.title || 'Sem título',
               tag: data.category || data.categoria || data.tag || 'Geral',
               imagem: data.image || data.imagem || data.featured_image || data.featuredImage || 'https://via.placeholder.com/600x400',
               descricao: data.subtitle || data.subtitulo || data.descricao || data.resumo || '',
-              dataPublicacao: data.published || data.date || ''
+              dataPublicacaoRaw: dateRaw,
+              dataPublicacaoFormatted: dateFormatted
             });
           }
         }
 
-        todasAsNoticias.sort((a, b) => new Date(b.dataPublicacao) - new Date(a.dataPublicacao));
+        todasAsNoticias.sort((a, b) => new Date(b.dataPublicacaoRaw) - new Date(a.dataPublicacaoRaw));
         renderizarNoticias(todasAsNoticias);
 
       } catch (error) {
@@ -279,7 +415,7 @@
       container.innerHTML = '';
 
       if (lista.length === 0) {
-        container.innerHTML = '<p style="color: var(--text-gray); text-align: center; padding: 2rem 0;">Nenhuma notícia encontrada nesta categoria.</p>';
+        container.innerHTML = '<p style="color: var(--text-gray); text-align: center; padding: 2.5rem 0;">Nenhuma notícia encontrada.</p>';
         return;
       }
 
@@ -293,7 +429,10 @@
             <img src="${item.imagem}" alt="${item.title}">
           </div>
           <div class="news-list-content">
-            <span class="tag">${item.tag.toUpperCase()}</span>
+            <div class="news-list-meta">
+              <span class="tag">${item.tag.toUpperCase()}</span>
+              ${item.dataPublicacaoFormatted ? `<span class="date">· ${item.dataPublicacaoFormatted}</span>` : ''}
+            </div>
             <h3>${item.title}</h3>
             <p>${item.descricao}</p>
           </div>
@@ -302,18 +441,53 @@
       });
     }
 
-    function filtrarNoticias(categoria, btnElement) {
-      // Atualiza botão ativo
-      const btns = document.querySelectorAll('.filter-btn');
-      btns.forEach(btn => btn.classList.remove('active'));
-      btnElement.classList.add('active');
+    function toggleDropdown(e) {
+      e.stopPropagation();
+      document.getElementById('dropdownWrapper').classList.toggle('open');
+    }
 
-      if (categoria === 'todos') {
-        renderizarNoticias(todasAsNoticias);
-      } else {
-        const filtradas = todasAsNoticias.filter(n => n.tag.toLowerCase().trim() === categoria.toLowerCase().trim());
-        renderizarNoticias(filtradas);
+    document.addEventListener('click', () => {
+      const wrapper = document.getElementById('dropdownWrapper');
+      if (wrapper) wrapper.classList.remove('open');
+    });
+
+    function filtrarNoticias(categoria, btnElement) {
+      filtroAtual = categoria;
+      
+      // Atualizar estados dos botões
+      document.querySelectorAll('.filter-btn, .dropdown-item').forEach(btn => btn.classList.remove('active'));
+      if (btnElement) btnElement.classList.add('active');
+
+      const wrapper = document.getElementById('dropdownWrapper');
+      if (wrapper) wrapper.classList.remove('open');
+
+      aplicarFiltros();
+    }
+
+    function pesquisarNoticias() {
+      aplicarFiltros();
+    }
+
+    function aplicarFiltros() {
+      const termo = document.getElementById('searchInput').value.toLowerCase().trim();
+
+      let resultado = todasAsNoticias;
+
+      // Filtrar por categoria
+      if (filtroAtual !== 'todos') {
+        resultado = resultado.filter(n => n.tag.toLowerCase().trim() === filtroAtual.toLowerCase().trim());
       }
+
+      // Filtrar por barra de pesquisa
+      if (termo !== '') {
+        resultado = resultado.filter(n => 
+          n.title.toLowerCase().includes(termo) || 
+          n.descricao.toLowerCase().includes(termo) ||
+          n.tag.toLowerCase().includes(termo)
+        );
+      }
+
+      renderizarNoticias(resultado);
     }
 
     document.addEventListener('DOMContentLoaded', carregarTodasNoticias);
