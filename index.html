@@ -96,6 +96,9 @@ async function carregarNoticias() {
     
     noticiasContainer.innerHTML = '';
 
+    const noticiasList = [];
+
+    // 1. Processa os ficheiros Markdown
     for (const file of files) {
       if (file.name.endsWith('.md')) {
         const res = await fetch(file.download_url);
@@ -107,31 +110,40 @@ async function carregarNoticias() {
         const data = jsyaml.load(parts[1]);
         if (!data) continue;
 
-        const slug = file.name.replace('.md', '');
-        
-        // Mapeamento flexível de campos (português/inglês)
-        const title = data.title || 'Sem título';
-        const tag = data.category || data.categoria || data.tag || 'Geral';
-        const imagem = data.image || data.imagem || data.featured_image || data.featuredImage || 'https://via.placeholder.com/600x400';
-        const descricao = data.subtitle || data.subtitulo || data.descricao || data.resumo || '';
-
-        const card = document.createElement('a');
-        card.href = `noticia.html?slug=${slug}`;
-        card.className = 'news-card';
-        
-        card.innerHTML = `
-          <div style="width: 100%; aspect-ratio: 16/9; overflow: hidden;">
-            <img src="${imagem}" alt="${title}" style="width: 100%; height: 100%; object-fit: cover;">
-          </div>
-          <div style="padding: 1.25rem;">
-            <span class="tag">${tag}</span>
-            <h3 style="margin: 0.5rem 0; font-size: 1.1rem; line-height: 1.4;">${title}</h3>
-            <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.5rem;">${descricao}</p>
-          </div>
-        `;
-        noticiasContainer.appendChild(card);
+        noticiasList.push({
+          slug: file.name.replace('.md', ''),
+          title: data.title || 'Sem título',
+          tag: data.category || data.categoria || data.tag || 'Geral',
+          imagem: data.image || data.imagem || data.featured_image || data.featuredImage || 'https://via.placeholder.com/600x400',
+          descricao: data.subtitle || data.subtitulo || data.descricao || data.resumo || '',
+          dataPublicacao: data.published || data.date || ''
+        });
       }
     }
+
+    // 2. Ordena pelas mais recentes e limita estritamente às últimas 4
+    noticiasList.sort((a, b) => new Date(b.dataPublicacao) - new Date(a.dataPublicacao));
+    const ultimasNoticias = noticiasList.slice(0, 4);
+
+    // 3. Renderiza apenas os 4 destaques na Home
+    ultimasNoticias.forEach(item => {
+      const card = document.createElement('a');
+      card.href = `noticia.html?slug=${item.slug}`;
+      card.className = 'news-card';
+      
+      card.innerHTML = `
+        <div style="width: 100%; aspect-ratio: 16/9; overflow: hidden;">
+          <img src="${item.imagem}" alt="${item.title}" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div style="padding: 1.25rem;">
+          <span class="tag">${item.tag.toUpperCase()}</span>
+          <h3 style="margin: 0.5rem 0; font-size: 1.1rem; line-height: 1.4;">${item.title}</h3>
+          <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.5rem;">${item.descricao}</p>
+        </div>
+      `;
+      noticiasContainer.appendChild(card);
+    });
+
   } catch (error) {
     console.error('Erro ao carregar notícias:', error);
   }
