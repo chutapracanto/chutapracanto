@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">ChutaPraCanto | Notícia</title>
-    <!-- CSS oficial do site -->
+    <link rel="icon" type="image/png" href="images/logo.png">
     <link rel="stylesheet" href="style.css">
     
     <!-- Meta Tags para Redes Sociais -->
@@ -15,7 +15,6 @@
     <meta name="twitter:card" content="summary_large_image" />
 
     <style>
-        /* Estilo do botão de partilha estilo Spotify */
         .btn-spotify-style {
             display: inline-flex;
             align-items: center;
@@ -47,22 +46,19 @@
     <ul>
       <li><a href="index.html">Home</a></li>
       <li><a href="noticias.html">Notícias</a></li>
-      <li><a href="media.html">Média</a></li>
-      <li><a href="index.html#equipa">Equipa</a></li>
+      <li><a href="sobre.html">Sobre Nós</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
     </ul>
   </nav>
 </header>
 
 <div class="article-container">
-    <!-- Botão Voltar -->
-    <a href="index.html" class="back-btn">← VOLTAR ÀS NOTÍCIAS</a>
+    <a href="noticias.html" class="back-btn">← VOLTAR ÀS NOTÍCIAS</a>
 
-    <!-- Conteúdo gerado dinamicamente -->
     <div id="article-content">
         <p style="color: var(--text-gray);">A carregar notícia...</p>
     </div>
 
-    <!-- Botão de Partilha Estilo Spotify -->
     <div class="share-section" id="share-box" style="display:none; margin-top: 40px; text-align: right;">
         <button class="btn-spotify-style" onclick="partilharNoticia()">
             Partilhar Notícia ↗
@@ -71,10 +67,41 @@
 </div>
 
 <footer>
-    <p>© 2026 ChutaPraCanto. Futebol e opinião tática.</p>
-    <div class="footer-links">
-      <a href="#">Sobre Nós</a>
-      <a href="#">Contacto</a>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="ChutaPraCanto" class="footer-logo">
+        <p>Análise tática, debate pós-jogo e opinião sem filtro sobre o futebol mundial.</p>
+      </div>
+
+      <div class="footer-links">
+        <h4>NAVEGAÇÃO</h4>
+        <a href="index.html">Home</a>
+        <a href="noticias.html">Notícias</a>
+        <a href="sobre.html">Sobre Nós</a>
+        <a href="contacto.html">Contacto</a>
+      </div>
+
+      <div class="footer-links">
+        <h4>LEGAL</h4>
+        <a href="privacidade.html">Política de Privacidade</a>
+        <a href="termos.html">Termos e Condições</a>
+      </div>
+
+      <div class="footer-socials-col">
+        <h4>REDES SOCIAIS</h4>
+        <div class="footer-social-links">
+          <a href="https://youtube.com/@chutapracanto" target="_blank" class="social-pill yt">YouTube ↗</a>
+          <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" class="social-pill sp">Spotify ↗</a>
+          <a href="https://instagram.com/chutapracanto.oficial" target="_blank" class="social-pill ig">Instagram ↗</a>
+          <a href="https://tiktok.com/@chutapracanto" target="_blank" class="social-pill tk">TikTok ↗</a>
+          <a href="https://facebook.com/chutapracanto" target="_blank" class="social-pill fb">Facebook ↗</a>
+          <a href="https://reddit.com/r/chutapracanto" target="_blank" class="social-pill rd">Reddit ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 ChutaPraCanto. Todos os direitos reservados.</p>
     </div>
 </footer>
 
@@ -107,7 +134,6 @@
             const date = frontmatter.published || frontmatter.date || 'Recente';
             const imagem = frontmatter.image || frontmatter.imagem || frontmatter.featured_image || frontmatter.featuredImage || '';
 
-            // Remove a primeira imagem do corpo do Markdown se for igual à imagem do topo (evita duplicar)
             markdownBody = markdownBody.trim().replace(/^!\[.*?\]\(.*?\)/, '');
 
             const dataFormatada = date.includes('T') ? date.split('T')[0] : date;
