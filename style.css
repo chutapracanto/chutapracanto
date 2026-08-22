@@ -614,10 +614,6 @@ h1#art-titulo {
 }
 
 .site-logo {
-  height: 110px;
-  width: auto;
-  max-width: 280px;
-  object-fit: contain;
-  transition: transform 0.2s ease;
-  filter: none; /* Remove o bloco verde */
+  /* Roda ligeiramente a tonalidade do verde atual sem queimar o branco */
+  filter: hue-rotate(25deg) saturate(140%);
 }
