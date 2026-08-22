@@ -98,18 +98,18 @@
             const parts = text.split("---");
             if (parts.length < 3) throw new Error("Formato inválido");
 
-            // Parser correto usando JS-YAML
             const frontmatter = jsyaml.load(parts[1]);
-            const markdownBody = parts.slice(2).join("---");
+            let markdownBody = parts.slice(2).join("---");
 
-            // Leitura flexível dos campos
             const title = frontmatter.title || 'Sem título';
             const subtitulo = frontmatter.subtitle || frontmatter.subtitulo || frontmatter.descricao || frontmatter.resumo || '';
             const categoria = frontmatter.category || frontmatter.categoria || frontmatter.tag || 'Geral';
             const date = frontmatter.published || frontmatter.date || 'Recente';
             const imagem = frontmatter.image || frontmatter.imagem || frontmatter.featured_image || frontmatter.featuredImage || '';
 
-            // Formatação da data (caso venha em ISO String)
+            // Remove a primeira imagem do corpo do Markdown se for igual à imagem do topo (evita duplicar)
+            markdownBody = markdownBody.trim().replace(/^!\[.*?\]\(.*?\)/, '');
+
             const dataFormatada = date.includes('T') ? date.split('T')[0] : date;
 
             document.getElementById('page-title').innerText = title + " | ChutaPraCanto";
@@ -125,7 +125,7 @@
                 ${subtitulo ? `<p class="art-subtitulo">${subtitulo}</p>` : ''}
                 <div class="art-meta">Publicado em ${dataFormatada} por ChutaPraCanto</div>
                 
-                ${imagem ? `<img src="${imagem}" alt="${title}" class="art-img">` : ''}
+                ${imagem ? `<img src="${imagem}" alt="${title}" class="art-img" style="width: 100%; max-width: 100%; border-radius: 8px; margin: 1.5rem 0;">` : ''}
                 
                 <div class="art-body">${htmlBody}</div>
             `;
