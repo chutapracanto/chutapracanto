@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <!-- Font Awesome CDN para os ícones sociais -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ChutaPraCanto | Futebol & Opinião Tática</title>
   <link rel="icon" type="image/png" href="images/logo.png">
+  
+  <!-- Font Awesome CDN para os ícones sociais -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css">
+  
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
   
   <style>
-    /* BOTÕES DE NAVEGAÇÃO DOS CARROSSEIS */
+    /* ESTILOS ESPECÍFICOS DOS CARROSSEIS E SPOTIFY */
     .arrow-btn { 
       background: #121824; 
       color: var(--neon-green); 
@@ -29,7 +31,6 @@
       color: #000; 
     }
     
-    /* CARROSSEIS DE VÍDEO */
     .media-carousel { 
       display: flex; 
       gap: 1.25rem; 
@@ -53,7 +54,6 @@
     .vertical-aspect .carousel-item { width: 240px; height: 425px; }
     .horizontal-aspect .carousel-item { width: 360px; height: 202px; }
 
-    /* SPOTIFY */
     .spotify-grid { 
       display: grid; 
       grid-template-columns: 280px 1fr; 
@@ -96,30 +96,32 @@
 </head>
 <body>
 
+  <!-- HEADER -->
   <header>
-  <div class="header-container">
-    <a href="index.html" class="logo-link">
-      <img src="images/logo.png" alt="ChutaPraCanto" class="site-logo">
-    </a>
-    
-    <nav>
-      <ul>
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="noticias.html">Notícias</a></li>
-        <li><a href="sobre.html">Sobre Nós</a></li>
-        <li><a href="contacto.html">Contacto</a></li>
-      </ul>
-    </nav>
+    <div class="header-container">
+      <a href="index.html" class="logo-link">
+        <img src="images/logo.png" alt="ChutaPraCanto" class="site-logo">
+      </a>
+      
+      <nav>
+        <ul>
+          <li><a href="index.html" class="active">Home</a></li>
+          <li><a href="noticias.html">Notícias</a></li>
+          <li><a href="sobre.html">Sobre Nós</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
 
-    <!-- ÍCONES SOCIAIS MINIMALISTAS NO TOPO -->
-    <div class="header-socials">
-      <a href="https://youtube.com/@chutapracanto" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
-      <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" title="Spotify"><i class="fa-brands fa-spotify"></i></a>
-      <a href="https://instagram.com/chutapracanto.oficial" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-      <a href="https://tiktok.com/@chutapracanto" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      <div class="header-socials">
+        <a href="https://youtube.com/@chutapracanto" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" title="Spotify"><i class="fa-brands fa-spotify"></i></a>
+        <a href="https://instagram.com/chutapracanto.oficial" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://tiktok.com/@chutapracanto" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
+
+  <!-- CONTEÚDO PRINCIPAL -->
   <div class="container">
 
     <!-- HERO -->
@@ -193,7 +195,7 @@
       </div>
     </section>
 
-    <!-- EQUIPA (ESTILO FRAMER - MOLDURA VERDE) -->
+    <!-- EQUIPA -->
     <section id="equipa">
       <div class="framer-team-box">
         <div class="team-intro">
@@ -215,56 +217,58 @@
 
   </div>
 
-<footer>
-  <div class="footer-container">
-    <div class="footer-brand">
-      <img src="images/logo.png" alt="ChutaPraCanto" class="footer-logo">
-      <p>Análise tática, debate pós-jogo e opinião sem filtro sobre o futebol mundial.</p>
-    </div>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <img src="images/logo.png" alt="ChutaPraCanto" class="footer-logo">
+        <p>Análise tática, debate pós-jogo e opinião sem filtro sobre o futebol mundial.</p>
+      </div>
 
-    <div class="footer-links">
-      <h4>NAVEGAÇÃO</h4>
-      <a href="index.html">Home</a>
-      <a href="noticias.html">Notícias</a>
-      <a href="sobre.html">Sobre Nós</a>
-      <a href="contacto.html">Contacto</a>
-    </div>
+      <div class="footer-links">
+        <h4>NAVEGAÇÃO</h4>
+        <a href="index.html">Home</a>
+        <a href="noticias.html">Notícias</a>
+        <a href="sobre.html">Sobre Nós</a>
+        <a href="contacto.html">Contacto</a>
+      </div>
 
-    <div class="footer-links">
-      <h4>LEGAL</h4>
-      <a href="privacidade.html">Política de Privacidade</a>
-      <a href="termos.html">Termos e Condições</a>
-    </div>
+      <div class="footer-links">
+        <h4>LEGAL</h4>
+        <a href="privacidade.html">Política de Privacidade</a>
+        <a href="termos.html">Termos e Condições</a>
+      </div>
 
-    <div class="footer-socials-col">
-      <h4>REDES SOCIAIS</h4>
-      <div class="footer-social-links">
-        <a href="https://youtube.com/@chutapracanto" target="_blank" class="social-pill">
-          <i class="fa-brands fa-youtube"></i> YouTube
-        </a>
-        <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" class="social-pill">
-          <i class="fa-brands fa-spotify"></i> Spotify
-        </a>
-        <a href="https://instagram.com/chutapracanto.oficial" target="_blank" class="social-pill">
-          <i class="fa-brands fa-instagram"></i> Instagram
-        </a>
-        <a href="https://tiktok.com/@chutapracanto" target="_blank" class="social-pill">
-          <i class="fa-brands fa-tiktok"></i> TikTok
-        </a>
-        <a href="https://facebook.com/chutapracanto" target="_blank" class="social-pill">
-          <i class="fa-brands fa-facebook-f"></i> Facebook
-        </a>
-        <a href="https://reddit.com/r/chutapracanto" target="_blank" class="social-pill">
-          <i class="fa-brands fa-reddit-alien"></i> Reddit
-        </a>
+      <div class="footer-socials-col">
+        <h4>REDES SOCIAIS</h4>
+        <div class="footer-social-links">
+          <a href="https://youtube.com/@chutapracanto" target="_blank" class="social-pill">
+            <i class="fa-brands fa-youtube"></i> YouTube
+          </a>
+          <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" class="social-pill">
+            <i class="fa-brands fa-spotify"></i> Spotify
+          </a>
+          <a href="https://instagram.com/chutapracanto.oficial" target="_blank" class="social-pill">
+            <i class="fa-brands fa-instagram"></i> Instagram
+          </a>
+          <a href="https://tiktok.com/@chutapracanto" target="_blank" class="social-pill">
+            <i class="fa-brands fa-tiktok"></i> TikTok
+          </a>
+          <a href="https://facebook.com/chutapracanto" target="_blank" class="social-pill">
+            <i class="fa-brands fa-facebook-f"></i> Facebook
+          </a>
+          <a href="https://reddit.com/r/chutapracanto" target="_blank" class="social-pill">
+            <i class="fa-brands fa-reddit-alien"></i> Reddit
+          </a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="footer-bottom">
-    <p>© 2026 ChutaPraCanto. Todos os direitos reservados.</p>
-  </div>
-</footer>
+    <div class="footer-bottom">
+      <p>© 2026 ChutaPraCanto. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
   <script>
     // 1. NAVEGAÇÃO DOS CARROSSEIS
     function scrollCarousel(id, direction) {
