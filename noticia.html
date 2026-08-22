@@ -6,11 +6,9 @@
   <title id="page-title">ChutaPraCanto | Notícia</title>
   <link rel="icon" type="image/png" href="images/logo.png">
   
-  <!-- Font Awesome para os ícones sociais do Header -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   
-  <!-- Meta Tags para Redes Sociais -->
   <meta property="og:type" content="article" />
   <meta property="og:title" id="meta-title" content="ChutaPraCanto" />
   <meta property="og:description" id="meta-desc" content="Notícias e opinião sobre futebol." />
@@ -18,7 +16,6 @@
   <meta name="twitter:card" content="summary_large_image" />
 
   <style>
-    /* ESTILOS DA PÁGINA INTERNA DE ARTIGO */
     .article-wrapper {
       max-width: 800px;
       margin: 2rem auto 4rem auto;
@@ -37,10 +34,6 @@
 
     .back-btn:hover {
       transform: translateX(-4px);
-    }
-
-    .article-header {
-      margin-bottom: 2rem;
     }
 
     .art-title {
@@ -67,8 +60,9 @@
 
     .art-img {
       width: 100%;
-      max-height: 450px;
+      height: 420px;
       object-fit: cover;
+      object-position: center 20%; /* CORRIGIDO: FOCO NO TOPO/ROSTO */
       border-radius: 12px;
       margin: 1.5rem 0 2rem 0;
       border: 1px solid var(--border-color);
@@ -80,15 +74,8 @@
       color: #e0e0e0;
     }
 
-    .art-body p {
-      margin-bottom: 1.5rem;
-    }
-
-    .art-body h2, .art-body h3 {
-      color: #fff;
-      margin: 2rem 0 1rem 0;
-    }
-
+    .art-body p { margin-bottom: 1.5rem; }
+    .art-body h2, .art-body h3 { color: #fff; margin: 2rem 0 1rem 0; }
     .art-body blockquote {
       border-left: 3px solid var(--neon-green);
       padding-left: 1rem;
@@ -97,7 +84,6 @@
       font-style: italic;
     }
 
-    /* BOTÃO DE PARTILHA */
     .btn-share {
       display: inline-flex;
       align-items: center;
@@ -188,24 +174,12 @@
       <div class="footer-socials-col">
         <h4>REDES SOCIAIS</h4>
         <div class="footer-social-links">
-          <a href="https://youtube.com/@chutapracanto" target="_blank" class="social-pill">
-            <i class="fa-brands fa-youtube"></i> YouTube
-          </a>
-          <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" class="social-pill">
-            <i class="fa-brands fa-spotify"></i> Spotify
-          </a>
-          <a href="https://instagram.com/chutapracanto.oficial" target="_blank" class="social-pill">
-            <i class="fa-brands fa-instagram"></i> Instagram
-          </a>
-          <a href="https://tiktok.com/@chutapracanto" target="_blank" class="social-pill">
-            <i class="fa-brands fa-tiktok"></i> TikTok
-          </a>
-          <a href="https://facebook.com/chutapracanto" target="_blank" class="social-pill">
-            <i class="fa-brands fa-facebook-f"></i> Facebook
-          </a>
-          <a href="https://reddit.com/r/chutapracanto" target="_blank" class="social-pill">
-            <i class="fa-brands fa-reddit-alien"></i> Reddit
-          </a>
+          <a href="https://youtube.com/@chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-youtube"></i> YouTube</a>
+          <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" class="social-pill"><i class="fa-brands fa-spotify"></i> Spotify</a>
+          <a href="https://instagram.com/chutapracanto.oficial" target="_blank" class="social-pill"><i class="fa-brands fa-instagram"></i> Instagram</a>
+          <a href="https://tiktok.com/@chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+          <a href="https://facebook.com/chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
+          <a href="https://reddit.com/r/chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-reddit-alien"></i> Reddit</a>
         </div>
       </div>
     </div>
@@ -244,12 +218,9 @@
         const date = frontmatter.published || frontmatter.date || 'Recente';
         const imagem = frontmatter.image || frontmatter.imagem || frontmatter.featured_image || frontmatter.featuredImage || '';
 
-        // Limpar imagens duplicadas no início do corpo Markdown
         markdownBody = markdownBody.trim().replace(/^!\[.*?\]\(.*?\)/, '');
-
         const dataFormatada = date.includes('T') ? date.split('T')[0] : date;
 
-        // Atualizar títulos e meta-tags
         document.getElementById('page-title').innerText = title + " | ChutaPraCanto";
         document.getElementById('meta-title').content = title;
         document.getElementById('meta-desc').content = subtitulo;
@@ -258,7 +229,7 @@
         const htmlBody = marked.parse(markdownBody);
         
         document.getElementById('article-content').innerHTML = `
-          <header class="article-header">
+          <header>
             <span class="tag">${categoria.toUpperCase()}</span>
             <h1 class="art-title">${title}</h1>
             ${subtitulo ? `<p class="art-subtitulo">${subtitulo}</p>` : ''}
