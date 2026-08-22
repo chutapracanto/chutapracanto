@@ -11,45 +11,48 @@
 </head>
 <body>
 
- <header>
-  <a href="index.html" class="logo-link">
-    <img src="images/logo.png" alt="ChutaPraCanto" class="site-logo">
-  </a>
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="noticias.html">Notícias</a></li>
-      <li><a href="media.html">Média</a></li>
-      <li><a href="index.html#equipa">Equipa</a></li>
-    </ul>
-  </nav>
-</header>
+  <header>
+    <a href="index.html" class="logo-link">
+      <img src="images/logo.png" alt="ChutaPraCanto" class="site-logo">
+    </a>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="noticias.html">Notícias</a></li>
+        <li><a href="#equipa">Equipa</a></li>
+      </ul>
+    </nav>
+  </header>
 
   <div class="container">
 
+    <!-- HERO -->
     <section class="hero">
       <div class="hero-tag">AO VIVO · FUTEBOL SEM FILTRO</div>
       <h1>Análise Tática, Debate Pós-Jogo e Opinião</h1>
       <p>O jogo não acaba aos 90. Acompanhamos cada detalhe, cada transferência e cada decisão que muda a época.</p>
-      <a href="https://www.youtube.com/@chutapracanto" target="_blank" class="btn-neon">Ver Canal no YouTube</a>
+      <a href="https://www.youtube.com/@chutapracanto" target="_blank" class="btn-neon">VER CANAL NO YOUTUBE</a>
     </section>
 
-  <!-- NOTÍCIAS EM DESTAQUE -->
-<section id="news">
-  <div class="section-header">
-    <h2 class="section-title">EM DESTAQUE</h2>
-    <a href="noticias.html" class="see-more">VER MAIS NOTÍCIAS →</a>
-  </div>
-  
-  <div class="featured-wrapper" id="noticias-container">
-    <p style="color: var(--text-gray);">A carregar notícias...</p>
-  </div>
-</section>
-
-    <!-- SHORTS YOUTUBE -->
-    <section id="shorts">
+    <!-- NOTÍCIAS EM DESTAQUE -->
+    <section id="news">
       <div class="section-header">
-        <h2 class="section-title">Shorts Recentes</h2>
+        <h2 class="section-title">EM DESTAQUE</h2>
+        <a href="noticias.html" class="see-more">VER MAIS NOTÍCIAS →</a>
+      </div>
+      
+      <div class="featured-wrapper" id="noticias-container">
+        <p style="color: var(--text-gray);">A carregar notícias...</p>
+      </div>
+    </section>
+
+    <!-- SHORTS / REELS -->
+    <section id="shorts-section">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">SHORTS / REELS</h2>
+          <span class="section-subtitle">60 segundos. Uma ideia que fica.</span>
+        </div>
         <a href="https://www.youtube.com/@chutapracanto/shorts" target="_blank" class="see-more">VER TODOS NO YOUTUBE →</a>
       </div>
       <div class="shorts-grid" id="shorts-container">
@@ -57,19 +60,43 @@
       </div>
     </section>
 
-    <!-- EQUIPA -->
-    <section id="equipa">
+    <!-- PODCAST -->
+    <section id="podcast-section">
       <div class="section-header">
-        <h2 class="section-title">A Equipa</h2>
+        <h2 class="section-title">PODCAST</h2>
       </div>
-      <div class="team-grid">
-        <div class="team-card">
-          <h3>RUTE COSTA</h3>
-          <p>Moderation</p>
+      <div class="podcast-featured-card">
+        <div class="podcast-cover">
+          <img src="images/logo.png" alt="ChutaPraCanto Podcast">
         </div>
-        <div class="team-card">
-          <h3>PEDRO SOARES</h3>
-          <p>Technical Analysis</p>
+        <div class="podcast-details">
+          <span class="tag">EPISÓDIO RECENTE · VIDEOCAST</span>
+          <h3>#2 - Um-dó-li-tá no Benfica, Bomba Palhinha e o Mercado Porto, Sporting e a venda do Braga</h3>
+          <p>Um debate de mercado sobre Benfica, Palhinha, Porto, Sporting e Braga — em vídeo e áudio.</p>
+          <div class="podcast-buttons">
+            <a href="https://www.youtube.com/@chutapracanto" target="_blank" class="btn-podcast yt">VER NO YOUTUBE</a>
+            <a href="https://open.spotify.com" target="_blank" class="btn-podcast sp">OUVIR NO SPOTIFY</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EQUIPA (ESTILO FRAMER - MOLDURA VERDE) -->
+    <section id="equipa">
+      <div class="framer-team-box">
+        <div class="team-intro">
+          <p class="team-sub">A EQUIPA QUE VÊ O JOGO DIFERENTE</p>
+          <h2>Duas vozes. O mesmo relvado.</h2>
+        </div>
+        <div class="team-members">
+          <div class="member">
+            <h3>RUTE COSTA</h3>
+            <span>MODERATION</span>
+          </div>
+          <div class="member">
+            <h3>PEDRO SOARES</h3>
+            <span>TECHNICAL ANALYSIS</span>
+          </div>
         </div>
       </div>
     </section>
@@ -80,6 +107,7 @@
     <p>© 2026 ChutaPraCanto. Futebol e opinião tática.</p>
     <div class="footer-links">
       <a href="#">Sobre Nós</a>
+      <a href="#">Política de Privacidade</a>
       <a href="#">Contacto</a>
     </div>
   </footer>
@@ -119,13 +147,12 @@ async function carregarNoticias() {
       }
     }
 
-    // Ordena por data e recolhe as 4 mais recentes
     noticiasList.sort((a, b) => new Date(b.dataPublicacao) - new Date(a.dataPublicacao));
     const emDestaque = noticiasList.slice(0, 4);
 
     if (emDestaque.length === 0) return;
 
-    // 1. Notícia Principal (Grande)
+    // 1. Destaque Principal (Grande)
     const principal = emDestaque[0];
     const mainCard = document.createElement('a');
     mainCard.href = `noticia.html?slug=${principal.slug}`;
@@ -143,7 +170,7 @@ async function carregarNoticias() {
     `;
     container.appendChild(mainCard);
 
-    // 2. Notícias Secundárias (Lista com 3 notícias)
+    // 2. Destaques Secundários (Lista de 3)
     if (emDestaque.length > 1) {
       const listContainer = document.createElement('div');
       listContainer.className = 'secondary-featured-list';
