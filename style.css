@@ -8,7 +8,7 @@
   --neon-green-hover: #00cc52;
   --text-white: #ffffff;
   --text-gray: #a0a0a0;
-  --font-title: 'Chakra Petch', sans-serif; /* FONTE ESTILO FRAMER */
+  --font-title: 'Chakra Petch', sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
 }
 
@@ -25,32 +25,37 @@ body {
   line-height: 1.5;
 }
 
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
 a {
   color: inherit;
   text-decoration: none;
 }
-
 
 h1, h2, h3, .logo, .btn-neon, .tag, .hero-tag {
   font-family: var(--font-title);
   letter-spacing: 0.3px;
 }
 
-/* Mantém apenas as tags e botões em maiúsculas */
 .tag, .hero-tag, .btn-neon, .see-more, .btn-ver-artigo {
   text-transform: uppercase;
 }
 
 /* ==========================================
-   HEADER COM REDES SOCIAIS (TOPO)
+   HEADER CORRIGIDO & ALINHADO
    ========================================== */
 header {
   background: #080b11;
   border-bottom: 1px solid #1a2332;
-  padding: 0.8rem 1.5rem;
+  padding: 1rem 1.5rem;
   position: sticky;
   top: 0;
   z-index: 1000;
+  width: 100%;
 }
 
 .header-container {
@@ -59,15 +64,43 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 2rem;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
 }
 
 .site-logo {
-  height: 38px;
+  height: 48px; /* Tamanho do logo ajustado */
   width: auto;
   display: block;
+  object-fit: contain;
 }
 
-/* Redes Sociais no Topo */
+/* MENU DE NAVEGAÇÃO */
+nav ul {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none; /* Remove as bolinhas pretas! */
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  color: var(--text-gray);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: color 0.2s ease;
+}
+
+nav a:hover, nav a.active {
+  color: var(--neon-green);
+}
+
+/* REDES SOCIAIS NO HEADER */
 .header-socials {
   display: flex;
   align-items: center;
@@ -76,7 +109,7 @@ header {
 
 .header-socials a {
   color: var(--text-gray);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   transition: all 0.2s ease;
 }
 
@@ -87,11 +120,16 @@ header {
 
 @media (max-width: 768px) {
   .header-socials {
-    display: none; /* Esconde no telemóvel para não sobrecarregar o menu */
+    display: none;
+  }
+  nav ul {
+    gap: 1rem;
   }
 }
 
-/* HERO */
+/* ==========================================
+   HERO
+   ========================================== */
 .hero {
   text-align: center;
   padding: 4rem 1rem;
@@ -123,7 +161,6 @@ header {
   font-size: 1.1rem;
 }
 
-/* BOTÕES */
 .btn-neon {
   background-color: var(--neon-green);
   color: #000;
@@ -140,7 +177,9 @@ header {
   box-shadow: 0 0 20px rgba(57, 255, 20, 0.4);
 }
 
-/* SECÇÕES */
+/* ==========================================
+   SECÇÕES & CABEÇALHOS
+   ========================================== */
 .section-header {
   display: flex;
   justify-content: space-between;
@@ -159,86 +198,189 @@ header {
   font-weight: 700;
 }
 
-/* CARTÕES E NOTÍCIAS */
-.news-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1.5rem;
+/* ==========================================
+   DESTAQUES (HOMEPAGE - LAYOUT FRAMER)
+   ========================================== */
+.featured-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
   margin-bottom: 4rem;
 }
 
-.news-card {
+.main-featured-card {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
   background-color: var(--card-bg);
   border: 1px solid var(--border-color);
   border-radius: 12px;
   overflow: hidden;
-  display: block;
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  text-decoration: none;
+  color: var(--text-white);
+  transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
-.news-card:hover {
+.main-featured-card:hover {
   border-color: var(--neon-green);
-  transform: translateY(-4px);
+  transform: translateY(-2px);
 }
 
-.tag {
-  color: var(--neon-green);
-  font-size: 0.75rem;
+.main-featured-img {
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+}
+
+.main-featured-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+.main-featured-content {
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.main-featured-content h2 {
+  font-size: 1.35rem;
+  margin: 0.6rem 0;
+  line-height: 1.3;
+  color: var(--text-white);
+}
+
+.main-featured-content p {
+  color: var(--text-gray);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 1.25rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.btn-ver-artigo {
+  display: inline-block;
+  align-self: flex-start;
+  background-color: var(--neon-green);
+  color: #000000;
+  font-family: var(--font-title);
   font-weight: 800;
+  font-size: 0.7rem;
+  padding: 6px 14px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
 }
 
-/* SHORTS */
-.shorts-grid {
+.secondary-featured-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sub-featured-card {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
-  margin-bottom: 4rem;
-}
-
-.short-card {
-  background: var(--card-bg);
-  border-radius: 12px;
+  grid-template-columns: 180px 1fr;
+  background-color: var(--card-bg);
   border: 1px solid var(--border-color);
-  padding: 0.8rem;
-  text-align: center;
-  transition: transform 0.2s;
+  border-radius: 10px;
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--text-white);
+  transition: border-color 0.2s ease;
 }
 
-.short-card:hover {
-  transform: translateY(-4px);
+.sub-featured-card:hover {
   border-color: var(--neon-green);
 }
 
-/* EQUIPA */
-.team-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-  margin-bottom: 4rem;
+.sub-featured-img {
+  width: 100%;
+  height: 110px;
 }
 
-.team-card {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  padding: 2rem;
-  border-radius: 12px;
-  text-align: center;
+.sub-featured-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
 }
 
-.team-card h3 {
-  font-size: 1.2rem;
-  margin-bottom: 0.2rem;
+.sub-featured-content {
+  padding: 0.8rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.team-card p {
-  color: var(--neon-green);
+.sub-featured-content h3 {
+  font-size: 1rem;
+  margin: 0.3rem 0;
+  line-height: 1.25;
+}
+
+.sub-featured-content p {
+  color: var(--text-gray);
   font-size: 0.8rem;
-  font-weight: 800;
-  text-transform: uppercase;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 /* ==========================================
-   FOOTER MODERNO & CLEAN
+   EQUIPA (ESTILO FRAMER)
+   ========================================== */
+.framer-team-box {
+  border: 1px solid var(--neon-green);
+  border-radius: 12px;
+  padding: 2.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(57, 255, 20, 0.02);
+  margin-bottom: 4rem;
+}
+
+.team-sub {
+  color: var(--text-white);
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 0.4rem;
+  font-family: var(--font-title);
+}
+
+.team-intro h2 {
+  font-size: 1.5rem;
+  color: var(--text-white);
+}
+
+.team-members {
+  display: flex;
+  gap: 3rem;
+}
+
+.member h3 {
+  font-size: 1.1rem;
+  color: var(--text-white);
+  margin-bottom: 0.2rem;
+}
+
+.member span {
+  color: var(--neon-green);
+  font-size: 0.75rem;
+  font-weight: 800;
+  font-family: var(--font-title);
+}
+
+/* ==========================================
+   FOOTER
    ========================================== */
 footer {
   background: #080b11;
@@ -256,18 +398,6 @@ footer {
   gap: 2.5rem;
   padding-bottom: 3rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-@media (max-width: 900px) {
-  .footer-container {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 550px) {
-  .footer-container {
-    grid-template-columns: 1fr;
-  }
 }
 
 .footer-logo {
@@ -311,7 +441,6 @@ footer {
   color: var(--neon-green);
 }
 
-/* BOTÕES SOCIAIS NO FOOTER COM ÍCONES */
 .footer-social-links {
   display: flex;
   flex-wrap: wrap;
@@ -359,483 +488,19 @@ footer {
   font-size: 0.8rem;
 }
 
-/* ==========================================================================
-   ESTILOS DA PÁGINA DE MÉDIA & CARROSSÉIS
-   ========================================================================== */
-
-.media-carousel {
-  display: flex;
-  gap: 1.25rem;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  padding: 0.5rem 0;
-  scrollbar-width: none;
+/* RESPONSIVIDADE MOBILE */
+@media (max-width: 900px) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
-.media-carousel::-webkit-scrollbar {
-  display: none;
-}
-
-.carousel-item {
-  flex: 0 0 auto;
-  background: #111;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.carousel-item iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-
-.vertical-aspect .carousel-item {
-  width: 240px;
-  height: 425px;
-}
-
-.horizontal-aspect .carousel-item {
-  width: 380px;
-  height: 215px;
-}
-
-.spotify-aspect .carousel-item {
-  width: 100%;
-  max-width: 600px;
-  height: 152px;
-}
-
-.arrow-btn {
-  background: #1a1a1a;
-  color: var(--neon-green);
-  border: 1px solid var(--neon-green);
-  font-size: 1.2rem;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  cursor: pointer;
-  margin-left: 0.3rem;
-  transition: all 0.2s ease;
-}
-
-.arrow-btn:hover {
-  background: var(--neon-green);
-  color: #000;
-}
-
-.btn-external {
-  display: inline-flex;
-  align-items: center;
-  background-color: transparent;
-  color: var(--neon-green);
-  border: 1px solid var(--neon-green);
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s ease;
-}
-
-.btn-external:hover {
-  background-color: var(--neon-green);
-  color: #000;
-  transform: translateY(-2px);
-}
-
-/* ==========================================================================
-   ESTILOS DA PÁGINA DE LEITURA DE NOTÍCIA (ESTILO FRAMER)
-   ========================================================================== */
-
-.article-container {
-  max-width: 800px;
-  margin: 40px auto;
-  padding: 0 20px;
-}
-
-.back-btn {
-  display: inline-block;
-  background: #111;
-  color: var(--neon-green);
-  border: 1px solid var(--neon-green);
-  padding: 8px 14px;
-  border-radius: 6px;
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: bold;
-  margin-bottom: 25px;
-  transition: background 0.2s;
-  font-family: var(--font-title);
-}
-
-.back-btn:hover {
-  background: var(--neon-green);
-  color: #000;
-}
-
-.article-category {
-  color: var(--neon-green);
-  font-weight: 800;
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  display: block;
-  margin-bottom: 10px;
-  font-family: var(--font-title);
-}
-
-h1#art-titulo {
-  font-size: 2.2rem;
-  font-weight: 900;
-  line-height: 1.2;
-  color: var(--text-white);
-  margin-bottom: 15px;
-  font-family: var(--font-title);
-}
-
-.art-subtitulo {
-  font-size: 1.1rem;
-  color: var(--text-gray);
-  line-height: 1.5;
-  margin-bottom: 15px;
-}
-
-.art-meta {
-  font-size: 0.85rem;
-  color: #737373;
-  margin-bottom: 30px;
-}
-
-.art-img {
-  width: 100%;
-  max-height: 450px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-bottom: 35px;
-}
-
-.art-body {
-  font-size: 1.05rem;
-  line-height: 1.8;
-  color: #e5e7eb;
-}
-
-.art-body p {
-  margin-bottom: 20px;
-}
-
-.art-body ul {
-  margin: 20px 0;
-  padding-left: 20px;
-}
-
-.art-body li {
-  margin-bottom: 10px;
-  list-style-type: disc; /* Garante os pontos circulares nas listas em vez de números */
-}
-
-.art-body strong {
-  color: var(--text-white);
-}
-
-/* ==========================================================================
-   ESTILOS DE DESTAQUES (HOMEPAGE - LAYOUT FRAMER)
-   ========================================================================== */
-
-.featured-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  margin-bottom: 4rem;
-}
-
-/* 1. NOTÍCIA PRINCIPAL (CARD GRANDE) */
-.main-featured-card {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  overflow: hidden;
-  text-decoration: none;
-  color: var(--text-white);
-  transition: border-color 0.2s ease, transform 0.2s ease;
-}
-
-.main-featured-card:hover {
-  border-color: var(--neon-green);
-  transform: translateY(-2px);
-}
-
-.main-featured-img {
-  width: 100%;
-  height: 100%;
-  min-height: 260px;
-}
-
-.main-featured-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.main-featured-content {
-  padding: 1.75rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.main-featured-content h2 {
-  font-size: 1.35rem;
-  margin: 0.6rem 0;
-  line-height: 1.3;
-  color: var(--text-white);
-}
-
-.main-featured-content p {
-  color: var(--text-gray);
-  font-size: 0.9rem;
-  line-height: 1.4;
-  margin-bottom: 1.25rem;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.btn-ver-artigo {
-  display: inline-block;
-  align-self: flex-start;
-  background-color: var(--neon-green);
-  color: #000000;
-  font-family: var(--font-title);
-  font-weight: 800;
-  font-size: 0.7rem;
-  padding: 6px 14px;
-  border-radius: 4px;
-  letter-spacing: 0.5px;
-}
-
-/* 2. LISTA DE 3 NOTÍCIAS SECUNDÁRIAS */
-.secondary-featured-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.sub-featured-card {
-  display: grid;
-  grid-template-columns: 180px 1fr;
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  overflow: hidden;
-  text-decoration: none;
-  color: var(--text-white);
-  transition: border-color 0.2s ease;
-}
-
-.sub-featured-card:hover {
-  border-color: var(--neon-green);
-}
-
-.sub-featured-img {
-  width: 100%;
-  height: 110px;
-}
-
-.sub-featured-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.sub-featured-content {
-  padding: 0.8rem 1.2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.sub-featured-content h3 {
-  font-size: 1rem;
-  margin: 0.3rem 0;
-  line-height: 1.25;
-}
-
-.sub-featured-content p {
-  color: var(--text-gray);
-  font-size: 0.8rem;
-  line-height: 1.3;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* ADAPTABILIDADE MOBILE */
 @media (max-width: 768px) {
   .main-featured-card {
     grid-template-columns: 1fr;
   }
   .sub-featured-card {
     grid-template-columns: 130px 1fr;
-  }
-  .sub-featured-img {
-    height: 100%;
-  }
-}
-
-/* AJUSTE DE FOCO DE IMAGEM PARA FOCAR NAS CARAS/TOPO */
-
-/* 1. Imagem do Destaque Principal */
-.main-featured-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 20%; /* Foca na parte superior onde estão as caras */
-}
-
-/* 2. Imagens dos Destaques Secundários */
-.sub-featured-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 20%;
-}
-
-/* 3. Imagens da grelha normal (Notícias / Home) */
-.news-card img {
-  object-fit: cover;
-  object-position: center 20%;
-}
-
-/* 4. Imagem no topo da Leitura do Artigo */
-.art-img {
-  object-fit: cover;
-  object-position: center 20%;
-}
-
-.site-logo {
-  /* Roda ligeiramente a tonalidade do verde atual sem queimar o branco */
-  filter: hue-rotate(25deg) saturate(140%);
-}
-
-/* ==========================================================================
-   ESTILOS FRAMER: PODCAST & EQUIPA
-   ========================================================================== */
-
-/* SUBTÍTULOS DE SECÇÃO */
-.section-subtitle {
-  color: var(--text-gray);
-  font-size: 0.85rem;
-}
-
-/* CARD PODCAST */
-.podcast-featured-card {
-  background-color: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  padding: 1.5rem;
-  display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: 1.5rem;
-  align-items: center;
-  margin-bottom: 4rem;
-}
-
-.podcast-cover img {
-  width: 100%;
-  border-radius: 8px;
-  background: #000;
-  padding: 1rem;
-}
-
-.podcast-details h3 {
-  font-size: 1.3rem;
-  margin: 0.5rem 0;
-  line-height: 1.3;
-}
-
-.podcast-details p {
-  color: var(--text-gray);
-  font-size: 0.9rem;
-  margin-bottom: 1.2rem;
-}
-
-.podcast-buttons {
-  display: flex;
-  gap: 0.8rem;
-}
-
-.btn-podcast {
-  padding: 8px 16px;
-  border-radius: 6px;
-  font-family: var(--font-title);
-  font-weight: 800;
-  font-size: 0.75rem;
-  text-decoration: none;
-}
-
-.btn-podcast.yt {
-  background-color: #ff0000;
-  color: #fff;
-}
-
-.btn-podcast.sp {
-  background-color: #1db954;
-  color: #000;
-}
-
-/* SECÇÃO EQUIPA ESTILO FRAMER (CAIXA VERDE) */
-.framer-team-box {
-  border: 1px solid var(--neon-green);
-  border-radius: 12px;
-  padding: 2.5rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: rgba(57, 255, 20, 0.02);
-  margin-bottom: 4rem;
-}
-
-.team-sub {
-  color: var(--text-white);
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 1px;
-  margin-bottom: 0.4rem;
-  font-family: var(--font-title);
-}
-
-.team-intro h2 {
-  font-size: 1.5rem;
-  color: var(--text-white);
-}
-
-.team-members {
-  display: flex;
-  gap: 3rem;
-}
-
-.member h3 {
-  font-size: 1.1rem;
-  color: var(--text-white);
-  margin-bottom: 0.2rem;
-}
-
-.member span {
-  color: var(--neon-green);
-  font-size: 0.75rem;
-  font-weight: 800;
-  font-family: var(--font-title);
-}
-
-/* RESPONSIVO MOBILE */
-@media (max-width: 768px) {
-  .podcast-featured-card {
-    grid-template-columns: 1fr;
   }
   .framer-team-box {
     flex-direction: column;
@@ -845,5 +510,11 @@ h1#art-titulo {
   .team-members {
     flex-direction: column;
     gap: 1.5rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .footer-container {
+    grid-template-columns: 1fr;
   }
 }
