@@ -2,7 +2,7 @@
 title: "Quinta-feira europeia: Benfica avassalador e SC Braga em vantagem nas pré-eliminatórias"
 slug: "quinta-feira-europeia-benfica-avassalador-e-sc-braga-em-vantagem-nas-pre-eliminatorias"
 subtitle: "Águias goleiam o Hearts por 6-1 na Liga Europa e arsenalistas vencem o Dínamo Minsk por 1-0 na Liga Conferência."
-category: "Futebol Nacional, SL Benfica, Liga Europa, SC Braga"
+category: "SL Benfica, Liga Europa, SC Braga, Liga Conferência"
 published: "2026-08-06T00:00:00.000Z"
 author: "ChutaPraCanto"
 image: https://framerusercontent.com/images/ycbszWojJI1w0LNN7vylumEGiQ.jpeg
