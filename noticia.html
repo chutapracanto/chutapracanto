@@ -1,72 +1,170 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">ChutaPraCanto | Notícia</title>
-    <link rel="icon" type="image/png" href="images/logo.png">
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- Meta Tags para Redes Sociais -->
-    <meta property="og:type" content="article" />
-    <meta property="og:title" id="meta-title" content="ChutaPraCanto" />
-    <meta property="og:description" id="meta-desc" content="Notícias e opinião sobre futebol." />
-    <meta property="og:image" id="meta-image" content="" />
-    <meta name="twitter:card" content="summary_large_image" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="page-title">ChutaPraCanto | Notícia</title>
+  <link rel="icon" type="image/png" href="images/logo.png">
+  
+  <!-- Font Awesome para os ícones sociais do Header -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+  
+  <!-- Meta Tags para Redes Sociais -->
+  <meta property="og:type" content="article" />
+  <meta property="og:title" id="meta-title" content="ChutaPraCanto" />
+  <meta property="og:description" id="meta-desc" content="Notícias e opinião sobre futebol." />
+  <meta property="og:image" id="meta-image" content="" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-    <style>
-        .btn-spotify-style {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background-color: transparent;
-            color: var(--neon-green);
-            border: 1px solid var(--neon-green);
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-        .btn-spotify-style:hover {
-            background-color: rgba(57, 255, 20, 0.1);
-            transform: scale(1.02);
-        }
-    </style>
+  <style>
+    /* ESTILOS DA PÁGINA INTERNA DE ARTIGO */
+    .article-wrapper {
+      max-width: 800px;
+      margin: 2rem auto 4rem auto;
+      padding: 0 1rem;
+    }
+
+    .back-btn {
+      display: inline-block;
+      color: var(--neon-green);
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      transition: transform 0.2s ease;
+    }
+
+    .back-btn:hover {
+      transform: translateX(-4px);
+    }
+
+    .article-header {
+      margin-bottom: 2rem;
+    }
+
+    .art-title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin: 0.8rem 0;
+      color: #fff;
+    }
+
+    .art-subtitulo {
+      font-size: 1.15rem;
+      color: var(--text-gray);
+      line-height: 1.5;
+      margin-bottom: 1rem;
+    }
+
+    .art-meta {
+      font-size: 0.85rem;
+      color: #777;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1.2rem;
+    }
+
+    .art-img {
+      width: 100%;
+      max-height: 450px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin: 1.5rem 0 2rem 0;
+      border: 1px solid var(--border-color);
+    }
+
+    .art-body {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #e0e0e0;
+    }
+
+    .art-body p {
+      margin-bottom: 1.5rem;
+    }
+
+    .art-body h2, .art-body h3 {
+      color: #fff;
+      margin: 2rem 0 1rem 0;
+    }
+
+    .art-body blockquote {
+      border-left: 3px solid var(--neon-green);
+      padding-left: 1rem;
+      margin: 1.5rem 0;
+      color: var(--text-gray);
+      font-style: italic;
+    }
+
+    /* BOTÃO DE PARTILHA */
+    .btn-share {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: transparent;
+      color: var(--neon-green);
+      border: 1px solid var(--neon-green);
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+      font-family: var(--font-title);
+    }
+
+    .btn-share:hover {
+      background-color: rgba(57, 255, 20, 0.1);
+      transform: translateY(-2px);
+    }
+  </style>
 </head>
 <body>
 
-<header>
-  <a href="index.html" class="logo-link">
-    <img src="images/logo.png" alt="ChutaPraCanto" class="site-logo">
-  </a>
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="noticias.html">Notícias</a></li>
-      <li><a href="sobre.html">Sobre Nós</a></li>
-      <li><a href="contacto.html">Contacto</a></li>
-    </ul>
-  </nav>
-</header>
+  <!-- HEADER -->
+  <header>
+    <div class="header-container">
+      <a href="index.html" class="logo-link">
+        <img src="images/logo.png" alt="ChutaPraCanto" class="site-logo">
+      </a>
+      
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="noticias.html" class="active">Notícias</a></li>
+          <li><a href="sobre.html">Sobre Nós</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
 
-<div class="article-container">
+      <div class="header-socials">
+        <a href="https://youtube.com/@chutapracanto" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" title="Spotify"><i class="fa-brands fa-spotify"></i></a>
+        <a href="https://instagram.com/chutapracanto.oficial" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://tiktok.com/@chutapracanto" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ARTIGO -->
+  <div class="article-wrapper">
     <a href="noticias.html" class="back-btn">← VOLTAR ÀS NOTÍCIAS</a>
 
     <div id="article-content">
-        <p style="color: var(--text-gray);">A carregar notícia...</p>
+      <p style="color: var(--text-gray);">A carregar notícia...</p>
     </div>
 
     <div class="share-section" id="share-box" style="display:none; margin-top: 40px; text-align: right;">
-        <button class="btn-spotify-style" onclick="partilharNoticia()">
-            Partilhar Notícia ↗
-        </button>
+      <button class="btn-share" onclick="partilharNoticia()">
+        PARTILHAR ARTIGO <i class="fa-solid fa-share-nodes"></i>
+      </button>
     </div>
-</div>
+  </div>
 
-<footer>
+  <!-- FOOTER -->
+  <footer>
     <div class="footer-container">
       <div class="footer-brand">
         <img src="images/logo.png" alt="ChutaPraCanto" class="footer-logo">
@@ -90,12 +188,24 @@
       <div class="footer-socials-col">
         <h4>REDES SOCIAIS</h4>
         <div class="footer-social-links">
-          <a href="https://youtube.com/@chutapracanto" target="_blank" class="social-pill yt">YouTube ↗</a>
-          <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" class="social-pill sp">Spotify ↗</a>
-          <a href="https://instagram.com/chutapracanto.oficial" target="_blank" class="social-pill ig">Instagram ↗</a>
-          <a href="https://tiktok.com/@chutapracanto" target="_blank" class="social-pill tk">TikTok ↗</a>
-          <a href="https://facebook.com/chutapracanto" target="_blank" class="social-pill fb">Facebook ↗</a>
-          <a href="https://reddit.com/r/chutapracanto" target="_blank" class="social-pill rd">Reddit ↗</a>
+          <a href="https://youtube.com/@chutapracanto" target="_blank" class="social-pill">
+            <i class="fa-brands fa-youtube"></i> YouTube
+          </a>
+          <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" class="social-pill">
+            <i class="fa-brands fa-spotify"></i> Spotify
+          </a>
+          <a href="https://instagram.com/chutapracanto.oficial" target="_blank" class="social-pill">
+            <i class="fa-brands fa-instagram"></i> Instagram
+          </a>
+          <a href="https://tiktok.com/@chutapracanto" target="_blank" class="social-pill">
+            <i class="fa-brands fa-tiktok"></i> TikTok
+          </a>
+          <a href="https://facebook.com/chutapracanto" target="_blank" class="social-pill">
+            <i class="fa-brands fa-facebook-f"></i> Facebook
+          </a>
+          <a href="https://reddit.com/r/chutapracanto" target="_blank" class="social-pill">
+            <i class="fa-brands fa-reddit-alien"></i> Reddit
+          </a>
         </div>
       </div>
     </div>
@@ -103,79 +213,83 @@
     <div class="footer-bottom">
       <p>© 2026 ChutaPraCanto. Todos os direitos reservados.</p>
     </div>
-</footer>
+  </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-<script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script>
     async function loadArticle() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const slug = urlParams.get('slug');
+      const urlParams = new URLSearchParams(window.location.search);
+      const slug = urlParams.get('slug');
+      
+      if (!slug) {
+        document.getElementById('article-content').innerHTML = "<h2>Notícia não encontrada.</h2>";
+        return;
+      }
+
+      try {
+        const res = await fetch(`content/noticias/${slug}.md`);
+        if (!res.ok) throw new Error("Artigo não existe");
+        const text = await res.text();
+
+        const parts = text.split("---");
+        if (parts.length < 3) throw new Error("Formato inválido");
+
+        const frontmatter = jsyaml.load(parts[1]);
+        let markdownBody = parts.slice(2).join("---");
+
+        const title = frontmatter.title || 'Sem título';
+        const subtitulo = frontmatter.subtitle || frontmatter.subtitulo || frontmatter.descricao || frontmatter.resumo || '';
+        const categoria = frontmatter.category || frontmatter.categoria || frontmatter.tag || 'Geral';
+        const date = frontmatter.published || frontmatter.date || 'Recente';
+        const imagem = frontmatter.image || frontmatter.imagem || frontmatter.featured_image || frontmatter.featuredImage || '';
+
+        // Limpar imagens duplicadas no início do corpo Markdown
+        markdownBody = markdownBody.trim().replace(/^!\[.*?\]\(.*?\)/, '');
+
+        const dataFormatada = date.includes('T') ? date.split('T')[0] : date;
+
+        // Atualizar títulos e meta-tags
+        document.getElementById('page-title').innerText = title + " | ChutaPraCanto";
+        document.getElementById('meta-title').content = title;
+        document.getElementById('meta-desc').content = subtitulo;
+        if (imagem) document.getElementById('meta-image').content = window.location.origin + imagem;
+
+        const htmlBody = marked.parse(markdownBody);
         
-        if(!slug) {
-            document.getElementById('article-content').innerHTML = "<h2>Notícia não encontrada.</h2>";
-            return;
-        }
+        document.getElementById('article-content').innerHTML = `
+          <header class="article-header">
+            <span class="tag">${categoria.toUpperCase()}</span>
+            <h1 class="art-title">${title}</h1>
+            ${subtitulo ? `<p class="art-subtitulo">${subtitulo}</p>` : ''}
+            <div class="art-meta">Publicado a ${dataFormatada} por <strong>ChutaPraCanto</strong></div>
+          </header>
+          
+          ${imagem ? `<img src="${imagem}" alt="${title}" class="art-img">` : ''}
+          
+          <div class="art-body">${htmlBody}</div>
+        `;
+        
+        document.getElementById('share-box').style.display = "block";
 
-        try {
-            const res = await fetch(`content/noticias/${slug}.md`);
-            if(!res.ok) throw new Error("Artigo não existe");
-            const text = await res.text();
-
-            const parts = text.split("---");
-            if (parts.length < 3) throw new Error("Formato inválido");
-
-            const frontmatter = jsyaml.load(parts[1]);
-            let markdownBody = parts.slice(2).join("---");
-
-            const title = frontmatter.title || 'Sem título';
-            const subtitulo = frontmatter.subtitle || frontmatter.subtitulo || frontmatter.descricao || frontmatter.resumo || '';
-            const categoria = frontmatter.category || frontmatter.categoria || frontmatter.tag || 'Geral';
-            const date = frontmatter.published || frontmatter.date || 'Recente';
-            const imagem = frontmatter.image || frontmatter.imagem || frontmatter.featured_image || frontmatter.featuredImage || '';
-
-            markdownBody = markdownBody.trim().replace(/^!\[.*?\]\(.*?\)/, '');
-
-            const dataFormatada = date.includes('T') ? date.split('T')[0] : date;
-
-            document.getElementById('page-title').innerText = title + " | ChutaPraCanto";
-            document.getElementById('meta-title').content = title;
-            document.getElementById('meta-desc').content = subtitulo;
-            if(imagem) document.getElementById('meta-image').content = window.location.origin + imagem;
-
-            const htmlBody = marked.parse(markdownBody);
-            
-            document.getElementById('article-content').innerHTML = `
-                <span class="article-category">${categoria.toUpperCase()}</span>
-                <h1 id="art-titulo">${title}</h1>
-                ${subtitulo ? `<p class="art-subtitulo">${subtitulo}</p>` : ''}
-                <div class="art-meta">Publicado em ${dataFormatada} por ChutaPraCanto</div>
-                
-                ${imagem ? `<img src="${imagem}" alt="${title}" class="art-img" style="width: 100%; max-width: 100%; border-radius: 8px; margin: 1.5rem 0;">` : ''}
-                
-                <div class="art-body">${htmlBody}</div>
-            `;
-            
-            document.getElementById('share-box').style.display = "block";
-
-        } catch (e) {
-            console.error(e);
-            document.getElementById('article-content').innerHTML = "<h2>Erro ao carregar a notícia.</h2>";
-        }
+      } catch (e) {
+        console.error(e);
+        document.getElementById('article-content').innerHTML = "<h2>Erro ao carregar a notícia.</h2>";
+      }
     }
 
     async function partilharNoticia() {
-        const title = document.getElementById('meta-title').content;
-        const url = window.location.href;
-        if (navigator.share) {
-            await navigator.share({ title, url }).catch(() => {});
-        } else {
-            navigator.clipboard.writeText(url);
-            alert('Link copiado para a área de transferência!');
-        }
+      const title = document.getElementById('meta-title').content;
+      const url = window.location.href;
+      if (navigator.share) {
+        await navigator.share({ title, url }).catch(() => {});
+      } else {
+        navigator.clipboard.writeText(url);
+        alert('Link copiado para a área de transferência!');
+      }
     }
 
-    loadArticle();
-</script>
+    document.addEventListener('DOMContentLoaded', loadArticle);
+  </script>
 </body>
 </html>
