@@ -91,14 +91,12 @@ async function carregarNoticias() {
     if (!response.ok) return;
     
     const files = await response.json();
-    const noticiasContainer = document.getElementById('noticias-container');
-    if (!noticiasContainer) return;
+    const container = document.getElementById('noticias-container');
+    if (!container) return;
     
-    noticiasContainer.innerHTML = '';
-
+    container.innerHTML = '';
     const noticiasList = [];
 
-    // 1. Processa os ficheiros Markdown
     for (const file of files) {
       if (file.name.endsWith('.md')) {
         const res = await fetch(file.download_url);
@@ -121,28 +119,54 @@ async function carregarNoticias() {
       }
     }
 
-    // 2. Ordena pelas mais recentes e limita estritamente às últimas 4
+    // Ordena por data e recolhe as 4 mais recentes
     noticiasList.sort((a, b) => new Date(b.dataPublicacao) - new Date(a.dataPublicacao));
-    const ultimasNoticias = noticiasList.slice(0, 4);
+    const emDestaque = noticiasList.slice(0, 4);
 
-    // 3. Renderiza apenas os 4 destaques na Home
-    ultimasNoticias.forEach(item => {
-      const card = document.createElement('a');
-      card.href = `noticia.html?slug=${item.slug}`;
-      card.className = 'news-card';
-      
-      card.innerHTML = `
-        <div style="width: 100%; aspect-ratio: 16/9; overflow: hidden;">
-          <img src="${item.imagem}" alt="${item.title}" style="width: 100%; height: 100%; object-fit: cover;">
-        </div>
-        <div style="padding: 1.25rem;">
-          <span class="tag">${item.tag.toUpperCase()}</span>
-          <h3 style="margin: 0.5rem 0; font-size: 1.1rem; line-height: 1.4;">${item.title}</h3>
-          <p style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.5rem;">${item.descricao}</p>
-        </div>
-      `;
-      noticiasContainer.appendChild(card);
-    });
+    if (emDestaque.length === 0) return;
+
+    // 1. Notícia Principal (Grande)
+    const principal = emDestaque[0];
+    const mainCard = document.createElement('a');
+    mainCard.href = `noticia.html?slug=${principal.slug}`;
+    mainCard.className = 'main-featured-card';
+    mainCard.innerHTML = `
+      <div class="main-featured-img">
+        <img src="${principal.imagem}" alt="${principal.title}">
+      </div>
+      <div class="main-featured-content">
+        <span class="tag">${principal.tag.toUpperCase()}</span>
+        <h2>${principal.title}</h2>
+        <p>${principal.descricao}</p>
+        <span class="btn-ver-artigo">LER ARTIGO COMPLETO</span>
+      </div>
+    `;
+    container.appendChild(mainCard);
+
+    // 2. Notícias Secundárias (Lista com 3 notícias)
+    if (emDestaque.length > 1) {
+      const listContainer = document.createElement('div');
+      listContainer.className = 'secondary-featured-list';
+
+      emDestaque.slice(1, 4).forEach(item => {
+        const subCard = document.createElement('a');
+        subCard.href = `noticia.html?slug=${item.slug}`;
+        subCard.className = 'sub-featured-card';
+        subCard.innerHTML = `
+          <div class="sub-featured-img">
+            <img src="${item.imagem}" alt="${item.title}">
+          </div>
+          <div class="sub-featured-content">
+            <span class="tag">${item.tag.toUpperCase()}</span>
+            <h3>${item.title}</h3>
+            <p>${item.descricao}</p>
+          </div>
+        `;
+        listContainer.appendChild(subCard);
+      });
+
+      container.appendChild(listContainer);
+    }
 
   } catch (error) {
     console.error('Erro ao carregar notícias:', error);
