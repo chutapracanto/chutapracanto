@@ -6,80 +6,86 @@
   <title>Notícias | ChutaPraCanto</title>
   <link rel="icon" type="image/png" href="images/logo.png">
   
-  <!-- Font Awesome para os ícones sociais do Header -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css">
-  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
   
   <style>
-    /* ESTILOS ESPECÍFICOS DO GRID DE NOTÍCIAS */
-    .news-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-      margin-bottom: 4rem;
+    /* LAYOUT DE LISTA IGUAL AO FRAMER */
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 900px;
+      margin: 1.5rem auto 4rem auto;
     }
 
-    .news-card {
+    .news-list-card {
+      display: grid;
+      grid-template-columns: 220px 1fr;
       background-color: var(--card-bg);
       border: 1px solid var(--border-color);
-      border-radius: 12px;
+      border-radius: 10px;
       overflow: hidden;
       text-decoration: none;
       color: var(--text-white);
-      display: flex;
-      flex-direction: column;
-      transition: all 0.2s ease;
+      transition: border-color 0.2s ease, transform 0.2s ease;
     }
 
-    .news-card:hover {
+    .news-list-card:hover {
       border-color: var(--neon-green);
-      transform: translateY(-3px);
+      transform: translateY(-2px);
     }
 
-    .news-card-img {
+    .news-list-img {
       width: 100%;
-      aspect-ratio: 16 / 9;
-      overflow: hidden;
+      height: 100%;
+      min-height: 130px;
       background-color: #1a1a1a;
     }
 
-    .news-card-img img {
+    .news-list-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.3s ease;
+      object-position: center 20%; /* FOCO NO TOPO/ROSTO */
+      display: block;
     }
 
-    .news-card:hover .news-card-img img {
-      transform: scale(1.03);
-    }
-
-    .news-card-body {
-      padding: 1.25rem;
+    .news-list-content {
+      padding: 1rem 1.25rem;
       display: flex;
       flex-direction: column;
-      flex-grow: 1;
+      justify-content: center;
     }
 
-    .news-card-body h3 {
-      margin: 0.6rem 0;
-      font-size: 1.15rem;
-      line-height: 1.35;
+    .news-list-content h3 {
+      font-size: 1.1rem;
+      margin: 0.4rem 0;
+      line-height: 1.3;
       color: #fff;
     }
 
-    .news-card-body p {
+    .news-list-content p {
       color: var(--text-gray);
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       line-height: 1.4;
       display: -webkit-box;
-      -webkit-line-clamp: 3;
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      margin-top: 0.2rem;
+    }
+
+    @media (max-width: 600px) {
+      .news-list-card {
+        grid-template-columns: 130px 1fr;
+      }
+      .news-list-content {
+        padding: 0.75rem;
+      }
+      .news-list-content h3 {
+        font-size: 0.95rem;
+      }
     }
   </style>
 </head>
@@ -112,11 +118,12 @@
 
   <!-- CONTEÚDO PRINCIPAL -->
   <div class="container">
-    <div class="section-header" style="margin-top: 1.5rem;">
+    <div style="max-width: 900px; margin: 1.5rem auto 0 auto;">
+      <p style="color: var(--neon-green); font-size: 0.75rem; font-weight: 800; font-family: var(--font-title); letter-spacing: 1px; margin-bottom: 0.3rem;">CHUTAPRACANTO · ATUALIDADE</p>
       <h1 class="section-title">TODAS AS NOTÍCIAS</h1>
     </div>
 
-    <div class="news-grid" id="noticias-grid">
+    <div class="news-list" id="noticias-list">
       <p style="color: var(--text-gray);">A carregar todas as notícias...</p>
     </div>
   </div>
@@ -146,24 +153,12 @@
       <div class="footer-socials-col">
         <h4>REDES SOCIAIS</h4>
         <div class="footer-social-links">
-          <a href="https://youtube.com/@chutapracanto" target="_blank" class="social-pill">
-            <i class="fa-brands fa-youtube"></i> YouTube
-          </a>
-          <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" class="social-pill">
-            <i class="fa-brands fa-spotify"></i> Spotify
-          </a>
-          <a href="https://instagram.com/chutapracanto.oficial" target="_blank" class="social-pill">
-            <i class="fa-brands fa-instagram"></i> Instagram
-          </a>
-          <a href="https://tiktok.com/@chutapracanto" target="_blank" class="social-pill">
-            <i class="fa-brands fa-tiktok"></i> TikTok
-          </a>
-          <a href="https://facebook.com/chutapracanto" target="_blank" class="social-pill">
-            <i class="fa-brands fa-facebook-f"></i> Facebook
-          </a>
-          <a href="https://reddit.com/r/chutapracanto" target="_blank" class="social-pill">
-            <i class="fa-brands fa-reddit-alien"></i> Reddit
-          </a>
+          <a href="https://youtube.com/@chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-youtube"></i> YouTube</a>
+          <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" class="social-pill"><i class="fa-brands fa-spotify"></i> Spotify</a>
+          <a href="https://instagram.com/chutapracanto.oficial" target="_blank" class="social-pill"><i class="fa-brands fa-instagram"></i> Instagram</a>
+          <a href="https://tiktok.com/@chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+          <a href="https://facebook.com/chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
+          <a href="https://reddit.com/r/chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-reddit-alien"></i> Reddit</a>
         </div>
       </div>
     </div>
@@ -180,10 +175,10 @@
         if (!response.ok) return;
         
         const files = await response.json();
-        const grid = document.getElementById('noticias-grid');
-        if (!grid) return;
+        const container = document.getElementById('noticias-list');
+        if (!container) return;
         
-        grid.innerHTML = '';
+        container.innerHTML = '';
         const noticiasList = [];
 
         for (const file of files) {
@@ -208,35 +203,33 @@
           }
         }
 
-        // Ordenar notícias da mais recente para a mais antiga
         noticiasList.sort((a, b) => new Date(b.dataPublicacao) - new Date(a.dataPublicacao));
 
         if (noticiasList.length === 0) {
-          grid.innerHTML = '<p style="color: var(--text-gray);">Sem notícias disponíveis de momento.</p>';
+          container.innerHTML = '<p style="color: var(--text-gray);">Sem notícias disponíveis de momento.</p>';
           return;
         }
 
         noticiasList.forEach(item => {
           const card = document.createElement('a');
           card.href = `noticia.html?slug=${item.slug}`;
-          card.className = 'news-card';
+          card.className = 'news-list-card';
           
           card.innerHTML = `
-            <div class="news-card-img">
+            <div class="news-list-img">
               <img src="${item.imagem}" alt="${item.title}">
             </div>
-            <div class="news-card-body">
+            <div class="news-list-content">
               <span class="tag">${item.tag.toUpperCase()}</span>
               <h3>${item.title}</h3>
               <p>${item.descricao}</p>
             </div>
           `;
-          grid.appendChild(card);
+          container.appendChild(card);
         });
 
       } catch (error) {
         console.error('Erro ao carregar notícias:', error);
-        document.getElementById('noticias-grid').innerHTML = '<p style="color: var(--text-gray);">Erro ao carregar lista de notícias.</p>';
       }
     }
 
