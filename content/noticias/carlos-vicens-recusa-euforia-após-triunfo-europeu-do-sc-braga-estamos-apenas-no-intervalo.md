@@ -1,0 +1,20 @@
+---
+title: "Carlos Vicens recusa euforia após triunfo europeu do SC Braga: \"Estamos apenas no intervalo\""
+slug: "carlos-vicens-recusa-euforia-após-triunfo-europeu-do-sc-braga-estamos-apenas-no-intervalo"
+subtitle: "Técnico do SC Braga recusa euforia após vitória por 2-0 sobre o Austria Wien, elogia a reação de Diego Rodrigues e aborda o reforço Milosevic."
+category: "SC Braga"
+published: "2026-08-20T00:00:00.000Z"
+author: "ChutaPraCanto"
+image: https://framerusercontent.com/images/ICyKImtjJiJ3l1uL5wO8Zz0DxI.webp
+cover: https://framerusercontent.com/images/ICyKImtjJiJ3l1uL5wO8Zz0DxI.webp
+thumbnail: https://framerusercontent.com/images/ICyKImtjJiJ3l1uL5wO8Zz0DxI.webp
+featured_image: https://framerusercontent.com/images/ICyKImtjJiJ3l1uL5wO8Zz0DxI.webp
+featuredImage: https://framerusercontent.com/images/ICyKImtjJiJ3l1uL5wO8Zz0DxI.webp
+featuredImageAlt: "Carlos Vicens recusa euforia após triunfo europeu do SC Braga: \"Estamos apenas no intervalo\""
+relatedYouTube: ""
+relatedSpotify: ""
+---
+
+![Carlos Vicens recusa euforia após triunfo europeu do SC Braga: "Estamos apenas no intervalo"](https://framerusercontent.com/images/ICyKImtjJiJ3l1uL5wO8Zz0DxI.webp)
+
+<p dir="ltr">O SC Braga venceu o Austria Wien por 2-0 na primeira mão do <em>playoff</em> da Liga Conferência, mas Carlos Vicens fez questão de arrefecer o entusiasmo. O técnico arsenalista lembrou que a eliminatória está a meio e anteviu dificuldades para a segunda mão, na Áustria.</p><h3 dir="ltr">Respeito pelo adversário e aviso para a 2.ª mão</h3><p dir="ltr">Apesar do resultado favorável construído na Pedreira, o treinador dos minhotos frisou a necessidade de manter a exigência máxima:</p><ul dir="auto"><li data-preset-tag="p"><p><strong>Eliminatória em aberto:</strong> "Apenas chegámos ao intervalo da eliminatória. Temos uma vantagem, mas na próxima semana teremos de apresentar a nossa melhor versão. Um golo do adversário pode mudar tudo e teremos de saber sofrer."</p></li><li data-preset-tag="p"><p><strong>Elogios ao Austria Wien:</strong> "Enfrentámos uma equipa com muita energia, forte nos duelos e extremamente comprometida. Para cumprirmos o objetivo de estar na fase de liga, teremos de trabalhar muito duro em Viena."</p></li></ul><h3 dir="ltr">Incidente na substituição e o reforço Milosevic</h3><p dir="ltr">Interrogado sobre o momento insólito em que o árbitro impediu a entrada de Sergio Barcia para o lugar do lesionado Vítor Carvalho, o espanhol direcionou as dúvidas para a equipa de arbitragem:</p><ul dir="auto"><li data-preset-tag="p"><p><strong>Gestão física e arbitragem:</strong> "O Vítor Carvalho avisou que precisava de sair. Não sou treinador de perder tempo e penalizar a equipa deixando um jogador fora afeta a saúde muscular do atleta. É uma pergunta que deve ser feita aos árbitros."</p></li><li data-preset-tag="p"><p><strong>Novo avançado:</strong> Sobre a oficialização de Milosevic, o técnico mostrou-se satisfeito: "É um avançado jovem, com ambição e vontade de triunfar. Vem para dar mais opções e qualidade ao nosso setor ofensivo."</p></li></ul><h3 dir="ltr">Impacto vindo do banco e superação de Diego Rodrigues</h3><p dir="ltr">A jogada do 2-0 foi desenhada por dois jogadores lançados no segundo tempo, com destaque para a recuperação de Diego Rodrigues:</p><ul dir="auto"><li data-preset-tag="p"><p><strong>Ambição dos suplentes:</strong> "Tanto o Dorgeles como o Diego entraram muito bem. Tenho insistido com os jogadores daquelas posições para atacarem a baliza com ambição."</p></li><li data-preset-tag="p"><p><strong>Superação pessoal:</strong> "Fico especialmente feliz pelo Diego, que passou por dias muito difíceis recentemente devido a uma intoxicação alimentar."</p></li></ul>
