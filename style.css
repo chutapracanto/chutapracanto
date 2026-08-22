@@ -582,3 +582,33 @@ h1#art-titulo {
     height: 100%;
   }
 }
+
+/* AJUSTE DE FOCO DE IMAGEM PARA FOCAR NAS CARAS/TOPO */
+
+/* 1. Imagem do Destaque Principal */
+.main-featured-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%; /* Foca na parte superior onde estão as caras */
+}
+
+/* 2. Imagens dos Destaques Secundários */
+.sub-featured-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+/* 3. Imagens da grelha normal (Notícias / Home) */
+.news-card img {
+  object-fit: cover;
+  object-position: center 20%;
+}
+
+/* 4. Imagem no topo da Leitura do Artigo */
+.art-img {
+  object-fit: cover;
+  object-position: center 20%;
+}
