@@ -105,12 +105,15 @@ async function carregarNoticias() {
         if (parts.length < 3) continue;
         
         const data = jsyaml.load(parts[1]);
+        if (!data) continue;
+
         const slug = file.name.replace('.md', '');
         
+        // Mapeamento flexível de campos (português/inglês)
         const title = data.title || 'Sem título';
-        const tag = data.tag || 'Geral';
-        const imagem = data.imagem || 'https://via.placeholder.com/600x400';
-        const descricao = data.descricao || data.resumo || '';
+        const tag = data.category || data.categoria || data.tag || 'Geral';
+        const imagem = data.image || data.imagem || data.featured_image || data.featuredImage || 'https://via.placeholder.com/600x400';
+        const descricao = data.subtitle || data.subtitulo || data.descricao || data.resumo || '';
 
         const card = document.createElement('a');
         card.href = `noticia.html?slug=${slug}`;
