@@ -17,7 +17,6 @@
   <meta name="twitter:card" content="summary_large_image" />
 
   <style>
-    /* Estilização personalizada para o corpo do artigo imitar perfeitamente o Framer */
     .art-body ul {
       list-style-type: disc !important;
       padding-left: 20px !important;
@@ -130,12 +129,26 @@
       const slug = urlParams.get('slug');
       
       if (!slug) {
-        document.getElementById('article-content').innerHTML = "<h2>Notícia não encontrada.</h2>";
+        document.getElementById('article-content').innerHTML = "<h2 style='color:#fff;'>Notícia não encontrada.</h2><p style='color:var(--text-gray); margin-top:10px;'>O link parece estar incompleto.</p>";
         return;
       }
 
       try {
-        const res = await fetch(`content/noticias/${slug}.md`);
+        // Tenta primeiro o slug exato do URL
+        let res = await fetch(`content/noticias/${slug}.md`);
+        
+        // Se falhar, tenta procurar diretamente na API do GitHub para encontrar o ficheiro correto ignorando diferenças de codificação ou maiúsculas/minúsculas
+        if (!res.ok) {
+          const apiRes = await fetch('https://api.github.com/repos/chutapracanto/chutapracanto/contents/content/noticias');
+          if (apiRes.ok) {
+            const files = await apiRes.json();
+            const matchedFile = files.find(f => f.name.replace('.md', '').toLowerCase() === decodeURIComponent(slug).toLowerCase());
+            if (matchedFile) {
+              res = await fetch(matchedFile.download_url);
+            }
+          }
+        }
+
         if (!res.ok) throw new Error("Artigo não existe");
         const text = await res.text();
 
@@ -159,7 +172,6 @@
           fullImageUrl = imagem.startsWith('http') ? imagem : window.location.origin + (imagem.startsWith('/') ? '' : '/') + imagem;
         }
 
-        // Atualiza os metadados com segurança
         const pageTitleEl = document.getElementById('page-title');
         if (pageTitleEl) pageTitleEl.innerText = title + " | ChutaPraCanto";
         
@@ -192,7 +204,13 @@
 
       } catch (e) {
         console.error(e);
-        document.getElementById('article-content').innerHTML = "<h2>Erro ao carregar a notícia.</h2>";
+        document.getElementById('article-content').innerHTML = `
+          <div style="text-align: center; padding: 3rem 0;">
+            <h2 style="color: #fff; margin-bottom: 1rem;">Notícia não encontrada ou erro ao carregar.</h2>
+            <p style="color: var(--text-gray); margin-bottom: 1.5rem;">O artigo selecionado pode ter sido movido ou o link está incorreto.</p>
+            <a href="noticias.html" class="filter-btn" style="display: inline-block; background: var(--neon-green); color: #000; text-decoration: none; padding: 0.6rem 1.2rem; border-radius: 8px;">Voltar à lista de notícias</a>
+          </div>
+        `;
       }
     }
 
