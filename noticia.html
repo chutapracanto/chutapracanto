@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   
-  <!-- Metadados para redes sociais (corrigidos) -->
+  <!-- Metadados para redes sociais -->
   <meta property="og:type" content="article" />
   <meta property="og:title" id="meta-title" content="ChutaPraCanto" />
   <meta property="og:description" id="meta-desc" content="Notícias e opinião sobre futebol." />
@@ -43,7 +43,7 @@
     </div>
   </header>
 
-  <!-- ARTIGO WRAPPER (ESTRUTURA ORIGINAL NORMAL) -->
+  <!-- ARTIGO WRAPPER -->
   <div class="container" style="max-width: 800px; margin-top: 2rem;">
     <a href="noticias.html" class="see-more" style="display: inline-block; margin-bottom: 2rem;">← VOLTAR ÀS NOTÍCIAS</a>
 
@@ -51,6 +51,7 @@
       <p style="color: var(--text-gray);">A carregar notícia...</p>
     </div>
 
+    <!-- Secção de Partilha corrigida -->
     <div class="share-section" id="share-box" style="display:none; margin-top: 40px; text-align: right;">
       <button class="btn-neon" onclick="partilharNoticia()">
         PARTILHAR ARTIGO <i class="fa-solid fa-share-nodes"></i>
@@ -84,6 +85,7 @@
         <h4>REDES SOCIAIS</h4>
         <div class="footer-social-links">
           <a href="https://youtube.com/@chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-youtube"></i> YouTube</a>
+          <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" class="social-pill"><i class="fa-brands fa-spotify"></i> Spotify</a>
           <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" class="social-pill"><i class="fa-brands fa-spotify"></i> Spotify</a>
           <a href="https://instagram.com/chutapracanto.oficial" target="_blank" class="social-pill"><i class="fa-brands fa-instagram"></i> Instagram</a>
           <a href="https://tiktok.com/@chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-tiktok"></i> TikTok</a>
@@ -129,17 +131,21 @@
 
         markdownBody = markdownBody.trim().replace(/^!\[.*?\]\(.*?\)/, '');
         const dataFormatada = date.includes('T') ? date.split('T')[0] : date;
-        const fullImageUrl = imagem.startsWith('http') ? imagem : window.location.origin + '/' + imagem;
+        
+        // Garante que o URL da imagem fica absoluto (essencial para o Facebook ler)
+        let fullImageUrl = "https://chutapracanto.pages.dev/images/logo.png";
+        if (imagem) {
+          fullImageUrl = imagem.startsWith('http') ? imagem : window.location.origin + (imagem.startsWith('/') ? '' : '/') + imagem;
+        }
 
-        // Atualizar metas para partilha corretamente
+        // Injetar nos meta tags para as redes sociais
         document.getElementById('page-title').innerText = title + " | ChutaPraCanto";
         document.getElementById('meta-title').content = title;
         document.getElementById('meta-desc').content = subtitulo;
-        if (imagem) document.getElementById('meta-image').content = fullImageUrl;
+        document.getElementById('meta-image').content = fullImageUrl;
 
         const htmlBody = marked.parse(markdownBody);
         
-        // Estrutura limpa e padrão (sem efeitos sticky esquisitos)
         document.getElementById('article-content').innerHTML = `
           <div style="margin-bottom: 2rem;">
             <span class="tag" style="color: var(--neon-green); font-size: 0.85rem; font-weight: 800; display: block; margin-bottom: 0.5rem;">${categoria.toUpperCase()}</span>
@@ -161,11 +167,16 @@
       }
     }
 
+    // Função de partilha restaurada corretamente
     async function partilharNoticia() {
       const title = document.getElementById('meta-title').content;
       const url = window.location.href;
       if (navigator.share) {
-        await navigator.share({ title, url }).catch(() => {});
+        try {
+          await navigator.share({ title, url });
+        } catch (err) {
+          // Ignorar se o utilizador cancelar a partilha
+        }
       } else {
         navigator.clipboard.writeText(url);
         alert('Link copiado para a área de transferência!');
