@@ -130,7 +130,7 @@
         const imgUrl = document.getElementById("noticia-imagem-url").value.trim();
         const statusEl = document.getElementById("status");
 
-        // Obter o HTML gerado pelo editor visual e convertê-lo para Markdown perfeito
+        // Obter o HTML gerado pelo editor visual e convertê-lo para Markdown limpo
         const htmlContent = quill.root.innerHTML;
         const turndownService = new TurndownService();
         const markdownBody = turndownService.turndown(htmlContent);
@@ -156,10 +156,11 @@
         const slug = titulo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-");
         const filename = `content/noticias/${slug}.md`;
         
+        // Estrutura unificada compatível com o site e CMS (com subtitle, category, date, imagem)
         const fileContent = `---
 title: "${titulo}"
-subtitulo: "${subtitulo}"
-categoria: "${categoria}"
+subtitle: "${subtitulo}"
+category: "${categoria}"
 date: "${data}"
 author: "${autor}"
 imagem: "${finalImageUrl}"
