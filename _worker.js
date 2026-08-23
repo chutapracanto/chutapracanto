@@ -2,13 +2,14 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
-    // Apenas tenta otimizar para o Facebook/Robôs se for a página de notícia com slug
+    // Se for a página de notícias com slug, tentamos injetar os meta tags no HTML
     if ((url.pathname.endsWith('/noticia.html') || url.pathname.endsWith('/noticia')) && url.searchParams.get('slug')) {
       const slug = url.searchParams.get('slug');
 
       try {
-        const mdUrl = `${url.origin}/content/noticias/${slug}.md`;
-        const mdRes = await fetch(mdUrl);
+        // Pede o ficheiro Markdown usando o sistema de assets do Cloudflare
+        const mdRequest = new Request(`${url.origin}/content/noticias/${slug}.md`, request);
+        const mdRes = await env.ASSETS.fetch(mdRequest);
 
         if (mdRes.ok) {
           const mdText = await mdRes.text();
@@ -32,10 +33,11 @@ export default {
               }
             });
 
+            // Busca a página HTML original
             const htmlRes = await env.ASSETS.fetch(request);
             let html = await htmlRes.text();
 
-            // Injeta os meta tags dinamicamente no HTML antes de o enviar
+            // Injeta os meta tags corretos para as redes sociais
             html = html.replace(/<meta property="og:title"[^>]*>/i, `<meta property="og:title" content="${title} | ChutaPraCanto" />`);
             html = html.replace(/<meta property="og:description"[^>]*>/i, `<meta property="og:description" content="${desc}" />`);
             html = html.replace(/<meta property="og:image"[^>]*>/i, `<meta property="og:image" content="${image}" />`);
@@ -47,11 +49,11 @@ export default {
           }
         }
       } catch (e) {
-        // Se falhar por qualquer motivo, não rebenta com o site: continua abaixo
+        // Se houver qualquer falha, prossegue e entrega a página normal
       }
     }
 
-    // Comportamento normal para qualquer outra página ou se algo falhar
+    // Comportamento normal para o resto do site
     return env.ASSETS.fetch(request);
   }
 };
