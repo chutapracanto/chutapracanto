@@ -12,105 +12,13 @@
   <meta property="og:type" content="article" />
   <meta property="og:title" id="meta-title" content="ChutaPraCanto" />
   <meta property="og:description" id="meta-desc" content="Notícias e opinião sobre futebol." />
-  <meta property="og:image" id="meta-image" content="" />
+  <meta property="og:image" id="meta-image" content="https://chutapracanto.pages.dev/images/logo.png" />
   <meta name="twitter:card" content="summary_large_image" />
-
-  <style>
-    .article-wrapper {
-      max-width: 800px;
-      margin: 2rem auto 4rem auto;
-      padding: 0 1rem;
-    }
-
-    .back-btn {
-      display: inline-block;
-      color: var(--neon-green);
-      font-weight: 700;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      margin-bottom: 2rem;
-      transition: transform 0.2s ease;
-    }
-
-    .back-btn:hover {
-      transform: translateX(-4px);
-    }
-
-    .art-title {
-      font-size: 2.2rem;
-      font-weight: 800;
-      line-height: 1.25;
-      margin: 0.8rem 0;
-      color: #fff;
-    }
-
-    .art-subtitulo {
-      font-size: 1.15rem;
-      color: var(--text-gray);
-      line-height: 1.5;
-      margin-bottom: 1rem;
-    }
-
-    .art-meta {
-      font-size: 0.85rem;
-      color: #777;
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 1.2rem;
-    }
-
-    .art-img {
-      width: 100%;
-      height: 420px;
-      object-fit: cover;
-      object-position: center 20%;
-      border-radius: 12px;
-      margin: 1.5rem 0 2rem 0;
-      border: 1px solid var(--border-color);
-    }
-
-    .art-body {
-      font-size: 1.05rem;
-      line-height: 1.8;
-      color: #e0e0e0;
-    }
-
-    .art-body p { margin-bottom: 1.5rem; }
-    .art-body h2, .art-body h3 { color: #fff; margin: 2rem 0 1rem 0; }
-    .art-body blockquote {
-      border-left: 3px solid var(--neon-green);
-      padding-left: 1rem;
-      margin: 1.5rem 0;
-      color: var(--text-gray);
-      font-style: italic;
-    }
-
-    .btn-share {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background-color: transparent;
-      color: var(--neon-green);
-      border: 1px solid var(--neon-green);
-      padding: 10px 20px;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      cursor: pointer;
-      text-transform: uppercase;
-      transition: all 0.2s ease;
-      font-family: var(--font-title);
-    }
-
-    .btn-share:hover {
-      background-color: rgba(57, 255, 20, 0.1);
-      transform: translateY(-2px);
-    }
-  </style>
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
+  <!-- HEADER GLOBAL -->
+  <header class="site-header">
     <div class="header-container">
       <a href="index.html" class="logo-link">
         <img src="images/logo.png" alt="ChutaPraCanto" class="site-logo">
@@ -134,7 +42,7 @@
     </div>
   </header>
 
-  <!-- ARTIGO -->
+  <!-- ARTIGO WRAPPER -->
   <div class="article-wrapper">
     <a href="noticias.html" class="back-btn">← VOLTAR ÀS NOTÍCIAS</a>
 
@@ -220,21 +128,26 @@
 
         markdownBody = markdownBody.trim().replace(/^!\[.*?\]\(.*?\)/, '');
         const dataFormatada = date.includes('T') ? date.split('T')[0] : date;
+        const fullImageUrl = imagem.startsWith('http') ? imagem : window.location.origin + '/' + imagem;
 
+        // Atualizar metas para partilha
         document.getElementById('page-title').innerText = title + " | ChutaPraCanto";
         document.getElementById('meta-title').content = title;
         document.getElementById('meta-desc').content = subtitulo;
-        if (imagem) document.getElementById('meta-image').content = window.location.origin + imagem;
+        if (imagem) document.getElementById('meta-image').content = fullImageUrl;
 
         const htmlBody = marked.parse(markdownBody);
         
+        // Estrutura com cabeçalho sticky profissional desportivo
         document.getElementById('article-content').innerHTML = `
-          <header>
-            <span class="tag">${categoria.toUpperCase()}</span>
-            <h1 class="art-title">${title}</h1>
-            ${subtitulo ? `<p class="art-subtitulo">${subtitulo}</p>` : ''}
-            <div class="art-meta">Publicado a ${dataFormatada} por <strong>ChutaPraCanto</strong></div>
-          </header>
+          <div class="article-header-sticky" id="stickyHeader">
+            <div class="sticky-inner">
+              <span class="tag">${categoria.toUpperCase()}</span>
+              <h1 class="art-title">${title}</h1>
+              ${subtitulo ? `<p class="art-subtitulo">${subtitulo}</p>` : ''}
+              <div class="art-meta">Publicado a ${dataFormatada} por <strong>ChutaPraCanto</strong></div>
+            </div>
+          </div>
           
           ${imagem ? `<img src="${imagem}" alt="${title}" class="art-img">` : ''}
           
@@ -242,6 +155,18 @@
         `;
         
         document.getElementById('share-box').style.display = "block";
+
+        // Ativar efeito de scroll inteligente (encolher ao rolar)
+        window.addEventListener('scroll', function() {
+          const stickyHeader = document.getElementById('stickyHeader');
+          if (stickyHeader) {
+            if (window.scrollY > 120) {
+              stickyHeader.classList.add('scrolled');
+            } else {
+              stickyHeader.classList.remove('scrolled');
+            }
+          }
+        });
 
       } catch (e) {
         console.error(e);
