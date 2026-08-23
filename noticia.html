@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   
+  <!-- Metadados para redes sociais (corrigidos) -->
   <meta property="og:type" content="article" />
   <meta property="og:title" id="meta-title" content="ChutaPraCanto" />
   <meta property="og:description" id="meta-desc" content="Notícias e opinião sobre futebol." />
@@ -42,16 +43,16 @@
     </div>
   </header>
 
-  <!-- ARTIGO WRAPPER -->
-  <div class="article-wrapper">
-    <a href="noticias.html" class="back-btn">← VOLTAR ÀS NOTÍCIAS</a>
+  <!-- ARTIGO WRAPPER (ESTRUTURA ORIGINAL NORMAL) -->
+  <div class="container" style="max-width: 800px; margin-top: 2rem;">
+    <a href="noticias.html" class="see-more" style="display: inline-block; margin-bottom: 2rem;">← VOLTAR ÀS NOTÍCIAS</a>
 
     <div id="article-content">
       <p style="color: var(--text-gray);">A carregar notícia...</p>
     </div>
 
     <div class="share-section" id="share-box" style="display:none; margin-top: 40px; text-align: right;">
-      <button class="btn-share" onclick="partilharNoticia()">
+      <button class="btn-neon" onclick="partilharNoticia()">
         PARTILHAR ARTIGO <i class="fa-solid fa-share-nodes"></i>
       </button>
     </div>
@@ -130,7 +131,7 @@
         const dataFormatada = date.includes('T') ? date.split('T')[0] : date;
         const fullImageUrl = imagem.startsWith('http') ? imagem : window.location.origin + '/' + imagem;
 
-        // Atualizar metas para partilha
+        // Atualizar metas para partilha corretamente
         document.getElementById('page-title').innerText = title + " | ChutaPraCanto";
         document.getElementById('meta-title').content = title;
         document.getElementById('meta-desc').content = subtitulo;
@@ -138,35 +139,21 @@
 
         const htmlBody = marked.parse(markdownBody);
         
-        // Estrutura com cabeçalho sticky profissional desportivo
+        // Estrutura limpa e padrão (sem efeitos sticky esquisitos)
         document.getElementById('article-content').innerHTML = `
-          <div class="article-header-sticky" id="stickyHeader">
-            <div class="sticky-inner">
-              <span class="tag">${categoria.toUpperCase()}</span>
-              <h1 class="art-title">${title}</h1>
-              ${subtitulo ? `<p class="art-subtitulo">${subtitulo}</p>` : ''}
-              <div class="art-meta">Publicado a ${dataFormatada} por <strong>ChutaPraCanto</strong></div>
-            </div>
+          <div style="margin-bottom: 2rem;">
+            <span class="tag" style="color: var(--neon-green); font-size: 0.85rem; font-weight: 800; display: block; margin-bottom: 0.5rem;">${categoria.toUpperCase()}</span>
+            <h1 style="font-size: 2.2rem; font-weight: 800; line-height: 1.25; margin-bottom: 0.8rem; font-family: var(--font-title);">${title}</h1>
+            ${subtitulo ? `<p style="font-size: 1.1rem; color: var(--text-gray); line-height: 1.4; margin-bottom: 1rem;">${subtitulo}</p>` : ''}
+            <div style="font-size: 0.85rem; color: #777;">Publicado a ${dataFormatada} por <strong>ChutaPraCanto</strong></div>
           </div>
           
-          ${imagem ? `<img src="${imagem}" alt="${title}" class="art-img">` : ''}
+          ${imagem ? `<div style="margin-bottom: 2.5rem; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);"><img src="${imagem}" alt="${title}" style="width: 100%; max-height: 450px; object-fit: cover; display: block;"></div>` : ''}
           
-          <div class="art-body">${htmlBody}</div>
+          <div class="art-body" style="font-size: 1.05rem; line-height: 1.7; color: #e0e0e0;">${htmlBody}</div>
         `;
         
         document.getElementById('share-box').style.display = "block";
-
-        // Ativar efeito de scroll inteligente (encolher ao rolar)
-        window.addEventListener('scroll', function() {
-          const stickyHeader = document.getElementById('stickyHeader');
-          if (stickyHeader) {
-            if (window.scrollY > 120) {
-              stickyHeader.classList.add('scrolled');
-            } else {
-              stickyHeader.classList.remove('scrolled');
-            }
-          }
-        });
 
       } catch (e) {
         console.error(e);
