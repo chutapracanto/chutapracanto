@@ -15,6 +15,29 @@
   <meta property="og:description" id="meta-desc" content="Notícias e opinião sobre futebol." />
   <meta property="og:image" id="meta-image" content="https://chutapracanto.pages.dev/images/logo.png" />
   <meta name="twitter:card" content="summary_large_image" />
+
+  <style>
+    /* Estilização personalizada para o corpo do artigo imitar perfeitamente o Framer */
+    .art-body ul {
+      list-style-type: disc !important;
+      padding-left: 20px !important;
+      margin-top: 1rem !important;
+      margin-bottom: 1rem !important;
+    }
+    .art-body li {
+      margin-bottom: 0.8rem !important;
+      line-height: 1.6 !important;
+      color: #e0e0e0;
+    }
+    .art-body p {
+      margin-bottom: 1.2rem !important;
+      line-height: 1.7 !important;
+    }
+    .art-body strong {
+      color: #ffffff;
+      font-weight: 700;
+    }
+  </style>
 </head>
 <body>
 
@@ -44,21 +67,11 @@
   </header>
 
   <!-- ARTIGO WRAPPER -->
-  <div class="container" style="max-width: 800px; margin-top: 2rem;">
+  <div class="container" style="max-width: 800px; margin-top: 2rem; margin-bottom: 4rem;">
     <a href="noticias.html" class="see-more" style="display: inline-block; margin-bottom: 2rem;">← VOLTAR ÀS NOTÍCIAS</a>
 
-    <!-- CABEÇALHO DINÂMICO (Com efeito de scroll futurista) -->
-    <div id="article-header" style="transition: all 0.3s ease; padding: 1.5rem; border-radius: 12px; margin-bottom: 2rem; background: rgba(18, 18, 18, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); position: sticky; top: 20px; z-index: 100;">
-      <span class="tag" id="art-categoria" style="color: var(--neon-green); font-size: 0.8rem; font-weight: 800; display: block; margin-bottom: 0.4rem; text-transform: uppercase;"></span>
-      <h1 id="art-titulo" style="font-size: 2rem; font-weight: 800; line-height: 1.2; margin-bottom: 0.5rem; font-family: var(--font-title); transition: font-size 0.3s ease; color: #fff;">A carregar...</h1>
-      <p id="art-subtitulo" style="font-size: 1rem; color: var(--text-gray); line-height: 1.3; margin: 0; transition: all 0.3s ease; opacity: 0.9;"></p>
-      <div id="art-meta" style="font-size: 0.8rem; color: #777; margin-top: 0.8rem;"></div>
-    </div>
-
-    <div id="article-image-container"></div>
-    
-    <div id="article-body-content" class="art-body" style="font-size: 1.05rem; line-height: 1.7; color: #e0e0e0;">
-      <p style="color: var(--text-gray);">A carregar conteúdo...</p>
+    <div id="article-content">
+      <p style="color: var(--text-gray);">A carregar notícia...</p>
     </div>
 
     <!-- Secção de Partilha -->
@@ -117,7 +130,7 @@
       const slug = urlParams.get('slug');
       
       if (!slug) {
-        document.getElementById('article-body-content').innerHTML = "<h2>Notícia não encontrada.</h2>";
+        document.getElementById('article-content').innerHTML = "<h2>Notícia não encontrada.</h2>";
         return;
       }
 
@@ -146,7 +159,7 @@
           fullImageUrl = imagem.startsWith('http') ? imagem : window.location.origin + (imagem.startsWith('/') ? '' : '/') + imagem;
         }
 
-        // Preenche os metadados do documento
+        // Atualiza os metadados com segurança
         const pageTitleEl = document.getElementById('page-title');
         if (pageTitleEl) pageTitleEl.innerText = title + " | ChutaPraCanto";
         
@@ -159,63 +172,29 @@
         const metaImageEl = document.getElementById('meta-image');
         if (metaImageEl) metaImageEl.content = fullImageUrl;
 
-        // Preenche o cabeçalho dinâmico
-        document.getElementById('art-categoria').innerText = categoria;
-        document.getElementById('art-titulo').innerText = title;
-        document.getElementById('art-subtitulo').innerText = subtitulo;
-        document.getElementById('art-meta').innerHTML = `Publicado a ${dataFormatada} por <strong>ChutaPraCanto</strong>`;
-
-        // Imagem principal
-        if (imagem) {
-          document.getElementById('article-image-container').innerHTML = `
-            <div style="margin-bottom: 2.5rem; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);">
-              <img src="${imagem}" alt="${title}" style="width: 100%; max-height: 450px; object-fit: cover; object-position: center top; display: block;">
-            </div>`;
-        }
-
-        // Corpo da notícia
         const htmlBody = marked.parse(markdownBody);
-        document.getElementById('article-body-content').innerHTML = htmlBody;
+        
+        document.getElementById('article-content').innerHTML = `
+          <div style="margin-bottom: 2rem;">
+            <span class="tag" style="color: var(--neon-green); font-size: 0.85rem; font-weight: 800; display: block; margin-bottom: 0.5rem; text-transform: uppercase;">${categoria}</span>
+            <h1 style="font-size: 2.2rem; font-weight: 800; line-height: 1.25; margin-bottom: 0.8rem; font-family: var(--font-title); color: #fff;">${title}</h1>
+            ${subtitulo ? `<p style="font-size: 1.1rem; color: var(--text-gray); line-height: 1.4; margin-bottom: 1rem;">${subtitulo}</p>` : ''}
+            <div style="font-size: 0.85rem; color: #777;">Publicado a ${dataFormatada} por <strong>ChutaPraCanto</strong></div>
+          </div>
+          
+          ${imagem ? `<div style="margin-bottom: 2.5rem; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);"><img src="${imagem}" alt="${title}" style="width: 100%; max-height: 450px; object-fit: cover; object-position: center top; display: block;"></div>` : ''}
+          
+          <div class="art-body" style="font-size: 1.05rem; line-height: 1.7; color: #e0e0e0;">${htmlBody}</div>
+        `;
         
         const shareBox = document.getElementById('share-box');
         if (shareBox) shareBox.style.display = "block";
 
       } catch (e) {
         console.error(e);
-        document.getElementById('article-body-content').innerHTML = "<h2>Erro ao carregar a notícia.</h2>";
+        document.getElementById('article-content').innerHTML = "<h2>Erro ao carregar a notícia.</h2>";
       }
     }
-
-    // Efeito futurista de scroll: encolhe e opacifica subtilmente o cabeçalho
-    window.addEventListener('scroll', () => {
-      const header = document.getElementById('article-header');
-      const title = document.getElementById('art-titulo');
-      const subtitle = document.getElementById('art-subtitulo');
-      
-      if (!header) return;
-
-      if (window.scrollY > 80) {
-        header.style.background = 'rgba(12, 12, 12, 0.85)';
-        header.style.padding = '1rem 1.2rem';
-        header.style.borderColor = 'rgba(34, 197, 94, 0.2)';
-        if(title) title.style.fontSize = '1.4rem';
-        if(subtitle) {
-          subtitle.style.opacity = '0';
-          subtitle.style.height = '0';
-          subtitle.style.margin = '0';
-        }
-      } else {
-        header.style.background = 'rgba(18, 18, 18, 0.6)';
-        header.style.padding = '1.5rem';
-        header.style.borderColor = 'rgba(255, 255, 255, 0.05)';
-        if(title) title.style.fontSize = '2rem';
-        if(subtitle) {
-          subtitle.style.opacity = '0.9';
-          subtitle.style.height = 'auto';
-          subtitle.style.margin = '0 0 0.5rem 0';
-        }
-      }
-    });
 
     async function partilharNoticia() {
       const metaTitleEl = document.getElementById('meta-title');
