@@ -221,7 +221,7 @@
       margin: 0;
     }
 
-    /* BOTÕES DE PAGINAÇÃO */
+    /* BOTÕES DE PAGINAÇÃO A VERDE NEON */
     .pagination {
       display: flex;
       justify-content: center;
@@ -232,8 +232,8 @@
 
     .page-btn {
       background-color: var(--card-bg);
-      color: #fff;
-      border: 1px solid var(--border-color);
+      color: var(--neon-green);
+      border: 1px solid var(--neon-green);
       padding: 0.5rem 1.2rem;
       border-radius: 8px;
       font-size: 0.8rem;
@@ -249,8 +249,10 @@
     }
 
     .page-btn:disabled {
-      opacity: 0.4;
+      opacity: 0.3;
       cursor: not-allowed;
+      border-color: var(--border-color);
+      color: var(--text-gray);
     }
 
     #pageIndicator {
@@ -407,7 +409,7 @@
     let noticiasFiltradas = [];
     let filtroAtual = 'todos';
     let paginaAtual = 1;
-    const itensPorPagina = 6; // Podes alterar para o número de notícias por página que preferires
+    const itensPorPagina = 6;
 
     async function carregarTodasNoticias() {
       try {
@@ -528,7 +530,7 @@
 
     function filtrarNoticias(categoria, btnElement) {
       filtroAtual = categoria;
-      paginaAtual = 1; // Resetar para a primeira página ao filtrar
+      paginaAtual = 1;
       
       document.querySelectorAll('.filter-btn, .dropdown-item').forEach(btn => btn.classList.remove('active'));
       if (btnElement) btnElement.classList.add('active');
@@ -540,7 +542,7 @@
     }
 
     function pesquisarNoticias() {
-      paginaAtual = 1; // Resetar para a primeira página ao pesquisar
+      paginaAtual = 1;
       aplicarFiltros();
     }
 
@@ -549,12 +551,10 @@
 
       noticiasFiltradas = todasAsNoticias;
 
-      // Filtrar por categoria
       if (filtroAtual !== 'todos') {
         noticiasFiltradas = noticiasFiltradas.filter(n => n.tag.toLowerCase().trim() === filtroAtual.toLowerCase().trim());
       }
 
-      // Filtrar por barra de pesquisa
       if (termo !== '') {
         noticiasFiltradas = noticiasFiltradas.filter(n => 
           n.title.toLowerCase().includes(termo) || 
