@@ -51,7 +51,7 @@
       <p style="color: var(--text-gray);">A carregar notícia...</p>
     </div>
 
-    <!-- Secção de Partilha corrigida -->
+    <!-- Secção de Partilha -->
     <div class="share-section" id="share-box" style="display:none; margin-top: 40px; text-align: right;">
       <button class="btn-neon" onclick="partilharNoticia()">
         PARTILHAR ARTIGO <i class="fa-solid fa-share-nodes"></i>
@@ -85,7 +85,6 @@
         <h4>REDES SOCIAIS</h4>
         <div class="footer-social-links">
           <a href="https://youtube.com/@chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-youtube"></i> YouTube</a>
-          <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" class="social-pill"><i class="fa-brands fa-spotify"></i> Spotify</a>
           <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" class="social-pill"><i class="fa-brands fa-spotify"></i> Spotify</a>
           <a href="https://instagram.com/chutapracanto.oficial" target="_blank" class="social-pill"><i class="fa-brands fa-instagram"></i> Instagram</a>
           <a href="https://tiktok.com/@chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-tiktok"></i> TikTok</a>
@@ -132,17 +131,23 @@
         markdownBody = markdownBody.trim().replace(/^!\[.*?\]\(.*?\)/, '');
         const dataFormatada = date.includes('T') ? date.split('T')[0] : date;
         
-        // Garante que o URL da imagem fica absoluto (essencial para o Facebook ler)
         let fullImageUrl = "https://chutapracanto.pages.dev/images/logo.png";
         if (imagem) {
           fullImageUrl = imagem.startsWith('http') ? imagem : window.location.origin + (imagem.startsWith('/') ? '' : '/') + imagem;
         }
 
-        // Injetar nos meta tags para as redes sociais
-        document.getElementById('page-title').innerText = title + " | ChutaPraCanto";
-        document.getElementById('meta-title').content = title;
-        document.getElementById('meta-desc').content = subtitulo;
-        document.getElementById('meta-image').content = fullImageUrl;
+        // Atualiza com segurança se os elementos existirem
+        const pageTitleEl = document.getElementById('page-title');
+        if (pageTitleEl) pageTitleEl.innerText = title + " | ChutaPraCanto";
+        
+        const metaTitleEl = document.getElementById('meta-title');
+        if (metaTitleEl) metaTitleEl.content = title;
+        
+        const metaDescEl = document.getElementById('meta-desc');
+        if (metaDescEl) metaDescEl.content = subtitulo;
+        
+        const metaImageEl = document.getElementById('meta-image');
+        if (metaImageEl) metaImageEl.content = fullImageUrl;
 
         const htmlBody = marked.parse(markdownBody);
         
@@ -154,12 +159,13 @@
             <div style="font-size: 0.85rem; color: #777;">Publicado a ${dataFormatada} por <strong>ChutaPraCanto</strong></div>
           </div>
           
-          ${imagem ? `<div style="margin-bottom: 2.5rem; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);"><img src="${imagem}" alt="${title}" style="width: 100%; max-height: 450px; object-fit: cover; display: block;"></div>` : ''}
+          ${imagem ? `<div style="margin-bottom: 2.5rem; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);"><img src="${imagem}" alt="${title}" style="width: 100%; max-height: 450px; object-fit: cover; object-position: center top; display: block;"></div>` : ''}
           
           <div class="art-body" style="font-size: 1.05rem; line-height: 1.7; color: #e0e0e0;">${htmlBody}</div>
         `;
         
-        document.getElementById('share-box').style.display = "block";
+        const shareBox = document.getElementById('share-box');
+        if (shareBox) shareBox.style.display = "block";
 
       } catch (e) {
         console.error(e);
@@ -167,16 +173,14 @@
       }
     }
 
-    // Função de partilha restaurada corretamente
     async function partilharNoticia() {
-      const title = document.getElementById('meta-title').content;
+      const metaTitleEl = document.getElementById('meta-title');
+      const title = metaTitleEl ? metaTitleEl.content : document.title;
       const url = window.location.href;
       if (navigator.share) {
         try {
           await navigator.share({ title, url });
-        } catch (err) {
-          // Ignorar se o utilizador cancelar a partilha
-        }
+        } catch (err) {}
       } else {
         navigator.clipboard.writeText(url);
         alert('Link copiado para a área de transferência!');
