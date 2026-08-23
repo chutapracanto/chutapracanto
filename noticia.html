@@ -3,83 +3,38 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title id="page-title">ChutaPraCanto | Notícia</title>
+  <title>Notícia | ChutaPraCanto</title>
   <link rel="icon" type="image/png" href="images/logo.png">
-  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css">
-  
-  <!-- Metadados para redes sociais -->
-  <meta property="og:type" content="article" />
-  <meta property="og:title" id="meta-title" content="ChutaPraCanto" />
-  <meta property="og:description" id="meta-desc" content="Notícias e opinião sobre futebol." />
-  <meta property="og:image" id="meta-image" content="https://chutapracanto.pages.dev/images/logo.png" />
-  <meta name="twitter:card" content="summary_large_image" />
-
-  <style>
-    .art-body ul {
-      list-style-type: disc !important;
-      padding-left: 20px !important;
-      margin-top: 1rem !important;
-      margin-bottom: 1rem !important;
-    }
-    .art-body li {
-      margin-bottom: 0.8rem !important;
-      line-height: 1.6 !important;
-      color: #e0e0e0;
-    }
-    .art-body p {
-      margin-bottom: 1.2rem !important;
-      line-height: 1.7 !important;
-    }
-    .art-body strong {
-      color: #ffffff;
-      font-weight: 700;
-    }
-  </style>
+  <!-- Biblioteca para converter Markdown em HTML -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
 
-  <!-- HEADER GLOBAL -->
-  <header class="site-header">
+  <!-- HEADER -->
+  <header>
     <div class="header-container">
       <a href="index.html" class="logo-link">
         <img src="images/logo.png" alt="ChutaPraCanto" class="site-logo">
       </a>
-      
       <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="noticias.html" class="active">Notícias</a></li>
+          <li><a href="noticias.html">Notícias</a></li>
           <li><a href="sobre.html">Sobre Nós</a></li>
           <li><a href="contacto.html">Contacto</a></li>
         </ul>
       </nav>
-
-      <div class="header-socials">
-        <a href="https://youtube.com/@chutapracanto" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
-        <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" title="Spotify"><i class="fa-brands fa-spotify"></i></a>
-        <a href="https://instagram.com/chutapracanto.oficial" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://tiktok.com/@chutapracanto" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-      </div>
     </div>
   </header>
 
-  <!-- ARTIGO WRAPPER -->
-  <div class="container" style="max-width: 800px; margin-top: 2rem; margin-bottom: 4rem;">
-    <a href="noticias.html" class="see-more" style="display: inline-block; margin-bottom: 2rem;">← VOLTAR ÀS NOTÍCIAS</a>
-
-    <div id="article-content">
-      <p style="color: var(--text-gray);">A carregar notícia...</p>
+  <!-- CONTEÚDO DA NOTÍCIA -->
+  <main class="container" style="max-width: 800px; margin: 2rem auto; padding: 0 1rem;">
+    <div id="noticia-conteudo">
+      <p style="color: var(--text-gray); text-align: center; padding: 3rem 0;">A carregar notícia...</p>
     </div>
-
-    <!-- Secção de Partilha -->
-    <div class="share-section" id="share-box" style="display:none; margin-top: 40px; text-align: right;">
-      <button onclick="partilharNoticia()" style="background: transparent; color: var(--neon-green); border: 2px solid var(--neon-green); padding: 12px 24px; border-radius: 8px; cursor: pointer; font-family: var(--font-main); font-weight: 700; transition: all 0.2s ease;" onmouseover="this.style.background='var(--neon-green)'; this.style.color='#000';" onmouseout="this.style.background='transparent'; this.style.color='var(--neon-green)';" onmousedown="this.style.background='#15803d'; this.style.color='#fff';" onmouseup="this.style.background='var(--neon-green)'; this.style.color='#000';">
-        Partilhar <i class="fa-solid fa-share-nodes" style="margin-left: 8px;"></i>
-      </button>
-    </div>
-  </div>
+  </main>
 
   <!-- FOOTER -->
   <footer>
@@ -88,7 +43,6 @@
         <img src="images/logo.png" alt="ChutaPraCanto" class="footer-logo">
         <p>Análise tática, debate pós-jogo e opinião sem filtro sobre o futebol mundial.</p>
       </div>
-
       <div class="footer-links">
         <h4>NAVEGAÇÃO</h4>
         <a href="index.html">Home</a>
@@ -96,139 +50,91 @@
         <a href="sobre.html">Sobre Nós</a>
         <a href="contacto.html">Contacto</a>
       </div>
-
-      <div class="footer-links">
-        <h4>LEGAL</h4>
-        <a href="privacidade.html">Política de Privacidade</a>
-        <a href="termos.html">Termos e Condições</a>
-      </div>
-
-      <div class="footer-socials-col">
-        <h4>REDES SOCIAIS</h4>
-        <div class="footer-social-links">
-          <a href="https://youtube.com/@chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-youtube"></i> YouTube</a>
-          <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" class="social-pill"><i class="fa-brands fa-spotify"></i> Spotify</a>
-          <a href="https://instagram.com/chutapracanto.oficial" target="_blank" class="social-pill"><i class="fa-brands fa-instagram"></i> Instagram</a>
-          <a href="https://tiktok.com/@chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-tiktok"></i> TikTok</a>
-          <a href="https://facebook.com/chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
-          <a href="https://reddit.com/r/chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-reddit-alien"></i> Reddit</a>
-        </div>
-      </div>
     </div>
-
     <div class="footer-bottom">
       <p>© 2026 ChutaPraCanto. Todos os direitos reservados.</p>
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script>
-    async function loadArticle() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const slug = urlParams.get('slug');
+    async function carregarArtigoIndividual() {
+      const container = document.getElementById('noticia-conteudo');
       
+      // Obter o slug do URL (ex: noticia.html?slug=nome-do-artigo)
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get('slug');
+
       if (!slug) {
-        document.getElementById('article-content').innerHTML = "<h2 style='color:#fff;'>Notícia não encontrada.</h2><p style='color:var(--text-gray); margin-top:10px;'>O link parece estar incompleto.</p>";
+        container.innerHTML = '<p style="color: #ff4444; text-align: center;">Notícia não encontrada.</p>';
         return;
       }
 
+      const repo = "chutapracanto/chutapracanto";
+      const branch = "main";
+      const urlFicheiro = `https://raw.githubusercontent.com/${repo}/${branch}/content/noticias/${slug}.md`;
+
       try {
-        // Tenta primeiro o slug exato do URL
-        let res = await fetch(`content/noticias/${slug}.md`);
-        
-        // Se falhar, tenta procurar diretamente na API do GitHub para encontrar o ficheiro correto ignorando diferenças de codificação ou maiúsculas/minúsculas
-        if (!res.ok) {
-          const apiRes = await fetch('https://api.github.com/repos/chutapracanto/chutapracanto/contents/content/noticias');
-          if (apiRes.ok) {
-            const files = await apiRes.json();
-            const matchedFile = files.find(f => f.name.replace('.md', '').toLowerCase() === decodeURIComponent(slug).toLowerCase());
-            if (matchedFile) {
-              res = await fetch(matchedFile.download_url);
-            }
-          }
-        }
+        const resposta = await fetch(urlFicheiro);
+        if (!resposta.ok) throw new Error("Artigo não encontrado.");
 
-        if (!res.ok) throw new Error("Artigo não existe");
-        const text = await res.text();
+        const textoMd = await resposta.text();
 
-        const parts = text.split("---");
-        if (parts.length < 3) throw new Error("Formato inválido");
+        // Separar o Frontmatter (cabeçalho YAML) do corpo da notícia
+        const partes = textoMd.split('---');
+        if (partes.length < 3) throw new Error("Formato do artigo inválido.");
 
-        const frontmatter = jsyaml.load(parts[1]);
-        let markdownBody = parts.slice(2).join("---");
+        const cabecalho = partes[1];
+        const corpoMarkdown = partes.slice(2).join('---'); // Tudo o resto é o corpo
 
-        const title = frontmatter.title || 'Sem título';
-        const subtitulo = frontmatter.subtitle || frontmatter.subtitulo || frontmatter.descricao || frontmatter.resumo || '';
-        const categoria = frontmatter.category || frontmatter.categoria || frontmatter.tag || 'Geral';
-        const date = frontmatter.published || frontmatter.date || 'Recente';
-        const imagem = frontmatter.image || frontmatter.imagem || frontmatter.featured_image || frontmatter.featuredImage || '';
+        // Função auxiliar para extrair campos do cabeçalho YAML
+        const extrairCampo = (campo) => {
+          const match = cabecalho.match(new RegExp(`${campo}:\\s*"([^"]*)"`)) || cabecalho.match(new RegExp(`${campo}:\\s*(.*)`));
+          return match ? match[1].replace(/"/g, '').trim() : '';
+        };
 
-        markdownBody = markdownBody.trim().replace(/^!\[.*?\]\(.*?\)/, '');
-        const dataFormatada = date.includes('T') ? date.split('T')[0] : date;
-        
-        let fullImageUrl = "https://chutapracanto.pages.dev/images/logo.png";
-        if (imagem) {
-          fullImageUrl = imagem.startsWith('http') ? imagem : window.location.origin + (imagem.startsWith('/') ? '' : '/') + imagem;
-        }
+        const titulo = extrairCampo('title');
+        const subtitulo = extrairCampo('subtitle');
+        const tag = extrairCampo('category') || 'FUTEBOL';
+        const data = extrairCampo('date');
+        const imagem = extrairCampo('imagem');
 
-        const pageTitleEl = document.getElementById('page-title');
-        if (pageTitleEl) pageTitleEl.innerText = title + " | ChutaPraCanto";
-        
-        const metaTitleEl = document.getElementById('meta-title');
-        if (metaTitleEl) metaTitleEl.content = title;
-        
-        const metaDescEl = document.getElementById('meta-desc');
-        if (metaDescEl) metaDescEl.content = subtitulo;
-        
-        const metaImageEl = document.getElementById('meta-image');
-        if (metaImageEl) metaImageEl.content = fullImageUrl;
+        // Converter o corpo de Markdown para HTML usando a biblioteca 'marked'
+        const corpoHtml = marked.parse(corpoMarkdown);
 
-        const htmlBody = marked.parse(markdownBody);
-        
-        document.getElementById('article-content').innerHTML = `
-          <div style="margin-bottom: 2rem;">
-            <span class="tag" style="color: var(--neon-green); font-size: 0.85rem; font-weight: 800; display: block; margin-bottom: 0.5rem; text-transform: uppercase;">${categoria}</span>
-            <h1 style="font-size: 2.2rem; font-weight: 800; line-height: 1.25; margin-bottom: 0.8rem; font-family: var(--font-title); color: #fff;">${title}</h1>
-            ${subtitulo ? `<p style="font-size: 1.1rem; color: var(--text-gray); line-height: 1.4; margin-bottom: 1rem;">${subtitulo}</p>` : ''}
-            <div style="font-size: 0.85rem; color: #777;">Publicado a ${dataFormatada} por <strong>ChutaPraCanto</strong></div>
+        // Montar o layout da página da notícia
+        container.innerHTML = `
+          <div style="margin-bottom: 1.5rem;">
+            <span style="color: var(--neon-green, #00ff66); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">${tag}</span>
+            <h1 style="font-size: 2.2rem; color: #fff; margin: 0.5rem 0 1rem 0; line-height: 1.2;">${titulo}</h1>
+            ${subtitulo ? `<p style="font-size: 1.1rem; color: var(--text-gray, #aaa); line-height: 1.5; margin-bottom: 1rem;">${subtitulo}</p>` : ''}
+            ${data ? `<p style="font-size: 0.8rem; color: #666; margin-bottom: 1.5rem;">Publicado a ${data}</p>` : ''}
           </div>
-          
-          ${imagem ? `<div style="margin-bottom: 2.5rem; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);"><img src="${imagem}" alt="${title}" style="width: 100%; max-height: 450px; object-fit: cover; object-position: center top; display: block;"></div>` : ''}
-          
-          <div class="art-body" style="font-size: 1.05rem; line-height: 1.7; color: #e0e0e0;">${htmlBody}</div>
-        `;
-        
-        const shareBox = document.getElementById('share-box');
-        if (shareBox) shareBox.style.display = "block";
 
-      } catch (e) {
-        console.error(e);
-        document.getElementById('article-content').innerHTML = `
-          <div style="text-align: center; padding: 3rem 0;">
-            <h2 style="color: #fff; margin-bottom: 1rem;">Notícia não encontrada ou erro ao carregar.</h2>
-            <p style="color: var(--text-gray); margin-bottom: 1.5rem;">O artigo selecionado pode ter sido movido ou o link está incorreto.</p>
-            <a href="noticias.html" class="filter-btn" style="display: inline-block; background: var(--neon-green); color: #000; text-decoration: none; padding: 0.6rem 1.2rem; border-radius: 8px;">Voltar à lista de notícias</a>
+          ${imagem ? `<div style="width: 100%; max-height: 450px; overflow: hidden; border-radius: 12px; margin-bottom: 2rem; border: 1px solid var(--border-color, #222);"><img src="${imagem}" style="width: 100%; height: 100%; object-fit: cover;" alt="${titulo}"></div>` : ''}
+
+          <div class="artigo-corpo" style="color: #ddd; font-size: 1rem; line-height: 1.8;">
+            ${corpoHtml}
           </div>
         `;
+
+      } catch (erro) {
+        console.error(erro);
+        container.innerHTML = '<p style="color: #ff4444; text-align: center; padding: 3rem 0;">Erro ao carregar o artigo. Tenta novamente mais tarde.</p>';
       }
     }
 
-    async function partilharNoticia() {
-      const metaTitleEl = document.getElementById('meta-title');
-      const title = metaTitleEl ? metaTitleEl.content : document.title;
-      const url = window.location.href;
-      if (navigator.share) {
-        try {
-          await navigator.share({ title, url });
-        } catch (err) {}
-      } else {
-        navigator.clipboard.writeText(url);
-        alert('Link copiado para a área de transferência!');
-      }
-    }
-
-    document.addEventListener('DOMContentLoaded', loadArticle);
+    document.addEventListener('DOMContentLoaded', carregarArtigoIndividual);
   </script>
+
+  <style>
+    /* Estilos extra para o conteúdo gerado em Markdown dentro do artigo */
+    .artigo-corpo h2 { color: #fff; font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; }
+    .artigo-corpo h3 { color: #fff; font-size: 1.25rem; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+    .artigo-corpo p { margin-bottom: 1.2rem; }
+    .artigo-corpo ul, .artigo-corpo ol { margin-bottom: 1.2rem; padding-left: 1.5rem; }
+    .artigo-corpo li { margin-bottom: 0.5rem; }
+    .artigo-corpo strong { color: #fff; }
+    .artigo-corpo blockquote { border-left: 3px solid var(--neon-green, #00ff66); padding-left: 1rem; margin: 1.5rem 0; color: #aaa; font-style: italic; }
+  </style>
 </body>
 </html>
