@@ -8,7 +8,6 @@
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
   
   <style>
     /* BARRA DE FERRAMENTAS & FILTROS CLEAN */
@@ -333,11 +332,6 @@
               <button class="dropdown-item" onclick="filtrarNoticias('sc braga', this)">SC Braga</button>
               <button class="dropdown-item" onclick="filtrarNoticias('liga portugal betclic', this)">Liga Portugal Betclic</button>
               <button class="dropdown-item" onclick="filtrarNoticias('liga europa', this)">Liga Europa</button>
-              <button class="dropdown-item" onclick="filtrarNoticias('liga conferência', this)">Liga Conferência</button>
-              <button class="dropdown-item" onclick="filtrarNoticias('supertaça europeia', this)">Supertaça Europeia</button>
-              <button class="dropdown-item" onclick="filtrarNoticias('liga portugal 2 meusuper', this)">Liga Portugal 2 MeuSuper</button>
-              <button class="dropdown-item" onclick="filtrarNoticias('la liga', this)">La Liga</button>
-              <button class="dropdown-item" onclick="filtrarNoticias('supertaça inglaterra', this)">Supertaça Inglaterra</button>
               <button class="dropdown-item" onclick="filtrarNoticias('futebol nacional', this)">Futebol Nacional</button>
             </div>
           </div>
@@ -353,7 +347,7 @@
 
     <!-- LISTA DE NOTÍCIAS -->
     <div class="news-list" id="noticias-list">
-      <p style="color: var(--text-gray); text-align: center; padding: 2.5rem 0;">A carregar todas as notícias...</p>
+      <p style="color: var(--text-gray); text-align: center; padding: 2.5rem 0;">A carregar notícias...</p>
     </div>
 
     <!-- BOTÕES DE PAGINAÇÃO -->
@@ -393,8 +387,6 @@
           <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" class="social-pill"><i class="fa-brands fa-spotify"></i> Spotify</a>
           <a href="https://instagram.com/chutapracanto.oficial" target="_blank" class="social-pill"><i class="fa-brands fa-instagram"></i> Instagram</a>
           <a href="https://tiktok.com/@chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-tiktok"></i> TikTok</a>
-          <a href="https://facebook.com/chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
-          <a href="https://reddit.com/r/chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-reddit-alien"></i> Reddit</a>
         </div>
       </div>
     </div>
@@ -413,49 +405,14 @@
 
     async function carregarTodasNoticias() {
       try {
-        const response = await fetch('https://api.github.com/repos/chutapracanto/chutapracanto/contents/content/noticias');
-        if (!response.ok) return;
+        const response = await fetch('noticias.json');
+        if (!response.ok) throw new Error('Erro ao carregar o JSON');
         
-        const files = await response.json();
-        todasAsNoticias = [];
-
-        for (const file of files) {
-          if (file.name.endsWith('.md')) {
-            const res = await fetch(file.download_url);
-            const text = await res.text();
-            
-            const parts = text.split('---');
-            if (parts.length < 3) continue;
-            
-            const data = jsyaml.load(parts[1]);
-            if (!data) continue;
-
-            let dateRaw = data.published || data.date || '';
-            let dateFormatted = '';
-            if (dateRaw) {
-              const d = new Date(dateRaw);
-              if (!isNaN(d)) {
-                dateFormatted = d.toLocaleDateString('pt-PT', { day: '2-digit', month: '2-digit', year: 'numeric' });
-              }
-            }
-
-            todasAsNoticias.push({
-              slug: file.name.replace('.md', ''),
-              title: data.title || 'Sem título',
-              tag: data.category || data.categoria || data.tag || 'Geral',
-              imagem: data.image || data.imagem || data.featured_image || data.featuredImage || 'https://via.placeholder.com/600x400',
-              descricao: data.subtitle || data.subtitulo || data.descricao || data.resumo || '',
-              dataPublicacaoRaw: dateRaw,
-              dataPublicacaoFormatted: dateFormatted
-            });
-          }
-        }
-
-        todasAsNoticias.sort((a, b) => new Date(b.dataPublicacaoRaw) - new Date(a.dataPublicacaoRaw));
+        todasAsNoticias = await response.json();
         aplicarFiltros();
 
       } catch (error) {
-        console.error('Erro ao carregar notícias:', error);
+        console.error('Erro:', error);
         document.getElementById('noticias-list').innerHTML = '<p style="color: var(--text-gray); text-align: center; padding: 2.5rem 0;">Erro ao carregar notícias.</p>';
       }
     }
@@ -484,19 +441,18 @@
 
       paginaItens.forEach(item => {
         const card = document.createElement('a');
-        card.href = `noticia.html?slug=${item.slug}`;
+        card.href = item.link || `#`;
         card.className = 'news-list-card';
         
         card.innerHTML = `
           <div class="news-list-img">
-            <img src="${item.imagem}" alt="${item.title}">
+            <img src="${item.imagem}" alt="${item.titulo}">
           </div>
           <div class="news-list-content">
             <div class="news-list-meta">
               <span class="tag">${item.tag.toUpperCase()}</span>
-              ${item.dataPublicacaoFormatted ? `<span class="date">· ${item.dataPublicacaoFormatted}</span>` : ''}
             </div>
-            <h3>${item.title}</h3>
+            <h3>${item.titulo}</h3>
             <p>${item.descricao}</p>
           </div>
         `;
@@ -557,7 +513,7 @@
 
       if (termo !== '') {
         noticiasFiltradas = noticiasFiltradas.filter(n => 
-          n.title.toLowerCase().includes(termo) || 
+          n.titulo.toLowerCase().includes(termo) || 
           n.descricao.toLowerCase().includes(termo) ||
           n.tag.toLowerCase().includes(termo)
         );
