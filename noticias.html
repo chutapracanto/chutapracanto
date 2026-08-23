@@ -20,7 +20,12 @@
       gap: 1rem;
       margin: 1.5rem 0 2rem 0;
     }
-    
+ <!-- BOTÕES DE PAGINAÇÃO -->
+<div class="pagination" id="paginationControls" style="display: none;">
+  <button class="page-btn" id="prevBtn" onclick="mudarPagina(-1)"><i class="fa-solid fa-arrow-left"></i> Anterior</button>
+  <span id="pageIndicator">Página 1 de 1</span>
+  <button class="page-btn" id="nextBtn" onclick="mudarPagina(1)">Seguinte <i class="fa-solid fa-arrow-right"></i></button>
+</div>   
 const itensPorPagina = 6; // Podes alterar aqui para 8, 9, 10, etc.
    
     .filter-pills {
