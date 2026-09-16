@@ -354,7 +354,7 @@
 
         // a partilha fique dependente da página/estado atual do navegador.
 
-        const noticiaUrl = new URL('noticia.html', window.location.origin);
+        const noticiaUrl = new URL('/noticia', window.location.origin);
 
         noticiaUrl.searchParams.set('slug', slug);
 
@@ -482,7 +482,7 @@
 
 
 
-      const noticiaUrl = new URL('noticia.html', window.location.origin);
+      const noticiaUrl = new URL('/noticia', window.location.origin);
 
       noticiaUrl.searchParams.set('slug', slug);
 
