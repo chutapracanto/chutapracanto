@@ -524,7 +524,8 @@ function isSocialCrawler(request) {
     "googlebot",
     "bingbot",
     "pinterest",
-    "skypeuripreview"
+    "skypeuripreview",
+    "google-inspectiontool"
   ];
 
   return crawlers.some(
@@ -685,6 +686,8 @@ async function prepararPaginaParaPartilha(
     "public, max-age=60"
   );
 
+  headers.delete("Content-Length");
+
   const htmlResponse =
     new Response(
       response.body,
@@ -695,73 +698,156 @@ async function prepararPaginaParaPartilha(
       }
     );
 
-  return new HTMLRewriter()
+  const rewriter =
+    new HTMLRewriter()
 
-    .on(
-      'meta#meta-title',
-      {
-        element(element) {
-          element.setAttribute(
-            "content",
-            dados.title
-          );
-        }
-      }
-    )
+      // --------------------------------------------------------
+      // TITLE
+      // --------------------------------------------------------
 
-    .on(
-      'meta#meta-desc',
-      {
-        element(element) {
-          element.setAttribute(
-            "content",
-            dados.descricao
-          );
-        }
-      }
-    )
-
-    .on(
-      'meta#meta-image',
-      {
-        element(element) {
-          element.setAttribute(
-            "content",
-            dados.imagemUrl
-          );
-        }
-      }
-    )
-
-    .on(
-      'meta#meta-url',
-      {
-        element(element) {
-          element.setAttribute(
-            "content",
-            dados.noticiaUrl
-          );
-        }
-      }
-    )
-
-    .on(
-      "title",
-      {
-        text(text) {
-          if (!text.lastInTextNode) {
+      .on(
+        "title",
+        {
+          text(text) {
             text.replace(
-              dados.title + " | ChutaPraCanto",
+              `${dados.title} | ChutaPraCanto`,
               true
             );
           }
         }
-      }
-    )
+      )
 
-    .transform(
-      htmlResponse
-    );
+      // --------------------------------------------------------
+      // OG TITLE
+      // --------------------------------------------------------
+
+      .on(
+        'meta#meta-title',
+        {
+          element(element) {
+            element.setAttribute(
+              "content",
+              dados.title
+            );
+          }
+        }
+      )
+
+      // --------------------------------------------------------
+      // OG DESCRIPTION
+      // --------------------------------------------------------
+
+      .on(
+        'meta#meta-desc',
+        {
+          element(element) {
+            element.setAttribute(
+              "content",
+              dados.descricao
+            );
+          }
+        }
+      )
+
+      // --------------------------------------------------------
+      // OG IMAGE
+      // --------------------------------------------------------
+
+      .on(
+        'meta#meta-image',
+        {
+          element(element) {
+            element.setAttribute(
+              "content",
+              dados.imagemUrl
+            );
+          }
+        }
+      )
+
+      // --------------------------------------------------------
+      // OG URL
+      // --------------------------------------------------------
+
+      .on(
+        'meta#meta-url',
+        {
+          element(element) {
+            element.setAttribute(
+              "content",
+              dados.noticiaUrl
+            );
+          }
+        }
+      )
+
+      // --------------------------------------------------------
+      // TWITTER TITLE
+      // --------------------------------------------------------
+
+      .on(
+        'meta[name="twitter:title"]',
+        {
+          element(element) {
+            element.setAttribute(
+              "content",
+              dados.title
+            );
+          }
+        }
+      )
+
+      // --------------------------------------------------------
+      // TWITTER DESCRIPTION
+      // --------------------------------------------------------
+
+      .on(
+        'meta[name="twitter:description"]',
+        {
+          element(element) {
+            element.setAttribute(
+              "content",
+              dados.descricao
+            );
+          }
+        }
+      )
+
+      // --------------------------------------------------------
+      // TWITTER IMAGE
+      // --------------------------------------------------------
+
+      .on(
+        'meta[name="twitter:image"]',
+        {
+          element(element) {
+            element.setAttribute(
+              "content",
+              dados.imagemUrl
+            );
+          }
+        }
+      )
+
+      // --------------------------------------------------------
+      // TWITTER URL
+      // --------------------------------------------------------
+
+      .on(
+        'meta[name="twitter:url"]',
+        {
+          element(element) {
+            element.setAttribute(
+              "content",
+              dados.noticiaUrl
+            );
+          }
+        }
+      );
+
+  return rewriter.transform(
+    htmlResponse
+  );
 }
 
 
