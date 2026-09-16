@@ -30,6 +30,8 @@
 
   <meta property="og:image" id="meta-image" content="https://chutapracanto.pages.dev/images/logo.png" />
 
+  <meta property="og:url" id="meta-url" content="https://chutapracanto.pages.dev/noticia.html" />
+
   <meta name="twitter:card" content="summary_large_image" />
 
 
@@ -346,6 +348,20 @@
 
 
 
+        // URL específica e estável desta notícia.
+
+        // Não usamos simplesmente window.location.href para evitar que
+
+        // a partilha fique dependente da página/estado atual do navegador.
+
+        const noticiaUrl = new URL('noticia.html', window.location.origin);
+
+        noticiaUrl.searchParams.set('slug', slug);
+
+        const urlPartilha = noticiaUrl.toString();
+
+
+
         const pageTitleEl = document.getElementById('page-title');
 
         if (pageTitleEl) pageTitleEl.innerText = title + " | ChutaPraCanto";
@@ -367,6 +383,12 @@
         const metaImageEl = document.getElementById('meta-image');
 
         if (metaImageEl) metaImageEl.content = fullImageUrl;
+
+
+
+        const metaUrlEl = document.getElementById('meta-url');
+
+        if (metaUrlEl) metaUrlEl.content = urlPartilha;
 
 
 
@@ -436,21 +458,85 @@
 
       const title = metaTitleEl ? metaTitleEl.content : document.title;
 
-      const url = window.location.href;
+
+
+      // Reconstrói sempre o URL da notícia a partir do slug.
+
+      // Assim, no telemóvel, navigator.share nunca recebe simplesmente
+
+      // o URL da página genérica ou outro URL que esteja no navegador.
+
+      const urlParams = new URLSearchParams(window.location.search);
+
+      const slug = urlParams.get('slug');
+
+
+
+      if (!slug) {
+
+        alert('Não foi possível identificar a notícia para partilhar.');
+
+        return;
+
+      }
+
+
+
+      const noticiaUrl = new URL('noticia.html', window.location.origin);
+
+      noticiaUrl.searchParams.set('slug', slug);
+
+      const url = noticiaUrl.toString();
+
+
 
       if (navigator.share) {
 
         try {
 
-          await navigator.share({ title, url });
+          await navigator.share({
 
-        } catch (err) {}
+            title: title,
+
+            text: title,
+
+            url: url
+
+          });
+
+        } catch (err) {
+
+          // O utilizador pode cancelar a janela de partilha.
+
+        }
 
       } else {
 
-        navigator.clipboard.writeText(url);
+        try {
 
-        alert('Link copiado para a área de transferência!');
+          await navigator.clipboard.writeText(url);
+
+          alert('Link da notícia copiado para a área de transferência!');
+
+        } catch (err) {
+
+          // Fallback para navegadores onde clipboard não está disponível.
+
+          const input = document.createElement('input');
+
+          input.value = url;
+
+          document.body.appendChild(input);
+
+          input.select();
+
+          document.execCommand('copy');
+
+          input.remove();
+
+          alert('Link da notícia copiado para a área de transferência!');
+
+        }
 
       }
 
