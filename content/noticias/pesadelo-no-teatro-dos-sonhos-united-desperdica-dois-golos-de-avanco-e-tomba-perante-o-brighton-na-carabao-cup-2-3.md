@@ -24,4 +24,3 @@ O regresso dos balneários trouxe um Brighton transfigurado, que demorou escasso
 1.  **Golo de Pascal Gross e choque em Old Trafford:** Aos primeiros minutos da segunda metade, o experiente Pascal Gross restabeleceu a igualdade na partida.
 2.  **De Cuyper consuma o volte-face:** Apenas quatro minutos após o golo do empate, o suplente Maxim De Cuyper apareceu na área para assinar o 2-3 e deixar os adeptos caseiros em absoluto sobressalto.
 3.  **Pressão sem frutos e adeus à Taça:** Carrick lançou o capitão Bruno Fernandes a 18 minutos do fim na tentativa de resgatar o resultado, mas a inspiração do guardião Jason Steele (a negar o golo a Rashford) e as intervenções de Karl Darlow selaram o marcador final e a consequente eliminação dos _Red Devils_.
-4.
