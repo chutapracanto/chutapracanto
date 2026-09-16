@@ -1,7 +1,3 @@
 name = "chutapracanto"
-main = "_worker.js"
+pages_build_output_dir = "."
 compatibility_date = "2026-09-16"
-
-[assets]
-directory = "."
-binding = "ASSETS"
