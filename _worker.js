@@ -1,771 +1,4911 @@
-const SESSION_MAX_AGE = 8 * 60 * 60;
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração | ChutaPraCanto</title>
 
-const GITHUB_API = "https://api.github.com";
-const GITHUB_OWNER = "chutapracanto";
-const GITHUB_REPO = "chutapracanto";
-const GITHUB_BRANCH = "main";
+    <link
+        href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css"
+        rel="stylesheet"
+    >
 
-const SESSION_COOKIE_NAME = "cpc_session";
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .panel {
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        h1,
+        h2 {
+            margin-top: 0;
+            color: #1a1a1a;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        h2 {
+            font-size: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 600;
+            font-size: 14px;
+            color: #444;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="date"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #fafafa;
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        #editor-container {
+            height: 320px;
+            background: #fff;
+        }
+
+        .ql-toolbar.ql-snow {
+            border-radius: 8px 8px 0 0;
+            background: #f1f5f9;
+            border-color: #ddd;
+        }
+
+        .ql-container.ql-snow {
+            border-color: #ddd;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .main-btn {
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            padding: 13px 18px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .main-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .main-btn:disabled {
+            opacity: 0.6;
+            cursor: default;
+        }
+
+        .secondary-btn {
+            background: #e5e7eb;
+            color: #333;
+            border: none;
+            padding: 11px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .secondary-btn:hover {
+            background: #d1d5db;
+        }
+
+        .danger-btn {
+            background: #dc2626;
+            color: #fff;
+            border: none;
+            padding: 11px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .danger-btn:hover {
+            background: #b91c1c;
+        }
+
+        .preview-btn {
+            background: #7c3aed;
+            color: #fff;
+            border: none;
+            padding: 9px 13px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .preview-btn:hover {
+            background: #6d28d9;
+        }
+
+        .share-btn {
+            background: #059669;
+            color: #fff;
+            border: none;
+            padding: 9px 13px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .share-btn:hover {
+            background: #047857;
+        }
+
+        .top-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .search {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+
+        .news-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .news-item {
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #fff;
+        }
+
+        .news-item:hover {
+            background: #f9fafb;
+        }
+
+        .news-thumb {
+            width: 120px;
+            height: 80px;
+            flex-shrink: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #eef0f2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .news-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .news-thumb-placeholder {
+            font-size: 28px;
+            color: #aaa;
+        }
+
+        .news-info {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .news-title {
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 7px;
+            word-break: break-word;
+            line-height: 1.4;
+        }
+
+        .news-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            color: #777;
+        }
+
+        .news-category {
+            background: #eef2ff;
+            color: #3730a3;
+            padding: 4px 8px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        .news-date {
+            color: #777;
+        }
+
+        .news-author {
+            color: #777;
+        }
+
+        .news-file {
+            font-size: 11px;
+            color: #aaa;
+            margin-top: 5px;
+            word-break: break-all;
+        }
+
+        .news-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            flex-shrink: 0;
+            min-width: 105px;
+        }
+
+        .edit-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 9px 14px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .edit-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .delete-list-btn {
+            background: #fee2e2;
+            color: #b91c1c;
+            border: none;
+            padding: 9px 14px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .delete-list-btn:hover {
+            background: #fecaca;
+        }
+
+        .logout-btn {
+            background: #f3f4f6;
+            color: #555;
+            border: 1px solid #ddd;
+            padding: 9px 14px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .logout-btn:hover {
+            background: #e5e7eb;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .page-btn {
+            min-width: 38px;
+            height: 38px;
+            padding: 0 10px;
+            border: 1px solid #d1d5db;
+            background: #fff;
+            color: #333;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .page-btn:hover {
+            background: #f3f4f6;
+        }
+
+        .page-btn.active {
+            background: #2563eb;
+            color: #fff;
+            border-color: #2563eb;
+        }
+
+        .page-btn:disabled {
+            opacity: 0.45;
+            cursor: default;
+        }
+
+        .page-info {
+            font-size: 13px;
+            color: #666;
+            margin: 0 8px;
+        }
+
+        .login-box {
+            max-width: 500px;
+            margin: 60px auto;
+        }
+
+        .login-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .status {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 7px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .mode-label {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .image-preview {
+            max-width: 220px;
+            max-height: 140px;
+            margin-top: 10px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .image-help {
+            font-size: 12px;
+            color: #777;
+            margin-top: 6px;
+        }
+
+        .preview-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.65);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .preview-modal {
+            background: #fff;
+            width: 100%;
+            max-width: 850px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 14px;
+            padding: 35px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        }
+
+        .preview-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 38px;
+            height: 38px;
+            border: none;
+            border-radius: 50%;
+            background: #f1f5f9;
+            cursor: pointer;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .preview-close:hover {
+            background: #e2e8f0;
+        }
+
+        .preview-category {
+            display: inline-block;
+            background: #eef2ff;
+            color: #3730a3;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .preview-title {
+            font-size: 32px;
+            line-height: 1.2;
+            margin: 0 0 12px;
+            color: #111827;
+        }
+
+        .preview-subtitle {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #6b7280;
+            margin-bottom: 15px;
+        }
+
+        .preview-meta {
+            font-size: 13px;
+            color: #777;
+            margin-bottom: 20px;
+        }
+
+        .preview-image {
+            width: 100%;
+            max-height: 430px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            display: none;
+        }
+
+        .preview-content {
+            font-size: 17px;
+            line-height: 1.75;
+            color: #292929;
+        }
+
+        .preview-content h1,
+        .preview-content h2,
+        .preview-content h3 {
+            line-height: 1.3;
+            margin-top: 28px;
+        }
+
+        .preview-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .preview-content blockquote {
+            border-left: 4px solid #2563eb;
+            padding-left: 15px;
+            margin-left: 0;
+            color: #555;
+        }
+
+        .preview-content ul,
+        .preview-content ol {
+            margin-top: 10px;
+            margin-bottom: 15px;
+            padding-left: 28px;
+        }
+
+        .preview-content ul {
+            list-style-type: disc;
+        }
+
+        .preview-content ol {
+            list-style-type: decimal;
+        }
+
+        .preview-content li {
+            margin-bottom: 7px;
+        }
+
+        .share-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.65);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .share-modal {
+            background: #fff;
+            width: 100%;
+            max-width: 480px;
+            border-radius: 14px;
+            padding: 28px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        }
+
+        .share-modal h2 {
+            margin-bottom: 8px;
+            padding-bottom: 12px;
+            padding-right: 40px;
+        }
+
+        .share-title {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            word-break: break-word;
+        }
+
+        .share-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .share-option {
+            border: none;
+            border-radius: 9px;
+            padding: 13px 12px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            transition: opacity 0.15s ease;
+        }
+
+        .share-option:hover {
+            opacity: 0.88;
+        }
+
+        .share-whatsapp {
+            background: #25d366;
+            color: #fff;
+        }
+
+        .share-facebook {
+            background: #1877f2;
+            color: #fff;
+        }
+
+        .share-x {
+            background: #111;
+            color: #fff;
+        }
+
+        .share-copy {
+            background: #e5e7eb;
+            color: #333;
+        }
+
+        .share-native {
+            background: #7c3aed;
+            color: #fff;
+        }
+
+        .share-url-box {
+            margin-top: 18px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 12px;
+            color: #666;
+            word-break: break-all;
+        }
+
+        .share-close-btn {
+            width: 100%;
+            margin-top: 15px;
+            background: #f3f4f6;
+            color: #555;
+            border: 1px solid #ddd;
+            padding: 11px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .share-close-btn:hover {
+            background: #e5e7eb;
+        }
+
+        @media (max-width: 650px) {
+
+            body {
+                padding: 10px;
+            }
+
+            .panel {
+                padding: 20px;
+            }
+
+            .news-item {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .news-thumb {
+                width: 100%;
+                height: 150px;
+            }
+
+            .news-actions {
+                width: 100%;
+                min-width: 0;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .news-actions button {
+                flex: 1 1 calc(50% - 7px);
+            }
+
+            .preview-modal {
+                padding: 25px 20px;
+            }
+
+            .preview-title {
+                font-size: 25px;
+            }
+
+            .preview-subtitle {
+                font-size: 16px;
+            }
+
+            .preview-content {
+                font-size: 16px;
+            }
+
+            .pagination {
+                gap: 4px;
+            }
+
+            .page-btn {
+                min-width: 34px;
+                height: 34px;
+            }
+
+            .share-modal {
+                padding: 22px;
+            }
+
+            .share-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div id="login-screen" class="panel login-box">
+
+        <h2>Acesso ao Painel</h2>
+
+        <div class="login-description">
+            Introduz a palavra-passe de administração do ChutaPraCanto.
+        </div>
+
+        <div class="form-group">
+
+            <label for="admin-password">
+                Palavra-passe
+            </label>
+
+            <input
+                type="password"
+                id="admin-password"
+                placeholder="Palavra-passe"
+                autocomplete="current-password"
+                onkeydown="if(event.key === 'Enter') entrar()"
+            >
+
+        </div>
+
+        <button
+            class="main-btn"
+            onclick="entrar()"
+        >
+            Entrar
+        </button>
+
+        <div
+            id="login-status"
+            class="status"
+        ></div>
+
+    </div>
 
 
-// ============================================================
-// RESPOSTAS
-// ============================================================
+    <div id="admin-screen" class="panel hidden">
 
-function json(data, status = 200, extraHeaders = {}) {
-  return new Response(JSON.stringify(data), {
-    status,
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "Cache-Control": "no-store",
-      ...extraHeaders
-    }
-  });
-}
+        <div id="list-screen">
+
+            <div class="top-actions">
+
+                <div>
+                    <h1>📰 Notícias</h1>
+                </div>
+
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+
+                    <button
+                        class="main-btn"
+                        onclick="novaNoticia()"
+                    >
+                        + Nova Notícia
+                    </button>
+
+                    <button
+                        class="logout-btn"
+                        onclick="terminarSessao()"
+                    >
+                        Sair
+                    </button>
+
+                </div>
+
+            </div>
+
+            <input
+                type="text"
+                id="search-news"
+                class="search"
+                placeholder="Pesquisar por título, categoria ou autor..."
+                oninput="filtrarLista()"
+            >
+
+            <div
+                id="news-list"
+                class="news-list"
+            >
+                <div class="loading">
+                    A carregar notícias...
+                </div>
+            </div>
+
+            <div
+                id="pagination"
+                class="pagination"
+            ></div>
+
+        </div>
 
 
-// ============================================================
-// COOKIES
-// ============================================================
+        <div
+            id="form-screen"
+            class="hidden"
+        >
 
-function getCookie(request, name) {
-  const cookieHeader = request.headers.get("Cookie") || "";
+            <div class="top-actions">
 
-  const cookies = cookieHeader.split(";");
+                <div>
 
-  for (const cookie of cookies) {
-    const [key, ...valueParts] = cookie.trim().split("=");
+                    <h1 id="form-title">
+                        Nova Notícia
+                    </h1>
 
-    if (key === name) {
-      try {
-        return decodeURIComponent(valueParts.join("="));
-      } catch {
-        return valueParts.join("=");
-      }
-    }
-  }
+                    <div
+                        class="mode-label"
+                        id="mode-label"
+                    ></div>
 
-  return null;
-}
+                </div>
+
+                <button
+                    class="secondary-btn"
+                    onclick="voltarLista()"
+                >
+                    ← Voltar às notícias
+                </button>
+
+            </div>
 
 
-// ============================================================
-// BASE64 URL
-// ============================================================
+            <div class="form-group">
 
-function base64UrlEncode(bytes) {
-  let binary = "";
+                <label for="noticia-titulo">
+                    Título
+                </label>
 
-  for (const byte of bytes) {
-    binary += String.fromCharCode(byte);
-  }
+                <input
+                    type="text"
+                    id="noticia-titulo"
+                    placeholder="Título da notícia..."
+                >
 
-  return btoa(binary)
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_")
-    .replace(/=+$/, "");
-}
+            </div>
 
-function base64UrlDecode(value) {
-  const padded = value
-    .replace(/-/g, "+")
-    .replace(/_/g, "/")
-    .padEnd(Math.ceil(value.length / 4) * 4, "=");
 
-  const binary = atob(padded);
+            <div class="form-group">
 
-  const bytes = new Uint8Array(binary.length);
+                <label for="noticia-subtitulo">
+                    Subtítulo / Descrição Curta
+                </label>
 
-  for (let i = 0; i < binary.length; i++) {
-    bytes[i] = binary.charCodeAt(i);
-  }
+                <textarea
+                    id="noticia-subtitulo"
+                    placeholder="Breve resumo..."
+                ></textarea>
 
-  return bytes;
-}
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="noticia-categoria">
+                    Categoria
+                </label>
+
+                <input
+                    type="text"
+                    id="noticia-categoria"
+                    placeholder="Ex.: SL BENFICA"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="noticia-data">
+                    Data
+                </label>
+
+                <input
+                    type="date"
+                    id="noticia-data"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="noticia-autor">
+                    Autor
+                </label>
+
+                <input
+                    type="text"
+                    id="noticia-autor"
+                    value="ChutaPraCanto"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Imagem (Upload ou URL)
+                </label>
+
+                <input
+                    type="file"
+                    id="image-upload"
+                    accept="image/*"
+                    style="margin-bottom:8px;"
+                >
+
+                <input
+                    type="text"
+                    id="noticia-imagem-url"
+                    placeholder="Ou cola aqui o URL da imagem..."
+                >
+
+                <div class="image-help">
+                    As imagens carregadas recebem automaticamente um nome único.
+                </div>
+
+                <img
+                    id="image-preview"
+                    class="image-preview"
+                    alt="Pré-visualização da imagem"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Conteúdo do Artigo
+                </label>
+
+                <div id="editor-container"></div>
+
+            </div>
+
+
+            <div class="form-actions">
+
+                <button
+                    type="button"
+                    class="preview-btn"
+                    onclick="previsualizarNoticia()"
+                >
+                    👁️ Pré-visualizar
+                </button>
+
+                <button
+                    class="main-btn"
+                    onclick="guardarNoticia()"
+                >
+                    <span id="save-button-text">
+                        Publicar Notícia
+                    </span>
+                </button>
+
+                <button
+                    id="delete-button"
+                    class="danger-btn hidden"
+                    onclick="apagarNoticia()"
+                >
+                    Apagar Notícia
+                </button>
+
+            </div>
+
+
+            <div
+                id="status"
+                class="status"
+            ></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div
+    id="preview-overlay"
+    class="preview-overlay hidden"
+    onclick="fecharPrevisualizacao(event)"
+>
+
+    <div
+        class="preview-modal"
+        onclick="event.stopPropagation()"
+    >
+
+        <button
+            class="preview-close"
+            onclick="fecharPrevisualizacao()"
+        >
+            ×
+        </button>
+
+        <div
+            id="preview-category"
+            class="preview-category hidden"
+        ></div>
+
+        <h1
+            id="preview-title"
+            class="preview-title"
+        ></h1>
+
+        <div
+            id="preview-subtitle"
+            class="preview-subtitle"
+        ></div>
+
+        <div
+            id="preview-meta"
+            class="preview-meta"
+        ></div>
+
+        <img
+            id="preview-image"
+            class="preview-image"
+            alt=""
+        >
+
+        <div
+            id="preview-content"
+            class="preview-content"
+        ></div>
+
+    </div>
+
+</div>
+
+
+<div
+    id="share-overlay"
+    class="share-overlay hidden"
+    onclick="fecharPartilha(event)"
+>
+
+    <div
+        class="share-modal"
+        onclick="event.stopPropagation()"
+    >
+
+        <button
+            class="preview-close"
+            onclick="fecharPartilha()"
+        >
+            ×
+        </button>
+
+        <h2>
+            📤 Partilhar notícia
+        </h2>
+
+        <div
+            id="share-title"
+            class="share-title"
+        ></div>
+
+        <div class="share-buttons">
+
+            <button
+                class="share-option share-whatsapp"
+                onclick="partilharWhatsApp()"
+            >
+                💬 WhatsApp
+            </button>
+
+            <button
+                class="share-option share-facebook"
+                onclick="partilharFacebook()"
+            >
+                📘 Facebook
+            </button>
+
+            <button
+                class="share-option share-x"
+                onclick="partilharX()"
+            >
+                𝕏 X
+            </button>
+
+            <button
+                class="share-option share-copy"
+                onclick="copiarLinkNoticia()"
+            >
+                🔗 Copiar link
+            </button>
+
+            <button
+                id="share-native-btn"
+                class="share-option share-native"
+                onclick="partilharNativamente()"
+            >
+                📱 Partilhar
+            </button>
+
+        </div>
+
+        <div
+            id="share-url"
+            class="share-url-box"
+        ></div>
+
+        <button
+            class="share-close-btn"
+            onclick="fecharPartilha()"
+        >
+            Fechar
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="https://unpkg.com/turndown/dist/turndown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+
+
+<script>
+
+const NOTICIAS_POR_PAGINA = 10;
+
+let noticias = [];
+let noticiasFiltradas = [];
+let paginaAtual = 1;
+
+let noticiaEmEdicao = null;
+let quill = null;
+
+let noticiaParaPartilhar = {
+    titulo: "",
+    url: ""
+};
 
 
 // ============================================================
 // AUTENTICAÇÃO
 // ============================================================
 
-async function getSigningKey(password) {
-  const encoder = new TextEncoder();
+async function entrar() {
 
-  return crypto.subtle.importKey(
-    "raw",
-    encoder.encode(password),
-    {
-      name: "HMAC",
-      hash: "SHA-256"
-    },
-    false,
-    ["sign", "verify"]
-  );
-}
-
-async function createSession(password) {
-  const timestamp = Math.floor(Date.now() / 1000);
-
-  const payload = `${timestamp}`;
-
-  const key = await getSigningKey(password);
-
-  const signature = await crypto.subtle.sign(
-    "HMAC",
-    key,
-    new TextEncoder().encode(payload)
-  );
-
-  return `${payload}.${base64UrlEncode(new Uint8Array(signature))}`;
-}
-
-async function verifySession(request, password) {
-  const session = getCookie(
-    request,
-    SESSION_COOKIE_NAME
-  );
-
-  if (!session) {
-    return false;
-  }
-
-  const parts = session.split(".");
-
-  if (parts.length !== 2) {
-    return false;
-  }
-
-  const timestamp = Number(parts[0]);
-  const signature = parts[1];
-
-  if (!Number.isFinite(timestamp) || !signature) {
-    return false;
-  }
-
-  const now = Math.floor(Date.now() / 1000);
-
-  if (
-    now - timestamp < 0 ||
-    now - timestamp > SESSION_MAX_AGE
-  ) {
-    return false;
-  }
-
-  try {
-    const key = await getSigningKey(password);
-
-    return await crypto.subtle.verify(
-      "HMAC",
-      key,
-      base64UrlDecode(signature),
-      new TextEncoder().encode(parts[0])
-    );
-  } catch {
-    return false;
-  }
-}
-
-function sessionCookie(value) {
-  return [
-    `${SESSION_COOKIE_NAME}=${encodeURIComponent(value)}`,
-    "Path=/",
-    "HttpOnly",
-    "Secure",
-    "SameSite=Strict",
-    `Max-Age=${SESSION_MAX_AGE}`
-  ].join("; ");
-}
-
-function clearSessionCookie() {
-  return [
-    `${SESSION_COOKIE_NAME}=`,
-    "Path=/",
-    "HttpOnly",
-    "Secure",
-    "SameSite=Strict",
-    "Max-Age=0",
-    "Expires=Thu, 01 Jan 1970 00:00:00 GMT"
-  ].join("; ");
-}
-
-async function requireAuth(request, env) {
-  if (!env.ADMIN_PASSWORD) {
-    return json(
-      {
-        error: "ADMIN_PASSWORD não está configurada no Cloudflare.",
-        message: "ADMIN_PASSWORD não está configurada no Cloudflare."
-      },
-      500
-    );
-  }
-
-  const authenticated = await verifySession(
-    request,
-    env.ADMIN_PASSWORD
-  );
-
-  if (!authenticated) {
-    return json(
-      {
-        error: "Não autenticado.",
-        message: "Não autenticado."
-      },
-      401
-    );
-  }
-
-  return null;
-}
-
-
-// ============================================================
-// GITHUB
-// ============================================================
-
-async function githubRequest(env, path, options = {}) {
-  const token = env.GITHUB_TOKEN;
-
-  if (!token) {
-    throw new Error(
-      "GITHUB_TOKEN não está configurado no Cloudflare."
-    );
-  }
-
-  const headers = {
-  "Authorization": `Bearer ${token}`,
-  "Accept": "application/vnd.github+json",
-  "X-GitHub-Api-Version": "2022-11-28",
-  "User-Agent": "ChutaPraCanto",
-  ...options.headers
-};
-
-  return fetch(`${GITHUB_API}${path}`, {
-    ...options,
-    headers
-  });
-}
-
-
-// ============================================================
-// SEGURANÇA DOS CAMINHOS
-// ============================================================
-
-function isAllowedNewsPath(path) {
-  if (
-    typeof path !== "string" ||
-    !path ||
-    path.includes("..") ||
-    path.includes("\\") ||
-    path.startsWith("/")
-  ) {
-    return false;
-  }
-
-  return /^content\/noticias\/[^/]+\.md$/i.test(path);
-}
-
-function isAllowedImagePath(path) {
-  if (
-    typeof path !== "string" ||
-    !path ||
-    path.includes("..") ||
-    path.includes("\\") ||
-    path.startsWith("/")
-  ) {
-    return false;
-  }
-
-  return /^images\/uploads\/[^/]+$/i.test(path);
-}
-
-
-// ============================================================
-// API ADMIN
-// ============================================================
-
-async function handleAdminAPI(request, env) {
-  const url = new URL(request.url);
-  const pathname = url.pathname;
-
-
-  // ----------------------------------------------------------
-  // LOGIN
-  // ----------------------------------------------------------
-
-  if (pathname === "/api/admin/login") {
-    if (request.method !== "POST") {
-      return json(
-        {
-          error: "Método não permitido.",
-          message: "Método não permitido."
-        },
-        405
-      );
-    }
-
-    if (!env.ADMIN_PASSWORD) {
-      return json(
-        {
-          error: "ADMIN_PASSWORD não está configurada.",
-          message: "ADMIN_PASSWORD não está configurada."
-        },
-        500
-      );
-    }
-
-    let body;
-
-    try {
-      body = await request.json();
-    } catch {
-      return json(
-        {
-          error: "Pedido inválido.",
-          message: "Pedido inválido."
-        },
-        400
-      );
-    }
+    const passwordInput =
+        document.getElementById("admin-password");
 
     const password =
-      typeof body.password === "string"
-        ? body.password
-        : "";
+        passwordInput.value.trim();
 
-    if (
-      !password ||
-      password !== env.ADMIN_PASSWORD
-    ) {
-      return json(
-        {
-          error: "Palavra-passe incorreta.",
-          message: "Palavra-passe incorreta."
-        },
-        401
-      );
-    }
+    if (!password) {
 
-    const session =
-      await createSession(env.ADMIN_PASSWORD);
-
-    return json(
-      {
-        ok: true
-      },
-      200,
-      {
-        "Set-Cookie": sessionCookie(session)
-      }
-    );
-  }
-
-
-  // ----------------------------------------------------------
-  // LOGOUT
-  // ----------------------------------------------------------
-
-  if (pathname === "/api/admin/logout") {
-    if (request.method !== "POST") {
-      return json(
-        {
-          error: "Método não permitido.",
-          message: "Método não permitido."
-        },
-        405
-      );
-    }
-
-    return json(
-      {
-        ok: true
-      },
-      200,
-      {
-        "Set-Cookie": clearSessionCookie()
-      }
-    );
-  }
-
-
-  // ----------------------------------------------------------
-  // VERIFICAR SESSÃO
-  // ----------------------------------------------------------
-
-  if (pathname === "/api/admin/session") {
-    if (request.method !== "GET") {
-      return json(
-        {
-          error: "Método não permitido.",
-          message: "Método não permitido."
-        },
-        405
-      );
-    }
-
-    const authError =
-      await requireAuth(request, env);
-
-    if (authError) {
-      return authError;
-    }
-
-    return json({
-      authenticated: true
-    });
-  }
-
-
-  // ----------------------------------------------------------
-  // RESTANTES ROTAS ADMIN
-  // ----------------------------------------------------------
-
-  if (!pathname.startsWith("/api/admin/")) {
-    return null;
-  }
-
-  const authError =
-    await requireAuth(request, env);
-
-  if (authError) {
-    return authError;
-  }
-
-
-  // ----------------------------------------------------------
-  // LISTAR NOTÍCIAS
-  // ----------------------------------------------------------
-
-  if (pathname === "/api/admin/news/list") {
-    if (request.method !== "GET") {
-      return json(
-        {
-          error: "Método não permitido.",
-          message: "Método não permitido."
-        },
-        405
-      );
-    }
-
-    const pageValue =
-      Number(
-        url.searchParams.get("page") || "1"
-      );
-
-    const page =
-      Number.isFinite(pageValue) && pageValue >= 1
-        ? Math.floor(pageValue)
-        : 1;
-
-    const perPage = 100;
-
-    const githubResponse =
-      await githubRequest(
-        env,
-        `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/content/noticias?ref=${encodeURIComponent(GITHUB_BRANCH)}&per_page=${perPage}&page=${page}`,
-        {
-          method: "GET"
-        }
-      );
-
-    const responseText =
-      await githubResponse.text();
-
-    let data;
-
-    try {
-      data = JSON.parse(responseText);
-    } catch {
-      data = {
-        error: responseText || "Resposta inválida do GitHub."
-      };
-    }
-
-    return json(
-      data,
-      githubResponse.status
-    );
-  }
-
-
-  // ----------------------------------------------------------
-  // NOTÍCIAS: LER / EDITAR / APAGAR
-  // ----------------------------------------------------------
-
-  if (pathname === "/api/admin/news") {
-    const path =
-      url.searchParams.get("path");
-
-    if (!isAllowedNewsPath(path)) {
-      return json(
-        {
-          error: "Caminho de notícia não permitido.",
-          message: "Caminho de notícia não permitido."
-        },
-        400
-      );
-    }
-
-    if (
-      !["GET", "PUT", "DELETE"].includes(
-        request.method
-      )
-    ) {
-      return json(
-        {
-          error: "Método não permitido.",
-          message: "Método não permitido."
-        },
-        405
-      );
-    }
-
-    const githubPath =
-      `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`;
-
-
-    // GET
-    if (request.method === "GET") {
-      const githubResponse =
-        await githubRequest(
-          env,
-          `${githubPath}?ref=${encodeURIComponent(GITHUB_BRANCH)}`,
-          {
-            method: "GET"
-          }
+        mostrarLoginStatus(
+            "Introduz a palavra-passe.",
+            false
         );
 
-      const responseText =
-        await githubResponse.text();
-
-      let data;
-
-      try {
-        data = JSON.parse(responseText);
-      } catch {
-        data = {
-          error:
-            responseText ||
-            "Resposta inválida do GitHub."
-        };
-      }
-
-      return json(
-        data,
-        githubResponse.status
-      );
+        return;
     }
 
-
-    // PUT / DELETE
-    const body =
-      await request.text();
-
-    const githubResponse =
-      await githubRequest(
-        env,
-        githubPath,
-        {
-          method: request.method,
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
-          body
-        }
-      );
-
-    const responseText =
-      await githubResponse.text();
-
-    let data;
-
-    try {
-      data = JSON.parse(responseText);
-    } catch {
-      data = {
-        error:
-          responseText ||
-          "Resposta inválida do GitHub."
-      };
-    }
-
-    return json(
-      data,
-      githubResponse.status
-    );
-  }
-
-
-  // ----------------------------------------------------------
-  // IMAGENS: LER / ENVIAR / APAGAR
-  // ----------------------------------------------------------
-
-  if (pathname === "/api/admin/image") {
-    const path =
-      url.searchParams.get("path");
-
-    if (!isAllowedImagePath(path)) {
-      return json(
-        {
-          error: "Caminho de imagem não permitido.",
-          message: "Caminho de imagem não permitido."
-        },
-        400
-      );
-    }
-
-    if (
-      !["GET", "PUT", "DELETE"].includes(
-        request.method
-      )
-    ) {
-      return json(
-        {
-          error: "Método não permitido.",
-          message: "Método não permitido."
-        },
-        405
-      );
-    }
-
-    const githubPath =
-      `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`;
-
-
-    // GET
-    if (request.method === "GET") {
-      const githubResponse =
-        await githubRequest(
-          env,
-          `${githubPath}?ref=${encodeURIComponent(GITHUB_BRANCH)}`,
-          {
-            method: "GET"
-          }
+    const button =
+        document.querySelector(
+            "#login-screen .main-btn"
         );
 
-      const responseText =
-        await githubResponse.text();
-
-      let data;
-
-      try {
-        data = JSON.parse(responseText);
-      } catch {
-        data = {
-          error:
-            responseText ||
-            "Resposta inválida do GitHub."
-        };
-      }
-
-      return json(
-        data,
-        githubResponse.status
-      );
-    }
-
-
-    // PUT / DELETE
-    const body =
-      await request.text();
-
-    const githubResponse =
-      await githubRequest(
-        env,
-        githubPath,
-        {
-          method: request.method,
-          headers: {
-            "Content-Type":
-              "application/json"
-          },
-          body
-        }
-      );
-
-    const responseText =
-      await githubResponse.text();
-
-    let data;
+    button.disabled = true;
+    button.innerText = "A entrar...";
 
     try {
-      data = JSON.parse(responseText);
-    } catch {
-      data = {
-        error:
-          responseText ||
-          "Resposta inválida do GitHub."
-      };
+
+        const response =
+            await fetch(
+                "/api/admin/login",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        password
+                    })
+                }
+            );
+
+        if (!response.ok) {
+
+            let mensagem =
+                "Palavra-passe incorreta.";
+
+            try {
+
+                const data =
+                    await response.json();
+
+                mensagem =
+                    data?.message ||
+                    data?.error ||
+                    mensagem;
+
+            } catch (e) {}
+
+            throw new Error(mensagem);
+        }
+
+        passwordInput.value = "";
+
+        mostrarAdmin();
+
+    } catch (error) {
+
+        mostrarLoginStatus(
+            error?.message ||
+            "Não foi possível iniciar sessão.",
+            false
+        );
+
+    } finally {
+
+        button.disabled = false;
+        button.innerText = "Entrar";
     }
-
-    return json(
-      data,
-      githubResponse.status
-    );
-  }
+}
 
 
-  // ----------------------------------------------------------
-  // ENDPOINT DESCONHECIDO
-  // ----------------------------------------------------------
+async function verificarSessao() {
 
-  return json(
-    {
-      error: "Endpoint não encontrado.",
-      message: "Endpoint não encontrado."
-    },
-    404
-  );
+    try {
+
+        const response =
+            await fetch(
+                "/api/admin/session",
+                {
+                    method: "GET",
+                    credentials: "same-origin"
+                }
+            );
+
+        return response.ok;
+
+    } catch (error) {
+
+        return false;
+    }
+}
+
+
+async function terminarSessao() {
+
+    try {
+
+        await fetch(
+            "/api/admin/logout",
+            {
+                method: "POST",
+                credentials: "same-origin"
+            }
+        );
+
+    } catch (error) {}
+
+    location.reload();
+}
+
+
+function mostrarAdmin() {
+
+    document
+        .getElementById("login-screen")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("admin-screen")
+        .classList
+        .remove("hidden");
+
+    iniciarEditor();
+
+    carregarNoticias();
+}
+
+
+function mostrarLoginStatus(
+    mensagem,
+    sucesso
+) {
+
+    const element =
+        document.getElementById(
+            "login-status"
+        );
+
+    element.innerText =
+        mensagem;
+
+    element.style.display =
+        "block";
+
+    if (sucesso) {
+
+        element.style.background =
+            "#dcfce7";
+
+        element.style.color =
+            "#166534";
+
+    } else {
+
+        element.style.background =
+            "#fee2e2";
+
+        element.style.color =
+            "#991b1b";
+    }
 }
 
 
 // ============================================================
-// WORKER PRINCIPAL
+// API DO WORKER
 // ============================================================
 
-export default {
-  async fetch(request, env) {
-    const url =
-      new URL(request.url);
+async function apiFetch(
+    endpoint,
+    options = {}
+) {
+
+    let response;
 
     try {
-      if (
-        url.pathname.startsWith(
-          "/api/admin/"
-        )
-      ) {
-        const response =
-          await handleAdminAPI(
-            request,
-            env
-          );
 
-        if (response) {
-          return response;
+        response =
+            await fetch(
+                endpoint,
+                {
+                    ...options,
+                    credentials: "same-origin",
+                    headers: {
+                        ...(options.headers || {})
+                    }
+                }
+            );
+
+    } catch (networkError) {
+
+        throw new Error(
+            networkError?.message ||
+            "Não foi possível contactar o servidor."
+        );
+    }
+
+    if (
+        response.status === 401
+    ) {
+
+        location.reload();
+
+        throw new Error(
+            "Sessão expirada."
+        );
+    }
+
+    if (!response.ok) {
+
+        let mensagem =
+            `Erro HTTP ${response.status}`;
+
+        try {
+
+            const contentType =
+                response.headers.get(
+                    "content-type"
+                ) || "";
+
+            if (
+                contentType.includes(
+                    "application/json"
+                )
+            ) {
+
+                const data =
+                    await response.json();
+
+                mensagem =
+                    data?.message ||
+                    data?.error ||
+                    data?.details ||
+                    mensagem;
+
+            } else {
+
+                const text =
+                    await response.text();
+
+                if (text && text.trim()) {
+
+                    mensagem =
+                        text.trim();
+                }
+            }
+
+        } catch (parseError) {}
+
+        throw new Error(
+            mensagem ||
+            `Erro HTTP ${response.status}`
+        );
+    }
+
+    return response;
+}
+
+
+// ============================================================
+// QUILL
+// ============================================================
+
+function iniciarEditor() {
+
+    if (quill) return;
+
+    quill =
+        new Quill(
+            "#editor-container",
+            {
+                theme: "snow",
+
+                placeholder:
+                    "Escreve ou cola aqui o texto da notícia...",
+
+                modules: {
+
+                    toolbar: [
+
+                        [
+                            "bold",
+                            "italic",
+                            "underline"
+                        ],
+
+                        [
+                            {
+                                header: [3, false]
+                            }
+                        ],
+
+                        [
+                            "blockquote"
+                        ],
+
+                        [
+                            {
+                                list: "bullet"
+                            },
+                            {
+                                list: "ordered"
+                            }
+                        ],
+
+                        [
+                            "clean"
+                        ]
+                    ]
+                }
+            }
+        );
+
+    /*
+     * Quando o utilizador cola Markdown diretamente
+     * do Gemini, tentamos reconhecer listas Markdown
+     * no texto colado antes de o Quill o interpretar.
+     *
+     * Isto permite preservar:
+     *
+     * - item
+     * - item
+     *
+     * como lista com pontos.
+     *
+     * E:
+     *
+     * 1. item
+     * 2. item
+     *
+     * como lista numerada.
+     */
+
+    quill.root.addEventListener(
+        "paste",
+        function(event) {
+
+            const clipboard =
+                event.clipboardData ||
+                window.clipboardData;
+
+            if (!clipboard) {
+                return;
+            }
+
+            const texto =
+                clipboard.getData("text/plain");
+
+            if (!texto) {
+                return;
+            }
+
+            const temListaMarkdown =
+                /(^|\n)[ \t]*[-*+][ \t]+\S/.test(texto) ||
+                /(^|\n)[ \t]*\d+\.[ \t]+\S/.test(texto);
+
+            if (!temListaMarkdown) {
+                return;
+            }
+
+            event.preventDefault();
+
+            const html =
+                markdownSimplesParaHtml(
+                    texto
+                );
+
+            const range =
+                quill.getSelection(true);
+
+            quill.clipboard.dangerouslyPasteHTML(
+                range
+                    ? range.index
+                    : quill.getLength(),
+                html,
+                "user"
+            );
         }
-      }
+    );
+}
 
-      return env.ASSETS.fetch(request);
+
+// ============================================================
+// LISTA DE NOTÍCIAS
+// ============================================================
+
+async function carregarNoticias() {
+
+    const container =
+        document.getElementById(
+            "news-list"
+        );
+
+    const pagination =
+        document.getElementById(
+            "pagination"
+        );
+
+    container.innerHTML =
+        '<div class="loading">A carregar notícias...</div>';
+
+    pagination.innerHTML = "";
+
+    try {
+
+        const response =
+            await apiFetch(
+                "/api/admin/news/list"
+            );
+
+        const data =
+            await response.json();
+
+        let lista =
+            Array.isArray(data)
+                ? data
+                : (
+                    Array.isArray(data.noticias)
+                        ? data.noticias
+                        : []
+                );
+
+        /*
+         * O endpoint de listagem devolve principalmente
+         * os ficheiros. O frontmatter (date, title, etc.)
+         * só está disponível quando abrimos o conteúdo
+         * da notícia.
+         *
+         * Por isso enriquecemos cada item com os dados
+         * reais do Markdown antes de ordenar.
+         */
+
+        noticias =
+            await enriquecerNoticiasComFrontmatter(
+                lista
+            );
+
+        noticias.sort(
+            (a, b) => {
+
+                const timestampA =
+                    obterTimestampNoticia(a);
+
+                const timestampB =
+                    obterTimestampNoticia(b);
+
+                if (
+                    timestampA !== null &&
+                    timestampB !== null
+                ) {
+
+                    if (
+                        timestampB !== timestampA
+                    ) {
+
+                        return (
+                            timestampB -
+                            timestampA
+                        );
+                    }
+                }
+
+                if (
+                    timestampA !== null
+                ) {
+                    return -1;
+                }
+
+                if (
+                    timestampB !== null
+                ) {
+                    return 1;
+                }
+
+                return String(
+                    b.name || ""
+                ).localeCompare(
+                    String(a.name || ""),
+                    "pt"
+                );
+            }
+        );
+
+        noticiasFiltradas =
+            [...noticias];
+
+        paginaAtual = 1;
+
+        mostrarLista(
+            noticiasFiltradas
+        );
 
     } catch (error) {
-      console.error(
-        "Worker error:",
-        error
-      );
 
-      return json(
-        {
-          error:
-            error instanceof Error
-              ? error.message
-              : "Erro interno do Worker.",
-          message:
-            error instanceof Error
-              ? error.message
-              : "Erro interno do Worker."
-        },
-        500
-      );
+        container.innerHTML = `
+
+            <div class="loading">
+
+                Não foi possível carregar as notícias.
+
+                <br><br>
+
+                ${escaparHtml(
+                    error?.message ||
+                    "Erro desconhecido."
+                )}
+
+            </div>
+        `;
     }
-  }
-};
+}
+
+
+// ============================================================
+// ENRIQUECER NOTÍCIAS COM FRONTMATTER
+// ============================================================
+
+async function enriquecerNoticiasComFrontmatter(
+    lista
+) {
+
+    if (!Array.isArray(lista) || !lista.length) {
+        return [];
+    }
+
+    const resultados =
+        await Promise.all(
+            lista.map(
+                async noticia => {
+
+                    const item =
+                        {
+                            ...noticia
+                        };
+
+                    if (!item.path) {
+                        return item;
+                    }
+
+                    try {
+
+                        const response =
+                            await apiFetch(
+                                `/api/admin/news?path=${encodeURIComponent(item.path)}`
+                            );
+
+                        const data =
+                            await response.json();
+
+                        if (
+                            data &&
+                            data.content
+                        ) {
+
+                            const markdown =
+                                decodeBase64(
+                                    data.content
+                                );
+
+                            const parsed =
+                                separarFrontmatter(
+                                    markdown
+                                );
+
+                            const fields =
+                                parsed.fields;
+
+                            item.titulo =
+                                obterCampo(
+                                    fields,
+                                    "title"
+                                ) ||
+                                item.titulo ||
+                                "";
+
+                            item.subtitulo =
+                                obterCampo(
+                                    fields,
+                                    "subtitulo",
+                                    "subtitle",
+                                    "descricao",
+                                    "resumo"
+                                ) ||
+                                item.subtitulo ||
+                                "";
+
+                            item.categoria =
+                                obterCampo(
+                                    fields,
+                                    "categoria",
+                                    "category",
+                                    "tag"
+                                ) ||
+                                item.categoria ||
+                                "";
+
+                            item.dataNoticia =
+                                obterCampo(
+                                    fields,
+                                    "date",
+                                    "published",
+                                    "dataNoticia",
+                                    "data"
+                                ) ||
+                                item.dataNoticia ||
+                                "";
+
+                            item.autor =
+                                obterCampo(
+                                    fields,
+                                    "author",
+                                    "autor"
+                                ) ||
+                                item.autor ||
+                                "";
+
+                            item.imagem =
+                                obterCampo(
+                                    fields,
+                                    "imagem",
+                                    "image",
+                                    "featured_image",
+                                    "featuredImage"
+                                ) ||
+                                item.imagem ||
+                                "";
+
+                            /*
+                             * Guardamos também o SHA mais recente
+                             * se o endpoint o devolver.
+                             */
+                            if (data.sha) {
+                                item.sha = data.sha;
+                            }
+                        }
+
+                    } catch (error) {
+
+                        /*
+                         * Se uma notícia individual falhar,
+                         * não impedimos as restantes de aparecer.
+                         */
+                    }
+
+                    return item;
+                }
+            )
+        );
+
+    return resultados;
+}
+
+
+// ============================================================
+// DATA DA NOTÍCIA
+// ============================================================
+
+function obterDataNoticia(
+    noticia
+) {
+
+    if (!noticia) {
+        return "";
+    }
+
+    return (
+        noticia.dataNoticia ||
+        noticia.date ||
+        noticia.published ||
+        noticia.data ||
+        ""
+    );
+}
+
+
+function obterTimestampNoticia(
+    noticia
+) {
+
+    const valor =
+        obterDataNoticia(
+            noticia
+        );
+
+    if (!valor) {
+        return null;
+    }
+
+    const texto =
+        String(valor).trim();
+
+    if (!texto) {
+        return null;
+    }
+
+    const match =
+        texto.match(
+            /^(\d{4})-(\d{2})-(\d{2})(?:[T\s].*)?$/
+        );
+
+    if (match) {
+
+        const ano =
+            Number(match[1]);
+
+        const mes =
+            Number(match[2]) - 1;
+
+        const dia =
+            Number(match[3]);
+
+        const timestamp =
+            new Date(
+                ano,
+                mes,
+                dia
+            ).getTime();
+
+        if (
+            !Number.isNaN(timestamp)
+        ) {
+
+            return timestamp;
+        }
+    }
+
+    const timestamp =
+        Date.parse(
+            texto
+        );
+
+    if (
+        !Number.isNaN(timestamp)
+    ) {
+
+        return timestamp;
+    }
+
+    return null;
+}
+
+
+function formatarDataNoticia(
+    noticia
+) {
+
+    const valor =
+        obterDataNoticia(
+            noticia
+        );
+
+    if (!valor) {
+        return "📅 Sem data";
+    }
+
+    const texto =
+        String(valor).trim();
+
+    const match =
+        texto.match(
+            /^(\d{4})-(\d{2})-(\d{2})/
+        );
+
+    if (match) {
+
+        return (
+            "📅 " +
+            match[1] +
+            "-" +
+            match[2] +
+            "-" +
+            match[3]
+        );
+    }
+
+    const timestamp =
+        Date.parse(
+            texto
+        );
+
+    if (
+        !Number.isNaN(timestamp)
+    ) {
+
+        const data =
+            new Date(
+                timestamp
+            );
+
+        const ano =
+            data.getFullYear();
+
+        const mes =
+            String(
+                data.getMonth() + 1
+            ).padStart(
+                2,
+                "0"
+            );
+
+        const dia =
+            String(
+                data.getDate()
+            ).padStart(
+                2,
+                "0"
+            );
+
+        return (
+            "📅 " +
+            ano +
+            "-" +
+            mes +
+            "-" +
+            dia
+        );
+    }
+
+    return (
+        "📅 " +
+        texto
+    );
+}
+
+
+// ============================================================
+// MOSTRAR LISTA
+// ============================================================
+
+function mostrarLista(lista) {
+
+    const container =
+        document.getElementById(
+            "news-list"
+        );
+
+    const pagination =
+        document.getElementById(
+            "pagination"
+        );
+
+    if (!lista.length) {
+
+        container.innerHTML = `
+
+            <div class="loading">
+                Não existem notícias.
+            </div>
+
+        `;
+
+        pagination.innerHTML = "";
+
+        return;
+    }
+
+    const totalPaginas =
+        Math.ceil(
+            lista.length /
+            NOTICIAS_POR_PAGINA
+        );
+
+    if (
+        paginaAtual > totalPaginas
+    ) {
+        paginaAtual =
+            totalPaginas;
+    }
+
+    const inicio =
+        (paginaAtual - 1) *
+        NOTICIAS_POR_PAGINA;
+
+    const fim =
+        inicio +
+        NOTICIAS_POR_PAGINA;
+
+    const noticiasDaPagina =
+        lista.slice(
+            inicio,
+            fim
+        );
+
+    container.innerHTML =
+        noticiasDaPagina
+            .map(file => {
+
+                const titulo =
+                    file.titulo ||
+                    slugParaTitulo(
+                        file.name || ""
+                    );
+
+                const categoria =
+                    file.categoria ||
+                    file.category ||
+                    "";
+
+                const imagem =
+                    normalizarUrlImagem(
+                        file.imagem ||
+                        file.image ||
+                        file.featured_image ||
+                        file.featuredImage ||
+                        ""
+                    );
+
+                const path =
+                    file.path || "";
+
+                const sha =
+                    file.sha || "";
+
+                const dataFormatada =
+                    formatarDataNoticia(
+                        file
+                    );
+
+                const imagemHtml =
+                    imagem
+                        ? `
+                            <div class="news-thumb">
+                                <img
+                                    src="${escaparHtml(imagem)}"
+                                    alt=""
+                                    onerror="this.parentElement.innerHTML='<div class=&quot;news-thumb-placeholder&quot;>📰</div>'"
+                                >
+                            </div>
+                        `
+                        : `
+                            <div class="news-thumb">
+                                <div class="news-thumb-placeholder">
+                                    📰
+                                </div>
+                            </div>
+                        `;
+
+                return `
+
+                    <div class="news-item">
+
+                        ${imagemHtml}
+
+                        <div class="news-info">
+
+                            <div class="news-title">
+                                ${escaparHtml(titulo)}
+                            </div>
+
+                            <div class="news-meta">
+
+                                ${
+                                    categoria
+                                        ? `
+                                            <span class="news-category">
+                                                ${escaparHtml(categoria)}
+                                            </span>
+                                        `
+                                        : ""
+                                }
+
+                                <span class="news-date">
+                                    ${escaparHtml(dataFormatada)}
+                                </span>
+
+                                ${
+                                    file.autor ||
+                                    file.author
+                                        ? `
+                                            <span class="news-author">
+                                                ✍️ ${escaparHtml(
+                                                    file.autor ||
+                                                    file.author
+                                                )}
+                                            </span>
+                                        `
+                                        : ""
+                                }
+
+                            </div>
+
+                            <div class="news-file">
+                                ${escaparHtml(file.name || "")}
+                            </div>
+
+                        </div>
+
+                        <div class="news-actions">
+
+                            <button
+                                class="preview-btn"
+                                onclick="previsualizarDaLista('${escaparJs(path)}')"
+                            >
+                                👁️ Ver
+                            </button>
+
+                            <button
+                                class="share-btn"
+                                onclick="abrirPartilha('${escaparJs(path)}', '${escaparJs(titulo)}')"
+                            >
+                                📤 Partilhar
+                            </button>
+
+                            <button
+                                class="edit-btn"
+                                onclick="editarNoticia('${escaparJs(path)}')"
+                            >
+                                ✏️ Editar
+                            </button>
+
+                            <button
+                                class="delete-list-btn"
+                                onclick="apagarDaLista('${escaparJs(path)}', '${escaparJs(sha)}', '${escaparJs(titulo)}')"
+                            >
+                                🗑️ Apagar
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                `;
+            })
+            .join("");
+
+    mostrarPaginacao(
+        totalPaginas,
+        lista.length
+    );
+}
+
+
+// ============================================================
+// PAGINAÇÃO
+// ============================================================
+
+function mostrarPaginacao(
+    totalPaginas,
+    totalResultados
+) {
+
+    const pagination =
+        document.getElementById(
+            "pagination"
+        );
+
+    if (
+        totalPaginas <= 1
+    ) {
+
+        pagination.innerHTML = `
+            <div class="page-info">
+                ${totalResultados}
+                notícia${totalResultados === 1 ? "" : "s"}
+            </div>
+        `;
+
+        return;
+    }
+
+    let html = "";
+
+    html += `
+
+        <button
+            class="page-btn"
+            onclick="mudarPagina(${paginaAtual - 1})"
+            ${paginaAtual === 1 ? "disabled" : ""}
+        >
+            ←
+        </button>
+
+    `;
+
+    for (
+        let i = 1;
+        i <= totalPaginas;
+        i++
+    ) {
+
+        html += `
+
+            <button
+                class="page-btn ${i === paginaAtual ? "active" : ""}"
+                onclick="mudarPagina(${i})"
+            >
+                ${i}
+            </button>
+
+        `;
+    }
+
+    html += `
+
+        <span class="page-info">
+            ${totalResultados} notícias
+        </span>
+
+    `;
+
+    html += `
+
+        <button
+            class="page-btn"
+            onclick="mudarPagina(${paginaAtual + 1})"
+            ${paginaAtual === totalPaginas ? "disabled" : ""}
+        >
+            →
+        </button>
+
+    `;
+
+    pagination.innerHTML =
+        html;
+}
+
+
+function mudarPagina(numero) {
+
+    const totalPaginas =
+        Math.ceil(
+            noticiasFiltradas.length /
+            NOTICIAS_POR_PAGINA
+        );
+
+    if (
+        numero < 1 ||
+        numero > totalPaginas
+    ) {
+        return;
+    }
+
+    paginaAtual =
+        numero;
+
+    mostrarLista(
+        noticiasFiltradas
+    );
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+// ============================================================
+// PESQUISA
+// ============================================================
+
+function filtrarLista() {
+
+    const termo =
+        document
+            .getElementById(
+                "search-news"
+            )
+            .value
+            .trim()
+            .toLowerCase();
+
+    if (!termo) {
+
+        noticiasFiltradas =
+            [...noticias];
+
+        paginaAtual = 1;
+
+        mostrarLista(
+            noticiasFiltradas
+        );
+
+        return;
+    }
+
+    noticiasFiltradas =
+        noticias.filter(
+            file => {
+
+                const titulo =
+                    (
+                        file.titulo ||
+                        ""
+                    ).toLowerCase();
+
+                const categoria =
+                    (
+                        file.categoria ||
+                        file.category ||
+                        ""
+                    ).toLowerCase();
+
+                const autor =
+                    (
+                        file.autor ||
+                        file.author ||
+                        ""
+                    ).toLowerCase();
+
+                const subtitulo =
+                    (
+                        file.subtitulo ||
+                        file.subtitle ||
+                        ""
+                    ).toLowerCase();
+
+                const nomeFicheiro =
+                    (
+                        file.name ||
+                        ""
+                    ).toLowerCase();
+
+                return (
+                    titulo.includes(termo) ||
+                    categoria.includes(termo) ||
+                    autor.includes(termo) ||
+                    subtitulo.includes(termo) ||
+                    nomeFicheiro.includes(termo)
+                );
+            }
+        );
+
+    paginaAtual = 1;
+
+    mostrarLista(
+        noticiasFiltradas
+    );
+}
+
+
+function slugParaTitulo(filename) {
+
+    return filename
+        .replace(/\.md$/i, "")
+        .replace(/[-_]+/g, " ")
+        .replace(/\b\w/g, letra =>
+            letra.toUpperCase()
+        );
+}
+
+
+// ============================================================
+// NOVA NOTÍCIA
+// ============================================================
+
+function novaNoticia() {
+
+    noticiaEmEdicao = null;
+
+    limparFormulario();
+
+    document
+        .getElementById("form-title")
+        .innerText =
+            "Nova Notícia";
+
+    document
+        .getElementById("mode-label")
+        .innerText =
+            "Criar uma nova notícia";
+
+    document
+        .getElementById("save-button-text")
+        .innerText =
+            "Publicar Notícia";
+
+    document
+        .getElementById("delete-button")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("list-screen")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("form-screen")
+        .classList
+        .remove("hidden");
+
+    document
+        .getElementById("noticia-data")
+        .valueAsDate =
+            new Date();
+
+    iniciarEditor();
+}
+
+
+// ============================================================
+// EDITAR NOTÍCIA
+// ============================================================
+
+async function editarNoticia(path) {
+
+    try {
+
+        document
+            .getElementById("list-screen")
+            .classList
+            .add("hidden");
+
+        document
+            .getElementById("form-screen")
+            .classList
+            .remove("hidden");
+
+        document
+            .getElementById("form-title")
+            .innerText =
+            "A carregar notícia...";
+
+        iniciarEditor();
+
+        const data =
+            await obterNoticiaAtual(
+                path
+            );
+
+        const markdown =
+            decodeBase64(
+                data.content
+            );
+
+        noticiaEmEdicao = {
+
+            path: path,
+
+            sha:
+                data.sha
+        };
+
+        preencherFormulario(
+            markdown
+        );
+
+        document
+            .getElementById("form-title")
+            .innerText =
+            "Editar Notícia";
+
+        document
+            .getElementById("mode-label")
+            .innerText =
+            "A editar: " +
+            path.split("/").pop();
+
+        document
+            .getElementById("save-button-text")
+            .innerText =
+            "Guardar Alterações";
+
+        document
+            .getElementById("delete-button")
+            .classList
+            .remove("hidden");
+
+    } catch (error) {
+
+        alert(
+            "Não foi possível abrir a notícia:\n\n" +
+            (
+                error?.message ||
+                "Erro desconhecido."
+            )
+        );
+
+        voltarLista();
+    }
+}
+
+
+// ============================================================
+// OBTER VERSÃO ATUAL DE UMA NOTÍCIA
+// ============================================================
+
+async function obterNoticiaAtual(
+    path
+) {
+
+    const response =
+        await apiFetch(
+            `/api/admin/news?path=${encodeURIComponent(path)}`
+        );
+
+    const data =
+        await response.json();
+
+    if (!data || !data.sha) {
+
+        throw new Error(
+            "O GitHub não devolveu o SHA atual da notícia."
+        );
+    }
+
+    return data;
+}
+
+
+// ============================================================
+// PARSER FRONTMATTER
+// ============================================================
+
+function separarFrontmatter(markdown) {
+
+    const match =
+        markdown.match(
+            /^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/
+        );
+
+    if (!match) {
+
+        return {
+            fields: {},
+            body: markdown
+        };
+    }
+
+    const frontmatter =
+        match[1];
+
+    const body =
+        match[2];
+
+    const fields = {};
+
+    frontmatter
+        .split("\n")
+        .forEach(line => {
+
+            const matchLine =
+                line.match(
+                    /^([A-Za-z_]+):\s*(.*)$/
+                );
+
+            if (!matchLine) return;
+
+            const key =
+                matchLine[1];
+
+            let value =
+                matchLine[2].trim();
+
+            if (
+                value.startsWith('"') &&
+                value.endsWith('"')
+            ) {
+
+                try {
+
+                    value =
+                        JSON.parse(
+                            value
+                        );
+
+                } catch (e) {
+
+                    value =
+                        value.slice(1, -1);
+                }
+            }
+
+            if (
+                value.startsWith("'") &&
+                value.endsWith("'")
+            ) {
+
+                value =
+                    value.slice(1, -1);
+            }
+
+            fields[key] =
+                value;
+        });
+
+    return {
+        fields,
+        body
+    };
+}
+
+
+function obterCampo(
+    fields,
+    ...nomes
+) {
+
+    for (
+        const nome of nomes
+    ) {
+
+        if (
+            fields[nome] !== undefined &&
+            fields[nome] !== null &&
+            fields[nome] !== ""
+        ) {
+
+            return fields[nome];
+        }
+    }
+
+    return "";
+}
+
+
+// ============================================================
+// PREENCHER FORMULÁRIO
+// ============================================================
+
+function preencherFormulario(
+    markdown
+) {
+
+    const parsed =
+        separarFrontmatter(
+            markdown
+        );
+
+    const fields =
+        parsed.fields;
+
+    const titulo =
+        obterCampo(
+            fields,
+            "title"
+        );
+
+    const subtitulo =
+        obterCampo(
+            fields,
+            "subtitulo",
+            "subtitle",
+            "descricao",
+            "resumo"
+        );
+
+    const categoria =
+        obterCampo(
+            fields,
+            "categoria",
+            "category",
+            "tag"
+        );
+
+    const data =
+        obterCampo(
+            fields,
+            "date",
+            "published",
+            "dataNoticia",
+            "data"
+        );
+
+    const autor =
+        obterCampo(
+            fields,
+            "author",
+            "autor"
+        ) ||
+        "ChutaPraCanto";
+
+    const imagem =
+        obterCampo(
+            fields,
+            "imagem",
+            "image",
+            "featured_image",
+            "featuredImage"
+        );
+
+    document
+        .getElementById("noticia-titulo")
+        .value =
+        titulo;
+
+    document
+        .getElementById("noticia-subtitulo")
+        .value =
+        subtitulo;
+
+    document
+        .getElementById("noticia-categoria")
+        .value =
+        categoria;
+
+    document
+        .getElementById("noticia-autor")
+        .value =
+        autor;
+
+    document
+        .getElementById("noticia-data")
+        .value =
+        data
+            ? String(data).substring(0, 10)
+            : "";
+
+    document
+        .getElementById("noticia-imagem-url")
+        .value =
+        imagem;
+
+    mostrarPreview(
+        normalizarUrlImagem(imagem)
+    );
+
+    quill.setText("");
+
+    const html =
+        markdownSimplesParaHtml(
+            parsed.body
+        );
+
+    quill.clipboard.dangerouslyPasteHTML(
+        html
+    );
+}
+
+
+// ============================================================
+// LIMPEZA DE CARACTERES INVISÍVEIS
+// ============================================================
+
+function limparCaracteresInvisiveis(texto) {
+
+    return String(texto || "")
+        .replace(/[\u200B\u200C\u200D\uFEFF]/g, "")
+        .replace(/\u2060/g, "");
+}
+
+
+// ============================================================
+// MARKDOWN -> HTML
+// ============================================================
+
+function markdownSimplesParaHtml(
+    markdown
+) {
+
+    markdown =
+        limparCaracteresInvisiveis(
+            markdown
+        )
+            .replace(/\r\n/g, "\n")
+            .replace(/\r/g, "\n");
+
+    /*
+     * Escapamos primeiro todo o texto para impedir
+     * que conteúdo do artigo seja interpretado como
+     * HTML arbitrário.
+     */
+
+    let html =
+        escaparHtml(
+            markdown
+        );
+
+    html =
+        html.replace(
+            /^###\s+(.+)$/gm,
+            "<h3>$1</h3>"
+        );
+
+    html =
+        html.replace(
+            /^##\s+(.+)$/gm,
+            "<h2>$1</h2>"
+        );
+
+    html =
+        html.replace(
+            /^#\s+(.+)$/gm,
+            "<h1>$1</h1>"
+        );
+
+    html =
+        html.replace(
+            /\*\*(.+?)\*\*/g,
+            "<strong>$1</strong>"
+        );
+
+    html =
+        html.replace(
+            /__(.+?)__/g,
+            "<strong>$1</strong>"
+        );
+
+    html =
+        html.replace(
+            /(?<!\*)\*([^*\n]+)\*(?!\*)/g,
+            "<em>$1</em>"
+        );
+
+    html =
+        html.replace(
+            /(?<!_)_([^_\n]+)_(?!_)/g,
+            "<em>$1</em>"
+        );
+
+    const linhas =
+        html.split("\n");
+
+    const resultado = [];
+
+    let emUl = false;
+    let emOl = false;
+
+    function fecharListas() {
+
+        if (emUl) {
+
+            resultado.push("</ul>");
+
+            emUl = false;
+        }
+
+        if (emOl) {
+
+            resultado.push("</ol>");
+
+            emOl = false;
+        }
+    }
+
+    for (
+        const linha of linhas
+    ) {
+
+        /*
+         * IMPORTANTE:
+         *
+         * A lista com -, * ou + é sempre UL.
+         * A lista com número + ponto é sempre OL.
+         */
+
+        const bullet =
+            linha.match(
+                /^[ \t]*[-*+][ \t]+(.+?)\s*$/
+            );
+
+        const ordered =
+            linha.match(
+                /^[ \t]*\d+\.[ \t]+(.+?)\s*$/
+            );
+
+        if (bullet) {
+
+            if (emOl) {
+
+                resultado.push(
+                    "</ol>"
+                );
+
+                emOl = false;
+            }
+
+            if (!emUl) {
+
+                resultado.push(
+                    "<ul>"
+                );
+
+                emUl = true;
+            }
+
+            resultado.push(
+                `<li>${bullet[1]}</li>`
+            );
+
+            continue;
+        }
+
+        if (ordered) {
+
+            if (emUl) {
+
+                resultado.push(
+                    "</ul>"
+                );
+
+                emUl = false;
+            }
+
+            if (!emOl) {
+
+                resultado.push(
+                    "<ol>"
+                );
+
+                emOl = true;
+            }
+
+            resultado.push(
+                `<li>${ordered[1]}</li>`
+            );
+
+            continue;
+        }
+
+        fecharListas();
+
+        if (!linha.trim()) {
+
+            resultado.push("");
+
+            continue;
+        }
+
+        if (
+            /^<h[123]>/.test(
+                linha
+            )
+        ) {
+
+            resultado.push(
+                linha
+            );
+
+        } else {
+
+            resultado.push(
+                `<p>${linha}</p>`
+            );
+        }
+    }
+
+    fecharListas();
+
+    return resultado
+        .join("\n")
+        .replace(
+            /<p>\s*<\/p>/g,
+            ""
+        );
+}
+
+
+// ============================================================
+// NORMALIZAR LISTAS DO QUILL
+// ============================================================
+
+function normalizarListasQuillParaTurndown(
+    html
+) {
+
+    const wrapper =
+        document.createElement("div");
+
+    wrapper.innerHTML =
+        html;
+
+    /*
+     * O Quill 2 pode usar <ol> tanto para listas
+     * numeradas como para listas com pontos.
+     *
+     * Nas listas com pontos, os <li> recebem:
+     *
+     * data-list="bullet"
+     *
+     * Transformamos esses blocos em <ul>.
+     */
+
+    const listas =
+        Array.from(
+            wrapper.querySelectorAll("ol")
+        );
+
+    listas.forEach(
+        lista => {
+
+            const itens =
+                Array.from(
+                    lista.children
+                ).filter(
+                    element =>
+                        element.tagName === "LI"
+                );
+
+            if (!itens.length) {
+                return;
+            }
+
+            const todosBullet =
+                itens.every(
+                    item =>
+                        item.getAttribute(
+                            "data-list"
+                        ) === "bullet"
+                );
+
+            if (todosBullet) {
+
+                const ul =
+                    document.createElement("ul");
+
+                itens.forEach(
+                    item => {
+
+                        item.removeAttribute(
+                            "data-list"
+                        );
+
+                        const ui =
+                            item.querySelector(
+                                ".ql-ui"
+                            );
+
+                        if (ui) {
+                            ui.remove();
+                        }
+
+                        ul.appendChild(
+                            item
+                        );
+                    }
+                );
+
+                lista.replaceWith(
+                    ul
+                );
+
+                return;
+            }
+
+            /*
+             * Caso exista mistura de tipos, dividimos
+             * em listas consecutivas preservando a ordem.
+             */
+
+            const fragment =
+                document.createDocumentFragment();
+
+            let listaAtual = null;
+            let tipoAtual = null;
+
+            itens.forEach(
+                item => {
+
+                    const tipo =
+                        item.getAttribute(
+                            "data-list"
+                        ) === "bullet"
+                            ? "bullet"
+                            : "ordered";
+
+                    if (
+                        !listaAtual ||
+                        tipo !== tipoAtual
+                    ) {
+
+                        listaAtual =
+                            document.createElement(
+                                tipo === "bullet"
+                                    ? "ul"
+                                    : "ol"
+                            );
+
+                        tipoAtual =
+                            tipo;
+
+                        fragment.appendChild(
+                            listaAtual
+                        );
+                    }
+
+                    item.removeAttribute(
+                        "data-list"
+                    );
+
+                    const ui =
+                        item.querySelector(
+                            ".ql-ui"
+                        );
+
+                    if (ui) {
+                        ui.remove();
+                    }
+
+                    listaAtual.appendChild(
+                        item
+                    );
+                }
+            );
+
+            lista.replaceWith(
+                fragment
+            );
+        }
+    );
+
+    /*
+     * Limpeza adicional para qualquer <li> que
+     * ainda tenha sobrado com o marcador interno
+     * do Quill.
+     */
+
+    wrapper
+        .querySelectorAll(
+            "li[data-list]"
+        )
+        .forEach(
+            item => {
+
+                item.removeAttribute(
+                    "data-list"
+                );
+
+                const ui =
+                    item.querySelector(
+                        ".ql-ui"
+                    );
+
+                if (ui) {
+                    ui.remove();
+                }
+            }
+        );
+
+    return wrapper.innerHTML;
+}
+
+
+// ============================================================
+// GUARDAR
+// ============================================================
+
+async function guardarNoticia() {
+
+    const titulo =
+        document
+            .getElementById("noticia-titulo")
+            .value
+            .trim();
+
+    const subtitulo =
+        document
+            .getElementById("noticia-subtitulo")
+            .value
+            .trim();
+
+    const categoria =
+        document
+            .getElementById("noticia-categoria")
+            .value
+            .trim();
+
+    const data =
+        document
+            .getElementById("noticia-data")
+            .value;
+
+    const autor =
+        document
+            .getElementById("noticia-autor")
+            .value
+            .trim();
+
+    const imgUrl =
+        document
+            .getElementById("noticia-imagem-url")
+            .value
+            .trim();
+
+    const statusEl =
+        document.getElementById(
+            "status"
+        );
+
+    if (
+        !titulo ||
+        !quill ||
+        quill.getText().trim().length === 0
+    ) {
+
+        alert(
+            "O título e o conteúdo são obrigatórios."
+        );
+
+        return;
+    }
+
+    statusEl.style.display =
+        "block";
+
+    statusEl.style.background =
+        "#fef3c7";
+
+    statusEl.style.color =
+        "#92400e";
+
+    statusEl.innerText =
+        "A guardar...";
+
+    try {
+
+        let finalImageUrl =
+            imgUrl;
+
+        const imageData =
+            await uploadImage();
+
+        if (imageData) {
+
+            const uniqueName =
+                criarNomeImagemUnico(
+                    imageData.name
+                );
+
+            const imagePath =
+                `images/uploads/${uniqueName}`;
+
+            await apiFetch(
+                `/api/admin/image?path=${encodeURIComponent(imagePath)}`,
+                {
+                    method: "PUT",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+                            message:
+                                "Upload de imagem: " +
+                                uniqueName,
+
+                            content:
+                                imageData.content
+                        })
+                }
+            );
+
+            finalImageUrl =
+                `/images/uploads/${uniqueName}`;
+        }
+
+
+        const htmlContentOriginal =
+            quill.root.innerHTML;
+
+        const htmlContent =
+            normalizarListasQuillParaTurndown(
+                htmlContentOriginal
+            );
+
+
+        const turndownService =
+            new TurndownService({
+                bulletListMarker: "-",
+                codeBlockStyle: "fenced",
+                emDelimiter: "_",
+                strongDelimiter: "**"
+            });
+
+
+        const htmlLimpo =
+            limparCaracteresInvisiveis(
+                htmlContent
+            );
+
+
+        let markdownBody =
+            turndownService.turndown(
+                htmlLimpo
+            );
+
+
+        /*
+         * O Turndown pode encontrar diferentes
+         * marcadores dependendo do HTML recebido.
+         *
+         * Normalizamos tudo para "- ".
+         */
+
+        markdownBody =
+            markdownBody
+                .replace(
+                    /^[ \t]*[*+][ \t]+/gm,
+                    "- "
+                );
+
+
+        markdownBody =
+            limparCaracteresInvisiveis(
+                markdownBody
+            )
+                .replace(
+                    /\r\n/g,
+                    "\n"
+                )
+                .replace(
+                    /\n{3,}/g,
+                    "\n\n"
+                )
+                .trim();
+
+
+        const fileContent =
+            construirMarkdown(
+                titulo,
+                subtitulo,
+                categoria,
+                data,
+                autor,
+                finalImageUrl,
+                markdownBody
+            );
+
+
+        if (!noticiaEmEdicao) {
+
+            const slug =
+                criarSlug(
+                    titulo
+                );
+
+            const filename =
+                `content/noticias/${slug}.md`;
+
+            await apiFetch(
+                `/api/admin/news?path=${encodeURIComponent(filename)}`,
+                {
+                    method: "PUT",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+                            message:
+                                "Nova notícia: " +
+                                titulo,
+
+                            content:
+                                encodeBase64(
+                                    fileContent
+                                )
+                        })
+                }
+            );
+
+            mostrarSucesso(
+                "Notícia publicada com sucesso!"
+            );
+
+        } else {
+
+            statusEl.innerText =
+                "A verificar a versão atual da notícia...";
+
+            const noticiaAtual =
+                await obterNoticiaAtual(
+                    noticiaEmEdicao.path
+                );
+
+            const shaAtual =
+                noticiaAtual.sha;
+
+            noticiaEmEdicao.sha =
+                shaAtual;
+
+            statusEl.innerText =
+                "A guardar alterações...";
+
+            await apiFetch(
+                `/api/admin/news?path=${encodeURIComponent(noticiaEmEdicao.path)}`,
+                {
+                    method: "PUT",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify({
+                            message:
+                                "Editar notícia: " +
+                                titulo,
+
+                            content:
+                                encodeBase64(
+                                    fileContent
+                                ),
+
+                            sha:
+                                shaAtual
+                        })
+                }
+            );
+
+            mostrarSucesso(
+                "Notícia atualizada com sucesso!"
+            );
+        }
+
+    } catch (error) {
+
+        statusEl.style.display =
+            "block";
+
+        statusEl.style.background =
+            "#fee2e2";
+
+        statusEl.style.color =
+            "#991b1b";
+
+        statusEl.innerText =
+            "Erro: " +
+            (
+                error?.message ||
+                "Erro desconhecido."
+            );
+    }
+}
+
+
+// ============================================================
+// CONSTRUIR MARKDOWN
+// ============================================================
+
+function construirMarkdown(
+    titulo,
+    subtitulo,
+    categoria,
+    data,
+    autor,
+    imagem,
+    body
+) {
+
+    return `---
+title: ${yamlQuote(titulo)}
+subtitulo: ${yamlQuote(subtitulo)}
+categoria: ${yamlQuote(categoria)}
+date: ${yamlQuote(data)}
+author: ${yamlQuote(autor)}
+imagem: ${yamlQuote(imagem)}
+---
+
+${body}
+`;
+}
+
+
+function yamlQuote(value) {
+
+    return JSON.stringify(
+        value || ""
+    );
+}
+
+
+// ============================================================
+// APAGAR
+// ============================================================
+
+async function apagarNoticia() {
+
+    if (!noticiaEmEdicao) {
+        return;
+    }
+
+    const confirmar =
+        confirm(
+            "Tens a certeza que queres apagar esta notícia?\n\nEsta ação não pode ser desfeita através deste painel."
+        );
+
+    if (!confirmar) {
+        return;
+    }
+
+    try {
+
+        const noticiaAtual =
+            await obterNoticiaAtual(
+                noticiaEmEdicao.path
+            );
+
+        const shaAtual =
+            noticiaAtual.sha;
+
+        noticiaEmEdicao.sha =
+            shaAtual;
+
+        await apiFetch(
+            `/api/admin/news?path=${encodeURIComponent(noticiaEmEdicao.path)}`,
+            {
+                method: "DELETE",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body:
+                    JSON.stringify({
+                        message:
+                            "Apagar notícia",
+
+                        sha:
+                            shaAtual
+                    })
+            }
+        );
+
+        alert(
+            "Notícia apagada."
+        );
+
+        voltarLista();
+
+    } catch (error) {
+
+        alert(
+            "Não foi possível apagar a notícia:\n\n" +
+            (
+                error?.message ||
+                "Erro desconhecido."
+            )
+        );
+    }
+}
+
+
+// ============================================================
+// APAGAR DA LISTA
+// ============================================================
+
+async function apagarDaLista(
+    path,
+    sha,
+    titulo
+) {
+
+    const confirmar =
+        confirm(
+            `Tens a certeza que queres apagar esta notícia?\n\n"${titulo}"\n\nEsta ação não pode ser desfeita através deste painel.`
+        );
+
+    if (!confirmar) {
+        return;
+    }
+
+    try {
+
+        const noticiaAtual =
+            await obterNoticiaAtual(
+                path
+            );
+
+        const shaAtual =
+            noticiaAtual.sha;
+
+        await apiFetch(
+            `/api/admin/news?path=${encodeURIComponent(path)}`,
+            {
+                method: "DELETE",
+
+                headers: {
+                    "Content-Type":
+                        "application/json"
+                },
+
+                body:
+                    JSON.stringify({
+                        message:
+                            "Apagar notícia: " +
+                            titulo,
+
+                        sha:
+                            shaAtual
+                    })
+            }
+        );
+
+        await carregarNoticias();
+
+    } catch (error) {
+
+        alert(
+            "Não foi possível apagar a notícia:\n\n" +
+            (
+                error?.message ||
+                "Erro desconhecido."
+            )
+        );
+    }
+}
+
+
+// ============================================================
+// IMAGEM
+// ============================================================
+
+async function uploadImage() {
+
+    const fileInput =
+        document.getElementById(
+            "image-upload"
+        );
+
+    if (
+        !fileInput.files.length
+    ) {
+        return null;
+    }
+
+    const file =
+        fileInput.files[0];
+
+    const reader =
+        new FileReader();
+
+    return new Promise(
+        (resolve, reject) => {
+
+            reader.onloadend =
+                () => {
+
+                    try {
+
+                        const result =
+                            reader.result;
+
+                        if (
+                            typeof result !== "string" ||
+                            !result.includes(",")
+                        ) {
+
+                            throw new Error(
+                                "Não foi possível ler a imagem selecionada."
+                            );
+                        }
+
+                        const base64Content =
+                            result.split(",")[1];
+
+                        if (!base64Content) {
+
+                            throw new Error(
+                                "A imagem não contém dados válidos."
+                            );
+                        }
+
+                        resolve({
+
+                            name:
+                                file.name,
+
+                            content:
+                                base64Content
+                        });
+
+                    } catch (error) {
+
+                        reject(error);
+                    }
+                };
+
+            reader.onerror =
+                () => {
+
+                    reject(
+                        new Error(
+                            "Não foi possível ler o ficheiro de imagem."
+                        )
+                    );
+                };
+
+            reader.readAsDataURL(
+                file
+            );
+        }
+    );
+}
+
+
+function criarNomeImagemUnico(
+    filename
+) {
+
+    const ultimaExtensao =
+        filename.lastIndexOf(".");
+
+    let nome =
+        ultimaExtensao > 0
+            ? filename.substring(
+                0,
+                ultimaExtensao
+            )
+            : filename;
+
+    let extensao =
+        ultimaExtensao > 0
+            ? filename.substring(
+                ultimaExtensao
+            )
+            : "";
+
+    nome =
+        nome
+            .normalize("NFD")
+            .replace(
+                /[\u0300-\u036f]/g,
+                ""
+            )
+            .replace(
+                /[^a-zA-Z0-9_-]+/g,
+                "-"
+            )
+            .replace(
+                /^-+|-+$/g,
+                ""
+            );
+
+    extensao =
+        extensao
+            .toLowerCase()
+            .replace(
+                /[^a-z0-9.]/g,
+                ""
+            );
+
+    if (!nome) {
+        nome = "imagem";
+    }
+
+    const agora =
+        new Date();
+
+    const timestamp =
+        agora
+            .toISOString()
+            .replace(
+                /[-:.TZ]/g,
+                ""
+            );
+
+    const aleatorio =
+        Math.random()
+            .toString(36)
+            .substring(
+                2,
+                7
+            );
+
+    return (
+        nome +
+        "-" +
+        timestamp +
+        "-" +
+        aleatorio +
+        extensao
+    );
+}
+
+
+function mostrarPreview(url) {
+
+    const preview =
+        document.getElementById(
+            "image-preview"
+        );
+
+    if (!url) {
+
+        preview.style.display =
+            "none";
+
+        preview.src =
+            "";
+
+        return;
+    }
+
+    preview.src =
+        normalizarUrlImagem(url);
+
+    preview.style.display =
+        "block";
+}
+
+
+// ============================================================
+// PRÉ-VISUALIZAÇÃO
+// ============================================================
+
+function previsualizarNoticia() {
+
+    if (!quill) {
+        return;
+    }
+
+    const titulo =
+        document
+            .getElementById("noticia-titulo")
+            .value
+            .trim();
+
+    const subtitulo =
+        document
+            .getElementById("noticia-subtitulo")
+            .value
+            .trim();
+
+    const categoria =
+        document
+            .getElementById("noticia-categoria")
+            .value
+            .trim();
+
+    const data =
+        document
+            .getElementById("noticia-data")
+            .value;
+
+    const autor =
+        document
+            .getElementById("noticia-autor")
+            .value
+            .trim();
+
+    const imagem =
+        document
+            .getElementById("noticia-imagem-url")
+            .value
+            .trim();
+
+    document
+        .getElementById("preview-title")
+        .innerText =
+            titulo ||
+            "Sem título";
+
+    const subtitleEl =
+        document.getElementById(
+            "preview-subtitle"
+        );
+
+    subtitleEl.innerText =
+        subtitulo;
+
+    subtitleEl.style.display =
+        subtitulo
+            ? "block"
+            : "none";
+
+    const categoryEl =
+        document.getElementById(
+            "preview-category"
+        );
+
+    if (categoria) {
+
+        categoryEl.innerText =
+            categoria;
+
+        categoryEl.classList.remove(
+            "hidden"
+        );
+
+    } else {
+
+        categoryEl.classList.add(
+            "hidden"
+        );
+    }
+
+    const metaParts = [];
+
+    if (data) {
+
+        metaParts.push(
+            "📅 " + data
+        );
+    }
+
+    if (autor) {
+
+        metaParts.push(
+            "✍️ " + autor
+        );
+    }
+
+    document
+        .getElementById("preview-meta")
+        .innerText =
+            metaParts.join("  •  ");
+
+    const previewImage =
+        document.getElementById(
+            "preview-image"
+        );
+
+    const imagemNormalizada =
+        normalizarUrlImagem(
+            imagem
+        );
+
+    if (imagemNormalizada) {
+
+        previewImage.src =
+            imagemNormalizada;
+
+        previewImage.style.display =
+            "block";
+
+    } else {
+
+        previewImage.src =
+            "";
+
+        previewImage.style.display =
+            "none";
+    }
+
+    /*
+     * IMPORTANTE:
+     *
+     * Não colocamos diretamente quill.root.innerHTML
+     * na pré-visualização.
+     *
+     * Primeiro normalizamos as listas do Quill.
+     * Assim uma lista bullet interna representada
+     * como <ol data-list="bullet"> passa para <ul>
+     * e aparece realmente com pontos.
+     */
+
+    const htmlPreview =
+        normalizarListasQuillParaTurndown(
+            quill.root.innerHTML
+        );
+
+    document
+        .getElementById("preview-content")
+        .innerHTML =
+            htmlPreview;
+
+    document
+        .getElementById("preview-overlay")
+        .classList
+        .remove("hidden");
+
+    document.body.style.overflow =
+        "hidden";
+}
+
+
+async function previsualizarDaLista(
+    path
+) {
+
+    try {
+
+        const response =
+            await apiFetch(
+                `/api/admin/news?path=${encodeURIComponent(path)}`
+            );
+
+        const data =
+            await response.json();
+
+        const markdown =
+            decodeBase64(
+                data.content
+            );
+
+        const parsed =
+            separarFrontmatter(
+                markdown
+            );
+
+        const fields =
+            parsed.fields;
+
+        const titulo =
+            obterCampo(
+                fields,
+                "title"
+            ) ||
+            slugParaTitulo(
+                path.split("/").pop()
+            );
+
+        const subtitulo =
+            obterCampo(
+                fields,
+                "subtitulo",
+                "subtitle",
+                "descricao",
+                "resumo"
+            );
+
+        const categoria =
+            obterCampo(
+                fields,
+                "categoria",
+                "category",
+                "tag"
+            );
+
+        const dataNoticia =
+            obterCampo(
+                fields,
+                "date",
+                "published",
+                "dataNoticia",
+                "data"
+            );
+
+        const autor =
+            obterCampo(
+                fields,
+                "author",
+                "autor"
+            );
+
+        const imagem =
+            obterCampo(
+                fields,
+                "imagem",
+                "image",
+                "featured_image",
+                "featuredImage"
+            );
+
+        document
+            .getElementById("preview-title")
+            .innerText =
+            titulo;
+
+        const subtitleEl =
+            document.getElementById(
+                "preview-subtitle"
+            );
+
+        subtitleEl.innerText =
+            subtitulo;
+
+        subtitleEl.style.display =
+            subtitulo
+                ? "block"
+                : "none";
+
+        const categoryEl =
+            document.getElementById(
+                "preview-category"
+            );
+
+        if (categoria) {
+
+            categoryEl.innerText =
+                categoria;
+
+            categoryEl.classList.remove(
+                "hidden"
+            );
+
+        } else {
+
+            categoryEl.classList.add(
+                "hidden"
+            );
+        }
+
+        const metaParts = [];
+
+        if (dataNoticia) {
+
+            metaParts.push(
+                "📅 " +
+                String(dataNoticia).substring(
+                    0,
+                    10
+                )
+            );
+        }
+
+        if (autor) {
+
+            metaParts.push(
+                "✍️ " + autor
+            );
+        }
+
+        document
+            .getElementById("preview-meta")
+            .innerText =
+            metaParts.join("  •  ");
+
+        const previewImage =
+            document.getElementById(
+                "preview-image"
+            );
+
+        const imagemNormalizada =
+            normalizarUrlImagem(
+                imagem
+            );
+
+        if (imagemNormalizada) {
+
+            previewImage.src =
+                imagemNormalizada;
+
+            previewImage.style.display =
+                "block";
+
+        } else {
+
+            previewImage.src =
+                "";
+
+            previewImage.style.display =
+                "none";
+        }
+
+        document
+            .getElementById("preview-content")
+            .innerHTML =
+                markdownSimplesParaHtml(
+                    parsed.body
+                );
+
+        document
+            .getElementById("preview-overlay")
+            .classList
+            .remove("hidden");
+
+        document.body.style.overflow =
+            "hidden";
+
+    } catch (error) {
+
+        alert(
+            "Não foi possível abrir a pré-visualização:\n\n" +
+            (
+                error?.message ||
+                "Erro desconhecido."
+            )
+        );
+    }
+}
+
+
+function fecharPrevisualizacao(
+    event
+) {
+
+    if (
+        event &&
+        event.target !==
+            document.getElementById(
+                "preview-overlay"
+            )
+    ) {
+        return;
+    }
+
+    document
+        .getElementById(
+            "preview-overlay"
+        )
+        .classList
+        .add("hidden");
+
+    document.body.style.overflow =
+        "";
+}
+
+
+// ============================================================
+// PARTILHA
+// ============================================================
+
+function construirUrlPublicaNoticia(
+    path
+) {
+
+    const filename =
+        String(path || "")
+            .split("/")
+            .pop()
+            .replace(
+                /\.md$/i,
+                ""
+            );
+
+    return (
+        window.location.origin +
+        "/noticias/" +
+        encodeURIComponent(filename)
+    );
+}
+
+
+function abrirPartilha(
+    path,
+    titulo
+) {
+
+    const url =
+        construirUrlPublicaNoticia(
+            path
+        );
+
+    noticiaParaPartilhar = {
+
+        titulo:
+            titulo ||
+            "ChutaPraCanto",
+
+        url:
+            url
+    };
+
+    document
+        .getElementById("share-title")
+        .innerText =
+            noticiaParaPartilhar.titulo;
+
+    document
+        .getElementById("share-url")
+        .innerText =
+            noticiaParaPartilhar.url;
+
+    const nativeButton =
+        document.getElementById(
+            "share-native-btn"
+        );
+
+    if (
+        navigator.share
+    ) {
+
+        nativeButton.classList.remove(
+            "hidden"
+        );
+
+    } else {
+
+        nativeButton.classList.add(
+            "hidden"
+        );
+    }
+
+    document
+        .getElementById("share-overlay")
+        .classList
+        .remove("hidden");
+
+    document.body.style.overflow =
+        "hidden";
+}
+
+
+function fecharPartilha(
+    event
+) {
+
+    if (
+        event &&
+        event.target !==
+            document.getElementById(
+                "share-overlay"
+            )
+    ) {
+        return;
+    }
+
+    document
+        .getElementById(
+            "share-overlay"
+        )
+        .classList
+        .add("hidden");
+
+    document.body.style.overflow =
+        "";
+}
+
+
+function partilharWhatsApp() {
+
+    const texto =
+        `${noticiaParaPartilhar.titulo}\n\n${noticiaParaPartilhar.url}`;
+
+    const url =
+        "https://wa.me/?text=" +
+        encodeURIComponent(
+            texto
+        );
+
+    window.open(
+        url,
+        "_blank",
+        "noopener,noreferrer"
+    );
+}
+
+
+function partilharFacebook() {
+
+    const url =
+        "https://www.facebook.com/sharer/sharer.php?u=" +
+        encodeURIComponent(
+            noticiaParaPartilhar.url
+        );
+
+    window.open(
+        url,
+        "_blank",
+        "noopener,noreferrer,width=700,height=600"
+    );
+}
+
+
+function partilharX() {
+
+    const texto =
+        noticiaParaPartilhar.titulo;
+
+    const url =
+        "https://twitter.com/intent/tweet?text=" +
+        encodeURIComponent(
+            texto
+        ) +
+        "&url=" +
+        encodeURIComponent(
+            noticiaParaPartilhar.url
+        );
+
+    window.open(
+        url,
+        "_blank",
+        "noopener,noreferrer,width=700,height=600"
+    );
+}
+
+
+async function copiarLinkNoticia() {
+
+    try {
+
+        if (
+            navigator.clipboard &&
+            navigator.clipboard.writeText
+        ) {
+
+            await navigator.clipboard.writeText(
+                noticiaParaPartilhar.url
+            );
+
+        } else {
+
+            throw new Error(
+                "Clipboard indisponível"
+            );
+        }
+
+        const button =
+            document.querySelector(
+                ".share-copy"
+            );
+
+        const textoOriginal =
+            button.innerText;
+
+        button.innerText =
+            "✅ Link copiado!";
+
+        setTimeout(
+            () => {
+
+                button.innerText =
+                    textoOriginal;
+
+            },
+            1800
+        );
+
+    } catch (error) {
+
+        const textarea =
+            document.createElement(
+                "textarea"
+            );
+
+        textarea.value =
+            noticiaParaPartilhar.url;
+
+        textarea.style.position =
+            "fixed";
+
+        textarea.style.opacity =
+            "0";
+
+        document.body.appendChild(
+            textarea
+        );
+
+        textarea.focus();
+        textarea.select();
+
+        try {
+
+            document.execCommand(
+                "copy"
+            );
+
+            const button =
+                document.querySelector(
+                    ".share-copy"
+                );
+
+            const textoOriginal =
+                button.innerText;
+
+            button.innerText =
+                "✅ Link copiado!";
+
+            setTimeout(
+                () => {
+
+                    button.innerText =
+                        textoOriginal;
+
+                },
+                1800
+            );
+
+        } catch (copyError) {
+
+            alert(
+                "Não foi possível copiar o link automaticamente.\n\n" +
+                noticiaParaPartilhar.url
+            );
+
+        } finally {
+
+            textarea.remove();
+        }
+    }
+}
+
+
+async function partilharNativamente() {
+
+    if (
+        !navigator.share
+    ) {
+
+        return;
+    }
+
+    try {
+
+        await navigator.share({
+
+            title:
+                noticiaParaPartilhar.titulo,
+
+            text:
+                noticiaParaPartilhar.titulo,
+
+            url:
+                noticiaParaPartilhar.url
+        });
+
+    } catch (error) {
+
+        /*
+         * Cancelar a janela de partilha
+         * não é um erro para o utilizador.
+         */
+    }
+}
+
+
+// ============================================================
+// IMAGENS
+// ============================================================
+
+function normalizarUrlImagem(
+    url
+) {
+
+    if (!url) {
+        return "";
+    }
+
+    url =
+        String(url).trim();
+
+    if (!url) {
+        return "";
+    }
+
+    if (
+        url.startsWith("http://") ||
+        url.startsWith("https://")
+    ) {
+        return url;
+    }
+
+    if (
+        url.startsWith("/")
+    ) {
+        return url;
+    }
+
+    return "/" +
+        url.replace(
+            /^\.?\//,
+            ""
+        );
+}
+
+
+document
+    .getElementById(
+        "noticia-imagem-url"
+    )
+    .addEventListener(
+        "input",
+        function() {
+
+            mostrarPreview(
+                this.value.trim()
+            );
+        }
+    );
+
+
+// ============================================================
+// UTILITÁRIOS
+// ============================================================
+
+function criarSlug(texto) {
+
+    return texto
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(
+            /[\u0300-\u036f]/g,
+            ""
+        )
+        .replace(
+            /[^a-z0-9]+/g,
+            "-"
+        )
+        .replace(
+            /^-+|-+$/g,
+            "");
+}
+
+
+function encodeBase64(texto) {
+
+    return btoa(
+        unescape(
+            encodeURIComponent(
+                texto
+            )
+        )
+    );
+}
+
+
+function decodeBase64(base64) {
+
+    const cleaned =
+        base64.replace(
+            /\n/g,
+            ""
+        );
+
+    return decodeURIComponent(
+        escape(
+            atob(cleaned)
+        )
+    );
+}
+
+
+function escaparHtml(texto) {
+
+    return String(texto)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+}
+
+
+function escaparJs(texto) {
+
+    return String(texto)
+        .replace(
+            /\\/g,
+            "\\\\"
+        )
+        .replace(
+            /'/g,
+            "\\'"
+        )
+        .replace(
+            /"/g,
+            '\\"'
+        )
+        .replace(
+            /\n/g,
+            "\\n"
+        )
+        .replace(
+            /\r/g,
+            "\\r"
+        );
+}
+
+
+// ============================================================
+// NAVEGAÇÃO
+// ============================================================
+
+function voltarLista() {
+
+    noticiaEmEdicao =
+        null;
+
+    document
+        .getElementById("form-screen")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("list-screen")
+        .classList
+        .remove("hidden");
+
+    document
+        .getElementById("status")
+        .style.display =
+            "none";
+
+    carregarNoticias();
+}
+
+
+function limparFormulario() {
+
+    document
+        .getElementById("noticia-titulo")
+        .value =
+            "";
+
+    document
+        .getElementById("noticia-subtitulo")
+        .value =
+            "";
+
+    document
+        .getElementById("noticia-categoria")
+        .value =
+            "";
+
+    document
+        .getElementById("noticia-data")
+        .value =
+            "";
+
+    document
+        .getElementById("noticia-autor")
+        .value =
+            "ChutaPraCanto";
+
+    document
+        .getElementById("noticia-imagem-url")
+        .value =
+            "";
+
+    document
+        .getElementById("image-upload")
+        .value =
+            "";
+
+    mostrarPreview("");
+
+    if (quill) {
+
+        quill.setText("");
+    }
+}
+
+
+function mostrarSucesso(
+    mensagem
+) {
+
+    const statusEl =
+        document.getElementById(
+            "status"
+        );
+
+    statusEl.style.display =
+        "block";
+
+    statusEl.style.background =
+        "#dcfce7";
+
+    statusEl.style.color =
+        "#166534";
+
+    statusEl.innerText =
+        mensagem;
+}
+
+
+// ============================================================
+// TECLA ESC PARA FECHAR MODAIS
+// ============================================================
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key !== "Escape"
+        ) {
+            return;
+        }
+
+        const shareOverlay =
+            document.getElementById(
+                "share-overlay"
+            );
+
+        const previewOverlay =
+            document.getElementById(
+                "preview-overlay"
+            );
+
+        if (
+            shareOverlay &&
+            !shareOverlay.classList.contains(
+                "hidden"
+            )
+        ) {
+
+            fecharPartilha();
+
+            return;
+        }
+
+        if (
+            previewOverlay &&
+            !previewOverlay.classList.contains(
+                "hidden"
+            )
+        ) {
+
+            fecharPrevisualizacao();
+        }
+    }
+);
+
+
+// ============================================================
+// INICIALIZAÇÃO
+// ============================================================
+
+window.onload =
+    async function() {
+
+        const autenticado =
+            await verificarSessao();
+
+        if (!autenticado) {
+            return;
+        }
+
+        mostrarAdmin();
+    };
+
+</script>
+
+</body>
+</html>
