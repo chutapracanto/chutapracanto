@@ -340,6 +340,68 @@ async function handleAdminAPI(request, env) {
     }
 
     if (!["GET", "PUT", "DELETE"].includes(request.method)) {
+     
+     if (pathname === "/api/admin/image") {
+    const path = url.searchParams.get("path");
+
+    if (
+      !path ||
+      !path.startsWith("images/uploads/") ||
+      path.includes("..") ||
+      path.includes("\\")
+    ) {
+      return json(
+        {
+          error: "Caminho de imagem não permitido."
+        },
+        400
+      );
+    }
+
+    if (!["PUT", "DELETE", "GET"].includes(request.method)) {
+      return json(
+        {
+          error: "Método não permitido."
+        },
+        405
+      );
+    }
+
+    const githubPath =
+      `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`;
+
+    if (request.method === "GET") {
+      const githubResponse = await githubRequest(
+        env,
+        `${githubPath}?ref=${encodeURIComponent(GITHUB_BRANCH)}`,
+        {
+          method: "GET"
+        }
+      );
+
+      const data = await githubResponse.json();
+
+      return json(data, githubResponse.status);
+    }
+
+    const body = await request.text();
+
+    const githubResponse = await githubRequest(
+      env,
+      githubPath,
+      {
+        method: request.method,
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body
+      }
+    );
+
+    const data = await githubResponse.json();
+
+    return json(data, githubResponse.status);
+  }   
       return json(
         {
           error: "Método não permitido."
