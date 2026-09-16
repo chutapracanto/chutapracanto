@@ -4050,11 +4050,18 @@ function construirUrlPublicaNoticia(
                 ""
             );
 
-    return (
-        window.location.origin +
-        "/noticias/" +
-        encodeURIComponent(filename)
+    const url =
+        new URL(
+            "/noticia.html",
+            window.location.origin
+        );
+
+    url.searchParams.set(
+        "slug",
+        filename
     );
+
+    return url.toString();
 }
 
 
