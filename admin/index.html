@@ -144,7 +144,7 @@
         }
 
         .danger-btn:hover {
-            background: #b91c1b;
+            background: #b91c1c;
         }
 
         .preview-btn {
@@ -159,6 +159,20 @@
 
         .preview-btn:hover {
             background: #6d28d9;
+        }
+
+        .share-btn {
+            background: #059669;
+            color: #fff;
+            border: none;
+            padding: 9px 13px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .share-btn:hover {
+            background: #047857;
         }
 
         .top-actions {
@@ -273,6 +287,7 @@
             flex-direction: column;
             gap: 7px;
             flex-shrink: 0;
+            min-width: 105px;
         }
 
         .edit-btn {
@@ -537,6 +552,115 @@
             margin-bottom: 7px;
         }
 
+        /* =====================================================
+           MODAL DE PARTILHA
+           ===================================================== */
+
+        .share-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.65);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .share-modal {
+            background: #fff;
+            width: 100%;
+            max-width: 480px;
+            border-radius: 14px;
+            padding: 28px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        }
+
+        .share-modal h2 {
+            margin-bottom: 8px;
+            padding-bottom: 12px;
+        }
+
+        .share-title {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            word-break: break-word;
+        }
+
+        .share-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .share-option {
+            border: none;
+            border-radius: 9px;
+            padding: 13px 12px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 700;
+            transition: opacity 0.15s ease;
+        }
+
+        .share-option:hover {
+            opacity: 0.88;
+        }
+
+        .share-whatsapp {
+            background: #25d366;
+            color: #fff;
+        }
+
+        .share-facebook {
+            background: #1877f2;
+            color: #fff;
+        }
+
+        .share-x {
+            background: #111;
+            color: #fff;
+        }
+
+        .share-copy {
+            background: #e5e7eb;
+            color: #333;
+        }
+
+        .share-native {
+            background: #7c3aed;
+            color: #fff;
+        }
+
+        .share-url-box {
+            margin-top: 18px;
+            background: #f3f4f6;
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-size: 12px;
+            color: #666;
+            word-break: break-all;
+        }
+
+        .share-close-btn {
+            width: 100%;
+            margin-top: 15px;
+            background: #f3f4f6;
+            color: #555;
+            border: 1px solid #ddd;
+            padding: 11px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .share-close-btn:hover {
+            background: #e5e7eb;
+        }
+
         @media (max-width: 650px) {
             body {
                 padding: 10px;
@@ -558,11 +682,13 @@
 
             .news-actions {
                 width: 100%;
+                min-width: 0;
                 flex-direction: row;
+                flex-wrap: wrap;
             }
 
             .news-actions button {
-                flex: 1;
+                flex: 1 1 calc(50% - 7px);
             }
 
             .preview-modal {
@@ -588,6 +714,14 @@
             .page-btn {
                 min-width: 34px;
                 height: 34px;
+            }
+
+            .share-modal {
+                padding: 22px;
+            }
+
+            .share-buttons {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -877,6 +1011,10 @@
 </div>
 
 
+<!-- =========================================================
+     MODAL DE PRÉ-VISUALIZAÇÃO
+     ========================================================= -->
+
 <div
     id="preview-overlay"
     class="preview-overlay hidden"
@@ -931,6 +1069,94 @@
 </div>
 
 
+<!-- =========================================================
+     MODAL DE PARTILHA
+     ========================================================= -->
+
+<div
+    id="share-overlay"
+    class="share-overlay hidden"
+    onclick="fecharPartilha(event)"
+>
+
+    <div
+        class="share-modal"
+        onclick="event.stopPropagation()"
+    >
+
+        <button
+            class="preview-close"
+            onclick="fecharPartilha()"
+        >
+            ×
+        </button>
+
+        <h2>
+            📤 Partilhar notícia
+        </h2>
+
+        <div
+            id="share-title"
+            class="share-title"
+        ></div>
+
+        <div class="share-buttons">
+
+            <button
+                class="share-option share-whatsapp"
+                onclick="partilharWhatsApp()"
+            >
+                💬 WhatsApp
+            </button>
+
+            <button
+                class="share-option share-facebook"
+                onclick="partilharFacebook()"
+            >
+                📘 Facebook
+            </button>
+
+            <button
+                class="share-option share-x"
+                onclick="partilharX()"
+            >
+                𝕏 X
+            </button>
+
+            <button
+                class="share-option share-copy"
+                onclick="copiarLinkNoticia()"
+            >
+                🔗 Copiar link
+            </button>
+
+            <button
+                id="share-native-btn"
+                class="share-option share-native"
+                onclick="partilharNativamente()"
+            >
+                📱 Partilhar
+            </button>
+
+        </div>
+
+        <div
+            id="share-url"
+            class="share-url-box"
+        ></div>
+
+        <button
+            class="share-close-btn"
+            onclick="fecharPartilha()"
+        >
+            Fechar
+        </button>
+
+    </div>
+
+</div>
+
+
 <script src="https://unpkg.com/turndown/dist/turndown.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
 
@@ -945,6 +1171,11 @@ let paginaAtual = 1;
 
 let noticiaEmEdicao = null;
 let quill = null;
+
+let noticiaParaPartilhar = {
+    titulo: "",
+    url: ""
+};
 
 
 // ============================================================
@@ -1196,6 +1427,7 @@ async function apiFetch(
                 mensagem =
                     data?.message ||
                     data?.error ||
+                    data?.details ||
                     mensagem;
 
             } else {
@@ -1318,25 +1550,30 @@ async function carregarNoticias() {
                         : []
                 );
 
+        /*
+         * Ordenação:
+         *
+         * 1. Data mais recente primeiro.
+         * 2. Se não houver data, usa o nome do ficheiro
+         *    como desempate.
+         */
+
         noticias =
             noticias.sort(
                 (a, b) => {
 
                     const dataA =
-                        a.dataNoticia || "";
+                        obterDataOrdenacaoNoticia(a);
 
                     const dataB =
-                        b.dataNoticia || "";
+                        obterDataOrdenacaoNoticia(b);
 
-                    if (dataA && dataB) {
+                    if (dataA !== dataB) {
 
                         return dataB.localeCompare(
                             dataA
                         );
                     }
-
-                    if (dataA) return -1;
-                    if (dataB) return 1;
 
                     return String(
                         b.name || ""
@@ -1374,6 +1611,27 @@ async function carregarNoticias() {
             </div>
         `;
     }
+}
+
+
+function obterDataOrdenacaoNoticia(
+    noticia
+) {
+
+    const data =
+        noticia?.dataNoticia ||
+        noticia?.date ||
+        noticia?.published ||
+        "";
+
+    if (!data) {
+        return "";
+    }
+
+    return String(data).substring(
+        0,
+        10
+    );
 }
 
 
@@ -1506,7 +1764,7 @@ function mostrarLista(lista) {
                                 <span class="news-date">
                                     ${
                                         file.dataNoticia
-                                            ? `📅 ${escaparHtml(file.dataNoticia)}`
+                                            ? `📅 ${escaparHtml(String(file.dataNoticia).substring(0, 10))}`
                                             : "📅 Sem data"
                                     }
                                 </span>
@@ -1536,6 +1794,13 @@ function mostrarLista(lista) {
                                 onclick="previsualizarDaLista('${escaparJs(path)}')"
                             >
                                 👁️ Ver
+                            </button>
+
+                            <button
+                                class="share-btn"
+                                onclick="abrirPartilha('${escaparJs(path)}', '${escaparJs(titulo)}')"
+                            >
+                                📤 Partilhar
                             </button>
 
                             <button
@@ -1847,13 +2112,16 @@ async function editarNoticia(path) {
 
         iniciarEditor();
 
-        const response =
-            await apiFetch(
-                `/api/admin/news?path=${encodeURIComponent(path)}`
-            );
+        /*
+         * Esta consulta já obtém uma versão atual do ficheiro.
+         * O SHA será novamente atualizado no momento de guardar,
+         * para evitar o erro "does not match SHA".
+         */
 
         const data =
-            await response.json();
+            await obterNoticiaAtual(
+                path
+            );
 
         const markdown =
             decodeBase64(
@@ -1905,6 +2173,33 @@ async function editarNoticia(path) {
 
         voltarLista();
     }
+}
+
+
+// ============================================================
+// OBTER VERSÃO ATUAL DE UMA NOTÍCIA
+// ============================================================
+
+async function obterNoticiaAtual(
+    path
+) {
+
+    const response =
+        await apiFetch(
+            `/api/admin/news?path=${encodeURIComponent(path)}`
+        );
+
+    const data =
+        await response.json();
+
+    if (!data || !data.sha) {
+
+        throw new Error(
+            "O GitHub não devolveu o SHA atual da notícia."
+        );
+    }
+
+    return data;
 }
 
 
@@ -2148,7 +2443,9 @@ function markdownSimplesParaHtml(
     markdown =
         limparCaracteresInvisiveis(
             markdown
-        );
+        )
+            .replace(/\r\n/g, "\n")
+            .replace(/\r/g, "\n");
 
     let html =
         escaparHtml(
@@ -2161,146 +2458,203 @@ function markdownSimplesParaHtml(
 
     html =
         html.replace(
-            /^### (.*)$/gm,
+            /^###\s+(.+)$/gm,
             "<h3>$1</h3>"
         );
 
     html =
         html.replace(
-            /^## (.*)$/gm,
+            /^##\s+(.+)$/gm,
             "<h2>$1</h2>"
         );
 
     html =
         html.replace(
-            /^# (.*)$/gm,
+            /^#\s+(.+)$/gm,
             "<h1>$1</h1>"
         );
 
 
     /*
-     * Negrito e itálico
+     * Negrito
      */
 
     html =
         html.replace(
-            /\*\*(.*?)\*\*/g,
+            /\*\*(.+?)\*\*/g,
             "<strong>$1</strong>"
         );
 
     html =
         html.replace(
-            /(^|[^*])\*(?!\s)(.*?)(?<!\s)\*(?!\*)/g,
-            "$1<em>$2</em>"
+            /__(.+?)__/g,
+            "<strong>$1</strong>"
         );
 
 
     /*
-     * Listas com marcadores.
+     * Itálico com asteriscos
+     */
+
+    html =
+        html.replace(
+            /(?<!\*)\*([^*\n]+)\*(?!\*)/g,
+            "<em>$1</em>"
+        );
+
+
+    /*
+     * Itálico com underscores
+     */
+
+    html =
+        html.replace(
+            /(?<!_)_([^_\n]+)_(?!_)/g,
+            "<em>$1</em>"
+        );
+
+
+    /*
+     * Processamento linha a linha.
      *
-     * Aceita tanto:
+     * Aceita:
      * - item
      * * item
+     * + item
+     *
+     * e:
+     * 1. item
+     * 2. item
      */
 
-    html =
-        html.replace(
-            /(?:^|\n)(?:[-*])\s+(.*?)(?=\n(?![-*]\s)|$)/gs,
-            function(match, items) {
+    const linhas =
+        html.split("\n");
 
-                const linhas =
-                    items
-                        .split(/\n/)
-                        .map(
-                            linha =>
-                                linha.trim()
-                        )
-                        .filter(Boolean);
+    const resultado = [];
 
-                return (
-                    "\n<ul>" +
-                    linhas
-                        .map(
-                            linha =>
-                                `<li>${linha}</li>`
-                        )
-                        .join("") +
-                    "</ul>\n"
+    let emUl = false;
+    let emOl = false;
+
+    function fecharListas() {
+
+        if (emUl) {
+
+            resultado.push("</ul>");
+
+            emUl = false;
+        }
+
+        if (emOl) {
+
+            resultado.push("</ol>");
+
+            emOl = false;
+        }
+    }
+
+    for (
+        const linha of linhas
+    ) {
+
+        const bullet =
+            linha.match(
+                /^[ \t]*[-*+][ \t]+(.+)$/
+            );
+
+        const ordered =
+            linha.match(
+                /^[ \t]*\d+\.[ \t]+(.+)$/
+            );
+
+        if (bullet) {
+
+            if (emOl) {
+
+                resultado.push(
+                    "</ol>"
                 );
+
+                emOl = false;
             }
-        );
 
+            if (!emUl) {
 
-    /*
-     * Listas numeradas.
-     */
-
-    html =
-        html.replace(
-            /(?:^|\n)(?:\d+\.)\s+(.*?)(?=\n(?!\d+\.\s)|$)/gs,
-            function(match, items) {
-
-                const linhas =
-                    items
-                        .split(/\n/)
-                        .map(
-                            linha =>
-                                linha.replace(
-                                    /^\d+\.\s+/,
-                                    ""
-                                ).trim()
-                        )
-                        .filter(Boolean);
-
-                return (
-                    "\n<ol>" +
-                    linhas
-                        .map(
-                            linha =>
-                                `<li>${linha}</li>`
-                        )
-                        .join("") +
-                    "</ol>\n"
+                resultado.push(
+                    "<ul>"
                 );
+
+                emUl = true;
             }
-        );
 
+            resultado.push(
+                `<li>${bullet[1]}</li>`
+            );
 
-    /*
-     * Parágrafos.
-     */
+            continue;
+        }
 
-    const blocos =
-        html
-            .split(/\n{2,}/)
-            .map(
-                bloco =>
-                    bloco.trim()
+        if (ordered) {
+
+            if (emUl) {
+
+                resultado.push(
+                    "</ul>"
+                );
+
+                emUl = false;
+            }
+
+            if (!emOl) {
+
+                resultado.push(
+                    "<ol>"
+                );
+
+                emOl = true;
+            }
+
+            resultado.push(
+                `<li>${ordered[1]}</li>`
+            );
+
+            continue;
+        }
+
+        fecharListas();
+
+        if (!linha.trim()) {
+
+            resultado.push("");
+
+            continue;
+        }
+
+        if (
+            /^<h[123]>/.test(
+                linha
             )
-            .filter(Boolean);
+        ) {
 
-    html =
-        blocos
-            .map(bloco => {
+            resultado.push(
+                linha
+            );
 
-                if (
-                    /^<h[123]>/.test(bloco) ||
-                    /^<(ul|ol)>/.test(bloco)
-                ) {
-                    return bloco;
-                }
+        } else {
 
-                if (
-                    /^<p>/.test(bloco)
-                ) {
-                    return bloco;
-                }
+            resultado.push(
+                `<p>${linha}</p>`
+            );
+        }
+    }
 
-                return `<p>${bloco.replace(/\n/g, "<br>")}</p>`;
-            })
-            .join("\n");
+    fecharListas();
 
-    return html;
+    return resultado
+        .join("\n")
+        .replace(
+            /<p>\s*<\/p>/g,
+            ""
+        );
 }
 
 
@@ -2380,6 +2734,10 @@ async function guardarNoticia() {
         let finalImageUrl =
             imgUrl;
 
+        /*
+         * Upload de imagem
+         */
+
         const imageData =
             await uploadImage();
 
@@ -2422,10 +2780,6 @@ async function guardarNoticia() {
 
         /*
          * Converte o conteúdo do Quill para Markdown.
-         *
-         * A configuração bulletListMarker garante
-         * que listas de marcadores sejam gravadas
-         * como "- item".
          */
 
         const htmlContent =
@@ -2433,14 +2787,11 @@ async function guardarNoticia() {
 
         const turndownService =
             new TurndownService({
-                bulletListMarker: "-"
+                bulletListMarker: "-",
+                codeBlockStyle: "fenced",
+                emDelimiter: "_",
+                strongDelimiter: "**"
             });
-
-
-        /*
-         * Remove caracteres invisíveis antes
-         * de converter para Markdown.
-         */
 
         const htmlLimpo =
             limparCaracteresInvisiveis(
@@ -2451,11 +2802,6 @@ async function guardarNoticia() {
             turndownService.turndown(
                 htmlLimpo
             );
-
-
-        /*
-         * Limpeza final do Markdown.
-         */
 
         markdownBody =
             limparCaracteresInvisiveis(
@@ -2482,6 +2828,11 @@ async function guardarNoticia() {
                 finalImageUrl,
                 markdownBody
             );
+
+
+        /*
+         * NOVA NOTÍCIA
+         */
 
         if (!noticiaEmEdicao) {
 
@@ -2523,6 +2874,37 @@ async function guardarNoticia() {
 
         } else {
 
+            /*
+             * CORREÇÃO DO ERRO SHA
+             *
+             * Nunca usamos apenas o SHA que ficou
+             * guardado quando a notícia foi aberta.
+             *
+             * Voltamos ao GitHub imediatamente antes
+             * do PUT para obter o SHA mais recente.
+             */
+
+            statusEl.innerText =
+                "A verificar a versão atual da notícia...";
+
+            const noticiaAtual =
+                await obterNoticiaAtual(
+                    noticiaEmEdicao.path
+                );
+
+            const shaAtual =
+                noticiaAtual.sha;
+
+            /*
+             * Atualizamos também o objeto local.
+             */
+
+            noticiaEmEdicao.sha =
+                shaAtual;
+
+            statusEl.innerText =
+                "A guardar alterações...";
+
             await apiFetch(
                 `/api/admin/news?path=${encodeURIComponent(noticiaEmEdicao.path)}`,
                 {
@@ -2545,7 +2927,7 @@ async function guardarNoticia() {
                                 ),
 
                             sha:
-                                noticiaEmEdicao.sha
+                                shaAtual
                         })
                 }
             );
@@ -2633,6 +3015,21 @@ async function apagarNoticia() {
 
     try {
 
+        /*
+         * Obter SHA atual antes de apagar.
+         */
+
+        const noticiaAtual =
+            await obterNoticiaAtual(
+                noticiaEmEdicao.path
+            );
+
+        const shaAtual =
+            noticiaAtual.sha;
+
+        noticiaEmEdicao.sha =
+            shaAtual;
+
         await apiFetch(
             `/api/admin/news?path=${encodeURIComponent(noticiaEmEdicao.path)}`,
             {
@@ -2649,7 +3046,7 @@ async function apagarNoticia() {
                             "Apagar notícia",
 
                         sha:
-                            noticiaEmEdicao.sha
+                            shaAtual
                     })
             }
         );
@@ -2694,6 +3091,19 @@ async function apagarDaLista(
 
     try {
 
+        /*
+         * Também aqui ignoramos o SHA antigo da lista.
+         * Buscamos o SHA atual antes do DELETE.
+         */
+
+        const noticiaAtual =
+            await obterNoticiaAtual(
+                path
+            );
+
+        const shaAtual =
+            noticiaAtual.sha;
+
         await apiFetch(
             `/api/admin/news?path=${encodeURIComponent(path)}`,
             {
@@ -2711,7 +3121,7 @@ async function apagarDaLista(
                             titulo,
 
                         sha:
-                            sha
+                            shaAtual
                     })
             }
         );
@@ -3291,6 +3701,297 @@ function fecharPrevisualizacao(
 
 
 // ============================================================
+// PARTILHA
+// ============================================================
+
+function construirUrlPublicaNoticia(
+    path
+) {
+
+    /*
+     * Exemplo:
+     *
+     * content/noticias/minha-noticia.md
+     *
+     * torna-se:
+     *
+     * https://chutapracanto.pages.dev/noticias/minha-noticia
+     */
+
+    const filename =
+        String(path || "")
+            .split("/")
+            .pop()
+            .replace(
+                /\.md$/i,
+                ""
+            );
+
+    return (
+        window.location.origin +
+        "/noticias/" +
+        encodeURIComponent(filename)
+    );
+}
+
+
+function abrirPartilha(
+    path,
+    titulo
+) {
+
+    const url =
+        construirUrlPublicaNoticia(
+            path
+        );
+
+    noticiaParaPartilhar = {
+
+        titulo:
+            titulo ||
+            "ChutaPraCanto",
+
+        url:
+            url
+    };
+
+    document
+        .getElementById("share-title")
+        .innerText =
+            noticiaParaPartilhar.titulo;
+
+    document
+        .getElementById("share-url")
+        .innerText =
+            noticiaParaPartilhar.url;
+
+    const nativeButton =
+        document.getElementById(
+            "share-native-btn"
+        );
+
+    if (
+        navigator.share
+    ) {
+
+        nativeButton.classList.remove(
+            "hidden"
+        );
+
+    } else {
+
+        nativeButton.classList.add(
+            "hidden"
+        );
+    }
+
+    document
+        .getElementById("share-overlay")
+        .classList
+        .remove("hidden");
+
+    document.body.style.overflow =
+        "hidden";
+}
+
+
+function fecharPartilha(
+    event
+) {
+
+    if (
+        event &&
+        event.target !==
+            document.getElementById(
+                "share-overlay"
+            )
+    ) {
+        return;
+    }
+
+    document
+        .getElementById(
+            "share-overlay"
+        )
+        .classList
+        .add("hidden");
+
+    document.body.style.overflow =
+        "";
+}
+
+
+function partilharWhatsApp() {
+
+    const texto =
+        `${noticiaParaPartilhar.titulo}\n\n${noticiaParaPartilhar.url}`;
+
+    const url =
+        "https://wa.me/?text=" +
+        encodeURIComponent(
+            texto
+        );
+
+    window.open(
+        url,
+        "_blank",
+        "noopener,noreferrer"
+    );
+}
+
+
+function partilharFacebook() {
+
+    const url =
+        "https://www.facebook.com/sharer/sharer.php?u=" +
+        encodeURIComponent(
+            noticiaParaPartilhar.url
+        );
+
+    window.open(
+        url,
+        "_blank",
+        "noopener,noreferrer,width=700,height=600"
+    );
+}
+
+
+function partilharX() {
+
+    const texto =
+        noticiaParaPartilhar.titulo;
+
+    const url =
+        "https://twitter.com/intent/tweet?text=" +
+        encodeURIComponent(
+            texto
+        ) +
+        "&url=" +
+        encodeURIComponent(
+            noticiaParaPartilhar.url
+        );
+
+    window.open(
+        url,
+        "_blank",
+        "noopener,noreferrer,width=700,height=600"
+    );
+}
+
+
+async function copiarLinkNoticia() {
+
+    try {
+
+        await navigator.clipboard.writeText(
+            noticiaParaPartilhar.url
+        );
+
+        const button =
+            document.querySelector(
+                ".share-copy"
+            );
+
+        const textoOriginal =
+            button.innerText;
+
+        button.innerText =
+            "✅ Link copiado!";
+
+        setTimeout(
+            () => {
+
+                button.innerText =
+                    textoOriginal;
+
+            },
+            1800
+        );
+
+    } catch (error) {
+
+        /*
+         * Fallback para browsers onde
+         * navigator.clipboard não está disponível.
+         */
+
+        const textarea =
+            document.createElement(
+                "textarea"
+            );
+
+        textarea.value =
+            noticiaParaPartilhar.url;
+
+        textarea.style.position =
+            "fixed";
+
+        textarea.style.opacity =
+            "0";
+
+        document.body.appendChild(
+            textarea
+        );
+
+        textarea.select();
+
+        try {
+
+            document.execCommand(
+                "copy"
+            );
+
+            alert(
+                "Link copiado!"
+            );
+
+        } catch (copyError) {
+
+            alert(
+                "Não foi possível copiar o link automaticamente.\n\n" +
+                noticiaParaPartilhar.url
+            );
+        }
+
+        textarea.remove();
+    }
+}
+
+
+async function partilharNativamente() {
+
+    if (
+        !navigator.share
+    ) {
+
+        return;
+    }
+
+    try {
+
+        await navigator.share({
+
+            title:
+                noticiaParaPartilhar.titulo,
+
+            text:
+                noticiaParaPartilhar.titulo,
+
+            url:
+                noticiaParaPartilhar.url
+        });
+
+    } catch (error) {
+
+        /*
+         * Cancelar a janela de partilha
+         * não é um erro para o utilizador.
+         */
+    }
+}
+
+
+// ============================================================
 // IMAGENS
 // ============================================================
 
@@ -3548,6 +4249,55 @@ function mostrarSucesso(
     statusEl.innerText =
         mensagem;
 }
+
+
+// ============================================================
+// TECLA ESC PARA FECHAR MODAIS
+// ============================================================
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key !== "Escape"
+        ) {
+            return;
+        }
+
+        const shareOverlay =
+            document.getElementById(
+                "share-overlay"
+            );
+
+        const previewOverlay =
+            document.getElementById(
+                "preview-overlay"
+            );
+
+        if (
+            shareOverlay &&
+            !shareOverlay.classList.contains(
+                "hidden"
+            )
+        ) {
+
+            fecharPartilha();
+
+            return;
+        }
+
+        if (
+            previewOverlay &&
+            !previewOverlay.classList.contains(
+                "hidden"
+            )
+        ) {
+
+            fecharPrevisualizacao();
+        }
+    }
+);
 
 
 // ============================================================
