@@ -580,6 +580,7 @@
         .share-modal h2 {
             margin-bottom: 8px;
             padding-bottom: 12px;
+            padding-right: 40px;
         }
 
         .share-title {
@@ -1553,36 +1554,62 @@ async function carregarNoticias() {
         /*
          * Ordenação:
          *
-         * 1. Data mais recente primeiro.
-         * 2. Se não houver data, usa o nome do ficheiro
-         *    como desempate.
+         * A data pode vir da API com nomes diferentes.
+         *
+         * Aceitamos:
+         * published
+         * date
+         * dataNoticia
+         * data
+         *
+         * A mais recente aparece sempre primeiro.
          */
 
-        noticias =
-            noticias.sort(
-                (a, b) => {
+        noticias.sort(
+            (a, b) => {
 
-                    const dataA =
-                        obterDataOrdenacaoNoticia(a);
+                const timestampA =
+                    obterTimestampNoticia(a);
 
-                    const dataB =
-                        obterDataOrdenacaoNoticia(b);
+                const timestampB =
+                    obterTimestampNoticia(b);
 
-                    if (dataA !== dataB) {
+                if (
+                    timestampA !== null &&
+                    timestampB !== null
+                ) {
 
-                        return dataB.localeCompare(
-                            dataA
+                    if (
+                        timestampB !== timestampA
+                    ) {
+
+                        return (
+                            timestampB -
+                            timestampA
                         );
                     }
-
-                    return String(
-                        b.name || ""
-                    ).localeCompare(
-                        String(a.name || ""),
-                        "pt"
-                    );
                 }
-            );
+
+                if (
+                    timestampA !== null
+                ) {
+                    return -1;
+                }
+
+                if (
+                    timestampB !== null
+                ) {
+                    return 1;
+                }
+
+                return String(
+                    b.name || ""
+                ).localeCompare(
+                    String(a.name || ""),
+                    "pt"
+                );
+            }
+        );
 
         noticiasFiltradas =
             [...noticias];
@@ -1614,23 +1641,197 @@ async function carregarNoticias() {
 }
 
 
-function obterDataOrdenacaoNoticia(
+// ============================================================
+// DATA DA NOTÍCIA
+// ============================================================
+
+function obterDataNoticia(
     noticia
 ) {
 
-    const data =
-        noticia?.dataNoticia ||
-        noticia?.date ||
-        noticia?.published ||
-        "";
-
-    if (!data) {
+    if (!noticia) {
         return "";
     }
 
-    return String(data).substring(
-        0,
-        10
+    return (
+        noticia.published ||
+        noticia.date ||
+        noticia.dataNoticia ||
+        noticia.data ||
+        ""
+    );
+}
+
+
+function obterTimestampNoticia(
+    noticia
+) {
+
+    const valor =
+        obterDataNoticia(
+            noticia
+        );
+
+    if (!valor) {
+        return null;
+    }
+
+    const texto =
+        String(valor).trim();
+
+    if (!texto) {
+        return null;
+    }
+
+    /*
+     * Primeiro tentamos interpretar
+     * a data diretamente.
+     *
+     * Exemplos aceites:
+     *
+     * 2026-09-16
+     * 2026-09-16T20:30:00.000Z
+     * 2026-09-16T20:30:00
+     */
+
+    const timestamp =
+        Date.parse(
+            texto
+        );
+
+    if (
+        !Number.isNaN(timestamp)
+    ) {
+
+        return timestamp;
+    }
+
+    /*
+     * Caso a API devolva uma data num
+     * formato menos habitual, tentamos
+     * pelo menos reconhecer YYYY-MM-DD.
+     */
+
+    const match =
+        texto.match(
+            /^(\d{4})-(\d{2})-(\d{2})/
+        );
+
+    if (match) {
+
+        const ano =
+            Number(match[1]);
+
+        const mes =
+            Number(match[2]) - 1;
+
+        const dia =
+            Number(match[3]);
+
+        const fallback =
+            new Date(
+                ano,
+                mes,
+                dia
+            ).getTime();
+
+        if (
+            !Number.isNaN(fallback)
+        ) {
+
+            return fallback;
+        }
+    }
+
+    return null;
+}
+
+
+function formatarDataNoticia(
+    noticia
+) {
+
+    const valor =
+        obterDataNoticia(
+            noticia
+        );
+
+    if (!valor) {
+        return "📅 Sem data";
+    }
+
+    const texto =
+        String(valor).trim();
+
+    /*
+     * Para o admin mostramos apenas
+     * a parte da data, mantendo o formato
+     * simples YYYY-MM-DD.
+     */
+
+    const match =
+        texto.match(
+            /^(\d{4})-(\d{2})-(\d{2})/
+        );
+
+    if (match) {
+
+        return (
+            "📅 " +
+            match[1] +
+            "-" +
+            match[2] +
+            "-" +
+            match[3]
+        );
+    }
+
+    const timestamp =
+        Date.parse(
+            texto
+        );
+
+    if (
+        !Number.isNaN(timestamp)
+    ) {
+
+        const data =
+            new Date(
+                timestamp
+            );
+
+        const ano =
+            data.getFullYear();
+
+        const mes =
+            String(
+                data.getMonth() + 1
+            ).padStart(
+                2,
+                "0"
+            );
+
+        const dia =
+            String(
+                data.getDate()
+            ).padStart(
+                2,
+                "0"
+            );
+
+        return (
+            "📅 " +
+            ano +
+            "-" +
+            mes +
+            "-" +
+            dia
+        );
+    }
+
+    return (
+        "📅 " +
+        texto
     );
 }
 
@@ -1705,11 +1906,16 @@ function mostrarLista(lista) {
 
                 const categoria =
                     file.categoria ||
+                    file.category ||
                     "";
 
                 const imagem =
                     normalizarUrlImagem(
-                        file.imagem
+                        file.imagem ||
+                        file.image ||
+                        file.featured_image ||
+                        file.featuredImage ||
+                        ""
                     );
 
                 const path =
@@ -1717,6 +1923,11 @@ function mostrarLista(lista) {
 
                 const sha =
                     file.sha || "";
+
+                const dataFormatada =
+                    formatarDataNoticia(
+                        file
+                    );
 
                 const imagemHtml =
                     imagem
@@ -1762,18 +1973,18 @@ function mostrarLista(lista) {
                                 }
 
                                 <span class="news-date">
-                                    ${
-                                        file.dataNoticia
-                                            ? `📅 ${escaparHtml(String(file.dataNoticia).substring(0, 10))}`
-                                            : "📅 Sem data"
-                                    }
+                                    ${escaparHtml(dataFormatada)}
                                 </span>
 
                                 ${
-                                    file.autor
+                                    file.autor ||
+                                    file.author
                                         ? `
                                             <span class="news-author">
-                                                ✍️ ${escaparHtml(file.autor)}
+                                                ✍️ ${escaparHtml(
+                                                    file.autor ||
+                                                    file.author
+                                                )}
                                             </span>
                                         `
                                         : ""
@@ -1988,18 +2199,21 @@ function filtrarLista() {
                 const categoria =
                     (
                         file.categoria ||
+                        file.category ||
                         ""
                     ).toLowerCase();
 
                 const autor =
                     (
                         file.autor ||
+                        file.author ||
                         ""
                     ).toLowerCase();
 
                 const subtitulo =
                     (
                         file.subtitulo ||
+                        file.subtitle ||
                         ""
                     ).toLowerCase();
 
@@ -2111,12 +2325,6 @@ async function editarNoticia(path) {
             "A carregar notícia...";
 
         iniciarEditor();
-
-        /*
-         * Esta consulta já obtém uma versão atual do ficheiro.
-         * O SHA será novamente atualizado no momento de guardar,
-         * para evitar o erro "does not match SHA".
-         */
 
         const data =
             await obterNoticiaAtual(
@@ -2352,13 +2560,16 @@ function preencherFormulario(
         obterCampo(
             fields,
             "date",
-            "published"
+            "published",
+            "dataNoticia",
+            "data"
         );
 
     const autor =
         obterCampo(
             fields,
-            "author"
+            "author",
+            "autor"
         ) ||
         "ChutaPraCanto";
 
@@ -2395,7 +2606,7 @@ function preencherFormulario(
         .getElementById("noticia-data")
         .value =
         data
-            ? data.substring(0, 10)
+            ? String(data).substring(0, 10)
             : "";
 
     document
@@ -2452,10 +2663,6 @@ function markdownSimplesParaHtml(
             markdown
         );
 
-    /*
-     * Cabeçalhos
-     */
-
     html =
         html.replace(
             /^###\s+(.+)$/gm,
@@ -2474,11 +2681,6 @@ function markdownSimplesParaHtml(
             "<h1>$1</h1>"
         );
 
-
-    /*
-     * Negrito
-     */
-
     html =
         html.replace(
             /\*\*(.+?)\*\*/g,
@@ -2491,41 +2693,17 @@ function markdownSimplesParaHtml(
             "<strong>$1</strong>"
         );
 
-
-    /*
-     * Itálico com asteriscos
-     */
-
     html =
         html.replace(
             /(?<!\*)\*([^*\n]+)\*(?!\*)/g,
             "<em>$1</em>"
         );
 
-
-    /*
-     * Itálico com underscores
-     */
-
     html =
         html.replace(
             /(?<!_)_([^_\n]+)_(?!_)/g,
             "<em>$1</em>"
         );
-
-
-    /*
-     * Processamento linha a linha.
-     *
-     * Aceita:
-     * - item
-     * * item
-     * + item
-     *
-     * e:
-     * 1. item
-     * 2. item
-     */
 
     const linhas =
         html.split("\n");
@@ -2734,10 +2912,6 @@ async function guardarNoticia() {
         let finalImageUrl =
             imgUrl;
 
-        /*
-         * Upload de imagem
-         */
-
         const imageData =
             await uploadImage();
 
@@ -2777,11 +2951,6 @@ async function guardarNoticia() {
                 `/images/uploads/${uniqueName}`;
         }
 
-
-        /*
-         * Converte o conteúdo do Quill para Markdown.
-         */
-
         const htmlContent =
             quill.root.innerHTML;
 
@@ -2817,7 +2986,6 @@ async function guardarNoticia() {
                 )
                 .trim();
 
-
         const fileContent =
             construirMarkdown(
                 titulo,
@@ -2828,11 +2996,6 @@ async function guardarNoticia() {
                 finalImageUrl,
                 markdownBody
             );
-
-
-        /*
-         * NOVA NOTÍCIA
-         */
 
         if (!noticiaEmEdicao) {
 
@@ -2874,16 +3037,6 @@ async function guardarNoticia() {
 
         } else {
 
-            /*
-             * CORREÇÃO DO ERRO SHA
-             *
-             * Nunca usamos apenas o SHA que ficou
-             * guardado quando a notícia foi aberta.
-             *
-             * Voltamos ao GitHub imediatamente antes
-             * do PUT para obter o SHA mais recente.
-             */
-
             statusEl.innerText =
                 "A verificar a versão atual da notícia...";
 
@@ -2894,10 +3047,6 @@ async function guardarNoticia() {
 
             const shaAtual =
                 noticiaAtual.sha;
-
-            /*
-             * Atualizamos também o objeto local.
-             */
 
             noticiaEmEdicao.sha =
                 shaAtual;
@@ -3015,10 +3164,6 @@ async function apagarNoticia() {
 
     try {
 
-        /*
-         * Obter SHA atual antes de apagar.
-         */
-
         const noticiaAtual =
             await obterNoticiaAtual(
                 noticiaEmEdicao.path
@@ -3090,11 +3235,6 @@ async function apagarDaLista(
     }
 
     try {
-
-        /*
-         * Também aqui ignoramos o SHA antigo da lista.
-         * Buscamos o SHA atual antes do DELETE.
-         */
 
         const noticiaAtual =
             await obterNoticiaAtual(
@@ -3537,13 +3677,16 @@ async function previsualizarDaLista(
             obterCampo(
                 fields,
                 "date",
-                "published"
+                "published",
+                "dataNoticia",
+                "data"
             );
 
         const autor =
             obterCampo(
                 fields,
-                "author"
+                "author",
+                "autor"
             );
 
         const imagem =
@@ -3600,7 +3743,7 @@ async function previsualizarDaLista(
 
             metaParts.push(
                 "📅 " +
-                dataNoticia.substring(
+                String(dataNoticia).substring(
                     0,
                     10
                 )
@@ -3707,16 +3850,6 @@ function fecharPrevisualizacao(
 function construirUrlPublicaNoticia(
     path
 ) {
-
-    /*
-     * Exemplo:
-     *
-     * content/noticias/minha-noticia.md
-     *
-     * torna-se:
-     *
-     * https://chutapracanto.pages.dev/noticias/minha-noticia
-     */
 
     const filename =
         String(path || "")
@@ -3883,9 +4016,21 @@ async function copiarLinkNoticia() {
 
     try {
 
-        await navigator.clipboard.writeText(
-            noticiaParaPartilhar.url
-        );
+        if (
+            navigator.clipboard &&
+            navigator.clipboard.writeText
+        ) {
+
+            await navigator.clipboard.writeText(
+                noticiaParaPartilhar.url
+            );
+
+        } else {
+
+            throw new Error(
+                "Clipboard indisponível"
+            );
+        }
 
         const button =
             document.querySelector(
@@ -3910,11 +4055,6 @@ async function copiarLinkNoticia() {
 
     } catch (error) {
 
-        /*
-         * Fallback para browsers onde
-         * navigator.clipboard não está disponível.
-         */
-
         const textarea =
             document.createElement(
                 "textarea"
@@ -3933,6 +4073,7 @@ async function copiarLinkNoticia() {
             textarea
         );
 
+        textarea.focus();
         textarea.select();
 
         try {
@@ -3941,8 +4082,25 @@ async function copiarLinkNoticia() {
                 "copy"
             );
 
-            alert(
-                "Link copiado!"
+            const button =
+                document.querySelector(
+                    ".share-copy"
+                );
+
+            const textoOriginal =
+                button.innerText;
+
+            button.innerText =
+                "✅ Link copiado!";
+
+            setTimeout(
+                () => {
+
+                    button.innerText =
+                        textoOriginal;
+
+                },
+                1800
             );
 
         } catch (copyError) {
@@ -3951,9 +4109,11 @@ async function copiarLinkNoticia() {
                 "Não foi possível copiar o link automaticamente.\n\n" +
                 noticiaParaPartilhar.url
             );
-        }
 
-        textarea.remove();
+        } finally {
+
+            textarea.remove();
+        }
     }
 }
 
