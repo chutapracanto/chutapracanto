@@ -486,8 +486,8 @@ function construirUrlImagem(imagem, origin) {
 
 function obterSlugDaNoticia(url) {
   if (
-    url.pathname !== "/noticia.html" &&
-    url.pathname !== "/noticia"
+    url.pathname !== "/noticia" &&
+    url.pathname !== "/noticia.html"
   ) {
     return "";
   }
@@ -504,6 +504,13 @@ function obterSlugDaNoticia(url) {
   }
 
   return slug.replace(/\.md$/i, "");
+}
+
+function construirUrlPublicaNoticia(origin, slug) {
+  return (
+    `${origin}/noticia?slug=` +
+    encodeURIComponent(slug)
+  );
 }
 
 function isSocialCrawler(request) {
@@ -621,7 +628,10 @@ async function obterDadosPartilha(env, slug, origin) {
       );
 
     const noticiaUrl =
-      `${origin}/noticia.html?slug=${encodeURIComponent(slug)}`;
+      construirUrlPublicaNoticia(
+        origin,
+        slug
+      );
 
     return {
       title,
@@ -683,7 +693,7 @@ async function prepararPaginaParaPartilha(
 
   headers.set(
     "Cache-Control",
-    "public, max-age=60"
+    "no-cache, no-store, must-revalidate"
   );
 
   headers.delete("Content-Length");
