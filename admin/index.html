@@ -112,6 +112,11 @@
             background: #1d4ed8;
         }
 
+        .main-btn:disabled {
+            opacity: 0.6;
+            cursor: default;
+        }
+
         .secondary-btn {
             background: #e5e7eb;
             color: #333;
@@ -373,6 +378,8 @@
             text-align: center;
             font-weight: 600;
             display: none;
+            white-space: pre-wrap;
+            word-break: break-word;
         }
 
         .loading {
@@ -579,7 +586,6 @@
 
 <div class="container">
 
-    <!-- LOGIN -->
     <div id="login-screen" class="panel login-box">
 
         <h2>Acesso ao Painel</h2>
@@ -617,10 +623,8 @@
     </div>
 
 
-    <!-- ADMIN -->
     <div id="admin-screen" class="panel hidden">
 
-        <!-- LISTA -->
         <div id="list-screen">
 
             <div class="top-actions">
@@ -674,7 +678,6 @@
         </div>
 
 
-        <!-- FORMULÁRIO -->
         <div
             id="form-screen"
             class="hidden"
@@ -863,7 +866,6 @@
 </div>
 
 
-<!-- PREVIEW -->
 <div
     id="preview-overlay"
     class="preview-overlay hidden"
@@ -992,9 +994,10 @@ async function entrar() {
                 const data =
                     await response.json();
 
-                if (data.message) {
-                    mensagem = data.message;
-                }
+                mensagem =
+                    data?.message ||
+                    data?.error ||
+                    mensagem;
 
             } catch (e) {}
 
@@ -1008,7 +1011,8 @@ async function entrar() {
     } catch (error) {
 
         mostrarLoginStatus(
-            error.message,
+            error?.message ||
+            "Não foi possível iniciar sessão.",
             false
         );
 
@@ -1122,17 +1126,29 @@ async function apiFetch(
     options = {}
 ) {
 
-    const response =
-        await fetch(
-            endpoint,
-            {
-                ...options,
-                credentials: "same-origin",
-                headers: {
-                    ...(options.headers || {})
+    let response;
+
+    try {
+
+        response =
+            await fetch(
+                endpoint,
+                {
+                    ...options,
+                    credentials: "same-origin",
+                    headers: {
+                        ...(options.headers || {})
+                    }
                 }
-            }
+            );
+
+    } catch (networkError) {
+
+        throw new Error(
+            networkError?.message ||
+            "Não foi possível contactar o servidor."
         );
+    }
 
     if (
         response.status === 401
@@ -1148,33 +1164,50 @@ async function apiFetch(
     if (!response.ok) {
 
         let mensagem =
-            `Erro: ${response.status}`;
+            `Erro HTTP ${response.status}`;
 
         try {
 
-            const data =
-                await response.json();
+            const contentType =
+                response.headers.get(
+                    "content-type"
+                ) || "";
 
-            if (data.message) {
+            if (
+                contentType.includes(
+                    "application/json"
+                )
+            ) {
+
+                const data =
+                    await response.json();
+
                 mensagem =
-                    data.message;
-            }
+                    data?.message ||
+                    data?.error ||
+                    mensagem;
 
-        } catch (e) {
-
-            try {
+            } else {
 
                 const text =
                     await response.text();
 
-                if (text) {
-                    mensagem = text;
-                }
+                if (text && text.trim()) {
 
-            } catch (e2) {}
+                    mensagem =
+                        text.trim();
+                }
+            }
+
+        } catch (parseError) {
+
+            // Mantemos a mensagem HTTP original.
         }
 
-        throw new Error(mensagem);
+        throw new Error(
+            mensagem ||
+            `Erro HTTP ${response.status}`
+        );
     }
 
     return response;
@@ -1317,7 +1350,10 @@ async function carregarNoticias() {
 
                 <br><br>
 
-                ${escaparHtml(error.message)}
+                ${escaparHtml(
+                    error?.message ||
+                    "Erro desconhecido."
+                )}
 
             </div>
         `;
@@ -1845,7 +1881,10 @@ async function editarNoticia(path) {
 
         alert(
             "Não foi possível abrir a notícia:\n\n" +
-            error.message
+            (
+                error?.message ||
+                "Erro desconhecido."
+            )
         );
 
         voltarLista();
@@ -2380,7 +2419,10 @@ async function guardarNoticia() {
 
         statusEl.innerText =
             "Erro: " +
-            error.message;
+            (
+                error?.message ||
+                "Erro desconhecido."
+            );
     }
 }
 
@@ -2473,7 +2515,10 @@ async function apagarNoticia() {
 
         alert(
             "Não foi possível apagar a notícia:\n\n" +
-            error.message
+            (
+                error?.message ||
+                "Erro desconhecido."
+            )
         );
     }
 }
@@ -2528,7 +2573,10 @@ async function apagarDaLista(
 
         alert(
             "Não foi possível apagar a notícia:\n\n" +
-            error.message
+            (
+                error?.message ||
+                "Erro desconhecido."
+            )
         );
     }
 }
@@ -2565,9 +2613,28 @@ async function uploadImage() {
 
                     try {
 
+                        const result =
+                            reader.result;
+
+                        if (
+                            typeof result !== "string" ||
+                            !result.includes(",")
+                        ) {
+
+                            throw new Error(
+                                "Não foi possível ler a imagem selecionada."
+                            );
+                        }
+
                         const base64Content =
-                            reader.result
-                                .split(",")[1];
+                            result.split(",")[1];
+
+                        if (!base64Content) {
+
+                            throw new Error(
+                                "A imagem não contém dados válidos."
+                            );
+                        }
 
                         resolve({
 
@@ -2585,7 +2652,14 @@ async function uploadImage() {
                 };
 
             reader.onerror =
-                reject;
+                () => {
+
+                    reject(
+                        new Error(
+                            "Não foi possível ler o ficheiro de imagem."
+                        )
+                    );
+                };
 
             reader.readAsDataURL(
                 file
@@ -3032,7 +3106,10 @@ async function previsualizarDaLista(
 
         alert(
             "Não foi possível abrir a pré-visualização:\n\n" +
-            error.message
+            (
+                error?.message ||
+                "Erro desconhecido."
+            )
         );
     }
 }
