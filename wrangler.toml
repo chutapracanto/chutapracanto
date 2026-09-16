@@ -1,4 +1,5 @@
 name = "chutapracanto"
+main = "_worker.js"
 compatibility_date = "2026-09-16"
 
 [assets]
