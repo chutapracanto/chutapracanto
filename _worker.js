@@ -1,8 +1,16 @@
 const SESSION_MAX_AGE = 8 * 60 * 60;
+
 const GITHUB_API = "https://api.github.com";
 const GITHUB_OWNER = "chutapracanto";
 const GITHUB_REPO = "chutapracanto";
 const GITHUB_BRANCH = "main";
+
+const SESSION_COOKIE_NAME = "cpc_session";
+
+
+// ============================================================
+// RESPOSTAS
+// ============================================================
 
 function json(data, status = 200, extraHeaders = {}) {
   return new Response(JSON.stringify(data), {
@@ -15,6 +23,11 @@ function json(data, status = 200, extraHeaders = {}) {
   });
 }
 
+
+// ============================================================
+// COOKIES
+// ============================================================
+
 function getCookie(request, name) {
   const cookieHeader = request.headers.get("Cookie") || "";
 
@@ -24,12 +37,21 @@ function getCookie(request, name) {
     const [key, ...valueParts] = cookie.trim().split("=");
 
     if (key === name) {
-      return decodeURIComponent(valueParts.join("="));
+      try {
+        return decodeURIComponent(valueParts.join("="));
+      } catch {
+        return valueParts.join("=");
+      }
     }
   }
 
   return null;
 }
+
+
+// ============================================================
+// BASE64 URL
+// ============================================================
 
 function base64UrlEncode(bytes) {
   let binary = "";
@@ -60,6 +82,11 @@ function base64UrlDecode(value) {
 
   return bytes;
 }
+
+
+// ============================================================
+// AUTENTICAÇÃO
+// ============================================================
 
 async function getSigningKey(password) {
   const encoder = new TextEncoder();
@@ -93,7 +120,10 @@ async function createSession(password) {
 }
 
 async function verifySession(request, password) {
-  const session = getCookie(request, "cpc_session");
+  const session = getCookie(
+    request,
+    SESSION_COOKIE_NAME
+  );
 
   if (!session) {
     return false;
@@ -108,13 +138,16 @@ async function verifySession(request, password) {
   const timestamp = Number(parts[0]);
   const signature = parts[1];
 
-  if (!Number.isFinite(timestamp)) {
+  if (!Number.isFinite(timestamp) || !signature) {
     return false;
   }
 
   const now = Math.floor(Date.now() / 1000);
 
-  if (now - timestamp < 0 || now - timestamp > SESSION_MAX_AGE) {
+  if (
+    now - timestamp < 0 ||
+    now - timestamp > SESSION_MAX_AGE
+  ) {
     return false;
   }
 
@@ -134,7 +167,7 @@ async function verifySession(request, password) {
 
 function sessionCookie(value) {
   return [
-    `cpc_session=${encodeURIComponent(value)}`,
+    `${SESSION_COOKIE_NAME}=${encodeURIComponent(value)}`,
     "Path=/",
     "HttpOnly",
     "Secure",
@@ -145,20 +178,57 @@ function sessionCookie(value) {
 
 function clearSessionCookie() {
   return [
-    "cpc_session=",
+    `${SESSION_COOKIE_NAME}=`,
     "Path=/",
     "HttpOnly",
     "Secure",
     "SameSite=Strict",
-    "Max-Age=0"
+    "Max-Age=0",
+    "Expires=Thu, 01 Jan 1970 00:00:00 GMT"
   ].join("; ");
 }
+
+async function requireAuth(request, env) {
+  if (!env.ADMIN_PASSWORD) {
+    return json(
+      {
+        error: "ADMIN_PASSWORD não está configurada no Cloudflare.",
+        message: "ADMIN_PASSWORD não está configurada no Cloudflare."
+      },
+      500
+    );
+  }
+
+  const authenticated = await verifySession(
+    request,
+    env.ADMIN_PASSWORD
+  );
+
+  if (!authenticated) {
+    return json(
+      {
+        error: "Não autenticado.",
+        message: "Não autenticado."
+      },
+      401
+    );
+  }
+
+  return null;
+}
+
+
+// ============================================================
+// GITHUB
+// ============================================================
 
 async function githubRequest(env, path, options = {}) {
   const token = env.GITHUB_TOKEN;
 
   if (!token) {
-    throw new Error("GITHUB_TOKEN não está configurado no Cloudflare.");
+    throw new Error(
+      "GITHUB_TOKEN não está configurado no Cloudflare."
+    );
   }
 
   const headers = {
@@ -174,53 +244,69 @@ async function githubRequest(env, path, options = {}) {
   });
 }
 
-function isAllowedContentPath(path) {
-  return (
-    path.startsWith("content/noticias/") ||
-    path.startsWith("images/uploads/")
-  );
-}
 
-async function requireAuth(request, env) {
-  if (!env.ADMIN_PASSWORD) {
-    return json(
-      {
-        error: "ADMIN_PASSWORD não está configurada no Cloudflare."
-      },
-      500
-    );
+// ============================================================
+// SEGURANÇA DOS CAMINHOS
+// ============================================================
+
+function isAllowedNewsPath(path) {
+  if (
+    typeof path !== "string" ||
+    !path ||
+    path.includes("..") ||
+    path.includes("\\") ||
+    path.startsWith("/")
+  ) {
+    return false;
   }
 
-  const authenticated = await verifySession(
-    request,
-    env.ADMIN_PASSWORD
-  );
+  return /^content\/noticias\/[^/]+\.md$/i.test(path);
+}
 
-  if (!authenticated) {
-    return json(
-      {
-        error: "Não autenticado."
-      },
-      401
-    );
+function isAllowedImagePath(path) {
+  if (
+    typeof path !== "string" ||
+    !path ||
+    path.includes("..") ||
+    path.includes("\\") ||
+    path.startsWith("/")
+  ) {
+    return false;
   }
 
-  return null;
+  return /^images\/uploads\/[^/]+$/i.test(path);
 }
+
+
+// ============================================================
+// API ADMIN
+// ============================================================
 
 async function handleAdminAPI(request, env) {
   const url = new URL(request.url);
   const pathname = url.pathname;
 
+
+  // ----------------------------------------------------------
+  // LOGIN
+  // ----------------------------------------------------------
+
   if (pathname === "/api/admin/login") {
     if (request.method !== "POST") {
-      return json({ error: "Método não permitido." }, 405);
+      return json(
+        {
+          error: "Método não permitido.",
+          message: "Método não permitido."
+        },
+        405
+      );
     }
 
     if (!env.ADMIN_PASSWORD) {
       return json(
         {
-          error: "ADMIN_PASSWORD não está configurada."
+          error: "ADMIN_PASSWORD não está configurada.",
+          message: "ADMIN_PASSWORD não está configurada."
         },
         500
       );
@@ -231,23 +317,35 @@ async function handleAdminAPI(request, env) {
     try {
       body = await request.json();
     } catch {
-      return json({ error: "Pedido inválido." }, 400);
-    }
-
-    const password = typeof body.password === "string"
-      ? body.password
-      : "";
-
-    if (!password || password !== env.ADMIN_PASSWORD) {
       return json(
         {
-          error: "Password incorreta."
+          error: "Pedido inválido.",
+          message: "Pedido inválido."
+        },
+        400
+      );
+    }
+
+    const password =
+      typeof body.password === "string"
+        ? body.password
+        : "";
+
+    if (
+      !password ||
+      password !== env.ADMIN_PASSWORD
+    ) {
+      return json(
+        {
+          error: "Palavra-passe incorreta.",
+          message: "Palavra-passe incorreta."
         },
         401
       );
     }
 
-    const session = await createSession(env.ADMIN_PASSWORD);
+    const session =
+      await createSession(env.ADMIN_PASSWORD);
 
     return json(
       {
@@ -260,9 +358,20 @@ async function handleAdminAPI(request, env) {
     );
   }
 
+
+  // ----------------------------------------------------------
+  // LOGOUT
+  // ----------------------------------------------------------
+
   if (pathname === "/api/admin/logout") {
     if (request.method !== "POST") {
-      return json({ error: "Método não permitido." }, 405);
+      return json(
+        {
+          error: "Método não permitido.",
+          message: "Método não permitido."
+        },
+        405
+      );
     }
 
     return json(
@@ -276,12 +385,24 @@ async function handleAdminAPI(request, env) {
     );
   }
 
+
+  // ----------------------------------------------------------
+  // VERIFICAR SESSÃO
+  // ----------------------------------------------------------
+
   if (pathname === "/api/admin/session") {
     if (request.method !== "GET") {
-      return json({ error: "Método não permitido." }, 405);
+      return json(
+        {
+          error: "Método não permitido.",
+          message: "Método não permitido."
+        },
+        405
+      );
     }
 
-    const authError = await requireAuth(request, env);
+    const authError =
+      await requireAuth(request, env);
 
     if (authError) {
       return authError;
@@ -292,76 +413,215 @@ async function handleAdminAPI(request, env) {
     });
   }
 
+
+  // ----------------------------------------------------------
+  // RESTANTES ROTAS ADMIN
+  // ----------------------------------------------------------
+
   if (!pathname.startsWith("/api/admin/")) {
     return null;
   }
 
-  const authError = await requireAuth(request, env);
+  const authError =
+    await requireAuth(request, env);
 
   if (authError) {
     return authError;
   }
 
+
+  // ----------------------------------------------------------
+  // LISTAR NOTÍCIAS
+  // ----------------------------------------------------------
+
   if (pathname === "/api/admin/news/list") {
     if (request.method !== "GET") {
-      return json({ error: "Método não permitido." }, 405);
+      return json(
+        {
+          error: "Método não permitido.",
+          message: "Método não permitido."
+        },
+        405
+      );
     }
 
-    const page = Math.max(
-      1,
-      Number(url.searchParams.get("page") || "1")
-    );
+    const pageValue =
+      Number(
+        url.searchParams.get("page") || "1"
+      );
+
+    const page =
+      Number.isFinite(pageValue) && pageValue >= 1
+        ? Math.floor(pageValue)
+        : 1;
 
     const perPage = 100;
 
-    const githubResponse = await githubRequest(
-      env,
-      `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/content/noticias?ref=${encodeURIComponent(GITHUB_BRANCH)}&per_page=${perPage}&page=${page}`,
-      {
-        method: "GET"
-      }
+    const githubResponse =
+      await githubRequest(
+        env,
+        `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/content/noticias?ref=${encodeURIComponent(GITHUB_BRANCH)}&per_page=${perPage}&page=${page}`,
+        {
+          method: "GET"
+        }
+      );
+
+    const responseText =
+      await githubResponse.text();
+
+    let data;
+
+    try {
+      data = JSON.parse(responseText);
+    } catch {
+      data = {
+        error: responseText || "Resposta inválida do GitHub."
+      };
+    }
+
+    return json(
+      data,
+      githubResponse.status
     );
-
-    const data = await githubResponse.json();
-
-    return json(data, githubResponse.status);
   }
 
-  if (pathname === "/api/admin/news") {
-    const path = url.searchParams.get("path");
 
-    if (!path || !isAllowedContentPath(path)) {
+  // ----------------------------------------------------------
+  // NOTÍCIAS: LER / EDITAR / APAGAR
+  // ----------------------------------------------------------
+
+  if (pathname === "/api/admin/news") {
+    const path =
+      url.searchParams.get("path");
+
+    if (!isAllowedNewsPath(path)) {
       return json(
         {
-          error: "Caminho não permitido."
+          error: "Caminho de notícia não permitido.",
+          message: "Caminho de notícia não permitido."
         },
         400
       );
     }
 
-    if (!["GET", "PUT", "DELETE"].includes(request.method)) {
-     
-     if (pathname === "/api/admin/image") {
-    const path = url.searchParams.get("path");
-
     if (
-      !path ||
-      !path.startsWith("images/uploads/") ||
-      path.includes("..") ||
-      path.includes("\\")
+      !["GET", "PUT", "DELETE"].includes(
+        request.method
+      )
     ) {
       return json(
         {
-          error: "Caminho de imagem não permitido."
+          error: "Método não permitido.",
+          message: "Método não permitido."
+        },
+        405
+      );
+    }
+
+    const githubPath =
+      `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`;
+
+
+    // GET
+    if (request.method === "GET") {
+      const githubResponse =
+        await githubRequest(
+          env,
+          `${githubPath}?ref=${encodeURIComponent(GITHUB_BRANCH)}`,
+          {
+            method: "GET"
+          }
+        );
+
+      const responseText =
+        await githubResponse.text();
+
+      let data;
+
+      try {
+        data = JSON.parse(responseText);
+      } catch {
+        data = {
+          error:
+            responseText ||
+            "Resposta inválida do GitHub."
+        };
+      }
+
+      return json(
+        data,
+        githubResponse.status
+      );
+    }
+
+
+    // PUT / DELETE
+    const body =
+      await request.text();
+
+    const githubResponse =
+      await githubRequest(
+        env,
+        githubPath,
+        {
+          method: request.method,
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+          body
+        }
+      );
+
+    const responseText =
+      await githubResponse.text();
+
+    let data;
+
+    try {
+      data = JSON.parse(responseText);
+    } catch {
+      data = {
+        error:
+          responseText ||
+          "Resposta inválida do GitHub."
+      };
+    }
+
+    return json(
+      data,
+      githubResponse.status
+    );
+  }
+
+
+  // ----------------------------------------------------------
+  // IMAGENS: LER / ENVIAR / APAGAR
+  // ----------------------------------------------------------
+
+  if (pathname === "/api/admin/image") {
+    const path =
+      url.searchParams.get("path");
+
+    if (!isAllowedImagePath(path)) {
+      return json(
+        {
+          error: "Caminho de imagem não permitido.",
+          message: "Caminho de imagem não permitido."
         },
         400
       );
     }
 
-    if (!["PUT", "DELETE", "GET"].includes(request.method)) {
+    if (
+      !["GET", "PUT", "DELETE"].includes(
+        request.method
+      )
+    ) {
       return json(
         {
-          error: "Método não permitido."
+          error: "Método não permitido.",
+          message: "Método não permitido."
         },
         405
       );
@@ -370,102 +630,141 @@ async function handleAdminAPI(request, env) {
     const githubPath =
       `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`;
 
+
+    // GET
     if (request.method === "GET") {
-      const githubResponse = await githubRequest(
-        env,
-        `${githubPath}?ref=${encodeURIComponent(GITHUB_BRANCH)}`,
-        {
-          method: "GET"
-        }
-      );
+      const githubResponse =
+        await githubRequest(
+          env,
+          `${githubPath}?ref=${encodeURIComponent(GITHUB_BRANCH)}`,
+          {
+            method: "GET"
+          }
+        );
 
-      const data = await githubResponse.json();
+      const responseText =
+        await githubResponse.text();
 
-      return json(data, githubResponse.status);
-    }
+      let data;
 
-    const body = await request.text();
-
-    const githubResponse = await githubRequest(
-      env,
-      githubPath,
-      {
-        method: request.method,
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body
+      try {
+        data = JSON.parse(responseText);
+      } catch {
+        data = {
+          error:
+            responseText ||
+            "Resposta inválida do GitHub."
+        };
       }
-    );
 
-    const data = await githubResponse.json();
-
-    return json(data, githubResponse.status);
-  }   
       return json(
-        {
-          error: "Método não permitido."
-        },
-        405
+        data,
+        githubResponse.status
       );
     }
 
-    const githubPath =
-      `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`;
 
-    if (request.method === "GET") {
-      const githubResponse = await githubRequest(
+    // PUT / DELETE
+    const body =
+      await request.text();
+
+    const githubResponse =
+      await githubRequest(
         env,
-        `${githubPath}?ref=${encodeURIComponent(GITHUB_BRANCH)}`,
+        githubPath,
         {
-          method: "GET"
+          method: request.method,
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+          body
         }
       );
 
-      const data = await githubResponse.json();
+    const responseText =
+      await githubResponse.text();
 
-      return json(data, githubResponse.status);
+    let data;
+
+    try {
+      data = JSON.parse(responseText);
+    } catch {
+      data = {
+        error:
+          responseText ||
+          "Resposta inválida do GitHub."
+      };
     }
 
-    const body = await request.text();
-
-    const githubResponse = await githubRequest(
-      env,
-      githubPath,
-      {
-        method: request.method,
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body
-      }
+    return json(
+      data,
+      githubResponse.status
     );
-
-    const data = await githubResponse.json();
-
-    return json(data, githubResponse.status);
   }
+
+
+  // ----------------------------------------------------------
+  // ENDPOINT DESCONHECIDO
+  // ----------------------------------------------------------
 
   return json(
     {
-      error: "Endpoint não encontrado."
+      error: "Endpoint não encontrado.",
+      message: "Endpoint não encontrado."
     },
     404
   );
 }
 
+
+// ============================================================
+// WORKER PRINCIPAL
+// ============================================================
+
 export default {
   async fetch(request, env) {
-    const url = new URL(request.url);
+    const url =
+      new URL(request.url);
 
-    if (url.pathname.startsWith("/api/admin/")) {
-      const response = await handleAdminAPI(request, env);
+    try {
+      if (
+        url.pathname.startsWith(
+          "/api/admin/"
+        )
+      ) {
+        const response =
+          await handleAdminAPI(
+            request,
+            env
+          );
 
-      if (response) {
-        return response;
+        if (response) {
+          return response;
+        }
       }
-    }
 
-    return env.ASSETS.fetch(request);
+      return env.ASSETS.fetch(request);
+
+    } catch (error) {
+      console.error(
+        "Worker error:",
+        error
+      );
+
+      return json(
+        {
+          error:
+            error instanceof Error
+              ? error.message
+              : "Erro interno do Worker.",
+          message:
+            error instanceof Error
+              ? error.message
+              : "Erro interno do Worker."
+        },
+        500
+      );
+    }
   }
 };
