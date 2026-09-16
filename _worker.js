@@ -452,6 +452,320 @@ async function enriquecerNoticias(env, noticias) {
 
 
 // ============================================================
+// DADOS PARA PARTILHA SOCIAL
+// ============================================================
+
+function escaparHtml(valor) {
+  return String(valor || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function construirUrlImagem(imagem, origin) {
+  if (!imagem) {
+    return `${origin}/images/logo.png`;
+  }
+
+  if (/^https?:\/\//i.test(imagem)) {
+    return imagem;
+  }
+
+  if (imagem.startsWith("//")) {
+    return `${new URL(origin).protocol}${imagem}`;
+  }
+
+  if (imagem.startsWith("/")) {
+    return `${origin}${imagem}`;
+  }
+
+  return `${origin}/${imagem}`;
+}
+
+function obterSlugDaNoticia(url) {
+  if (
+    url.pathname !== "/noticia.html" &&
+    url.pathname !== "/noticia"
+  ) {
+    return "";
+  }
+
+  const slug = url.searchParams.get("slug");
+
+  if (
+    !slug ||
+    slug.includes("/") ||
+    slug.includes("\\") ||
+    slug.includes("..")
+  ) {
+    return "";
+  }
+
+  return slug.replace(/\.md$/i, "");
+}
+
+function isSocialCrawler(request) {
+  const userAgent =
+    request.headers.get("User-Agent") || "";
+
+  const ua = userAgent.toLowerCase();
+
+  const crawlers = [
+    "facebookexternalhit",
+    "facebot",
+    "whatsapp",
+    "twitterbot",
+    "linkedinbot",
+    "slackbot",
+    "discordbot",
+    "telegrambot",
+    "googlebot",
+    "bingbot",
+    "pinterest",
+    "skypeuripreview"
+  ];
+
+  return crawlers.some(
+    (crawler) => ua.includes(crawler)
+  );
+}
+
+async function obterDadosPartilha(env, slug, origin) {
+  if (!slug) {
+    return null;
+  }
+
+  const path =
+    `content/noticias/${slug}.md`;
+
+  if (!isAllowedNewsPath(path)) {
+    return null;
+  }
+
+  try {
+    const githubResponse =
+      await githubRequest(
+        env,
+        `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(GITHUB_BRANCH)}`,
+        {
+          method: "GET"
+        }
+      );
+
+    if (!githubResponse.ok) {
+      return null;
+    }
+
+    const data =
+      await githubResponse.json();
+
+    const markdown =
+      decodeGithubBase64(
+        data.content || ""
+      );
+
+    if (!markdown) {
+      return null;
+    }
+
+    const title =
+      extrairCampoFrontmatter(
+        markdown,
+        "title"
+      ) || "ChutaPraCanto";
+
+    const descricao =
+      extrairCampoFrontmatter(
+        markdown,
+        "subtitle"
+      ) ||
+      extrairCampoFrontmatter(
+        markdown,
+        "subtitulo"
+      ) ||
+      extrairCampoFrontmatter(
+        markdown,
+        "descricao"
+      ) ||
+      extrairCampoFrontmatter(
+        markdown,
+        "resumo"
+      ) ||
+      "Notícias e opinião sobre futebol.";
+
+    const imagem =
+      extrairCampoFrontmatter(
+        markdown,
+        "image"
+      ) ||
+      extrairCampoFrontmatter(
+        markdown,
+        "imagem"
+      ) ||
+      extrairCampoFrontmatter(
+        markdown,
+        "featured_image"
+      ) ||
+      extrairCampoFrontmatter(
+        markdown,
+        "featuredImage"
+      );
+
+    const imagemUrl =
+      construirUrlImagem(
+        imagem,
+        origin
+      );
+
+    const noticiaUrl =
+      `${origin}/noticia.html?slug=${encodeURIComponent(slug)}`;
+
+    return {
+      title,
+      descricao,
+      imagemUrl,
+      noticiaUrl
+    };
+
+  } catch {
+    return null;
+  }
+}
+
+
+// ============================================================
+// HTML PARA CRAWLERS SOCIAIS
+// ============================================================
+
+async function prepararPaginaParaPartilha(
+  request,
+  env,
+  response
+) {
+  if (!isSocialCrawler(request)) {
+    return response;
+  }
+
+  if (
+    !response ||
+    !response.ok ||
+    !response.headers.get("Content-Type")?.includes("text/html")
+  ) {
+    return response;
+  }
+
+  const url =
+    new URL(request.url);
+
+  const slug =
+    obterSlugDaNoticia(url);
+
+  if (!slug) {
+    return response;
+  }
+
+  const dados =
+    await obterDadosPartilha(
+      env,
+      slug,
+      url.origin
+    );
+
+  if (!dados) {
+    return response;
+  }
+
+  const headers =
+    new Headers(response.headers);
+
+  headers.set(
+    "Cache-Control",
+    "public, max-age=60"
+  );
+
+  const htmlResponse =
+    new Response(
+      response.body,
+      {
+        status: response.status,
+        statusText: response.statusText,
+        headers
+      }
+    );
+
+  return new HTMLRewriter()
+
+    .on(
+      'meta#meta-title',
+      {
+        element(element) {
+          element.setAttribute(
+            "content",
+            dados.title
+          );
+        }
+      }
+    )
+
+    .on(
+      'meta#meta-desc',
+      {
+        element(element) {
+          element.setAttribute(
+            "content",
+            dados.descricao
+          );
+        }
+      }
+    )
+
+    .on(
+      'meta#meta-image',
+      {
+        element(element) {
+          element.setAttribute(
+            "content",
+            dados.imagemUrl
+          );
+        }
+      }
+    )
+
+    .on(
+      'meta#meta-url',
+      {
+        element(element) {
+          element.setAttribute(
+            "content",
+            dados.noticiaUrl
+          );
+        }
+      }
+    )
+
+    .on(
+      "title",
+      {
+        text(text) {
+          if (!text.lastInTextNode) {
+            text.replace(
+              dados.title + " | ChutaPraCanto",
+              true
+            );
+          }
+        }
+      }
+    )
+
+    .transform(
+      htmlResponse
+    );
+}
+
+
+// ============================================================
 // API ADMIN
 // ============================================================
 
@@ -946,7 +1260,17 @@ export default {
         }
       }
 
-      return env.ASSETS.fetch(request);
+      const assetResponse =
+        await env.ASSETS.fetch(request);
+
+      const responseComPartilha =
+        await prepararPaginaParaPartilha(
+          request,
+          env,
+          assetResponse
+        );
+
+      return responseComPartilha;
 
     } catch (error) {
       console.error(
