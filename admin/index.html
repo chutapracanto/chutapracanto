@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administração | ChutaPraCanto</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
+    <link
+        href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css"
+        rel="stylesheet"
+    >
 
     <style>
         * {
@@ -32,7 +35,8 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
-        h1, h2 {
+        h1,
+        h2 {
             margin-top: 0;
             color: #1a1a1a;
         }
@@ -294,6 +298,20 @@
             background: #fecaca;
         }
 
+        .logout-btn {
+            background: #f3f4f6;
+            color: #555;
+            border: 1px solid #ddd;
+            padding: 9px 14px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .logout-btn:hover {
+            background: #e5e7eb;
+        }
+
         .pagination {
             display: flex;
             justify-content: center;
@@ -341,6 +359,13 @@
             margin: 60px auto;
         }
 
+        .login-description {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
         .status {
             margin-top: 15px;
             padding: 10px;
@@ -386,8 +411,6 @@
             color: #777;
             margin-top: 6px;
         }
-
-        /* PREVIEW */
 
         .preview-overlay {
             position: fixed;
@@ -497,7 +520,6 @@
         }
 
         @media (max-width: 650px) {
-
             body {
                 padding: 10px;
             }
@@ -562,19 +584,35 @@
 
         <h2>Acesso ao Painel</h2>
 
+        <div class="login-description">
+            Introduz a palavra-passe de administração do ChutaPraCanto.
+        </div>
+
         <div class="form-group">
-            <label>GitHub Personal Access Token</label>
+            <label for="admin-password">
+                Palavra-passe
+            </label>
 
             <input
                 type="password"
-                id="github-token"
-                placeholder="Cola aqui o teu token"
+                id="admin-password"
+                placeholder="Palavra-passe"
+                autocomplete="current-password"
+                onkeydown="if(event.key === 'Enter') entrar()"
             >
         </div>
 
-        <button class="main-btn" onclick="salvarToken()">
+        <button
+            class="main-btn"
+            onclick="entrar()"
+        >
             Entrar
         </button>
+
+        <div
+            id="login-status"
+            class="status"
+        ></div>
 
     </div>
 
@@ -587,14 +625,27 @@
 
             <div class="top-actions">
 
-                <h1>📰 Notícias</h1>
+                <div>
+                    <h1>📰 Notícias</h1>
+                </div>
 
-                <button
-                    class="main-btn"
-                    onclick="novaNoticia()"
-                >
-                    + Nova Notícia
-                </button>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+
+                    <button
+                        class="main-btn"
+                        onclick="novaNoticia()"
+                    >
+                        + Nova Notícia
+                    </button>
+
+                    <button
+                        class="logout-btn"
+                        onclick="terminarSessao()"
+                    >
+                        Sair
+                    </button>
+
+                </div>
 
             </div>
 
@@ -606,19 +657,28 @@
                 oninput="filtrarLista()"
             >
 
-            <div id="news-list" class="news-list">
+            <div
+                id="news-list"
+                class="news-list"
+            >
                 <div class="loading">
                     A carregar notícias...
                 </div>
             </div>
 
-            <div id="pagination" class="pagination"></div>
+            <div
+                id="pagination"
+                class="pagination"
+            ></div>
 
         </div>
 
 
         <!-- FORMULÁRIO -->
-        <div id="form-screen" class="hidden">
+        <div
+            id="form-screen"
+            class="hidden"
+        >
 
             <div class="top-actions">
 
@@ -647,7 +707,9 @@
 
             <div class="form-group">
 
-                <label>Título</label>
+                <label for="noticia-titulo">
+                    Título
+                </label>
 
                 <input
                     type="text"
@@ -660,7 +722,9 @@
 
             <div class="form-group">
 
-                <label>Subtítulo / Descrição Curta</label>
+                <label for="noticia-subtitulo">
+                    Subtítulo / Descrição Curta
+                </label>
 
                 <textarea
                     id="noticia-subtitulo"
@@ -672,7 +736,9 @@
 
             <div class="form-group">
 
-                <label>Categoria</label>
+                <label for="noticia-categoria">
+                    Categoria
+                </label>
 
                 <input
                     type="text"
@@ -685,7 +751,9 @@
 
             <div class="form-group">
 
-                <label>Data</label>
+                <label for="noticia-data">
+                    Data
+                </label>
 
                 <input
                     type="date"
@@ -697,7 +765,9 @@
 
             <div class="form-group">
 
-                <label>Autor</label>
+                <label for="noticia-autor">
+                    Autor
+                </label>
 
                 <input
                     type="text"
@@ -710,7 +780,9 @@
 
             <div class="form-group">
 
-                <label>Imagem (Upload ou URL)</label>
+                <label>
+                    Imagem (Upload ou URL)
+                </label>
 
                 <input
                     type="file"
@@ -732,6 +804,7 @@
                 <img
                     id="image-preview"
                     class="image-preview"
+                    alt="Pré-visualização da imagem"
                 >
 
             </div>
@@ -739,7 +812,9 @@
 
             <div class="form-group">
 
-                <label>Conteúdo do Artigo</label>
+                <label>
+                    Conteúdo do Artigo
+                </label>
 
                 <div id="editor-container"></div>
 
@@ -830,6 +905,7 @@
         <img
             id="preview-image"
             class="preview-image"
+            alt=""
         >
 
         <div
@@ -848,9 +924,6 @@
 
 <script>
 
-const REPO = "chutapracanto/chutapracanto";
-const BRANCH = "main";
-
 const NOTICIAS_POR_PAGINA = 10;
 
 let noticias = [];
@@ -862,87 +935,220 @@ let quill = null;
 
 
 // ============================================================
-// LOGIN
+// AUTENTICAÇÃO
 // ============================================================
 
-function salvarToken() {
+async function entrar() {
 
-    const token =
-        document
-            .getElementById("github-token")
-            .value
-            .trim();
+    const passwordInput =
+        document.getElementById("admin-password");
 
-    if (!token) {
+    const password =
+        passwordInput.value.trim();
 
-        alert(
-            "Cola primeiro o teu GitHub Personal Access Token."
+    if (!password) {
+
+        mostrarLoginStatus(
+            "Introduz a palavra-passe.",
+            false
         );
 
         return;
     }
 
-    localStorage.setItem(
-        "gh_token_cpc",
-        token
-    );
+    const button =
+        document.querySelector(
+            "#login-screen .main-btn"
+        );
+
+    button.disabled = true;
+    button.innerText = "A entrar...";
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/admin/login",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        password
+                    })
+                }
+            );
+
+        if (!response.ok) {
+
+            let mensagem =
+                "Palavra-passe incorreta.";
+
+            try {
+
+                const data =
+                    await response.json();
+
+                if (data.message) {
+                    mensagem = data.message;
+                }
+
+            } catch (e) {}
+
+            throw new Error(mensagem);
+        }
+
+        passwordInput.value = "";
+
+        mostrarAdmin();
+
+    } catch (error) {
+
+        mostrarLoginStatus(
+            error.message,
+            false
+        );
+
+    } finally {
+
+        button.disabled = false;
+        button.innerText = "Entrar";
+    }
+}
+
+
+async function verificarSessao() {
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/admin/session",
+                {
+                    method: "GET",
+                    credentials: "same-origin"
+                }
+            );
+
+        return response.ok;
+
+    } catch (error) {
+
+        return false;
+    }
+}
+
+
+async function terminarSessao() {
+
+    try {
+
+        await fetch(
+            "/api/admin/logout",
+            {
+                method: "POST",
+                credentials: "same-origin"
+            }
+        );
+
+    } catch (error) {}
 
     location.reload();
 }
 
 
-function getToken() {
+function mostrarAdmin() {
 
-    return localStorage.getItem(
-        "gh_token_cpc"
-    );
+    document
+        .getElementById("login-screen")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("admin-screen")
+        .classList
+        .remove("hidden");
+
+    iniciarEditor();
+
+    carregarNoticias();
+}
+
+
+function mostrarLoginStatus(
+    mensagem,
+    sucesso
+) {
+
+    const element =
+        document.getElementById(
+            "login-status"
+        );
+
+    element.innerText =
+        mensagem;
+
+    element.style.display =
+        "block";
+
+    if (sucesso) {
+
+        element.style.background =
+            "#dcfce7";
+
+        element.style.color =
+            "#166534";
+
+    } else {
+
+        element.style.background =
+            "#fee2e2";
+
+        element.style.color =
+            "#991b1b";
+    }
 }
 
 
 // ============================================================
-// GITHUB
+// API DO WORKER
 // ============================================================
 
-async function githubFetch(
-    url,
+async function apiFetch(
+    endpoint,
     options = {}
 ) {
 
-    const token = getToken();
+    const response =
+        await fetch(
+            endpoint,
+            {
+                ...options,
+                credentials: "same-origin",
+                headers: {
+                    ...(options.headers || {})
+                }
+            }
+        );
 
-    if (!token) {
+    if (
+        response.status === 401
+    ) {
+
+        location.reload();
 
         throw new Error(
-            "Token do GitHub não encontrado."
+            "Sessão expirada."
         );
     }
 
-    const headers = {
-
-        "Authorization":
-            `token ${token}`,
-
-        "Accept":
-            "application/vnd.github+json",
-
-        ...options.headers
-    };
-
-
-    const response = await fetch(
-        url,
-        {
-            ...options,
-            headers
-        }
-    );
-
-
     if (!response.ok) {
 
-        let errorMessage =
-            `Erro GitHub: ${response.status}`;
-
+        let mensagem =
+            `Erro: ${response.status}`;
 
         try {
 
@@ -950,19 +1156,26 @@ async function githubFetch(
                 await response.json();
 
             if (data.message) {
-
-                errorMessage +=
-                    ` - ${data.message}`;
+                mensagem =
+                    data.message;
             }
 
-        } catch (e) {}
+        } catch (e) {
 
+            try {
 
-        throw new Error(
-            errorMessage
-        );
+                const text =
+                    await response.text();
+
+                if (text) {
+                    mensagem = text;
+                }
+
+            } catch (e2) {}
+        }
+
+        throw new Error(mensagem);
     }
-
 
     return response;
 }
@@ -976,45 +1189,43 @@ function iniciarEditor() {
 
     if (quill) return;
 
+    quill =
+        new Quill(
+            "#editor-container",
+            {
+                theme: "snow",
 
-    quill = new Quill(
-        "#editor-container",
-        {
+                placeholder:
+                    "Escreve ou cola aqui o texto da notícia...",
 
-            theme: "snow",
+                modules: {
 
-            placeholder:
-                "Escreve ou cola aqui o texto da notícia...",
+                    toolbar: [
 
-            modules: {
+                        [
+                            "bold",
+                            "italic",
+                            "underline"
+                        ],
 
-                toolbar: [
+                        [
+                            {
+                                header: [3, false]
+                            }
+                        ],
 
-                    [
-                        "bold",
-                        "italic",
-                        "underline"
-                    ],
+                        [
+                            "blockquote",
+                            "list"
+                        ],
 
-                    [
-                        {
-                            "header": [3, false]
-                        }
-                    ],
-
-                    [
-                        "blockquote",
-                        "list"
-                    ],
-
-                    [
-                        "clean"
+                        [
+                            "clean"
+                        ]
                     ]
-
-                ]
+                }
             }
-        }
-    );
+        );
 }
 
 
@@ -1029,243 +1240,68 @@ async function carregarNoticias() {
             "news-list"
         );
 
-
     const pagination =
         document.getElementById(
             "pagination"
         );
-
 
     container.innerHTML =
         '<div class="loading">A carregar notícias...</div>';
 
     pagination.innerHTML = "";
 
-
     try {
 
-        let todosOsFicheiros = [];
-
-        let page = 1;
-
-
-        while (true) {
-
-            const response =
-                await githubFetch(
-                    `https://api.github.com/repos/${REPO}/contents/content/noticias?ref=${BRANCH}&per_page=100&page=${page}`
-                );
-
-
-            const files =
-                await response.json();
-
-
-            const mdFiles =
-                files.filter(
-                    file =>
-                        file.type === "file" &&
-                        file.name
-                            .toLowerCase()
-                            .endsWith(".md")
-                );
-
-
-            todosOsFicheiros.push(
-                ...mdFiles
+        const response =
+            await apiFetch(
+                "/api/admin/news/list"
             );
 
-
-            if (files.length < 100) {
-                break;
-            }
-
-
-            page++;
-        }
-
-
-        const noticiasComDados =
-            await Promise.all(
-
-                todosOsFicheiros.map(
-                    async file => {
-
-                        try {
-
-                            const response =
-                                await githubFetch(
-                                    `https://api.github.com/repos/${REPO}/contents/${encodeURIComponent(file.path)}?ref=${BRANCH}`
-                                );
-
-
-                            const data =
-                                await response.json();
-
-
-                            const markdown =
-                                decodeBase64(
-                                    data.content
-                                );
-
-
-                            const parsed =
-                                separarFrontmatter(
-                                    markdown
-                                );
-
-
-                            const fields =
-                                parsed.fields;
-
-
-                            const dataNoticia =
-                                obterCampo(
-                                    fields,
-                                    "date",
-                                    "published"
-                                );
-
-
-                            const titulo =
-                                obterCampo(
-                                    fields,
-                                    "title"
-                                );
-
-
-                            const categoria =
-                                obterCampo(
-                                    fields,
-                                    "categoria",
-                                    "category",
-                                    "tag"
-                                );
-
-
-                            const autor =
-                                obterCampo(
-                                    fields,
-                                    "author"
-                                );
-
-
-                            const subtitulo =
-                                obterCampo(
-                                    fields,
-                                    "subtitulo",
-                                    "subtitle",
-                                    "descricao",
-                                    "resumo"
-                                );
-
-
-                            const imagem =
-                                obterCampo(
-                                    fields,
-                                    "imagem",
-                                    "image",
-                                    "featured_image",
-                                    "featuredImage"
-                                );
-
-
-                            return {
-
-                                ...file,
-
-                                titulo:
-                                    titulo ||
-                                    slugParaTitulo(
-                                        file.name
-                                    ),
-
-                                categoria:
-                                    categoria || "",
-
-                                autor:
-                                    autor || "",
-
-                                subtitulo:
-                                    subtitulo || "",
-
-                                imagem:
-                                    imagem || "",
-
-                                dataNoticia:
-                                    dataNoticia
-                                        ? dataNoticia.substring(0, 10)
-                                        : ""
-                            };
-
-
-                        } catch (e) {
-
-                            return {
-
-                                ...file,
-
-                                titulo:
-                                    slugParaTitulo(
-                                        file.name
-                                    ),
-
-                                categoria: "",
-
-                                autor: "",
-
-                                subtitulo: "",
-
-                                imagem: "",
-
-                                dataNoticia: ""
-                            };
-                        }
-                    }
-                )
-            );
-
+        const data =
+            await response.json();
 
         noticias =
-            noticiasComDados.sort(
+            Array.isArray(data)
+                ? data
+                : (
+                    Array.isArray(data.noticias)
+                        ? data.noticias
+                        : []
+                );
+
+        noticias =
+            noticias.sort(
                 (a, b) => {
 
-                    if (
-                        a.dataNoticia &&
-                        b.dataNoticia
-                    ) {
+                    const dataA =
+                        a.dataNoticia || "";
 
-                        return b.dataNoticia
-                            .localeCompare(
-                                a.dataNoticia
-                            );
+                    const dataB =
+                        b.dataNoticia || "";
+
+                    if (dataA && dataB) {
+
+                        return dataB.localeCompare(
+                            dataA
+                        );
                     }
 
+                    if (dataA) return -1;
+                    if (dataB) return 1;
 
-                    if (a.dataNoticia) {
-                        return -1;
-                    }
-
-
-                    if (b.dataNoticia) {
-                        return 1;
-                    }
-
-
-                    return b.name.localeCompare(
-                        a.name,
+                    return String(
+                        b.name || ""
+                    ).localeCompare(
+                        String(a.name || ""),
                         "pt"
                     );
                 }
             );
 
-
         noticiasFiltradas =
             [...noticias];
 
-
         paginaAtual = 1;
-
 
         mostrarLista(
             noticiasFiltradas
@@ -1281,9 +1317,7 @@ async function carregarNoticias() {
 
                 <br><br>
 
-                ${escaparHtml(
-                    error.message
-                )}
+                ${escaparHtml(error.message)}
 
             </div>
         `;
@@ -1302,12 +1336,10 @@ function mostrarLista(lista) {
             "news-list"
         );
 
-
     const pagination =
         document.getElementById(
             "pagination"
         );
-
 
     if (!lista.length) {
 
@@ -1324,37 +1356,32 @@ function mostrarLista(lista) {
         return;
     }
 
-
     const totalPaginas =
         Math.ceil(
             lista.length /
             NOTICIAS_POR_PAGINA
         );
 
-
-    if (paginaAtual > totalPaginas) {
-
+    if (
+        paginaAtual > totalPaginas
+    ) {
         paginaAtual =
             totalPaginas;
     }
-
 
     const inicio =
         (paginaAtual - 1) *
         NOTICIAS_POR_PAGINA;
 
-
     const fim =
         inicio +
         NOTICIAS_POR_PAGINA;
-
 
     const noticiasDaPagina =
         lista.slice(
             inicio,
             fim
         );
-
 
     container.innerHTML =
         noticiasDaPagina
@@ -1363,20 +1390,23 @@ function mostrarLista(lista) {
                 const titulo =
                     file.titulo ||
                     slugParaTitulo(
-                        file.name
+                        file.name || ""
                     );
-
 
                 const categoria =
                     file.categoria ||
                     "";
-
 
                 const imagem =
                     normalizarUrlImagem(
                         file.imagem
                     );
 
+                const path =
+                    file.path || "";
+
+                const sha =
+                    file.sha || "";
 
                 const imagemHtml =
                     imagem
@@ -1397,24 +1427,17 @@ function mostrarLista(lista) {
                             </div>
                         `;
 
-
                 return `
 
                     <div class="news-item">
 
                         ${imagemHtml}
 
-
                         <div class="news-info">
 
                             <div class="news-title">
-
-                                ${escaparHtml(
-                                    titulo
-                                )}
-
+                                ${escaparHtml(titulo)}
                             </div>
-
 
                             <div class="news-meta">
 
@@ -1422,35 +1445,25 @@ function mostrarLista(lista) {
                                     categoria
                                         ? `
                                             <span class="news-category">
-                                                ${escaparHtml(
-                                                    categoria
-                                                )}
+                                                ${escaparHtml(categoria)}
                                             </span>
                                         `
                                         : ""
                                 }
 
-
                                 <span class="news-date">
-
                                     ${
                                         file.dataNoticia
-                                            ? `📅 ${escaparHtml(
-                                                file.dataNoticia
-                                            )}`
+                                            ? `📅 ${escaparHtml(file.dataNoticia)}`
                                             : "📅 Sem data"
                                     }
-
                                 </span>
-
 
                                 ${
                                     file.autor
                                         ? `
                                             <span class="news-author">
-                                                ✍️ ${escaparHtml(
-                                                    file.autor
-                                                )}
+                                                ✍️ ${escaparHtml(file.autor)}
                                             </span>
                                         `
                                         : ""
@@ -1458,39 +1471,31 @@ function mostrarLista(lista) {
 
                             </div>
 
-
                             <div class="news-file">
-
-                                ${escaparHtml(
-                                    file.name
-                                )}
-
+                                ${escaparHtml(file.name || "")}
                             </div>
 
                         </div>
-
 
                         <div class="news-actions">
 
                             <button
                                 class="preview-btn"
-                                onclick="previsualizarDaLista('${escaparHtml(file.path)}')"
+                                onclick="previsualizarDaLista('${escaparJs(path)}')"
                             >
                                 👁️ Ver
                             </button>
 
-
                             <button
                                 class="edit-btn"
-                                onclick="editarNoticia('${escaparHtml(file.path)}')"
+                                onclick="editarNoticia('${escaparJs(path)}')"
                             >
                                 ✏️ Editar
                             </button>
 
-
                             <button
                                 class="delete-list-btn"
-                                onclick="apagarDaLista('${escaparHtml(file.path)}', '${escaparHtml(file.sha)}', '${escaparHtml(titulo)}')"
+                                onclick="apagarDaLista('${escaparJs(path)}', '${escaparJs(sha)}', '${escaparJs(titulo)}')"
                             >
                                 🗑️ Apagar
                             </button>
@@ -1500,10 +1505,8 @@ function mostrarLista(lista) {
                     </div>
 
                 `;
-
             })
             .join("");
-
 
     mostrarPaginacao(
         totalPaginas,
@@ -1526,23 +1529,21 @@ function mostrarPaginacao(
             "pagination"
         );
 
-
     if (
         totalPaginas <= 1
     ) {
 
         pagination.innerHTML = `
             <div class="page-info">
-                ${totalResultados} notícia${totalResultados === 1 ? "" : "s"}
+                ${totalResultados}
+                notícia${totalResultados === 1 ? "" : "s"}
             </div>
         `;
 
         return;
     }
 
-
     let html = "";
-
 
     html += `
 
@@ -1555,7 +1556,6 @@ function mostrarPaginacao(
         </button>
 
     `;
-
 
     for (
         let i = 1;
@@ -1575,7 +1575,6 @@ function mostrarPaginacao(
         `;
     }
 
-
     html += `
 
         <span class="page-info">
@@ -1583,7 +1582,6 @@ function mostrarPaginacao(
         </span>
 
     `;
-
 
     html += `
 
@@ -1596,7 +1594,6 @@ function mostrarPaginacao(
         </button>
 
     `;
-
 
     pagination.innerHTML =
         html;
@@ -1611,7 +1608,6 @@ function mudarPagina(numero) {
             NOTICIAS_POR_PAGINA
         );
 
-
     if (
         numero < 1 ||
         numero > totalPaginas
@@ -1619,15 +1615,12 @@ function mudarPagina(numero) {
         return;
     }
 
-
     paginaAtual =
         numero;
-
 
     mostrarLista(
         noticiasFiltradas
     );
-
 
     window.scrollTo({
         top: 0,
@@ -1651,7 +1644,6 @@ function filtrarLista() {
             .trim()
             .toLowerCase();
 
-
     if (!termo) {
 
         noticiasFiltradas =
@@ -1666,7 +1658,6 @@ function filtrarLista() {
         return;
     }
 
-
     noticiasFiltradas =
         noticias.filter(
             file => {
@@ -1677,13 +1668,11 @@ function filtrarLista() {
                         ""
                     ).toLowerCase();
 
-
                 const categoria =
                     (
                         file.categoria ||
                         ""
                     ).toLowerCase();
-
 
                 const autor =
                     (
@@ -1691,38 +1680,29 @@ function filtrarLista() {
                         ""
                     ).toLowerCase();
 
-
                 const subtitulo =
                     (
                         file.subtitulo ||
                         ""
                     ).toLowerCase();
 
-
                 const nomeFicheiro =
-                    file.name
-                        .toLowerCase();
-
+                    (
+                        file.name ||
+                        ""
+                    ).toLowerCase();
 
                 return (
-
                     titulo.includes(termo) ||
-
                     categoria.includes(termo) ||
-
                     autor.includes(termo) ||
-
                     subtitulo.includes(termo) ||
-
                     nomeFicheiro.includes(termo)
-
                 );
             }
         );
 
-
     paginaAtual = 1;
-
 
     mostrarLista(
         noticiasFiltradas
@@ -1749,51 +1729,42 @@ function novaNoticia() {
 
     noticiaEmEdicao = null;
 
-
     limparFormulario();
-
 
     document
         .getElementById("form-title")
         .innerText =
             "Nova Notícia";
 
-
     document
         .getElementById("mode-label")
         .innerText =
             "Criar uma nova notícia";
-
 
     document
         .getElementById("save-button-text")
         .innerText =
             "Publicar Notícia";
 
-
     document
         .getElementById("delete-button")
         .classList
         .add("hidden");
-
 
     document
         .getElementById("list-screen")
         .classList
         .add("hidden");
 
-
     document
         .getElementById("form-screen")
         .classList
         .remove("hidden");
 
-
     document
         .getElementById("noticia-data")
         .valueAsDate =
             new Date();
-
 
     iniciarEditor();
 }
@@ -1812,77 +1783,63 @@ async function editarNoticia(path) {
             .classList
             .add("hidden");
 
-
         document
             .getElementById("form-screen")
             .classList
             .remove("hidden");
 
-
         document
             .getElementById("form-title")
             .innerText =
-                "A carregar notícia...";
-
+            "A carregar notícia...";
 
         iniciarEditor();
 
-
         const response =
-            await githubFetch(
-                `https://api.github.com/repos/${REPO}/contents/${encodeURIComponent(path)}?ref=${BRANCH}`
+            await apiFetch(
+                `/api/admin/news?path=${encodeURIComponent(path)}`
             );
-
 
         const data =
             await response.json();
-
 
         const markdown =
             decodeBase64(
                 data.content
             );
 
-
         noticiaEmEdicao = {
 
             path: path,
 
-            sha: data.sha
+            sha:
+                data.sha
         };
-
 
         preencherFormulario(
             markdown
         );
 
-
         document
             .getElementById("form-title")
             .innerText =
-                "Editar Notícia";
-
+            "Editar Notícia";
 
         document
             .getElementById("mode-label")
             .innerText =
             "A editar: " +
-            path
-                .split("/")
-                .pop();
-
+            path.split("/").pop();
 
         document
             .getElementById("save-button-text")
             .innerText =
-                "Guardar Alterações";
-
+            "Guardar Alterações";
 
         document
             .getElementById("delete-button")
             .classList
             .remove("hidden");
-
 
     } catch (error) {
 
@@ -1891,14 +1848,13 @@ async function editarNoticia(path) {
             error.message
         );
 
-
         voltarLista();
     }
 }
 
 
 // ============================================================
-// PARSER DO MARKDOWN
+// PARSER FRONTMATTER
 // ============================================================
 
 function separarFrontmatter(markdown) {
@@ -1908,28 +1864,21 @@ function separarFrontmatter(markdown) {
             /^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/
         );
 
-
     if (!match) {
 
         return {
-
             fields: {},
-
             body: markdown
         };
     }
 
-
     const frontmatter =
         match[1];
-
 
     const body =
         match[2];
 
-
     const fields = {};
-
 
     frontmatter
         .split("\n")
@@ -1940,17 +1889,13 @@ function separarFrontmatter(markdown) {
                     /^([A-Za-z_]+):\s*(.*)$/
                 );
 
-
             if (!matchLine) return;
-
 
             const key =
                 matchLine[1];
 
-
             let value =
                 matchLine[2].trim();
-
 
             if (
                 value.startsWith('"') &&
@@ -1967,13 +1912,9 @@ function separarFrontmatter(markdown) {
                 } catch (e) {
 
                     value =
-                        value.slice(
-                            1,
-                            -1
-                        );
+                        value.slice(1, -1);
                 }
             }
-
 
             if (
                 value.startsWith("'") &&
@@ -1981,22 +1922,15 @@ function separarFrontmatter(markdown) {
             ) {
 
                 value =
-                    value.slice(
-                        1,
-                        -1
-                    );
+                    value.slice(1, -1);
             }
-
 
             fields[key] =
                 value;
         });
 
-
     return {
-
         fields,
-
         body
     };
 }
@@ -2021,7 +1955,6 @@ function obterCampo(
         }
     }
 
-
     return "";
 }
 
@@ -2039,17 +1972,14 @@ function preencherFormulario(
             markdown
         );
 
-
     const fields =
         parsed.fields;
-
 
     const titulo =
         obterCampo(
             fields,
             "title"
         );
-
 
     const subtitulo =
         obterCampo(
@@ -2060,7 +1990,6 @@ function preencherFormulario(
             "resumo"
         );
 
-
     const categoria =
         obterCampo(
             fields,
@@ -2069,7 +1998,6 @@ function preencherFormulario(
             "tag"
         );
 
-
     const data =
         obterCampo(
             fields,
@@ -2077,14 +2005,12 @@ function preencherFormulario(
             "published"
         );
 
-
     const autor =
         obterCampo(
             fields,
             "author"
         ) ||
         "ChutaPraCanto";
-
 
     const imagem =
         obterCampo(
@@ -2095,87 +2021,48 @@ function preencherFormulario(
             "featuredImage"
         );
 
+    document
+        .getElementById("noticia-titulo")
+        .value =
+        titulo;
 
     document
-        .getElementById(
-            "noticia-titulo"
-        )
+        .getElementById("noticia-subtitulo")
         .value =
-            titulo;
-
+        subtitulo;
 
     document
-        .getElementById(
-            "noticia-subtitulo"
-        )
+        .getElementById("noticia-categoria")
         .value =
-            subtitulo;
-
+        categoria;
 
     document
-        .getElementById(
-            "noticia-categoria"
-        )
+        .getElementById("noticia-autor")
         .value =
-            categoria;
-
+        autor;
 
     document
-        .getElementById(
-            "noticia-autor"
-        )
+        .getElementById("noticia-data")
         .value =
-            autor;
-
-
-    if (data) {
-
-        const dataLimpa =
-            data.substring(
-                0,
-                10
-            );
-
-
-        document
-            .getElementById(
-                "noticia-data"
-            )
-            .value =
-                dataLimpa;
-
-    } else {
-
-        document
-            .getElementById(
-                "noticia-data"
-            )
-            .value =
-                "";
-    }
-
+        data
+            ? data.substring(0, 10)
+            : "";
 
     document
-        .getElementById(
-            "noticia-imagem-url"
-        )
+        .getElementById("noticia-imagem-url")
         .value =
-            imagem;
-
+        imagem;
 
     mostrarPreview(
         normalizarUrlImagem(imagem)
     );
 
-
     quill.setText("");
-
 
     const html =
         markdownSimplesParaHtml(
             parsed.body
         );
-
 
     quill.clipboard.dangerouslyPasteHTML(
         html
@@ -2196,13 +2083,23 @@ function markdownSimplesParaHtml(
             markdown
         );
 
-
     html =
         html.replace(
             /^### (.*)$/gm,
             "<h3>$1</h3>"
         );
 
+    html =
+        html.replace(
+            /^## (.*)$/gm,
+            "<h2>$1</h2>"
+        );
+
+    html =
+        html.replace(
+            /^# (.*)$/gm,
+            "<h1>$1</h1>"
+        );
 
     html =
         html.replace(
@@ -2210,13 +2107,11 @@ function markdownSimplesParaHtml(
             "<p><strong>$1</strong></p>"
         );
 
-
     html =
         html.replace(
             /\*\*(.*?)\*\*/g,
             "<strong>$1</strong>"
         );
-
 
     html =
         html.replace(
@@ -2224,13 +2119,11 @@ function markdownSimplesParaHtml(
             "<li>$1</li>"
         );
 
-
     html =
         html.replace(
             /(<li>.*<\/li>)/gs,
             "<ul>$1</ul>"
         );
-
 
     html =
         html.replace(
@@ -2238,12 +2131,10 @@ function markdownSimplesParaHtml(
             "</p><p>"
         );
 
-
     html =
         "<p>" +
         html +
         "</p>";
-
 
     html =
         html.replace(
@@ -2251,103 +2142,67 @@ function markdownSimplesParaHtml(
             ""
         );
 
-
     html =
         html.replace(
-            /<p>\s*(<h3>)/g,
+            /<p>\s*(<h[123]>)/g,
             "$1"
         );
 
-
     html =
         html.replace(
-            /(<\/h3>)\s*<\/p>/g,
+            /(<\/h[123]>)\s*<\/p>/g,
             "$1"
         );
-
 
     return html;
 }
 
 
 // ============================================================
-// GUARDAR / PUBLICAR
+// GUARDAR
 // ============================================================
 
 async function guardarNoticia() {
 
-    const token =
-        getToken();
-
-
-    if (!token) {
-
-        alert(
-            "Sessão não encontrada."
-        );
-
-        return;
-    }
-
-
     const titulo =
         document
-            .getElementById(
-                "noticia-titulo"
-            )
+            .getElementById("noticia-titulo")
             .value
             .trim();
-
 
     const subtitulo =
         document
-            .getElementById(
-                "noticia-subtitulo"
-            )
+            .getElementById("noticia-subtitulo")
             .value
             .trim();
-
 
     const categoria =
         document
-            .getElementById(
-                "noticia-categoria"
-            )
+            .getElementById("noticia-categoria")
             .value
             .trim();
-
 
     const data =
         document
-            .getElementById(
-                "noticia-data"
-            )
+            .getElementById("noticia-data")
             .value;
-
 
     const autor =
         document
-            .getElementById(
-                "noticia-autor"
-            )
+            .getElementById("noticia-autor")
             .value
             .trim();
-
 
     const imgUrl =
         document
-            .getElementById(
-                "noticia-imagem-url"
-            )
+            .getElementById("noticia-imagem-url")
             .value
             .trim();
-
 
     const statusEl =
         document.getElementById(
             "status"
         );
-
 
     if (
         !titulo ||
@@ -2362,32 +2217,25 @@ async function guardarNoticia() {
         return;
     }
 
-
     statusEl.style.display =
         "block";
-
 
     statusEl.style.background =
         "#fef3c7";
 
-
     statusEl.style.color =
         "#92400e";
 
-
     statusEl.innerText =
         "A guardar...";
-
 
     try {
 
         let finalImageUrl =
             imgUrl;
 
-
         const imageData =
             await uploadImage();
-
 
         if (imageData) {
 
@@ -2396,66 +2244,55 @@ async function guardarNoticia() {
                     imageData.name
                 );
 
-
             const imagePath =
                 `images/uploads/${uniqueName}`;
 
-
-            const imageBody = {
-
-                message:
-                    "Upload imagem: " +
-                    uniqueName,
-
-                content:
-                    imageData.content,
-
-                branch:
-                    BRANCH
-            };
-
-
-            await githubFetch(
-
-                `https://api.github.com/repos/${REPO}/contents/${imagePath}`,
-
+            await apiFetch(
+                `/api/admin/image?path=${encodeURIComponent(imagePath)}`,
                 {
-
-                    method:
-                        "PUT",
+                    method: "PUT",
 
                     headers: {
-
                         "Content-Type":
                             "application/json"
                     },
 
                     body:
-                        JSON.stringify(
-                            imageBody
-                        )
+                        JSON.stringify({
+                            name:
+                                uniqueName,
+
+                            content:
+                                imageData.content
+                        })
                 }
             );
-
 
             finalImageUrl =
                 `/images/uploads/${uniqueName}`;
         }
 
-
         const htmlContent =
             quill.root.innerHTML;
 
-
         const turndownService =
             new TurndownService();
-
 
         const markdownBody =
             turndownService.turndown(
                 htmlContent
             );
 
+        const fileContent =
+            construirMarkdown(
+                titulo,
+                subtitulo,
+                categoria,
+                data,
+                autor,
+                finalImageUrl,
+                markdownBody
+            );
 
         if (!noticiaEmEdicao) {
 
@@ -2464,48 +2301,21 @@ async function guardarNoticia() {
                     titulo
                 );
 
-
             const filename =
                 `content/noticias/${slug}.md`;
 
-
-            const fileContent =
-                construirMarkdown(
-
-                    titulo,
-
-                    subtitulo,
-
-                    categoria,
-
-                    data,
-
-                    autor,
-
-                    finalImageUrl,
-
-                    markdownBody
-                );
-
-
-            await githubFetch(
-
-                `https://api.github.com/repos/${REPO}/contents/${filename}`,
-
+            await apiFetch(
+                `/api/admin/news?path=${encodeURIComponent(filename)}`,
                 {
-
-                    method:
-                        "PUT",
+                    method: "PUT",
 
                     headers: {
-
                         "Content-Type":
                             "application/json"
                     },
 
                     body:
                         JSON.stringify({
-
                             message:
                                 "Nova notícia: " +
                                 titulo,
@@ -2513,14 +2323,10 @@ async function guardarNoticia() {
                             content:
                                 encodeBase64(
                                     fileContent
-                                ),
-
-                            branch:
-                                BRANCH
+                                )
                         })
                 }
             );
-
 
             mostrarSucesso(
                 "Notícia publicada com sucesso!"
@@ -2528,43 +2334,18 @@ async function guardarNoticia() {
 
         } else {
 
-            const fileContent =
-                construirMarkdown(
-
-                    titulo,
-
-                    subtitulo,
-
-                    categoria,
-
-                    data,
-
-                    autor,
-
-                    finalImageUrl,
-
-                    markdownBody
-                );
-
-
-            await githubFetch(
-
-                `https://api.github.com/repos/${REPO}/contents/${noticiaEmEdicao.path}`,
-
+            await apiFetch(
+                `/api/admin/news?path=${encodeURIComponent(noticiaEmEdicao.path)}`,
                 {
-
-                    method:
-                        "PUT",
+                    method: "PUT",
 
                     headers: {
-
                         "Content-Type":
                             "application/json"
                     },
 
                     body:
                         JSON.stringify({
-
                             message:
                                 "Editar notícia: " +
                                 titulo,
@@ -2574,35 +2355,27 @@ async function guardarNoticia() {
                                     fileContent
                                 ),
 
-                            branch:
-                                BRANCH,
-
                             sha:
                                 noticiaEmEdicao.sha
                         })
                 }
             );
 
-
             mostrarSucesso(
                 "Notícia atualizada com sucesso!"
             );
         }
-
 
     } catch (error) {
 
         statusEl.style.display =
             "block";
 
-
         statusEl.style.background =
             "#fee2e2";
 
-
         statusEl.style.color =
             "#991b1b";
-
 
         statusEl.innerText =
             "Erro: " +
@@ -2657,73 +2430,56 @@ async function apagarNoticia() {
         return;
     }
 
-
     const confirmar =
         confirm(
             "Tens a certeza que queres apagar esta notícia?\n\nEsta ação não pode ser desfeita através deste painel."
         );
 
-
     if (!confirmar) {
         return;
     }
 
-
     try {
 
-        await githubFetch(
-
-            `https://api.github.com/repos/${REPO}/contents/${noticiaEmEdicao.path}`,
-
+        await apiFetch(
+            `/api/admin/news?path=${encodeURIComponent(noticiaEmEdicao.path)}`,
             {
-
-                method:
-                    "DELETE",
+                method: "DELETE",
 
                 headers: {
-
                     "Content-Type":
                         "application/json"
                 },
 
                 body:
                     JSON.stringify({
-
                         message:
                             "Apagar notícia",
 
                         sha:
-                            noticiaEmEdicao.sha,
-
-                        branch:
-                            BRANCH
+                            noticiaEmEdicao.sha
                     })
             }
         );
-
 
         alert(
             "Notícia apagada."
         );
 
-
         voltarLista();
-
 
     } catch (error) {
 
         alert(
-
             "Não foi possível apagar a notícia:\n\n" +
             error.message
-
         );
     }
 }
 
 
 // ============================================================
-// APAGAR DIRETAMENTE DA LISTA
+// APAGAR DA LISTA
 // ============================================================
 
 async function apagarDaLista(
@@ -2737,45 +2493,33 @@ async function apagarDaLista(
             `Tens a certeza que queres apagar esta notícia?\n\n"${titulo}"\n\nEsta ação não pode ser desfeita através deste painel.`
         );
 
-
     if (!confirmar) {
         return;
     }
 
-
     try {
 
-        await githubFetch(
-
-            `https://api.github.com/repos/${REPO}/contents/${encodeURIComponent(path)}`,
-
+        await apiFetch(
+            `/api/admin/news?path=${encodeURIComponent(path)}`,
             {
-
-                method:
-                    "DELETE",
+                method: "DELETE",
 
                 headers: {
-
                     "Content-Type":
                         "application/json"
                 },
 
                 body:
                     JSON.stringify({
-
                         message:
                             "Apagar notícia: " +
                             titulo,
 
                         sha:
-                            sha,
-
-                        branch:
-                            BRANCH
+                            sha
                     })
             }
         );
-
 
         await carregarNoticias();
 
@@ -2800,22 +2544,17 @@ async function uploadImage() {
             "image-upload"
         );
 
-
     if (
         !fileInput.files.length
     ) {
-
         return null;
     }
-
 
     const file =
         fileInput.files[0];
 
-
     const reader =
         new FileReader();
-
 
     return new Promise(
         (resolve, reject) => {
@@ -2829,7 +2568,6 @@ async function uploadImage() {
                             reader.result
                                 .split(",")[1];
 
-
                         resolve({
 
                             name:
@@ -2839,17 +2577,14 @@ async function uploadImage() {
                                 base64Content
                         });
 
-
                     } catch (error) {
 
                         reject(error);
                     }
                 };
 
-
             reader.onerror =
                 reject;
-
 
             reader.readAsDataURL(
                 file
@@ -2866,7 +2601,6 @@ function criarNomeImagemUnico(
     const ultimaExtensao =
         filename.lastIndexOf(".");
 
-
     let nome =
         ultimaExtensao > 0
             ? filename.substring(
@@ -2875,14 +2609,12 @@ function criarNomeImagemUnico(
             )
             : filename;
 
-
     let extensao =
         ultimaExtensao > 0
             ? filename.substring(
                 ultimaExtensao
             )
             : "";
-
 
     nome =
         nome
@@ -2900,7 +2632,6 @@ function criarNomeImagemUnico(
                 ""
             );
 
-
     extensao =
         extensao
             .toLowerCase()
@@ -2909,15 +2640,12 @@ function criarNomeImagemUnico(
                 ""
             );
 
-
     if (!nome) {
         nome = "imagem";
     }
 
-
     const agora =
         new Date();
-
 
     const timestamp =
         agora
@@ -2927,7 +2655,6 @@ function criarNomeImagemUnico(
                 ""
             );
 
-
     const aleatorio =
         Math.random()
             .toString(36)
@@ -2935,7 +2662,6 @@ function criarNomeImagemUnico(
                 2,
                 7
             );
-
 
     return (
         nome +
@@ -2955,7 +2681,6 @@ function mostrarPreview(url) {
             "image-preview"
         );
 
-
     if (!url) {
 
         preview.style.display =
@@ -2967,10 +2692,8 @@ function mostrarPreview(url) {
         return;
     }
 
-
     preview.src =
         normalizarUrlImagem(url);
-
 
     preview.style.display =
         "block";
@@ -2978,7 +2701,7 @@ function mostrarPreview(url) {
 
 
 // ============================================================
-// PRÉ-VISUALIZAÇÃO DA NOTÍCIA
+// PRÉ-VISUALIZAÇÃO
 // ============================================================
 
 function previsualizarNoticia() {
@@ -2987,90 +2710,64 @@ function previsualizarNoticia() {
         return;
     }
 
-
     const titulo =
         document
-            .getElementById(
-                "noticia-titulo"
-            )
+            .getElementById("noticia-titulo")
             .value
             .trim();
-
 
     const subtitulo =
         document
-            .getElementById(
-                "noticia-subtitulo"
-            )
+            .getElementById("noticia-subtitulo")
             .value
             .trim();
-
 
     const categoria =
         document
-            .getElementById(
-                "noticia-categoria"
-            )
+            .getElementById("noticia-categoria")
             .value
             .trim();
-
 
     const data =
         document
-            .getElementById(
-                "noticia-data"
-            )
+            .getElementById("noticia-data")
             .value;
-
 
     const autor =
         document
-            .getElementById(
-                "noticia-autor"
-            )
+            .getElementById("noticia-autor")
             .value
             .trim();
-
 
     const imagem =
         document
-            .getElementById(
-                "noticia-imagem-url"
-            )
+            .getElementById("noticia-imagem-url")
             .value
             .trim();
 
-
     document
-        .getElementById(
-            "preview-title"
-        )
+        .getElementById("preview-title")
         .innerText =
             titulo ||
             "Sem título";
-
 
     const subtitleEl =
         document.getElementById(
             "preview-subtitle"
         );
 
-
     subtitleEl.innerText =
         subtitulo;
-
 
     subtitleEl.style.display =
         subtitulo
             ? "block"
             : "none";
 
-
     const categoryEl =
         document.getElementById(
             "preview-category"
         );
-
 
     if (categoria) {
 
@@ -3088,45 +2785,34 @@ function previsualizarNoticia() {
         );
     }
 
-
     const metaParts = [];
 
-
     if (data) {
-
         metaParts.push(
             "📅 " + data
         );
     }
 
-
     if (autor) {
-
         metaParts.push(
             "✍️ " + autor
         );
     }
 
-
     document
-        .getElementById(
-            "preview-meta"
-        )
+        .getElementById("preview-meta")
         .innerText =
             metaParts.join("  •  ");
-
 
     const previewImage =
         document.getElementById(
             "preview-image"
         );
 
-
     const imagemNormalizada =
         normalizarUrlImagem(
             imagem
         );
-
 
     if (imagemNormalizada) {
 
@@ -3145,22 +2831,15 @@ function previsualizarNoticia() {
             "none";
     }
 
-
     document
-        .getElementById(
-            "preview-content"
-        )
+        .getElementById("preview-content")
         .innerHTML =
             quill.root.innerHTML;
 
-
     document
-        .getElementById(
-            "preview-overlay"
-        )
+        .getElementById("preview-overlay")
         .classList
         .remove("hidden");
-
 
     document.body.style.overflow =
         "hidden";
@@ -3174,30 +2853,25 @@ async function previsualizarDaLista(
     try {
 
         const response =
-            await githubFetch(
-                `https://api.github.com/repos/${REPO}/contents/${encodeURIComponent(path)}?ref=${BRANCH}`
+            await apiFetch(
+                `/api/admin/news?path=${encodeURIComponent(path)}`
             );
-
 
         const data =
             await response.json();
-
 
         const markdown =
             decodeBase64(
                 data.content
             );
 
-
         const parsed =
             separarFrontmatter(
                 markdown
             );
 
-
         const fields =
             parsed.fields;
-
 
         const titulo =
             obterCampo(
@@ -3208,7 +2882,6 @@ async function previsualizarDaLista(
                 path.split("/").pop()
             );
 
-
         const subtitulo =
             obterCampo(
                 fields,
@@ -3218,7 +2891,6 @@ async function previsualizarDaLista(
                 "resumo"
             );
 
-
         const categoria =
             obterCampo(
                 fields,
@@ -3227,7 +2899,6 @@ async function previsualizarDaLista(
                 "tag"
             );
 
-
         const dataNoticia =
             obterCampo(
                 fields,
@@ -3235,13 +2906,11 @@ async function previsualizarDaLista(
                 "published"
             );
 
-
         const autor =
             obterCampo(
                 fields,
                 "author"
             );
-
 
         const imagem =
             obterCampo(
@@ -3252,36 +2921,28 @@ async function previsualizarDaLista(
                 "featuredImage"
             );
 
-
         document
-            .getElementById(
-                "preview-title"
-            )
+            .getElementById("preview-title")
             .innerText =
                 titulo;
-
 
         const subtitleEl =
             document.getElementById(
                 "preview-subtitle"
             );
 
-
         subtitleEl.innerText =
             subtitulo;
-
 
         subtitleEl.style.display =
             subtitulo
                 ? "block"
                 : "none";
 
-
         const categoryEl =
             document.getElementById(
                 "preview-category"
             );
-
 
         if (categoria) {
 
@@ -3299,9 +2960,7 @@ async function previsualizarDaLista(
             );
         }
 
-
         const metaParts = [];
-
 
         if (dataNoticia) {
 
@@ -3314,7 +2973,6 @@ async function previsualizarDaLista(
             );
         }
 
-
         if (autor) {
 
             metaParts.push(
@@ -3322,26 +2980,20 @@ async function previsualizarDaLista(
             );
         }
 
-
         document
-            .getElementById(
-                "preview-meta"
-            )
+            .getElementById("preview-meta")
             .innerText =
                 metaParts.join("  •  ");
-
 
         const previewImage =
             document.getElementById(
                 "preview-image"
             );
 
-
         const imagemNormalizada =
             normalizarUrlImagem(
                 imagem
             );
-
 
         if (imagemNormalizada) {
 
@@ -3360,28 +3012,20 @@ async function previsualizarDaLista(
                 "none";
         }
 
-
         document
-            .getElementById(
-                "preview-content"
-            )
+            .getElementById("preview-content")
             .innerHTML =
                 markdownSimplesParaHtml(
                     parsed.body
                 );
 
-
         document
-            .getElementById(
-                "preview-overlay"
-            )
+            .getElementById("preview-overlay")
             .classList
             .remove("hidden");
 
-
         document.body.style.overflow =
             "hidden";
-
 
     } catch (error) {
 
@@ -3407,7 +3051,6 @@ function fecharPrevisualizacao(
         return;
     }
 
-
     document
         .getElementById(
             "preview-overlay"
@@ -3415,11 +3058,14 @@ function fecharPrevisualizacao(
         .classList
         .add("hidden");
 
-
     document.body.style.overflow =
         "";
 }
 
+
+// ============================================================
+// IMAGENS
+// ============================================================
 
 function normalizarUrlImagem(
     url
@@ -3429,32 +3075,25 @@ function normalizarUrlImagem(
         return "";
     }
 
-
     url =
         String(url).trim();
-
 
     if (!url) {
         return "";
     }
 
-
     if (
         url.startsWith("http://") ||
         url.startsWith("https://")
     ) {
-
         return url;
     }
-
 
     if (
         url.startsWith("/")
     ) {
-
         return url;
     }
-
 
     return "/" +
         url.replace(
@@ -3486,21 +3125,16 @@ document
 function criarSlug(texto) {
 
     return texto
-
         .toLowerCase()
-
         .normalize("NFD")
-
         .replace(
             /[\u0300-\u036f]/g,
             ""
         )
-
         .replace(
             /[^a-z0-9]+/g,
             "-"
         )
-
         .replace(
             /^-+|-+$/g,
             "");
@@ -3510,9 +3144,7 @@ function criarSlug(texto) {
 function encodeBase64(texto) {
 
     return btoa(
-
         unescape(
-
             encodeURIComponent(
                 texto
             )
@@ -3529,14 +3161,9 @@ function decodeBase64(base64) {
             ""
         );
 
-
     return decodeURIComponent(
-
         escape(
-
-            atob(
-                cleaned
-            )
+            atob(cleaned)
         )
     );
 }
@@ -3573,6 +3200,32 @@ function escaparHtml(texto) {
 }
 
 
+function escaparJs(texto) {
+
+    return String(texto)
+        .replace(
+            /\\/g,
+            "\\\\"
+        )
+        .replace(
+            /'/g,
+            "\\'"
+        )
+        .replace(
+            /"/g,
+            '\\"'
+        )
+        .replace(
+            /\n/g,
+            "\\n"
+        )
+        .replace(
+            /\r/g,
+            "\\r"
+        );
+}
+
+
 // ============================================================
 // NAVEGAÇÃO
 // ============================================================
@@ -3582,30 +3235,20 @@ function voltarLista() {
     noticiaEmEdicao =
         null;
 
-
     document
-        .getElementById(
-            "form-screen"
-        )
+        .getElementById("form-screen")
         .classList
         .add("hidden");
 
-
     document
-        .getElementById(
-            "list-screen"
-        )
+        .getElementById("list-screen")
         .classList
         .remove("hidden");
 
-
     document
-        .getElementById(
-            "status"
-        )
+        .getElementById("status")
         .style.display =
             "none";
-
 
     carregarNoticias();
 }
@@ -3614,71 +3257,45 @@ function voltarLista() {
 function limparFormulario() {
 
     document
-        .getElementById(
-            "noticia-titulo"
-        )
+        .getElementById("noticia-titulo")
         .value =
             "";
 
-
     document
-        .getElementById(
-            "noticia-subtitulo"
-        )
+        .getElementById("noticia-subtitulo")
         .value =
             "";
 
-
     document
-        .getElementById(
-            "noticia-categoria"
-        )
+        .getElementById("noticia-categoria")
         .value =
             "";
 
-
     document
-        .getElementById(
-            "noticia-data"
-        )
+        .getElementById("noticia-data")
         .value =
             "";
 
-
     document
-        .getElementById(
-            "noticia-autor"
-        )
+        .getElementById("noticia-autor")
         .value =
             "ChutaPraCanto";
 
-
     document
-        .getElementById(
-            "noticia-imagem-url"
-        )
+        .getElementById("noticia-imagem-url")
         .value =
             "";
 
-
     document
-        .getElementById(
-            "image-upload"
-        )
+        .getElementById("image-upload")
         .value =
             "";
 
-
-    mostrarPreview(
-        ""
-    );
-
+    mostrarPreview("");
 
     if (quill) {
 
-        quill.setText(
-            ""
-        );
+        quill.setText("");
     }
 }
 
@@ -3692,18 +3309,14 @@ function mostrarSucesso(
             "status"
         );
 
-
     statusEl.style.display =
         "block";
-
 
     statusEl.style.background =
         "#dcfce7";
 
-
     statusEl.style.color =
         "#166534";
-
 
     statusEl.innerText =
         mensagem;
@@ -3717,31 +3330,14 @@ function mostrarSucesso(
 window.onload =
     async function() {
 
-        if (!getToken()) {
+        const autenticado =
+            await verificarSessao();
+
+        if (!autenticado) {
             return;
         }
 
-
-        document
-            .getElementById(
-                "login-screen"
-            )
-            .classList
-            .add("hidden");
-
-
-        document
-            .getElementById(
-                "admin-screen"
-            )
-            .classList
-            .remove("hidden");
-
-
-        iniciarEditor();
-
-
-        await carregarNoticias();
+        mostrarAdmin();
     };
 
 </script>
