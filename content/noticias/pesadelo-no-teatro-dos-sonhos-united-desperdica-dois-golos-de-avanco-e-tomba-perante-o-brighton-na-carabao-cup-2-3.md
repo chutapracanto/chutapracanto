@@ -4,7 +4,7 @@ subtitulo: "De sonho a pesadelo: Shea Lacey marca na estreia, mas Brighton assin
 categoria: "Carabao Cup"
 date: "2026-09-16"
 author: "ChutaPraCanto"
-imagem: "/images/uploads/NDuQgBnvwrq700tQ64066JfZhU-20260916224210246-0k3he.jpg"
+imagem: "/images/uploads/NDuQgBnvwrq700tQ64066JfZhU-20260916225145778-q8lma.jpg"
 ---
 
 Noite de autêntico pesadelo para o Manchester United na Carabao Cup. Perante os seus adeptos em Old Trafford, os _Red Devils_ assinaram uma entrada fulgurante na 3.ª eliminatória, mas permitiram uma reviravolta épica ao Brighton e acabaram eliminados com um desaire por 2-3, dizendo adeus prematuramente à competição.
