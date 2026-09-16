@@ -232,11 +232,12 @@ async function githubRequest(env, path, options = {}) {
   }
 
   const headers = {
-    "Authorization": `Bearer ${token}`,
-    "Accept": "application/vnd.github+json",
-    "X-GitHub-Api-Version": "2022-11-28",
-    ...options.headers
-  };
+  "Authorization": `Bearer ${token}`,
+  "Accept": "application/vnd.github+json",
+  "X-GitHub-Api-Version": "2022-11-28",
+  "User-Agent": "ChutaPraCanto",
+  ...options.headers
+};
 
   return fetch(`${GITHUB_API}${path}`, {
     ...options,
