@@ -33,8 +33,9 @@ export default {
               }
             });
 
-            // Busca a página HTML original
-            const htmlRes = await env.ASSETS.fetch(request);
+            // Busca a página HTML original sem o parâmetro ?slug
+            const htmlRequest = new Request(`${url.origin}/noticia.html`, request);
+            const htmlRes = await env.ASSETS.fetch(htmlRequest);
             let html = await htmlRes.text();
 
             // Injeta os meta tags corretos para as redes sociais
