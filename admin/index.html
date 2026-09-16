@@ -1551,20 +1551,6 @@ async function carregarNoticias() {
                         : []
                 );
 
-        /*
-         * Ordenação:
-         *
-         * A data pode vir da API com nomes diferentes.
-         *
-         * Aceitamos:
-         * published
-         * date
-         * dataNoticia
-         * data
-         *
-         * A mais recente aparece sempre primeiro.
-         */
-
         noticias.sort(
             (a, b) => {
 
@@ -1683,17 +1669,6 @@ function obterTimestampNoticia(
         return null;
     }
 
-    /*
-     * Primeiro tentamos interpretar
-     * a data diretamente.
-     *
-     * Exemplos aceites:
-     *
-     * 2026-09-16
-     * 2026-09-16T20:30:00.000Z
-     * 2026-09-16T20:30:00
-     */
-
     const timestamp =
         Date.parse(
             texto
@@ -1705,12 +1680,6 @@ function obterTimestampNoticia(
 
         return timestamp;
     }
-
-    /*
-     * Caso a API devolva uma data num
-     * formato menos habitual, tentamos
-     * pelo menos reconhecer YYYY-MM-DD.
-     */
 
     const match =
         texto.match(
@@ -1762,12 +1731,6 @@ function formatarDataNoticia(
 
     const texto =
         String(valor).trim();
-
-    /*
-     * Para o admin mostramos apenas
-     * a parte da data, mantendo o formato
-     * simples YYYY-MM-DD.
-     */
 
     const match =
         texto.match(
@@ -2837,6 +2800,194 @@ function markdownSimplesParaHtml(
 
 
 // ============================================================
+// QUILL -> HTML COMPATÍVEL COM MARKDOWN
+// ============================================================
+
+function normalizarListasQuillParaTurndown(
+    html
+) {
+
+    const wrapper =
+        document.createElement("div");
+
+    wrapper.innerHTML =
+        html;
+
+    /*
+     * O Quill 2 pode representar tanto
+     * listas numeradas como listas com pontos
+     * dentro de <ol>.
+     *
+     * A diferença está no atributo:
+     *
+     * data-list="bullet"
+     *
+     * Portanto, antes de passar o HTML ao
+     * Turndown, transformamos as listas bullet
+     * reais em <ul>.
+     */
+
+    const listas =
+        Array.from(
+            wrapper.querySelectorAll("ol")
+        );
+
+    listas.forEach(
+        lista => {
+
+            const itens =
+                Array.from(
+                    lista.children
+                ).filter(
+                    element =>
+                        element.tagName === "LI"
+                );
+
+            if (!itens.length) {
+                return;
+            }
+
+            /*
+             * Caso toda a lista seja bullet,
+             * basta transformar o próprio <ol>
+             * num <ul>.
+             */
+
+            const todosBullet =
+                itens.every(
+                    item =>
+                        item.getAttribute(
+                            "data-list"
+                        ) === "bullet"
+                );
+
+            if (todosBullet) {
+
+                const ul =
+                    document.createElement("ul");
+
+                Array.from(
+                    lista.attributes
+                ).forEach(
+                    atributo => {
+
+                        if (
+                            atributo.name !==
+                            "data-list"
+                        ) {
+
+                            ul.setAttribute(
+                                atributo.name,
+                                atributo.value
+                            );
+                        }
+                    }
+                );
+
+                itens.forEach(
+                    item => {
+
+                        item.removeAttribute(
+                            "data-list"
+                        );
+
+                        ul.appendChild(
+                            item
+                        );
+                    }
+                );
+
+                lista.replaceWith(
+                    ul
+                );
+
+                return;
+            }
+
+            /*
+             * Se houver uma mistura de listas
+             * numeradas e bullets dentro do mesmo
+             * <ol>, dividimos os itens em blocos
+             * consecutivos, preservando a ordem.
+             */
+
+            const fragment =
+                document.createDocumentFragment();
+
+            let listaAtual = null;
+            let tipoAtual = null;
+
+            itens.forEach(
+                item => {
+
+                    const tipo =
+                        item.getAttribute(
+                            "data-list"
+                        ) === "bullet"
+                            ? "bullet"
+                            : "ordered";
+
+                    if (
+                        !listaAtual ||
+                        tipo !== tipoAtual
+                    ) {
+
+                        listaAtual =
+                            document.createElement(
+                                tipo === "bullet"
+                                    ? "ul"
+                                    : "ol"
+                            );
+
+                        tipoAtual =
+                            tipo;
+
+                        fragment.appendChild(
+                            listaAtual
+                        );
+                    }
+
+                    item.removeAttribute(
+                        "data-list"
+                    );
+
+                    listaAtual.appendChild(
+                        item
+                    );
+                }
+            );
+
+            lista.replaceWith(
+                fragment
+            );
+        }
+    );
+
+    /*
+     * Alguns conteúdos podem chegar ao editor
+     * já com <li data-list="bullet"> fora de
+     * uma lista esperada. Garantimos também aqui
+     * que esse atributo não chega ao Markdown.
+     */
+
+    wrapper
+        .querySelectorAll(
+            'li[data-list="bullet"]'
+        )
+        .forEach(
+            item => {
+
+                item.removeAttribute(
+                    "data-list"
+                );
+            }
+        );
+
+    return wrapper.innerHTML;
+}
+
+
+// ============================================================
 // GUARDAR
 // ============================================================
 
@@ -2951,8 +3102,28 @@ async function guardarNoticia() {
                 `/images/uploads/${uniqueName}`;
         }
 
-        const htmlContent =
+
+        /*
+         * =====================================================
+         * CORREÇÃO DAS LISTAS
+         * =====================================================
+         *
+         * O Quill 2 usa <ol> para alguns tipos
+         * de listas, distinguindo as listas com
+         * pontos através de data-list="bullet".
+         *
+         * Antes do Turndown normalizamos o HTML
+         * para que os bullets sejam realmente <ul>.
+         */
+
+        const htmlContentOriginal =
             quill.root.innerHTML;
+
+        const htmlContent =
+            normalizarListasQuillParaTurndown(
+                htmlContentOriginal
+            );
+
 
         const turndownService =
             new TurndownService({
@@ -2962,15 +3133,32 @@ async function guardarNoticia() {
                 strongDelimiter: "**"
             });
 
+
         const htmlLimpo =
             limparCaracteresInvisiveis(
                 htmlContent
             );
 
+
         let markdownBody =
             turndownService.turndown(
                 htmlLimpo
             );
+
+
+        /*
+         * Garantimos novamente que qualquer
+         * marcador de bullet produzido pelo
+         * Turndown fica com "-".
+         */
+
+        markdownBody =
+            markdownBody
+                .replace(
+                    /^[ \t]*[*+][ \t]+/gm,
+                    "- "
+                );
+
 
         markdownBody =
             limparCaracteresInvisiveis(
@@ -2986,6 +3174,7 @@ async function guardarNoticia() {
                 )
                 .trim();
 
+
         const fileContent =
             construirMarkdown(
                 titulo,
@@ -2996,6 +3185,7 @@ async function guardarNoticia() {
                 finalImageUrl,
                 markdownBody
             );
+
 
         if (!noticiaEmEdicao) {
 
@@ -3701,7 +3891,7 @@ async function previsualizarDaLista(
         document
             .getElementById("preview-title")
             .innerText =
-                titulo;
+            titulo;
 
         const subtitleEl =
             document.getElementById(
@@ -3760,7 +3950,7 @@ async function previsualizarDaLista(
         document
             .getElementById("preview-meta")
             .innerText =
-                metaParts.join("  •  ");
+            metaParts.join("  •  ");
 
         const previewImage =
             document.getElementById(
