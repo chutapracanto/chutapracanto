@@ -319,6 +319,12 @@
             display: none;
         }
 
+        .image-help {
+            font-size: 12px;
+            color: #777;
+            margin-top: 6px;
+        }
+
         @media (max-width: 650px) {
 
             body {
@@ -529,6 +535,10 @@
                     id="noticia-imagem-url"
                     placeholder="Ou cola aqui o URL da imagem..."
                 >
+
+                <div class="image-help">
+                    As imagens carregadas recebem automaticamente um nome único.
+                </div>
 
                 <img
                     id="image-preview"
@@ -789,7 +799,6 @@ async function carregarNoticias() {
         let page = 1;
 
 
-        // Permite ultrapassar 100 notícias
         while (true) {
 
             const response =
@@ -826,7 +835,6 @@ async function carregarNoticias() {
         }
 
 
-        // Ler os dados reais de cada notícia
         const noticiasComDados =
             await Promise.all(
 
@@ -953,7 +961,6 @@ async function carregarNoticias() {
             );
 
 
-        // Mais recentes primeiro
         noticias =
             noticiasComDados.sort(
                 (a, b) => {
@@ -1532,10 +1539,10 @@ async function editarNoticia(path) {
         document
             .getElementById("mode-label")
             .innerText =
-                "A editar: " +
-                path
-                    .split("/")
-                    .pop();
+            "A editar: " +
+            path
+                .split("/")
+                .pop();
 
 
         document
@@ -2057,40 +2064,21 @@ async function guardarNoticia() {
 
         if (imageData) {
 
+            const uniqueName =
+                criarNomeImagemUnico(
+                    imageData.name
+                );
+
+
             const imagePath =
-                `images/uploads/${imageData.name}`;
-
-
-            let existingSha =
-                null;
-
-
-            try {
-
-                const existingResponse =
-                    await githubFetch(
-                        `https://api.github.com/repos/${REPO}/contents/${encodeURIComponent(imagePath)}?ref=${BRANCH}`
-                    );
-
-
-                const existingData =
-                    await existingResponse.json();
-
-
-                existingSha =
-                    existingData.sha;
-
-            } catch (e) {
-
-                // Imagem nova.
-            }
+                `images/uploads/${uniqueName}`;
 
 
             const imageBody = {
 
                 message:
                     "Upload imagem: " +
-                    imageData.name,
+                    uniqueName,
 
                 content:
                     imageData.content,
@@ -2098,13 +2086,6 @@ async function guardarNoticia() {
                 branch:
                     BRANCH
             };
-
-
-            if (existingSha) {
-
-                imageBody.sha =
-                    existingSha;
-            }
 
 
             await githubFetch(
@@ -2131,7 +2112,7 @@ async function guardarNoticia() {
 
 
             finalImageUrl =
-                `/images/uploads/${imageData.name}`;
+                `/images/uploads/${uniqueName}`;
         }
 
 
@@ -2485,6 +2466,95 @@ async function uploadImage() {
                 file
             );
         }
+    );
+}
+
+
+function criarNomeImagemUnico(
+    filename
+) {
+
+    const ultimaExtensao =
+        filename.lastIndexOf(".");
+
+
+    let nome =
+        ultimaExtensao > 0
+            ? filename.substring(
+                0,
+                ultimaExtensao
+            )
+            : filename;
+
+
+    let extensao =
+        ultimaExtensao > 0
+            ? filename.substring(
+                ultimaExtensao
+            )
+            : "";
+
+
+    nome =
+        nome
+            .normalize("NFD")
+            .replace(
+                /[\u0300-\u036f]/g,
+                ""
+            )
+            .replace(
+                /[^a-zA-Z0-9_-]+/g,
+                "-"
+            )
+            .replace(
+                /^-+|-+$/g,
+                ""
+            );
+
+
+    extensao =
+        extensao
+            .toLowerCase()
+            .replace(
+                /[^a-z0-9.]/g,
+                ""
+            );
+
+
+    if (!nome) {
+        nome = "imagem";
+    }
+
+
+    const agora =
+        new Date();
+
+
+    const timestamp =
+        agora
+            .toISOString()
+            .replace(
+                /[-:.TZ]/g,
+                ""
+            );
+
+
+    const aleatorio =
+        Math.random()
+            .toString(36)
+            .substring(
+                2,
+                7
+            );
+
+
+    return (
+        nome +
+        "-" +
+        timestamp +
+        "-" +
+        aleatorio +
+        extensao
     );
 }
 
