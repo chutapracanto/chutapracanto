@@ -431,7 +431,7 @@ async function enriquecerNoticias(env, noticias) {
           data.content || ""
         );
 
-       const dataNoticia =
+    const dataNoticia =
   extrairDataNoticia(markdown);
 
 const imagem =
