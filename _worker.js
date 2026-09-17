@@ -6,7 +6,7 @@ const GITHUB_REPO = "chutapracanto";
 const GITHUB_BRANCH = "main";
 
 const SESSION_COOKIE_NAME = "cpc_session";
-const NEWS_CACHE_TTL = 60;
+
 
 // ============================================================
 // RESPOSTAS
@@ -411,40 +411,13 @@ async function enriquecerNoticias(env, noticias) {
       }
 
       try {
-        const cacheKey =
-          `https://cache.chutapracanto.local/${encodeURIComponent(
-            noticia.path
-          )}`;
-
-        const cacheRequest =
-          new Request(cacheKey);
-
-        const cachedResponse =
-          await caches.default.match(
-            cacheRequest
-          );
-
-        if (cachedResponse) {
-          const cachedData =
-            await cachedResponse.json();
-
-          return {
-            ...noticia,
-            dataNoticia:
-              cachedData.dataNoticia || "",
-            image:
-              cachedData.image || ""
-          };
-        }
-
-        const githubResponse =
-          await githubRequest(
-            env,
-            `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${noticia.path}?ref=${encodeURIComponent(GITHUB_BRANCH)}`,
-            {
-              method: "GET"
-            }
-          );
+        const githubResponse = await githubRequest(
+          env,
+          `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${noticia.path}?ref=${encodeURIComponent(GITHUB_BRANCH)}`,
+          {
+            method: "GET"
+          }
+        );
 
         if (!githubResponse.ok) {
           return {
@@ -454,13 +427,11 @@ async function enriquecerNoticias(env, noticias) {
           };
         }
 
-        const data =
-          await githubResponse.json();
+        const data = await githubResponse.json();
 
-        const markdown =
-          decodeGithubBase64(
-            data.content || ""
-          );
+        const markdown = decodeGithubBase64(
+          data.content || ""
+        );
 
         const dataNoticia =
           extrairDataNoticia(markdown);
@@ -483,35 +454,11 @@ async function enriquecerNoticias(env, noticias) {
             "featuredImage"
           );
 
-        const resultado = {
-          dataNoticia,
-          image: imagem
-        };
-
-        const cacheResponse =
-          new Response(
-            JSON.stringify(resultado),
-            {
-              headers: {
-                "Content-Type":
-                  "application/json",
-                "Cache-Control":
-                  `public, max-age=${NEWS_CACHE_TTL}`
-              }
-            }
-          );
-
-        await caches.default.put(
-          cacheRequest,
-          cacheResponse
-        );
-
         return {
           ...noticia,
           dataNoticia,
           image: imagem
         };
-
       } catch {
         return {
           ...noticia,
