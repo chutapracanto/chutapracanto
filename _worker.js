@@ -6,7 +6,7 @@ const GITHUB_REPO = "chutapracanto";
 const GITHUB_BRANCH = "main";
 
 const SESSION_COOKIE_NAME = "cpc_session";
-
+const NEWS_CACHE_TTL = 60;
 
 // ============================================================
 // RESPOSTAS
@@ -392,6 +392,138 @@ function extrairDataNoticia(markdown) {
 // ============================================================
 
 async function enriquecerNoticias(env, noticias) {
+  if (!Array.isArray(noticias)) {
+    return noticias;
+  }
+
+  const resultados = await Promise.all(
+    noticias.map(async (noticia) => {
+      if (
+        !noticia ||
+        typeof noticia.path !== "string" ||
+        !isAllowedNewsPath(noticia.path)
+      ) {
+        return {
+          ...noticia,
+          dataNoticia: "",
+          image: ""
+        };
+      }
+
+      try {
+        const cacheKey =
+          `https://cache.chutapracanto.local/${encodeURIComponent(
+            noticia.path
+          )}`;
+
+        const cacheRequest =
+          new Request(cacheKey);
+
+        const cachedResponse =
+          await caches.default.match(
+            cacheRequest
+          );
+
+        if (cachedResponse) {
+          const cachedData =
+            await cachedResponse.json();
+
+          return {
+            ...noticia,
+            dataNoticia:
+              cachedData.dataNoticia || "",
+            image:
+              cachedData.image || ""
+          };
+        }
+
+        const githubResponse =
+          await githubRequest(
+            env,
+            `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${noticia.path}?ref=${encodeURIComponent(GITHUB_BRANCH)}`,
+            {
+              method: "GET"
+            }
+          );
+
+        if (!githubResponse.ok) {
+          return {
+            ...noticia,
+            dataNoticia: "",
+            image: ""
+          };
+        }
+
+        const data =
+          await githubResponse.json();
+
+        const markdown =
+          decodeGithubBase64(
+            data.content || ""
+          );
+
+        const dataNoticia =
+          extrairDataNoticia(markdown);
+
+        const imagem =
+          extrairCampoFrontmatter(
+            markdown,
+            "image"
+          ) ||
+          extrairCampoFrontmatter(
+            markdown,
+            "imagem"
+          ) ||
+          extrairCampoFrontmatter(
+            markdown,
+            "featured_image"
+          ) ||
+          extrairCampoFrontmatter(
+            markdown,
+            "featuredImage"
+          );
+
+        const resultado = {
+          dataNoticia,
+          image: imagem
+        };
+
+        const cacheResponse =
+          new Response(
+            JSON.stringify(resultado),
+            {
+              headers: {
+                "Content-Type":
+                  "application/json",
+                "Cache-Control":
+                  `public, max-age=${NEWS_CACHE_TTL}`
+              }
+            }
+          );
+
+        await caches.default.put(
+          cacheRequest,
+          cacheResponse
+        );
+
+        return {
+          ...noticia,
+          dataNoticia,
+          image: imagem
+        };
+
+      } catch {
+        return {
+          ...noticia,
+          dataNoticia: "",
+          image: ""
+        };
+      }
+    })
+  );
+
+  return resultados;
+}
   if (!Array.isArray(noticias)) {
     return noticias;
   }
