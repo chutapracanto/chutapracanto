@@ -431,18 +431,32 @@ async function enriquecerNoticias(env, noticias) {
           data.content || ""
         );
 
-        const dataNoticia =
-          extrairDataNoticia(markdown);
+       const dataNoticia =
+  extrairDataNoticia(markdown);
 
-        return {
-          ...noticia,
-          dataNoticia
-        };
-      } catch {
-        return {
-          ...noticia,
-          dataNoticia: ""
-        };
+const imagem =
+  extrairCampoFrontmatter(
+    markdown,
+    "image"
+  ) ||
+  extrairCampoFrontmatter(
+    markdown,
+    "imagem"
+  ) ||
+  extrairCampoFrontmatter(
+    markdown,
+    "featured_image"
+  ) ||
+  extrairCampoFrontmatter(
+    markdown,
+    "featuredImage"
+  );
+
+return {
+  ...noticia,
+  dataNoticia,
+  image: imagem
+};
       }
     })
   );
