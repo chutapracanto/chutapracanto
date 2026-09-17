@@ -405,7 +405,8 @@ async function enriquecerNoticias(env, noticias) {
       ) {
         return {
           ...noticia,
-          dataNoticia: ""
+          dataNoticia: "",
+          image: ""
         };
       }
 
@@ -421,7 +422,8 @@ async function enriquecerNoticias(env, noticias) {
         if (!githubResponse.ok) {
           return {
             ...noticia,
-            dataNoticia: ""
+            dataNoticia: "",
+            image: ""
           };
         }
 
@@ -434,14 +436,34 @@ async function enriquecerNoticias(env, noticias) {
         const dataNoticia =
           extrairDataNoticia(markdown);
 
+        const imagem =
+          extrairCampoFrontmatter(
+            markdown,
+            "image"
+          ) ||
+          extrairCampoFrontmatter(
+            markdown,
+            "imagem"
+          ) ||
+          extrairCampoFrontmatter(
+            markdown,
+            "featured_image"
+          ) ||
+          extrairCampoFrontmatter(
+            markdown,
+            "featuredImage"
+          );
+
         return {
           ...noticia,
-          dataNoticia
+          dataNoticia,
+          image: imagem
         };
       } catch {
         return {
           ...noticia,
-          dataNoticia: ""
+          dataNoticia: "",
+          image: ""
         };
       }
     })
@@ -1084,7 +1106,7 @@ async function handleAdminAPI(request, env) {
         isAllowedNewsPath(item.path)
     );
 
-    // Acrescenta dataNoticia ao objeto devolvido
+    // Acrescenta dataNoticia e imagem ao objeto devolvido
     const noticiasEnriquecidas =
       await enriquecerNoticias(
         env,
