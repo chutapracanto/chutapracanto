@@ -12,13 +12,9 @@
 
   <link rel="icon" type="image/png" href="images/logo.png">
 
-  
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <link rel="stylesheet" href="style.css">
-
-  
 
   <!-- Metadados para redes sociais -->
 
@@ -30,11 +26,9 @@
 
   <meta property="og:image" id="meta-image" content="https://chutapracanto.pages.dev/images/logo.png" />
 
-  <meta property="og:url" id="meta-url" content="https://chutapracanto.pages.dev/noticia.html" />
+  <meta property="og:url" id="meta-url" content="https://chutapracanto.pages.dev/noticia" />
 
   <meta name="twitter:card" content="summary_large_image" />
-
-
 
   <style>
 
@@ -82,169 +76,151 @@
 
 <body>
 
-
-
   <!-- HEADER GLOBAL -->
 
   <header class="site-header">
 
-    <div class="header-container">
+```
+<div class="header-container">
 
-      <a href="index.html" class="logo-link">
+  <a href="index.html" class="logo-link">
 
-        <img src="images/logo.png" alt="ChutaPraCanto" class="site-logo">
+    <img src="images/logo.png" alt="ChutaPraCanto" class="site-logo">
 
-      </a>
+  </a>
 
-      
+  <nav>
 
-      <nav>
+    <ul>
 
-        <ul>
+      <li><a href="index.html">Home</a></li>
 
-          <li><a href="index.html">Home</a></li>
+      <li><a href="noticias.html" class="active">Notícias</a></li>
 
-          <li><a href="noticias.html" class="active">Notícias</a></li>
+      <li><a href="sobre.html">Sobre Nós</a></li>
 
-          <li><a href="sobre.html">Sobre Nós</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
 
-          <li><a href="contacto.html">Contacto</a></li>
+    </ul>
 
-        </ul>
+  </nav>
 
-      </nav>
+  <div class="header-socials">
 
+    <a href="https://youtube.com/@chutapracanto" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
 
+    <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" title="Spotify"><i class="fa-brands fa-spotify"></i></a>
 
-      <div class="header-socials">
+    <a href="https://instagram.com/chutapracanto.oficial" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
 
-        <a href="https://youtube.com/@chutapracanto" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+    <a href="https://tiktok.com/@chutapracanto" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
 
-        <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" title="Spotify"><i class="fa-brands fa-spotify"></i></a>
+  </div>
 
-        <a href="https://instagram.com/chutapracanto.oficial" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-
-        <a href="https://tiktok.com/@chutapracanto" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-
-      </div>
-
-    </div>
+</div>
+```
 
   </header>
-
-
 
   <!-- ARTIGO WRAPPER -->
 
   <div class="container" style="max-width: 800px; margin-top: 2rem; margin-bottom: 4rem;">
 
-    <a href="noticias.html" class="see-more" style="display: inline-block; margin-bottom: 2rem;">← VOLTAR ÀS NOTÍCIAS</a>
+```
+<a href="noticias.html" class="see-more" style="display: inline-block; margin-bottom: 2rem;">← VOLTAR ÀS NOTÍCIAS</a>
 
+<div id="article-content">
 
+  <p style="color: var(--text-gray);">A carregar notícia...</p>
 
-    <div id="article-content">
+</div>
 
-      <p style="color: var(--text-gray);">A carregar notícia...</p>
+<!-- Secção de Partilha -->
 
-    </div>
+<div class="share-section" id="share-box" style="display:none; margin-top: 40px; text-align: right;">
 
+  <button onclick="partilharNoticia()" style="background: transparent; color: var(--neon-green); border: 2px solid var(--neon-green); padding: 12px 24px; border-radius: 8px; cursor: pointer; font-family: var(--font-main); font-weight: 700; transition: all 0.2s ease;" onmouseover="this.style.background='var(--neon-green)'; this.style.color='#000';" onmouseout="this.style.background='transparent'; this.style.color='var(--neon-green)';" onmousedown="this.style.background='#15803d'; this.style.color='#fff';" onmouseup="this.style.background='var(--neon-green)'; this.style.color='#000';">
 
+    Partilhar no Facebook <i class="fa-brands fa-facebook-f" style="margin-left: 8px;"></i>
 
-    <!-- Secção de Partilha -->
+  </button>
 
-    <div class="share-section" id="share-box" style="display:none; margin-top: 40px; text-align: right;">
-
-      <button onclick="partilharNoticia()" style="background: transparent; color: var(--neon-green); border: 2px solid var(--neon-green); padding: 12px 24px; border-radius: 8px; cursor: pointer; font-family: var(--font-main); font-weight: 700; transition: all 0.2s ease;" onmouseover="this.style.background='var(--neon-green)'; this.style.color='#000';" onmouseout="this.style.background='transparent'; this.style.color='var(--neon-green)';" onmousedown="this.style.background='#15803d'; this.style.color='#fff';" onmouseup="this.style.background='var(--neon-green)'; this.style.color='#000';">
-
-        Partilhar <i class="fa-solid fa-share-nodes" style="margin-left: 8px;"></i>
-
-      </button>
-
-    </div>
+</div>
+```
 
   </div>
-
-
 
   <!-- FOOTER -->
 
   <footer>
 
-    <div class="footer-container">
+```
+<div class="footer-container">
 
-      <div class="footer-brand">
+  <div class="footer-brand">
 
-        <img src="images/logo.png" alt="ChutaPraCanto" class="footer-logo">
+    <img src="images/logo.png" alt="ChutaPraCanto" class="footer-logo">
 
-        <p>Análise tática, debate pós-jogo e opinião sem filtro sobre o futebol mundial.</p>
+    <p>Análise tática, debate pós-jogo e opinião sem filtro sobre o futebol mundial.</p>
 
-      </div>
+  </div>
 
+  <div class="footer-links">
 
+    <h4>NAVEGAÇÃO</h4>
 
-      <div class="footer-links">
+    <a href="index.html">Home</a>
 
-        <h4>NAVEGAÇÃO</h4>
+    <a href="noticias.html">Notícias</a>
 
-        <a href="index.html">Home</a>
+    <a href="sobre.html">Sobre Nós</a>
 
-        <a href="noticias.html">Notícias</a>
+    <a href="contacto.html">Contacto</a>
 
-        <a href="sobre.html">Sobre Nós</a>
+  </div>
 
-        <a href="contacto.html">Contacto</a>
+  <div class="footer-links">
 
-      </div>
+    <h4>LEGAL</h4>
 
+    <a href="privacidade.html">Política de Privacidade</a>
 
+    <a href="termos.html">Termos e Condições</a>
 
-      <div class="footer-links">
+  </div>
 
-        <h4>LEGAL</h4>
+  <div class="footer-socials-col">
 
-        <a href="privacidade.html">Política de Privacidade</a>
+    <h4>REDES SOCIAIS</h4>
 
-        <a href="termos.html">Termos e Condições</a>
+    <div class="footer-social-links">
 
-      </div>
+      <a href="https://youtube.com/@chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-youtube"></i> YouTube</a>
 
+      <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" class="social-pill"><i class="fa-brands fa-spotify"></i> Spotify</a>
 
+      <a href="https://instagram.com/chutapracanto.oficial" target="_blank" class="social-pill"><i class="fa-brands fa-instagram"></i> Instagram</a>
 
-      <div class="footer-socials-col">
+      <a href="https://tiktok.com/@chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-tiktok"></i> TikTok</a>
 
-        <h4>REDES SOCIAIS</h4>
+      <a href="https://facebook.com/chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
 
-        <div class="footer-social-links">
-
-          <a href="https://youtube.com/@chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-youtube"></i> YouTube</a>
-
-          <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" class="social-pill"><i class="fa-brands fa-spotify"></i> Spotify</a>
-
-          <a href="https://instagram.com/chutapracanto.oficial" target="_blank" class="social-pill"><i class="fa-brands fa-instagram"></i> Instagram</a>
-
-          <a href="https://tiktok.com/@chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-tiktok"></i> TikTok</a>
-
-          <a href="https://facebook.com/chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
-
-          <a href="https://reddit.com/r/chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-reddit-alien"></i> Reddit</a>
-
-        </div>
-
-      </div>
+      <a href="https://reddit.com/r/chutapracanto" target="_blank" class="social-pill"><i class="fa-brands fa-reddit-alien"></i> Reddit</a>
 
     </div>
 
+  </div>
 
+</div>
 
-    <div class="footer-bottom">
+<div class="footer-bottom">
 
-      <p>© 2026 ChutaPraCanto. Todos os direitos reservados.</p>
+  <p>© 2026 ChutaPraCanto. Todos os direitos reservados.</p>
 
-    </div>
+</div>
+```
 
   </footer>
-
-
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
 
@@ -258,8 +234,6 @@
 
       const slug = urlParams.get('slug');
 
-      
-
       if (!slug) {
 
         document.getElementById('article-content').innerHTML = "<h2 style='color:#fff;'>Notícia não encontrada.</h2><p style='color:var(--text-gray); margin-top:10px;'>O link parece estar incompleto.</p>";
@@ -268,15 +242,11 @@
 
       }
 
-
-
       try {
 
         // Tenta primeiro o slug exato do URL
 
         let res = await fetch(`content/noticias/${slug}.md`);
-
-        
 
         // Se falhar, tenta procurar diretamente na API do GitHub para encontrar o ficheiro correto ignorando diferenças de codificação ou maiúsculas/minúsculas
 
@@ -300,25 +270,17 @@
 
         }
 
-
-
         if (!res.ok) throw new Error("Artigo não existe");
 
         const text = await res.text();
-
-
 
         const parts = text.split("---");
 
         if (parts.length < 3) throw new Error("Formato inválido");
 
-
-
         const frontmatter = jsyaml.load(parts[1]);
 
         let markdownBody = parts.slice(2).join("---");
-
-
 
         const title = frontmatter.title || 'Sem título';
 
@@ -330,13 +292,9 @@
 
         const imagem = frontmatter.image || frontmatter.imagem || frontmatter.featured_image || frontmatter.featuredImage || '';
 
-
-
         markdownBody = markdownBody.trim().replace(/^!\[.*?\]\(.*?\)/, '');
 
         const dataFormatada = date.includes('T') ? date.split('T')[0] : date;
-
-        
 
         let fullImageUrl = "https://chutapracanto.pages.dev/images/logo.png";
 
@@ -345,8 +303,6 @@
           fullImageUrl = imagem.startsWith('http') ? imagem : window.location.origin + (imagem.startsWith('/') ? '' : '/') + imagem;
 
         }
-
-
 
         // URL específica e estável desta notícia.
 
@@ -360,194 +316,22 @@
 
         const urlPartilha = noticiaUrl.toString();
 
-
-
         const pageTitleEl = document.getElementById('page-title');
 
         if (pageTitleEl) pageTitleEl.innerText = title + " | ChutaPraCanto";
-
-        
 
         const metaTitleEl = document.getElementById('meta-title');
 
         if (metaTitleEl) metaTitleEl.content = title;
 
-        
-
         const metaDescEl = document.getElementById('meta-desc');
 
         if (metaDescEl) metaDescEl.content = subtitulo;
-
-        
 
         const metaImageEl = document.getElementById('meta-image');
 
         if (metaImageEl) metaImageEl.content = fullImageUrl;
 
-
-
         const metaUrlEl = document.getElementById('meta-url');
 
         if (metaUrlEl) metaUrlEl.content = urlPartilha;
-
-
-
-        const htmlBody = marked.parse(markdownBody);
-
-        
-
-        document.getElementById('article-content').innerHTML = `
-
-          <div style="margin-bottom: 2rem;">
-
-            <span class="tag" style="color: var(--neon-green); font-size: 0.85rem; font-weight: 800; display: block; margin-bottom: 0.5rem; text-transform: uppercase;">${categoria}</span>
-
-            <h1 style="font-size: 2.2rem; font-weight: 800; line-height: 1.25; margin-bottom: 0.8rem; font-family: var(--font-title); color: #fff;">${title}</h1>
-
-            ${subtitulo ? `<p style="font-size: 1.1rem; color: var(--text-gray); line-height: 1.4; margin-bottom: 1rem;">${subtitulo}</p>` : ''}
-
-            <div style="font-size: 0.85rem; color: #777;">Publicado a ${dataFormatada} por <strong>ChutaPraCanto</strong></div>
-
-          </div>
-
-          
-
-          ${imagem ? `<div style="margin-bottom: 2.5rem; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);"><img src="${imagem}" alt="${title}" style="width: 100%; max-height: 450px; object-fit: cover; object-position: center top; display: block;"></div>` : ''}
-
-          
-
-          <div class="art-body" style="font-size: 1.05rem; line-height: 1.7; color: #e0e0e0;">${htmlBody}</div>
-
-        `;
-
-        
-
-        const shareBox = document.getElementById('share-box');
-
-        if (shareBox) shareBox.style.display = "block";
-
-
-
-      } catch (e) {
-
-        console.error(e);
-
-        document.getElementById('article-content').innerHTML = `
-
-          <div style="text-align: center; padding: 3rem 0;">
-
-            <h2 style="color: #fff; margin-bottom: 1rem;">Notícia não encontrada ou erro ao carregar.</h2>
-
-            <p style="color: var(--text-gray); margin-bottom: 1.5rem;">O artigo selecionado pode ter sido movido ou o link está incorreto.</p>
-
-            <a href="noticias.html" class="filter-btn" style="display: inline-block; background: var(--neon-green); color: #000; text-decoration: none; padding: 0.6rem 1.2rem; border-radius: 8px;">Voltar à lista de notícias</a>
-
-          </div>
-
-        `;
-
-      }
-
-    }
-
-
-
-    async function partilharNoticia() {
-
-      const metaTitleEl = document.getElementById('meta-title');
-
-      const title = metaTitleEl ? metaTitleEl.content : document.title;
-
-
-
-      // Reconstrói sempre o URL da notícia a partir do slug.
-
-      // Assim, no telemóvel, navigator.share nunca recebe simplesmente
-
-      // o URL da página genérica ou outro URL que esteja no navegador.
-
-      const urlParams = new URLSearchParams(window.location.search);
-
-      const slug = urlParams.get('slug');
-
-
-
-      if (!slug) {
-
-        alert('Não foi possível identificar a notícia para partilhar.');
-
-        return;
-
-      }
-
-
-
-      const noticiaUrl = new URL('/noticia', window.location.origin);
-
-      noticiaUrl.searchParams.set('slug', slug);
-
-      const url = noticiaUrl.toString();
-
-
-
-      if (navigator.share) {
-
-        try {
-
-          await navigator.share({
-
-            title: title,
-
-            text: title,
-
-            url: url
-
-          });
-
-        } catch (err) {
-
-          // O utilizador pode cancelar a janela de partilha.
-
-        }
-
-      } else {
-
-        try {
-
-          await navigator.clipboard.writeText(url);
-
-          alert('Link da notícia copiado para a área de transferência!');
-
-        } catch (err) {
-
-          // Fallback para navegadores onde clipboard não está disponível.
-
-          const input = document.createElement('input');
-
-          input.value = url;
-
-          document.body.appendChild(input);
-
-          input.select();
-
-          document.execCommand('copy');
-
-          input.remove();
-
-          alert('Link da notícia copiado para a área de transferência!');
-
-        }
-
-      }
-
-    }
-
-
-
-    document.addEventListener('DOMContentLoaded', loadArticle);
-
-  </script>
-
-</body>
-
-</html>
