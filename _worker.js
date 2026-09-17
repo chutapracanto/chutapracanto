@@ -1,4 +1,3 @@
-```js
 const SESSION_MAX_AGE = 8 * 60 * 60;
 
 const GITHUB_API = "https://api.github.com";
@@ -711,6 +710,11 @@ async function prepararPaginaParaPartilha(
 
   const rewriter =
     new HTMLRewriter()
+
+      // --------------------------------------------------------
+      // TITLE
+      // --------------------------------------------------------
+
       .on(
         "title",
         {
@@ -722,6 +726,11 @@ async function prepararPaginaParaPartilha(
           }
         }
       )
+
+      // --------------------------------------------------------
+      // OG TITLE
+      // --------------------------------------------------------
+
       .on(
         'meta#meta-title',
         {
@@ -733,6 +742,11 @@ async function prepararPaginaParaPartilha(
           }
         }
       )
+
+      // --------------------------------------------------------
+      // OG DESCRIPTION
+      // --------------------------------------------------------
+
       .on(
         'meta#meta-desc',
         {
@@ -744,6 +758,11 @@ async function prepararPaginaParaPartilha(
           }
         }
       )
+
+      // --------------------------------------------------------
+      // OG IMAGE
+      // --------------------------------------------------------
+
       .on(
         'meta#meta-image',
         {
@@ -755,6 +774,11 @@ async function prepararPaginaParaPartilha(
           }
         }
       )
+
+      // --------------------------------------------------------
+      // OG URL
+      // --------------------------------------------------------
+
       .on(
         'meta#meta-url',
         {
@@ -766,6 +790,11 @@ async function prepararPaginaParaPartilha(
           }
         }
       )
+
+      // --------------------------------------------------------
+      // TWITTER TITLE
+      // --------------------------------------------------------
+
       .on(
         'meta[name="twitter:title"]',
         {
@@ -777,6 +806,11 @@ async function prepararPaginaParaPartilha(
           }
         }
       )
+
+      // --------------------------------------------------------
+      // TWITTER DESCRIPTION
+      // --------------------------------------------------------
+
       .on(
         'meta[name="twitter:description"]',
         {
@@ -788,6 +822,11 @@ async function prepararPaginaParaPartilha(
           }
         }
       )
+
+      // --------------------------------------------------------
+      // TWITTER IMAGE
+      // --------------------------------------------------------
+
       .on(
         'meta[name="twitter:image"]',
         {
@@ -799,6 +838,11 @@ async function prepararPaginaParaPartilha(
           }
         }
       )
+
+      // --------------------------------------------------------
+      // TWITTER URL
+      // --------------------------------------------------------
+
       .on(
         'meta[name="twitter:url"]',
         {
@@ -824,6 +868,11 @@ async function prepararPaginaParaPartilha(
 async function handleAdminAPI(request, env) {
   const url = new URL(request.url);
   const pathname = url.pathname;
+
+
+  // ----------------------------------------------------------
+  // LOGIN
+  // ----------------------------------------------------------
 
   if (pathname === "/api/admin/login") {
     if (request.method !== "POST") {
@@ -892,6 +941,11 @@ async function handleAdminAPI(request, env) {
     );
   }
 
+
+  // ----------------------------------------------------------
+  // LOGOUT
+  // ----------------------------------------------------------
+
   if (pathname === "/api/admin/logout") {
     if (request.method !== "POST") {
       return json(
@@ -913,6 +967,11 @@ async function handleAdminAPI(request, env) {
       }
     );
   }
+
+
+  // ----------------------------------------------------------
+  // VERIFICAR SESSÃO
+  // ----------------------------------------------------------
 
   if (pathname === "/api/admin/session") {
     if (request.method !== "GET") {
@@ -937,6 +996,11 @@ async function handleAdminAPI(request, env) {
     });
   }
 
+
+  // ----------------------------------------------------------
+  // RESTANTES ROTAS ADMIN
+  // ----------------------------------------------------------
+
   if (!pathname.startsWith("/api/admin/")) {
     return null;
   }
@@ -947,6 +1011,11 @@ async function handleAdminAPI(request, env) {
   if (authError) {
     return authError;
   }
+
+
+  // ----------------------------------------------------------
+  // LISTAR NOTÍCIAS
+  // ----------------------------------------------------------
 
   if (pathname === "/api/admin/news/list") {
     if (request.method !== "GET") {
@@ -1007,6 +1076,7 @@ async function handleAdminAPI(request, env) {
       );
     }
 
+    // Apenas ficheiros Markdown de notícias
     const noticias = data.filter(
       (item) =>
         item &&
@@ -1014,6 +1084,7 @@ async function handleAdminAPI(request, env) {
         isAllowedNewsPath(item.path)
     );
 
+    // Acrescenta dataNoticia ao objeto devolvido
     const noticiasEnriquecidas =
       await enriquecerNoticias(
         env,
@@ -1025,6 +1096,11 @@ async function handleAdminAPI(request, env) {
       githubResponse.status
     );
   }
+
+
+  // ----------------------------------------------------------
+  // NOTÍCIAS: LER / EDITAR / APAGAR
+  // ----------------------------------------------------------
 
   if (pathname === "/api/admin/news") {
     const path =
@@ -1057,6 +1133,8 @@ async function handleAdminAPI(request, env) {
     const githubPath =
       `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`;
 
+
+    // GET
     if (request.method === "GET") {
       const githubResponse =
         await githubRequest(
@@ -1088,6 +1166,8 @@ async function handleAdminAPI(request, env) {
       );
     }
 
+
+    // PUT / DELETE
     const body =
       await request.text();
 
@@ -1125,6 +1205,11 @@ async function handleAdminAPI(request, env) {
       githubResponse.status
     );
   }
+
+
+  // ----------------------------------------------------------
+  // IMAGENS: LER / ENVIAR / APAGAR
+  // ----------------------------------------------------------
 
   if (pathname === "/api/admin/image") {
     const path =
@@ -1157,6 +1242,8 @@ async function handleAdminAPI(request, env) {
     const githubPath =
       `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}`;
 
+
+    // GET
     if (request.method === "GET") {
       const githubResponse =
         await githubRequest(
@@ -1188,6 +1275,8 @@ async function handleAdminAPI(request, env) {
       );
     }
 
+
+    // PUT / DELETE
     const body =
       await request.text();
 
@@ -1225,6 +1314,11 @@ async function handleAdminAPI(request, env) {
       githubResponse.status
     );
   }
+
+
+  // ----------------------------------------------------------
+  // ENDPOINT DESCONHECIDO
+  // ----------------------------------------------------------
 
   return json(
     {
@@ -1296,4 +1390,3 @@ export default {
     }
   }
 };
-```
