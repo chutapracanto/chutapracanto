@@ -1,3 +1,4 @@
+---
 title: "Arranque para esquecer: Tottenham sofre derrota pesada no reduto do Brentford"
 slug: "arranque-para-esquecer-tottenham-sofre-derrota-pesada-no-reduto-do-brentford"
 subtitle: "Investimento milionário não evitou revés concludente na jornada inaugural da Premier League."
