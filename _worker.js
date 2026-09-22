@@ -1062,75 +1062,84 @@ async function handleAdminAPI(request, env) {
       );
     }
 
-    const pageValue =
-      Number(
-        url.searchParams.get("page") || "1"
+    const indexResponse =
+      await env.ASSETS.fetch(
+        new Request(
+          new URL(
+            "/content/noticias-index.json",
+            request.url
+          ),
+          request
+        )
       );
 
-    const page =
-      Number.isFinite(pageValue) && pageValue >= 1
-        ? Math.floor(pageValue)
-        : 1;
-
-    const perPage = 100;
-
-    const githubResponse =
-      await githubRequest(
-        env,
-        `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/content/noticias?ref=${encodeURIComponent(obterBranchGithub(env))}&per_page=${perPage}&page=${page}`,
+    if (!indexResponse.ok) {
+      return json(
         {
-          method: "GET"
-        }
+          error: "Índice de notícias indisponível.",
+          message: "O índice de notícias ainda não foi gerado."
+        },
+        503
       );
-
-    const responseText =
-      await githubResponse.text();
+    }
 
     let data;
 
     try {
-      data = JSON.parse(responseText);
+      data = await indexResponse.json();
     } catch {
-      data = {
-        error: responseText || "Resposta inválida do GitHub."
-      };
-    }
-
-    if (!githubResponse.ok) {
       return json(
-        data,
-        githubResponse.status
+        {
+          error: "Índice de notícias inválido.",
+          message: "Não foi possível ler o índice de notícias."
+        },
+        500
       );
     }
 
     if (!Array.isArray(data)) {
       return json(
-        data,
-        githubResponse.status
+        {
+          error: "Índice de notícias inválido.",
+          message: "O índice de notícias não contém uma lista válida."
+        },
+        500
       );
     }
 
-    // Apenas ficheiros Markdown de notícias
-    const noticias = data.filter(
-      (item) =>
-        item &&
-        typeof item.path === "string" &&
-        isAllowedNewsPath(item.path)
-    );
-
-    // Acrescenta dataNoticia e imagem ao objeto devolvido
-    const noticiasEnriquecidas =
-      await enriquecerNoticias(
-        env,
-        noticias
-      );
+    const noticias = data.map(item => ({
+      name:
+        item.path
+          ? item.path.split("/").pop()
+          : "",
+      path:
+        item.path || "",
+      slug:
+        item.slug || "",
+      title:
+        item.title || "Sem título",
+      subtitle:
+        item.subtitle || "",
+      category:
+        item.category || "Geral",
+      published:
+        item.published || "",
+      image:
+        item.image || "",
+      dataNoticia:
+        item.published || "",
+      sha:
+        null
+    }));
 
     return json(
-      noticiasEnriquecidas,
-      githubResponse.status
+      noticias,
+      200,
+      {
+        "Cache-Control": "no-store"
+      }
     );
   }
-
 
   // ----------------------------------------------------------
   // NOTÍCIAS: LER / EDITAR / APAGAR
