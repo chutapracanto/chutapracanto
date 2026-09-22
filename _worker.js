@@ -578,7 +578,7 @@ async function obterDadosPartilha(env, slug, origin) {
     const githubResponse =
       await githubRequest(
         env,
-        `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${encodeURIComponent(path)}?ref=${encodeURIComponent(GITHUB_BRANCH)}`,
+        `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}?ref=${encodeURIComponent(GITHUB_BRANCH)}`,
         {
           method: "GET"
         }
