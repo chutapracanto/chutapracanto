@@ -46,7 +46,7 @@ jobs:
           def field(frontmatter, names):
               for name in names:
                   match = re.search(
-                      rf"^\\s*{re.escape(name)}\\s*:\\s*(.*?)\\s*$",
+                      rf"^\s*{re.escape(name)}\s*:\s*(.*?)\s*$",
                       frontmatter,
                       re.MULTILINE
                   )
@@ -59,7 +59,7 @@ jobs:
           for path in sorted(root.glob("*.md")):
               text = path.read_text(encoding="utf-8-sig")
               match = re.match(
-                  r"^---\\s*\\n([\\s\\S]*?)\\n---(?:\\s*\\n|$)",
+                  r"^---\s*\n([\s\S]*?)\n---(?:\s*\n|$)",
                   text
               )
               if not match:
@@ -88,7 +88,7 @@ jobs:
 
               noticias.append({
                   "slug": slug,
-                  "path": str(path).replace("\\\\", "/"),
+                  "path": str(path).replace("\\", "/"),
                   "title": title,
                   "subtitle": subtitle,
                   "category": category,
@@ -96,11 +96,8 @@ jobs:
                   "image": image
               })
 
-          def sort_key(item):
-              return item.get("published") or ""
-
           noticias.sort(
-              key=sort_key,
+              key=lambda item: item.get("published") or "",
               reverse=True
           )
 
@@ -109,9 +106,10 @@ jobs:
                   noticias,
                   ensure_ascii=False,
                   indent=2
-              ) + "\\n",
+              ) + "\n",
               encoding="utf-8"
           )
+
       - name: Commit índice atualizado
         shell: bash
         run: |
