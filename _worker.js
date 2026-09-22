@@ -579,14 +579,23 @@ async function obterDadosPartilha(env, slug, origin) {
   }
 
   try {
-    const githubResponse =
-      await githubRequest(
-        env,
-        `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}?ref=${encodeURIComponent(obterBranchGithub(env))}`,
-        {
-          method: "GET"
-        }
-      );
+    const headers = {
+      "Accept": "application/vnd.github+json",
+      "X-GitHub-Api-Version": "2022-11-28",
+      "User-Agent": "ChutaPraCanto"
+    };
+
+    if (env.GITHUB_TOKEN) {
+      headers.Authorization = `Bearer ${env.GITHUB_TOKEN}`;
+    }
+
+    const githubResponse = await fetch(
+      `${GITHUB_API}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}?ref=${encodeURIComponent(obterBranchGithub(env))}`,
+      {
+        method: "GET",
+        headers
+      }
+    );
 
     if (!githubResponse.ok) {
       return null;
