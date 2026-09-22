@@ -1211,8 +1211,37 @@ async function handleAdminAPI(request, env) {
 
 
     // PUT / DELETE
-    const body =
-      await request.text();
+    let body;
+
+    try {
+      const payload =
+        JSON.parse(await request.text());
+
+      if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+        return json(
+          {
+            error: "Corpo inválido.",
+            message: "Corpo inválido."
+          },
+          400
+        );
+      }
+
+      payload.branch =
+        obterBranchGithub(env);
+
+      body =
+        JSON.stringify(payload);
+
+    } catch {
+      return json(
+        {
+          error: "Corpo JSON inválido.",
+          message: "Corpo JSON inválido."
+        },
+        400
+      );
+    }
 
     const githubResponse =
       await githubRequest(
@@ -1320,8 +1349,37 @@ async function handleAdminAPI(request, env) {
 
 
     // PUT / DELETE
-    const body =
-      await request.text();
+    let body;
+
+    try {
+      const payload =
+        JSON.parse(await request.text());
+
+      if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
+        return json(
+          {
+            error: "Corpo inválido.",
+            message: "Corpo inválido."
+          },
+          400
+        );
+      }
+
+      payload.branch =
+        obterBranchGithub(env);
+
+      body =
+        JSON.stringify(payload);
+
+    } catch {
+      return json(
+        {
+          error: "Corpo JSON inválido.",
+          message: "Corpo JSON inválido."
+        },
+        400
+      );
+    }
 
     const githubResponse =
       await githubRequest(
