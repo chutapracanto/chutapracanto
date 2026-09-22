@@ -566,19 +566,15 @@ function isSocialCrawler(request) {
   );
 }
 
-async function obterDadosPartilha(env, slug, origin, diagnostico = null) {
+async function obterDadosPartilha(env, slug, origin) {
   if (!slug) {
-    if (diagnostico) diagnostico.dataError = "slug vazio";
     return null;
   }
 
   const path =
     `content/noticias/${slug}.md`;
 
-  if (diagnostico) diagnostico.githubPath = path;
-
   if (!isAllowedNewsPath(path)) {
-    if (diagnostico) diagnostico.dataError = "caminho recusado por isAllowedNewsPath";
     return null;
   }
 
@@ -593,47 +589,27 @@ async function obterDadosPartilha(env, slug, origin, diagnostico = null) {
       headers.Authorization = `Bearer ${env.GITHUB_TOKEN}`;
     }
 
-    const githubUrl =
-      `${GITHUB_API}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}?ref=${encodeURIComponent(obterBranchGithub(env))}`;
-
-    if (diagnostico) {
-      diagnostico.githubBranch = obterBranchGithub(env);
-      diagnostico.githubUrl = githubUrl;
-      diagnostico.hasGithubToken = Boolean(env.GITHUB_TOKEN);
-    }
-
-    const githubResponse = await fetch(githubUrl, {
-      method: "GET",
-      headers
-    });
-
-    if (diagnostico) diagnostico.githubStatus = githubResponse.status;
+    const githubResponse = await fetch(
+      `${GITHUB_API}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}?ref=${encodeURIComponent(obterBranchGithub(env))}`,
+      {
+        method: "GET",
+        headers
+      }
+    );
 
     if (!githubResponse.ok) {
-      if (diagnostico) diagnostico.githubError = (await githubResponse.clone().text()).slice(0, 500);
       return null;
     }
 
     const data =
       await githubResponse.json();
 
-    if (diagnostico) {
-      diagnostico.githubFilePath = data.path || null;
-      diagnostico.githubContentLength = typeof data.content === "string" ? data.content.length : 0;
-    }
-
     const markdown =
       decodeGithubBase64(
         data.content || ""
       );
 
-    if (diagnostico) {
-      diagnostico.markdownLength = markdown.length;
-      diagnostico.frontmatterValid = markdown.startsWith("---");
-    }
-
     if (!markdown) {
-      if (diagnostico) diagnostico.dataError = "conteúdo Markdown vazio";
       return null;
     }
 
@@ -692,15 +668,6 @@ async function obterDadosPartilha(env, slug, origin, diagnostico = null) {
         slug
       );
 
-    if (diagnostico) {
-      Object.assign(diagnostico, {
-        title,
-        descricao,
-        imagemUrl,
-        noticiaUrl
-      });
-    }
-
     return {
       title,
       descricao,
@@ -708,8 +675,7 @@ async function obterDadosPartilha(env, slug, origin, diagnostico = null) {
       noticiaUrl
     };
 
-  } catch (error) {
-    if (diagnostico) diagnostico.dataError = String(error);
+  } catch {
     return null;
   }
 }
@@ -789,8 +755,7 @@ async function prepararPaginaParaPartilha(
         {
           text(text) {
             text.replace(
-              `${dados.title} | ChutaPraCanto`,
-              true
+              `${dados.title} | ChutaPraCanto`
             );
           }
         }
@@ -1409,60 +1374,6 @@ export default {
       new URL(request.url);
 
     try {
-      if (url.searchParams.get("__ogdiag") === "CPC_fase1_20260922") {
-        const slug = obterSlugDaNoticia(url);
-        const diag = {
-          userAgent: request.headers.get("User-Agent") || "",
-          isSocialCrawler: isSocialCrawler(request),
-          pathname: url.pathname,
-          origin: url.origin,
-          slug,
-          allowPath: isAllowedNewsPath(`content/noticias/${slug}.md`),
-          data: {}
-        };
-
-        const dados = await obterDadosPartilha(
-          env,
-          slug,
-          url.origin,
-          diag.data
-        );
-
-        const assetResponse = await env.ASSETS.fetch(request);
-        diag.assetStatus = assetResponse.status;
-        diag.assetContentType = assetResponse.headers.get("Content-Type");
-
-        const transformedResponse = await prepararPaginaParaPartilha(
-          request,
-          env,
-          assetResponse
-        );
-
-        const html = await transformedResponse.text();
-        const tags = [...html.matchAll(/<meta\\b[^>]*>/gi)].map((match) => match[0]);
-        const readMeta = (attribute, value) => {
-          const tag = tags.find((candidate) =>
-            candidate.includes(`${attribute}="${value}"`)
-          );
-          return tag?.match(/\\bcontent="([^"]*)"/i)?.[1] || null;
-        };
-
-        diag.dataAvailable = Boolean(dados);
-        diag.transformedStatus = transformedResponse.status;
-        diag.finalMeta = {
-          title: readMeta("id", "meta-title"),
-          description: readMeta("id", "meta-desc"),
-          image: readMeta("id", "meta-image"),
-          url: readMeta("id", "meta-url"),
-          twitterTitle: readMeta("name", "twitter:title"),
-          twitterDescription: readMeta("name", "twitter:description"),
-          twitterImage: readMeta("name", "twitter:image"),
-          twitterUrl: readMeta("name", "twitter:url")
-        };
-
-        return json(diag);
-      }
-
       if (
         url.pathname.startsWith(
           "/api/admin/"
