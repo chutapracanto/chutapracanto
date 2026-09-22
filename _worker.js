@@ -5,6 +5,10 @@ const GITHUB_OWNER = "chutapracanto";
 const GITHUB_REPO = "chutapracanto";
 const GITHUB_BRANCH = "main";
 
+function obterBranchGithub(env) {
+  return env.CF_PAGES_BRANCH || GITHUB_BRANCH;
+}
+
 const SESSION_COOKIE_NAME = "cpc_session";
 
 
@@ -413,7 +417,7 @@ async function enriquecerNoticias(env, noticias) {
       try {
         const githubResponse = await githubRequest(
           env,
-          `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${noticia.path}?ref=${encodeURIComponent(GITHUB_BRANCH)}`,
+          `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${noticia.path}?ref=${encodeURIComponent(obterBranchGithub(env))}`,
           {
             method: "GET"
           }
@@ -578,7 +582,7 @@ async function obterDadosPartilha(env, slug, origin) {
     const githubResponse =
       await githubRequest(
         env,
-        `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}?ref=${encodeURIComponent(GITHUB_BRANCH)}`,
+        `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}?ref=${encodeURIComponent(obterBranchGithub(env))}`,
         {
           method: "GET"
         }
@@ -1065,7 +1069,7 @@ async function handleAdminAPI(request, env) {
     const githubResponse =
       await githubRequest(
         env,
-        `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/content/noticias?ref=${encodeURIComponent(GITHUB_BRANCH)}&per_page=${perPage}&page=${page}`,
+        `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/content/noticias?ref=${encodeURIComponent(obterBranchGithub(env))}&per_page=${perPage}&page=${page}`,
         {
           method: "GET"
         }
@@ -1161,7 +1165,7 @@ async function handleAdminAPI(request, env) {
       const githubResponse =
         await githubRequest(
           env,
-          `${githubPath}?ref=${encodeURIComponent(GITHUB_BRANCH)}`,
+          `${githubPath}?ref=${encodeURIComponent(obterBranchGithub(env))}`,
           {
             method: "GET"
           }
@@ -1270,7 +1274,7 @@ async function handleAdminAPI(request, env) {
       const githubResponse =
         await githubRequest(
           env,
-          `${githubPath}?ref=${encodeURIComponent(GITHUB_BRANCH)}`,
+          `${githubPath}?ref=${encodeURIComponent(obterBranchGithub(env))}`,
           {
             method: "GET"
           }
