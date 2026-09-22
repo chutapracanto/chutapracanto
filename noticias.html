@@ -825,102 +825,54 @@
 
 
     async function carregarTodasNoticias() {
-
       try {
+        const response = await fetch('/content/noticias-index.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error('Não foi possível carregar o índice de notícias.');
 
-        const response = await fetch('https://api.github.com/repos/chutapracanto/chutapracanto/contents/content/noticias');
+        const data = await response.json();
 
-        if (!response.ok) return;
-
-        
-
-        const files = await response.json();
-
-        todasAsNoticias = [];
-
-
-
-        for (const file of files) {
-
-          if (file.name.endsWith('.md')) {
-
-            const res = await fetch(file.download_url);
-
-            const text = await res.text();
-
-            
-
-            const parts = text.split('---');
-
-            if (parts.length < 3) continue;
-
-            
-
-            const data = jsyaml.load(parts[1]);
-
-            if (!data) continue;
-
-
-
-            let dateRaw = data.published || data.date || '';
-
-            let dateFormatted = '';
-
-            if (dateRaw) {
-
-              const d = new Date(dateRaw);
-
-              if (!isNaN(d)) {
-
-                dateFormatted = d.toLocaleDateString('pt-PT', { day: '2-digit', month: '2-digit', year: 'numeric' });
-
-              }
-
-            }
-
-
-
-            todasAsNoticias.push({
-
-              slug: file.name.replace('.md', ''),
-
-              title: data.title || 'Sem título',
-
-              tag: data.category || data.categoria || data.tag || 'Geral',
-
-              imagem: data.image || data.imagem || data.featured_image || data.featuredImage || 'https://via.placeholder.com/600x400',
-
-              descricao: data.subtitle || data.subtitulo || data.descricao || data.resumo || '',
-
-              dataPublicacaoRaw: dateRaw,
-
-              dataPublicacaoFormatted: dateFormatted
-
-            });
-
-          }
-
+        if (!Array.isArray(data)) {
+          throw new Error('Índice de notícias inválido.');
         }
 
+        todasAsNoticias = data.map(item => {
+          const dateRaw = item.published || '';
+          let dateFormatted = '';
 
+          if (dateRaw) {
+            const d = new Date(dateRaw);
+            if (!Number.isNaN(d.getTime())) {
+              dateFormatted = d.toLocaleDateString('pt-PT', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+              });
+            }
+          }
 
-        todasAsNoticias.sort((a, b) => new Date(b.dataPublicacaoRaw) - new Date(a.dataPublicacaoRaw));
+          return {
+            slug: item.slug || '',
+            title: item.title || 'Sem título',
+            tag: item.category || 'Geral',
+            imagem: item.image || 'https://via.placeholder.com/600x400',
+            descricao: item.subtitle || '',
+            dataPublicacaoRaw: dateRaw,
+            dataPublicacaoFormatted: dateFormatted
+          };
+        }).filter(item => item.slug);
+
+        todasAsNoticias.sort(
+          (a, b) => new Date(b.dataPublicacaoRaw) - new Date(a.dataPublicacaoRaw)
+        );
 
         aplicarFiltros();
 
-
-
       } catch (error) {
-
         console.error('Erro ao carregar notícias:', error);
-
-        document.getElementById('noticias-list').innerHTML = '<p style="color: var(--text-gray); text-align: center; padding: 2.5rem 0;">Erro ao carregar notícias.</p>';
-
+        document.getElementById('noticias-list').innerHTML =
+          '<p style="color: var(--text-gray); text-align: center; padding: 2.5rem 0;">Erro ao carregar notícias.</p>';
       }
-
     }
-
-
 
     function renderizarPagina() {
 
@@ -970,7 +922,7 @@
 
         const card = document.createElement('a');
 
-        card.href = `noticia.html?slug=${item.slug}`;
+        card.href = `noticia.html?slug=${encodeURIComponent(item.slug)}`;
 
         card.className = 'news-list-card';
 
