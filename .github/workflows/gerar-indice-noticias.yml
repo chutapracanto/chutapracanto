@@ -8,6 +8,7 @@ on:
       - fase-0a-foundation
       - fase-2a-taxonomia-autores
       - fase-2b-news-opinion
+      - corrigir-ordem-noticias-taxonomia
     paths:
       - "content/noticias/**"
       - "content/taxonomia.json"
@@ -25,6 +26,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Gerar índice
         shell: python
@@ -32,6 +35,8 @@ jobs:
           import json
           import re
           import unicodedata
+          import subprocess
+          from datetime import datetime, timezone
           from pathlib import Path
 
           root = Path("content/noticias")
@@ -50,6 +55,15 @@ jobs:
               return "".join(char for char in value.casefold() if char.isalnum())
 
           categories_by_alias = {}
+          taxonomy_changed = False
+          category_ids = {item["id"] for item in taxonomy["categories"]}
+
+          def category_id_for(label):
+              normalized = unicodedata.normalize("NFKD", str(label or ""))
+              normalized = "".join(char for char in normalized if not unicodedata.combining(char))
+              candidate = re.sub(r"[^a-z0-9]+", "-", normalized.casefold()).strip("-")
+              return candidate or "categoria"
+
           for item in taxonomy["categories"]:
               for alias in [item["label"], *item.get("aliases", [])]:
                   categories_by_alias[normalize_key(alias)] = item
@@ -58,6 +72,54 @@ jobs:
           for item in authors:
               for alias in [item["name"], *item.get("aliases", [])]:
                   authors_by_alias[normalize_key(alias)] = item
+
+          creation_time_cache = {}
+
+          def git_creation_time(path):
+              key = str(path)
+              if key not in creation_time_cache:
+                  result = subprocess.run(
+                      ["git", "log", "--follow", "--diff-filter=A", "--format=%cI", "--reverse", "--", key],
+                      check=False,
+                      capture_output=True,
+                      text=True
+                  )
+                  creation_time_cache[key] = result.stdout.splitlines()[0].strip() if result.returncode == 0 and result.stdout.splitlines() else ""
+              return creation_time_cache[key]
+
+          def publication_timestamp(value, path):
+              value = str(value or "").strip()
+              if not value:
+                  return ""
+              try:
+                  if re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+                      published_day = datetime.strptime(value, "%Y-%m-%d").date()
+                      created_raw = git_creation_time(path)
+                      created = datetime.fromisoformat(created_raw) if created_raw else datetime.combine(
+                          published_day, datetime.min.time(), tzinfo=timezone.utc
+                      )
+                      parsed = datetime(
+                          published_day.year, published_day.month, published_day.day,
+                          created.hour, created.minute, created.second, created.microsecond,
+                          tzinfo=created.tzinfo or timezone.utc
+                      )
+                  else:
+                      parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+                      if parsed.tzinfo is None:
+                          parsed = parsed.replace(tzinfo=timezone.utc)
+                  return parsed.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
+              except (ValueError, OverflowError):
+                  return ""
+
+          def sort_timestamp(item):
+              value = str(item.get("publishedAt") or item.get("published") or "")
+              try:
+                  parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+                  if parsed.tzinfo is None:
+                      parsed = parsed.replace(tzinfo=timezone.utc)
+                  return parsed.timestamp()
+              except (ValueError, OverflowError):
+                  return float("-inf")
 
           def parse_scalar(value):
               value = value.strip()
@@ -107,6 +169,22 @@ jobs:
                   ["category", "categoria", "tag"]
               ) or "Geral"
               category_meta = categories_by_alias.get(normalize_key(category_raw))
+              if category_meta is None and category_raw:
+                  category_id = category_id_for(category_raw)
+                  base_id = category_id
+                  suffix = 2
+                  while category_id in category_ids:
+                      category_id = f"{base_id}-{suffix}"
+                      suffix += 1
+                  category_meta = {
+                      "id": category_id,
+                      "label": category_raw,
+                      "kind": "mixed"
+                  }
+                  taxonomy["categories"].append(category_meta)
+                  category_ids.add(category_id)
+                  categories_by_alias[normalize_key(category_raw)] = category_meta
+                  taxonomy_changed = True
               category = category_meta["label"] if category_meta else category_raw
               editorial_type = field(frontmatter, ["type"]) or "news"
               if editorial_type not in editorial_types:
@@ -124,6 +202,7 @@ jobs:
                   ["image", "imagem", "featured_image", "featuredImage"]
               )
 
+              published_at = publication_timestamp(published, path)
               noticia = {
                   "slug": slug,
                   "path": str(path).replace("\\", "/"),
@@ -137,16 +216,20 @@ jobs:
                   "authorId": author_meta["id"] if author_meta else None,
                   "authorType": author_meta["type"] if author_meta else None,
                   "published": published,
+                  "publishedAt": published_at,
                   "image": image
               }
               if modified:
                   noticia["modified"] = modified
               noticias.append(noticia)
 
-          noticias.sort(
-              key=lambda item: item.get("published") or "",
-              reverse=True
-          )
+          noticias.sort(key=sort_timestamp, reverse=True)
+
+          if taxonomy_changed:
+              Path("content/taxonomia.json").write_text(
+                  json.dumps(taxonomy, ensure_ascii=False, indent=2) + "\n",
+                  encoding="utf-8"
+              )
 
           output.write_text(
               json.dumps(
@@ -193,7 +276,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add content/noticias-index.json sitemap.xml
+          git add content/noticias-index.json content/taxonomia.json sitemap.xml
           if git diff --cached --quiet; then
             echo "Índice já está atualizado."
             exit 0
