@@ -274,7 +274,7 @@ function isAllowedNewsPath(path) {
     return false;
   }
 
-  return /^content\/noticias\/[^/]+\.md$/i.test(path);
+  return /^content\/(?:noticias|opiniao)\/[^/]+\.md$/i.test(path);
 }
 
 function isAllowedImageUploadPath(path) {
@@ -1322,8 +1322,8 @@ async function handleAdminAPI(request, env) {
     if (!isAllowedNewsPath(path)) {
       return json(
         {
-          error: "Caminho de notícia não permitido.",
-          message: "Caminho de notícia não permitido."
+          error: "Caminho de conteúdo não permitido.",
+          message: "Caminho de conteúdo não permitido."
         },
         400
       );
