@@ -2,13 +2,6 @@ name: Gerar índice de notícias
 
 on:
   push:
-    branches:
-      - main
-      - fase-2-performance-noticias
-      - fase-0a-foundation
-      - fase-2a-taxonomia-autores
-      - fase-2b-news-opinion
-      - corrigir-ordem-noticias-taxonomia
     paths:
       - "content/noticias/**"
       - "content/opiniao/**"
@@ -250,7 +243,7 @@ jobs:
           from html import escape
 
           base_url = "https://chutapracanto.pages.dev"
-          pages = ["/", "/noticias", "/opiniao", "/sobre", "/contacto", "/privacidade", "/termos"]
+          pages = ["/", "/noticias", "/opiniao", "/sobre", "/contacto", "/privacidade", "/termos", "/politica-editorial"]
           entries = [base_url + page for page in pages]
           today = date.today().isoformat()
           for noticia in noticias:

@@ -167,7 +167,7 @@
     <nav aria-label="Navegação principal">
       <ul>
         <li><a href="/">Home</a></li>
-        <li><a href="/noticias" class="active">Notícias</a></li>
+        <li><a id="nav-noticias" href="/noticias" class="active">Notícias</a></li>
         <li><a href="/sobre">Sobre Nós</a></li>
         <li><a href="/contacto">Contacto</a></li>
       </ul>
@@ -183,7 +183,7 @@
 
   <div class="container" style="max-width: 800px; margin-top: 2rem; margin-bottom: 4rem;">
 
-    <a href="noticias.html" class="see-more" style="display: inline-block; margin-bottom: 2rem;">← VOLTAR ÀS NOTÍCIAS</a>
+    <a id="back-to-section" href="/noticias" class="see-more" style="display: inline-block; margin-bottom: 2rem;">← VOLTAR ÀS NOTÍCIAS</a>
 
     <div id="article-content">
 
@@ -317,7 +317,7 @@
         '@type': 'BreadcrumbList',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_CANONICAL_ORIGIN + '/' },
-          { '@type': 'ListItem', position: 2, name: 'Notícias', item: SITE_CANONICAL_ORIGIN + '/noticias' },
+          { '@type': 'ListItem', position: 2, name: data.editorialTypeLabel === 'Opinião' ? 'Opinião' : 'Notícias', item: SITE_CANONICAL_ORIGIN + (data.editorialTypeLabel === 'Opinião' ? '/opiniao' : '/noticias') },
           { '@type': 'ListItem', position: 3, name: data.title, item: canonical }
         ]
       };
@@ -338,7 +338,7 @@
         const index = await indexResponse.json();
         if (!Array.isArray(index)) throw new Error('Índice de notícias inválido');
         const entry = index.find(item => item.slug === slug) || index.find(item => String(item.slug || '').toLowerCase() === slug.toLowerCase());
-        if (!entry || typeof entry.path !== 'string' || !/^content\/noticias\/[^/]+\.md$/.test(entry.path) || entry.path.includes('..')) throw new Error('Artigo não encontrado');
+        if (!entry || typeof entry.path !== 'string' || !/^content\/(noticias|opiniao)\/[^/]+\.md$/.test(entry.path) || entry.path.includes('..')) throw new Error('Artigo não encontrado');
         const [authors, editorialTypes] = await Promise.all([
           fetch('/content/authors.json').then(response => response.ok ? response.json() : []).catch(() => []),
           fetch('/content/editorial-types.json').then(response => response.ok ? response.json() : []).catch(() => [])
@@ -370,6 +370,13 @@
         const authorUrlValue = frontmatter.authorUrl || frontmatter.author_url || '';
         const authorUrl = safeContentUrl(authorUrlValue);
         const editorialType = String(entry.type || 'news');
+        const isOpinion = editorialType === 'opinion';
+        const sectionLabel = isOpinion ? 'Opinião' : 'Notícias';
+        const sectionPath = isOpinion ? '/opiniao' : '/noticias';
+        const backLink = document.getElementById('back-to-section');
+        if (backLink) { backLink.href = sectionPath; backLink.textContent = isOpinion ? '← VOLTAR À OPINIÃO' : '← VOLTAR ÀS NOTÍCIAS'; }
+        const navNoticias = document.getElementById('nav-noticias');
+        if (navNoticias) navNoticias.classList.toggle('active', !isOpinion);
         const editorialTypeRecord = Array.isArray(editorialTypes)
           ? editorialTypes.find(item => item.id === editorialType)
           : null;
@@ -405,7 +412,7 @@
         breadcrumb.className = 'article-breadcrumbs';
         breadcrumb.setAttribute('aria-label', 'Breadcrumb');
         const crumbList = document.createElement('ol');
-        [['Home','/'],['Notícias','/noticias']].forEach(([label, href]) => {
+        [['Home','/'],[sectionLabel,sectionPath]].forEach(([label, href]) => {
           const li = document.createElement('li');
           const link = document.createElement('a');
           link.href = href;

@@ -4,7 +4,7 @@ subtitulo: "Entre a magia dos relvados e a toxicidade dos bastidores, o futebol 
 categoria: "Crónica-Futebol Português"
 type: "opinion"
 date: "2026-09-23T20:20:59.514Z"
-author: "ChutaPraCanto"
+author: "Pedro Soares"
 imagem: "/images/uploads/1000135294-20260923202059598-r8hqp.jpg"
 ---
 
