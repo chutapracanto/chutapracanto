@@ -194,7 +194,7 @@
             margin-bottom: 20px;
         }
 
-        .news-list {
+        .section-tabs{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap}.section-tab{border:1px solid #d1d5db;background:#fff;color:#374151;padding:10px 15px;border-radius:8px;cursor:pointer;font-weight:700}.section-tab.active{background:#2563eb;color:#fff;border-color:#2563eb}.image-picker-overlay{position:fixed;inset:0;z-index:10001;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;padding:20px}.image-picker-modal{width:100%;max-width:980px;max-height:90vh;overflow:auto;background:#fff;border-radius:14px;padding:24px}.image-search-row{display:flex;gap:8px;margin-bottom:16px}.image-search-row input{flex:1}.image-results{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.image-result{border:1px solid #e5e7eb;border-radius:9px;overflow:hidden;background:#fff;cursor:pointer;text-align:left;padding:0}.image-result img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;background:#f3f4f6}.image-result-info{padding:8px;font-size:11px;color:#555;line-height:1.4}.image-result-title{font-weight:700;color:#222;margin-bottom:3px}.image-result-license{color:#666}.image-picker-note{font-size:12px;color:#666;margin:8px 0 15px;line-height:1.5}.news-list {
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -709,6 +709,10 @@
                 font-size: 16px;
             }
 
+            .image-results { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+            .image-search-row { flex-direction: column; }
+
             .pagination {
                 gap: 4px;
             }
@@ -790,6 +794,13 @@
                     </button>
 
                     <button
+                        class="secondary-btn"
+                        onclick="novaCronica()"
+                    >
+                        + Nova Crónica
+                    </button>
+
+                    <button
                         class="logout-btn"
                         onclick="terminarSessao()"
                     >
@@ -798,6 +809,11 @@
 
                 </div>
 
+            </div>
+
+            <div class="section-tabs" role="tablist" aria-label="Área editorial">
+                <button type="button" id="tab-news" class="section-tab active" onclick="mudarSecaoAdmin('news')">📰 Notícias</button>
+                <button type="button" id="tab-opinion" class="section-tab" onclick="mudarSecaoAdmin('opinion')">✍️ Crónicas</button>
             </div>
 
             <input
@@ -944,8 +960,12 @@
             <div class="form-group">
 
                 <label>
-                    Imagem (Upload ou URL)
+                    Imagem
                 </label>
+
+                <button type="button" class="secondary-btn" onclick="abrirPesquisaImagens()" style="margin-bottom:8px;">
+                    🔎 Pesquisar imagens abertas na Internet
+                </button>
 
                 <input
                     type="file"
@@ -961,7 +981,7 @@
                 >
 
                 <div class="image-help">
-                    JPEG, PNG ou WebP até 5 MiB. As imagens recebem um nome único.
+                    Podes enviar JPEG, PNG ou WebP até 5 MiB, colar um URL ou pesquisar imagens com licença aberta. As imagens pesquisadas ficam alojadas no servidor de origem e não ocupam espaço no site.
                 </div>
 
                 <img
@@ -1025,6 +1045,22 @@
 
 </div>
 
+
+<div id="image-picker-overlay" class="image-picker-overlay hidden" onclick="fecharPesquisaImagens(event)">
+    <div class="image-picker-modal" onclick="event.stopPropagation()">
+        <div style="display:flex;justify-content:space-between;gap:12px;align-items:center;">
+            <h2 style="margin-bottom:0;">Pesquisar imagem</h2>
+            <button type="button" class="secondary-btn" onclick="fecharPesquisaImagens()">Fechar</button>
+        </div>
+        <div class="image-picker-note">Pesquisa no Openverse, um índice de obras com licença Creative Commons ou domínio público. Confirma sempre a licença da imagem escolhida antes de publicar. A imagem é usada por URL externo e não é copiada para o Chuta Pra Canto.</div>
+        <div class="image-search-row">
+            <input type="text" id="image-search-query" placeholder="Ex.: Cristiano Ronaldo, FC Porto, futebol português..." onkeydown="if(event.key==='Enter') pesquisarImagens()">
+            <button type="button" class="main-btn" onclick="pesquisarImagens()">Pesquisar</button>
+        </div>
+        <div id="image-search-status" class="loading hidden"></div>
+        <div id="image-results" class="image-results"></div>
+    </div>
+</div>
 
 <!-- =========================================================
      MODAL DE PRÉ-VISUALIZAÇÃO
@@ -1183,6 +1219,7 @@ const NOTICIAS_POR_PAGINA = 10;
 let noticias = [];
 let noticiasFiltradas = [];
 let paginaAtual = 1;
+let secaoAdminAtual = "news";
 
 let noticiaEmEdicao = null;
 let quill = null;
@@ -1613,7 +1650,7 @@ async function carregarNoticias() {
         );
 
         noticiasFiltradas =
-            [...noticias];
+            noticias.filter(file => obterTipoConteudo(file) === secaoAdminAtual);
 
         paginaAtual = 1;
 
@@ -1817,6 +1854,18 @@ function formatarDataNoticia(
 // ============================================================
 // MOSTRAR LISTA
 // ============================================================
+
+function obterTipoConteudo(file) {
+    return file?.type === "opinion" ? "opinion" : "news";
+}
+
+function mudarSecaoAdmin(tipo) {
+    secaoAdminAtual = tipo === "opinion" ? "opinion" : "news";
+    document.getElementById("tab-news")?.classList.toggle("active", secaoAdminAtual === "news");
+    document.getElementById("tab-opinion")?.classList.toggle("active", secaoAdminAtual === "opinion");
+    paginaAtual = 1;
+    filtrarLista();
+}
 
 function mostrarLista(lista) {
 
@@ -2081,6 +2130,7 @@ function filtrarLista() {
     noticiasFiltradas =
         noticias.filter(
             file => {
+                if (obterTipoConteudo(file) !== secaoAdminAtual) return false;
 
                 const titulo =
                     (
@@ -2147,6 +2197,14 @@ function slugParaTitulo(filename) {
 // ============================================================
 // NOVA NOTÍCIA
 // ============================================================
+
+function novaCronica() {
+    novaNoticia();
+    document.getElementById("noticia-type").value = "opinion";
+    document.getElementById("form-title").innerText = "Nova Crónica";
+    document.getElementById("mode-label").innerText = "Criar uma nova crónica / opinião";
+    document.getElementById("save-button-text").innerText = "Publicar Crónica";
+}
 
 function novaNoticia() {
 
@@ -2434,6 +2492,14 @@ function preencherFormulario(
 
     if (tipoEditorialSelect) {
         tipoEditorialSelect.value = tipoEditorialEmEdicao;
+    }
+
+    const formTitle = document.getElementById("form-title");
+    const saveButtonText = document.getElementById("save-button-text");
+    if (formTitle && saveButtonText) {
+        const isOpinion = tipoEditorialEmEdicao === "opinion";
+        formTitle.innerText = "Editar " + (isOpinion ? "Crónica" : "Notícia");
+        saveButtonText.innerText = "Guardar Alterações";
     }
 
     const titulo =
@@ -2930,6 +2996,71 @@ function normalizarListasQuillParaTurndown(
     return wrapper.innerHTML;
 }
 
+
+// ============================================================
+// PESQUISA DE IMAGENS ABERTAS
+// ============================================================
+
+function abrirPesquisaImagens() {
+    document.getElementById("image-picker-overlay").classList.remove("hidden");
+    document.getElementById("image-search-query").focus();
+}
+
+function fecharPesquisaImagens(event) {
+    if (event && event.target !== event.currentTarget) return;
+    document.getElementById("image-picker-overlay").classList.add("hidden");
+}
+
+async function pesquisarImagens() {
+    const query = document.getElementById("image-search-query").value.trim();
+    const status = document.getElementById("image-search-status");
+    const results = document.getElementById("image-results");
+    if (!query) { status.textContent = "Escreve o que procuras."; status.classList.remove("hidden"); results.replaceChildren(); return; }
+    status.textContent = "A pesquisar imagens...";
+    status.classList.remove("hidden");
+    results.replaceChildren();
+    try {
+        const params = new URLSearchParams({q: query, page_size: "20", license: "cc0,by,by-sa", mature: "false"});
+        const response = await fetch("https://api.openverse.org/v1/images/?" + params.toString());
+        if (!response.ok) throw new Error("Não foi possível pesquisar imagens.");
+        const data = await response.json();
+        const items = Array.isArray(data.results) ? data.results : [];
+        if (!items.length) { status.textContent = "Não foram encontradas imagens com licença aberta para esta pesquisa."; return; }
+        status.classList.add("hidden");
+        const fragment = document.createDocumentFragment();
+        items.forEach(item => {
+            const imageUrl = item.url || "";
+            const thumbnail = item.thumbnail || imageUrl;
+            if (!/^https?:\/\//i.test(imageUrl)) return;
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "image-result";
+            button.addEventListener("click", () => selecionarImagemExterna(item));
+            const img = document.createElement("img");
+            img.src = thumbnail; img.alt = ""; img.loading = "lazy"; img.referrerPolicy = "no-referrer";
+            const info = document.createElement("div"); info.className = "image-result-info";
+            const title = document.createElement("div"); title.className = "image-result-title"; title.textContent = item.title || "Imagem sem título";
+            const license = document.createElement("div"); license.className = "image-result-license";
+            license.textContent = [(item.license ? String(item.license).toUpperCase() : "Licença não indicada"), item.creator ? " · " + item.creator : "", item.source ? " · " + item.source : ""].join("");
+            info.append(title, license); button.append(img, info); fragment.appendChild(button);
+        });
+        results.replaceChildren(fragment);
+        if (!results.children.length) { status.textContent = "Os resultados não tinham URLs de imagem utilizáveis."; status.classList.remove("hidden"); }
+    } catch (error) {
+        status.textContent = error?.message || "Não foi possível pesquisar imagens.";
+        status.classList.remove("hidden");
+    }
+}
+
+function selecionarImagemExterna(item) {
+    const url = item?.url || "";
+    if (!/^https?:\/\//i.test(url)) return;
+    document.getElementById("noticia-imagem-url").value = url;
+    mostrarPreview(url);
+    fecharPesquisaImagens();
+    const help = document.querySelector(".image-help");
+    if (help) help.textContent = "Imagem externa selecionada. O ficheiro permanece no servidor de origem e não é copiado para o Chuta Pra Canto.";
+}
 
 // ============================================================
 // GUARDAR
