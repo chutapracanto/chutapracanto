@@ -1,0 +1,14 @@
+/images/uploads/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/content/noticias-index.json
+  Cache-Control: public, max-age=300, must-revalidate
+
+/content/authors.json
+  Cache-Control: public, max-age=300, must-revalidate
+
+/content/editorial-types.json
+  Cache-Control: public, max-age=300, must-revalidate
+
+/content/taxonomia.json
+  Cache-Control: public, max-age=300, must-revalidate
