@@ -91,10 +91,10 @@
       opacity: calc(1 - (var(--heading-progress) * .45));
       transition: font-size .12s linear, opacity .12s linear;
     }
-    .share-section {
+     .share-section {
       display: flex;
       justify-content: flex-end;
-      margin: .75rem 0 1.25rem;
+      margin: 1.5rem 0 .75rem;
     }
     .share-button {
       width: 42px;
@@ -567,11 +567,6 @@
           header.appendChild(byline);
         }
         container.replaceChildren(breadcrumb, header);
-        const shareBox = document.getElementById('share-box');
-        if (shareBox) {
-          container.appendChild(shareBox);
-          shareBox.hidden = false;
-        }
         if (imageValue) {
           const figure = document.createElement('figure');
           figure.className = 'article-hero-image';
@@ -601,6 +596,14 @@
     }
 
     async function mostrarNoticiasRelacionadas(currentSlug, indexDados) {
+
+      const shareBox = document.getElementById('share-box');
+      if (shareBox) {
+        const articleContent = document.getElementById('article-content');
+        articleContent.appendChild(shareBox);
+        shareBox.hidden = false;
+      }
+
 
       const section = document.getElementById('related-news');
 
