@@ -102,6 +102,38 @@
 
     }
 
+    @media (max-width: 400px) {
+
+      .related-news-card:not(.no-image) {
+
+        grid-template-columns: 96px minmax(0, 1fr);
+
+      }
+
+      .related-news-card .sub-featured-content {
+
+        min-width: 0;
+
+        padding: 0.65rem 0.75rem;
+
+      }
+
+      .related-news-card .sub-featured-content h3 {
+
+        display: -webkit-box;
+
+        -webkit-box-orient: vertical;
+
+        -webkit-line-clamp: 3;
+
+        overflow: hidden;
+
+        font-size: 0.9rem;
+
+      }
+
+    }
+
   </style>
 
 </head>
