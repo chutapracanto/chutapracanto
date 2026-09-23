@@ -470,9 +470,21 @@
 
         }).sort((a, b) => dataPublicacao(b).localeCompare(dataPublicacao(a)));
 
-        const mesmaCategoria = recentes.filter(noticia => noticia.category === noticiaAtual.category);
+        const slugsIncluidos = new Set([currentSlug]);
 
-        const outrasCategorias = recentes.filter(noticia => noticia.category !== noticiaAtual.category);
+        const noticiasUnicas = recentes.filter(noticia => {
+
+          if (slugsIncluidos.has(noticia.slug)) return false;
+
+          slugsIncluidos.add(noticia.slug);
+
+          return true;
+
+        });
+
+        const mesmaCategoria = noticiasUnicas.filter(noticia => noticia.category === noticiaAtual.category);
+
+        const outrasCategorias = noticiasUnicas.filter(noticia => noticia.category !== noticiaAtual.category);
 
         const relacionadas = [...mesmaCategoria, ...outrasCategorias].slice(0, 3);
 
