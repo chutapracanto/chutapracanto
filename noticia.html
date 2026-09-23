@@ -348,9 +348,10 @@
       const canonical = SITE_CANONICAL_ORIGIN + '/noticia?slug=' + encodeURIComponent(data.slug);
       const schema = {
         '@context': 'https://schema.org',
-        '@type': 'NewsArticle',
+        '@type': data.editorialType === 'news' ? 'NewsArticle' : 'Article',
         headline: data.title,
         description: data.description || undefined,
+        articleSection: data.editorialTypeLabel || undefined,
         image: data.image,
         mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
         publisher: { '@type': 'Organization', name: 'Chuta Pra Canto', logo: { '@type': 'ImageObject', url: SITE_CANONICAL_ORIGIN + '/images/logo.png' } }
@@ -358,7 +359,7 @@
       if (data.datePublished) schema.datePublished = data.datePublished;
       if (data.dateModified) schema.dateModified = data.dateModified;
       if (data.author) {
-        const author = { '@type': autorEditorialEhOrganizacao(data.author) ? 'Organization' : 'Person', name: data.author };
+        const author = { '@type': data.authorType === 'Organization' || autorEditorialEhOrganizacao(data.author) ? 'Organization' : 'Person', name: data.author };
         if (data.authorUrl) author.url = data.authorUrl;
         schema.author = author;
       }
@@ -389,6 +390,10 @@
         if (!Array.isArray(index)) throw new Error('Índice de notícias inválido');
         const entry = index.find(item => item.slug === slug) || index.find(item => String(item.slug || '').toLowerCase() === slug.toLowerCase());
         if (!entry || typeof entry.path !== 'string' || !/^content\/noticias\/[^/]+\.md$/.test(entry.path) || entry.path.includes('..')) throw new Error('Artigo não encontrado');
+        const [authors, editorialTypes] = await Promise.all([
+          fetch('/content/authors.json').then(response => response.ok ? response.json() : []).catch(() => []),
+          fetch('/content/editorial-types.json').then(response => response.ok ? response.json() : []).catch(() => [])
+        ]);
         const encodedPath = entry.path.split('/').map(encodeURIComponent).join('/');
         let response = await fetch('/' + encodedPath);
         if (!response.ok) {
@@ -408,17 +413,27 @@
         const title = String(frontmatter.title || entry.title || 'Sem título');
         const description = String(frontmatter.subtitle || frontmatter.subtitulo || frontmatter.descricao || frontmatter.resumo || entry.subtitle || '');
         const category = String(frontmatter.category || frontmatter.categoria || frontmatter.tag || entry.category || 'Geral');
-        const author = typeof frontmatter.author === 'string' ? frontmatter.author.trim() : '';
+        const authorRecord = Array.isArray(authors)
+          ? authors.find(item => item.id === entry.authorId)
+          : null;
+        const author = String(authorRecord?.name || entry.author || (typeof frontmatter.author === 'string' ? frontmatter.author.trim() : ''));
+        const authorType = authorRecord?.type || entry.authorType || '';
         const authorUrlValue = frontmatter.authorUrl || frontmatter.author_url || '';
         const authorUrl = safeContentUrl(authorUrlValue);
+        const editorialType = String(entry.type || 'news');
+        const editorialTypeRecord = Array.isArray(editorialTypes)
+          ? editorialTypes.find(item => item.id === editorialType)
+          : null;
+        const editorialTypeLabel = editorialTypeRecord?.label || ({ news: 'Notícia', opinion: 'Opinião', video: 'Vídeo', podcast: 'Podcast' }[editorialType] || editorialType);
         const dateValue = frontmatter.published || frontmatter.date || frontmatter.dataNoticia || frontmatter.data || entry.published || '';
-        const modifiedValue = frontmatter.dateModified || frontmatter.date_modified || frontmatter.modified || '';
+        const modifiedValue = frontmatter.dateModified || frontmatter.date_modified || frontmatter.modified || entry.modified || '';
         const validDate = value => {
           const d = new Date(value);
           return value && !Number.isNaN(d.getTime()) ? d.toISOString() : '';
         };
         const published = validDate(dateValue);
-        const modified = validDate(modifiedValue);
+        const modifiedCandidate = validDate(modifiedValue);
+        const modified = modifiedCandidate && modifiedCandidate !== published ? modifiedCandidate : '';
         const imageValue = frontmatter.image || frontmatter.imagem || frontmatter.featured_image || frontmatter.featuredImage || entry.image || '';
         const image = imageValue ? safeArticleImage(imageValue) : SITE_CANONICAL_ORIGIN + '/images/logo.png';
         const canonical = SITE_CANONICAL_ORIGIN + '/noticia?slug=' + encodeURIComponent(entry.slug);
@@ -460,20 +475,25 @@
         const tag = document.createElement('span');
         tag.className = 'tag';
         tag.textContent = category.toUpperCase();
+        const editorialTag = document.createElement('span');
+        editorialTag.className = 'tag';
+        editorialTag.textContent = editorialTypeLabel;
         const h1 = document.createElement('h1');
         h1.textContent = title;
-        header.append(tag, h1);
+        header.append(tag, editorialTag, h1);
         if (description) {
           const summary = document.createElement('p');
           summary.className = 'article-summary';
           summary.textContent = description;
           header.appendChild(summary);
         }
-        if (published || author) {
+        if (published || author || modified) {
           const byline = document.createElement('p');
           byline.className = 'article-byline';
           const dateText = published ? 'Publicado em ' + new Date(published).toLocaleDateString('pt-PT') : '';
-          byline.textContent = dateText + (dateText && author ? ' · ' : '') + (author ? 'Por ' + author : '');
+          const authorText = author ? 'Por ' + author : '';
+          const modifiedText = modified ? 'Atualizado em ' + new Date(modified).toLocaleDateString('pt-PT') : '';
+          byline.textContent = [dateText, authorText, modifiedText].filter(Boolean).join(' · ');
           header.appendChild(byline);
         }
         container.replaceChildren(breadcrumb, header);
@@ -494,7 +514,7 @@
         bodyElement.innerHTML = sanitizeArticleHtml(marked.parse(body));
         container.appendChild(bodyElement);
 
-        addArticleJsonLd({ slug: entry.slug, title, description, image, datePublished: published, dateModified: modified, author, authorUrl });
+        addArticleJsonLd({ slug: entry.slug, title, description, image, datePublished: published, dateModified: modified, author, authorType, authorUrl, editorialType, editorialTypeLabel });
         await mostrarNoticiasRelacionadas(entry.slug, index);
         const shareBox = document.getElementById('share-box');
         if (shareBox) shareBox.style.display = 'block';
