@@ -2468,6 +2468,10 @@ function preencherFormulario(
             "data"
         );
 
+    if (noticiaEmEdicao) {
+        noticiaEmEdicao.dataPublicacaoOriginal = String(data || "");
+    }
+
     const autor =
         obterCampo(
             fields,
@@ -2956,6 +2960,12 @@ async function guardarNoticia() {
             .getElementById("noticia-data")
             .value;
 
+    const dataPublicacao =
+        obterDataPublicacaoParaGuardar(
+            data,
+            noticiaEmEdicao?.dataPublicacaoOriginal || ""
+        );
+
     const autor =
         document
             .getElementById("noticia-autor")
@@ -3130,7 +3140,7 @@ async function guardarNoticia() {
                 titulo,
                 subtitulo,
                 categoria,
-                data,
+                dataPublicacao,
                 autor,
                 finalImageUrl,
                 tipoEditorial,
@@ -3283,6 +3293,23 @@ function yamlQuote(value) {
     return JSON.stringify(
         value || ""
     );
+}
+
+
+function obterDataPublicacaoParaGuardar(dataSelecionada, dataOriginal = "") {
+    const dataMantida = String(dataOriginal || "");
+    if (dataMantida && dataMantida.substring(0, 10) === dataSelecionada) {
+        return dataMantida;
+    }
+
+    const partes = String(dataSelecionada || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if (!partes) {
+        return dataSelecionada;
+    }
+
+    const instante = new Date();
+    instante.setFullYear(Number(partes[1]), Number(partes[2]) - 1, Number(partes[3]));
+    return instante.toISOString();
 }
 
 
