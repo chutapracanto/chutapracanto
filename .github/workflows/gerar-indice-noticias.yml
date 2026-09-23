@@ -11,6 +11,7 @@ on:
       - corrigir-ordem-noticias-taxonomia
     paths:
       - "content/noticias/**"
+      - "content/opiniao/**"
       - "content/taxonomia.json"
       - "content/authors.json"
       - "content/editorial-types.json"
@@ -39,7 +40,7 @@ jobs:
           from datetime import datetime, timezone
           from pathlib import Path
 
-          root = Path("content/noticias")
+          roots = [Path("content/noticias"), Path("content/opiniao")]
           output = Path("content/noticias-index.json")
           taxonomy = json.loads(Path("content/taxonomia.json").read_text(encoding="utf-8"))
           authors = json.loads(Path("content/authors.json").read_text(encoding="utf-8"))
@@ -147,81 +148,84 @@ jobs:
 
           noticias = []
 
-          for path in sorted(root.glob("*.md")):
-              text = path.read_text(encoding="utf-8-sig")
-              match = re.match(
-                  r"^---\s*\n([\s\S]*?)\n---(?:\s*\n|$)",
-                  text
-              )
-              if not match:
+          for root in roots:
+              if not root.exists():
                   continue
+              for path in sorted(root.glob("*.md")):
+                  text = path.read_text(encoding="utf-8-sig")
+                  match = re.match(
+                      r"^---\s*\n([\s\S]*?)\n---(?:\s*\n|$)",
+                      text
+                  )
+                  if not match:
+                      continue
 
-              frontmatter = match.group(1)
+                  frontmatter = match.group(1)
 
-              slug = field(frontmatter, ["slug"]) or path.stem
-              title = field(frontmatter, ["title"]) or "Sem título"
-              subtitle = field(
-                  frontmatter,
-                  ["subtitle", "subtitulo", "descricao", "resumo"]
-              )
-              category_raw = field(
-                  frontmatter,
-                  ["category", "categoria", "tag"]
-              ) or "Geral"
-              category_meta = categories_by_alias.get(normalize_key(category_raw))
-              if category_meta is None and category_raw:
-                  category_id = category_id_for(category_raw)
-                  base_id = category_id
-                  suffix = 2
-                  while category_id in category_ids:
-                      category_id = f"{base_id}-{suffix}"
-                      suffix += 1
-                  category_meta = {
-                      "id": category_id,
-                      "label": category_raw,
-                      "kind": "mixed"
+                  slug = field(frontmatter, ["slug"]) or path.stem
+                  title = field(frontmatter, ["title"]) or "Sem título"
+                  subtitle = field(
+                      frontmatter,
+                      ["subtitle", "subtitulo", "descricao", "resumo"]
+                  )
+                  category_raw = field(
+                      frontmatter,
+                      ["category", "categoria", "tag"]
+                  ) or "Geral"
+                  category_meta = categories_by_alias.get(normalize_key(category_raw))
+                  if category_meta is None and category_raw:
+                      category_id = category_id_for(category_raw)
+                      base_id = category_id
+                      suffix = 2
+                      while category_id in category_ids:
+                          category_id = f"{base_id}-{suffix}"
+                          suffix += 1
+                      category_meta = {
+                          "id": category_id,
+                          "label": category_raw,
+                          "kind": "mixed"
+                      }
+                      taxonomy["categories"].append(category_meta)
+                      category_ids.add(category_id)
+                      categories_by_alias[normalize_key(category_raw)] = category_meta
+                      taxonomy_changed = True
+                  category = category_meta["label"] if category_meta else category_raw
+                  editorial_type = field(frontmatter, ["type"]) or "news"
+                  if editorial_type not in editorial_types:
+                      raise ValueError(f"Tipo editorial não registado em {path}: {editorial_type}")
+                  author_raw = field(frontmatter, ["author", "autor"])
+                  author_meta = authors_by_alias.get(normalize_key(author_raw))
+                  author = author_meta["name"] if author_meta else author_raw
+                  published = field(
+                      frontmatter,
+                      ["published", "date", "dataNoticia", "data"]
+                  )
+                  modified = field(frontmatter, ["modified", "dateModified", "updated"])
+                  image = field(
+                      frontmatter,
+                      ["image", "imagem", "featured_image", "featuredImage"]
+                  )
+
+                  published_at = publication_timestamp(published, path)
+                  noticia = {
+                      "slug": slug,
+                      "path": str(path).replace("\\", "/"),
+                      "type": editorial_type,
+                      "title": title,
+                      "subtitle": subtitle,
+                      "category": category,
+                      "categoryId": category_meta["id"] if category_meta else None,
+                      "categoryKind": category_meta["kind"] if category_meta else "unclassified",
+                      "author": author,
+                      "authorId": author_meta["id"] if author_meta else None,
+                      "authorType": author_meta["type"] if author_meta else None,
+                      "published": published,
+                      "publishedAt": published_at,
+                      "image": image
                   }
-                  taxonomy["categories"].append(category_meta)
-                  category_ids.add(category_id)
-                  categories_by_alias[normalize_key(category_raw)] = category_meta
-                  taxonomy_changed = True
-              category = category_meta["label"] if category_meta else category_raw
-              editorial_type = field(frontmatter, ["type"]) or "news"
-              if editorial_type not in editorial_types:
-                  raise ValueError(f"Tipo editorial não registado em {path}: {editorial_type}")
-              author_raw = field(frontmatter, ["author", "autor"])
-              author_meta = authors_by_alias.get(normalize_key(author_raw))
-              author = author_meta["name"] if author_meta else author_raw
-              published = field(
-                  frontmatter,
-                  ["published", "date", "dataNoticia", "data"]
-              )
-              modified = field(frontmatter, ["modified", "dateModified", "updated"])
-              image = field(
-                  frontmatter,
-                  ["image", "imagem", "featured_image", "featuredImage"]
-              )
-
-              published_at = publication_timestamp(published, path)
-              noticia = {
-                  "slug": slug,
-                  "path": str(path).replace("\\", "/"),
-                  "type": editorial_type,
-                  "title": title,
-                  "subtitle": subtitle,
-                  "category": category,
-                  "categoryId": category_meta["id"] if category_meta else None,
-                  "categoryKind": category_meta["kind"] if category_meta else "unclassified",
-                  "author": author,
-                  "authorId": author_meta["id"] if author_meta else None,
-                  "authorType": author_meta["type"] if author_meta else None,
-                  "published": published,
-                  "publishedAt": published_at,
-                  "image": image
-              }
-              if modified:
-                  noticia["modified"] = modified
-              noticias.append(noticia)
+                  if modified:
+                      noticia["modified"] = modified
+                  noticias.append(noticia)
 
           noticias.sort(key=sort_timestamp, reverse=True)
 
@@ -252,7 +256,7 @@ jobs:
           for noticia in noticias:
               slug = noticia.get("slug")
               path = noticia.get("path", "")
-              if not slug or not re.fullmatch(r"content/noticias/[^/]+\.md", path) or ".." in path:
+              if not slug or not re.fullmatch(r"content/(?:noticias|opiniao)/[^/]+\.md", path) or ".." in path:
                   continue
               published = (noticia.get("published") or "")[:10]
               if re.fullmatch(r"\d{4}-\d{2}-\d{2}", published) and published > today:
