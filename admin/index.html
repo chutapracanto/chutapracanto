@@ -1052,7 +1052,7 @@
             <h2 style="margin-bottom:0;">Pesquisar imagem</h2>
             <button type="button" class="secondary-btn" onclick="fecharPesquisaImagens()">Fechar</button>
         </div>
-        <div class="image-picker-note">Pesquisa no Openverse, um índice de obras com licença Creative Commons ou domínio público. Confirma sempre a licença da imagem escolhida antes de publicar. A imagem é usada por URL externo e não é copiada para o Chuta Pra Canto.</div>
+        <div class="image-picker-note">Pesquisa no Openverse e Wikimedia Commons por imagens com licença permitida ou domínio público. Confirma sempre a licença da imagem escolhida antes de publicar. A imagem é usada por URL externo e não é copiada para o Chuta Pra Canto.</div>
         <div class="image-search-row">
             <input type="text" id="image-search-query" placeholder="Ex.: Cristiano Ronaldo, FC Porto, futebol português..." onkeydown="if(event.key==='Enter') pesquisarImagens()">
             <button type="button" class="main-btn" onclick="pesquisarImagens()">Pesquisar</button>
@@ -3034,16 +3034,16 @@ async function pesquisarImagens() {
     results.replaceChildren();
 
     const anoAtual = String(new Date().getFullYear());
-    const consultas = [
-        query,
-        query + " " + anoAtual
-    ];
+    const consultas = [query];
+    if (!/\b20\d{2}\b/.test(query)) {
+        consultas.push(query + " " + anoAtual);
+    }
 
     try {
         const openverseRequests = consultas.map(async (consulta) => {
             const params = new URLSearchParams({
                 q: consulta,
-                page_size: "30",
+                page_size: "20",
                 license: "cc0,by,by-sa",
                 mature: "false"
             });
@@ -3095,8 +3095,7 @@ async function pesquisarImagens() {
                     const licenseNormalizada = String(license).toLowerCase();
 
                     const reutilizavel =
-                        !license ||
-                        /public domain|cc0|cc by(?:-sa)?/i.test(licenseNormalizada);
+                        /^(?:public domain(?: mark(?: 1\.0)?)?|cc0(?: \d+(?:\.\d+)?)?|cc by(?:-sa)?(?: \d+(?:\.\d+)?)?)$/i.test(licenseNormalizada);
 
                     if (!reutilizavel || !info?.url) return null;
 
