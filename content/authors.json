@@ -3,13 +3,15 @@
     "id": "rute-costa",
     "name": "Rute Costa",
     "type": "Person",
-    "aliases": []
+    "aliases": [],
+    "role": "Moderadora e Locutora"
   },
   {
     "id": "pedro-soares",
     "name": "Pedro Soares",
     "type": "Person",
-    "aliases": []
+    "aliases": [],
+    "role": "Treinador, Opinião Crítica e Análise"
   },
   {
     "id": "chuta-pra-canto",
