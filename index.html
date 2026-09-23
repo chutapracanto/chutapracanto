@@ -1,17 +1,28 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-PT">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ChutaPraCanto | Futebol & Opinião Tática</title>
+  <meta name="description" content="Notícias de futebol, análise tática e opinião sobre o futebol português e internacional.">
+  <link rel="canonical" href="https://chutapracanto.pages.dev/">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Chuta Pra Canto">
+  <meta property="og:title" content="Chuta Pra Canto | Futebol e opinião tática">
+  <meta property="og:description" content="Notícias de futebol, análise tática e opinião sobre o futebol português e internacional.">
+  <meta property="og:url" content="https://chutapracanto.pages.dev/">
+  <meta property="og:image" content="https://chutapracanto.pages.dev/images/logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Chuta Pra Canto | Futebol e opinião tática">
+  <meta name="twitter:description" content="Notícias de futebol, análise tática e opinião sobre o futebol português e internacional.">
+  <meta name="twitter:image" content="https://chutapracanto.pages.dev/images/logo.png">
+  <title>Chuta Pra Canto | Futebol e Opinião Tática</title>
   <link rel="icon" type="image/png" href="images/logo.png">
   
   <!-- Font Awesome CDN para os ícones sociais -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="style.css">
   
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
   
   <style>
     /* ESTILOS ESPECÍFICOS DOS CARROSSEIS E SPOTIFY */
@@ -276,24 +287,70 @@
       carousel.scrollBy({ left: direction * 300, behavior: 'smooth' });
     }
 
+    function safePublicUrl(value) {
+      if (typeof value !== 'string' || !value.trim()) return '';
+      try {
+        const url = new URL(value.trim(), window.location.origin);
+        if ((url.protocol !== 'https:' && !(url.origin === window.location.origin && url.protocol === 'http:')) || url.username || url.password) return '';
+        return url.href;
+      } catch { return ''; }
+    }
+
+    function createNewsImage(value, alt, className) {
+      const wrap = document.createElement('div');
+      if (className) wrap.className = className;
+      const img = document.createElement('img');
+      img.src = safePublicUrl(value) || new URL('/images/logo.png', window.location.origin).href;
+      img.alt = typeof alt === 'string' ? alt : '';
+      img.loading = 'lazy';
+      img.onerror = () => { img.onerror = null; img.src = '/images/logo.png'; };
+      wrap.appendChild(img);
+      return wrap;
+    }
+
+    function createTextElement(tag, className, value) {
+      const el = document.createElement(tag);
+      if (className) el.className = className;
+      el.textContent = typeof value === 'string' ? value : '';
+      return el;
+    }
+
     // 2. FEEDS DO YOUTUBE
     async function carregarYouTube(playlistId, containerId) {
       const container = document.getElementById(containerId);
-      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(`https://www.youtube.com/feeds/videos.xml?playlist_id=${playlistId}`)}`;
+      const feedUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${encodeURIComponent(playlistId)}`;
+      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`;
       try {
         const res = await fetch(apiUrl);
         const data = await res.json();
-        if (data.status === 'ok') {
-          container.innerHTML = '';
-          data.items.forEach(item => {
-            let videoId = item.link.includes('v=') ? item.link.split('v=')[1].split('&')[0] : item.guid.split(':')[2];
-            const div = document.createElement('div');
-            div.className = 'carousel-item';
-            div.innerHTML = `<iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>`;
-            container.appendChild(div);
-          });
-        }
-      } catch (e) { container.innerHTML = '<p style="color: var(--text-gray);">Erro ao carregar vídeos.</p>'; }
+        if (!res.ok || data.status !== 'ok' || !Array.isArray(data.items)) throw new Error('Feed indisponível');
+        container.replaceChildren();
+        data.items.forEach(item => {
+          let videoId = '';
+          try {
+            const link = new URL(item.link);
+            if (link.hostname === 'www.youtube.com' || link.hostname === 'youtube.com') videoId = link.searchParams.get('v') || '';
+          } catch {}
+          if (!/^[A-Za-z0-9_-]{11}$/.test(videoId)) {
+            const candidate = String(item.guid || '').split(':').pop();
+            videoId = /^[A-Za-z0-9_-]{11}$/.test(candidate) ? candidate : '';
+          }
+          if (!videoId) return;
+          const card = document.createElement('div');
+          card.className = 'carousel-item';
+          const iframe = document.createElement('iframe');
+          iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}`;
+          iframe.title = typeof item.title === 'string' ? item.title : 'Vídeo Chuta Pra Canto';
+          iframe.loading = 'lazy';
+          iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+          iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+          iframe.allowFullscreen = true;
+          card.appendChild(iframe);
+          container.appendChild(card);
+        });
+      } catch (error) {
+        container.replaceChildren(createTextElement('p', '', 'Não foi possível carregar os vídeos neste momento.'));
+      }
     }
 
     // 3. FEED DO SPOTIFY
@@ -303,22 +360,33 @@
       try {
         const res = await fetch(apiUrl);
         const data = await res.json();
-        if (data.status === 'ok') {
-          if (data.feed.image) document.getElementById('podcast-cover').src = data.feed.image;
-          container.innerHTML = '';
-          data.items.forEach(ep => {
-            const dateStr = new Date(ep.pubDate).toLocaleDateString('pt-PT', { day: '2-digit', month: 'short', year: 'numeric' });
-            container.innerHTML += `
-              <div class="episode-card">
-                <div class="episode-info">
-                  <p class="episode-title">${ep.title}</p>
-                  <span class="episode-date">${dateStr}</span>
-                </div>
-                <audio controls class="audio-player" src="${ep.enclosure.link}"></audio>
-              </div>`;
-          });
-        }
-      } catch (e) { container.innerHTML = '<p style="color: var(--text-gray);">Erro ao carregar episódios.</p>'; }
+        if (!res.ok || data.status !== 'ok' || !Array.isArray(data.items)) throw new Error('Feed indisponível');
+        const cover = safePublicUrl(data.feed && data.feed.image);
+        if (cover) document.getElementById('podcast-cover').src = cover;
+        container.replaceChildren();
+        data.items.forEach(ep => {
+          const card = document.createElement('div');
+          card.className = 'episode-card';
+          const info = document.createElement('div');
+          info.className = 'episode-info';
+          info.appendChild(createTextElement('p', 'episode-title', ep.title));
+          const date = new Date(ep.pubDate);
+          info.appendChild(createTextElement('span', 'episode-date', Number.isNaN(date.getTime()) ? '' : date.toLocaleDateString('pt-PT', { day: '2-digit', month: 'short', year: 'numeric' })));
+          const audioUrl = safePublicUrl(ep.enclosure && ep.enclosure.link);
+          card.appendChild(info);
+          if (audioUrl) {
+            const audio = document.createElement('audio');
+            audio.controls = true;
+            audio.preload = 'none';
+            audio.className = 'audio-player';
+            audio.src = audioUrl;
+            card.appendChild(audio);
+          }
+          container.appendChild(card);
+        });
+      } catch (error) {
+        container.replaceChildren(createTextElement('p', '', 'Não foi possível carregar os episódios neste momento.'));
+      }
     }
 
     // 4. NOTÍCIAS DO CMS (GITHUB)
@@ -326,71 +394,52 @@
       try {
         const response = await fetch('/content/noticias-index.json', { cache: 'no-store' });
         if (!response.ok) throw new Error('Não foi possível carregar o índice de notícias.');
-
         const noticiasList = await response.json();
         const container = document.getElementById('noticias-container');
         if (!container) return;
-
-        if (!Array.isArray(noticiasList)) {
-          throw new Error('Índice de notícias inválido.');
-        }
-
-        const emDestaque = noticiasList.slice(0, 4);
-
-        container.innerHTML = '';
-
-        if (emDestaque.length === 0) {
-          container.innerHTML = '<p style="color: var(--text-gray);">Ainda não existem notícias publicadas.</p>';
+        if (!Array.isArray(noticiasList)) throw new Error('Índice de notícias inválido.');
+        const destaques = noticiasList.slice(0, 4);
+        container.replaceChildren();
+        if (!destaques.length) {
+          container.appendChild(createTextElement('p', '', 'Ainda não existem notícias publicadas.'));
           return;
         }
-
-        const principal = emDestaque[0];
+        const principal = destaques[0];
         const mainCard = document.createElement('a');
         mainCard.href = `noticia.html?slug=${encodeURIComponent(principal.slug)}`;
         mainCard.className = 'main-featured-card';
-        mainCard.innerHTML = `
-          <div class="main-featured-img">
-            <img src="${principal.image || 'https://via.placeholder.com/600x400'}" alt="${principal.title}">
-          </div>
-          <div class="main-featured-content">
-            <span class="tag">${(principal.category || 'Geral').toUpperCase()}</span>
-            <h2>${principal.title}</h2>
-            <p>${principal.subtitle || ''}</p>
-            <span class="btn-ver-artigo">LER ARTIGO COMPLETO</span>
-          </div>
-        `;
+        mainCard.appendChild(createNewsImage(principal.image, principal.title, 'main-featured-img'));
+        const mainContent = document.createElement('div');
+        mainContent.className = 'main-featured-content';
+        mainContent.appendChild(createTextElement('span', 'tag', (principal.category || 'Geral').toUpperCase()));
+        mainContent.appendChild(createTextElement('h2', '', principal.title || 'Sem título'));
+        mainContent.appendChild(createTextElement('p', '', principal.subtitle || ''));
+        mainContent.appendChild(createTextElement('span', 'btn-ver-artigo', 'LER ARTIGO COMPLETO'));
+        mainCard.appendChild(mainContent);
         container.appendChild(mainCard);
 
-        if (emDestaque.length > 1) {
-          const listContainer = document.createElement('div');
-          listContainer.className = 'secondary-featured-list';
-
-          emDestaque.slice(1, 4).forEach(item => {
-            const subCard = document.createElement('a');
-            subCard.href = `noticia.html?slug=${encodeURIComponent(item.slug)}`;
-            subCard.className = 'sub-featured-card';
-            subCard.innerHTML = `
-              <div class="sub-featured-img">
-                <img src="${item.image || 'https://via.placeholder.com/600x400'}" alt="${item.title}">
-              </div>
-              <div class="sub-featured-content">
-                <span class="tag">${(item.category || 'Geral').toUpperCase()}</span>
-                <h3>${item.title}</h3>
-                <p>${item.subtitle || ''}</p>
-              </div>
-            `;
-            listContainer.appendChild(subCard);
+        if (destaques.length > 1) {
+          const list = document.createElement('div');
+          list.className = 'secondary-featured-list';
+          destaques.slice(1, 4).forEach(item => {
+            const card = document.createElement('a');
+            card.href = `noticia.html?slug=${encodeURIComponent(item.slug)}`;
+            card.className = 'sub-featured-card';
+            card.appendChild(createNewsImage(item.image, item.title, 'sub-featured-img'));
+            const content = document.createElement('div');
+            content.className = 'sub-featured-content';
+            content.appendChild(createTextElement('span', 'tag', (item.category || 'Geral').toUpperCase()));
+            content.appendChild(createTextElement('h3', '', item.title || 'Sem título'));
+            content.appendChild(createTextElement('p', '', item.subtitle || ''));
+            card.appendChild(content);
+            list.appendChild(card);
           });
-
-          container.appendChild(listContainer);
+          container.appendChild(list);
         }
-
       } catch (error) {
         console.error('Erro ao carregar notícias:', error);
         const container = document.getElementById('noticias-container');
-        if (container) {
-          container.innerHTML = '<p style="color: var(--text-gray);">Erro ao carregar notícias.</p>';
-        }
+        if (container) container.replaceChildren(createTextElement('p', '', 'Erro ao carregar notícias.'));
       }
     }
 

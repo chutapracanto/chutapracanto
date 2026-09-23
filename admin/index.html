@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow,noarchive">
     <title>Administração | ChutaPraCanto</title>
 
     <link
@@ -936,7 +937,7 @@
                 <input
                     type="file"
                     id="image-upload"
-                    accept="image/*"
+                    accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
                     style="margin-bottom:8px;"
                 >
 
@@ -947,7 +948,7 @@
                 >
 
                 <div class="image-help">
-                    As imagens carregadas recebem automaticamente um nome único.
+                    JPEG, PNG ou WebP até 5 MiB. As imagens recebem um nome único.
                 </div>
 
                 <img
@@ -1805,204 +1806,118 @@ function formatarDataNoticia(
 
 function mostrarLista(lista) {
 
-    const container =
-        document.getElementById(
-            "news-list"
-        );
-
-    const pagination =
-        document.getElementById(
-            "pagination"
-        );
+    const container = document.getElementById("news-list");
+    const pagination = document.getElementById("pagination");
 
     if (!lista.length) {
-
-        container.innerHTML = `
-
-            <div class="loading">
-                Não existem notícias.
-            </div>
-
-        `;
-
-        pagination.innerHTML = "";
-
+        const vazio = document.createElement("div");
+        vazio.className = "loading";
+        vazio.textContent = "Não existem notícias.";
+        container.replaceChildren(vazio);
+        pagination.replaceChildren();
         return;
     }
 
-    const totalPaginas =
-        Math.ceil(
-            lista.length /
-            NOTICIAS_POR_PAGINA
+    const totalPaginas = Math.ceil(lista.length / NOTICIAS_POR_PAGINA);
+    if (paginaAtual > totalPaginas) paginaAtual = totalPaginas;
+
+    const inicio = (paginaAtual - 1) * NOTICIAS_POR_PAGINA;
+    const noticiasDaPagina = lista.slice(inicio, inicio + NOTICIAS_POR_PAGINA);
+    const fragmento = document.createDocumentFragment();
+
+    noticiasDaPagina.forEach(file => {
+        const titulo = file.titulo || slugParaTitulo(file.name || "");
+        const categoria = file.categoria || file.category || "";
+        const imagem = normalizarUrlImagem(
+            file.imagem || file.image || file.featured_image || file.featuredImage || ""
+        );
+        const path = file.path || "";
+        const sha = file.sha || "";
+        const dataFormatada = formatarDataNoticia(file);
+
+        const item = document.createElement("div");
+        item.className = "news-item";
+
+        const thumb = document.createElement("div");
+        thumb.className = "news-thumb";
+        if (imagem) {
+            const img = document.createElement("img");
+            img.src = imagem;
+            img.alt = "";
+            img.addEventListener("error", () => {
+                const placeholder = document.createElement("div");
+                placeholder.className = "news-thumb-placeholder";
+                placeholder.textContent = "📰";
+                thumb.replaceChildren(placeholder);
+            }, { once: true });
+            thumb.appendChild(img);
+        } else {
+            const placeholder = document.createElement("div");
+            placeholder.className = "news-thumb-placeholder";
+            placeholder.textContent = "📰";
+            thumb.appendChild(placeholder);
+        }
+
+        const info = document.createElement("div");
+        info.className = "news-info";
+
+        const titleElement = document.createElement("div");
+        titleElement.className = "news-title";
+        titleElement.textContent = titulo;
+        info.appendChild(titleElement);
+
+        const meta = document.createElement("div");
+        meta.className = "news-meta";
+        if (categoria) {
+            const categoryElement = document.createElement("span");
+            categoryElement.className = "news-category";
+            categoryElement.textContent = categoria;
+            meta.appendChild(categoryElement);
+        }
+
+        const dateElement = document.createElement("span");
+        dateElement.className = "news-date";
+        dateElement.textContent = dataFormatada;
+        meta.appendChild(dateElement);
+
+        const autor = file.autor || file.author || "";
+        if (autor) {
+            const authorElement = document.createElement("span");
+            authorElement.className = "news-author";
+            authorElement.textContent = "✍️ " + autor;
+            meta.appendChild(authorElement);
+        }
+        info.appendChild(meta);
+
+        const fileElement = document.createElement("div");
+        fileElement.className = "news-file";
+        fileElement.textContent = file.name || "";
+        info.appendChild(fileElement);
+
+        const actions = document.createElement("div");
+        actions.className = "news-actions";
+        const createActionButton = (label, className, action) => {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = className;
+            button.textContent = label;
+            button.addEventListener("click", action);
+            return button;
+        };
+
+        actions.append(
+            createActionButton("👁️ Ver", "preview-btn", () => previsualizarDaLista(path)),
+            createActionButton("📤 Partilhar", "share-btn", () => abrirPartilha(path, titulo)),
+            createActionButton("✏️ Editar", "edit-btn", () => editarNoticia(path)),
+            createActionButton("🗑️ Apagar", "delete-list-btn", () => apagarDaLista(path, sha, titulo))
         );
 
-    if (
-        paginaAtual > totalPaginas
-    ) {
-        paginaAtual =
-            totalPaginas;
-    }
+        item.append(thumb, info, actions);
+        fragmento.appendChild(item);
+    });
 
-    const inicio =
-        (paginaAtual - 1) *
-        NOTICIAS_POR_PAGINA;
-
-    const fim =
-        inicio +
-        NOTICIAS_POR_PAGINA;
-
-    const noticiasDaPagina =
-        lista.slice(
-            inicio,
-            fim
-        );
-
-    container.innerHTML =
-        noticiasDaPagina
-            .map(file => {
-
-                const titulo =
-                    file.titulo ||
-                    slugParaTitulo(
-                        file.name || ""
-                    );
-
-                const categoria =
-                    file.categoria ||
-                    file.category ||
-                    "";
-
-                const imagem =
-                    normalizarUrlImagem(
-                        file.imagem ||
-                        file.image ||
-                        file.featured_image ||
-                        file.featuredImage ||
-                        ""
-                    );
-
-                const path =
-                    file.path || "";
-
-                const sha =
-                    file.sha || "";
-
-                const dataFormatada =
-                    formatarDataNoticia(
-                        file
-                    );
-
-                const imagemHtml =
-                    imagem
-                        ? `
-                            <div class="news-thumb">
-                                <img
-                                    src="${escaparHtml(imagem)}"
-                                    alt=""
-                                    onerror="this.parentElement.innerHTML='<div class=&quot;news-thumb-placeholder&quot;>📰</div>'"
-                                >
-                            </div>
-                        `
-                        : `
-                            <div class="news-thumb">
-                                <div class="news-thumb-placeholder">
-                                    📰
-                                </div>
-                            </div>
-                        `;
-
-                return `
-
-                    <div class="news-item">
-
-                        ${imagemHtml}
-
-                        <div class="news-info">
-
-                            <div class="news-title">
-                                ${escaparHtml(titulo)}
-                            </div>
-
-                            <div class="news-meta">
-
-                                ${
-                                    categoria
-                                        ? `
-                                            <span class="news-category">
-                                                ${escaparHtml(categoria)}
-                                            </span>
-                                        `
-                                        : ""
-                                }
-
-                                <span class="news-date">
-                                    ${escaparHtml(dataFormatada)}
-                                </span>
-
-                                ${
-                                    file.autor ||
-                                    file.author
-                                        ? `
-                                            <span class="news-author">
-                                                ✍️ ${escaparHtml(
-                                                    file.autor ||
-                                                    file.author
-                                                )}
-                                            </span>
-                                        `
-                                        : ""
-                                }
-
-                            </div>
-
-                            <div class="news-file">
-                                ${escaparHtml(file.name || "")}
-                            </div>
-
-                        </div>
-
-                        <div class="news-actions">
-
-                            <button
-                                class="preview-btn"
-                                onclick="previsualizarDaLista('${escaparJs(path)}')"
-                            >
-                                👁️ Ver
-                            </button>
-
-                            <button
-                                class="share-btn"
-                                onclick="abrirPartilha('${escaparJs(path)}', '${escaparJs(titulo)}')"
-                            >
-                                📤 Partilhar
-                            </button>
-
-                            <button
-                                class="edit-btn"
-                                onclick="editarNoticia('${escaparJs(path)}')"
-                            >
-                                ✏️ Editar
-                            </button>
-
-                            <button
-                                class="delete-list-btn"
-                                onclick="apagarDaLista('${escaparJs(path)}', '${escaparJs(sha)}', '${escaparJs(titulo)}')"
-                            >
-                                🗑️ Apagar
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                `;
-            })
-            .join("");
-
-    mostrarPaginacao(
-        totalPaginas,
-        lista.length
-    );
+    container.replaceChildren(fragmento);
+    mostrarPaginacao(totalPaginas, lista.length);
 }
 
 
@@ -3490,6 +3405,15 @@ async function uploadImage() {
 
     const file =
         fileInput.files[0];
+
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+    const allowedExtensions = /\.(?:jpe?g|png|webp)$/i;
+    if (!allowedTypes.includes(file.type) || !allowedExtensions.test(file.name)) {
+        throw new Error("Formato não permitido. Seleciona uma imagem JPEG, PNG ou WebP.");
+    }
+    if (file.size > 5 * 1024 * 1024) {
+        throw new Error("A imagem excede o limite de 5 MiB.");
+    }
 
     const reader =
         new FileReader();

@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - fase-2-performance-noticias
+      - fase-0a-foundation
     paths:
       - "content/noticias/**"
       - ".github/workflows/gerar-indice-noticias.yml"
@@ -110,12 +111,43 @@ jobs:
               encoding="utf-8"
           )
 
+          # Gera sitemap no mesmo passo a partir das páginas públicas e do índice derivado dos Markdown.
+          from datetime import date
+          from urllib.parse import quote
+          from html import escape
+
+          base_url = "https://chutapracanto.pages.dev"
+          pages = ["/", "/noticias", "/sobre", "/contacto", "/privacidade", "/termos"]
+          entries = [base_url + page for page in pages]
+          today = date.today().isoformat()
+          for noticia in noticias:
+              slug = noticia.get("slug")
+              path = noticia.get("path", "")
+              if not slug or not re.fullmatch(r"content/noticias/[^/]+\.md", path) or ".." in path:
+                  continue
+              published = (noticia.get("published") or "")[:10]
+              if re.fullmatch(r"\d{4}-\d{2}-\d{2}", published) and published > today:
+                  continue
+              entries.append(base_url + "/noticia?slug=" + quote(slug, safe="~!*'()-._"))
+
+          sitemap_lines = [
+              '<?xml version="1.0" encoding="UTF-8"?>',
+              '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+          ]
+          for loc in dict.fromkeys(entries):
+              sitemap_lines.append("  <url><loc>" + escape(loc, quote=False) + "</loc></url>")
+          sitemap_lines.append("</urlset>")
+          Path("sitemap.xml").write_text(
+              "\n".join(sitemap_lines) + "\n",
+              encoding="utf-8"
+          )
+
       - name: Commit índice atualizado
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add content/noticias-index.json
+          git add content/noticias-index.json sitemap.xml
           if git diff --cached --quiet; then
             echo "Índice já está atualizado."
             exit 0
