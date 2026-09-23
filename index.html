@@ -428,7 +428,8 @@
         const container = document.getElementById('noticias-container');
         if (!container) return;
         if (!Array.isArray(noticiasList)) throw new Error('Índice de notícias inválido.');
-        const destaques = noticiasList.slice(0, 4);
+        const noticiasEditoriales = noticiasList.filter(item => (item.type || 'news') === 'news');
+        const destaques = noticiasEditoriales.slice(0, 4);
         container.replaceChildren();
         if (!destaques.length) {
           container.appendChild(createTextElement('p', '', 'Ainda não existem notícias publicadas.'));
