@@ -336,6 +336,14 @@
       return template.innerHTML;
     }
 
+    function normalizarNomeEditorial(nome) {
+      return String(nome || "").replace(/\s+/g, "").toLowerCase();
+    }
+
+    function autorEditorialEhOrganizacao(nome) {
+      return normalizarNomeEditorial(nome) === "chutapracanto";
+    }
+
     function addArticleJsonLd(data) {
       const canonical = SITE_CANONICAL_ORIGIN + '/noticia?slug=' + encodeURIComponent(data.slug);
       const schema = {
@@ -350,7 +358,7 @@
       if (data.datePublished) schema.datePublished = data.datePublished;
       if (data.dateModified) schema.dateModified = data.dateModified;
       if (data.author) {
-        const author = { '@type': /^chuta\s*pra\s*canto$/i.test(data.author) ? 'Organization' : 'Person', name: data.author };
+        const author = { '@type': autorEditorialEhOrganizacao(data.author) ? 'Organization' : 'Person', name: data.author };
         if (data.authorUrl) author.url = data.authorUrl;
         schema.author = author;
       }
