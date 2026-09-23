@@ -1286,6 +1286,8 @@ async function handleAdminAPI(request, env) {
         item.path || "",
       slug:
         item.slug || "",
+      type:
+        item.type || "news",
       title:
         item.title || "Sem título",
       subtitle:
