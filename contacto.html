@@ -74,7 +74,7 @@
 <p>Ao pedir uma correção, indica, por favor, o URL do artigo e a informação a rever.</p>
 <h2>Envia uma mensagem</h2>
 <p>Usa o formulário para sugestões editoriais, correções ou propostas de parceria. Evita incluir informação sensível que não seja necessária para responder ao teu contacto.</p>
-<form id="contact-form" class="contact-form" method="POST" action="https://formsubmit.co/FORM_SUBMIT_TOKEN_PENDING">
+<form id="contact-form" class="contact-form" method="POST" action="https://formsubmit.co/dc931faa14cbc4ca5cfe6f55ade00db1">
   <div class="contact-field"><label for="contact-name">Nome</label><input id="contact-name" name="name" type="text" autocomplete="name" maxlength="100" required></div>
   <div class="contact-field"><label for="contact-email">Email</label><input id="contact-email" name="email" type="email" autocomplete="email" maxlength="254" required></div>
   <div class="contact-field"><label for="contact-message">Mensagem</label><textarea id="contact-message" name="message" rows="6" minlength="10" maxlength="5000" required></textarea></div>
@@ -97,7 +97,7 @@
   form.addEventListener('submit', async event => {
     event.preventDefault();
     if (!form.reportValidity()) return;
-    if (form.action.endsWith('/FORM_SUBMIT_TOKEN_PENDING')) {
+    if (form.action.endsWith('/dc931faa14cbc4ca5cfe6f55ade00db1')) {
       status.textContent = 'O formulário está a aguardar ativação. Tenta novamente mais tarde.';
       return;
     }
