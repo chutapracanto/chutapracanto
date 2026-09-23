@@ -324,55 +324,38 @@
     // 4. NOTÍCIAS DO CMS (GITHUB)
     async function carregarNoticias() {
       try {
-        const response = await fetch('https://api.github.com/repos/chutapracanto/chutapracanto/contents/content/noticias');
-        if (!response.ok) return;
-        
-        const files = await response.json();
+        const response = await fetch('/content/noticias-index.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error('Não foi possível carregar o índice de notícias.');
+
+        const noticiasList = await response.json();
         const container = document.getElementById('noticias-container');
         if (!container) return;
-        
-        container.innerHTML = '';
-        const noticiasList = [];
 
-        for (const file of files) {
-          if (file.name.endsWith('.md')) {
-            const res = await fetch(file.download_url);
-            const text = await res.text();
-            
-            const parts = text.split('---');
-            if (parts.length < 3) continue;
-            
-            const data = jsyaml.load(parts[1]);
-            if (!data) continue;
-
-            noticiasList.push({
-              slug: file.name.replace('.md', ''),
-              title: data.title || 'Sem título',
-              tag: data.category || data.categoria || data.tag || 'Geral',
-              imagem: data.image || data.imagem || data.featured_image || data.featuredImage || 'https://via.placeholder.com/600x400',
-              descricao: data.subtitle || data.subtitulo || data.descricao || data.resumo || '',
-              dataPublicacao: data.published || data.date || ''
-            });
-          }
+        if (!Array.isArray(noticiasList)) {
+          throw new Error('Índice de notícias inválido.');
         }
 
-        noticiasList.sort((a, b) => new Date(b.dataPublicacao) - new Date(a.dataPublicacao));
         const emDestaque = noticiasList.slice(0, 4);
 
-        if (emDestaque.length === 0) return;
+        container.innerHTML = '';
+
+        if (emDestaque.length === 0) {
+          container.innerHTML = '<p style="color: var(--text-gray);">Ainda não existem notícias publicadas.</p>';
+          return;
+        }
 
         const principal = emDestaque[0];
         const mainCard = document.createElement('a');
-        mainCard.href = `noticia.html?slug=${principal.slug}`;
+        mainCard.href = `noticia.html?slug=${encodeURIComponent(principal.slug)}`;
         mainCard.className = 'main-featured-card';
         mainCard.innerHTML = `
           <div class="main-featured-img">
-            <img src="${principal.imagem}" alt="${principal.title}">
+            <img src="${principal.image || 'https://via.placeholder.com/600x400'}" alt="${principal.title}">
           </div>
           <div class="main-featured-content">
-            <span class="tag">${principal.tag.toUpperCase()}</span>
+            <span class="tag">${(principal.category || 'Geral').toUpperCase()}</span>
             <h2>${principal.title}</h2>
-            <p>${principal.descricao}</p>
+            <p>${principal.subtitle || ''}</p>
             <span class="btn-ver-artigo">LER ARTIGO COMPLETO</span>
           </div>
         `;
@@ -384,16 +367,16 @@
 
           emDestaque.slice(1, 4).forEach(item => {
             const subCard = document.createElement('a');
-            subCard.href = `noticia.html?slug=${item.slug}`;
+            subCard.href = `noticia.html?slug=${encodeURIComponent(item.slug)}`;
             subCard.className = 'sub-featured-card';
             subCard.innerHTML = `
               <div class="sub-featured-img">
-                <img src="${item.imagem}" alt="${item.title}">
+                <img src="${item.image || 'https://via.placeholder.com/600x400'}" alt="${item.title}">
               </div>
               <div class="sub-featured-content">
-                <span class="tag">${item.tag.toUpperCase()}</span>
+                <span class="tag">${(item.category || 'Geral').toUpperCase()}</span>
                 <h3>${item.title}</h3>
-                <p>${item.descricao}</p>
+                <p>${item.subtitle || ''}</p>
               </div>
             `;
             listContainer.appendChild(subCard);
@@ -404,6 +387,10 @@
 
       } catch (error) {
         console.error('Erro ao carregar notícias:', error);
+        const container = document.getElementById('noticias-container');
+        if (container) {
+          container.innerHTML = '<p style="color: var(--text-gray);">Erro ao carregar notícias.</p>';
+        }
       }
     }
 

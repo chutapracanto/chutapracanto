@@ -1,0 +1,124 @@
+name: Gerar índice de notícias
+
+on:
+  push:
+    branches:
+      - main
+      - fase-2-performance-noticias
+    paths:
+      - "content/noticias/**"
+      - ".github/workflows/gerar-indice-noticias.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  gerar-indice:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Gerar índice
+        shell: python
+        run: |
+          import json
+          import re
+          from pathlib import Path
+
+          root = Path("content/noticias")
+          output = Path("content/noticias-index.json")
+
+          def parse_scalar(value):
+              value = value.strip()
+              if not value:
+                  return ""
+              if value.startswith('"') and value.endswith('"'):
+                  try:
+                      return json.loads(value)
+                  except Exception:
+                      return value[1:-1]
+              if value.startswith("'") and value.endswith("'"):
+                  return value[1:-1].replace("''", "'")
+              return value
+
+          def field(frontmatter, names):
+              for name in names:
+                  match = re.search(
+                      rf"^\s*{re.escape(name)}\s*:\s*(.*?)\s*$",
+                      frontmatter,
+                      re.MULTILINE
+                  )
+                  if match:
+                      return parse_scalar(match.group(1))
+              return ""
+
+          noticias = []
+
+          for path in sorted(root.glob("*.md")):
+              text = path.read_text(encoding="utf-8-sig")
+              match = re.match(
+                  r"^---\s*\n([\s\S]*?)\n---(?:\s*\n|$)",
+                  text
+              )
+              if not match:
+                  continue
+
+              frontmatter = match.group(1)
+
+              slug = field(frontmatter, ["slug"]) or path.stem
+              title = field(frontmatter, ["title"]) or "Sem título"
+              subtitle = field(
+                  frontmatter,
+                  ["subtitle", "subtitulo", "descricao", "resumo"]
+              )
+              category = field(
+                  frontmatter,
+                  ["category", "categoria", "tag"]
+              ) or "Geral"
+              published = field(
+                  frontmatter,
+                  ["published", "date", "dataNoticia", "data"]
+              )
+              image = field(
+                  frontmatter,
+                  ["image", "imagem", "featured_image", "featuredImage"]
+              )
+
+              noticias.append({
+                  "slug": slug,
+                  "path": str(path).replace("\\", "/"),
+                  "title": title,
+                  "subtitle": subtitle,
+                  "category": category,
+                  "published": published,
+                  "image": image
+              })
+
+          noticias.sort(
+              key=lambda item: item.get("published") or "",
+              reverse=True
+          )
+
+          output.write_text(
+              json.dumps(
+                  noticias,
+                  ensure_ascii=False,
+                  indent=2
+              ) + "\n",
+              encoding="utf-8"
+          )
+
+      - name: Commit índice atualizado
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/noticias-index.json
+          if git diff --cached --quiet; then
+            echo "Índice já está atualizado."
+            exit 0
+          fi
+          git commit -m "Atualizar índice de notícias"
+          git push
