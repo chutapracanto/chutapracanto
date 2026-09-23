@@ -61,6 +61,9 @@
       border: 1px solid var(--border-color); 
     }
     .carousel-item iframe { width: 100%; height: 100%; border: none; }
+    .youtube-play-trigger { position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; cursor: pointer; overflow: hidden; background: #121824; color: #fff; }
+    .youtube-play-trigger img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .youtube-play-icon { position: absolute; top: 50%; left: 50%; display: grid; place-items: center; width: 3.5rem; height: 2.5rem; transform: translate(-50%, -50%); border-radius: 0.65rem; background: rgba(0, 0, 0, 0.8); color: #fff; font-size: 1.2rem; }
     
     .vertical-aspect .carousel-item { width: 240px; height: 425px; }
     .horizontal-aspect .carousel-item { width: 360px; height: 202px; }
@@ -76,7 +79,7 @@
     }
     @media (max-width: 768px) { .spotify-grid { grid-template-columns: 1fr; } }
 
-    .podcast-main-cover { width: 100%; border-radius: 8px; border: 1px solid var(--border-color); }
+    .podcast-main-cover { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-color); }
     
     .episodes-scroll { 
       display: flex; 
@@ -162,8 +165,8 @@
         <div style="display: flex; align-items: center; gap: 0.8rem;">
           <a href="https://youtube.com/@chutapracanto/shorts" target="_blank" class="see-more">VER NO YOUTUBE →</a>
           <div>
-            <button class="arrow-btn" onclick="scrollCarousel('carousel-shorts', -1)">‹</button>
-            <button class="arrow-btn" onclick="scrollCarousel('carousel-shorts', 1)">›</button>
+            <button class="arrow-btn" type="button" aria-label="Deslizar Shorts para a esquerda" onclick="scrollCarousel('carousel-shorts', -1)">‹</button>
+            <button class="arrow-btn" type="button" aria-label="Deslizar Shorts para a direita" onclick="scrollCarousel('carousel-shorts', 1)">›</button>
           </div>
         </div>
       </div>
@@ -179,8 +182,8 @@
         <div style="display: flex; align-items: center; gap: 0.8rem;">
           <a href="https://youtube.com/@chutapracanto/podcasts" target="_blank" class="see-more">VER NO YOUTUBE →</a>
           <div>
-            <button class="arrow-btn" onclick="scrollCarousel('carousel-podcasts', -1)">‹</button>
-            <button class="arrow-btn" onclick="scrollCarousel('carousel-podcasts', 1)">›</button>
+            <button class="arrow-btn" type="button" aria-label="Deslizar podcasts de vídeo para a esquerda" onclick="scrollCarousel('carousel-podcasts', -1)">‹</button>
+            <button class="arrow-btn" type="button" aria-label="Deslizar podcasts de vídeo para a direita" onclick="scrollCarousel('carousel-podcasts', 1)">›</button>
           </div>
         </div>
       </div>
@@ -197,7 +200,7 @@
       </div>
       <div class="spotify-grid">
         <div>
-          <img id="podcast-cover" src="images/logo.png" alt="Podcast" class="podcast-main-cover">
+          <img id="podcast-cover" src="images/logo.png" alt="Capa do podcast Chuta Pra Canto" class="podcast-main-cover" loading="lazy" decoding="async">
           <p style="margin: 0.8rem 0 0 0; font-weight: 700; font-size: 1.1rem; color: #fff;" id="podcast-title">ChutaPraCanto</p>
         </div>
         <div class="episodes-scroll" id="episodes-container">
@@ -296,13 +299,15 @@
       } catch { return ''; }
     }
 
-    function createNewsImage(value, alt, className) {
+    function createNewsImage(value, alt, className, prioritize = false) {
       const wrap = document.createElement('div');
       if (className) wrap.className = className;
       const img = document.createElement('img');
       img.src = safePublicUrl(value) || new URL('/images/logo.png', window.location.origin).href;
       img.alt = typeof alt === 'string' ? alt : '';
-      img.loading = 'lazy';
+      img.loading = prioritize ? 'eager' : 'lazy';
+      img.decoding = 'async';
+      if (prioritize) img.fetchPriority = 'high';
       img.onerror = () => { img.onerror = null; img.src = '/images/logo.png'; };
       wrap.appendChild(img);
       return wrap;
@@ -325,7 +330,7 @@
         const data = await res.json();
         if (!res.ok || data.status !== 'ok' || !Array.isArray(data.items)) throw new Error('Feed indisponível');
         container.replaceChildren();
-        data.items.forEach(item => {
+        data.items.slice(0, 6).forEach(item => {
           let videoId = '';
           try {
             const link = new URL(item.link);
@@ -336,20 +341,41 @@
             videoId = /^[A-Za-z0-9_-]{11}$/.test(candidate) ? candidate : '';
           }
           if (!videoId) return;
+          const title = typeof item.title === 'string' && item.title.trim() ? item.title.trim() : 'Vídeo Chuta Pra Canto';
           const card = document.createElement('div');
           card.className = 'carousel-item';
-          const iframe = document.createElement('iframe');
-          iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}`;
-          iframe.title = typeof item.title === 'string' ? item.title : 'Vídeo Chuta Pra Canto';
-          iframe.loading = 'lazy';
-          iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-          iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-          iframe.allowFullscreen = true;
-          card.appendChild(iframe);
+          const trigger = document.createElement('button');
+          trigger.type = 'button';
+          trigger.className = 'youtube-play-trigger';
+          trigger.setAttribute('aria-label', `Reproduzir vídeo: ${title}`);
+          const thumbnail = document.createElement('img');
+          thumbnail.src = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+          thumbnail.alt = '';
+          thumbnail.loading = 'lazy';
+          thumbnail.decoding = 'async';
+          const playIcon = document.createElement('span');
+          playIcon.className = 'youtube-play-icon';
+          playIcon.setAttribute('aria-hidden', 'true');
+          playIcon.textContent = '▶';
+          trigger.append(thumbnail, playIcon);
+          trigger.addEventListener('click', () => {
+            const iframe = document.createElement('iframe');
+            iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
+            iframe.title = title;
+            iframe.loading = 'eager';
+            iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+            iframe.allowFullscreen = true;
+            card.replaceChildren(iframe);
+          });
+          card.appendChild(trigger);
           container.appendChild(card);
         });
       } catch (error) {
-        container.replaceChildren(createTextElement('p', '', 'Não foi possível carregar os vídeos neste momento.'));
+        const message = createTextElement('p', '', 'Não foi possível carregar os vídeos neste momento.');
+        message.setAttribute('role', 'status');
+        message.setAttribute('aria-live', 'polite');
+        container.replaceChildren(message);
       }
     }
 
@@ -379,13 +405,17 @@
             audio.controls = true;
             audio.preload = 'none';
             audio.className = 'audio-player';
+            audio.setAttribute('aria-label', `Reproduzir episódio: ${ep.title}`);
             audio.src = audioUrl;
             card.appendChild(audio);
           }
           container.appendChild(card);
         });
       } catch (error) {
-        container.replaceChildren(createTextElement('p', '', 'Não foi possível carregar os episódios neste momento.'));
+        const message = createTextElement('p', '', 'Não foi possível carregar os episódios neste momento.');
+        message.setAttribute('role', 'status');
+        message.setAttribute('aria-live', 'polite');
+        container.replaceChildren(message);
       }
     }
 
@@ -408,7 +438,7 @@
         const mainCard = document.createElement('a');
         mainCard.href = `noticia.html?slug=${encodeURIComponent(principal.slug)}`;
         mainCard.className = 'main-featured-card';
-        mainCard.appendChild(createNewsImage(principal.image, principal.title, 'main-featured-img'));
+        mainCard.appendChild(createNewsImage(principal.image, principal.title, 'main-featured-img', true));
         const mainContent = document.createElement('div');
         mainContent.className = 'main-featured-content';
         mainContent.appendChild(createTextElement('span', 'tag', (principal.category || 'Geral').toUpperCase()));
@@ -439,16 +469,78 @@
       } catch (error) {
         console.error('Erro ao carregar notícias:', error);
         const container = document.getElementById('noticias-container');
-        if (container) container.replaceChildren(createTextElement('p', '', 'Erro ao carregar notícias.'));
+        if (container) {
+          const message = createTextElement('p', '', 'Erro ao carregar notícias.');
+          message.setAttribute('role', 'status');
+          message.setAttribute('aria-live', 'polite');
+          container.replaceChildren(message);
+        }
       }
+    }
+
+    function iniciarFeedsAdiados() {
+      const feeds = [
+        { id: 'carousel-shorts', carregar: () => carregarYouTube('PLUXnJ5IDIDWU', 'carousel-shorts') },
+        { id: 'carousel-podcasts', carregar: () => carregarYouTube('PLFJ6oHgZs4WU', 'carousel-podcasts') },
+        { id: 'episodes-container', carregar: () => carregarFeedSpotify('https://anchor.fm/s/1159ff964/podcast/rss') }
+      ];
+      if (!('IntersectionObserver' in window)) {
+        const pendentes = new Map();
+        const removerListeners = new Map();
+
+        const carregarUmaVez = elemento => {
+          const carregar = pendentes.get(elemento);
+          if (!carregar) return;
+          pendentes.delete(elemento);
+          removerListeners.get(elemento)?.();
+          removerListeners.delete(elemento);
+          carregar();
+          if (pendentes.size === 0) window.removeEventListener('scroll', verificarSecoesProximas);
+        };
+
+        const verificarSecoesProximas = () => {
+          pendentes.forEach((carregar, elemento) => {
+            const rect = elemento.getBoundingClientRect();
+            if (rect.top <= window.innerHeight + 300 && rect.bottom >= -300) carregarUmaVez(elemento);
+          });
+        };
+
+        feeds.forEach(feed => {
+          const elemento = document.getElementById(feed.id);
+          if (!elemento) return;
+          const secao = elemento.closest('section') || elemento;
+          const ativar = () => carregarUmaVez(elemento);
+          pendentes.set(elemento, feed.carregar);
+          secao.addEventListener('pointerenter', ativar);
+          secao.addEventListener('focusin', ativar);
+          secao.addEventListener('touchstart', ativar, { passive: true });
+          removerListeners.set(elemento, () => {
+            secao.removeEventListener('pointerenter', ativar);
+            secao.removeEventListener('focusin', ativar);
+            secao.removeEventListener('touchstart', ativar);
+          });
+        });
+
+        if (pendentes.size) window.addEventListener('scroll', verificarSecoesProximas, { passive: true });
+        return;
+      }
+      const feedsPorElemento = new Map(feeds.map(feed => [document.getElementById(feed.id), feed.carregar]));
+      const observer = new IntersectionObserver((entries, currentObserver) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          currentObserver.unobserve(entry.target);
+          feedsPorElemento.get(entry.target)?.();
+        });
+      }, { rootMargin: '300px 0px' });
+      feedsPorElemento.forEach((carregar, elemento) => {
+        if (elemento) observer.observe(elemento);
+      });
     }
 
     // INICIALIZAÇÃO
     document.addEventListener('DOMContentLoaded', () => {
       carregarNoticias();
-      carregarYouTube('PLUXnJ5IDIDWU', 'carousel-shorts');
-      carregarYouTube('PLFJ6oHgZs4WU', 'carousel-podcasts');
-      carregarFeedSpotify('https://anchor.fm/s/1159ff964/podcast/rss');
+      iniciarFeedsAdiados();
     });
   </script>
 </body>

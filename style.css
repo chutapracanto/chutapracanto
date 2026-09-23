@@ -36,6 +36,14 @@ a {
   text-decoration: none;
 }
 
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+audio:focus-visible {
+  outline: 2px solid var(--neon-green);
+  outline-offset: 3px;
+}
+
 h1, h2, h3, .logo, .btn-neon, .tag, .hero-tag {
   font-family: var(--font-title);
   letter-spacing: 0.3px;
@@ -119,11 +127,26 @@ nav a:hover, nav a.active {
 }
 
 @media (max-width: 768px) {
+  header {
+    padding: 0.75rem 1rem;
+  }
+  .header-container {
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+  .logo-link {
+    justify-content: center;
+  }
   .header-socials {
     display: none;
   }
+  nav {
+    width: 100%;
+  }
   nav ul {
-    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
   }
 }
 
@@ -226,12 +249,13 @@ nav a:hover, nav a.active {
 }
 
 .main-featured-img {
+  align-self: start;
   width: 100%;
-  height: 100%;
-  min-height: 260px;
+  aspect-ratio: 16 / 9;
 }
 
 .main-featured-img img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -299,11 +323,13 @@ nav a:hover, nav a.active {
 }
 
 .sub-featured-img {
+  align-self: start;
   width: 100%;
-  height: 110px;
+  aspect-ratio: 16 / 10;
 }
 
 .sub-featured-img img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -510,6 +536,15 @@ footer {
   .team-members {
     flex-direction: column;
     gap: 1.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  header {
+    padding: 0.65rem 0.75rem;
+  }
+  nav ul {
+    column-gap: 0.75rem;
   }
 }
 
