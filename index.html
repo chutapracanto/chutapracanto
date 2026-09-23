@@ -79,7 +79,7 @@
     }
     @media (max-width: 768px) { .spotify-grid { grid-template-columns: 1fr; } }
 
-    .podcast-main-cover { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-color); }
+    .podcast-main-cover { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-color); }
     
     .episodes-scroll { 
       display: flex; 
@@ -485,7 +485,43 @@
         { id: 'episodes-container', carregar: () => carregarFeedSpotify('https://anchor.fm/s/1159ff964/podcast/rss') }
       ];
       if (!('IntersectionObserver' in window)) {
-        feeds.forEach(feed => feed.carregar());
+        const pendentes = new Map();
+        const removerListeners = new Map();
+
+        const carregarUmaVez = elemento => {
+          const carregar = pendentes.get(elemento);
+          if (!carregar) return;
+          pendentes.delete(elemento);
+          removerListeners.get(elemento)?.();
+          removerListeners.delete(elemento);
+          carregar();
+          if (pendentes.size === 0) window.removeEventListener('scroll', verificarSecoesProximas);
+        };
+
+        const verificarSecoesProximas = () => {
+          pendentes.forEach((carregar, elemento) => {
+            const rect = elemento.getBoundingClientRect();
+            if (rect.top <= window.innerHeight + 300 && rect.bottom >= -300) carregarUmaVez(elemento);
+          });
+        };
+
+        feeds.forEach(feed => {
+          const elemento = document.getElementById(feed.id);
+          if (!elemento) return;
+          const secao = elemento.closest('section') || elemento;
+          const ativar = () => carregarUmaVez(elemento);
+          pendentes.set(elemento, feed.carregar);
+          secao.addEventListener('pointerenter', ativar);
+          secao.addEventListener('focusin', ativar);
+          secao.addEventListener('touchstart', ativar, { passive: true });
+          removerListeners.set(elemento, () => {
+            secao.removeEventListener('pointerenter', ativar);
+            secao.removeEventListener('focusin', ativar);
+            secao.removeEventListener('touchstart', ativar);
+          });
+        });
+
+        if (pendentes.size) window.addEventListener('scroll', verificarSecoesProximas, { passive: true });
         return;
       }
       const feedsPorElemento = new Map(feeds.map(feed => [document.getElementById(feed.id), feed.carregar]));

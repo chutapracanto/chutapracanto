@@ -351,7 +351,6 @@
 
       height: 100%;
 
-      aspect-ratio: 11 / 7;
 
       overflow: hidden;
 
@@ -577,9 +576,6 @@
 
       }
 
-      .news-list-img {
-        aspect-ratio: 1;
-      }
 
       .news-list-content {
 
@@ -755,7 +751,7 @@
 
       <button class="page-btn" id="prevBtn" onclick="mudarPagina(-1)"><i class="fa-solid fa-arrow-left"></i> Anterior</button>
 
-      <span id="pageIndicator" aria-live="polite" aria-atomic="true">Página 1 de 1</span>
+      <span id="pageIndicator">Página 1 de 1</span>
 
       <button class="page-btn" id="nextBtn" onclick="mudarPagina(1)">Seguinte <i class="fa-solid fa-arrow-right"></i></button>
 
@@ -856,6 +852,7 @@
     let paginaAtual = 1;
 
     const itensPorPagina = 6;
+    let timerAnuncioPesquisa = null;
 
 
 
@@ -923,7 +920,21 @@
       }
     }
 
-    function renderizarPagina() {
+    function atualizarAnuncioResultados() {
+      const resultsStatus = document.getElementById('news-results-status');
+      if (!resultsStatus) return;
+      if (noticiasFiltradas.length === 0) {
+        resultsStatus.textContent = 'Nenhuma notícia encontrada.';
+        return;
+      }
+      const totalPaginas = Math.ceil(noticiasFiltradas.length / itensPorPagina);
+      const pagina = Math.min(paginaAtual, totalPaginas);
+      const inicio = (pagina - 1) * itensPorPagina;
+      const quantidade = Math.min(itensPorPagina, noticiasFiltradas.length - inicio);
+      resultsStatus.textContent = `${quantidade} notícias nesta página. Página ${pagina} de ${totalPaginas}.`;
+    }
+
+    function renderizarPagina(anunciarResultados = true) {
 
       const container = document.getElementById('noticias-list');
 
@@ -937,8 +948,7 @@
 
       if (noticiasFiltradas.length === 0) {
 
-        const resultsStatus = document.getElementById('news-results-status');
-        if (resultsStatus) resultsStatus.textContent = 'Nenhuma notícia encontrada.';
+        if (anunciarResultados) atualizarAnuncioResultados();
         container.innerHTML = '<p style="color: var(--text-gray); text-align: center; padding: 2.5rem 0;">Nenhuma notícia encontrada.</p>';
 
         if (paginationControls) paginationControls.style.display = 'none';
@@ -966,8 +976,7 @@
       const fim = inicio + itensPorPagina;
 
       const paginaItens = noticiasFiltradas.slice(inicio, fim);
-      const resultsStatus = document.getElementById('news-results-status');
-      if (resultsStatus) resultsStatus.textContent = `${paginaItens.length} notícias nesta página. Página ${paginaAtual} de ${totalPaginas}.`;
+      if (anunciarResultados) atualizarAnuncioResultados();
 
 
 
@@ -1031,6 +1040,7 @@
 
     function mudarPagina(direcao) {
 
+      clearTimeout(timerAnuncioPesquisa);
       paginaAtual += direcao;
 
       renderizarPagina();
@@ -1068,6 +1078,7 @@
 
     function filtrarNoticias(categoria, btnElement) {
 
+      clearTimeout(timerAnuncioPesquisa);
       filtroAtual = categoria;
 
       paginaAtual = 1;
@@ -1106,16 +1117,16 @@
 
 
     function pesquisarNoticias() {
-
       paginaAtual = 1;
-
-      aplicarFiltros();
-
+      aplicarFiltros(false);
+      clearTimeout(timerAnuncioPesquisa);
+      timerAnuncioPesquisa = setTimeout(() => {
+        timerAnuncioPesquisa = null;
+        atualizarAnuncioResultados();
+      }, 500);
     }
 
-
-
-    function aplicarFiltros() {
+    function aplicarFiltros(anunciarResultados = true) {
 
       const termo = document.getElementById('searchInput').value.toLowerCase().trim();
 
@@ -1149,11 +1160,9 @@
 
 
 
-      renderizarPagina();
+      renderizarPagina(anunciarResultados);
 
     }
-
-
 
     document.addEventListener('DOMContentLoaded', carregarTodasNoticias);
 
