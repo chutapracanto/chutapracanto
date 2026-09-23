@@ -167,7 +167,8 @@
     <nav aria-label="Navegação principal">
       <ul>
         <li><a href="/">Home</a></li>
-        <li><a id="nav-noticias" href="/noticias" class="active">Notícias</a></li>
+        <li><a id="nav-noticias" href="/noticias" class="active" aria-current="page">Notícias</a></li>
+        <li><a id="nav-opiniao" href="/opiniao">Opinião</a></li>
         <li><a href="/sobre">Sobre Nós</a></li>
         <li><a href="/contacto">Contacto</a></li>
       </ul>
@@ -215,6 +216,7 @@
       <h4>Navegação</h4>
       <a href="/">Home</a>
       <a href="/noticias">Notícias</a>
+      <a href="/opiniao">Opinião</a>
       <a href="/sobre">Sobre Nós</a>
       <a href="/contacto">Contacto</a>
     </div>
@@ -376,7 +378,17 @@
         const backLink = document.getElementById('back-to-section');
         if (backLink) { backLink.href = sectionPath; backLink.textContent = isOpinion ? '← VOLTAR À OPINIÃO' : '← VOLTAR ÀS NOTÍCIAS'; }
         const navNoticias = document.getElementById('nav-noticias');
-        if (navNoticias) navNoticias.classList.toggle('active', !isOpinion);
+        const navOpinion = document.getElementById('nav-opiniao');
+        if (navNoticias) {
+          navNoticias.classList.toggle('active', !isOpinion);
+          if (isOpinion) navNoticias.removeAttribute('aria-current');
+          else navNoticias.setAttribute('aria-current', 'page');
+        }
+        if (navOpinion) {
+          navOpinion.classList.toggle('active', isOpinion);
+          if (isOpinion) navOpinion.setAttribute('aria-current', 'page');
+          else navOpinion.removeAttribute('aria-current');
+        }
         const editorialTypeRecord = Array.isArray(editorialTypes)
           ? editorialTypes.find(item => item.id === editorialType)
           : null;
