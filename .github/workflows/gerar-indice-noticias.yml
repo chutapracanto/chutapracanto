@@ -2,13 +2,6 @@ name: Gerar índice de notícias
 
 on:
   push:
-    branches:
-      - main
-      - fase-2-performance-noticias
-      - fase-0a-foundation
-      - fase-2a-taxonomia-autores
-      - fase-2b-news-opinion
-      - corrigir-ordem-noticias-taxonomia
     paths:
       - "content/noticias/**"
       - "content/opiniao/**"
