@@ -97,11 +97,6 @@
   form.addEventListener('submit', async event => {
     event.preventDefault();
     if (!form.reportValidity()) return;
-    if (form.action.endsWith('/dc931faa14cbc4ca5cfe6f55ade00db1')) {
-      status.textContent = 'O formulário está a aguardar ativação. Tenta novamente mais tarde.';
-      return;
-    }
-
     replyToField.value = emailField.value.trim();
     status.textContent = 'A enviar mensagem…';
     submitButton.disabled = true;
