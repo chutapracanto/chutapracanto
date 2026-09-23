@@ -1052,7 +1052,7 @@
             <h2 style="margin-bottom:0;">Pesquisar imagem</h2>
             <button type="button" class="secondary-btn" onclick="fecharPesquisaImagens()">Fechar</button>
         </div>
-        <div class="image-picker-note">Pesquisa no Openverse, um índice de obras com licença Creative Commons ou domínio público. Confirma sempre a licença da imagem escolhida antes de publicar. A imagem é usada por URL externo e não é copiada para o Chuta Pra Canto.</div>
+        <div class="image-picker-note">Pesquisa no Openverse e Wikimedia Commons por imagens com licença permitida ou domínio público. Confirma sempre a licença da imagem escolhida antes de publicar. A imagem é usada por URL externo e não é copiada para o Chuta Pra Canto.</div>
         <div class="image-search-row">
             <input type="text" id="image-search-query" placeholder="Ex.: Cristiano Ronaldo, FC Porto, futebol português..." onkeydown="if(event.key==='Enter') pesquisarImagens()">
             <button type="button" class="main-btn" onclick="pesquisarImagens()">Pesquisar</button>
@@ -3021,39 +3021,225 @@ async function pesquisarImagens() {
     const query = document.getElementById("image-search-query").value.trim();
     const status = document.getElementById("image-search-status");
     const results = document.getElementById("image-results");
-    if (!query) { status.textContent = "Escreve o que procuras."; status.classList.remove("hidden"); results.replaceChildren(); return; }
-    status.textContent = "A pesquisar imagens...";
+
+    if (!query) {
+        status.textContent = "Escreve o que procuras.";
+        status.classList.remove("hidden");
+        results.replaceChildren();
+        return;
+    }
+
+    status.textContent = "A pesquisar em várias fontes...";
     status.classList.remove("hidden");
     results.replaceChildren();
+
+    const anoAtual = String(new Date().getFullYear());
+    const consultas = [query];
+    if (!/\b20\d{2}\b/.test(query)) {
+        consultas.push(query + " " + anoAtual);
+    }
+
     try {
-        const params = new URLSearchParams({q: query, page_size: "20", license: "cc0,by,by-sa", mature: "false"});
-        const response = await fetch("https://api.openverse.org/v1/images/?" + params.toString());
-        if (!response.ok) throw new Error("Não foi possível pesquisar imagens.");
-        const data = await response.json();
-        const items = Array.isArray(data.results) ? data.results : [];
-        if (!items.length) { status.textContent = "Não foram encontradas imagens com licença aberta para esta pesquisa."; return; }
-        status.classList.add("hidden");
+        const openverseRequests = consultas.map(async (consulta) => {
+            const params = new URLSearchParams({
+                q: consulta,
+                page_size: "20",
+                license: "cc0,by,by-sa",
+                mature: "false"
+            });
+            const response = await fetch(
+                "https://api.openverse.org/v1/images/?" + params.toString()
+            );
+            if (!response.ok) return [];
+            const data = await response.json();
+            return Array.isArray(data.results)
+                ? data.results.map(item => ({
+                    ...item,
+                    _sourceLabel: "Openverse",
+                    _sourceUrl: item.foreign_landing_url || item.url || ""
+                }))
+                : [];
+        });
+
+        const wikimediaRequests = consultas.map(async (consulta) => {
+            const params = new URLSearchParams({
+                action: "query",
+                generator: "search",
+                gsrsearch: consulta,
+                gsrnamespace: "6",
+                gsrlimit: "30",
+                prop: "imageinfo",
+                iiprop: "url|thumburl|mime|extmetadata",
+                iiurlwidth: "500",
+                iiextmetadatafilter: "LicenseShortName|LicenseUrl|Artist|Credit|Attribution",
+                format: "json",
+                origin: "*"
+            });
+
+            const response = await fetch(
+                "https://commons.wikimedia.org/w/api.php?" + params.toString()
+            );
+
+            if (!response.ok) return [];
+
+            const data = await response.json();
+            const pages = data?.query?.pages
+                ? Object.values(data.query.pages)
+                : [];
+
+            return pages
+                .map(page => {
+                    const info = page?.imageinfo?.[0];
+                    const meta = info?.extmetadata || {};
+                    const license = meta.LicenseShortName?.value || "";
+                    const licenseNormalizada = String(license).toLowerCase();
+
+                    const reutilizavel =
+                        /^(?:public domain(?: mark(?: 1\.0)?)?|cc0(?: \d+(?:\.\d+)?)?|cc by(?:-sa)?(?: \d+(?:\.\d+)?)?)$/i.test(licenseNormalizada);
+
+                    if (!reutilizavel || !info?.url) return null;
+
+                    const clean = (value) =>
+                        String(value || "")
+                            .replace(/<[^>]*>/g, " ")
+                            .replace(/&nbsp;/gi, " ")
+                            .replace(/\s+/g, " ")
+                            .trim();
+
+                    const creator =
+                        clean(meta.Attribution?.value) ||
+                        clean(meta.Artist?.value) ||
+                        clean(meta.Credit?.value);
+
+                    return {
+                        url: info.url,
+                        thumbnail: info.thumburl || info.url,
+                        title: String(page.title || "").replace(/^File:/i, ""),
+                        creator,
+                        license: license || "Licença não indicada",
+                        source: "Wikimedia Commons",
+                        _sourceLabel: "Wikimedia Commons",
+                        _sourceUrl: info.descriptionurl || (
+                            "https://commons.wikimedia.org/wiki/" +
+                            encodeURIComponent(page.title || "")
+                        )
+                    };
+                })
+                .filter(Boolean);
+        });
+
+        const grupos = await Promise.all([
+            ...openverseRequests,
+            ...wikimediaRequests
+        ]);
+
+        const items = [];
+        const vistos = new Set();
+
+        for (const grupo of grupos) {
+            for (const item of grupo) {
+                const imageUrl = item?.url || "";
+                if (!/^https?:\/\//i.test(imageUrl) || vistos.has(imageUrl)) {
+                    continue;
+                }
+                vistos.add(imageUrl);
+                items.push(item);
+            }
+        }
+
+        if (!items.length) {
+            status.textContent =
+                "Não foram encontradas imagens reutilizáveis para esta pesquisa. Tenta acrescentar o clube, competição ou o ano.";
+            return;
+        }
+
+        status.textContent =
+            items.length +
+            " imagens encontradas em Openverse e Wikimedia Commons.";
+        status.classList.remove("hidden");
+
         const fragment = document.createDocumentFragment();
+
         items.forEach(item => {
             const imageUrl = item.url || "";
             const thumbnail = item.thumbnail || imageUrl;
+
             if (!/^https?:\/\//i.test(imageUrl)) return;
+
             const button = document.createElement("button");
             button.type = "button";
             button.className = "image-result";
-            button.addEventListener("click", () => selecionarImagemExterna(item));
+            button.addEventListener(
+                "click",
+                () => selecionarImagemExterna(item)
+            );
+
             const img = document.createElement("img");
-            img.src = thumbnail; img.alt = ""; img.loading = "lazy"; img.referrerPolicy = "no-referrer";
-            const info = document.createElement("div"); info.className = "image-result-info";
-            const title = document.createElement("div"); title.className = "image-result-title"; title.textContent = item.title || "Imagem sem título";
-            const license = document.createElement("div"); license.className = "image-result-license";
-            license.textContent = [(item.license ? String(item.license).toUpperCase() : "Licença não indicada"), item.creator ? " · " + item.creator : "", item.source ? " · " + item.source : ""].join("");
-            info.append(title, license); button.append(img, info); fragment.appendChild(button);
+            img.src = thumbnail;
+            img.alt = "";
+            img.dataset.fallback = imageUrl;
+            img.addEventListener("error", function() {
+                if (this.dataset.fallback && this.src !== this.dataset.fallback) {
+                    const fallback = this.dataset.fallback;
+                    this.dataset.fallback = "";
+                    this.src = fallback;
+                    return;
+                }
+                button.remove();
+            });
+            img.loading = "lazy";
+            img.referrerPolicy = "no-referrer";
+
+            const info = document.createElement("div");
+            info.className = "image-result-info";
+
+            const title = document.createElement("div");
+            title.className = "image-result-title";
+            title.textContent =
+                item.title || "Imagem sem título";
+
+            const license = document.createElement("div");
+            license.className = "image-result-license";
+            license.textContent = [
+                item.license
+                    ? String(item.license).toUpperCase()
+                    : "LICENÇA NÃO INDICADA",
+                item.creator
+                    ? " · " + item.creator
+                    : "",
+                item._sourceLabel
+                    ? " · " + item._sourceLabel
+                    : ""
+            ].join("");
+
+            const sourceLink = document.createElement("a");
+            sourceLink.href = item._sourceUrl || imageUrl;
+            sourceLink.target = "_blank";
+            sourceLink.rel = "noopener noreferrer";
+            sourceLink.textContent = "Ver fonte";
+            sourceLink.style.display = "inline-block";
+            sourceLink.style.marginTop = "4px";
+            sourceLink.style.fontWeight = "700";
+            sourceLink.addEventListener("click", event => {
+                event.stopPropagation();
+            });
+
+            info.append(title, license, sourceLink);
+            button.append(img, info);
+            fragment.appendChild(button);
         });
+
         results.replaceChildren(fragment);
-        if (!results.children.length) { status.textContent = "Os resultados não tinham URLs de imagem utilizáveis."; status.classList.remove("hidden"); }
+
+        if (!results.children.length) {
+            status.textContent =
+                "Os resultados não tinham URLs de imagem utilizáveis.";
+        }
+
     } catch (error) {
-        status.textContent = error?.message || "Não foi possível pesquisar imagens.";
+        status.textContent =
+            error?.message ||
+            "Não foi possível pesquisar imagens.";
         status.classList.remove("hidden");
     }
 }
