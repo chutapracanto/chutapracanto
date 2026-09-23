@@ -490,7 +490,9 @@
         const shareBox = document.getElementById('share-box');
         if (shareBox) shareBox.style.display = 'block';
       } catch (error) {
-        console.error('Erro ao carregar notícia:', error);
+        if (error?.message !== 'Artigo não encontrado') {
+          console.error('Erro ao carregar notícia:', error);
+        }
         container.textContent = 'Não foi possível carregar esta notícia. Volta à página de Notícias e tenta outro artigo.';
       }
     }
