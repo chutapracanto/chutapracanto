@@ -538,7 +538,7 @@
           currentObserver.unobserve(entry.target);
           feedsPorElemento.get(entry.target)?.();
         });
-      }, { rootMargin: '300px 0px' });
+      }, { rootMargin: '0px 0px' });
       feedsPorElemento.forEach((carregar, elemento) => {
         if (elemento) observer.observe(elemento);
       });
