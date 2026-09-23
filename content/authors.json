@@ -1,0 +1,22 @@
+[
+  {
+    "id": "rute-costa",
+    "name": "Rute Costa",
+    "type": "Person",
+    "aliases": []
+  },
+  {
+    "id": "pedro-soares",
+    "name": "Pedro Soares",
+    "type": "Person",
+    "aliases": []
+  },
+  {
+    "id": "chuta-pra-canto",
+    "name": "Chuta Pra Canto",
+    "type": "Organization",
+    "aliases": [
+      "ChutaPraCanto"
+    ]
+  }
+]

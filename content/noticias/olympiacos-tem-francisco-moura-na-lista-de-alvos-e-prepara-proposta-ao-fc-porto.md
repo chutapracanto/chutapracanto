@@ -2,7 +2,7 @@
 title: "Olympiacos tem Francisco Moura na lista de alvos e prepara proposta ao FC Porto"
 slug: "olympiacos-tem-francisco-moura-na-lista-de-alvos-e-prepara-proposta-ao-fc-porto"
 subtitle: "Clube grego elege o lateral-esquerdo como prioridade e planeia avançar com uma oferta inicial de 7 milhões de euros."
-category: "FCPORTO"
+category: "FC Porto"
 published: "2026-08-06T00:00:00.000Z"
 author: "ChutaPraCanto"
 image: https://framerusercontent.com/images/uwSlf1LWqZkieChWX58NsQbxQ.jpg

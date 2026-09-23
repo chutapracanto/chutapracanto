@@ -6,8 +6,12 @@ on:
       - main
       - fase-2-performance-noticias
       - fase-0a-foundation
+      - fase-2a-taxonomia-autores
     paths:
       - "content/noticias/**"
+      - "content/taxonomia.json"
+      - "content/authors.json"
+      - "content/editorial-types.json"
       - ".github/workflows/gerar-indice-noticias.yml"
 
 permissions:
@@ -26,10 +30,33 @@ jobs:
         run: |
           import json
           import re
+          import unicodedata
           from pathlib import Path
 
           root = Path("content/noticias")
           output = Path("content/noticias-index.json")
+          taxonomy = json.loads(Path("content/taxonomia.json").read_text(encoding="utf-8"))
+          authors = json.loads(Path("content/authors.json").read_text(encoding="utf-8"))
+          editorial_types = {
+              item["id"] for item in json.loads(
+                  Path("content/editorial-types.json").read_text(encoding="utf-8")
+              )
+          }
+
+          def normalize_key(value):
+              value = unicodedata.normalize("NFKD", str(value or ""))
+              value = "".join(char for char in value if not unicodedata.combining(char))
+              return "".join(char for char in value.casefold() if char.isalnum())
+
+          categories_by_alias = {}
+          for item in taxonomy["categories"]:
+              for alias in [item["label"], *item.get("aliases", [])]:
+                  categories_by_alias[normalize_key(alias)] = item
+
+          authors_by_alias = {}
+          for item in authors:
+              for alias in [item["name"], *item.get("aliases", [])]:
+                  authors_by_alias[normalize_key(alias)] = item
 
           def parse_scalar(value):
               value = value.strip()
@@ -74,28 +101,46 @@ jobs:
                   frontmatter,
                   ["subtitle", "subtitulo", "descricao", "resumo"]
               )
-              category = field(
+              category_raw = field(
                   frontmatter,
                   ["category", "categoria", "tag"]
               ) or "Geral"
+              category_meta = categories_by_alias.get(normalize_key(category_raw))
+              category = category_meta["label"] if category_meta else category_raw
+              editorial_type = field(frontmatter, ["type"]) or "news"
+              if editorial_type not in editorial_types:
+                  raise ValueError(f"Tipo editorial não registado em {path}: {editorial_type}")
+              author_raw = field(frontmatter, ["author", "autor"])
+              author_meta = authors_by_alias.get(normalize_key(author_raw))
+              author = author_meta["name"] if author_meta else author_raw
               published = field(
                   frontmatter,
                   ["published", "date", "dataNoticia", "data"]
               )
+              modified = field(frontmatter, ["modified", "dateModified", "updated"])
               image = field(
                   frontmatter,
                   ["image", "imagem", "featured_image", "featuredImage"]
               )
 
-              noticias.append({
+              noticia = {
                   "slug": slug,
                   "path": str(path).replace("\\", "/"),
+                  "type": editorial_type,
                   "title": title,
                   "subtitle": subtitle,
                   "category": category,
+                  "categoryId": category_meta["id"] if category_meta else None,
+                  "categoryKind": category_meta["kind"] if category_meta else "unclassified",
+                  "author": author,
+                  "authorId": author_meta["id"] if author_meta else None,
+                  "authorType": author_meta["type"] if author_meta else None,
                   "published": published,
                   "image": image
-              })
+              }
+              if modified:
+                  noticia["modified"] = modified
+              noticias.append(noticia)
 
           noticias.sort(
               key=lambda item: item.get("published") or "",

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "news",
+    "label": "Notícia"
+  },
+  {
+    "id": "opinion",
+    "label": "Opinião"
+  },
+  {
+    "id": "video",
+    "label": "Vídeo"
+  },
+  {
+    "id": "podcast",
+    "label": "Podcast"
+  }
+]

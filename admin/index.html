@@ -1173,6 +1173,7 @@ let paginaAtual = 1;
 
 let noticiaEmEdicao = null;
 let quill = null;
+let tipoEditorialEmEdicao = "news";
 
 let noticiaParaPartilhar = {
     titulo: "",
@@ -2411,6 +2412,10 @@ function preencherFormulario(
     const fields =
         parsed.fields;
 
+    tipoEditorialEmEdicao =
+        obterCampo(fields, "type") ||
+        "news";
+
     const titulo =
         obterCampo(
             fields,
@@ -3098,6 +3103,7 @@ async function guardarNoticia() {
                 data,
                 autor,
                 finalImageUrl,
+                tipoEditorialEmEdicao,
                 markdownBody
             );
 
@@ -3223,6 +3229,7 @@ function construirMarkdown(
     data,
     autor,
     imagem,
+    tipoEditorial,
     body
 ) {
 
@@ -3230,6 +3237,7 @@ function construirMarkdown(
 title: ${yamlQuote(titulo)}
 subtitulo: ${yamlQuote(subtitulo)}
 categoria: ${yamlQuote(categoria)}
+type: ${yamlQuote(tipoEditorial)}
 date: ${yamlQuote(data)}
 author: ${yamlQuote(autor)}
 imagem: ${yamlQuote(imagem)}
@@ -4463,6 +4471,8 @@ function voltarLista() {
 
 
 function limparFormulario() {
+
+    tipoEditorialEmEdicao = "news";
 
     document
         .getElementById("noticia-titulo")
