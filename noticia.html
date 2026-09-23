@@ -78,6 +78,30 @@
 
     }
 
+    .related-news {
+
+      margin-top: 3rem;
+
+    }
+
+    .related-news h2 {
+
+      margin: 0 0 1.25rem;
+
+      color: var(--text-white);
+
+      font-family: var(--font-title);
+
+      font-size: 1.5rem;
+
+    }
+
+    .related-news-card.no-image {
+
+      grid-template-columns: 1fr;
+
+    }
+
   </style>
 
 </head>
@@ -147,6 +171,8 @@
       </button>
 
     </div>
+
+    <section id="related-news" class="related-news" aria-labelledby="related-news-title" hidden></section>
 
   </div>
 
@@ -342,6 +368,8 @@
 
         `;
 
+        await mostrarNoticiasRelacionadas(slug);
+
         const shareBox = document.getElementById('share-box');
 
         if (shareBox) shareBox.style.display = "block";
@@ -363,6 +391,138 @@
           </div>
 
         `;
+
+      }
+
+    }
+
+    async function mostrarNoticiasRelacionadas(currentSlug) {
+
+      const section = document.getElementById('related-news');
+
+      try {
+
+        const response = await fetch('/content/noticias-index.json');
+
+        if (!response.ok) return;
+
+        const noticias = await response.json();
+
+        if (!Array.isArray(noticias)) return;
+
+        const noticiaAtual = noticias.find(noticia => noticia.slug === currentSlug);
+
+        if (!noticiaAtual) return;
+
+        const hoje = new Intl.DateTimeFormat('en-CA', {
+
+          timeZone: 'Europe/Lisbon',
+
+          year: 'numeric',
+
+          month: '2-digit',
+
+          day: '2-digit'
+
+        }).format(new Date());
+
+        const dataPublicacao = noticia => String(noticia.published || '').slice(0, 10);
+
+        const recentes = noticias.filter(noticia => {
+
+          if (!noticia.slug || noticia.slug === currentSlug) return false;
+
+          const publicadaEm = dataPublicacao(noticia);
+
+          return /^\\d{4}-\\d{2}-\\d{2}$/.test(publicadaEm) && publicadaEm <= hoje;
+
+        }).sort((a, b) => dataPublicacao(b).localeCompare(dataPublicacao(a)));
+
+        const mesmaCategoria = recentes.filter(noticia => noticia.category === noticiaAtual.category);
+
+        const outrasCategorias = recentes.filter(noticia => noticia.category !== noticiaAtual.category);
+
+        const relacionadas = [...mesmaCategoria, ...outrasCategorias].slice(0, 3);
+
+        if (relacionadas.length !== 3) return;
+
+        const heading = document.createElement('h2');
+
+        heading.id = 'related-news-title';
+
+        heading.textContent = 'Continua a ler';
+
+        const cards = document.createElement('div');
+
+        cards.className = 'secondary-featured-list';
+
+        relacionadas.forEach(noticia => {
+
+          const card = document.createElement('a');
+
+          card.className = 'sub-featured-card related-news-card';
+
+          card.href = 'noticia.html?slug=' + encodeURIComponent(noticia.slug);
+
+          const imagem = noticia.image ? document.createElement('div') : null;
+
+          if (imagem) {
+
+            imagem.className = 'sub-featured-img';
+
+            const elementoImagem = document.createElement('img');
+
+            elementoImagem.src = new URL(noticia.image, window.location.origin).href;
+
+            elementoImagem.alt = '';
+
+            elementoImagem.loading = 'lazy';
+
+            imagem.appendChild(elementoImagem);
+
+            card.appendChild(imagem);
+
+          } else {
+
+            card.classList.add('no-image');
+
+          }
+
+          const conteudo = document.createElement('div');
+
+          conteudo.className = 'sub-featured-content';
+
+          const categoria = document.createElement('span');
+
+          categoria.className = 'tag';
+
+          categoria.textContent = noticia.category || 'Geral';
+
+          const titulo = document.createElement('h3');
+
+          titulo.textContent = noticia.title || 'Notícia';
+
+          const data = document.createElement('p');
+
+          const publicadaEm = dataPublicacao(noticia);
+
+          data.textContent = publicadaEm ? new Intl.DateTimeFormat('pt-PT').format(new Date(publicadaEm + 'T12:00:00')) : '';
+
+          conteudo.append(categoria, titulo, data);
+
+          card.appendChild(conteudo);
+
+          cards.appendChild(card);
+
+        });
+
+        section.replaceChildren(heading, cards);
+
+        section.hidden = false;
+
+      } catch (error) {
+
+        console.error('Não foi possível carregar notícias relacionadas:', error);
 
       }
 
