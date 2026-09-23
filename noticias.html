@@ -879,7 +879,9 @@
           throw new Error('Índice de notícias inválido.');
         }
 
-        todasAsNoticias = data.map(item => {
+        todasAsNoticias = data
+          .filter(item => (item.type || 'news') === 'news')
+          .map(item => {
           const dateRaw = item.published || '';
           let dateFormatted = '';
 

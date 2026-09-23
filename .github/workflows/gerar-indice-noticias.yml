@@ -7,6 +7,7 @@ on:
       - fase-2-performance-noticias
       - fase-0a-foundation
       - fase-2a-taxonomia-autores
+      - fase-2b-news-opinion
     paths:
       - "content/noticias/**"
       - "content/taxonomia.json"
