@@ -74,7 +74,6 @@
     .article-heading h1 {
       color: #fff;
       font-family: var(--font-title);
-      font-size: clamp(1.8rem, 4vw, 2.6rem);
       line-height: 1.2;
       margin: calc(.6rem - (var(--heading-progress) * .2rem)) 0;
       transform-origin: left center;
@@ -520,6 +519,17 @@
         if (!Array.isArray(index)) throw new Error('Índice de notícias inválido');
         const entry = index.find(item => item.slug === slug) || index.find(item => String(item.slug || '').toLowerCase() === slug.toLowerCase());
         if (!entry || typeof entry.path !== 'string' || !/^content\/(noticias|opiniao)\/[^/]+\.md$/.test(entry.path) || entry.path.includes('..')) throw new Error('Artigo não encontrado');
+        if (entry.image) {
+          const preloadUrl = safeArticleImage(entry.image);
+          if (preloadUrl && !document.querySelector('link[rel="preload"][as="image"]')) {
+            const preload = document.createElement('link');
+            preload.rel = 'preload';
+            preload.as = 'image';
+            preload.href = preloadUrl;
+            preload.fetchPriority = 'high';
+            document.head.appendChild(preload);
+          }
+        }
         const [authors, editorialTypes] = await Promise.all([
           fetch('/content/authors.json').then(response => response.ok ? response.json() : []).catch(() => []),
           fetch('/content/editorial-types.json').then(response => response.ok ? response.json() : []).catch(() => [])
@@ -652,6 +662,7 @@
           img.src = safeArticleImage(imageValue);
           img.alt = title;
           img.loading = 'eager';
+          img.fetchPriority = 'high';
           img.decoding = 'async';
           img.onerror = () => { img.onerror = null; img.src = '/images/logo.png'; };
           figure.appendChild(img);
