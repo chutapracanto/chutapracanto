@@ -30,6 +30,15 @@
 .legal-page .eyebrow{color:var(--neon-green);font-weight:700;letter-spacing:.08em;text-transform:uppercase}
 .legal-page :focus-visible{outline:3px solid var(--neon-green);outline-offset:3px}
 @media(max-width:640px){.legal-page{margin:1.5rem 1rem 3rem}.legal-page h2{font-size:1.2rem}}
+.contact-form{display:grid;gap:1rem;margin-top:1.25rem}
+.contact-field{display:grid;gap:.4rem}
+.contact-field label{color:var(--text-white);font-weight:600}
+.contact-field input,.contact-field textarea{width:100%;box-sizing:border-box;padding:.75rem .85rem;border:1px solid var(--border-color);border-radius:8px;background:var(--card-bg);color:var(--text-white);font:inherit}
+.contact-field input:focus-visible,.contact-field textarea:focus-visible,.contact-form button:focus-visible{outline:3px solid var(--neon-green);outline-offset:3px}
+.contact-form button{justify-self:start;padding:.7rem 1.1rem;border:1px solid var(--neon-green);border-radius:8px;background:var(--neon-green);color:#000;font:inherit;font-weight:700;cursor:pointer}
+.contact-form button:disabled{opacity:.65;cursor:wait}
+.contact-status{min-height:1.5em;margin:0}
+.contact-honeypot{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
 </style>
 </head>
 <body>
@@ -51,12 +60,64 @@
 <li><a href="https://tiktok.com/@chutapracanto" target="_blank" rel="noopener noreferrer">TikTok — @chutapracanto</a></li>
 <li><a href="https://youtube.com/@chutapracanto" target="_blank" rel="noopener noreferrer">YouTube — Chuta Pra Canto</a></li>
 </ul>
-<p>Ao pedir uma correção, indica, por favor, o URL do artigo e a informação a rever. Não publicamos aqui um endereço de email porque não existe um contacto de email público identificado no site.</p>
+<p>Ao pedir uma correção, indica, por favor, o URL do artigo e a informação a rever.</p>
+<h2>Envia uma mensagem</h2>
+<p>Usa o formulário para sugestões editoriais, correções ou propostas de parceria. Evita incluir informação sensível que não seja necessária para responder ao teu contacto.</p>
+<form id="contact-form" class="contact-form" method="POST" action="https://formsubmit.co/FORM_SUBMIT_TOKEN_PENDING">
+  <div class="contact-field"><label for="contact-name">Nome</label><input id="contact-name" name="name" type="text" autocomplete="name" maxlength="100" required></div>
+  <div class="contact-field"><label for="contact-email">Email</label><input id="contact-email" name="email" type="email" autocomplete="email" maxlength="254" required></div>
+  <div class="contact-field"><label for="contact-message">Mensagem</label><textarea id="contact-message" name="message" rows="6" minlength="10" maxlength="5000" required></textarea></div>
+  <input type="hidden" name="_subject" value="Mensagem através do site Chuta Pra Canto">
+  <input type="hidden" name="_replyto" id="contact-reply-to" value="">
+  <div class="contact-honeypot" aria-hidden="true"><label for="contact-company">Deixa este campo vazio</label><input id="contact-company" name="_honey" type="text" tabindex="-1" autocomplete="off"></div>
+  <button type="submit">Enviar mensagem</button>
+  <p id="contact-status" class="contact-status" role="status" aria-live="polite" aria-atomic="true"></p>
+</form>
 </article></main>
+<script>
+(() => {
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('contact-status');
+  const emailField = document.getElementById('contact-email');
+  const replyToField = document.getElementById('contact-reply-to');
+  const submitButton = form?.querySelector('button[type="submit"]');
+  if (!form || !status || !emailField || !replyToField || !submitButton) return;
+
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!form.reportValidity()) return;
+    if (form.action.endsWith('/FORM_SUBMIT_TOKEN_PENDING')) {
+      status.textContent = 'O formulário está a aguardar ativação. Tenta novamente mais tarde.';
+      return;
+    }
+
+    replyToField.value = emailField.value.trim();
+    status.textContent = 'A enviar mensagem…';
+    submitButton.disabled = true;
+    try {
+      const endpoint = form.action.replace('https://formsubmit.co/', 'https://formsubmit.co/ajax/');
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      });
+      const result = await response.json().catch(() => null);
+      const envioConfirmado = result?.success === true || String(result?.success).toLowerCase() === 'true';
+      if (!response.ok || !envioConfirmado) throw new Error('Falha no envio');
+      form.reset();
+      status.textContent = 'Mensagem enviada. Obrigado pelo contacto.';
+    } catch {
+      status.textContent = 'Não foi possível enviar a mensagem. Tenta novamente mais tarde.';
+    } finally {
+      submitButton.disabled = false;
+    }
+  });
+})();
+</script>
 <footer><div class="footer-container">
 <div class="footer-brand"><img src="/images/logo.png" alt="Chuta Pra Canto" class="footer-logo"><p>Análise tática, debate pós-jogo e opinião sobre futebol.</p></div>
 <div class="footer-links"><h4>Navegação</h4><a href="/">Home</a><a href="/noticias">Notícias</a><a href="/sobre">Sobre Nós</a><a href="/contacto">Contacto</a></div>
 <div class="footer-links"><h4>Informação</h4><a href="/privacidade">Política de Privacidade</a><a href="/termos">Termos e Condições</a></div>
 <div class="footer-socials-col"><h4>Redes sociais</h4><div class="footer-social-links"><a href="https://youtube.com/@chutapracanto" target="_blank" rel="noopener noreferrer" class="social-pill">YouTube</a><a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" rel="noopener noreferrer" class="social-pill">Spotify</a><a href="https://instagram.com/chutapracanto.oficial" target="_blank" rel="noopener noreferrer" class="social-pill">Instagram</a><a href="https://tiktok.com/@chutapracanto" target="_blank" rel="noopener noreferrer" class="social-pill">TikTok</a></div></div>
-</div><div class="footer-bottom"><p>© 2026 Chuta Pra Canto</p></div></footer>
+</div><div class="footer-bottom"><p>© 2026 Chuta Pra Canto. Todos os direitos reservados.</p></div></footer>
 </body></html>
