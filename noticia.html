@@ -491,7 +491,8 @@
           const byline = document.createElement('p');
           byline.className = 'article-byline';
           const dateText = published ? 'Publicado em ' + new Date(published).toLocaleDateString('pt-PT') : '';
-          const authorText = author ? 'Por ' + author : '';
+          const authorRole = authorRecord?.role ? ' (' + authorRecord.role + ')' : '';
+          const authorText = author ? 'Por ' + author + authorRole : '';
           const modifiedText = modified ? 'Atualizado em ' + new Date(modified).toLocaleDateString('pt-PT') : '';
           byline.textContent = [dateText, authorText, modifiedText].filter(Boolean).join(' · ');
           header.appendChild(byline);
