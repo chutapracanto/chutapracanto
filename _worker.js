@@ -633,7 +633,7 @@ async function obterDadosPartilha(env, slug, origin) {
     return null;
   }
 
-  const path =
+  let path =
     `content/noticias/${slug}.md`;
 
   if (!isAllowedNewsPath(path)) {
@@ -651,13 +651,24 @@ async function obterDadosPartilha(env, slug, origin) {
       headers.Authorization = `Bearer ${env.GITHUB_TOKEN}`;
     }
 
-    const githubResponse = await fetch(
+    let githubResponse = await fetch(
       `${GITHUB_API}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}?ref=${encodeURIComponent(obterBranchGithub(env))}`,
       {
         method: "GET",
         headers
       }
     );
+
+    if (!githubResponse.ok) {
+      path = `content/opiniao/${slug}.md`;
+      githubResponse = await fetch(
+        `${GITHUB_API}/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${path}?ref=${encodeURIComponent(obterBranchGithub(env))}`,
+        {
+          method: "GET",
+          headers
+        }
+      );
+    }
 
     if (!githubResponse.ok) {
       return null;
@@ -674,6 +685,8 @@ async function obterDadosPartilha(env, slug, origin) {
     if (!markdown) {
       return null;
     }
+
+    const editorialType = extrairCampoFrontmatter(markdown, "type") || "news";
 
     const title =
       extrairCampoFrontmatter(
@@ -738,6 +751,7 @@ async function obterDadosPartilha(env, slug, origin) {
 
     return {
       title,
+      editorialType,
       descricao,
       imagemUrl,
       noticiaUrl,
@@ -852,7 +866,7 @@ async function prepararPaginaParaPartilha(
             }
             const schema = {
               "@context": "https://schema.org",
-              "@type": "NewsArticle",
+              "@type": dados.editorialType === "opinion" ? "Article" : "NewsArticle",
               headline: dados.title,
               description: dados.descricao || undefined,
               image: dados.imagemUrl,
@@ -871,7 +885,7 @@ async function prepararPaginaParaPartilha(
               "@type": "BreadcrumbList",
               itemListElement: [
                 { "@type": "ListItem", position: 1, name: "Home", item: "https://chutapracanto.pages.dev/" },
-                { "@type": "ListItem", position: 2, name: "Notícias", item: "https://chutapracanto.pages.dev/noticias" },
+                { "@type": "ListItem", position: 2, name: dados.editorialType === "opinion" ? "Opinião" : "Notícias", item: dados.editorialType === "opinion" ? "https://chutapracanto.pages.dev/opiniao" : "https://chutapracanto.pages.dev/noticias" },
                 { "@type": "ListItem", position: 3, name: dados.title, item: dados.canonicalUrl }
               ]
             };
