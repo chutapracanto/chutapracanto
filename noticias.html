@@ -931,7 +931,8 @@
       const pagina = Math.min(paginaAtual, totalPaginas);
       const inicio = (pagina - 1) * itensPorPagina;
       const quantidade = Math.min(itensPorPagina, noticiasFiltradas.length - inicio);
-      resultsStatus.textContent = `${quantidade} notícias nesta página. Página ${pagina} de ${totalPaginas}.`;
+      const substantivo = quantidade === 1 ? 'notícia' : 'notícias';
+      resultsStatus.textContent = `${quantidade} ${substantivo} nesta página. Página ${pagina} de ${totalPaginas}.`;
     }
 
     function renderizarPagina(anunciarResultados = true) {
