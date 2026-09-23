@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Opinião, análise crítica e debate sobre futebol no Chuta Pra Canto.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <link rel="canonical" href="https://chutapracanto.pages.dev/opiniao">
+  <title>Opinião | Chuta Pra Canto</title>
+  <link rel="icon" type="image/png" href="/images/logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="/style.css">
+  <style>
+    .opinion-intro { margin-bottom: 2rem; }
+    .opinion-intro h1 { font-size: clamp(2rem, 5vw, 3rem); margin-bottom: .75rem; }
+    .opinion-intro p { color: var(--text-gray); max-width: 720px; }
+    .opinion-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }
+    .opinion-card { display: flex; flex-direction: column; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; overflow: hidden; transition: border-color .2s ease, transform .2s ease; }
+    .opinion-card:hover { border-color: var(--neon-green); transform: translateY(-2px); }
+    .opinion-image { aspect-ratio: 16 / 9; background: #101010; overflow: hidden; }
+    .opinion-image img { width: 100%; height: 100%; display: block; object-fit: cover; }
+    .opinion-content { padding: 1.25rem; }
+    .opinion-meta { color: var(--neon-green); font: 700 .75rem var(--font-title); text-transform: uppercase; margin-bottom: .45rem; }
+    .opinion-content h2 { font-size: 1.25rem; line-height: 1.3; margin-bottom: .55rem; }
+    .opinion-content p { color: var(--text-gray); font-size: .9rem; line-height: 1.5; }
+    .opinion-empty { color: var(--text-gray); padding: 2rem 0; }
+    @media (max-width: 700px) { .opinion-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<header class="site-header">
+  <div class="header-container">
+    <a href="/" class="logo-link" aria-label="Chuta Pra Canto — início"><img src="/images/logo.png" alt="Chuta Pra Canto" class="site-logo"></a>
+    <nav aria-label="Navegação principal">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/noticias">Notícias</a></li>
+        <li><a href="/opiniao" class="active" aria-current="page">Opinião</a></li>
+        <li><a href="/sobre">Sobre Nós</a></li>
+        <li><a href="/contacto">Contacto</a></li>
+      </ul>
+    </nav>
+    <div class="header-socials">
+      <a href="https://youtube.com/@chutapracanto" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" rel="noopener noreferrer" aria-label="Spotify"><i class="fa-brands fa-spotify"></i></a>
+      <a href="https://instagram.com/chutapracanto.oficial" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://tiktok.com/@chutapracanto" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+    </div>
+  </div>
+</header>
+<main class="container">
+  <section class="opinion-intro">
+    <h1>Opinião</h1>
+    <p>Análise crítica, leitura tática e debate sobre os principais temas do futebol, com a perspetiva da equipa Chuta Pra Canto.</p>
+  </section>
+  <section aria-labelledby="opinion-title">
+    <h2 id="opinion-title" class="section-title">Últimas opiniões</h2>
+    <div id="opinion-list" class="opinion-grid" aria-live="polite">
+      <p class="opinion-empty">A carregar opiniões...</p>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="footer-container">
+    <div class="footer-brand"><img src="/images/logo.png" alt="Chuta Pra Canto" class="footer-logo"><p>Análise tática, debate pós-jogo e opinião sobre futebol.</p></div>
+    <div class="footer-links"><h4>Navegação</h4><a href="/">Home</a><a href="/noticias">Notícias</a><a href="/opiniao">Opinião</a><a href="/sobre">Sobre Nós</a><a href="/contacto">Contacto</a></div>
+    <div class="footer-links"><h4>Informação</h4><a href="/privacidade">Política de Privacidade</a><a href="/termos">Termos e Condições</a></div>
+    <div class="footer-socials-col"><h4>Redes sociais</h4><div class="footer-social-links">
+      <a href="https://youtube.com/@chutapracanto" target="_blank" rel="noopener noreferrer" class="social-pill"><i class="fa-brands fa-youtube"></i> YouTube</a>
+      <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" rel="noopener noreferrer" class="social-pill"><i class="fa-brands fa-spotify"></i> Spotify</a>
+      <a href="https://instagram.com/chutapracanto.oficial" target="_blank" rel="noopener noreferrer" class="social-pill"><i class="fa-brands fa-instagram"></i> Instagram</a>
+      <a href="https://tiktok.com/@chutapracanto" target="_blank" rel="noopener noreferrer" class="social-pill"><i class="fa-brands fa-tiktok"></i> TikTok</a>
+      <a href="https://facebook.com/chutapracanto" target="_blank" rel="noopener noreferrer" class="social-pill"><i class="fa-brands fa-facebook-f"></i> Facebook</a>
+      <a href="https://reddit.com/r/chutapracanto" target="_blank" rel="noopener noreferrer" class="social-pill"><i class="fa-brands fa-reddit-alien"></i> Reddit</a>
+    </div></div>
+  </div>
+  <div class="footer-bottom"><p>© 2026 Chuta Pra Canto. Todos os direitos reservados.</p></div>
+</footer>
+<script>
+function safeUrl(value) {
+  try { const u = new URL(value || "", window.location.origin); return (u.protocol === "https:" || u.origin === window.location.origin) && !u.username && !u.password ? u.href : ""; } catch { return ""; }
+}
+async function carregarOpinioes() {
+  const list = document.getElementById("opinion-list");
+  try {
+    const response = await fetch("/content/noticias-index.json", { cache: "no-store" });
+    if (!response.ok) throw new Error();
+    const data = await response.json();
+    if (!Array.isArray(data)) throw new Error();
+    const opinions = data.filter(item => (item.type || "news") === "opinion").sort((a,b) => Date.parse(b.publishedAt || b.published || "") - Date.parse(a.publishedAt || a.published || ""));
+    list.replaceChildren();
+    if (!opinions.length) {
+      const empty = document.createElement("p"); empty.className = "opinion-empty"; empty.textContent = "Ainda não existem artigos de opinião publicados."; list.appendChild(empty); return;
+    }
+    opinions.forEach(item => {
+      const card = document.createElement("a");
+      card.className = "opinion-card";
+      card.href = "/noticia?slug=" + encodeURIComponent(item.slug || "");
+      const image = document.createElement("div"); image.className = "opinion-image";
+      const img = document.createElement("img"); img.src = safeUrl(item.image) || "/images/logo.png"; img.alt = item.title || "Opinião"; img.loading = "lazy"; img.decoding = "async"; img.onerror = () => { img.onerror = null; img.src = "/images/logo.png"; };
+      image.appendChild(img);
+      const content = document.createElement("div"); content.className = "opinion-content";
+      const meta = document.createElement("div"); meta.className = "opinion-meta"; meta.textContent = item.category || "Opinião";
+      const title = document.createElement("h2"); title.textContent = item.title || "Sem título";
+      const description = document.createElement("p"); description.textContent = item.subtitle || "";
+      content.append(meta, title, description);
+      card.append(image, content); list.appendChild(card);
+    });
+  } catch {
+    list.replaceChildren();
+    const error = document.createElement("p"); error.className = "opinion-empty"; error.textContent = "Não foi possível carregar as opiniões."; list.appendChild(error);
+  }
+}
+document.addEventListener("DOMContentLoaded", carregarOpinioes);
+</script>
+</body>
+</html>
