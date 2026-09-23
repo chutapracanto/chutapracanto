@@ -3069,7 +3069,8 @@ async function pesquisarImagens() {
                 gsrnamespace: "6",
                 gsrlimit: "30",
                 prop: "imageinfo",
-                iiprop: "url|extmetadata",
+                iiprop: "url|thumburl|mime|extmetadata",
+                iiurlwidth: "500",
                 iiextmetadatafilter: "LicenseShortName|LicenseUrl|Artist|Credit|Attribution",
                 format: "json",
                 origin: "*"
@@ -3177,6 +3178,16 @@ async function pesquisarImagens() {
             const img = document.createElement("img");
             img.src = thumbnail;
             img.alt = "";
+            img.dataset.fallback = imageUrl;
+            img.addEventListener("error", function() {
+                if (this.dataset.fallback && this.src !== this.dataset.fallback) {
+                    const fallback = this.dataset.fallback;
+                    this.dataset.fallback = "";
+                    this.src = fallback;
+                    return;
+                }
+                button.remove();
+            });
             img.loading = "lazy";
             img.referrerPolicy = "no-referrer";
 
