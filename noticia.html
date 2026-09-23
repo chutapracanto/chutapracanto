@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="pt">
+<html lang="pt-PT">
 
 <head>
 
@@ -8,7 +8,10 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title id="page-title">ChutaPraCanto | Notícia</title>
+  <title id="page-title">Notícia | Chuta Pra Canto</title>
+  <meta name="description" id="meta-description" content="Notícias e opinião sobre futebol.">
+  <link rel="canonical" id="canonical-url" href="https://chutapracanto.pages.dev/noticia"> 
+  <meta name="robots" content="index,follow,max-image-preview:large">
 
   <link rel="icon" type="image/png" href="images/logo.png">
 
@@ -19,8 +22,11 @@
   <!-- Metadados para redes sociais -->
 
   <meta property="og:type" content="article" />
+  <meta property="article:published_time" id="meta-published" content="" />
+  <meta property="article:modified_time" id="meta-modified" content="" />
 
-  <meta property="og:title" id="meta-title" content="ChutaPraCanto" />
+  <meta property="og:site_name" content="Chuta Pra Canto" />
+  <meta property="og:title" id="meta-title" content="Chuta Pra Canto" />
 
   <meta property="og:description" id="meta-desc" content="Notícias e opinião sobre futebol." />
 
@@ -30,16 +36,26 @@
 
   <meta name="twitter:card" content="summary_large_image" />
 
-  <meta name="twitter:title" content="ChutaPraCanto" />
+  <meta name="twitter:title" id="twitter-title" content="Chuta Pra Canto" />
 
-  <meta name="twitter:description" content="Notícias e opinião sobre futebol." />
+  <meta name="twitter:description" id="twitter-description" content="Notícias e opinião sobre futebol." />
 
-  <meta name="twitter:image" content="https://chutapracanto.pages.dev/images/logo.png" />
+  <meta name="twitter:image" id="twitter-image" content="https://chutapracanto.pages.dev/images/logo.png" />
 
-  <meta name="twitter:url" content="https://chutapracanto.pages.dev/noticia" />
+  <meta name="twitter:url" id="twitter-url" content="https://chutapracanto.pages.dev/noticia" />
+  <script id="article-jsonld" type="application/ld+json">{}</script>
 
   <style>
 
+    .article-breadcrumbs { margin: 0 0 1.25rem; color: var(--text-gray); font-size: .9rem; }
+    .article-breadcrumbs ol { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding: 0; margin: 0; }
+    .article-breadcrumbs li + li::before { content: "›"; margin-right: .5rem; color: var(--neon-green); }
+    .article-breadcrumbs a { color: var(--text-gray); }
+    .article-heading h1 { color: #fff; font-family: var(--font-title); font-size: clamp(1.8rem,4vw,2.6rem); line-height: 1.2; margin: .6rem 0; }
+    .article-summary { color: var(--text-gray); font-size: 1.1rem; line-height: 1.6; }
+    .article-byline { color: #888; font-size: .9rem; }
+    .article-hero-image { margin: 0 0 2rem; }
+    .article-hero-image img { display: block; width: 100%; max-height: 450px; object-fit: cover; object-position: center top; border-radius: 12px; border: 1px solid var(--border-color); }
     .art-body ul {
 
       list-style-type: disc !important;
@@ -279,166 +295,219 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="/vendor/dompurify-3.4.15.min.js"></script>
 
   <script>
 
-    async function loadArticle() {
+    const SITE_CANONICAL_ORIGIN = 'https://chutapracanto.pages.dev';
 
-      const urlParams = new URLSearchParams(window.location.search);
-
-      const slug = urlParams.get('slug');
-
-      if (!slug) {
-
-        document.getElementById('article-content').innerHTML = "<h2 style='color:#fff;'>Notícia não encontrada.</h2><p style='color:var(--text-gray); margin-top:10px;'>O link parece estar incompleto.</p>";
-
-        return;
-
-      }
-
+    function safeContentUrl(value, allowMailto = false) {
+      if (typeof value !== 'string' || !value.trim()) return '';
       try {
-
-        // Tenta primeiro o slug exato do URL
-
-        let res = await fetch(`content/noticias/${slug}.md`);
-
-        // Se falhar, tenta procurar diretamente na API do GitHub para encontrar o ficheiro correto ignorando diferenças de codificação ou maiúsculas/minúsculas
-
-        if (!res.ok) {
-
-          const apiRes = await fetch('https://api.github.com/repos/chutapracanto/chutapracanto/contents/content/noticias');
-
-          if (apiRes.ok) {
-
-            const files = await apiRes.json();
-
-            const matchedFile = files.find(f => f.name.replace('.md', '').toLowerCase() === decodeURIComponent(slug).toLowerCase());
-
-            if (matchedFile) {
-
-              res = await fetch(matchedFile.download_url);
-
-            }
-
-          }
-
-        }
-
-        if (!res.ok) throw new Error("Artigo não existe");
-
-        const text = await res.text();
-
-        const parts = text.split("---");
-
-        if (parts.length < 3) throw new Error("Formato inválido");
-
-        const frontmatter = jsyaml.load(parts[1]);
-
-        let markdownBody = parts.slice(2).join("---");
-
-        const title = frontmatter.title || 'Sem título';
-
-        const subtitulo = frontmatter.subtitle || frontmatter.subtitulo || frontmatter.descricao || frontmatter.resumo || '';
-
-        const categoria = frontmatter.category || frontmatter.categoria || frontmatter.tag || 'Geral';
-
-        const date = frontmatter.published || frontmatter.date || 'Recente';
-
-        const imagem = frontmatter.image || frontmatter.imagem || frontmatter.featured_image || frontmatter.featuredImage || '';
-
-        markdownBody = markdownBody.trim().replace(/^!\[.*?\]\(.*?\)/, '');
-
-        const dataFormatada = date.includes('T') ? date.split('T')[0] : date;
-
-        let fullImageUrl = "https://chutapracanto.pages.dev/images/logo.png";
-
-        if (imagem) {
-
-          fullImageUrl = imagem.startsWith('http') ? imagem : window.location.origin + (imagem.startsWith('/') ? '' : '/') + imagem;
-
-        }
-
-        const pageTitleEl = document.getElementById('page-title');
-
-        if (pageTitleEl) pageTitleEl.innerText = title + " | ChutaPraCanto";
-
-        const metaTitleEl = document.getElementById('meta-title');
-
-        if (metaTitleEl) metaTitleEl.content = title;
-
-        const metaDescEl = document.getElementById('meta-desc');
-
-        if (metaDescEl) metaDescEl.content = subtitulo;
-
-        const metaImageEl = document.getElementById('meta-image');
-
-        if (metaImageEl) metaImageEl.content = fullImageUrl;
-
-        const metaUrlEl = document.getElementById('meta-url');
-
-        if (metaUrlEl) metaUrlEl.content = window.location.href;
-
-        const htmlBody = marked.parse(markdownBody);
-
-        document.getElementById('article-content').innerHTML = `
-
-          <div style="margin-bottom: 2rem;">
-
-            <span class="tag" style="color: var(--neon-green); font-size: 0.85rem; font-weight: 800; display: block; margin-bottom: 0.5rem; text-transform: uppercase;">${categoria}</span>
-
-            <h1 style="font-size: 2.2rem; font-weight: 800; line-height: 1.25; margin-bottom: 0.8rem; font-family: var(--font-title); color: #fff;">${title}</h1>
-
-            ${subtitulo ? `<p style="font-size: 1.1rem; color: var(--text-gray); line-height: 1.4; margin-bottom: 1rem;">${subtitulo}</p>` : ''}
-
-            <div style="font-size: 0.85rem; color: #777;">Publicado a ${dataFormatada} por <strong>ChutaPraCanto</strong></div>
-
-          </div>
-
-          ${imagem ? `<div style="margin-bottom: 2.5rem; border-radius: 12px; overflow: hidden; border: 1px solid var(--border-color);"><img src="${imagem}" alt="${title}" style="width: 100%; max-height: 450px; object-fit: cover; object-position: center top; display: block;"></div>` : ''}
-
-          <div class="art-body" style="font-size: 1.05rem; line-height: 1.7; color: #e0e0e0;">${htmlBody}</div>
-
-        `;
-
-        await mostrarNoticiasRelacionadas(slug);
-
-        const shareBox = document.getElementById('share-box');
-
-        if (shareBox) shareBox.style.display = "block";
-
-      } catch (e) {
-
-        console.error(e);
-
-        document.getElementById('article-content').innerHTML = `
-
-          <div style="text-align: center; padding: 3rem 0;">
-
-            <h2 style="color: #fff; margin-bottom: 1rem;">Notícia não encontrada ou erro ao carregar.</h2>
-
-            <p style="color: var(--text-gray); margin-bottom: 1.5rem;">O artigo selecionado pode ter sido movido ou o link está incorreto.</p>
-
-            <a href="noticias.html" class="filter-btn" style="display: inline-block; background: var(--neon-green); color: #000; text-decoration: none; padding: 0.6rem 1.2rem; border-radius: 8px;">Voltar à lista de notícias</a>
-
-          </div>
-
-        `;
-
-      }
-
+        const url = new URL(value.trim(), window.location.origin);
+        const allowed = url.protocol === 'https:' || (url.origin === window.location.origin && url.protocol === 'http:') || (allowMailto && url.protocol === 'mailto:');
+        if (!allowed || url.username || url.password) return '';
+        return url.href;
+      } catch { return ''; }
     }
 
-    async function mostrarNoticiasRelacionadas(currentSlug) {
+    function safeArticleImage(value) {
+      return safeContentUrl(value) || new URL('/images/logo.png', window.location.origin).href;
+    }
+
+    function sanitizeArticleHtml(html) {
+      const safeHtml = DOMPurify.sanitize(html, {
+        ALLOWED_TAGS: ['p','h1','h2','h3','h4','h5','h6','strong','em','b','i','ul','ol','li','br','blockquote','hr','a','img','pre','code','table','thead','tbody','tr','th','td'],
+        ALLOWED_ATTR: ['href','src','alt','title','dir','class','colspan','rowspan','width','height'],
+        FORBID_ATTR: ['style'],
+        ALLOW_DATA_ATTR: false,
+        RETURN_TRUSTED_TYPE: false
+      });
+      const template = document.createElement('template');
+      template.innerHTML = safeHtml;
+      template.content.querySelectorAll('a[href]').forEach(link => {
+        const safe = safeContentUrl(link.getAttribute('href'), true);
+        if (safe) link.href = safe; else link.removeAttribute('href');
+      });
+      template.content.querySelectorAll('img[src]').forEach(image => {
+        const safe = safeContentUrl(image.getAttribute('src'));
+        if (safe) image.src = safe; else image.remove();
+      });
+      return template.innerHTML;
+    }
+
+    function addArticleJsonLd(data) {
+      const canonical = SITE_CANONICAL_ORIGIN + '/noticia?slug=' + encodeURIComponent(data.slug);
+      const schema = {
+        '@context': 'https://schema.org',
+        '@type': 'NewsArticle',
+        headline: data.title,
+        description: data.description || undefined,
+        image: data.image,
+        mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
+        publisher: { '@type': 'Organization', name: 'Chuta Pra Canto', logo: { '@type': 'ImageObject', url: SITE_CANONICAL_ORIGIN + '/images/logo.png' } }
+      };
+      if (data.datePublished) schema.datePublished = data.datePublished;
+      if (data.dateModified) schema.dateModified = data.dateModified;
+      if (data.author) {
+        const author = { '@type': /^chuta\s*pra\s*canto$/i.test(data.author) ? 'Organization' : 'Person', name: data.author };
+        if (data.authorUrl) author.url = data.authorUrl;
+        schema.author = author;
+      }
+      const crumbs = {
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: SITE_CANONICAL_ORIGIN + '/' },
+          { '@type': 'ListItem', position: 2, name: 'Notícias', item: SITE_CANONICAL_ORIGIN + '/noticias' },
+          { '@type': 'ListItem', position: 3, name: data.title, item: canonical }
+        ]
+      };
+      const script = document.getElementById('article-jsonld');
+      if (script) script.textContent = JSON.stringify([schema, crumbs]);
+    }
+
+    async function loadArticle() {
+      const slug = new URLSearchParams(window.location.search).get('slug');
+      const container = document.getElementById('article-content');
+      if (!slug || slug.includes('/') || slug.includes('\\') || slug.includes('..') || /[\u0000-\u001f]/.test(slug)) {
+        container.textContent = 'Notícia não encontrada. O endereço parece estar incompleto.';
+        return;
+      }
+      try {
+        const indexResponse = await fetch('/content/noticias-index.json');
+        if (!indexResponse.ok) throw new Error('Índice de notícias indisponível');
+        const index = await indexResponse.json();
+        if (!Array.isArray(index)) throw new Error('Índice de notícias inválido');
+        const entry = index.find(item => item.slug === slug) || index.find(item => String(item.slug || '').toLowerCase() === slug.toLowerCase());
+        if (!entry || typeof entry.path !== 'string' || !/^content\/noticias\/[^/]+\.md$/.test(entry.path) || entry.path.includes('..')) throw new Error('Artigo não encontrado');
+        const encodedPath = entry.path.split('/').map(encodeURIComponent).join('/');
+        let response = await fetch('/' + encodedPath);
+        if (!response.ok) {
+          const apiResponse = await fetch('https://api.github.com/repos/chutapracanto/chutapracanto/contents/content/noticias');
+          if (apiResponse.ok) {
+            const files = await apiResponse.json();
+            const matched = files.find(file => file.name.replace(/\.md$/i, '').toLowerCase() === decodeURIComponent(slug).toLowerCase());
+            if (matched && /^https:\/\/raw\.githubusercontent\.com\/chutapracanto\/chutapracanto\//.test(matched.download_url)) response = await fetch(matched.download_url);
+          }
+        }
+        if (!response.ok) throw new Error('Artigo não existe');
+        const markdown = await response.text();
+        const parts = markdown.split('---');
+        if (parts.length < 3) throw new Error('Formato do artigo inválido');
+        const frontmatter = jsyaml.load(parts[1]) || {};
+        let body = parts.slice(2).join('---').trim().replace(/^!\[.*?\]\(.*?\)/, '');
+        const title = String(frontmatter.title || entry.title || 'Sem título');
+        const description = String(frontmatter.subtitle || frontmatter.subtitulo || frontmatter.descricao || frontmatter.resumo || entry.subtitle || '');
+        const category = String(frontmatter.category || frontmatter.categoria || frontmatter.tag || entry.category || 'Geral');
+        const author = typeof frontmatter.author === 'string' ? frontmatter.author.trim() : '';
+        const authorUrlValue = frontmatter.authorUrl || frontmatter.author_url || '';
+        const authorUrl = safeContentUrl(authorUrlValue);
+        const dateValue = frontmatter.published || frontmatter.date || frontmatter.dataNoticia || frontmatter.data || entry.published || '';
+        const modifiedValue = frontmatter.dateModified || frontmatter.date_modified || frontmatter.modified || '';
+        const validDate = value => {
+          const d = new Date(value);
+          return value && !Number.isNaN(d.getTime()) ? d.toISOString() : '';
+        };
+        const published = validDate(dateValue);
+        const modified = validDate(modifiedValue);
+        const imageValue = frontmatter.image || frontmatter.imagem || frontmatter.featured_image || frontmatter.featuredImage || entry.image || '';
+        const image = imageValue ? safeArticleImage(imageValue) : SITE_CANONICAL_ORIGIN + '/images/logo.png';
+        const canonical = SITE_CANONICAL_ORIGIN + '/noticia?slug=' + encodeURIComponent(entry.slug);
+        const currentShareUrl = window.location.origin + '/noticia?slug=' + encodeURIComponent(entry.slug);
+        document.title = title + ' | Chuta Pra Canto';
+        document.getElementById('meta-title').content = title;
+        document.getElementById('meta-description').content = description;
+        document.getElementById('meta-desc').content = description;
+        document.getElementById('meta-image').content = image;
+        document.getElementById('meta-url').content = currentShareUrl;
+        document.getElementById('meta-published').content = published;
+        document.getElementById('meta-modified').content = modified;
+        document.getElementById('twitter-title').content = title;
+        document.getElementById('twitter-description').content = description;
+        document.getElementById('twitter-image').content = image;
+        document.getElementById('twitter-url').content = currentShareUrl;
+        document.getElementById('canonical-url').href = canonical;
+
+        const breadcrumb = document.createElement('nav');
+        breadcrumb.className = 'article-breadcrumbs';
+        breadcrumb.setAttribute('aria-label', 'Breadcrumb');
+        const crumbList = document.createElement('ol');
+        [['Home','/'],['Notícias','/noticias']].forEach(([label, href]) => {
+          const li = document.createElement('li');
+          const link = document.createElement('a');
+          link.href = href;
+          link.textContent = label;
+          li.appendChild(link);
+          crumbList.appendChild(li);
+        });
+        const current = document.createElement('li');
+        current.textContent = title;
+        current.setAttribute('aria-current', 'page');
+        crumbList.appendChild(current);
+        breadcrumb.appendChild(crumbList);
+
+        const header = document.createElement('header');
+        header.className = 'article-heading';
+        const tag = document.createElement('span');
+        tag.className = 'tag';
+        tag.textContent = category.toUpperCase();
+        const h1 = document.createElement('h1');
+        h1.textContent = title;
+        header.append(tag, h1);
+        if (description) {
+          const summary = document.createElement('p');
+          summary.className = 'article-summary';
+          summary.textContent = description;
+          header.appendChild(summary);
+        }
+        if (published || author) {
+          const byline = document.createElement('p');
+          byline.className = 'article-byline';
+          const dateText = published ? 'Publicado em ' + new Date(published).toLocaleDateString('pt-PT') : '';
+          byline.textContent = dateText + (dateText && author ? ' · ' : '') + (author ? 'Por ' + author : '');
+          header.appendChild(byline);
+        }
+        container.replaceChildren(breadcrumb, header);
+        if (imageValue) {
+          const figure = document.createElement('figure');
+          figure.className = 'article-hero-image';
+          const img = document.createElement('img');
+          img.src = safeArticleImage(imageValue);
+          img.alt = title;
+          img.loading = 'eager';
+          img.onerror = () => { img.onerror = null; img.src = '/images/logo.png'; };
+          figure.appendChild(img);
+          container.appendChild(figure);
+        }
+        const bodyElement = document.createElement('div');
+        bodyElement.className = 'art-body';
+        bodyElement.innerHTML = sanitizeArticleHtml(marked.parse(body));
+        container.appendChild(bodyElement);
+
+        addArticleJsonLd({ slug: entry.slug, title, description, image, datePublished: published, dateModified: modified, author, authorUrl });
+        await mostrarNoticiasRelacionadas(entry.slug, index);
+        const shareBox = document.getElementById('share-box');
+        if (shareBox) shareBox.style.display = 'block';
+      } catch (error) {
+        console.error('Erro ao carregar notícia:', error);
+        container.textContent = 'Não foi possível carregar esta notícia. Volta à página de Notícias e tenta outro artigo.';
+      }
+    }
+
+    async function mostrarNoticiasRelacionadas(currentSlug, indexDados) {
 
       const section = document.getElementById('related-news');
 
       try {
 
-        const response = await fetch('/content/noticias-index.json');
+        let noticias = indexDados;
 
-        if (!response.ok) return;
-
-        const noticias = await response.json();
+        if (!Array.isArray(noticias)) {
+          const response = await fetch('/content/noticias-index.json');
+          if (!response.ok) return;
+          noticias = await response.json();
+        }
 
         if (!Array.isArray(noticias)) return;
 
@@ -516,7 +585,7 @@
 
             const elementoImagem = document.createElement('img');
 
-            elementoImagem.src = new URL(noticia.image, window.location.origin).href;
+            elementoImagem.src = safeArticleImage(noticia.image);
 
             elementoImagem.alt = '';
 

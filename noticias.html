@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="pt">
+<html lang="pt-PT">
 
 <head>
 
@@ -8,7 +8,20 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Notícias | ChutaPraCanto</title>
+  <title>Notícias de Futebol | Chuta Pra Canto</title>
+  <meta name="description" content="Acompanha as últimas notícias de futebol, pesquisa artigos e filtra por competição e categoria.">
+  <link rel="canonical" href="https://chutapracanto.pages.dev/noticias">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Chuta Pra Canto">
+  <meta property="og:title" content="Notícias de Futebol | Chuta Pra Canto">
+  <meta property="og:description" content="Acompanha as últimas notícias de futebol, pesquisa artigos e filtra por competição e categoria.">
+  <meta property="og:url" content="https://chutapracanto.pages.dev/noticias">
+  <meta property="og:image" content="https://chutapracanto.pages.dev/images/logo.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Notícias de Futebol | Chuta Pra Canto">
+  <meta name="twitter:description" content="Acompanha as últimas notícias de futebol, pesquisa artigos e filtra por competição e categoria.">
+  <meta name="twitter:image" content="https://chutapracanto.pages.dev/images/logo.png">
 
   <link rel="icon" type="image/png" href="images/logo.png">
 
@@ -18,7 +31,6 @@
 
   <link rel="stylesheet" href="style.css">
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
 
   
 
@@ -824,6 +836,14 @@
 
 
 
+    function safePublicUrl(value) {
+      if (typeof value !== 'string' || !value.trim()) return '';
+      try {
+        const url = new URL(value.trim(), window.location.origin);
+        if ((url.protocol !== 'https:' && !(url.origin === window.location.origin && url.protocol === 'http:')) || url.username || url.password) return '';
+        return url.href;
+      } catch { return ''; }
+    }
     async function carregarTodasNoticias() {
       try {
         const response = await fetch('/content/noticias-index.json', { cache: 'no-store' });
@@ -854,7 +874,7 @@
             slug: item.slug || '',
             title: item.title || 'Sem título',
             tag: item.category || 'Geral',
-            imagem: item.image || 'https://via.placeholder.com/600x400',
+            imagem: item.image || 'images/logo.png',
             descricao: item.subtitle || '',
             dataPublicacaoRaw: dateRaw,
             dataPublicacaoFormatted: dateFormatted
@@ -921,39 +941,36 @@
       paginaItens.forEach(item => {
 
         const card = document.createElement('a');
-
         card.href = `noticia.html?slug=${encodeURIComponent(item.slug)}`;
-
         card.className = 'news-list-card';
-
-        
-
-        card.innerHTML = `
-
-          <div class="news-list-img">
-
-            <img src="${item.imagem}" alt="${item.title}">
-
-          </div>
-
-          <div class="news-list-content">
-
-            <div class="news-list-meta">
-
-              <span class="tag">${item.tag.toUpperCase()}</span>
-
-              ${item.dataPublicacaoFormatted ? `<span class="date">· ${item.dataPublicacaoFormatted}</span>` : ''}
-
-            </div>
-
-            <h3>${item.title}</h3>
-
-            <p>${item.descricao}</p>
-
-          </div>
-
-        `;
-
+        const imageWrap = document.createElement('div');
+        imageWrap.className = 'news-list-img';
+        const image = document.createElement('img');
+        image.src = safePublicUrl(item.imagem) || '/images/logo.png';
+        image.alt = item.title;
+        image.loading = 'lazy';
+        image.onerror = () => { image.onerror = null; image.src = '/images/logo.png'; };
+        imageWrap.appendChild(image);
+        const content = document.createElement('div');
+        content.className = 'news-list-content';
+        const meta = document.createElement('div');
+        meta.className = 'news-list-meta';
+        const tag = document.createElement('span');
+        tag.className = 'tag';
+        tag.textContent = item.tag.toUpperCase();
+        meta.appendChild(tag);
+        if (item.dataPublicacaoFormatted) {
+          const date = document.createElement('span');
+          date.className = 'date';
+          date.textContent = '· ' + item.dataPublicacaoFormatted;
+          meta.appendChild(date);
+        }
+        const title = document.createElement('h3');
+        title.textContent = item.title;
+        const description = document.createElement('p');
+        description.textContent = item.descricao;
+        content.append(meta, title, description);
+        card.append(imageWrap, content);
         container.appendChild(card);
 
       });

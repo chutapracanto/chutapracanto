@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow,noarchive">
     <title>Administração | ChutaPraCanto</title>
 
     <link
@@ -936,7 +937,7 @@
                 <input
                     type="file"
                     id="image-upload"
-                    accept="image/*"
+                    accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
                     style="margin-bottom:8px;"
                 >
 
@@ -947,7 +948,7 @@
                 >
 
                 <div class="image-help">
-                    As imagens carregadas recebem automaticamente um nome único.
+                    JPEG, PNG ou WebP até 5 MiB. As imagens recebem um nome único.
                 </div>
 
                 <img
@@ -3490,6 +3491,15 @@ async function uploadImage() {
 
     const file =
         fileInput.files[0];
+
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp"];
+    const allowedExtensions = /\.(?:jpe?g|png|webp)$/i;
+    if (!allowedTypes.includes(file.type) || !allowedExtensions.test(file.name)) {
+        throw new Error("Formato não permitido. Seleciona uma imagem JPEG, PNG ou WebP.");
+    }
+    if (file.size > 5 * 1024 * 1024) {
+        throw new Error("A imagem excede o limite de 5 MiB.");
+    }
 
     const reader =
         new FileReader();

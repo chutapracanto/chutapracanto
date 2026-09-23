@@ -268,6 +268,66 @@ function isAllowedNewsPath(path) {
   return /^content\/noticias\/[^/]+\.md$/i.test(path);
 }
 
+function isAllowedImageUploadPath(path) {
+  return typeof path === "string" &&
+    /^images\/uploads\/[A-Za-z0-9][A-Za-z0-9._-]{0,119}\.(?:jpe?g|png|webp)$/i.test(path) &&
+    !path.includes("..");
+}
+
+const MAX_IMAGE_UPLOAD_BYTES = 5 * 1024 * 1024;
+const MAX_IMAGE_REQUEST_BYTES = 7 * 1024 * 1024;
+
+async function lerCorpoLimitado(request, maxBytes) {
+  const declaredLength = Number(request.headers.get("Content-Length") || 0);
+  if (declaredLength > maxBytes) throw new Error("Ficheiro demasiado grande. O limite é 5 MiB.");
+  if (!request.body) return "";
+  const reader = request.body.getReader();
+  const chunks = [];
+  let total = 0;
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    total += value.byteLength;
+    if (total > maxBytes) {
+      await reader.cancel();
+      throw new Error("Ficheiro demasiado grande. O limite é 5 MiB.");
+    }
+    chunks.push(value);
+  }
+  const bytes = new Uint8Array(total);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return new TextDecoder().decode(bytes);
+}
+
+function validarImagemUpload(content, path) {
+  if (typeof content !== "string" || !content || content.length > Math.ceil(MAX_IMAGE_UPLOAD_BYTES / 3) * 4 + 4 || !/^[A-Za-z0-9+/]+={0,2}$/.test(content) || content.length % 4 === 1) {
+    return false;
+  }
+  let binary;
+  try { binary = atob(content); } catch { return false; }
+  if (!binary.length || binary.length > MAX_IMAGE_UPLOAD_BYTES) return false;
+  const isJpeg = binary.length >= 4 &&
+    binary.charCodeAt(0) === 0xff &&
+    binary.charCodeAt(1) === 0xd8 &&
+    binary.charCodeAt(2) === 0xff &&
+    binary.charCodeAt(binary.length - 2) === 0xff &&
+    binary.charCodeAt(binary.length - 1) === 0xd9;
+  const isPng = binary.length >= 24 &&
+    binary.slice(0, 8) === "\x89PNG\r\n\x1a\n" &&
+    binary.slice(12, 16) === "IHDR" &&
+    binary.slice(-8) === "\x00\x00\x00\x00IEND\xae\x42\x60\x82";
+  const isWebp = binary.length >= 20 &&
+    binary.slice(0, 4) === "RIFF" &&
+    binary.slice(8, 12) === "WEBP" &&
+    new DataView(Uint8Array.from(binary, character => character.charCodeAt(0)).buffer).getUint32(4, true) === binary.length - 8;
+  const ext = path.split(".").pop().toLowerCase();
+  return (ext === "jpg" || ext === "jpeg") ? isJpeg : ext === "png" ? isPng : ext === "webp" ? isWebp : false;
+}
+
 function isAllowedImagePath(path) {
   if (
     typeof path !== "string" ||
@@ -491,23 +551,16 @@ function escaparHtml(valor) {
 }
 
 function construirUrlImagem(imagem, origin) {
-  if (!imagem) {
-    return `${origin}/images/logo.png`;
+  if (!imagem || typeof imagem !== "string") return "https://chutapracanto.pages.dev/images/logo.png";
+  try {
+    const url = new URL(imagem, origin);
+    if ((url.protocol !== "https:" && url.origin !== origin) || url.username || url.password) {
+      return "https://chutapracanto.pages.dev/images/logo.png";
+    }
+    return url.href;
+  } catch {
+    return "https://chutapracanto.pages.dev/images/logo.png";
   }
-
-  if (/^https?:\/\//i.test(imagem)) {
-    return imagem;
-  }
-
-  if (imagem.startsWith("//")) {
-    return `${new URL(origin).protocol}${imagem}`;
-  }
-
-  if (imagem.startsWith("/")) {
-    return `${origin}${imagem}`;
-  }
-
-  return `${origin}/${imagem}`;
 }
 
 function obterSlugDaNoticia(url) {
@@ -668,11 +721,32 @@ async function obterDadosPartilha(env, slug, origin) {
         slug
       );
 
+    const canonicalUrl =
+      construirUrlPublicaNoticia(
+        "https://chutapracanto.pages.dev",
+        slug
+      );
+
     return {
       title,
       descricao,
       imagemUrl,
-      noticiaUrl
+      noticiaUrl,
+      canonicalUrl,
+      datePublished:
+        extrairCampoFrontmatter(markdown, "published") ||
+        extrairCampoFrontmatter(markdown, "date") ||
+        extrairCampoFrontmatter(markdown, "dataNoticia") ||
+        extrairCampoFrontmatter(markdown, "data"),
+      dateModified:
+        extrairCampoFrontmatter(markdown, "dateModified") ||
+        extrairCampoFrontmatter(markdown, "date_modified") ||
+        extrairCampoFrontmatter(markdown, "modified"),
+      author:
+        extrairCampoFrontmatter(markdown, "author"),
+      authorUrl:
+        extrairCampoFrontmatter(markdown, "authorUrl") ||
+        extrairCampoFrontmatter(markdown, "author_url")
     };
 
   } catch {
@@ -749,6 +823,93 @@ async function prepararPaginaParaPartilha(
       // --------------------------------------------------------
       // TITLE
       // --------------------------------------------------------
+
+      .on(
+        "script#article-jsonld",
+        {
+          element(element) {
+            const author = String(dados.author || "").trim();
+            const authorData = author
+              ? {
+                  "@type": author.toLowerCase() === "chuta pra canto" ? "Organization" : "Person",
+                  name: author
+                }
+              : null;
+            if (authorData && dados.authorUrl) {
+              try {
+                const authorUrl = new URL(dados.authorUrl, "https://chutapracanto.pages.dev");
+                if (authorUrl.protocol === "https:" && !authorUrl.username && !authorUrl.password) authorData.url = authorUrl.href;
+              } catch {}
+            }
+            const schema = {
+              "@context": "https://schema.org",
+              "@type": "NewsArticle",
+              headline: dados.title,
+              description: dados.descricao || undefined,
+              image: dados.imagemUrl,
+              mainEntityOfPage: { "@type": "WebPage", "@id": dados.canonicalUrl },
+              publisher: {
+                "@type": "Organization",
+                name: "Chuta Pra Canto",
+                logo: { "@type": "ImageObject", url: "https://chutapracanto.pages.dev/images/logo.png" }
+              }
+            };
+            if (authorData) schema.author = authorData;
+            if (dados.datePublished && !Number.isNaN(Date.parse(dados.datePublished))) schema.datePublished = dados.datePublished;
+            if (dados.dateModified && !Number.isNaN(Date.parse(dados.dateModified))) schema.dateModified = dados.dateModified;
+            const breadcrumbs = {
+              "@context": "https://schema.org",
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://chutapracanto.pages.dev/" },
+                { "@type": "ListItem", position: 2, name: "Notícias", item: "https://chutapracanto.pages.dev/noticias" },
+                { "@type": "ListItem", position: 3, name: dados.title, item: dados.canonicalUrl }
+              ]
+            };
+            const jsonLd = JSON.stringify([schema, breadcrumbs])
+              .replace(/</g, "\\u003c")
+              .replace(/>/g, "\\u003e")
+              .replace(/&/g, "\\u0026");
+            element.setInnerContent(jsonLd);
+          }
+        }
+      )
+
+      .on(
+        "link#canonical-url",
+        {
+          element(element) {
+            element.setAttribute("href", dados.canonicalUrl);
+          }
+        }
+      )
+
+      .on(
+        'meta#meta-published',
+        {
+          element(element) {
+            if (dados.datePublished && !Number.isNaN(Date.parse(dados.datePublished))) element.setAttribute("content", dados.datePublished);
+          }
+        }
+      )
+
+      .on(
+        'meta#meta-modified',
+        {
+          element(element) {
+            if (dados.dateModified && !Number.isNaN(Date.parse(dados.dateModified))) element.setAttribute("content", dados.dateModified);
+          }
+        }
+      )
+
+      .on(
+        "meta#meta-description",
+        {
+          element(element) {
+            element.setAttribute("content", dados.descricao);
+          }
+        }
+      )
 
       .on(
         "title",
@@ -1297,6 +1458,13 @@ async function handleAdminAPI(request, env) {
       );
     }
 
+    if (request.method === "PUT" && !isAllowedImageUploadPath(path)) {
+      return json(
+        { error: "Tipo de imagem ou nome de ficheiro não permitido.", message: "Use JPEG, PNG ou WebP com um nome de ficheiro simples." },
+        415
+      );
+    }
+
     if (
       !["GET", "PUT", "DELETE"].includes(
         request.method
@@ -1351,9 +1519,20 @@ async function handleAdminAPI(request, env) {
     // PUT / DELETE
     let body;
 
+    let requestText;
     try {
-      const payload =
-        JSON.parse(await request.text());
+      requestText = request.method === "PUT"
+        ? await lerCorpoLimitado(request, MAX_IMAGE_REQUEST_BYTES)
+        : await request.text();
+    } catch (error) {
+      return json(
+        { error: "Ficheiro demasiado grande.", message: "O limite de upload é 5 MiB." },
+        413
+      );
+    }
+
+    try {
+      const payload = JSON.parse(requestText);
 
       if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
         return json(
@@ -1362,6 +1541,13 @@ async function handleAdminAPI(request, env) {
             message: "Corpo inválido."
           },
           400
+        );
+      }
+
+      if (request.method === "PUT" && !validarImagemUpload(payload.content, path)) {
+        return json(
+          { error: "Conteúdo de imagem inválido.", message: "O conteúdo não corresponde a um JPEG, PNG ou WebP válido, ou excede 5 MiB." },
+          415
         );
       }
 
@@ -1453,7 +1639,9 @@ export default {
           );
 
         if (response) {
-          return response;
+          const headers = new Headers(response.headers);
+          headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+          return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
         }
       }
 
