@@ -1,5 +1,21 @@
 [
   {
+    "slug": "onde-a-paixao-virou-guerra",
+    "path": "content/opiniao/onde-a-paixao-virou-guerra.md",
+    "type": "opinion",
+    "title": "​Onde a Paixão Virou Guerra",
+    "subtitle": "Entre a magia dos relvados e a toxicidade dos bastidores, o futebol português trocou o respeito pelo ódio. É urgente resgatar o jogo jogado.",
+    "category": "Crónica-Futebol Português",
+    "categoryId": "cronica-futebol-portugues",
+    "categoryKind": "mixed",
+    "author": "Pedro Soares",
+    "authorId": "pedro-soares",
+    "authorType": "Person",
+    "published": "2026-09-23T20:20:59.514Z",
+    "publishedAt": "2026-09-23T20:20:59.514000Z",
+    "image": "/images/uploads/1000135294-20260923202059598-r8hqp.jpg"
+  },
+  {
     "slug": "elogios-a-jj-a-meta-dos-1000-golos-e-as-criticas-a-conferencia-assertiva-de-cristiano-ronaldo-antes-do-pais-de-gales",
     "path": "content/noticias/elogios-a-jj-a-meta-dos-1000-golos-e-as-criticas-a-conferencia-assertiva-de-cristiano-ronaldo-antes-do-pais-de-gales.md",
     "type": "news",
