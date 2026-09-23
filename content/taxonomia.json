@@ -91,6 +91,11 @@
       "id": "selecao-nacional",
       "label": "Seleção Nacional",
       "kind": "mixed"
+    },
+    {
+      "id": "cronica-futebol-portugues",
+      "label": "Crónica-Futebol Português",
+      "kind": "mixed"
     }
   ]
 }
