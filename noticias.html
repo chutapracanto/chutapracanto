@@ -251,9 +251,24 @@
 
 
     .search-box input:focus {
-
       border-color: var(--neon-green);
+    }
 
+    .search-box input:focus-visible {
+      outline: 2px solid var(--neon-green);
+      outline-offset: 2px;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
 
@@ -335,6 +350,8 @@
       width: 100%;
 
       height: 100%;
+
+      aspect-ratio: 11 / 7;
 
       overflow: hidden;
 
@@ -560,6 +577,10 @@
 
       }
 
+      .news-list-img {
+        aspect-ratio: 1;
+      }
+
       .news-list-content {
 
         padding: 0.75rem;
@@ -650,15 +671,15 @@
 
         <div class="filter-pills">
 
-          <button class="filter-btn active" onclick="filtrarNoticias('todos', this)">Todas</button>
+          <button class="filter-btn active" aria-pressed="true" onclick="filtrarNoticias('todos', this)">Todas</button>
 
-          <button class="filter-btn" onclick="filtrarNoticias('sl benfica', this)">SL Benfica</button>
+          <button class="filter-btn" aria-pressed="false" onclick="filtrarNoticias('sl benfica', this)">SL Benfica</button>
 
-          <button class="filter-btn" onclick="filtrarNoticias('fc porto', this)">FC Porto</button>
+          <button class="filter-btn" aria-pressed="false" onclick="filtrarNoticias('fc porto', this)">FC Porto</button>
 
-          <button class="filter-btn" onclick="filtrarNoticias('sporting sc', this)">Sporting SC</button>
+          <button class="filter-btn" aria-pressed="false" onclick="filtrarNoticias('sporting sc', this)">Sporting SC</button>
 
-          <button class="filter-btn" onclick="filtrarNoticias('premier league', this)">Premier League</button>
+          <button class="filter-btn" aria-pressed="false" onclick="filtrarNoticias('premier league', this)">Premier League</button>
 
           
 
@@ -666,7 +687,7 @@
 
           <div class="dropdown-wrapper" id="dropdownWrapper">
 
-            <button class="filter-btn" onclick="toggleDropdown(event)">
+            <button class="filter-btn" id="categoryDropdownToggle" type="button" aria-expanded="false" aria-label="Mais categorias" onclick="toggleDropdown(event)">
 
               Mais <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem;"></i>
 
@@ -674,23 +695,23 @@
 
             <div class="dropdown-menu">
 
-              <button class="dropdown-item" onclick="filtrarNoticias('sc braga', this)">SC Braga</button>
+              <button class="dropdown-item" aria-pressed="false" onclick="filtrarNoticias('sc braga', this)">SC Braga</button>
 
-              <button class="dropdown-item" onclick="filtrarNoticias('liga portugal betclic', this)">Liga Portugal Betclic</button>
+              <button class="dropdown-item" aria-pressed="false" onclick="filtrarNoticias('liga portugal betclic', this)">Liga Portugal Betclic</button>
 
-              <button class="dropdown-item" onclick="filtrarNoticias('liga europa', this)">Liga Europa</button>
+              <button class="dropdown-item" aria-pressed="false" onclick="filtrarNoticias('liga europa', this)">Liga Europa</button>
 
-              <button class="dropdown-item" onclick="filtrarNoticias('liga conferência', this)">Liga Conferência</button>
+              <button class="dropdown-item" aria-pressed="false" onclick="filtrarNoticias('liga conferência', this)">Liga Conferência</button>
 
-              <button class="dropdown-item" onclick="filtrarNoticias('supertaça europeia', this)">Supertaça Europeia</button>
+              <button class="dropdown-item" aria-pressed="false" onclick="filtrarNoticias('supertaça europeia', this)">Supertaça Europeia</button>
 
-              <button class="dropdown-item" onclick="filtrarNoticias('liga portugal 2 meusuper', this)">Liga Portugal 2 MeuSuper</button>
+              <button class="dropdown-item" aria-pressed="false" onclick="filtrarNoticias('liga portugal 2 meusuper', this)">Liga Portugal 2 MeuSuper</button>
 
-              <button class="dropdown-item" onclick="filtrarNoticias('la liga', this)">La Liga</button>
+              <button class="dropdown-item" aria-pressed="false" onclick="filtrarNoticias('la liga', this)">La Liga</button>
 
-              <button class="dropdown-item" onclick="filtrarNoticias('supertaça inglaterra', this)">Supertaça Inglaterra</button>
+              <button class="dropdown-item" aria-pressed="false" onclick="filtrarNoticias('supertaça inglaterra', this)">Supertaça Inglaterra</button>
 
-              <button class="dropdown-item" onclick="filtrarNoticias('futebol nacional', this)">Futebol Nacional</button>
+              <button class="dropdown-item" aria-pressed="false" onclick="filtrarNoticias('futebol nacional', this)">Futebol Nacional</button>
 
             </div>
 
@@ -704,9 +725,10 @@
 
         <div class="search-box">
 
-          <i class="fa-solid fa-magnifying-glass"></i>
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
 
-          <input type="text" id="searchInput" placeholder="Pesquisar notícias..." oninput="pesquisarNoticias()">
+          <label class="visually-hidden" for="searchInput">Pesquisar notícias por título, descrição ou categoria</label>
+          <input type="search" id="searchInput" placeholder="Pesquisar notícias..." aria-label="Pesquisar notícias por título, descrição ou categoria" oninput="pesquisarNoticias()">
 
         </div>
 
@@ -718,7 +740,8 @@
 
     <!-- LISTA DE NOTÍCIAS -->
 
-    <div class="news-list" id="noticias-list">
+    <p id="news-results-status" class="visually-hidden" role="status" aria-live="polite" aria-atomic="true">A carregar notícias.</p>
+    <div class="news-list" id="noticias-list" aria-label="Resultados das notícias" aria-busy="true">
 
       <p style="color: var(--text-gray); text-align: center; padding: 2.5rem 0;">A carregar todas as notícias...</p>
 
@@ -732,7 +755,7 @@
 
       <button class="page-btn" id="prevBtn" onclick="mudarPagina(-1)"><i class="fa-solid fa-arrow-left"></i> Anterior</button>
 
-      <span id="pageIndicator">Página 1 de 1</span>
+      <span id="pageIndicator" aria-live="polite" aria-atomic="true">Página 1 de 1</span>
 
       <button class="page-btn" id="nextBtn" onclick="mudarPagina(1)">Seguinte <i class="fa-solid fa-arrow-right"></i></button>
 
@@ -845,6 +868,10 @@
       } catch { return ''; }
     }
     async function carregarTodasNoticias() {
+      const resultsRegion = document.getElementById('noticias-list');
+      const resultsStatus = document.getElementById('news-results-status');
+      if (resultsRegion) resultsRegion.setAttribute('aria-busy', 'true');
+      if (resultsStatus) resultsStatus.textContent = 'A carregar notícias.';
       try {
         const response = await fetch('/content/noticias-index.json', { cache: 'no-store' });
         if (!response.ok) throw new Error('Não foi possível carregar o índice de notícias.');
@@ -884,13 +911,15 @@
         todasAsNoticias.sort(
           (a, b) => new Date(b.dataPublicacaoRaw) - new Date(a.dataPublicacaoRaw)
         );
-
+        if (resultsRegion) resultsRegion.setAttribute('aria-busy', 'false');
         aplicarFiltros();
 
       } catch (error) {
         console.error('Erro ao carregar notícias:', error);
+        if (resultsRegion) resultsRegion.setAttribute('aria-busy', 'false');
+        if (resultsStatus) resultsStatus.textContent = 'Erro ao carregar notícias.';
         document.getElementById('noticias-list').innerHTML =
-          '<p style="color: var(--text-gray); text-align: center; padding: 2.5rem 0;">Erro ao carregar notícias.</p>';
+          '<p style="color: var(--text-gray); text-align: center; padding: 2.5rem 0;">Erro ao carregar notícias.</p>'; 
       }
     }
 
@@ -908,6 +937,8 @@
 
       if (noticiasFiltradas.length === 0) {
 
+        const resultsStatus = document.getElementById('news-results-status');
+        if (resultsStatus) resultsStatus.textContent = 'Nenhuma notícia encontrada.';
         container.innerHTML = '<p style="color: var(--text-gray); text-align: center; padding: 2.5rem 0;">Nenhuma notícia encontrada.</p>';
 
         if (paginationControls) paginationControls.style.display = 'none';
@@ -935,6 +966,8 @@
       const fim = inicio + itensPorPagina;
 
       const paginaItens = noticiasFiltradas.slice(inicio, fim);
+      const resultsStatus = document.getElementById('news-results-status');
+      if (resultsStatus) resultsStatus.textContent = `${paginaItens.length} notícias nesta página. Página ${paginaAtual} de ${totalPaginas}.`;
 
 
 
@@ -949,6 +982,7 @@
         image.src = safePublicUrl(item.imagem) || '/images/logo.png';
         image.alt = item.title;
         image.loading = 'lazy';
+        image.decoding = 'async';
         image.onerror = () => { image.onerror = null; image.src = '/images/logo.png'; };
         imageWrap.appendChild(image);
         const content = document.createElement('div');
@@ -1011,7 +1045,9 @@
 
       e.stopPropagation();
 
-      document.getElementById('dropdownWrapper').classList.toggle('open');
+      const wrapper = document.getElementById('dropdownWrapper');
+      wrapper.classList.toggle('open');
+      document.getElementById('categoryDropdownToggle').setAttribute('aria-expanded', wrapper.classList.contains('open') ? 'true' : 'false');
 
     }
 
@@ -1021,7 +1057,10 @@
 
       const wrapper = document.getElementById('dropdownWrapper');
 
-      if (wrapper) wrapper.classList.remove('open');
+      if (wrapper) {
+        wrapper.classList.remove('open');
+        document.getElementById('categoryDropdownToggle').setAttribute('aria-expanded', 'false');
+      }
 
     });
 
@@ -1035,15 +1074,28 @@
 
       
 
-      document.querySelectorAll('.filter-btn, .dropdown-item').forEach(btn => btn.classList.remove('active'));
-
-      if (btnElement) btnElement.classList.add('active');
+      document.querySelectorAll('.filter-btn, .dropdown-item').forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-pressed', 'false');
+      });
+      if (btnElement) {
+        btnElement.classList.add('active');
+        btnElement.setAttribute('aria-pressed', 'true');
+      }
+      const dropdownToggle = document.getElementById('categoryDropdownToggle');
+      if (dropdownToggle) {
+        const filtroEmMais = btnElement?.classList.contains('dropdown-item');
+        dropdownToggle.setAttribute('aria-label', filtroEmMais ? `Mais categorias. Filtro ativo: ${btnElement.textContent.trim()}` : 'Mais categorias');
+      }
 
 
 
       const wrapper = document.getElementById('dropdownWrapper');
 
-      if (wrapper) wrapper.classList.remove('open');
+      if (wrapper) {
+        wrapper.classList.remove('open');
+        document.getElementById('categoryDropdownToggle').setAttribute('aria-expanded', 'false');
+      }
 
 
 
