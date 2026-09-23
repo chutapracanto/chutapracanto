@@ -833,7 +833,7 @@
 
     <div class="footer-bottom">
 
-      <p>© 2026 ChutaPraCanto. Todos os direitos reservados.</p>
+      <p>© 2026 Chuta Pra Canto. Todos os direitos reservados.</p>
 
     </div>
 
@@ -853,6 +853,84 @@
 
     const itensPorPagina = 6;
     let timerAnuncioPesquisa = null;
+    let indiceNoticiasCarregado = false;
+
+    function normalizarCategoria(texto) {
+      return String(texto || '').trim().toLocaleLowerCase('pt-PT').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    }
+
+    function obterBotoesCategoria() {
+      return [...document.querySelectorAll('.filter-btn, .dropdown-item')]
+        .filter(btn => btn.id !== 'categoryDropdownToggle');
+    }
+
+    function sincronizarBotoesCategoria(botaoAtivo) {
+      obterBotoesCategoria().forEach(btn => {
+        const ativo = btn === botaoAtivo;
+        btn.classList.toggle('active', ativo);
+        btn.setAttribute('aria-pressed', ativo ? 'true' : 'false');
+      });
+      const toggle = document.getElementById('categoryDropdownToggle');
+      if (toggle) {
+        const estaNoDropdown = botaoAtivo?.classList.contains('dropdown-item');
+        toggle.setAttribute('aria-label', estaNoDropdown
+          ? `Mais categorias. Filtro ativo: ${botaoAtivo.textContent.trim()}`
+          : 'Mais categorias');
+      }
+    }
+
+    function escreverEstadoNaUrl(metodo = 'replace') {
+      const url = new URL(window.location.href);
+      const pesquisa = document.getElementById('searchInput')?.value.trim() || '';
+      url.searchParams.delete('search');
+      url.searchParams.delete('category');
+      url.searchParams.delete('page');
+      if (pesquisa) url.searchParams.set('search', pesquisa);
+      if (filtroAtual !== 'todos') {
+        const botaoAtivo = obterBotoesCategoria().find(btn => btn.classList.contains('active'));
+        if (botaoAtivo) url.searchParams.set('category', botaoAtivo.textContent.trim());
+      }
+      if (paginaAtual > 1) url.searchParams.set('page', String(paginaAtual));
+      const destino = url.pathname + url.search + url.hash;
+      const atual = window.location.pathname + window.location.search + window.location.hash;
+      if (destino === atual) return;
+      window.history[`${metodo}State`]({ noticias: true }, '', destino);
+    }
+
+    function restaurarEstadoDaUrl() {
+      clearTimeout(timerAnuncioPesquisa);
+      timerAnuncioPesquisa = null;
+      const params = new URL(window.location.href).searchParams;
+      const campoPesquisa = document.getElementById('searchInput');
+      if (campoPesquisa) campoPesquisa.value = params.get('search') || '';
+
+      const categoriaPedida = (params.get('category') || '').trim();
+      let botaoAtivo = obterBotoesCategoria().find(btn =>
+        normalizarCategoria(btn.textContent) === normalizarCategoria(categoriaPedida) &&
+        normalizarCategoria(categoriaPedida) !== 'todas'
+      );
+      if (!botaoAtivo && categoriaPedida) {
+        botaoAtivo = obterBotoesCategoria().find(btn =>
+          normalizarCategoria(btn.textContent).includes(normalizarCategoria(categoriaPedida))
+        );
+      }
+      if (!categoriaPedida || normalizarCategoria(categoriaPedida) === 'todas' || !botaoAtivo) {
+        botaoAtivo = obterBotoesCategoria().find(btn => normalizarCategoria(btn.textContent) === 'todas') || null;
+        filtroAtual = 'todos';
+      } else {
+        filtroAtual = botaoAtivo.textContent.trim().toLocaleLowerCase('pt-PT');
+      }
+      sincronizarBotoesCategoria(botaoAtivo);
+
+      const paginaPedida = params.get('page') || '';
+      const paginaNumerica = /^\d+$/.test(paginaPedida) ? Number(paginaPedida) : NaN;
+      paginaAtual = Number.isSafeInteger(paginaNumerica) && paginaNumerica > 0 ? paginaNumerica : 1;
+
+      if (indiceNoticiasCarregado) {
+        aplicarFiltros();
+        escreverEstadoNaUrl('replace');
+      }
+    }
 
 
 
@@ -910,8 +988,10 @@
         todasAsNoticias.sort(
           (a, b) => new Date(b.dataPublicacaoRaw) - new Date(a.dataPublicacaoRaw)
         );
+        indiceNoticiasCarregado = true;
         if (resultsRegion) resultsRegion.setAttribute('aria-busy', 'false');
         aplicarFiltros();
+        escreverEstadoNaUrl('replace');
 
       } catch (error) {
         console.error('Erro ao carregar notícias:', error);
@@ -950,7 +1030,7 @@
 
 
       if (noticiasFiltradas.length === 0) {
-
+        paginaAtual = 1;
         if (anunciarResultados) atualizarAnuncioResultados();
         container.innerHTML = '<p style="color: var(--text-gray); text-align: center; padding: 2.5rem 0;">Nenhuma notícia encontrada.</p>';
 
@@ -1042,17 +1122,14 @@
 
 
     function mudarPagina(direcao) {
-
       clearTimeout(timerAnuncioPesquisa);
+      timerAnuncioPesquisa = null;
       paginaAtual += direcao;
-
       renderizarPagina();
-
+      atualizarAnuncioResultados();
+      escreverEstadoNaUrl('push');
       window.scrollTo({ top: 0, behavior: 'smooth' });
-
     }
-
-
 
     function toggleDropdown(e) {
 
@@ -1080,44 +1157,19 @@
 
 
     function filtrarNoticias(categoria, btnElement) {
-
       clearTimeout(timerAnuncioPesquisa);
+      timerAnuncioPesquisa = null;
       filtroAtual = categoria;
-
       paginaAtual = 1;
-
-      
-
-      document.querySelectorAll('.filter-btn, .dropdown-item').forEach(btn => {
-        btn.classList.remove('active');
-        btn.setAttribute('aria-pressed', 'false');
-      });
-      if (btnElement) {
-        btnElement.classList.add('active');
-        btnElement.setAttribute('aria-pressed', 'true');
-      }
-      const dropdownToggle = document.getElementById('categoryDropdownToggle');
-      if (dropdownToggle) {
-        const filtroEmMais = btnElement?.classList.contains('dropdown-item');
-        dropdownToggle.setAttribute('aria-label', filtroEmMais ? `Mais categorias. Filtro ativo: ${btnElement.textContent.trim()}` : 'Mais categorias');
-      }
-
-
-
+      sincronizarBotoesCategoria(btnElement);
       const wrapper = document.getElementById('dropdownWrapper');
-
       if (wrapper) {
         wrapper.classList.remove('open');
         document.getElementById('categoryDropdownToggle').setAttribute('aria-expanded', 'false');
       }
-
-
-
       aplicarFiltros();
-
+      escreverEstadoNaUrl('push');
     }
-
-
 
     function pesquisarNoticias() {
       paginaAtual = 1;
@@ -1126,6 +1178,7 @@
       timerAnuncioPesquisa = setTimeout(() => {
         timerAnuncioPesquisa = null;
         atualizarAnuncioResultados();
+        escreverEstadoNaUrl('replace');
       }, 500);
     }
 
@@ -1167,7 +1220,11 @@
 
     }
 
-    document.addEventListener('DOMContentLoaded', carregarTodasNoticias);
+    document.addEventListener('DOMContentLoaded', () => {
+      restaurarEstadoDaUrl();
+      carregarTodasNoticias();
+    });
+    window.addEventListener('popstate', restaurarEstadoDaUrl);
 
   </script>
 
