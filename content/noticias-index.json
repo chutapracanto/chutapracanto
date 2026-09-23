@@ -1,33 +1,35 @@
 [
   {
-    "slug": "a-liga-das-nacoes-e-para-ganhar-jj-antecipa-estreia-nas-quinas-elogia-inteligencia-do-grupo-e-revela-planos-para-o-meio-campo",
-    "path": "content/noticias/a-liga-das-nacoes-e-para-ganhar-jj-antecipa-estreia-nas-quinas-elogia-inteligencia-do-grupo-e-revela-planos-para-o-meio-campo.md",
-    "type": "news",
-    "title": "«A Liga das Nações é para ganhar»: JJ antecipa estreia nas Quinas, elogia inteligência do grupo e revela planos para o meio-campo",
-    "subtitle": "Técnico de 72 anos prometeu mexidas na estrutura do corredor central e um meio-campo com um médio de cobertura dedicado.",
-    "category": "Seleção Nacional",
-    "categoryId": null,
-    "categoryKind": "unclassified",
-    "author": "Chuta Pra Canto",
-    "authorId": "chuta-pra-canto",
-    "authorType": "Organization",
-    "published": "2026-09-23",
-    "image": "/images/uploads/1000135215-20260923162700222-o0i52.jpg"
-  },
-  {
     "slug": "elogios-a-jj-a-meta-dos-1000-golos-e-as-criticas-a-conferencia-assertiva-de-cristiano-ronaldo-antes-do-pais-de-gales",
     "path": "content/noticias/elogios-a-jj-a-meta-dos-1000-golos-e-as-criticas-a-conferencia-assertiva-de-cristiano-ronaldo-antes-do-pais-de-gales.md",
     "type": "news",
     "title": "Elogios a JJ, a meta dos 1000 golos e as críticas: A conferência assertiva de Cristiano Ronaldo antes do País de Gales",
     "subtitle": "O capitão da Seleção Nacional considerou a escolha de Jorge Jesus \"perfeita\" e garantiu que a sua motivação para representar Portugal continua intacta.",
     "category": "Seleção Nacional",
-    "categoryId": null,
-    "categoryKind": "unclassified",
+    "categoryId": "selecao-nacional",
+    "categoryKind": "mixed",
     "author": "Chuta Pra Canto",
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-09-23",
+    "publishedAt": "2026-09-23T16:42:48Z",
     "image": "/images/uploads/1000135293-20260923164246963-y9ye9.webp"
+  },
+  {
+    "slug": "a-liga-das-nacoes-e-para-ganhar-jj-antecipa-estreia-nas-quinas-elogia-inteligencia-do-grupo-e-revela-planos-para-o-meio-campo",
+    "path": "content/noticias/a-liga-das-nacoes-e-para-ganhar-jj-antecipa-estreia-nas-quinas-elogia-inteligencia-do-grupo-e-revela-planos-para-o-meio-campo.md",
+    "type": "news",
+    "title": "«A Liga das Nações é para ganhar»: JJ antecipa estreia nas Quinas, elogia inteligência do grupo e revela planos para o meio-campo",
+    "subtitle": "Técnico de 72 anos prometeu mexidas na estrutura do corredor central e um meio-campo com um médio de cobertura dedicado.",
+    "category": "Seleção Nacional",
+    "categoryId": "selecao-nacional",
+    "categoryKind": "mixed",
+    "author": "Chuta Pra Canto",
+    "authorId": "chuta-pra-canto",
+    "authorType": "Organization",
+    "published": "2026-09-23",
+    "publishedAt": "2026-09-23T16:27:01Z",
+    "image": "/images/uploads/1000135215-20260923162700222-o0i52.jpg"
   },
   {
     "slug": "noite-de-gloria-na-noruega-torreense-assina-estreia-europeia-de-sonho-e-afunda-lillestr-m-1-2",
@@ -42,22 +44,8 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-09-17",
+    "publishedAt": "2026-09-17T21:10:09Z",
     "image": "/images/uploads/1000135192-20260917211007621-s35ki.webp"
-  },
-  {
-    "slug": "pesadelo-no-teatro-dos-sonhos-united-desperdica-dois-golos-de-avanco-e-tomba-perante-o-brighton-na-carabao-cup-2-3",
-    "path": "content/noticias/pesadelo-no-teatro-dos-sonhos-united-desperdica-dois-golos-de-avanco-e-tomba-perante-o-brighton-na-carabao-cup-2-3.md",
-    "type": "news",
-    "title": "Pesadelo no 'Teatro dos Sonhos': United desperdiça dois golos de avanço e tomba perante o Brighton na Carabao Cup (2-3)",
-    "subtitle": "De sonho a pesadelo: Shea Lacey marca na estreia, mas Brighton assina reviravolta e afasta United da Carabao Cup.",
-    "category": "Carabao Cup",
-    "categoryId": "carabao-cup",
-    "categoryKind": "competition",
-    "author": "Chuta Pra Canto",
-    "authorId": "chuta-pra-canto",
-    "authorType": "Organization",
-    "published": "2026-09-16",
-    "image": "/images/uploads/NDuQgBnvwrq700tQ64066JfZhU-20260916225628429-pm5tx.jpg"
   },
   {
     "slug": "vitoria-categorica-em-san-siro-benfica-quebra-enguico-historico-frente-ao-ac-milan-na-europa-league-0-2",
@@ -72,7 +60,24 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-09-16",
+    "publishedAt": "2026-09-16T22:48:08Z",
     "image": "/images/uploads/1000135185-20260916224806420-jbo51.webp"
+  },
+  {
+    "slug": "pesadelo-no-teatro-dos-sonhos-united-desperdica-dois-golos-de-avanco-e-tomba-perante-o-brighton-na-carabao-cup-2-3",
+    "path": "content/noticias/pesadelo-no-teatro-dos-sonhos-united-desperdica-dois-golos-de-avanco-e-tomba-perante-o-brighton-na-carabao-cup-2-3.md",
+    "type": "news",
+    "title": "Pesadelo no 'Teatro dos Sonhos': United desperdiça dois golos de avanço e tomba perante o Brighton na Carabao Cup (2-3)",
+    "subtitle": "De sonho a pesadelo: Shea Lacey marca na estreia, mas Brighton assina reviravolta e afasta United da Carabao Cup.",
+    "category": "Carabao Cup",
+    "categoryId": "carabao-cup",
+    "categoryKind": "competition",
+    "author": "Chuta Pra Canto",
+    "authorId": "chuta-pra-canto",
+    "authorType": "Organization",
+    "published": "2026-09-16",
+    "publishedAt": "2026-09-16T22:42:12Z",
+    "image": "/images/uploads/NDuQgBnvwrq700tQ64066JfZhU-20260916225628429-pm5tx.jpg"
   },
   {
     "slug": "ud-leiria-goleia-leixoes-no-estadio-do-mar-e-estreia-se-a-vencer-no-campeonato",
@@ -87,6 +92,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-23",
+    "publishedAt": "2026-08-23T00:07:56Z",
     "image": "/images/uploads/1000134420.jpg"
   },
   {
@@ -102,6 +108,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-22T00:00:00.000Z",
+    "publishedAt": "2026-08-22T00:00:00Z",
     "image": "https://framerusercontent.com/images/DhbOZQLGd6fJsqZgnMJHs83ysTU.jpg"
   },
   {
@@ -117,6 +124,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-22T00:00:00.000Z",
+    "publishedAt": "2026-08-22T00:00:00Z",
     "image": "https://framerusercontent.com/images/kFjzP0xHwHqj4rE2g5v9Wz1lA.jpg"
   },
   {
@@ -132,6 +140,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-22T00:00:00.000Z",
+    "publishedAt": "2026-08-22T00:00:00Z",
     "image": "https://framerusercontent.com/images/SzNPPsDAQAYe7mVQhBgUrvXAyI.jpg"
   },
   {
@@ -147,6 +156,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-22T00:00:00.000Z",
+    "publishedAt": "2026-08-22T00:00:00Z",
     "image": "https://framerusercontent.com/images/jQ3lfv6wjc3orLyYmoXOokpw.jpg"
   },
   {
@@ -162,6 +172,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-21T00:00:00.000Z",
+    "publishedAt": "2026-08-21T00:00:00Z",
     "image": "https://framerusercontent.com/images/B5MLgbodTIREM7msVgjcacrHE.jpg"
   },
   {
@@ -177,6 +188,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-21T00:00:00.000Z",
+    "publishedAt": "2026-08-21T00:00:00Z",
     "image": "https://framerusercontent.com/images/SUqDa6VnAaAKNAgp8VvMzNycSKc.jpg"
   },
   {
@@ -192,6 +204,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-20T00:00:00.000Z",
+    "publishedAt": "2026-08-20T00:00:00Z",
     "image": "https://framerusercontent.com/images/XXVtU8uow3RvPToWRgY3Con1cpo.jpg"
   },
   {
@@ -207,6 +220,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-20T00:00:00.000Z",
+    "publishedAt": "2026-08-20T00:00:00Z",
     "image": "https://framerusercontent.com/images/dsVEDq3j0zdaQXMXYZx7ZnEQucQ.jpg"
   },
   {
@@ -222,6 +236,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-20T00:00:00.000Z",
+    "publishedAt": "2026-08-20T00:00:00Z",
     "image": "https://framerusercontent.com/images/a5wFgoFVis0WaUV0hZBTyR32Y.jpg"
   },
   {
@@ -237,6 +252,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-20T00:00:00.000Z",
+    "publishedAt": "2026-08-20T00:00:00Z",
     "image": "https://framerusercontent.com/images/rh6tVoiPXJsPukTmD9mOqqcC0.webp"
   },
   {
@@ -252,6 +268,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-20T00:00:00.000Z",
+    "publishedAt": "2026-08-20T00:00:00Z",
     "image": "https://framerusercontent.com/images/ICyKImtjJiJ3l1uL5wO8Zz0DxI.webp"
   },
   {
@@ -267,6 +284,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-19T00:00:00.000Z",
+    "publishedAt": "2026-08-19T00:00:00Z",
     "image": "https://framerusercontent.com/images/O3tpkcOnmdE35Q4o39IBVHzcLkY.webp"
   },
   {
@@ -282,6 +300,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-19T00:00:00.000Z",
+    "publishedAt": "2026-08-19T00:00:00Z",
     "image": "https://framerusercontent.com/images/2Q43K2gsTAyjHsOaL05leiTHlY.jpg"
   },
   {
@@ -297,6 +316,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-19T00:00:00.000Z",
+    "publishedAt": "2026-08-19T00:00:00Z",
     "image": "https://framerusercontent.com/images/j1N5sdmFB4ldsVaYnB5uPxAXTU.jpg"
   },
   {
@@ -312,6 +332,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-18T00:00:00.000Z",
+    "publishedAt": "2026-08-18T00:00:00Z",
     "image": "https://framerusercontent.com/images/bmvvcT7SolqVgW5gQb2wBVLes.jpg"
   },
   {
@@ -327,6 +348,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-17T00:00:00.000Z",
+    "publishedAt": "2026-08-17T00:00:00Z",
     "image": "https://framerusercontent.com/images/yABmRI9CKUruacUJH9vYrCZ4E.jpg"
   },
   {
@@ -342,6 +364,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-17T00:00:00.000Z",
+    "publishedAt": "2026-08-17T00:00:00Z",
     "image": "https://framerusercontent.com/images/9FEvZ4zMUyMtuH9ULHPlD4t72U.jpg"
   },
   {
@@ -357,6 +380,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-16T00:00:00.000Z",
+    "publishedAt": "2026-08-16T00:00:00Z",
     "image": "https://framerusercontent.com/images/6rzEEcNcAcDCi2d6tHxg0IB8WNQ.jpg"
   },
   {
@@ -372,6 +396,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-16T00:00:00.000Z",
+    "publishedAt": "2026-08-16T00:00:00Z",
     "image": "https://framerusercontent.com/images/upaiNlWaMI4MTrkBWYhxJMP7No.webp"
   },
   {
@@ -387,6 +412,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-16T00:00:00.000Z",
+    "publishedAt": "2026-08-16T00:00:00Z",
     "image": "https://framerusercontent.com/images/a6OUYcrciavjHBxF3hb3jUwI2QI.jpg"
   },
   {
@@ -402,6 +428,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-15T00:00:00.000Z",
+    "publishedAt": "2026-08-15T00:00:00Z",
     "image": "https://framerusercontent.com/images/qUerYUofm3rhwn898rEOAAtmpY.jpeg"
   },
   {
@@ -417,6 +444,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-15T00:00:00.000Z",
+    "publishedAt": "2026-08-15T00:00:00Z",
     "image": "https://framerusercontent.com/images/WhS1HY8R3xGQdvW4uyT5BgzE.webp"
   },
   {
@@ -432,6 +460,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-14T00:00:00.000Z",
+    "publishedAt": "2026-08-14T00:00:00Z",
     "image": "https://framerusercontent.com/images/r95sM8zMZ2N2sHYO3AODLHLkznE.webp"
   },
   {
@@ -447,6 +476,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-14T00:00:00.000Z",
+    "publishedAt": "2026-08-14T00:00:00Z",
     "image": "https://framerusercontent.com/images/e80UQP3Tj7VUsbUic3RjdfWQ.jpeg"
   },
   {
@@ -462,6 +492,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-14T00:00:00.000Z",
+    "publishedAt": "2026-08-14T00:00:00Z",
     "image": "https://framerusercontent.com/images/lqGiuJACPECmET6XiJBXjbf9zE.webp"
   },
   {
@@ -477,6 +508,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-13T00:00:00.000Z",
+    "publishedAt": "2026-08-13T00:00:00Z",
     "image": "https://framerusercontent.com/images/xBg8Z9WuoCfZwENgiUku8r3v0Q.webp"
   },
   {
@@ -492,6 +524,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-13T00:00:00.000Z",
+    "publishedAt": "2026-08-13T00:00:00Z",
     "image": "https://framerusercontent.com/images/OXZTGWYrM8ai0alLlbxuFPlITNw.jpg"
   },
   {
@@ -507,6 +540,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-13T00:00:00.000Z",
+    "publishedAt": "2026-08-13T00:00:00Z",
     "image": "https://framerusercontent.com/images/0BvJ4tcaI2tzR3GH8FvnanQdGg.webp"
   },
   {
@@ -522,6 +556,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-13T00:00:00.000Z",
+    "publishedAt": "2026-08-13T00:00:00Z",
     "image": "https://framerusercontent.com/images/avYGrW5Qul6n9ZPkNCzUKSbIbRo.webp"
   },
   {
@@ -537,6 +572,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-13T00:00:00.000Z",
+    "publishedAt": "2026-08-13T00:00:00Z",
     "image": "https://framerusercontent.com/images/yoN1HGbJh8s44dtfgYW8Tu485A.webp"
   },
   {
@@ -552,6 +588,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-11T00:00:00.000Z",
+    "publishedAt": "2026-08-11T00:00:00Z",
     "image": "https://framerusercontent.com/images/Zl7hhF2dSS9EdRibA0mh9fna0.jpg"
   },
   {
@@ -567,6 +604,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-11T00:00:00.000Z",
+    "publishedAt": "2026-08-11T00:00:00Z",
     "image": "https://framerusercontent.com/images/5c7sp9cGHafX9GCeT9omwpEBhg.png"
   },
   {
@@ -582,6 +620,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-10T00:00:00.000Z",
+    "publishedAt": "2026-08-10T00:00:00Z",
     "image": "https://framerusercontent.com/images/KhCfOyCGNVEvn25YnTA4r62d6iI.webp"
   },
   {
@@ -597,6 +636,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-10T00:00:00.000Z",
+    "publishedAt": "2026-08-10T00:00:00Z",
     "image": "https://framerusercontent.com/images/JVqLzkVJcR2m9OmVS8Cg32pEFFA.jpg"
   },
   {
@@ -612,6 +652,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-08T00:00:00.000Z",
+    "publishedAt": "2026-08-08T00:00:00Z",
     "image": "https://framerusercontent.com/images/zJVg7zOIyezuXrjgYVfnbtfy3Q.jpeg"
   },
   {
@@ -627,6 +668,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-07T00:00:00.000Z",
+    "publishedAt": "2026-08-07T00:00:00Z",
     "image": "https://framerusercontent.com/images/Hcshcg7HFZbRA7swmMg1DcQ0NAc.jpg"
   },
   {
@@ -642,6 +684,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-06T00:00:00.000Z",
+    "publishedAt": "2026-08-06T00:00:00Z",
     "image": "https://framerusercontent.com/images/mW4AmOCPvcmFT4tN0kKfQX5wdo.jpg"
   },
   {
@@ -657,6 +700,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-06T00:00:00.000Z",
+    "publishedAt": "2026-08-06T00:00:00Z",
     "image": "https://framerusercontent.com/images/QB82OGvvNuZKpTv6R4LzroWVb8o.jpg"
   },
   {
@@ -672,6 +716,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-06T00:00:00.000Z",
+    "publishedAt": "2026-08-06T00:00:00Z",
     "image": "https://framerusercontent.com/images/uwSlf1LWqZkieChWX58NsQbxQ.jpg"
   },
   {
@@ -687,7 +732,24 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-06T00:00:00.000Z",
+    "publishedAt": "2026-08-06T00:00:00Z",
     "image": "https://framerusercontent.com/images/ycbszWojJI1w0LNN7vylumEGiQ.jpeg"
+  },
+  {
+    "slug": "mercado-a-ferver-benfica-acelera-por-reforços-e-palhinha-no-radar",
+    "path": "content/noticias/mercado-a-ferver-benfica-acelera-por-reforços-e-palhinha-no-radar.md",
+    "type": "news",
+    "title": "Mercado a Ferver: Benfica Acelera por Reforços e Palhinha no Radar",
+    "subtitle": "As águias intensificam movimentações para fechar o plantel antes do arranque oficial da época. Analisamos os cenários para o meio-campo encarnado.",
+    "category": "SL Benfica",
+    "categoryId": "sl-benfica",
+    "categoryKind": "club",
+    "author": "Chuta Pra Canto",
+    "authorId": "chuta-pra-canto",
+    "authorType": "Organization",
+    "published": "2026-08-05",
+    "publishedAt": "2026-08-05T21:45:27Z",
+    "image": "https://framerusercontent.com/images/0rO5D7SpllQkxO76Fe0IURchg.jpg"
   },
   {
     "slug": "benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe",
@@ -702,6 +764,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-05T12:00:00.000Z",
+    "publishedAt": "2026-08-05T12:00:00Z",
     "image": "https://framerusercontent.com/images/yuZIWPtjI16gMkzUDJomIyCcyjA.jpg"
   },
   {
@@ -717,6 +780,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-05T00:00:00.000Z",
+    "publishedAt": "2026-08-05T00:00:00Z",
     "image": "https://framerusercontent.com/images/PrkICBC7QMFN9KrfmCmke2kVJo.jpg"
   },
   {
@@ -732,6 +796,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-05T00:00:00.000Z",
+    "publishedAt": "2026-08-05T00:00:00Z",
     "image": "https://framerusercontent.com/images/UY0b2QMMuxLtot4tjT7byWPBkgY.jpg"
   },
   {
@@ -747,6 +812,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-05T00:00:00.000Z",
+    "publishedAt": "2026-08-05T00:00:00Z",
     "image": "https://framerusercontent.com/images/1SyTn14yJQ4aDY9i6QxIz8TEA.jpg"
   },
   {
@@ -762,6 +828,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-05T00:00:00.000Z",
+    "publishedAt": "2026-08-05T00:00:00Z",
     "image": "https://framerusercontent.com/images/4EmwMLUZqne7YvLjNG7quM9brQs.jpg"
   },
   {
@@ -777,21 +844,7 @@
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-08-05T00:00:00.000Z",
+    "publishedAt": "2026-08-05T00:00:00Z",
     "image": "https://framerusercontent.com/images/TfKtJ9JuWEMvgOveMaaJQfFJyPw.png"
-  },
-  {
-    "slug": "mercado-a-ferver-benfica-acelera-por-reforços-e-palhinha-no-radar",
-    "path": "content/noticias/mercado-a-ferver-benfica-acelera-por-reforços-e-palhinha-no-radar.md",
-    "type": "news",
-    "title": "Mercado a Ferver: Benfica Acelera por Reforços e Palhinha no Radar",
-    "subtitle": "As águias intensificam movimentações para fechar o plantel antes do arranque oficial da época. Analisamos os cenários para o meio-campo encarnado.",
-    "category": "SL Benfica",
-    "categoryId": "sl-benfica",
-    "categoryKind": "club",
-    "author": "Chuta Pra Canto",
-    "authorId": "chuta-pra-canto",
-    "authorType": "Organization",
-    "published": "2026-08-05",
-    "image": "https://framerusercontent.com/images/0rO5D7SpllQkxO76Fe0IURchg.jpg"
   }
 ]

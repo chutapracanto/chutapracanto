@@ -642,56 +642,14 @@
       <div class="filter-toolbar">
 
         <div class="filter-pills">
-
           <button class="filter-btn active" aria-pressed="true" onclick="filtrarNoticias('todos', this)">Todas</button>
-
-          <button class="filter-btn" aria-pressed="false" onclick="filtrarNoticias('sl benfica', this)">SL Benfica</button>
-
-          <button class="filter-btn" aria-pressed="false" onclick="filtrarNoticias('fc porto', this)">FC Porto</button>
-
-          <button class="filter-btn" aria-pressed="false" onclick="filtrarNoticias('sporting sc', this)">Sporting SC</button>
-
-          <button class="filter-btn" aria-pressed="false" onclick="filtrarNoticias('premier league', this)">Premier League</button>
-
-          
-
-          <!-- DROPDOWN MAIS CATEGORIAS -->
-
           <div class="dropdown-wrapper" id="dropdownWrapper">
-
             <button class="filter-btn" id="categoryDropdownToggle" type="button" aria-expanded="false" aria-label="Mais categorias" onclick="toggleDropdown(event)">
-
               Mais <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem;"></i>
-
             </button>
-
-            <div class="dropdown-menu">
-
-              <button class="dropdown-item" aria-pressed="false" onclick="filtrarNoticias('sc braga', this)">SC Braga</button>
-
-              <button class="dropdown-item" aria-pressed="false" onclick="filtrarNoticias('liga portugal betclic', this)">Liga Portugal Betclic</button>
-
-              <button class="dropdown-item" aria-pressed="false" onclick="filtrarNoticias('liga europa', this)">Liga Europa</button>
-
-              <button class="dropdown-item" aria-pressed="false" onclick="filtrarNoticias('liga conferência', this)">Liga Conferência</button>
-
-              <button class="dropdown-item" aria-pressed="false" onclick="filtrarNoticias('supertaça europeia', this)">Supertaça Europeia</button>
-
-              <button class="dropdown-item" aria-pressed="false" onclick="filtrarNoticias('liga portugal 2 meusuper', this)">Liga Portugal 2 MeuSuper</button>
-
-              <button class="dropdown-item" aria-pressed="false" onclick="filtrarNoticias('la liga', this)">La Liga</button>
-
-              <button class="dropdown-item" aria-pressed="false" onclick="filtrarNoticias('supertaça inglaterra', this)">Supertaça Inglaterra</button>
-
-              <button class="dropdown-item" aria-pressed="false" onclick="filtrarNoticias('futebol nacional', this)">Futebol Nacional</button>
-
-            </div>
-
+            <div class="dropdown-menu" id="categoryDropdownMenu"></div>
           </div>
-
         </div>
-
-
 
         <!-- PESQUISA RÁPIDA -->
 
@@ -794,6 +752,32 @@
       return String(texto || '').trim().toLocaleLowerCase('pt-PT').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     }
 
+    function renderizarCategorias(categorias) {
+      const menu = document.getElementById('categoryDropdownMenu');
+      if (!menu) return;
+      menu.replaceChildren();
+      const categoriasUnicas = new Map();
+      (Array.isArray(categorias) ? categorias : []).forEach(item => {
+        const label = String(item?.label || '').trim();
+        const chave = normalizarCategoria(label);
+        if (label && chave && chave !== 'todas' && !categoriasUnicas.has(chave)) {
+          categoriasUnicas.set(chave, { ...item, label });
+        }
+      });
+      categoriasUnicas.forEach(categoria => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'dropdown-item';
+        button.setAttribute('aria-pressed', 'false');
+        button.textContent = categoria.label;
+        if (categoria.id) button.dataset.categoryId = categoria.id;
+        button.addEventListener('click', () => filtrarNoticias(categoria.label, button));
+        menu.appendChild(button);
+      });
+      const wrapper = document.getElementById('dropdownWrapper');
+      if (wrapper) wrapper.hidden = categoriasUnicas.size === 0;
+    }
+
     function obterBotoesCategoria() {
       return [...document.querySelectorAll('.filter-btn, .dropdown-item')]
         .filter(btn => btn.id !== 'categoryDropdownToggle');
@@ -883,10 +867,14 @@
       if (resultsRegion) resultsRegion.setAttribute('aria-busy', 'true');
       if (resultsStatus) resultsStatus.textContent = 'A carregar notícias.';
       try {
-        const response = await fetch('/content/noticias-index.json', { cache: 'no-store' });
+        const [response, taxonomyResponse] = await Promise.all([
+          fetch('/content/noticias-index.json', { cache: 'no-store' }),
+          fetch('/content/taxonomia.json', { cache: 'no-store' })
+        ]);
         if (!response.ok) throw new Error('Não foi possível carregar o índice de notícias.');
 
         const data = await response.json();
+        const taxonomy = taxonomyResponse.ok ? await taxonomyResponse.json() : null;
 
         if (!Array.isArray(data)) {
           throw new Error('Índice de notícias inválido.');
@@ -916,17 +904,25 @@
             imagem: item.image || 'images/logo.png',
             descricao: item.subtitle || '',
             dataPublicacaoRaw: dateRaw,
+            dataPublicacaoOrdenacao: item.publishedAt || dateRaw,
             dataPublicacaoFormatted: dateFormatted
           };
         }).filter(item => item.slug);
 
+        const categoriasTaxonomia = Array.isArray(taxonomy?.categories)
+          ? taxonomy.categories
+          : [];
+        const categoriasDoIndice = [...new Map(todasAsNoticias.map(item => [
+          normalizarCategoria(item.tag),
+          { label: item.tag }
+        ]).filter(([key]) => key)).values()];
+        renderizarCategorias(categoriasTaxonomia.length ? categoriasTaxonomia : categoriasDoIndice);
         todasAsNoticias.sort(
-          (a, b) => new Date(b.dataPublicacaoRaw) - new Date(a.dataPublicacaoRaw)
+          (a, b) => Date.parse(b.dataPublicacaoOrdenacao) - Date.parse(a.dataPublicacaoOrdenacao)
         );
         indiceNoticiasCarregado = true;
         if (resultsRegion) resultsRegion.setAttribute('aria-busy', 'false');
-        aplicarFiltros();
-        escreverEstadoNaUrl('replace');
+        restaurarEstadoDaUrl();
 
       } catch (error) {
         console.error('Erro ao carregar notícias:', error);
@@ -1119,7 +1115,7 @@
 
     function aplicarFiltros(anunciarResultados = true) {
 
-      const termo = document.getElementById('searchInput').value.toLowerCase().trim();
+      const termo = normalizarCategoria(document.getElementById('searchInput').value);
 
 
 
@@ -1129,7 +1125,7 @@
 
       if (filtroAtual !== 'todos') {
 
-        noticiasFiltradas = noticiasFiltradas.filter(n => n.tag.toLowerCase().trim() === filtroAtual.toLowerCase().trim());
+        noticiasFiltradas = noticiasFiltradas.filter(n => normalizarCategoria(n.tag) === normalizarCategoria(filtroAtual));
 
       }
 
@@ -1139,11 +1135,11 @@
 
         noticiasFiltradas = noticiasFiltradas.filter(n => 
 
-          n.title.toLowerCase().includes(termo) || 
+          normalizarCategoria(n.title).includes(termo) || 
 
-          n.descricao.toLowerCase().includes(termo) ||
+          normalizarCategoria(n.descricao).includes(termo) ||
 
-          n.tag.toLowerCase().includes(termo)
+          normalizarCategoria(n.tag).includes(termo)
 
         );
 

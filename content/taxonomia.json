@@ -86,6 +86,11 @@
       "id": "european-roundup",
       "label": "SL Benfica, Liga Europa, SC Braga, Liga Conferência",
       "kind": "mixed"
+    },
+    {
+      "id": "selecao-nacional",
+      "label": "Seleção Nacional",
+      "kind": "mixed"
     }
   ]
 }

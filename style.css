@@ -81,7 +81,7 @@ header {
 }
 
 .site-logo {
-  height: clamp(48px, 5vw, 64px);
+  height: clamp(52px, 5.5vw, 72px);
   width: auto;
   max-width: min(100%, 280px);
   display: block;

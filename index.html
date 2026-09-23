@@ -217,11 +217,11 @@
         <div class="team-members">
           <div class="member">
             <h3>RUTE COSTA</h3>
-            <span>MODERATION</span>
+            <span data-author-role="rute-costa">Moderadora e Locutora</span>
           </div>
           <div class="member">
             <h3>PEDRO SOARES</h3>
-            <span>TECHNICAL ANALYSIS</span>
+            <span data-author-role="pedro-soares">Treinador, Opinião Crítica e Análise</span>
           </div>
         </div>
       </div>
@@ -300,6 +300,26 @@
       if (className) el.className = className;
       el.textContent = typeof value === 'string' ? value : '';
       return el;
+    }
+
+    function timestampPublicacao(item) {
+      const timestamp = Date.parse(item.publishedAt || item.published || '');
+      return Number.isFinite(timestamp) ? timestamp : 0;
+    }
+
+    async function carregarPapeisEquipa() {
+      try {
+        const response = await fetch('/content/authors.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error('Não foi possível carregar os autores.');
+        const authors = await response.json();
+        if (!Array.isArray(authors)) throw new Error('Lista de autores inválida.');
+        document.querySelectorAll('[data-author-role]').forEach(element => {
+          const author = authors.find(item => item.id === element.dataset.authorRole);
+          if (author?.role) element.textContent = author.role;
+        });
+      } catch (error) {
+        console.error('Erro ao carregar os papéis da equipa:', error);
+      }
     }
 
     // 2. FEEDS DO YOUTUBE
@@ -410,7 +430,9 @@
         const container = document.getElementById('noticias-container');
         if (!container) return;
         if (!Array.isArray(noticiasList)) throw new Error('Índice de notícias inválido.');
-        const noticiasEditoriales = noticiasList.filter(item => (item.type || 'news') === 'news');
+        const noticiasEditoriales = noticiasList
+          .filter(item => (item.type || 'news') === 'news')
+          .sort((a, b) => timestampPublicacao(b) - timestampPublicacao(a));
         const destaques = noticiasEditoriales.slice(0, 4);
         container.replaceChildren();
         if (!destaques.length) {
@@ -523,6 +545,7 @@
     // INICIALIZAÇÃO
     document.addEventListener('DOMContentLoaded', () => {
       carregarNoticias();
+      carregarPapeisEquipa();
       iniciarFeedsAdiados();
     });
   </script>
