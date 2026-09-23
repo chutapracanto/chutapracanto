@@ -886,6 +886,19 @@
 
             <div class="form-group">
 
+                <label for="noticia-type">
+                    Tipo editorial
+                </label>
+
+                <select id="noticia-type">
+                    <option value="news">Notícia</option>
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
                 <label for="noticia-categoria">
                     Categoria
                 </label>
@@ -2416,6 +2429,13 @@ function preencherFormulario(
         obterCampo(fields, "type") ||
         "news";
 
+    const tipoEditorialSelect =
+        document.getElementById("noticia-type");
+
+    if (tipoEditorialSelect) {
+        tipoEditorialSelect.value = tipoEditorialEmEdicao;
+    }
+
     const titulo =
         obterCampo(
             fields,
@@ -2948,6 +2968,16 @@ async function guardarNoticia() {
             .value
             .trim();
 
+    const tipoEditorialSelect =
+        document.getElementById("noticia-type");
+
+    const tipoEditorial =
+        tipoEditorialSelect?.value ||
+        tipoEditorialEmEdicao ||
+        "news";
+
+    tipoEditorialEmEdicao = tipoEditorial;
+
     const statusEl =
         document.getElementById(
             "status"
@@ -3103,7 +3133,7 @@ async function guardarNoticia() {
                 data,
                 autor,
                 finalImageUrl,
-                tipoEditorialEmEdicao,
+                tipoEditorial,
                 markdownBody
             );
 
@@ -4474,6 +4504,13 @@ function limparFormulario() {
 
     tipoEditorialEmEdicao = "news";
 
+    const tipoEditorialSelect =
+        document.getElementById("noticia-type");
+
+    if (tipoEditorialSelect) {
+        tipoEditorialSelect.value = "news";
+    }
+
     document
         .getElementById("noticia-titulo")
         .value =
@@ -4594,8 +4631,56 @@ document.addEventListener(
 // INICIALIZAÇÃO
 // ============================================================
 
+async function carregarTiposEditoriais() {
+
+    const selector =
+        document.getElementById("noticia-type");
+
+    if (!selector) {
+        return;
+    }
+
+    try {
+        const response = await fetch(
+            "/content/editorial-types.json",
+            { cache: "no-store" }
+        );
+
+        if (!response.ok) {
+            throw new Error("Não foi possível carregar os tipos editoriais.");
+        }
+
+        const tipos = await response.json();
+
+        if (!Array.isArray(tipos)) {
+            throw new Error("Lista de tipos editoriais inválida.");
+        }
+
+        const options = tipos
+            .filter(tipo => typeof tipo.id === "string" && typeof tipo.label === "string")
+            .map(tipo => {
+                const option = document.createElement("option");
+                option.value = tipo.id;
+                option.textContent = tipo.label;
+                return option;
+            });
+
+        if (!options.some(option => option.value === "news")) {
+            throw new Error("O tipo editorial news não está configurado.");
+        }
+
+        selector.replaceChildren(...options);
+        selector.value = tipoEditorialEmEdicao || "news";
+
+    } catch (error) {
+        console.error("Erro ao carregar tipos editoriais:", error);
+    }
+}
+
 window.onload =
     async function() {
+
+        await carregarTiposEditoriais();
 
         const autenticado =
             await verificarSessao();
