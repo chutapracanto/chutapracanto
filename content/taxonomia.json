@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "categories": [
+    {
+      "id": "liga-europa",
+      "label": "Liga Europa",
+      "kind": "competition"
+    },
+    {
+      "id": "carabao-cup",
+      "label": "Carabao Cup",
+      "kind": "competition"
+    },
+    {
+      "id": "sl-benfica-liga-europa",
+      "label": "SL Benfica Liga Europa",
+      "kind": "mixed"
+    },
+    {
+      "id": "liga-portugal-2-meusuper",
+      "label": "Liga Portugal 2 MeuSuper",
+      "kind": "competition"
+    },
+    {
+      "id": "sporting-sc",
+      "label": "Sporting SC",
+      "kind": "club"
+    },
+    {
+      "id": "premier-league",
+      "label": "Premier League",
+      "kind": "competition"
+    },
+    {
+      "id": "fc-porto",
+      "label": "FC Porto",
+      "kind": "club",
+      "aliases": [
+        "FCPORTO"
+      ]
+    },
+    {
+      "id": "sc-braga",
+      "label": "SC Braga",
+      "kind": "club"
+    },
+    {
+      "id": "sl-benfica",
+      "label": "SL Benfica",
+      "kind": "club"
+    },
+    {
+      "id": "supertaca-inglaterra",
+      "label": "Supertaça Inglaterra",
+      "kind": "competition"
+    },
+    {
+      "id": "liga-portugal-betclic",
+      "label": "Liga Portugal Betclic",
+      "kind": "competition"
+    },
+    {
+      "id": "sporting-cp",
+      "label": "Sporting CP",
+      "kind": "club"
+    },
+    {
+      "id": "supertaca-europeia",
+      "label": "Supertaça Europeia",
+      "kind": "competition",
+      "aliases": [
+        "Supertaca Europeia"
+      ]
+    },
+    {
+      "id": "sl-benfica-fc-porto-sporting-sc",
+      "label": "SL Benfica FC Porto Sporting SC",
+      "kind": "mixed"
+    },
+    {
+      "id": "liga-portugal-meusuper",
+      "label": "Liga Portugal MeuSuper",
+      "kind": "competition"
+    },
+    {
+      "id": "european-roundup",
+      "label": "SL Benfica, Liga Europa, SC Braga, Liga Conferência",
+      "kind": "mixed"
+    }
+  ]
+}

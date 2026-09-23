@@ -2,7 +2,7 @@
 title: "PSG bate Aston Villa em Salzburgo e revalida a Supertaça Europeia"
 slug: "psg-bate-aston-villa-em-salzburgo-e-revalida-a-supertaça-europeia"
 subtitle: "Com Vitinha, Nuno Mendes e João Neves a titulares, parisienses bateram o Aston Villa por 2-1 e somaram o quarto troféu europeu num ano."
-category: "Supertaca Europeia"
+category: "Supertaça Europeia"
 published: "2026-08-13T00:00:00.000Z"
 author: "ChutaPraCanto"
 image: https://framerusercontent.com/images/0BvJ4tcaI2tzR3GH8FvnanQdGg.webp
