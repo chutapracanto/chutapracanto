@@ -9,6 +9,15 @@ function obterBranchGithub(env) {
   return env.CF_PAGES_BRANCH || GITHUB_BRANCH;
 }
 
+function normalizarNomeEditorial(nome) {
+  return String(nome || "").replace(/\s+/g, "").toLowerCase();
+}
+
+function autorEditorialEhOrganizacao(nome) {
+  return normalizarNomeEditorial(nome) === "chutapracanto";
+}
+
+
 const SESSION_COOKIE_NAME = "cpc_session";
 
 
@@ -831,7 +840,7 @@ async function prepararPaginaParaPartilha(
             const author = String(dados.author || "").trim();
             const authorData = author
               ? {
-                  "@type": author.toLowerCase() === "chuta pra canto" ? "Organization" : "Person",
+                  "@type": autorEditorialEhOrganizacao(author) ? "Organization" : "Person",
                   name: author
                 }
               : null;
