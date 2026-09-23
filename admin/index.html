@@ -781,7 +781,7 @@
             <div class="top-actions">
 
                 <div>
-                    <h1>📰 Notícias</h1>
+                    <h1 id="admin-section-title">📰 Notícias</h1>
                 </div>
 
                 <div style="display:flex; gap:8px; flex-wrap:wrap;">
@@ -1863,6 +1863,10 @@ function mudarSecaoAdmin(tipo) {
     secaoAdminAtual = tipo === "opinion" ? "opinion" : "news";
     document.getElementById("tab-news")?.classList.toggle("active", secaoAdminAtual === "news");
     document.getElementById("tab-opinion")?.classList.toggle("active", secaoAdminAtual === "opinion");
+    const sectionTitle = document.getElementById("admin-section-title");
+    if (sectionTitle) {
+        sectionTitle.textContent = secaoAdminAtual === "opinion" ? "✍️ Crónicas" : "📰 Notícias";
+    }
     paginaAtual = 1;
     filtrarLista();
 }
@@ -2116,7 +2120,9 @@ function filtrarLista() {
     if (!termo) {
 
         noticiasFiltradas =
-            [...noticias];
+            noticias.filter(
+                file => obterTipoConteudo(file) === secaoAdminAtual
+            );
 
         paginaAtual = 1;
 
