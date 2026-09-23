@@ -813,7 +813,7 @@
                 class="news-list"
             >
                 <div class="loading">
-                    A carregar notícias...
+                    A carregar conteúdos...
                 </div>
             </div>
 
@@ -999,7 +999,7 @@
                     onclick="guardarNoticia()"
                 >
                     <span id="save-button-text">
-                        Publicar Notícia
+                        Publicar Conteúdo
                     </span>
                 </button>
 
@@ -1008,7 +1008,7 @@
                     class="danger-btn hidden"
                     onclick="apagarNoticia()"
                 >
-                    Apagar Notícia
+                    Apagar Conteúdo
                 </button>
 
             </div>
@@ -1627,7 +1627,7 @@ async function carregarNoticias() {
 
             <div class="loading">
 
-                Não foi possível carregar as notícias.
+                Não foi possível carregar os conteúdos.
 
                 <br><br>
 
@@ -2162,7 +2162,7 @@ function novaNoticia() {
     document
         .getElementById("mode-label")
         .innerText =
-            "Criar uma nova notícia";
+            "Criar um novo conteúdo";
 
     document
         .getElementById("save-button-text")
@@ -2214,7 +2214,7 @@ async function editarNoticia(path) {
         document
             .getElementById("form-title")
             .innerText =
-            "A carregar notícia...";
+            "A carregar conteúdo...";
 
         iniciarEditor();
 
@@ -2243,7 +2243,7 @@ async function editarNoticia(path) {
         document
             .getElementById("form-title")
             .innerText =
-            "Editar Notícia";
+            "Editar Conteúdo";
 
         document
             .getElementById("mode-label")
@@ -3156,7 +3156,7 @@ async function guardarNoticia() {
                 );
 
             const filename =
-                `content/noticias/${slug}.md`;
+                `content/${tipoEditorial === "opinion" ? "opiniao" : "noticias"}/${slug}.md`;
 
             await apiFetch(
                 `/api/admin/news?path=${encodeURIComponent(filename)}`,
@@ -3171,7 +3171,7 @@ async function guardarNoticia() {
                     body:
                         JSON.stringify({
                             message:
-                                "Nova notícia: " +
+                                "Novo conteúdo: " +
                                 titulo,
 
                             content:
@@ -3183,7 +3183,7 @@ async function guardarNoticia() {
             );
 
             mostrarSucesso(
-                "Notícia publicada com sucesso!"
+                "Conteúdo publicado com sucesso!"
             );
 
         } else {
@@ -3218,7 +3218,7 @@ async function guardarNoticia() {
                     body:
                         JSON.stringify({
                             message:
-                                "Editar notícia: " +
+                                "Editar conteúdo: " +
                                 titulo,
 
                             content:
@@ -3233,7 +3233,7 @@ async function guardarNoticia() {
             );
 
             mostrarSucesso(
-                "Notícia atualizada com sucesso!"
+                "Conteúdo atualizado com sucesso!"
             );
         }
 

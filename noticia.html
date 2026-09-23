@@ -344,7 +344,7 @@
         const encodedPath = entry.path.split('/').map(encodeURIComponent).join('/');
         let response = await fetch('/' + encodedPath);
         if (!response.ok) {
-          const apiResponse = await fetch('https://api.github.com/repos/chutapracanto/chutapracanto/contents/content/noticias');
+          const apiResponse = await fetch('https://api.github.com/repos/chutapracanto/chutapracanto/contents/content/' + (entry.type === 'opinion' ? 'opiniao' : 'noticias'));
           if (apiResponse.ok) {
             const files = await apiResponse.json();
             const matched = files.find(file => file.name.replace(/\.md$/i, '').toLowerCase() === decodeURIComponent(slug).toLowerCase());
@@ -510,7 +510,7 @@
 
         const recentes = noticias.filter(noticia => {
 
-          if (!noticia.slug || noticia.slug === currentSlug) return false;
+          if (!noticia.slug || noticia.slug === currentSlug || (noticia.type || 'news') !== 'news') return false;
 
           const publicadaEm = dataPublicacao(noticia);
 
