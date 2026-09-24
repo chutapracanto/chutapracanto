@@ -186,7 +186,7 @@ def article_from_page(session: requests.Session, url: str) -> dict | None:
 
     image_ok, image_status = image_is_reachable(session, image)
     if not image_ok:
-        return None
+        raise RuntimeError(f"image-not-reachable: {image_status}")
 
     return {
         "slug": slug,
