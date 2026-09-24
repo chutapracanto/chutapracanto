@@ -1,6 +1,10 @@
 name: Testar importação histórica do Framer
 
 on:
+  push:
+    paths:
+      - "scripts/import-framer-news.py"
+      - ".github/workflows/testar-importacao-framer.yml"
   workflow_dispatch:
     inputs:
       limit:
