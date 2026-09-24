@@ -753,15 +753,18 @@ FIM.
 - O estado real do GitHub prevalece sobre estados antigos descritos no manual, conversas ou memória.
 - Depois de workflows que escrevem conteúdo, verificar efetivamente índice e sitemap.
 
-## 24. REBASE OPERACIONAL DO STICKY — 2026-09-24
+## 24. REBASE E FECHO OPERACIONAL DO STICKY — 2026-09-24
 
 - PR #23 foi fechada sem merge porque a sua branch estava 75 commits atrás de main, depois dos avanços do arquivo Framer.
-- Antes de reaplicar, foi verificado que `noticia.html` e `style.css` em main eram byte-a-byte iguais aos mesmos ficheiros na base original #22; portanto não havia alterações atuais nesses ficheiros a perder.
-- Foi criada `mobile-sticky-editorial-rebased` diretamente a partir de main.
-- Foram reaplicadas apenas as versões dos dois ficheiros do #23.
+- Foi criada `mobile-sticky-editorial-rebased` diretamente a partir da main atual.
+- Foram reaplicadas apenas as versões de `noticia.html` e `style.css` do #23.
 - Validação estática: 7 blocos `<script>` de `noticia.html` passaram compilação sintática; chaves de `style.css` balanceadas.
-- PR #24 foi criada sobre main atual: 2 ficheiros, 164 adições, 9 remoções, 2 commits, branch sem commits atrás de main.
-- PR #24 permanece aberta até validação visual/funcional e de performance suficiente; deployment SUCCESS sozinho não autoriza merge.
+- PR #24 foi criada sobre main atual e recebeu 8 commits, 2 ficheiros alterados.
+- Validação externa final: 390 e 320 px sem overflow/sobreposição, cartões verticais com imagem 16:9, títulos completos e relacionados acessíveis; 768 e 1280 px sem regressões visíveis.
+- Consola permaneceu inconclusiva por limitação do browser incorporado; não houve alteração de código nessa ronda.
+- PR #24 foi mergeada em `d1ac249d0cd5fee66e25d7162a97872dc82e28e3`.
+- main recebeu posteriormente o commit `9b8ed5e0a05aebeebab110aabc5ea919e8d5a8f1` para atualizar este manual.
+- A validação pós-merge de produção permanece obrigatória antes de iniciar a Fase 6.
 
 ## 25. FORMATO DE PROMPTS E TEXTO PARA COPIAR — 2026-09-24
 
