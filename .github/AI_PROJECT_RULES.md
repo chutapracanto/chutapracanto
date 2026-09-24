@@ -369,8 +369,13 @@ Estado atual:
 - validação de imagem foi acrescentada ao importer nos commits 43f291630fb69825172324118b60ec0edcc5aafc e ec1731934d4377343e6585ef4e36a17ee779dbfc;
 - imagem ausente/inacessível agora conta como falha e bloqueia a entrada no lote de importação;
 - o novo dry-run do último commit ainda está a ser criado/executado pelo GitHub Actions;
+- foi criado temporariamente .github/workflows/importar-framer-uma-vez.yml para a importação real, com proteção contra sobrescrita; depois da execução deve ser removido;
 - isso não autoriza importação real: ainda é necessário validar o relatório completo e a estratégia de imagens;
 - não gastar Codex para esta fase enquanto o Assistente conseguir continuar pelo GitHub.
+
+### PRIORIDADE ATUAL DA IMPORTAÇÃO
+
+O dry-run completo terminou SUCCESS no commit anterior. A prioridade operacional passou para a importação real única do arquivo, seguida de geração automática do índice/sitemap e validação. Depois de concluída, remover o workflow temporário de importação para não voltar a fazer 213 pedidos em futuros pushes.
 
 ### REGRA DE CONTINUIDADE DE EXECUÇÃO
 
