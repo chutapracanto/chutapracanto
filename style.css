@@ -58,7 +58,7 @@ h1, h2, h3, .logo, .btn-neon, .tag, .hero-tag {
    ========================================== */
 header {
   --header-progress: 0;
-  background: rgba(8, 11, 17, calc(1 - (var(--header-progress) * .72)));
+  background: rgba(8, 11, 17, calc(1 - (var(--header-progress) * .08)));
   border-bottom: 1px solid rgba(26, 35, 50, calc(1 - (var(--header-progress) * .78)));
   padding: calc(1rem - (var(--header-progress) * .5rem)) 1.5rem;
   position: sticky;
