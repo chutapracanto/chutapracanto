@@ -383,6 +383,8 @@ Estado atual:
 - commit de adaptação: 996897a0def026b6f625d1980b5f1544c74aee03; a próxima execução deve validar prontos/falhas antes de considerar a importação concluída;
 - diagnóstico dos campos confirmou título/data/categoria/autor/imagem corretos, mas o corpo estava em elementos `div`, não `p`; commit ce9a50994154ff32523798b12694ddab82641c92 passou a extrair o bloco de corpo diretamente;
 - o commit a02106e651e0a7346510c9d824559f175ddc1734a é o novo gatilho controlado de escrita;
+- a primeira importação válida preparou 179 artigos, mas o push foi rejeitado porque main avançou durante a execução; o workflow agora faz fetch/rebase de main antes de publicar;
+- o run 36022816703 confirmou: 213 URLs, 179 prontos, 34 duplicados/ignorados, 0 falhas;
 - o commit 4f9f3e91c93b91b2d0f5565a6dd6a83de8dbbce5 é o gatilho controlado da importação real;
 - isso não autoriza importação real: ainda é necessário validar o relatório completo e a estratégia de imagens;
 - não gastar Codex para esta fase enquanto o Assistente conseguir continuar pelo GitHub.
