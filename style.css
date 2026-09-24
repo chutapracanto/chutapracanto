@@ -232,6 +232,10 @@ nav a:hover, nav a.active {
   margin-bottom: 4rem;
 }
 
+@media (min-width: 769px) {
+  .featured-wrapper { min-height: 640px; }
+}
+
 .main-featured-card {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
@@ -428,11 +432,14 @@ footer {
 }
 
 .footer-logo {
-  height: clamp(42px, 4vw, 50px);
-  width: auto;
+  display: block;
+  width: 220px;
+  height: 50px;
   max-width: 100%;
   align-self: flex-start;
   object-fit: contain;
+  object-position: left center;
+  aspect-ratio: 22 / 5;
 }
 
 .footer-brand p {
