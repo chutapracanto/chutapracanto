@@ -175,6 +175,22 @@ def article_from_page(session: requests.Session, url: str) -> dict | None:
         or first_meta(soup, "article:modified_time", "dateModified")
     )
 
+    h1s = soup.find_all("h1")
+    article_h1 = h1s[1] if len(h1s) > 1 else (h1s[0] if h1s else None)
+    header_block = article_h1.parent.parent.parent if article_h1 and article_h1.parent and article_h1.parent.parent and article_h1.parent.parent.parent else None
+    header_text = clean(header_block.get_text(" ", strip=True)) if header_block else ""
+    if not published:
+        published_match = re.search(r"(?i)Publicado em ([^·]+)", header_text)
+        published = parse_date(published_match.group(1)) if published_match else ""
+    if author == "ChutaPraCanto" and header_text:
+        author_match = re.search(r"(?i)·\s*Por\s+(.+)$", header_text)
+        if author_match:
+            author = clean(author_match.group(1))
+    if not category and header_text and title:
+        category_match = re.search(r"← VOLTAR ÀS NOTÍCIAS\s+(.+?)\s+" + re.escape(title), header_text)
+        if category_match:
+            category = clean(category_match.group(1))
+
     image = article_ld.get("image", "")
     if isinstance(image, dict):
         image = image.get("url", "")
