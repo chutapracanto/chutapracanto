@@ -684,3 +684,18 @@ FIM.
 - O importer atual contém a extração adaptada ao template Framer e validação de imagem, mas a importação real continua bloqueada até existir uma validação completa do lote.
 - Antes da importação real: confirmar relatório de 213 URLs, falhas = 0 para entradas consideradas importáveis, duplicados corretamente classificados e imagens acessíveis. Não considerar apenas o estado do commit como validação do lote.
 - Depois da importação real: validar número efetivamente escrito, ausência de sobrescrita, índice cronológico, pesquisa, sitemap e regressões; remover o mecanismo temporário de importação única.
+
+
+## 17. REGRA DE ESCALADA — QUANDO A EXECUÇÃO EXTERNA É INEVITÁVEL
+
+- Se a continuação do trabalho depender de uma capacidade que o ambiente atual não disponibiliza, **não terminar simplesmente a resposta**.
+- Primeiro esgotar tudo o que puder ser executado diretamente no GitHub/repositório e verificar o estado.
+- Quando restar uma operação externa inevitável, identificar imediatamente **quem precisa de a executar**:
+  1. **Utilizadora**, quando exige uma ação manual na interface/conta/Cloudflare ou uma decisão que só ela pode tomar.
+  2. **Codex**, quando exige execução local, browser/Cloudflare, terminal, rede, GitHub Actions ou outra capacidade disponível ao Codex mas não ao ambiente atual.
+- Nesse momento, preparar **imediatamente a instrução acionável**, sem pedir à utilizadora para descobrir os passos.
+- Para a utilizadora: fornecer passos numerados, curtos e exatos, indicando onde clicar/fazer e o resultado esperado.
+- Para o Codex: fornecer um **prompt pronto a colar**, curto e específico, mandando primeiro ler `.github/AI_PROJECT_RULES.md`, inspecionar o estado atual e executar/verificar a tarefa; não colar o manual inteiro no prompt.
+- Se forem necessárias ações em ambos, separar claramente a parte da utilizadora e a parte do Codex e indicar a ordem.
+- Depois de a ação externa ser executada, retomar automaticamente o ciclo: **verificar → corrigir → verificar → continuar**, sem considerar a tarefa concluída apenas porque a execução externa terminou.
+- Nunca dizer apenas “isto tem de ser feito externamente” ou “o próximo passo é teu”. A resposta deve deixar a pessoa com **o procedimento ou prompt pronto para executar imediatamente**.
