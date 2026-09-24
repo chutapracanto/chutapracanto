@@ -376,6 +376,8 @@ Estado atual:
 - foi corrigida a permissão do workflow para contents: write no commit 556624cba28fe42089453d9df695b54e3465fdc8, necessária para o commit automático dos artigos;
 - o push automático foi corrigido para `git push origin HEAD:main` no commit b229d43e114c49e9499af9277afbe64d5835bffd;
 - o estado do importador passa a apontar para o run do GitHub Actions para permitir inspeção do relatório quando necessário, alteração no commit dc83e7c5bc37b14f6f74115c3e6ae1caa1eea43a;
+- dry-run atual revelou 213 URLs encontradas, 0 prontas, 213 ignoradas e 0 falhas; todas foram classificadas como missing-title-date-or-body;
+- prioridade mudou de importar para diagnosticar como o Framer entrega o HTML/conteúdo das páginas e adaptar o extrator sem inventar conteúdo;
 - o commit a02106e651e0a7346510c9d824559f175ddc1734a é o novo gatilho controlado de escrita;
 - o commit 4f9f3e91c93b91b2d0f5565a6dd6a83de8dbbce5 é o gatilho controlado da importação real;
 - isso não autoriza importação real: ainda é necessário validar o relatório completo e a estratégia de imagens;
