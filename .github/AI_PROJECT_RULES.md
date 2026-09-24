@@ -283,6 +283,7 @@ Pedro Soares — Treinador, Opinião Crítica e Análise.
 ### #19 — Navegação/leitura/partilha/performance
 FECHADA SEM MERGE.
 Não é produção.
+Estado real confirmado em 2026-09-24: PR fechada, não merged; HEAD no fecho: `acfcc1c7974bf42e81f2a2a3fe633bffc06d6733`. As alterações reaplicadas/validadas em produção devem ser consideradas apenas através do #22 e alterações posteriores efetivamente mergeadas.
 Incluía:
 - navegação Notícias/Opinião;
 - sticky progressivo;
@@ -322,11 +323,12 @@ MERGED — 9855a09b
 Deployment histórico successful, commit fff0fca.
 
 ### #23 — Sticky editorial progressivo + mobile Notícias
-ABERTA / MERGEABLE / NÃO MERGED em 2026-09-24.
-Branch: mobile-sticky-editorial
-Head: 9e62d3e5
-Preview: https://507d6a7d.chutapracanto.pages.dev
-Deployment: SUCCESS
+ABERTA / NÃO MERGED em 2026-09-24, confirmada diretamente no GitHub.
+Base: `main` em `9855a09b4e27ddeea2ea5973392a399f60bb0921`.
+Branch: mobile-sticky-editorial.
+Head confirmado: `9e62d3e53f2a0a85a5dcc7a5b3a6987becec8550`.
+Preview confirmado: `https://507d6a7d.chutapracanto.pages.dev`.
+Deployment do HEAD: SUCCESS.
 - header/cabeçalho encolhem/transparecem progressivamente no scroll;
 - mobile Notícias passa a cartões verticais;
 - imagem 16:9;
@@ -390,9 +392,9 @@ Estado atual:
 - isso não autoriza importação real: ainda é necessário validar o relatório completo e a estratégia de imagens;
 - não gastar Codex para esta fase enquanto o Assistente conseguir continuar pelo GitHub.
 
-### PRIORIDADE ATUAL DA IMPORTAÇÃO
+### FECHO DA IMPORTAÇÃO FRAMER
 
-O dry-run completo terminou SUCCESS no commit anterior. A prioridade operacional passou para a importação real única do arquivo, seguida de geração automática do índice/sitemap e validação. Depois de concluída, remover o workflow temporário de importação para não voltar a fazer 213 pedidos em futuros pushes.
+A importação real, regeneração do índice/sitemap e validação final estão concluídas. Não executar novamente o importer nem reabrir esta fase sem nova necessidade explícita. O workflow temporário de importação foi removido. O importer e artefactos de auditoria só devem ser removidos após avaliar o seu valor de manutenção/auditoria.
 
 ### REGRA DE CONTINUIDADE DE EXECUÇÃO
 
@@ -538,21 +540,21 @@ FASE 3B — URL/contacto/footer — CONCLUÍDA (#9/#11)
 FASE 3C — Opinião/Crónicas — CONCLUÍDA (#13/#14/#18)
 FASE 3D — Política/privacidade/AdSense técnico — CONCLUÍDA (#15)
 FASE 3E — Pesquisa imagens — CONCLUÍDA (#16)
-FASE 4 — Domínio/monetização técnica — EM CURSO (#20)
+FASE 4 — Domínio/monetização técnica — CONCLUÍDA TECNICAMENTE (#20); operação AdSense/Search Console continua separada
 FASE 5 — UX editorial/navegação/partilha/sticky — PARCIALMENTE CONCLUÍDA (#22; #23 em validação)
-FASE 6 — Performance mensurável — PRÓXIMA
+FASE 6 — Performance mensurável — PRÓXIMA APÓS VALIDAÇÃO DO #23
 FASE 7 — Dados estruturados de futebol — FUTURA
 FASE 8 — Google News/Publisher Center — FUTURA
 FASE 9 — Monetização — FUTURA/PROGRESSIVA
 FASE 10 — Crescimento/distribuição — FUTURA
 
 ### FASE 4 — Domínio/monetização
-- .com;
-- redirects Cloudflare;
-- AdSense;
-- ads.txt;
-- Search Console;
-- validação real.
+- migração técnica para .com: concluída em #20;
+- redirects/configuração Cloudflare: validar quando houver necessidade operacional;
+- AdSense: acompanhamento/verificação/revisão, sem assumir aprovação;
+- ads.txt: preservado/preparado;
+- Search Console: validar propriedade, sitemap e indexabilidade quando esta frente for retomada;
+- não iniciar agora compra/configuração de .pt; a decisão atual é tratar .pt como próxima fase quando a operação de domínio for retomada.
 
 ### FASE 5 — UX editorial
 - terminar #23;
@@ -617,22 +619,21 @@ Nunca inventar dados.
 ## 13. PRIORIDADES
 
 P0 AGORA:
-1. #23.
-2. validar/corrigir.
-3. merge só após validação.
-4. confirmar main + .com + #22.
+1. Validar #23 contra o estado real de main, incluindo UX e performance.
+2. Corrigir #23 apenas dentro do escopo e voltar a validar.
+3. Fazer merge de #23 somente após validação suficiente.
+4. Confirmar main + deployment de produção + regressões.
 
 P1:
-5. .com em todas as superfícies.
-6. AdSense/ads.txt.
-7. Search Console/indexabilidade.
-8. sitemap/robots/canonical/OG.
-9. baseline performance.
+5. Baseline mensurável de performance/LCP/CLS/INP/TBT.
+6. Corrigir gargalos comprovados, sem repetir alterações de PRs fechadas.
+7. Confirmar superfícies .com e artefactos SEO já existentes.
+8. Retomar AdSense/Search Console na ordem definida.
 
 P2:
-10. Google News/Publisher Center.
-11. performance comprovada.
-12. pequenas melhorias editoriais.
+9. Google News/Publisher Center.
+10. pequenas melhorias editoriais.
+11. dados estruturados de futebol.
 
 P3:
 13. dados de futebol.
@@ -744,3 +745,16 @@ FIM.
 - Não houve alteração de conteúdo editorial nem nova execução do importador Framer durante a regeneração.
 - A importação histórica Framer está operacionalmente concluída. O workflow temporário `.github/workflows/importar-framer-uma-vez.yml` foi removido após a validação final, no commit `ced7e4113b9a4fb76102c2a32cd9325fc84ce8bd`.
 - O importer/scripts e restantes mecanismos só devem ser removidos ou alterados depois de verificar se ainda existe valor de auditoria/manutenção; não apagar artefactos de auditoria sem necessidade.
+
+## 23. RECONCILIAÇÃO DO ESTADO REAL — 2026-09-24
+
+- Revisão feita diretamente contra o GitHub, não apenas contra a memória das conversas.
+- main confirmado em `0f5be13d75a94aba956e4ed1af1d09d6b2aa1060`, commit `docs: fechar importação histórica do Framer`.
+- O SHA `571e5e5293daefe63c6bdb5d2a2568eb2da4b9fd` visto em `fetch_file(index.html)` é SHA do blob de `index.html`, não HEAD de main.
+- PR #19 está fechada e não mergeada; não é produção.
+- PR #23 está aberta e não mergeada, branch `mobile-sticky-editorial`, HEAD `9e62d3e53f2a0a85a5dcc7a5b3a6987becec8550`; Preview Cloudflare SUCCESS, mas continua fora de produção até validação.
+- #22 é a implementação de produção da linha sticky/navegação/partilha pós-migração; não duplicar #19/#21.
+- Framer está fechado: 213 URLs únicas, 179 importadas, 34 duplicadas/ignoradas, 0 falhas; 233 Markdown finais (232 notícias + 1 opinião); sitemap 241 URLs; workflow temporário removido.
+- Não existe atualmente branch/PR de LCP no GitHub. Qualquer trabalho LCP referido pelas conversas anteriores não deve ser assumido como alteração aplicada a main sem commit/branch verificável.
+- O estado real do GitHub prevalece sobre estados antigos descritos no manual, conversas ou memória.
+- Depois de workflows que escrevem conteúdo, verificar efetivamente índice e sitemap.
