@@ -3,7 +3,7 @@
 Importa notícias públicas do antigo Framer para o arquivo Markdown do Chuta Pra Canto.
 
 Por segurança, a execução normal é DRY-RUN. Só escreve com --write.
-Não apaga nem substitui notícias existentes: deduplica por slug, sourceUrl e título+data.
+Não apaga nem substitui notícias existentes: deduplica por slug, sourceUrl e título+data.\nAs imagens da fonte também são verificadas antes de uma entrada ser considerada pronta.
 """
 
 from __future__ import annotations
