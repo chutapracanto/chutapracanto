@@ -214,9 +214,8 @@ def article_from_page(session: requests.Session, url: str) -> dict | None:
             for node in header_block.parent.find_all(recursive=False):
                 if node is header_block or node.name != "div":
                     continue
-                raw_text = node.get_text("\n\n", strip=True)
-                normalized_text = re.sub(r"\n{3,}", "\n\n", raw_text).strip()
-                text_len = len(clean(node.get_text(" ", strip=True)))
+                normalized_text = clean(node.get_text(" ", strip=True))
+                text_len = len(normalized_text)
                 if text_len >= 500:
                     sibling_candidates.append((text_len, normalized_text))
             if sibling_candidates:
