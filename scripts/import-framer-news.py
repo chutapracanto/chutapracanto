@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Real import is enabled only by the explicit [IMPORT-FRAMER-REAL] workflow commit.
 """
 Importa notícias públicas do antigo Framer para o arquivo Markdown do Chuta Pra Canto.
 
