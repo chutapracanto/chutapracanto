@@ -120,8 +120,12 @@ def article_from_page(session: requests.Session, url: str) -> dict | None:
     response = session.get(url, headers=HEADERS, timeout=TIMEOUT)
     response.raise_for_status()
     soup = BeautifulSoup(response.text, "html.parser")
+    if os.getenv("FRAMER_DEBUG") and url.endswith(tuple(urls for urls in [])):
+        pass
 
     objects = jsonld_objects(soup)
+    if os.getenv("FRAMER_DEBUG"):
+        print("FRAMER_DEBUG_PAGE", url, "status=", response.status_code, "bytes=", len(response.content), "title=", clean(soup.title.get_text(" ", strip=True) if soup.title else ""), "jsonld_types=", [x.get("@type") for x in objects[:5]])
     article_ld = next(
         (x for x in objects if x.get("@type") in ("NewsArticle", "Article")),
         {},
