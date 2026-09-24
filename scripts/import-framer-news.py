@@ -64,11 +64,19 @@ def parse_date(value: str | None) -> str:
     value = clean(value)
     if not value:
         return ""
+    months = {
+        "janeiro": 1, "fevereiro": 2, "março": 3, "abril": 4,
+        "maio": 5, "junho": 6, "julho": 7, "agosto": 8,
+        "setembro": 9, "outubro": 10, "novembro": 11, "dezembro": 12,
+    }
     for fmt in ("%Y-%m-%d", "%d/%m/%Y", "%d-%m-%Y", "%B %d, %Y"):
         try:
             return datetime.strptime(value, fmt).date().isoformat()
         except ValueError:
             pass
+    m = re.search(r"(?i)(\d{1,2}) de ([a-zç]+) de (20\d{2})", value)
+    if m and m.group(2).lower() in months:
+        return datetime(int(m.group(3)), months[m.group(2).lower()], int(m.group(1))).date().isoformat()
     m = re.search(r"(20\d{2})-(\d{2})-(\d{2})", value)
     return "-".join(m.groups()) if m else ""
 
@@ -180,18 +188,37 @@ def article_from_page(session: requests.Session, url: str) -> dict | None:
         body_text = clean(str(article_ld["articleBody"]))
 
     if not body_text:
-        candidates = []
-        for selector in ("article", "[role='article']", "main"):
-            for node in soup.select(selector):
+        h1s = soup.find_all("h1")
+        article_h1 = h1s[1] if len(h1s) > 1 else (h1s[0] if h1s else None)
+        header_block = article_h1.parent.parent.parent if article_h1 and article_h1.parent and article_h1.parent.parent and article_h1.parent.parent.parent else None
+        if header_block and header_block.parent:
+            sibling_candidates = []
+            for node in header_block.parent.find_all(recursive=False):
+                if node is header_block or node.name != "div":
+                    continue
                 paragraphs = [
                     clean(p.get_text(" ", strip=True))
                     for p in node.find_all("p")
                 ]
                 paragraphs = [p for p in paragraphs if len(p) >= 25]
-                if len(paragraphs) >= 2:
-                    candidates.append("\n\n".join(paragraphs))
-        if candidates:
-            body_text = max(candidates, key=len)
+                text_len = len(clean(node.get_text(" ", strip=True)))
+                if len(paragraphs) >= 2 and text_len >= 500:
+                    sibling_candidates.append((text_len, paragraphs))
+            if sibling_candidates:
+                body_text = "\n\n".join(max(sibling_candidates, key=lambda x: x[0])[1])
+        if not body_text:
+            candidates = []
+            for selector in ("article", "[role='article']", "main"):
+                for node in soup.select(selector):
+                    paragraphs = [
+                        clean(p.get_text(" ", strip=True))
+                        for p in node.find_all("p")
+                    ]
+                    paragraphs = [p for p in paragraphs if len(p) >= 25]
+                    if len(paragraphs) >= 2:
+                        candidates.append("\n\n".join(paragraphs))
+            if candidates:
+                body_text = max(candidates, key=len)
 
     if not title or not published or not body_text:
         return None
