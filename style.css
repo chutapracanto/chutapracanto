@@ -583,9 +583,9 @@ footer {
 
 .article-heading {
   --article-progress: 0;
-  position: sticky;
-  top: var(--site-header-height, 88px);
-  z-index: 900;
+  position: relative;
+  top: auto;
+  z-index: auto;
   background: rgba(8, 8, 8, calc(.96 - (var(--article-progress) * .82)));
   border-top-color: rgba(57, 255, 20, calc(.08 - (var(--article-progress) * .06)));
   border-bottom-color: rgba(57, 255, 20, calc(.14 - (var(--article-progress) * .11)));
