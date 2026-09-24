@@ -125,7 +125,7 @@ def article_from_page(session: requests.Session, url: str) -> dict | None:
 
     objects = jsonld_objects(soup)
     if os.getenv("FRAMER_DEBUG"):
-        print("FRAMER_DEBUG_PAGE", url, "status=", response.status_code, "bytes=", len(response.content), "title=", clean(soup.title.get_text(" ", strip=True) if soup.title else ""), "jsonld_types=", [x.get("@type") for x in objects[:5]], "h1=", [clean(x.get_text(" ", strip=True)) for x in soup.find_all("h1")[:3]], "p_count=", len(soup.find_all("p")), "meta=", [(m.get("name") or m.get("property"), clean(m.get("content"))) for m in soup.find_all("meta") if m.get("name") or m.get("property")][:12])
+        h1s=soup.find_all("h1"); chain=[]; node=h1s[1] if len(h1s)>1 else (h1s[0] if h1s else None);\n        for _ in range(6):\n            if not node: break\n            chain.append((node.name, node.get("class"), len(node.get_text(" ", strip=True))))\n            node=node.parent\n        print("FRAMER_DEBUG_PAGE", url, "status=", response.status_code, "bytes=", len(response.content), "title=", clean(soup.title.get_text(" ", strip=True) if soup.title else ""), "jsonld_types=", [x.get("@type") for x in objects[:5]], "h1=", [clean(x.get_text(" ", strip=True)) for x in h1s[:3]], "p_count=", len(soup.find_all("p")), "chain=", chain, "meta=", [(m.get("name") or m.get("property"), clean(m.get("content"))) for m in soup.find_all("meta") if m.get("name") or m.get("property")][:12])
     article_ld = next(
         (x for x in objects if x.get("@type") in ("NewsArticle", "Article")),
         {},
