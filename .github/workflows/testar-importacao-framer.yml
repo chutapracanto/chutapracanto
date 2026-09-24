@@ -32,7 +32,7 @@ jobs:
 
       - name: Executar dry-run
         env:
-          LIMIT: ${{ inputs.limit }}
+          LIMIT: ${{ inputs.limit || '20' }}
         run: python scripts/import-framer-news.py --limit "$LIMIT"
 
       - name: Guardar relatório
@@ -41,3 +41,4 @@ jobs:
           name: framer-import-report
           path: /tmp/framer-import-report.json
           if-no-files-found: error
+          if: always()
