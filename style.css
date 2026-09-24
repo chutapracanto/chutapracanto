@@ -620,7 +620,7 @@ footer {
 
 @media (max-width: 768px) {
   .article-heading {
-    top: var(--site-header-height, 70px);
+    top: auto;
     padding-top: calc(.8rem - (var(--article-progress) * .48rem));
     padding-bottom: calc(.75rem - (var(--article-progress) * .42rem));
   }
