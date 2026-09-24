@@ -709,3 +709,16 @@ FIM.
 - Nenhum push normal, correção do importer ou alteração do workflow pode agora disparar por si só a importação real através deste workflow.
 - Esta proteção complementa o `testar-importacao-framer.yml`, que continua em dry-run por defeito e só escreve com o marcador explícito `[IMPORT-FRAMER-REAL]`.
 - A importação real continua a exigir validação do lote e autorização explícita para escrever os 179 artigos preparados.
+
+## 19. ATUALIZAÇÃO OPERACIONAL — 2026-09-24 17:XX WEST
+
+- A utilizadora executou manualmente o workflow `Importar arquivo histórico Framer (execução manual)` com confirmação explícita `IMPORTAR`.
+- Run GitHub Actions `36026062466`: SUCCESS, duração 1m11s.
+- Job `importar`: SUCCESS em todos os passos; `rejeitado`: SKIPPED, confirmando que a execução autorizada foi a escolhida.
+- Commit resultante da importação: `6701b981302dea5955047812e83e92e6a5c17dbe`, mensagem `content: importar arquivo histórico do Framer`.
+- O repositório passou de 53 ficheiros Markdown em `content/noticias` para 232, portanto foram escritos 179 novos artigos, coerente com o dry-run anterior (213 URLs encontradas, 179 prontas, 34 duplicadas/ignoradas, 0 falhas).
+- O índice `content/noticias-index.json` ainda estava com 54 entradas no momento da verificação, e o `sitemap.xml` com 62 URLs. Isto é estado transitório de pós-importação e NÃO deve ser considerado validado até o workflow de geração do índice concluir.
+- O workflow `.github/workflows/gerar-indice-noticias.yml` é responsável por regenerar o índice e o sitemap a partir dos Markdown. Depois da importação real, verificar explicitamente que esse processamento ocorreu, que o índice contém os 232 artigos/opiniões esperados, que a ordenação é mais recente -> mais antiga e que o sitemap foi atualizado.
+- Só depois dessa validação final devem ser removidos o workflow temporário `.github/workflows/importar-framer-uma-vez.yml` e quaisquer mecanismos temporários de importação.
+- Regra de continuidade aplicada: depois de uma ação externa executada pela utilizadora, o Assistente deve consultar diretamente o estado do GitHub e continuar a validação/correção, sem pedir à utilizadora para interpretar os resultados.
+
