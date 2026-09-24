@@ -63,7 +63,7 @@
       font-family: var(--font-title);
       line-height: 1.2;
       margin: .6rem 0;
-      font-size: 2.6rem;
+      font-size: calc(2.6rem - (var(--article-progress) * 1.45rem));
     }
     .article-summary {
       color: var(--text-gray);
@@ -241,7 +241,7 @@
         padding-bottom: .75rem;
       }
       .article-heading h1 {
-        font-size: 1.9rem;
+        font-size: calc(1.9rem - (var(--article-progress) * .78rem));
       }
       .article-summary {
         font-size: 1rem;
