@@ -60,6 +60,8 @@ jobs:
             exit 0
           fi
           git commit -m "content: importar arquivo histórico do Framer"
+          git fetch origin main
+          git rebase origin/main
           git push origin HEAD:main
       - name: Mostrar diagnóstico do relatório
         if: always()
