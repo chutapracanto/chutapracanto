@@ -378,6 +378,7 @@ Estado atual:
 - o estado do importador passa a apontar para o run do GitHub Actions para permitir inspeção do relatório quando necessário, alteração no commit dc83e7c5bc37b14f6f74115c3e6ae1caa1eea43a;
 - dry-run atual revelou 213 URLs encontradas, 0 prontas, 213 ignoradas e 0 falhas; todas foram classificadas como missing-title-date-or-body;
 - prioridade mudou de importar para diagnosticar como o Framer entrega o HTML/conteúdo das páginas e adaptar o extrator sem inventar conteúdo;
+- diagnóstico confirmou HTML HTTP 200 completo (~166–171 KB), título presente, 19 parágrafos no primeiro artigo e metadados Framer/search-index; não há JSON-LD. O problema está na seleção do contentor pelo parser atual, não na ausência de HTML;
 - o commit a02106e651e0a7346510c9d824559f175ddc1734a é o novo gatilho controlado de escrita;
 - o commit 4f9f3e91c93b91b2d0f5565a6dd6a83de8dbbce5 é o gatilho controlado da importação real;
 - isso não autoriza importação real: ainda é necessário validar o relatório completo e a estratégia de imagens;
