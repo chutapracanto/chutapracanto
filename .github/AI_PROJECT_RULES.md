@@ -699,3 +699,13 @@ FIM.
 - Se forem necessárias ações em ambos, separar claramente a parte da utilizadora e a parte do Codex e indicar a ordem.
 - Depois de a ação externa ser executada, retomar automaticamente o ciclo: **verificar → corrigir → verificar → continuar**, sem considerar a tarefa concluída apenas porque a execução externa terminou.
 - Nunca dizer apenas “isto tem de ser feito externamente” ou “o próximo passo é teu”. A resposta deve deixar a pessoa com **o procedimento ou prompt pronto para executar imediatamente**.
+
+
+## 18. ATUALIZAÇÃO OPERACIONAL — 2026-09-24 17:XX WEST
+
+- O workflow separado `.github/workflows/importar-framer-uma-vez.yml` foi identificado como perigoso porque o gatilho anterior em `push` executava `--write` automaticamente.
+- Esse comportamento foi removido no commit `48e701ee4ee750dfdac0669d4ee9f09645c19697`.
+- A importação única passou a ser exclusivamente manual via `workflow_dispatch`, com confirmação explícita `IMPORTAR`; sem essa confirmação, a execução é bloqueada.
+- Nenhum push normal, correção do importer ou alteração do workflow pode agora disparar por si só a importação real através deste workflow.
+- Esta proteção complementa o `testar-importacao-framer.yml`, que continua em dry-run por defeito e só escreve com o marcador explícito `[IMPORT-FRAMER-REAL]`.
+- A importação real continua a exigir validação do lote e autorização explícita para escrever os 179 artigos preparados.
