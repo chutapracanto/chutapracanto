@@ -1,16 +1,19 @@
-name: Importar arquivo histórico Framer (execução única)
+name: Importar arquivo histórico Framer (execução manual)
 
 on:
-  push:
-    paths:
-      - "scripts/import-framer-news.py"
-      - ".github/workflows/importar-framer-uma-vez.yml"
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Escrever os artigos no repositório? Escreva IMPORTAR para confirmar.'
+        required: true
+        type: string
 
 permissions:
   contents: write
 
 jobs:
   importar:
+    if: ${{ github.event.inputs.confirm == 'IMPORTAR' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -21,7 +24,7 @@ jobs:
       - name: Preparar Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: '3.12'
 
       - name: Instalar dependências
         run: python -m pip install requests beautifulsoup4
@@ -41,3 +44,10 @@ jobs:
           fi
           git commit -m "content: importar arquivo histórico do Framer"
           git push
+
+  rejeitado:
+    if: ${{ github.event.inputs.confirm != 'IMPORTAR' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Bloquear execução sem confirmação explícita
+        run: echo "Importação não executada. É necessária a confirmação IMPORTAR." && exit 1
