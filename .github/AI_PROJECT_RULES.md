@@ -768,3 +768,13 @@ FIM.
 - Validação estática: 7 blocos `<script>` de `noticia.html` passaram compilação sintática; chaves de `style.css` balanceadas.
 - PR #24 foi criada sobre main atual: 2 ficheiros, 164 adições, 9 remoções, 2 commits, branch sem commits atrás de main.
 - PR #24 permanece aberta até validação visual/funcional e de performance suficiente; deployment SUCCESS sozinho não autoriza merge.
+
+## 25. FORMATO DE PROMPTS E TEXTO PARA COPIAR — 2026-09-24
+
+Quando o assistente enviar à utilizadora qualquer conteúdo cuja finalidade seja copiar integralmente para outra ferramenta, conversa, terminal, Codex, GitHub, Cloudflare ou outro executor, deve usar obrigatoriamente um bloco de código com linguagem apropriada (por exemplo, `text`, `bash` ou `powershell`) para disponibilizar o botão de copiar.
+
+- Prompts para Codex: sempre em bloco de código.
+- Comandos de terminal: sempre em bloco de código.
+- Textos longos/instruções que a utilizadora precise copiar integralmente: sempre em bloco de código.
+- Não colocar instruções copiáveis importantes apenas em texto corrido.
+- Esta regra é de formato de entrega e não substitui as regras de conteúdo/execução do restante manual.
