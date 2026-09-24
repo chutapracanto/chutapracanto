@@ -125,7 +125,7 @@ def article_from_page(session: requests.Session, url: str) -> dict | None:
 
     objects = jsonld_objects(soup)
     if os.getenv("FRAMER_DEBUG"):
-        print("FRAMER_DEBUG_PAGE", url, "status=", response.status_code, "bytes=", len(response.content), "title=", clean(soup.title.get_text(" ", strip=True) if soup.title else ""), "jsonld_types=", [x.get("@type") for x in objects[:5]])
+        print("FRAMER_DEBUG_PAGE", url, "status=", response.status_code, "bytes=", len(response.content), "title=", clean(soup.title.get_text(" ", strip=True) if soup.title else ""), "jsonld_types=", [x.get("@type") for x in objects[:5]], "h1=", [clean(x.get_text(" ", strip=True)) for x in soup.find_all("h1")[:3]], "p_count=", len(soup.find_all("p")), "meta=", [(m.get("name") or m.get("property"), clean(m.get("content"))) for m in soup.find_all("meta") if m.get("name") or m.get("property")][:12])
     article_ld = next(
         (x for x in objects if x.get("@type") in ("NewsArticle", "Article")),
         {},
