@@ -443,7 +443,7 @@
         }
         const principal = destaques[0];
         const mainCard = document.createElement('a');
-        mainCard.href = `noticia.html?slug=${encodeURIComponent(principal.slug)}`;
+        mainCard.href = `/noticia?slug=${encodeURIComponent(principal.slug)}`;
         mainCard.className = 'main-featured-card';
         mainCard.appendChild(createNewsImage(principal.image, principal.title, 'main-featured-img', true));
         const mainContent = document.createElement('div');
@@ -460,7 +460,7 @@
           list.className = 'secondary-featured-list';
           destaques.slice(1, 4).forEach(item => {
             const card = document.createElement('a');
-            card.href = `noticia.html?slug=${encodeURIComponent(item.slug)}`;
+            card.href = `/noticia?slug=${encodeURIComponent(item.slug)}`;
             card.className = 'sub-featured-card';
             card.appendChild(createNewsImage(item.image, item.title, 'sub-featured-img'));
             const content = document.createElement('div');
