@@ -560,15 +560,15 @@ function escaparHtml(valor) {
 }
 
 function construirUrlImagem(imagem, origin) {
-  if (!imagem || typeof imagem !== "string") return "https://chutapracanto.pages.dev/images/logo.png";
+  if (!imagem || typeof imagem !== "string") return "https://chutapracanto.com/images/logo.png";
   try {
     const url = new URL(imagem, origin);
     if ((url.protocol !== "https:" && url.origin !== origin) || url.username || url.password) {
-      return "https://chutapracanto.pages.dev/images/logo.png";
+      return "https://chutapracanto.com/images/logo.png";
     }
     return url.href;
   } catch {
-    return "https://chutapracanto.pages.dev/images/logo.png";
+    return "https://chutapracanto.com/images/logo.png";
   }
 }
 
@@ -745,7 +745,7 @@ async function obterDadosPartilha(env, slug, origin) {
 
     const canonicalUrl =
       construirUrlPublicaNoticia(
-        "https://chutapracanto.pages.dev",
+        "https://chutapracanto.com",
         slug
       );
 
@@ -860,7 +860,7 @@ async function prepararPaginaParaPartilha(
               : null;
             if (authorData && dados.authorUrl) {
               try {
-                const authorUrl = new URL(dados.authorUrl, "https://chutapracanto.pages.dev");
+                const authorUrl = new URL(dados.authorUrl, "https://chutapracanto.com");
                 if (authorUrl.protocol === "https:" && !authorUrl.username && !authorUrl.password) authorData.url = authorUrl.href;
               } catch {}
             }
@@ -874,7 +874,7 @@ async function prepararPaginaParaPartilha(
               publisher: {
                 "@type": "Organization",
                 name: "Chuta Pra Canto",
-                logo: { "@type": "ImageObject", url: "https://chutapracanto.pages.dev/images/logo.png" }
+                logo: { "@type": "ImageObject", url: "https://chutapracanto.com/images/logo.png" }
               }
             };
             if (authorData) schema.author = authorData;
@@ -884,8 +884,8 @@ async function prepararPaginaParaPartilha(
               "@context": "https://schema.org",
               "@type": "BreadcrumbList",
               itemListElement: [
-                { "@type": "ListItem", position: 1, name: "Home", item: "https://chutapracanto.pages.dev/" },
-                { "@type": "ListItem", position: 2, name: dados.editorialType === "opinion" ? "Opinião" : "Notícias", item: dados.editorialType === "opinion" ? "https://chutapracanto.pages.dev/opiniao" : "https://chutapracanto.pages.dev/noticias" },
+                { "@type": "ListItem", position: 1, name: "Home", item: "https://chutapracanto.com/" },
+                { "@type": "ListItem", position: 2, name: dados.editorialType === "opinion" ? "Opinião" : "Notícias", item: dados.editorialType === "opinion" ? "https://chutapracanto.com/opiniao" : "https://chutapracanto.com/noticias" },
                 { "@type": "ListItem", position: 3, name: dados.title, item: dados.canonicalUrl }
               ]
             };
