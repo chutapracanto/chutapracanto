@@ -342,6 +342,49 @@ Prioridade imediata:
 5. confirmar main pós-merge.
 PR #24 não existe no último estado verificado.
 
+## 4A. IMPORTAÇÃO DO ARQUIVO FRAMER
+
+Subtarefa ativa em 2026-09-24: recuperar o arquivo histórico público do antigo Framer.
+
+Regras obrigatórias:
+- Fonte: arquivo público Framer /news e páginas individuais /noticias/<slug>.
+- Inventário já confirmado: 213 links únicos no arquivo público.
+- Ordem: Framer -> verificar -> eliminar duplicados -> preservar data original -> importar -> índice cronológico mais recente -> mais antigo.
+- Notícias CPC que já existem permanecem intactas.
+- Nunca sobrescrever Markdown existente.
+- Deduplicação mínima: slug, sourceUrl e título normalizado + data.
+- Preservar título, subtítulo, categoria, autor, imagem, conteúdo, slug e data original sempre que existirem na fonte.
+- Não inventar datas, autores, categorias, conteúdo ou imagens quando a página não os fornecer.
+- Antes da importação real, o dry-run de todo o arquivo deve concluir sem falhas e produzir relatório com URLs encontradas, prontos, ignorados e falhas.
+- O dry-run não pode escrever artigos.
+- Importação real só depois de validar também a integridade das imagens e a forma como URLs de imagem externas serão tratadas.
+- Depois da importação, regenerar/validar o índice e confirmar ordem mais recente -> mais antiga, pesquisa, sitemap e ausência de regressões.
+- O mecanismo temporário que força 213 URLs em cada push serve apenas para validação e deve ser removido antes de ficar como comportamento permanente.
+
+Estado atual:
+- script: scripts/import-framer-news.py;
+- workflow: .github/workflows/testar-importacao-framer.yml;
+- correção de import os aplicada no commit 04c78526a9953bb250130800b3bc5a818124b9e1;
+- o check framer-dry-run desse commit está SUCCESS;
+- isso não autoriza importação real: ainda é necessário validar o relatório completo e a estratégia de imagens;
+- não gastar Codex para esta fase enquanto o Assistente conseguir continuar pelo GitHub.
+
+### REGRA DE CONTINUIDADE DE EXECUÇÃO
+
+Uma mensagem do Assistente NÃO deve ser tratada como ponto de paragem quando existe uma próxima ação autónoma possível.
+
+É proibido terminar uma resposta com fórmulas como "o próximo passo continua comigo", "agora fico a aguardar", "diz-me para seguir" ou equivalente quando a ação seguinte pode ser executada imediatamente.
+
+Fluxo obrigatório: executar -> verificar -> corrigir -> verificar -> executar próxima etapa -> repetir.
+
+Só enviar resposta à utilizadora quando:
+1. o trabalho atingiu um ponto de conclusão real; ou
+2. existe uma dependência externa que exige uma ação dela e não pode ser contornada pelo Assistente.
+
+Se a ferramenta devolver estado pending, o Assistente deve continuar a verificar/atuar quando houver uma ferramenta adequada, em vez de encerrar a interação apenas para relatar pending.
+
+AI_PROJECT_RULES.md deve ser atualizado sempre que uma nova regra, prioridade, arquitetura, decisão operacional ou alteração relevante do projeto seja introduzida.
+
 ## 5. ESTADO CONSOLIDADO
 
 Produção inclui:
