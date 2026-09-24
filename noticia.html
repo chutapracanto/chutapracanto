@@ -338,11 +338,9 @@
 
     <a id="back-to-section" href="/noticias" class="see-more" style="display: inline-block; margin-bottom: 2rem;">← VOLTAR ÀS NOTÍCIAS</a>
 
-    <div id="article-content">
+    <p id="article-loading-status" role="status" aria-live="polite" style="color: var(--text-gray);">A carregar notícia...</p>
 
-      <p style="color: var(--text-gray);">A carregar notícia...</p>
-
-    </div>
+    <div id="article-content" aria-busy="true" hidden></div>
 
     <div class="share-section" id="share-box" hidden>
 
@@ -793,6 +791,8 @@
         }
         container.textContent = 'Não foi possível carregar esta notícia. Volta à página de Notícias e tenta outro artigo.';
       } finally {
+        container.hidden = false;
+        container.setAttribute('aria-busy', 'false');
         document.body.classList.remove('article-loading');
       }
     }
