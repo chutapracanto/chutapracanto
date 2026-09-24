@@ -42,7 +42,7 @@
       color: #000; 
     }
     
-    .media-carousel { 
+    .media-carousel {
       display: flex; 
       gap: 1.25rem; 
       overflow-x: auto; 
@@ -51,6 +51,8 @@
       scrollbar-width: none; 
       min-height: 200px; 
     }
+    .media-carousel.vertical-aspect { min-height: 441px; }
+    .media-carousel.horizontal-aspect { min-height: 218px; }
     .media-carousel::-webkit-scrollbar { display: none; }
     
     .carousel-item { 
@@ -538,7 +540,7 @@
           currentObserver.unobserve(entry.target);
           feedsPorElemento.get(entry.target)?.();
         });
-      }, { rootMargin: '300px 0px' });
+      }, { rootMargin: '0px 0px' });
       feedsPorElemento.forEach((carregar, elemento) => {
         if (elemento) observer.observe(elemento);
       });
