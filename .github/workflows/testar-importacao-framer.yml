@@ -48,6 +48,13 @@ jobs:
             python scripts/import-framer-news.py --limit "$LIMIT"
           fi
 
+      - name: Diagnóstico de ficheiros escritos
+        if: always()
+        run: |
+          echo "FILES=$(find content/noticias -maxdepth 1 -type f -name '*.md' | wc -l)"
+          echo "STATUS:"
+          git status --short --untracked-files=all | head -30
+
       - name: Commit artigos importados
         if: ${{ github.event_name == 'push' }}
         shell: bash
