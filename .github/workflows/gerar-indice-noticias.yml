@@ -242,7 +242,7 @@ jobs:
           from urllib.parse import quote
           from html import escape
 
-          base_url = "https://chutapracanto.pages.dev"
+          base_url = "https://chutapracanto.com"
           pages = ["/", "/noticias", "/opiniao", "/sobre", "/contacto", "/privacidade", "/termos", "/politica-editorial"]
           entries = [base_url + page for page in pages]
           today = date.today().isoformat()
