@@ -381,6 +381,7 @@ Estado atual:
 - diagnóstico confirmou HTML HTTP 200 completo (~166–171 KB), título presente, 19 parágrafos no primeiro artigo e metadados Framer/search-index; não há JSON-LD. O problema está na seleção do contentor pelo parser atual, não na ausência de HTML;
 - extrator adaptado ao template Framer: contentor irmão do cabeçalho, data em `Publicado em`, autor após `Por`, categoria entre o link de retorno e o título, e meses portugueses;
 - commit de adaptação: 996897a0def026b6f625d1980b5f1544c74aee03; a próxima execução deve validar prontos/falhas antes de considerar a importação concluída;
+- diagnóstico dos campos confirmou título/data/categoria/autor/imagem corretos, mas o corpo estava em elementos `div`, não `p`; commit ce9a50994154ff32523798b12694ddab82641c92 passou a extrair o bloco de corpo diretamente;
 - o commit a02106e651e0a7346510c9d824559f175ddc1734a é o novo gatilho controlado de escrita;
 - o commit 4f9f3e91c93b91b2d0f5565a6dd6a83de8dbbce5 é o gatilho controlado da importação real;
 - isso não autoriza importação real: ainda é necessário validar o relatório completo e a estratégia de imagens;
