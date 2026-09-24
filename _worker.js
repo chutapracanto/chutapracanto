@@ -1080,62 +1080,6 @@ async function prepararPaginaParaPartilha(
 
 
 // ============================================================
-// SHELL INICIAL DO ARTIGO
-// ============================================================
-
-async function prepararShellInicialArtigo(request, response, indexResponse) {
-  if (
-    !response ||
-    !response.ok ||
-    !response.headers.get("Content-Type")?.includes("text/html") ||
-    !indexResponse ||
-    !indexResponse.ok
-  ) {
-    return response;
-  }
-
-  const url = new URL(request.url);
-  const slug = obterSlugDaNoticia(url);
-  if (!slug) return response;
-
-  let index;
-  try {
-    index = await indexResponse.json();
-  } catch {
-    return response;
-  }
-  if (!Array.isArray(index)) return response;
-
-  const entry = index.find(item => item.slug === slug) ||
-    index.find(item => String(item.slug || "").toLowerCase() === slug.toLowerCase());
-  if (
-    !entry ||
-    typeof entry.path !== "string" ||
-    !isAllowedNewsPath(entry.path)
-  ) {
-    return response;
-  }
-
-  const title = escaparHtml(String(entry.title || "Sem título"));
-  const shell = `<header class="article-heading" data-initial-article-shell="true"><h1 data-article-title>${title}</h1></header>`;
-  const headers = new Headers(response.headers);
-  headers.delete("Content-Length");
-
-  return new HTMLRewriter()
-    .on("#article-content", {
-      element(element) {
-        element.setInnerContent(shell, { html: true });
-      }
-    })
-    .transform(new Response(response.body, {
-      status: response.status,
-      statusText: response.statusText,
-      headers
-    }));
-}
-
-
-// ============================================================
 // API ADMIN
 // ============================================================
 
@@ -1726,24 +1670,14 @@ export default {
         }
       }
 
-      const slugArtigo = obterSlugDaNoticia(url);
-      const devePrepararShell = request.method === "GET" && Boolean(slugArtigo) && !isSocialCrawler(request);
-      const indexPromise = devePrepararShell
-        ? env.ASSETS.fetch(new Request(new URL("/content/noticias-index.json", request.url), { method: "GET" }))
-        : Promise.resolve(null);
-      const [assetResponse, indexResponse] = await Promise.all([
-        env.ASSETS.fetch(request),
-        indexPromise
-      ]);
+      const assetResponse =
+        await env.ASSETS.fetch(request);
 
-      const responseComShell = devePrepararShell
-        ? await prepararShellInicialArtigo(request, assetResponse, indexResponse)
-        : assetResponse;
       const responseComPartilha =
         await prepararPaginaParaPartilha(
           request,
           env,
-          responseComShell
+          assetResponse
         );
 
       return responseComPartilha;
