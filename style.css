@@ -232,6 +232,10 @@ nav a:hover, nav a.active {
   margin-bottom: 4rem;
 }
 
+@media (min-width: 769px) {
+  .featured-wrapper { min-height: 640px; }
+}
+
 .main-featured-card {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
