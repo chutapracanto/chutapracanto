@@ -10,4 +10,4 @@
 
 ## Resposta a vulnerabilidades
 
-Não publiques tokens, palavras-passe ou dados privados em issues. Para reportar um problema, contacta o projeto pelos canais públicos apresentados em https://chutapracanto.pages.dev/contacto.
+Não publiques tokens, palavras-passe ou dados privados em issues. Para reportar um problema, contacta o projeto pelos canais públicos apresentados em https://chutapracanto.com/contacto.
