@@ -52,48 +52,28 @@
     .article-breadcrumbs li + li::before { content: "›"; margin-right: .5rem; color: var(--neon-green); }
     .article-breadcrumbs a { color: var(--text-gray); }
     .article-heading {
-      --heading-progress: 0;
-      position: sticky;
-      top: var(--site-header-offset, 0px);
-      z-index: 900;
+      position: relative;
       width: auto;
-      padding: calc(1.05rem - (var(--heading-progress) * .45rem)) 0 calc(.95rem - (var(--heading-progress) * .35rem));
-      background: rgba(8, 11, 17, .9);
+      padding: 1.05rem 0 .95rem;
       border-top: 1px solid rgba(57, 255, 20, .08);
-      border-bottom: 1px solid rgba(57, 255, 20, calc(.14 - (var(--heading-progress) * .07)));
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      transition: padding .12s linear, border-color .12s linear;
+      border-bottom: 1px solid rgba(57, 255, 20, .14);
     }
-    .article-heading.is-near-end {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-    .article-heading .tag { opacity: calc(1 - (var(--heading-progress) * .35)); transition: opacity .12s linear; }
     .article-heading h1 {
       color: #fff;
       font-family: var(--font-title);
       line-height: 1.2;
-      margin: calc(.6rem - (var(--heading-progress) * .2rem)) 0;
-      transform-origin: left center;
-      font-size: calc(2.6rem - (var(--heading-progress) * .75rem));
-      transition: font-size .12s linear, margin .12s linear, opacity .12s linear;
-      opacity: calc(1 - (var(--heading-progress) * .35));
+      margin: .6rem 0;
+      font-size: 2.6rem;
     }
     .article-summary {
       color: var(--text-gray);
-      font-size: calc(1.1rem - (var(--heading-progress) * .22rem));
+      font-size: 1.1rem;
       line-height: 1.55;
-      margin-bottom: calc(.35rem - (var(--heading-progress) * .2rem));
-      opacity: calc(1 - (var(--heading-progress) * .55));
-      transition: font-size .12s linear, opacity .12s linear, margin .12s linear;
+      margin-bottom: .35rem;
     }
     .article-byline {
       color: #888;
-      font-size: calc(.9rem - (var(--heading-progress) * .1rem));
-      opacity: calc(1 - (var(--heading-progress) * .45));
-      transition: font-size .12s linear, opacity .12s linear;
+      font-size: .9rem;
     }
      .share-section {
       position: relative;
@@ -258,14 +238,14 @@
 
     @media (max-width: 768px) {
       .article-heading {
-        padding-top: calc(.8rem - (var(--heading-progress) * .25rem));
-        padding-bottom: calc(.75rem - (var(--heading-progress) * .2rem));
+        padding-top: .8rem;
+        padding-bottom: .75rem;
       }
       .article-heading h1 {
-        font-size: calc(1.9rem - (var(--heading-progress) * .45rem));
+        font-size: 1.9rem;
       }
       .article-summary {
-        font-size: calc(1rem - (var(--heading-progress) * .18rem));
+        font-size: 1rem;
       }
       .share-button {
         width: 40px;
@@ -519,7 +499,8 @@
         if (!Array.isArray(index)) throw new Error('Índice de notícias inválido');
         const entry = index.find(item => item.slug === slug) || index.find(item => String(item.slug || '').toLowerCase() === slug.toLowerCase());
         if (!entry || typeof entry.path !== 'string' || !/^content\/(noticias|opiniao)\/[^/]+\.md$/.test(entry.path) || entry.path.includes('..')) throw new Error('Artigo não encontrado');
-        if (entry.image) {
+        const articleImageIsDesktopPriority = window.matchMedia('(min-width: 769px)').matches;
+        if (entry.image && articleImageIsDesktopPriority) {
           const preloadUrl = safeArticleImage(entry.image);
           if (preloadUrl && !document.querySelector('link[rel="preload"][as="image"]')) {
             const preload = document.createElement('link');
@@ -530,20 +511,63 @@
             document.head.appendChild(preload);
           }
         }
-        const [authors, editorialTypes] = await Promise.all([
-          fetch('/content/authors.json').then(response => response.ok ? response.json() : []).catch(() => []),
-          fetch('/content/editorial-types.json').then(response => response.ok ? response.json() : []).catch(() => [])
-        ]);
-        const encodedPath = entry.path.split('/').map(encodeURIComponent).join('/');
-        let response = await fetch('/' + encodedPath);
-        if (!response.ok) {
-          const apiResponse = await fetch('https://api.github.com/repos/chutapracanto/chutapracanto/contents/content/' + (entry.type === 'opinion' ? 'opiniao' : 'noticias'));
-          if (apiResponse.ok) {
-            const files = await apiResponse.json();
-            const matched = files.find(file => file.name.replace(/\.md$/i, '').toLowerCase() === decodeURIComponent(slug).toLowerCase());
-            if (matched && /^https:\/\/raw\.githubusercontent\.com\/chutapracanto\/chutapracanto\//.test(matched.download_url)) response = await fetch(matched.download_url);
-          }
+
+        const editorialType = String(entry.type || 'news');
+        const isOpinion = editorialType === 'opinion';
+        const sectionLabel = isOpinion ? 'Opinião' : 'Notícias';
+        const sectionPath = isOpinion ? '/opiniao' : '/noticias';
+        const previewTitle = String(entry.title || 'Sem título');
+        const previewDescription = String(entry.subtitle || '');
+        const previewCategory = String(entry.category || 'Geral');
+        const previewHeader = document.createElement('header');
+        previewHeader.className = 'article-heading';
+        const previewCategoryTag = document.createElement('span');
+        previewCategoryTag.className = 'tag';
+        previewCategoryTag.dataset.articleCategory = '';
+        previewCategoryTag.textContent = previewCategory.toUpperCase();
+        const previewEditorialTag = document.createElement('span');
+        previewEditorialTag.className = 'tag';
+        previewEditorialTag.dataset.articleType = '';
+        previewEditorialTag.textContent = isOpinion ? 'Opinião' : 'Notícia';
+        const previewH1 = document.createElement('h1');
+        previewH1.textContent = previewTitle;
+        previewHeader.append(previewCategoryTag, previewEditorialTag, previewH1);
+        let previewSummary = null;
+        if (previewDescription) {
+          previewSummary = document.createElement('p');
+          previewSummary.className = 'article-summary';
+          previewSummary.textContent = previewDescription;
+          previewHeader.appendChild(previewSummary);
         }
+        const previewDate = entry.published ? new Date(entry.published) : null;
+        if (entry.author || (previewDate && !Number.isNaN(previewDate.getTime()))) {
+          const previewByline = document.createElement('p');
+          previewByline.className = 'article-byline';
+          const dateText = previewDate && !Number.isNaN(previewDate.getTime()) ? 'Publicado em ' + previewDate.toLocaleDateString('pt-PT') : '';
+          previewByline.textContent = [dateText, entry.author ? 'Por ' + entry.author : ''].filter(Boolean).join(' · ');
+          previewHeader.appendChild(previewByline);
+        }
+        container.replaceChildren(previewHeader);
+        document.title = previewTitle + ' | Chuta Pra Canto';
+
+        const encodedPath = entry.path.split('/').map(encodeURIComponent).join('/');
+        const markdownPromise = (async () => {
+          let response = await fetch('/' + encodedPath);
+          if (!response.ok) {
+            const apiResponse = await fetch('https://api.github.com/repos/chutapracanto/chutapracanto/contents/content/' + (isOpinion ? 'opiniao' : 'noticias'));
+            if (apiResponse.ok) {
+              const files = await apiResponse.json();
+              const matched = files.find(file => file.name.replace(/\.md$/i, '').toLowerCase() === decodeURIComponent(slug).toLowerCase());
+              if (matched && /^https:\/\/raw\.githubusercontent\.com\/chutapracanto\/chutapracanto\//.test(matched.download_url)) response = await fetch(matched.download_url);
+            }
+          }
+          return response;
+        })();
+        const [authors, editorialTypes, response] = await Promise.all([
+          fetch('/content/authors.json').then(response => response.ok ? response.json() : []).catch(() => []),
+          fetch('/content/editorial-types.json').then(response => response.ok ? response.json() : []).catch(() => []),
+          markdownPromise
+        ]);
         if (!response.ok) throw new Error('Artigo não existe');
         const markdown = await response.text();
         const parts = markdown.split('---');
@@ -560,10 +584,6 @@
         const authorType = authorRecord?.type || entry.authorType || '';
         const authorUrlValue = frontmatter.authorUrl || frontmatter.author_url || '';
         const authorUrl = safeContentUrl(authorUrlValue);
-        const editorialType = String(entry.type || 'news');
-        const isOpinion = editorialType === 'opinion';
-        const sectionLabel = isOpinion ? 'Opinião' : 'Notícias';
-        const sectionPath = isOpinion ? '/opiniao' : '/noticias';
         const backLink = document.getElementById('back-to-section');
         if (backLink) { backLink.href = sectionPath; backLink.textContent = isOpinion ? '← VOLTAR À OPINIÃO' : '← VOLTAR ÀS NOTÍCIAS'; }
         const navNoticias = document.getElementById('nav-noticias');
@@ -626,47 +646,55 @@
         current.setAttribute('aria-current', 'page');
         crumbList.appendChild(current);
         breadcrumb.appendChild(crumbList);
-
-        const header = document.createElement('header');
-        header.className = 'article-heading';
-        const tag = document.createElement('span');
-        tag.className = 'tag';
-        tag.textContent = category.toUpperCase();
-        const editorialTag = document.createElement('span');
-        editorialTag.className = 'tag';
-        editorialTag.textContent = editorialTypeLabel;
-        const h1 = document.createElement('h1');
-        h1.textContent = title;
-        header.append(tag, editorialTag, h1);
+        container.insertBefore(breadcrumb, previewHeader);
+        previewCategoryTag.textContent = category.toUpperCase();
+        previewEditorialTag.textContent = editorialTypeLabel;
+        previewH1.textContent = title;
         if (description) {
-          const summary = document.createElement('p');
-          summary.className = 'article-summary';
-          summary.textContent = description;
-          header.appendChild(summary);
+          if (!previewSummary) {
+            previewSummary = document.createElement('p');
+            previewSummary.className = 'article-summary';
+            previewHeader.appendChild(previewSummary);
+          }
+          previewSummary.textContent = description;
+        } else {
+          previewSummary?.remove();
+          previewSummary = null;
         }
-        if (published || author || modified) {
-          const byline = document.createElement('p');
-          byline.className = 'article-byline';
-          const dateText = published ? 'Publicado em ' + new Date(published).toLocaleDateString('pt-PT') : '';
-          const authorRole = authorRecord?.role ? ' (' + authorRecord.role + ')' : '';
-          const authorText = author ? 'Por ' + author + authorRole : '';
-          const modifiedText = modified ? 'Atualizado em ' + new Date(modified).toLocaleDateString('pt-PT') : '';
-          byline.textContent = [dateText, authorText, modifiedText].filter(Boolean).join(' · ');
-          header.appendChild(byline);
+        const finalDateText = published ? 'Publicado em ' + new Date(published).toLocaleDateString('pt-PT') : '';
+        const authorRole = authorRecord?.role ? ' (' + authorRecord.role + ')' : '';
+        const authorText = author ? 'Por ' + author + authorRole : '';
+        const modifiedText = modified ? 'Atualizado em ' + new Date(modified).toLocaleDateString('pt-PT') : '';
+        const finalBylineText = [finalDateText, authorText, modifiedText].filter(Boolean).join(' · ');
+        let previewByline = previewHeader.querySelector('.article-byline');
+        if (finalBylineText) {
+          if (!previewByline) {
+            previewByline = document.createElement('p');
+            previewByline.className = 'article-byline';
+            previewHeader.appendChild(previewByline);
+          }
+          previewByline.textContent = finalBylineText;
+        } else {
+          previewByline?.remove();
         }
-        container.replaceChildren(breadcrumb, header);
         if (imageValue) {
-          const figure = document.createElement('figure');
-          figure.className = 'article-hero-image';
-          const img = document.createElement('img');
+          let figure = container.querySelector('.article-hero-image');
+          if (!figure) {
+            figure = document.createElement('figure');
+            figure.className = 'article-hero-image';
+            container.insertBefore(figure, previewHeader.nextSibling);
+          }
+          let img = figure.querySelector('img');
+          if (!img) {
+            img = document.createElement('img');
+            img.loading = 'eager';
+            img.decoding = 'async';
+            figure.appendChild(img);
+          }
           img.src = safeArticleImage(imageValue);
           img.alt = title;
-          img.loading = 'eager';
-          img.fetchPriority = 'high';
-          img.decoding = 'async';
+          img.fetchPriority = articleImageIsDesktopPriority ? 'high' : 'auto';
           img.onerror = () => { img.onerror = null; img.src = '/images/logo.png'; };
-          figure.appendChild(img);
-          container.appendChild(figure);
         }
         const bodyElement = document.createElement('div');
         bodyElement.className = 'art-body';
@@ -915,39 +943,7 @@
       });
     }
 
-    function configurarCabecalhoArtigo() {
-      const heading = document.querySelector('.article-heading');
-      const body = document.querySelector('.art-body');
-      const siteHeader = document.querySelector('.site-header');
-      if (!heading) return;
-      const atualizarOffset = () => {
-        const alturaHeader = siteHeader ? siteHeader.getBoundingClientRect().height : 0;
-        document.documentElement.style.setProperty('--site-header-offset', alturaHeader + 'px');
-      };
-      let frame = null;
-      const atualizarEstado = () => {
-        frame = null;
-        const progress = Math.min(1, Math.max(0, window.scrollY / 260));
-        heading.style.setProperty('--heading-progress', progress.toFixed(3));
-        if (body) {
-          const alturaCabecalho = heading.getBoundingClientRect().height;
-          const limiteInferior = (siteHeader?.getBoundingClientRect().bottom || 0) + alturaCabecalho + 24;
-          heading.classList.toggle('is-near-end', body.getBoundingClientRect().bottom <= limiteInferior);
-        }
-      };
-      const agendarAtualizacao = () => {
-        if (frame !== null) return;
-        frame = window.requestAnimationFrame(atualizarEstado);
-      };
-      atualizarOffset();
-      atualizarEstado();
-      window.addEventListener('resize', () => { atualizarOffset(); agendarAtualizacao(); }, { passive: true });
-      window.addEventListener('scroll', agendarAtualizacao, { passive: true });
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      loadArticle().then(() => configurarCabecalhoArtigo());
-    });
+    document.addEventListener('DOMContentLoaded', () => loadArticle());
 
   </script>
 
