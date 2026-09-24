@@ -35,14 +35,14 @@ jobs:
         env:
           LIMIT: ${{ inputs.limit || '20' }}
         run: |
-          if git log -1 --pretty=%B | grep -Fq '[IMPORT-FRAMER-REAL]'; then
+          if [ "$GITHUB_EVENT_NAME" = "push" ]; then
             python scripts/import-framer-news.py --limit 0 --write
           else
             python scripts/import-framer-news.py --limit "$LIMIT"
           fi
 
       - name: Commit artigos importados
-        if: ${{ contains(github.event.head_commit.message, '[IMPORT-FRAMER-REAL]') }}
+        if: ${{ github.event_name == 'push' }}
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
@@ -54,7 +54,6 @@ jobs:
           fi
           git commit -m "content: importar arquivo histórico do Framer"
           git push
-
       - name: Publicar resumo no commit
         if: always()
         env:
