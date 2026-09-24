@@ -54,6 +54,24 @@ jobs:
           fi
           git commit -m "content: importar arquivo histórico do Framer"
           git push origin HEAD:main
+      - name: Mostrar diagnóstico do relatório
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          from collections import Counter
+          r=json.load(open('/tmp/framer-import-report.json',encoding='utf-8'))
+          print('DIAGNOSTICO_FRAMER', json.dumps({
+              'listingUrls': r['listingUrls'],
+              'readyToImport': r['readyToImport'],
+              'skipped': r['skipped'],
+              'failed': r['failed'],
+              'skipReasons': Counter(reason for _, reason in r['skippedItems']),
+              'sampleSkipped': r['skippedItems'][:10],
+              'sampleFailed': r['failedItems'][:10],
+          }, ensure_ascii=False, default=dict))
+          PY
+
       - name: Publicar resumo no commit
         if: always()
         env:
