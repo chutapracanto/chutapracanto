@@ -669,3 +669,15 @@ Se precisar de Codex: prompt curto, focado, sem reproduzir este manual.
 Se precisar da utilizadora: pedir apenas a ação indispensável.
 
 FIM.
+
+
+## 16. ATUALIZAÇÃO OPERACIONAL — 2026-09-24 16:49 WEST
+
+- Regra permanente reforçada: esta documentação é atualizada no mesmo ciclo sempre que surgir uma nova regra, prioridade, decisão ou alteração relevante.
+- Regra de continuidade reforçada pela utilizadora: nunca terminar uma mensagem apenas porque existe um estado pending ou porque existe trabalho autónomo ainda executável. Continuar a executar, verificar, corrigir e repetir até conclusão ou dependência externa real.
+- Corrigido o workflow `.github/workflows/testar-importacao-framer.yml` no commit `fb0316790f9a19f6de863bc0aadbd720de1aebad`.
+- O workflow deixa de escrever artigos automaticamente em qualquer push. Em push normal executa dry-run completo; escrita só ocorre quando a mensagem do commit contém explicitamente `[IMPORT-FRAMER-REAL]`.
+- Esta proteção é obrigatória para impedir que correções do importer ou do próprio workflow provoquem uma importação real acidental.
+- O importer atual contém a extração adaptada ao template Framer e validação de imagem, mas a importação real continua bloqueada até existir uma validação completa do lote.
+- Antes da importação real: confirmar relatório de 213 URLs, falhas = 0 para entradas consideradas importáveis, duplicados corretamente classificados e imagens acessíveis. Não considerar apenas o estado do commit como validação do lote.
+- Depois da importação real: validar número efetivamente escrito, ausência de sobrescrita, índice cronológico, pesquisa, sitemap e regressões; remover o mecanismo temporário de importação única.
