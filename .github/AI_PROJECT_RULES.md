@@ -373,6 +373,8 @@ Estado atual:
 - foi criado temporariamente .github/workflows/importar-framer-uma-vez.yml para a importação real, com proteção contra sobrescrita; depois da execução deve ser removido;
 - o workflow principal testar-importacao-framer.yml foi reforçado para escrita apenas com o marcador explícito [IMPORT-FRAMER-REAL];
 - o gatilho foi tornado robusto no commit ef5a16812b9da42df66934e57aa2aff03ec5f4e8, lendo a mensagem do commit no runner;
+- foi corrigida a permissão do workflow para contents: write no commit 556624cba28fe42089453d9df695b54e3465fdc8, necessária para o commit automático dos artigos;
+- o commit a02106e651e0a7346510c9d824559f175ddc1734a é o novo gatilho controlado de escrita;
 - o commit 4f9f3e91c93b91b2d0f5565a6dd6a83de8dbbce5 é o gatilho controlado da importação real;
 - isso não autoriza importação real: ainda é necessário validar o relatório completo e a estratégia de imagens;
 - não gastar Codex para esta fase enquanto o Assistente conseguir continuar pelo GitHub.
