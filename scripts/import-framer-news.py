@@ -15,6 +15,7 @@ import json
 import re
 import sys
 import time
+import unicodedata
 from datetime import datetime
 from pathlib import Path
 from urllib.parse import urljoin, urlparse, unquote
@@ -189,6 +190,13 @@ def listing_urls(session: requests.Session) -> list[str]:
     return urls
 
 
+def title_date_key(title: str, published: str) -> tuple[str, str]:
+    normalized = unicodedata.normalize("NFKD", clean(title))
+    normalized = "".join(ch for ch in normalized if not unicodedata.combining(ch))
+    normalized = re.sub(r"[^a-z0-9]+", " ", normalized.casefold()).strip()
+    return normalized, published
+
+
 def yaml_quote(value: str) -> str:
     return json.dumps(value, ensure_ascii=False)
 
@@ -230,6 +238,11 @@ def main() -> int:
     existing = json.loads(INDEX.read_text(encoding="utf-8")) if INDEX.exists() else []
     existing_slugs = {str(x.get("slug", "")) for x in existing}
     existing_sources = {str(x.get("sourceUrl", "")) for x in existing}
+    existing_title_dates = {
+        title_date_key(str(x.get("title", "")), str(x.get("published", "")))
+        for x in existing
+        if x.get("title") and x.get("published")
+    }
 
     imported = []
     skipped = []
@@ -241,12 +254,21 @@ def main() -> int:
             if not item:
                 skipped.append((url, "missing-title-date-or-body"))
                 continue
-            if item["slug"] in existing_slugs or item["sourceUrl"] in existing_sources:
-                skipped.append((url, "already-present"))
+            item_key = title_date_key(item["title"], item["published"])
+            if (
+                item["slug"] in existing_slugs
+                or item["sourceUrl"] in existing_sources
+                or item_key in existing_title_dates
+            ):
+                reason = "already-present"
+                if item_key in existing_title_dates:
+                    reason = "duplicate-title-and-date"
+                skipped.append((url, reason))
                 continue
             imported.append(item)
             existing_slugs.add(item["slug"])
             existing_sources.add(item["sourceUrl"])
+            existing_title_dates.add(item_key)
             print(f"[{n}/{len(urls)}] OK {item['published']} {item['title']}")
         except Exception as exc:
             failed.append((url, str(exc)))
