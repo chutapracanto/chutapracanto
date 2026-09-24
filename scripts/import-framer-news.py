@@ -35,8 +35,17 @@ HEADERS = {
 }
 
 
+def repair_mojibake(value: str) -> str:
+    try:
+        repaired = value.encode("latin1").decode("utf-8")
+        return repaired if repaired != value else value
+    except (UnicodeEncodeError, UnicodeDecodeError):
+        return value
+
+
 def clean(value: str | None) -> str:
-    return re.sub(r"\s+", " ", html.unescape(value or "")).strip()
+    value = repair_mojibake(html.unescape(value or ""))
+    return re.sub(r"\s+", " ", value).strip()
 
 
 def slugify(value: str) -> str:
@@ -177,7 +186,7 @@ def listing_urls(session: requests.Session) -> list[str]:
     urls = []
     seen = set()
     for a in soup.find_all("a", href=True):
-        href = urljoin(LISTING, a["href"])
+        href = urljoin(LISTING, repair_mojibake(a["href"]))
         parsed = urlparse(href)
         if parsed.netloc != urlparse(BASE).netloc:
             continue
