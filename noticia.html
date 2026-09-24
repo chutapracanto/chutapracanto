@@ -791,6 +791,8 @@
         }
         container.textContent = 'Não foi possível carregar esta notícia. Volta à página de Notícias e tenta outro artigo.';
       } finally {
+        const loadingStatus = document.getElementById('article-loading-status');
+        if (loadingStatus) loadingStatus.hidden = true;
         container.hidden = false;
         container.setAttribute('aria-busy', 'false');
         document.body.classList.remove('article-loading');
