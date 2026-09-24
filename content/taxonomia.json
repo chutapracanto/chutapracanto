@@ -161,6 +161,11 @@
       "id": "roma-seriea",
       "label": "Roma SerieA",
       "kind": "mixed"
+    },
+    {
+      "id": "liga-das-nacoes",
+      "label": "Liga das Nações",
+      "kind": "mixed"
     }
   ]
 }
