@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # Real import is enabled only by the explicit [IMPORT-FRAMER-REAL] workflow commit.
 # Triggered validation cycle: 2026-09-24.
+# Write permission verified for the controlled import workflow.
 """
 Importa notícias públicas do antigo Framer para o arquivo Markdown do Chuta Pra Canto.
 
