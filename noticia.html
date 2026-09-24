@@ -15,6 +15,10 @@
 
   <link rel="icon" type="image/png" href="images/logo.png">
 
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <link rel="stylesheet" href="style.css">
@@ -384,50 +388,35 @@
           const isOpinion = entry.type === 'opinion';
           const title = String(entry.title || 'Sem título');
           const category = String(entry.category || 'Geral');
-          const header = container.querySelector(':scope > header.article-heading') || document.createElement('header');
+          const header = document.createElement('header');
           header.className = 'article-heading';
-          const categoryTag = header.querySelector('[data-article-category]') || document.createElement('span');
+          const categoryTag = document.createElement('span');
           categoryTag.className = 'tag';
-          categoryTag.dataset.articleCategory = '';
           categoryTag.textContent = category.toUpperCase();
-          const typeTag = header.querySelector('[data-article-type]') || document.createElement('span');
+          const typeTag = document.createElement('span');
           typeTag.className = 'tag';
-          typeTag.dataset.articleType = '';
           typeTag.textContent = isOpinion ? 'Opinião' : 'Notícia';
-          const h1 = header.querySelector('[data-article-title], h1') || document.createElement('h1');
-          h1.dataset.articleTitle = '';
+          const h1 = document.createElement('h1');
           h1.textContent = title;
-          if (h1.parentElement !== header) header.appendChild(h1);
-          header.insertBefore(categoryTag, h1);
-          header.insertBefore(typeTag, h1);
+          header.append(categoryTag, typeTag, h1);
 
-          let summary = header.querySelector('.article-summary');
+          let summary = null;
           if (entry.subtitle) {
-            if (!summary) {
-              summary = document.createElement('p');
-              summary.className = 'article-summary';
-              header.appendChild(summary);
-            }
+            summary = document.createElement('p');
+            summary.className = 'article-summary';
             summary.textContent = String(entry.subtitle);
-          } else {
-            summary?.remove();
-            summary = null;
+            header.appendChild(summary);
           }
           const date = entry.published ? new Date(entry.published) : null;
-          let byline = header.querySelector('.article-byline');
           if (entry.author || (date && !Number.isNaN(date.getTime()))) {
-            if (!byline) {
-              byline = document.createElement('p');
-              byline.className = 'article-byline';
-              header.appendChild(byline);
-            }
+            const byline = document.createElement('p');
+            byline.className = 'article-byline';
             const dateText = date && !Number.isNaN(date.getTime()) ? 'Publicado em ' + date.toLocaleDateString('pt-PT') : '';
             byline.textContent = [dateText, entry.author ? 'Por ' + entry.author : ''].filter(Boolean).join(' · ');
-          } else {
-            byline?.remove();
+            header.appendChild(byline);
           }
 
-          if (header.parentElement !== container) container.replaceChildren(header);
+          container.replaceChildren(header);
           document.title = title + ' | Chuta Pra Canto';
           const backLink = document.getElementById('back-to-section');
           if (backLink) {
