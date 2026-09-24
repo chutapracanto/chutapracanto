@@ -214,16 +214,13 @@ def article_from_page(session: requests.Session, url: str) -> dict | None:
             for node in header_block.parent.find_all(recursive=False):
                 if node is header_block or node.name != "div":
                     continue
-                paragraphs = [
-                    clean(p.get_text(" ", strip=True))
-                    for p in node.find_all("p")
-                ]
-                paragraphs = [p for p in paragraphs if len(p) >= 25]
+                raw_text = node.get_text("\n\n", strip=True)
+                normalized_text = re.sub(r"\n{3,}", "\n\n", raw_text).strip()
                 text_len = len(clean(node.get_text(" ", strip=True)))
-                if len(paragraphs) >= 2 and text_len >= 500:
-                    sibling_candidates.append((text_len, paragraphs))
+                if text_len >= 500:
+                    sibling_candidates.append((text_len, normalized_text))
             if sibling_candidates:
-                body_text = "\n\n".join(max(sibling_candidates, key=lambda x: x[0])[1])
+                body_text = max(sibling_candidates, key=lambda x: x[0])[1]
         if not body_text:
             candidates = []
             for selector in ("article", "[role='article']", "main"):
