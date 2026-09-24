@@ -728,4 +728,10 @@ FIM.
 - O índice e sitemap não devem ser assumidos como atualizados só porque o import terminou SUCCESS. O commit automático feito pelo workflow usa o token do GitHub Actions; workflows dependentes de `push` não devem ser considerados disparados automaticamente por esse commit.
 - Regra operacional: sempre verificar o estado efetivo de `content/noticias-index.json` e `sitemap.xml` depois de workflows que escrevem conteúdo. Se estiverem desatualizados, executar explicitamente o mecanismo de regeneração disponível ou adaptar o workflow para que a mesma execução produza todos os artefactos necessários.
 - O estado observado após a importação foi índice com 54 entradas e sitemap com 62 URLs, apesar de existirem 232 Markdown. Portanto, a etapa de regeneração/validação continua obrigatória antes de remover o workflow temporário de importação.
+## 21. REGRA PERMANENTE — CODEX DEVE CONSULTAR AS RULES
 
+- Sempre que o Assistente preparar um prompt para o Codex para este projeto, o prompt deve lembrar explicitamente o Codex de ler `.github/AI_PROJECT_RULES.md` antes de executar a tarefa.
+- A formulação mínima recomendada é: **"Trabalha no repo chutapracanto/chutapracanto usando .github/AI_PROJECT_RULES.md. Lê as rules primeiro antes de alterar ou executar qualquer coisa."**
+- Esta lembrança é obrigatória mesmo quando a tarefa parece pequena, porque o ficheiro contém decisões de arquitetura, limites, prioridades, histórico e regras de segurança que podem ser relevantes para a execução.
+- Não é necessário copiar o conteúdo do manual para o prompt; basta indicar o ficheiro e mandar lê-lo primeiro.
+- Depois da execução do Codex, o Assistente deve voltar a verificar o estado do GitHub e continuar o ciclo de validação/correção definido neste manual.
