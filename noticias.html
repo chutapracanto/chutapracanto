@@ -27,8 +27,14 @@
 
   
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.onload=null;this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,600;0,700;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.onload=null;this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,600;0,700;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="stylesheet" href="style.css">
 
 
@@ -612,7 +618,7 @@
   <header class="site-header">
   <div class="header-container">
     <a href="/" class="logo-link" aria-label="Chuta Pra Canto — início">
-      <img src="/images/logo.png" alt="Chuta Pra Canto" class="site-logo">
+      <img src="/images/logo.png" alt="Chuta Pra Canto" class="site-logo" decoding="async" fetchpriority="low">
     </a>
     <nav aria-label="Navegação principal">
       <ul>
@@ -708,7 +714,7 @@
   <footer>
   <div class="footer-container">
     <div class="footer-brand">
-      <img src="/images/logo.png" alt="Chuta Pra Canto" class="footer-logo" width="220" height="50">
+      <img src="/images/logo.png" alt="Chuta Pra Canto" class="footer-logo" loading="lazy" decoding="async" fetchpriority="low" width="220" height="50">
       <p>Análise tática, debate pós-jogo e opinião sobre futebol.</p>
     </div>
     <div class="footer-links">
@@ -1005,7 +1011,7 @@
 
 
 
-      paginaItens.forEach(item => {
+      paginaItens.forEach((item, index) => {
 
         const card = document.createElement('a');
         card.href = `/noticia?slug=${encodeURIComponent(item.slug)}`;
@@ -1015,7 +1021,9 @@
         const image = document.createElement('img');
         image.src = safePublicUrl(item.imagem) || '/images/logo.png';
         image.alt = item.title;
-        image.loading = 'lazy';
+        const isAboveFold = paginaAtual === 1 && index === 0;
+        image.loading = isAboveFold ? 'eager' : 'lazy';
+        image.fetchPriority = isAboveFold ? 'high' : 'low';
         image.decoding = 'async';
         image.onerror = () => { image.onerror = null; image.src = '/images/logo.png'; };
         imageWrap.appendChild(image);

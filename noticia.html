@@ -15,8 +15,14 @@
 
   <link rel="icon" type="image/png" href="images/logo.png">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.onload=null;this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,600;0,700;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.onload=null;this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,600;0,700;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="stylesheet" href="style.css">
 
   <!-- Metadados para redes sociais -->
@@ -312,7 +318,7 @@
   <header class="site-header">
   <div class="header-container">
     <a href="/" class="logo-link" aria-label="Chuta Pra Canto — início">
-      <img src="/images/logo.png" alt="Chuta Pra Canto" class="site-logo">
+      <img src="/images/logo.png" alt="Chuta Pra Canto" class="site-logo" decoding="async" fetchpriority="low">
     </a>
     <nav aria-label="Navegação principal">
       <ul>
@@ -382,35 +388,56 @@
           const isOpinion = entry.type === 'opinion';
           const title = String(entry.title || 'Sem título');
           const category = String(entry.category || 'Geral');
-          const header = document.createElement('header');
+          const existingHeader = container.querySelector('.article-heading');
+          const header = existingHeader || document.createElement('header');
           header.className = 'article-heading';
-          const categoryTag = document.createElement('span');
+          const existingTags = [...header.querySelectorAll('.tag')];
+          const categoryTag = existingTags[0] || document.createElement('span');
           categoryTag.className = 'tag';
-          categoryTag.textContent = category.toUpperCase();
-          const typeTag = document.createElement('span');
+          const typeTag = existingTags[1] || document.createElement('span');
           typeTag.className = 'tag';
-          typeTag.textContent = isOpinion ? 'Opinião' : 'Notícia';
-          const h1 = document.createElement('h1');
-          h1.textContent = title;
-          header.append(categoryTag, typeTag, h1);
+          const h1 = header.querySelector('h1') || document.createElement('h1');
+          let summary = header.querySelector('.article-summary');
+          let byline = header.querySelector('.article-byline');
 
-          let summary = null;
-          if (entry.subtitle) {
-            summary = document.createElement('p');
-            summary.className = 'article-summary';
-            summary.textContent = String(entry.subtitle);
-            header.appendChild(summary);
+          if (!existingHeader) {
+            header.append(categoryTag, typeTag, h1);
+            container.replaceChildren(header);
+          } else {
+            if (!categoryTag.parentElement) header.insertBefore(categoryTag, header.firstChild);
+            if (!typeTag.parentElement) header.insertBefore(typeTag, h1);
+            if (!h1.parentElement) header.appendChild(h1);
           }
+
+          categoryTag.textContent = category.toUpperCase();
+          typeTag.textContent = isOpinion ? 'Opinião' : 'Notícia';
+          h1.textContent = title;
+
+          if (entry.subtitle) {
+            if (!summary) {
+              summary = document.createElement('p');
+              summary.className = 'article-summary';
+              header.appendChild(summary);
+            }
+            summary.textContent = String(entry.subtitle);
+          } else {
+            summary?.remove();
+            summary = null;
+          }
+
           const date = entry.published ? new Date(entry.published) : null;
           if (entry.author || (date && !Number.isNaN(date.getTime()))) {
-            const byline = document.createElement('p');
-            byline.className = 'article-byline';
+            if (!byline) {
+              byline = document.createElement('p');
+              byline.className = 'article-byline';
+              header.appendChild(byline);
+            }
             const dateText = date && !Number.isNaN(date.getTime()) ? 'Publicado em ' + date.toLocaleDateString('pt-PT') : '';
             byline.textContent = [dateText, entry.author ? 'Por ' + entry.author : ''].filter(Boolean).join(' · ');
-            header.appendChild(byline);
+          } else {
+            byline?.remove();
+            byline = null;
           }
-
-          container.replaceChildren(header);
           document.title = title + ' | Chuta Pra Canto';
           const backLink = document.getElementById('back-to-section');
           if (backLink) {
@@ -434,9 +461,17 @@
           window.__articleInitialShell = shell;
           const imagePriority = window.matchMedia('(min-width: 769px)').matches;
           if (entry.image) {
-            const figure = document.createElement('figure');
-            figure.className = 'article-hero-image';
-            const image = document.createElement('img');
+            let figure = container.querySelector('.article-hero-image');
+            if (!figure) {
+              figure = document.createElement('figure');
+              figure.className = 'article-hero-image';
+              container.appendChild(figure);
+            }
+            let image = figure.querySelector('img');
+            if (!image) {
+              image = document.createElement('img');
+              figure.appendChild(image);
+            }
             const imageUrl = new URL(String(entry.image), window.location.origin);
             const safeImageUrl = (imageUrl.protocol === 'https:' || (imageUrl.origin === window.location.origin && imageUrl.protocol === 'http:')) && !imageUrl.username && !imageUrl.password
               ? imageUrl.href
@@ -455,8 +490,7 @@
             image.fetchPriority = imagePriority ? 'high' : 'auto';
             image.decoding = 'async';
             image.onerror = () => { image.onerror = null; image.src = '/images/logo.png'; };
-            figure.appendChild(image);
-            container.appendChild(figure);
+            shell.figure = figure;
             shell.figure = figure;
             shell.image = image;
           }
@@ -469,7 +503,7 @@
   <footer>
   <div class="footer-container">
     <div class="footer-brand">
-      <img src="/images/logo.png" alt="Chuta Pra Canto" class="footer-logo" width="220" height="50">
+      <img src="/images/logo.png" alt="Chuta Pra Canto" class="footer-logo" loading="lazy" decoding="async" fetchpriority="low" width="220" height="50">
       <p>Análise tática, debate pós-jogo e opinião sobre futebol.</p>
     </div>
     <div class="footer-links">
@@ -709,24 +743,39 @@
         document.getElementById('twitter-url').content = currentShareUrl;
         document.getElementById('canonical-url').href = canonical;
 
-        const breadcrumb = document.createElement('nav');
-        breadcrumb.className = 'article-breadcrumbs';
-        breadcrumb.setAttribute('aria-label', 'Breadcrumb');
-        const crumbList = document.createElement('ol');
-        [['Home','/'],[sectionLabel,sectionPath]].forEach(([label, href]) => {
-          const li = document.createElement('li');
-          const link = document.createElement('a');
-          link.href = href;
-          link.textContent = label;
-          li.appendChild(link);
-          crumbList.appendChild(li);
-        });
-        const current = document.createElement('li');
-        current.textContent = title;
-        current.setAttribute('aria-current', 'page');
-        crumbList.appendChild(current);
-        breadcrumb.appendChild(crumbList);
-        container.insertBefore(breadcrumb, previewHeader);
+        let breadcrumb = container.querySelector('.article-breadcrumbs');
+        if (!breadcrumb) {
+          breadcrumb = document.createElement('nav');
+          breadcrumb.className = 'article-breadcrumbs';
+          breadcrumb.setAttribute('aria-label', 'Breadcrumb');
+          const crumbList = document.createElement('ol');
+          [['Home','/'],[sectionLabel,sectionPath]].forEach(([label, href]) => {
+            const li = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = href;
+            link.textContent = label;
+            li.appendChild(link);
+            crumbList.appendChild(li);
+          });
+          const current = document.createElement('li');
+          current.textContent = title;
+          current.setAttribute('aria-current', 'page');
+          crumbList.appendChild(current);
+          breadcrumb.appendChild(crumbList);
+          container.insertBefore(breadcrumb, previewHeader);
+        } else {
+          const breadcrumbLinks = breadcrumb.querySelectorAll('a');
+          if (breadcrumbLinks[0]) {
+            breadcrumbLinks[0].href = '/';
+            breadcrumbLinks[0].textContent = 'Home';
+          }
+          if (breadcrumbLinks[1]) {
+            breadcrumbLinks[1].href = sectionPath;
+            breadcrumbLinks[1].textContent = sectionLabel;
+          }
+          const current = breadcrumb.querySelector('li[aria-current="page"]');
+          if (current) current.textContent = title;
+        }
         previewCategoryTag.textContent = category.toUpperCase();
         previewEditorialTag.textContent = editorialTypeLabel;
         previewH1.textContent = title;

@@ -19,7 +19,13 @@
 <meta name="twitter:url" content="https://chutapracanto.com/opiniao">
   <title>Opinião | Chuta Pra Canto</title>
   <link rel="icon" type="image/png" href="/images/logo.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.onload=null;this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,600;0,700;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.onload=null;this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,600;0,700;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="stylesheet" href="/style.css">
   <style>
     .opinion-intro { margin-bottom: 2rem; }
@@ -42,7 +48,7 @@
 <body>
 <header class="site-header">
   <div class="header-container">
-    <a href="/" class="logo-link" aria-label="Chuta Pra Canto — início"><img src="/images/logo.png" alt="Chuta Pra Canto" class="site-logo"></a>
+    <a href="/" class="logo-link" aria-label="Chuta Pra Canto — início"><img src="/images/logo.png" alt="Chuta Pra Canto" class="site-logo" decoding="async" fetchpriority="low"></a>
     <nav aria-label="Navegação principal">
       <ul>
         <li><a href="/">Home</a></li>
@@ -74,7 +80,7 @@
 </main>
 <footer>
   <div class="footer-container">
-    <div class="footer-brand"><img src="/images/logo.png" alt="Chuta Pra Canto" class="footer-logo"><p>Análise tática, debate pós-jogo e opinião sobre futebol.</p></div>
+    <div class="footer-brand"><img src="/images/logo.png" alt="Chuta Pra Canto" class="footer-logo" loading="lazy" decoding="async" fetchpriority="low"><p>Análise tática, debate pós-jogo e opinião sobre futebol.</p></div>
     <div class="footer-links"><h4>Navegação</h4><a href="/">Home</a><a href="/noticias">Notícias</a><a href="/opiniao">Opinião</a><a href="/sobre">Sobre Nós</a><a href="/contacto">Contacto</a></div>
     <div class="footer-links"><h4>Informação</h4><a href="/privacidade">Política de Privacidade</a><a href="/termos">Termos e Condições</a><a href="/politica-editorial">Política Editorial</a></div>
     <div class="footer-socials-col"><h4>Redes sociais</h4><div class="footer-social-links">
