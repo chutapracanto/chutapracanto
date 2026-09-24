@@ -34,6 +34,7 @@ jobs:
       - name: Executar importação/teste
         env:
           LIMIT: ${{ inputs.limit || '20' }}
+          FRAMER_DEBUG: "1"
         run: |
           if [ "$GITHUB_EVENT_NAME" = "push" ]; then
             python scripts/import-framer-news.py --limit 0 --write
