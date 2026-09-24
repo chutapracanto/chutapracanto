@@ -232,7 +232,7 @@ def markdown(item: dict) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--write", action="store_true")
-    parser.add_argument("--limit", type=int, default=0)
+    parser.add_argument("--limit", type=int, default=213)
     parser.add_argument("--delay", type=float, default=0.2)
     args = parser.parse_args()
 
