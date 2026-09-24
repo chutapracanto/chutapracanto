@@ -69,7 +69,7 @@ jobs:
           except Exception as e:
               desc=f'Framer dry-run sem relatório: {e}'
               state='failure'
-          subprocess.run(['gh','api',f'repos/{os.environ["GITHUB_REPOSITORY"]}/statuses/{os.environ["GITHUB_SHA"]}','-f',f'state={state}','-f','context=framer-dry-run','-f',f'description={desc[:140]}'],check=False)
+          subprocess.run(['gh','api',f'repos/{os.environ["GITHUB_REPOSITORY"]}/statuses/{os.environ["GITHUB_SHA"]}','-f',f'state={state}','-f','context=framer-dry-run','-f',f'description={desc[:140]}','-f',f'target_url=https://github.com/{os.environ["GITHUB_REPOSITORY"]}/actions/runs/{os.environ["GITHUB_RUN_ID"]}'],check=False)
           PY
 
       - name: Guardar relatório
