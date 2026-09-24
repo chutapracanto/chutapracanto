@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "scripts/import-framer-news.py"
+      - ".github/workflows/importar-framer-uma-vez.yml"
 
 permissions:
   contents: write
