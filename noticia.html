@@ -15,6 +15,16 @@
 
   <link rel="icon" type="image/png" href="images/logo.png">
 
+  <script>
+    (() => {
+      const slug = new URLSearchParams(window.location.search).get('slug');
+      if (!slug || slug.includes('/') || slug.includes('\\') || slug.includes('..') || /[\\u0000-\\u001f]/.test(slug)) return;
+      window.__articleIndexPromise = fetch('/content/noticias-index.json')
+        .then(response => response.ok ? response.json() : null)
+        .catch(() => null);
+    })();
+  </script>
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <link rel="stylesheet" href="style.css">
@@ -371,11 +381,11 @@
       const container = document.getElementById('article-content');
       if (!slug || !container || slug.includes('/') || slug.includes('\\') || slug.includes('..') || /[\\u0000-\\u001f]/.test(slug)) return;
 
-      window.__articleIndexPromise = fetch('/content/noticias-index.json')
+      window.__articleIndexPromise = (window.__articleIndexPromise || fetch('/content/noticias-index.json')
         .then(response => {
           if (!response.ok) throw new Error('Índice de notícias indisponível');
           return response.json();
-        })
+        }))
         .then(index => {
           if (!Array.isArray(index)) throw new Error('Índice de notícias inválido');
           const entry = index.find(item => item.slug === slug) || index.find(item => String(item.slug || '').toLowerCase() === slug.toLowerCase());
