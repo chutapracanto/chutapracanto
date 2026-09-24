@@ -42,7 +42,7 @@
       color: #000; 
     }
     
-    .media-carousel { 
+    .media-carousel {
       display: flex; 
       gap: 1.25rem; 
       overflow-x: auto; 
@@ -51,6 +51,8 @@
       scrollbar-width: none; 
       min-height: 200px; 
     }
+    .media-carousel.vertical-aspect { min-height: 441px; }
+    .media-carousel.horizontal-aspect { min-height: 218px; }
     .media-carousel::-webkit-scrollbar { display: none; }
     
     .carousel-item { 
@@ -443,7 +445,7 @@
         }
         const principal = destaques[0];
         const mainCard = document.createElement('a');
-        mainCard.href = `noticia.html?slug=${encodeURIComponent(principal.slug)}`;
+        mainCard.href = `/noticia?slug=${encodeURIComponent(principal.slug)}`;
         mainCard.className = 'main-featured-card';
         mainCard.appendChild(createNewsImage(principal.image, principal.title, 'main-featured-img', true));
         const mainContent = document.createElement('div');
@@ -460,7 +462,7 @@
           list.className = 'secondary-featured-list';
           destaques.slice(1, 4).forEach(item => {
             const card = document.createElement('a');
-            card.href = `noticia.html?slug=${encodeURIComponent(item.slug)}`;
+            card.href = `/noticia?slug=${encodeURIComponent(item.slug)}`;
             card.className = 'sub-featured-card';
             card.appendChild(createNewsImage(item.image, item.title, 'sub-featured-img'));
             const content = document.createElement('div');
@@ -538,7 +540,7 @@
           currentObserver.unobserve(entry.target);
           feedsPorElemento.get(entry.target)?.();
         });
-      }, { rootMargin: '300px 0px' });
+      }, { rootMargin: '0px 0px' });
       feedsPorElemento.forEach((carregar, elemento) => {
         if (elemento) observer.observe(elemento);
       });
