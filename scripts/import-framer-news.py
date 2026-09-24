@@ -129,7 +129,11 @@ def article_from_page(session: requests.Session, url: str) -> dict | None:
             if not node: break
             chain.append((node.name, node.get("class"), len(node.get_text(" ", strip=True)), clean(node.get_text(" ", strip=True))[:500]))
             node=node.parent
-        print("FRAMER_DEBUG_PAGE", url, "status=", response.status_code, "bytes=", len(response.content), "title=", clean(soup.title.get_text(" ", strip=True) if soup.title else ""), "jsonld_types=", [x.get("@type") for x in objects[:5]], "h1=", [clean(x.get_text(" ", strip=True)) for x in h1s[:3]], "p_count=", len(soup.find_all("p")), "chain=", chain, "meta=", [(m.get("name") or m.get("property"), clean(m.get("content"))) for m in soup.find_all("meta") if m.get("name") or m.get("property")][:12])
+        sib=[]; hdr=h1s[1].find_parent("div", class_=lambda v: v and "framer-1ajq6b5" in v) if len(h1s)>1 else None;
+        if hdr:
+            for x in list(hdr.parent.children) if hdr.parent else []:
+                if getattr(x, "name", None): sib.append((x.name, x.get("class"), len(x.get_text(" ", strip=True))))
+        print("FRAMER_DEBUG_PAGE", url, "status=", response.status_code, "bytes=", len(response.content), "title=", clean(soup.title.get_text(" ", strip=True) if soup.title else ""), "jsonld_types=", [x.get("@type") for x in objects[:5]], "h1=", [clean(x.get_text(" ", strip=True)) for x in h1s[:3]], "p_count=", len(soup.find_all("p")), "chain=", chain, "siblings=", sib[:20], "meta=", [(m.get("name") or m.get("property"), clean(m.get("content"))) for m in soup.find_all("meta") if m.get("name") or m.get("property")][:12])
     article_ld = next(
         (x for x in objects if x.get("@type") in ("NewsArticle", "Article")),
         {},
