@@ -37,7 +37,13 @@ jobs:
           FRAMER_DEBUG: "1"
         run: |
           if [ "$GITHUB_EVENT_NAME" = "push" ]; then
-            python scripts/import-framer-news.py --limit 0 --write
+            if git log -1 --pretty=%B | grep -Fq "[IMPORT-FRAMER-REAL]"; then
+              echo "IMPORT-FRAMER-REAL encontrado: execução de escrita autorizada."
+              python scripts/import-framer-news.py --limit 0 --write
+            else
+              echo "Sem [IMPORT-FRAMER-REAL]: execução protegida em dry-run."
+              python scripts/import-framer-news.py --limit 0
+            fi
           else
             python scripts/import-framer-news.py --limit "$LIMIT"
           fi
