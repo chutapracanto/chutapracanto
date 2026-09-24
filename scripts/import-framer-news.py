@@ -152,6 +152,8 @@ def article_from_page(session: requests.Session, url: str) -> dict | None:
         h1 = soup.find("h1")
         title = clean(h1.get_text(" ", strip=True) if h1 else "")
 
+    category = clean(first_meta(soup, "article:section", "section", "category"))
+
     subtitle = (
         clean(article_ld.get("description"))
         or first_meta(soup, "description", "og:description", "twitter:description")
@@ -250,7 +252,7 @@ def article_from_page(session: requests.Session, url: str) -> dict | None:
         "slug": slug,
         "title": title,
         "subtitle": subtitle,
-        "category": clean(first_meta(soup, "article:section")) or "Futebol",
+        "category": category or "Futebol",
         "author": author,
         "published": published,
         "modified": modified,
