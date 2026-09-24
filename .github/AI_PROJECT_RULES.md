@@ -385,6 +385,7 @@ Estado atual:
 - o commit a02106e651e0a7346510c9d824559f175ddc1734a é o novo gatilho controlado de escrita;
 - a primeira importação válida preparou 179 artigos, mas o push foi rejeitado porque main avançou durante a execução; o workflow agora faz fetch/rebase de main antes de publicar;
 - o run 36022816703 confirmou: 213 URLs, 179 prontos, 34 duplicados/ignorados, 0 falhas;
+- o run seguinte conseguiu preparar os 179 no runner mas não os viu no stage normal; o workflow passou a usar `git add -f content/noticias` para garantir que os novos Markdown entram no commit;
 - o commit 4f9f3e91c93b91b2d0f5565a6dd6a83de8dbbce5 é o gatilho controlado da importação real;
 - isso não autoriza importação real: ainda é necessário validar o relatório completo e a estratégia de imagens;
 - não gastar Codex para esta fase enquanto o Assistente conseguir continuar pelo GitHub.
