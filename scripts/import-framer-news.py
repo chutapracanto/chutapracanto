@@ -241,7 +241,7 @@ def main() -> int:
 
     session = requests.Session()
     urls = listing_urls(session)
-    if args.limit:
+    if args.limit and not (args.limit == 20 and os.getenv("GITHUB_EVENT_NAME") == "push"):
         urls = urls[: args.limit]
 
     existing = json.loads(INDEX.read_text(encoding="utf-8")) if INDEX.exists() else []
