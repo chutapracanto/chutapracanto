@@ -14,6 +14,7 @@ on:
 
 permissions:
   contents: read
+  statuses: write
 
 jobs:
   testar:
@@ -35,7 +36,26 @@ jobs:
           LIMIT: ${{ inputs.limit || '20' }}
         run: python scripts/import-framer-news.py --limit "$LIMIT"
 
+      - name: Publicar resumo no commit
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import json, os, subprocess
+          p='/tmp/framer-import-report.json'
+          try:
+              r=json.load(open(p,encoding='utf-8'))
+              desc=f"Framer: URLs={r['listingUrls']} | prontos={r['readyToImport']} | ignorados={r['skipped']} | falhas={r['failed']}"
+              state='success' if r['failed'] == 0 else 'failure'
+          except Exception as e:
+              desc=f'Framer dry-run sem relatório: {e}'
+              state='failure'
+          subprocess.run(['gh','api',f'repos/{os.environ["GITHUB_REPOSITORY"]}/statuses/{os.environ["GITHUB_SHA"]}','-f',f'state={state}','-f','context=framer-dry-run','-f',f'description={desc[:140]}'],check=False)
+          PY
+
       - name: Guardar relatório
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: framer-import-report
