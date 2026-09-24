@@ -12,6 +12,7 @@ import argparse
 import hashlib
 import html
 import json
+import os
 import re
 import sys
 import time
