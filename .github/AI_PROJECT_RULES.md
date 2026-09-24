@@ -372,6 +372,7 @@ Estado atual:
 - o novo dry-run do último commit ainda está a ser criado/executado pelo GitHub Actions;
 - foi criado temporariamente .github/workflows/importar-framer-uma-vez.yml para a importação real, com proteção contra sobrescrita; depois da execução deve ser removido;
 - o workflow principal testar-importacao-framer.yml foi reforçado para escrita apenas com o marcador explícito [IMPORT-FRAMER-REAL];
+- o gatilho foi tornado robusto no commit ef5a16812b9da42df66934e57aa2aff03ec5f4e8, lendo a mensagem do commit no runner;
 - o commit 4f9f3e91c93b91b2d0f5565a6dd6a83de8dbbce5 é o gatilho controlado da importação real;
 - isso não autoriza importação real: ainda é necessário validar o relatório completo e a estratégia de imagens;
 - não gastar Codex para esta fase enquanto o Assistente conseguir continuar pelo GitHub.
