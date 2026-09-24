@@ -238,6 +238,8 @@ def article_from_page(session: requests.Session, url: str) -> dict | None:
             if candidates:
                 body_text = max(candidates, key=len)
 
+    if os.getenv("FRAMER_DEBUG"):
+        print("FRAMER_DEBUG_FIELDS", url, "title_ok=", bool(title), "published=", published, "category=", category, "author=", author, "body_len=", len(body_text), "image=", image)
     if not title or not published or not body_text:
         return None
 
