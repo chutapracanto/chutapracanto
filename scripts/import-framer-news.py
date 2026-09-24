@@ -206,6 +206,10 @@ def article_from_page(session: requests.Session, url: str) -> dict | None:
         body_text = clean(str(article_ld["articleBody"]))
 
     if not body_text:
+        direct_body_nodes = soup.find_all("div", class_=lambda value: value and "framer-j471f3" in value)
+        if direct_body_nodes:
+            body_text = clean(max(direct_body_nodes, key=lambda node: len(node.get_text(" ", strip=True))).get_text(" ", strip=True))
+    if not body_text:
         h1s = soup.find_all("h1")
         article_h1 = h1s[1] if len(h1s) > 1 else (h1s[0] if h1s else None)
         header_block = article_h1.parent.parent.parent if article_h1 and article_h1.parent and article_h1.parent.parent and article_h1.parent.parent.parent else None
