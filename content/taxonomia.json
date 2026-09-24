@@ -96,6 +96,71 @@
       "id": "cronica-futebol-portugues",
       "label": "Crónica-Futebol Português",
       "kind": "mixed"
+    },
+    {
+      "id": "serie-a",
+      "label": "Serie A",
+      "kind": "mixed"
+    },
+    {
+      "id": "ligue-1",
+      "label": "Ligue 1",
+      "kind": "mixed"
+    },
+    {
+      "id": "fc-porto-sportingcp",
+      "label": "FC Porto SportingCP",
+      "kind": "mixed"
+    },
+    {
+      "id": "uefa-champions-league",
+      "label": "UEFA Champions League",
+      "kind": "mixed"
+    },
+    {
+      "id": "sporting-cp-uefa-champions-league",
+      "label": "Sporting CP UEFA Champions League",
+      "kind": "mixed"
+    },
+    {
+      "id": "sl-benfica-fc-porto",
+      "label": "SL Benfica FC Porto",
+      "kind": "mixed"
+    },
+    {
+      "id": "torreense",
+      "label": "Torreense",
+      "kind": "mixed"
+    },
+    {
+      "id": "liga-2-portugal-meusuper",
+      "label": "Liga 2 Portugal MeuSuper",
+      "kind": "mixed"
+    },
+    {
+      "id": "ac-milan",
+      "label": "AC Milan",
+      "kind": "mixed"
+    },
+    {
+      "id": "la-liga",
+      "label": "La Liga",
+      "kind": "mixed"
+    },
+    {
+      "id": "primeira-liga-portugal-betclic",
+      "label": "Primeira Liga Portugal Betclic",
+      "kind": "mixed"
+    },
+    {
+      "id": "selecao-nacional-sub-21",
+      "label": "Seleção Nacional Sub-21",
+      "kind": "mixed"
+    },
+    {
+      "id": "roma-seriea",
+      "label": "Roma SerieA",
+      "kind": "mixed"
     }
   ]
 }
