@@ -789,3 +789,49 @@ Quando o assistente enviar à utilizadora qualquer conteúdo cuja finalidade sej
 - A leitura das rules é obrigatória mesmo quando o Assistente já conhece o contexto ou considera a resposta trivial.
 - Esta regra existe para impedir regressões de processo, incluindo parar quando ainda existe uma ação autónoma possível, esquecer o limite Free, esquecer o formato de prompts copiáveis ou ignorar decisões de arquitetura já registadas.
 - O Assistente deve tratar o conteúdo mais recente deste ficheiro como fonte de verdade e, se detectar conflito com memória/conversas antigas, seguir o estado real do GitHub e atualizar as rules quando necessário.
+
+
+## 27. BÍBLIA MESTRA DE CONTINUIDADE — 2026-09-24
+
+- Foi criada a Bíblia Mestra consolidada:
+  `bíblia mestra Chuta Pra Canto.md`
+- Este ficheiro reúne e organiza as duas bíblias anteriores e o handoff técnico de performance, preservando os textos originais no próprio documento como arquivo integral.
+- Para continuidade entre IAs, a ordem recomendada é:
+  1. ler este `AI_PROJECT_RULES.md`;
+  2. ler `bíblia mestra Chuta Pra Canto.md`;
+  3. verificar o estado real do GitHub/produção;
+  4. consultar `bíblia primeira conversa.md`, `bíblia segunda conversa.md` e `.github/AI_HANDOFF_2026-09-24.md` apenas quando for necessário recuperar detalhe histórico ou técnico.
+- As bíblias anteriores são arquivo histórico, não fontes concorrentes de estado atual.
+- Em caso de conflito, o GitHub atual e estas Rules prevalecem sobre qualquer Bíblia/handoff.
+- A Bíblia Mestra deve ser atualizada quando houver alteração relevante de estado, prioridade, arquitetura, decisão ou continuidade.
+- Não apagar as duas bíblias originais nem o handoff apenas por terem sido consolidados.
+
+## 28. ESTADO ATUAL CORRIGIDO APÓS CONSOLIDAÇÃO — 2026-09-24
+
+- O estado real de `main` foi consultado diretamente e está atualmente em:
+  `c6bee91789b98fba07ad88d8f013b42e5e2f8b5e`
+- A main avançou depois das bíblias/handoff, incluindo commits de conteúdo e atualização do índice. Portanto, documentos históricos não devem ser tratados como fotografia atual do HEAD.
+- A PR #25 `perf-lcp-first-pass` está **ABERTA e NÃO MERGEADA**.
+- PR #25:
+  - head: `5e1ec62ed59c98394956b0cc6010eed4969f273c`;
+  - base original: `1b78f71fc2b15d8766def78df0b89ea9d05e6f21`;
+  - state: open;
+  - merged: false;
+  - mergeable: false no estado consultado;
+  - 15 commits;
+  - 12 ficheiros alterados.
+- Como a main avançou depois da criação da PR #25, não assumir que a branch está atualizada nem fazer merge sem primeiro verificar/reconciliar a divergência.
+- O shell inicial de artigo foi comprovado em HTML RAW e não existe duplicação após JavaScript.
+- O problema técnico ainda aberto é o diagnóstico do CLS `0,571` observado num artigo desktop e a anomalia da medição Lighthouse/PSI da Opinião.
+- Não fazer merge da #25 até existir diagnóstico suficientemente sólido e validação correspondente.
+- O último diagnóstico externo pediu Chrome Performance trace para identificar timestamp/elemento/causa do layout shift e investigar `--article-progress`; nenhuma alteração de código foi feita nessa ronda.
+- A importação histórica Framer permanece fechada: 213 URLs, 179 importadas, 34 duplicadas/ignoradas, 0 falhas, 233 Markdown finais, índice 233 e sitemap 241 no último estado validado.
+- Depois de qualquer workflow que escreva conteúdo, verificar efetivamente o índice e o sitemap.
+
+## 29. REGRA DE LEITURA OBRIGATÓRIA — 2026-09-24
+
+- Antes de toda e qualquer resposta ou ação neste projeto, consultar as Rules e cumprir o estado mais recente registado.
+- Quando esta secção e uma secção histórica entrarem em conflito, esta secção mais recente prevalece, juntamente com o estado real do GitHub.
+
+
+FIM.
