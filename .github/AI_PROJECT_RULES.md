@@ -752,9 +752,19 @@ FIM.
 - main confirmado em `0f5be13d75a94aba956e4ed1af1d09d6b2aa1060`, commit `docs: fechar importação histórica do Framer`.
 - O SHA `571e5e5293daefe63c6bdb5d2a2568eb2da4b9fd` visto em `fetch_file(index.html)` é SHA do blob de `index.html`, não HEAD de main.
 - PR #19 está fechada e não mergeada; não é produção.
-- PR #23 está aberta e não mergeada, branch `mobile-sticky-editorial`, HEAD `9e62d3e53f2a0a85a5dcc7a5b3a6987becec8550`; Preview Cloudflare SUCCESS, mas continua fora de produção até validação.
-- #22 é a implementação de produção da linha sticky/navegação/partilha pós-migração; não duplicar #19/#21.
+- PR #23 foi fechada sem merge por estar 75 commits atrás da main após a importação histórica; não é produção. O seu conteúdo foi reaplicado sem alteração de ficheiros de base na PR #24.
+- #22 é a implementação de produção da linha sticky/navegação/partilha pós-migração; não duplicar #19/#21. A PR #24 é a reaplicação da melhoria adicional do #23 sobre a main atual.
 - Framer está fechado: 213 URLs únicas, 179 importadas, 34 duplicadas/ignoradas, 0 falhas; 233 Markdown finais (232 notícias + 1 opinião); sitemap 241 URLs; workflow temporário removido.
 - Não existe atualmente branch/PR de LCP no GitHub. Qualquer trabalho LCP referido pelas conversas anteriores não deve ser assumido como alteração aplicada a main sem commit/branch verificável.
 - O estado real do GitHub prevalece sobre estados antigos descritos no manual, conversas ou memória.
 - Depois de workflows que escrevem conteúdo, verificar efetivamente índice e sitemap.
+
+## 24. REBASE OPERACIONAL DO STICKY — 2026-09-24
+
+- PR #23 foi fechada sem merge porque a sua branch estava 75 commits atrás de main, depois dos avanços do arquivo Framer.
+- Antes de reaplicar, foi verificado que `noticia.html` e `style.css` em main eram byte-a-byte iguais aos mesmos ficheiros na base original #22; portanto não havia alterações atuais nesses ficheiros a perder.
+- Foi criada `mobile-sticky-editorial-rebased` diretamente a partir de main.
+- Foram reaplicadas apenas as versões dos dois ficheiros do #23.
+- Validação estática: 7 blocos `<script>` de `noticia.html` passaram compilação sintática; chaves de `style.css` balanceadas.
+- PR #24 foi criada sobre main atual: 2 ficheiros, 164 adições, 9 remoções, 2 commits, branch sem commits atrás de main.
+- PR #24 permanece aberta até validação visual/funcional e de performance suficiente; deployment SUCCESS sozinho não autoriza merge.
