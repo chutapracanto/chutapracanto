@@ -722,3 +722,10 @@ FIM.
 - Só depois dessa validação final devem ser removidos o workflow temporário `.github/workflows/importar-framer-uma-vez.yml` e quaisquer mecanismos temporários de importação.
 - Regra de continuidade aplicada: depois de uma ação externa executada pela utilizadora, o Assistente deve consultar diretamente o estado do GitHub e continuar a validação/correção, sem pedir à utilizadora para interpretar os resultados.
 
+## 20. ATUALIZAÇÃO OPERACIONAL — 2026-09-24 17:XX WEST
+
+- Verificação pós-importação confirmou que o commit automático `6701b981302dea5955047812e83e92e6a5c17dbe` colocou os 179 artigos novos no repositório, totalizando 232 Markdown em `content/noticias`.
+- O índice e sitemap não devem ser assumidos como atualizados só porque o import terminou SUCCESS. O commit automático feito pelo workflow usa o token do GitHub Actions; workflows dependentes de `push` não devem ser considerados disparados automaticamente por esse commit.
+- Regra operacional: sempre verificar o estado efetivo de `content/noticias-index.json` e `sitemap.xml` depois de workflows que escrevem conteúdo. Se estiverem desatualizados, executar explicitamente o mecanismo de regeneração disponível ou adaptar o workflow para que a mesma execução produza todos os artefactos necessários.
+- O estado observado após a importação foi índice com 54 entradas e sitemap com 62 URLs, apesar de existirem 232 Markdown. Portanto, a etapa de regeneração/validação continua obrigatória antes de remover o workflow temporário de importação.
+
