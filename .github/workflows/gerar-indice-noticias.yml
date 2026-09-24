@@ -198,6 +198,10 @@ jobs:
                       frontmatter,
                       ["image", "imagem", "featured_image", "featuredImage"]
                   )
+                  source_url = field(
+                      frontmatter,
+                      ["sourceUrl", "source_url", "urlOriginal", "url_original"]
+                  )
 
                   published_at = publication_timestamp(published, path)
                   noticia = {
@@ -216,6 +220,8 @@ jobs:
                       "publishedAt": published_at,
                       "image": image
                   }
+                  if source_url:
+                      noticia["sourceUrl"] = source_url
                   if modified:
                       noticia["modified"] = modified
                   noticias.append(noticia)
