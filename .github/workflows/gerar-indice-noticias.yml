@@ -1,3 +1,4 @@
+# Pós-importação Framer: manter este workflow como fonte automática do índice e sitemap.
 name: Gerar índice de notícias
 
 on:
