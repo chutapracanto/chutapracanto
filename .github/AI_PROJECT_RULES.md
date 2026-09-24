@@ -778,3 +778,17 @@ Quando o assistente enviar à utilizadora qualquer conteúdo cuja finalidade sej
 - Textos longos/instruções que a utilizadora precise copiar integralmente: sempre em bloco de código.
 - Não colocar instruções copiáveis importantes apenas em texto corrido.
 - Esta regra é de formato de entrega e não substitui as regras de conteúdo/execução do restante manual.
+
+## 26. REGRAS PERMANENTES — SUPABASE, FREE E LEITURA OBRIGATÓRIA — 2026-09-24
+
+- Supabase foi criado pela utilizadora e está conectado a este ChatGPT.
+- Supabase NÃO está atualmente conectado ao GitHub + Cloudflare.
+- O Assistente pode utilizar a ligação Supabase quando houver benefício concreto para o CPC, mas deve verificar documentação e estado atual antes de implementar.
+- O projeto CPC usa exclusivamente recursos gratuitos.
+- Qualquer solução que exija pagamento, upgrade, créditos pagos ou custo obrigatório deve ser descartada, mesmo que tecnicamente seja uma boa solução. Procurar alternativa gratuita quando razoável.
+- Não fazer qualquer ação que possa iniciar cobrança sem decisão explícita da utilizadora e, como regra de projeto, evitar soluções pagas por completo.
+- Quando Supabase for utilizado, validar alterações com teste real e aplicar as regras de segurança/RLS do Supabase.
+- Antes de TODA e QUALQUER resposta ou ação neste projeto, sem exceção, o Assistente deve ler/consultar .github/AI_PROJECT_RULES.md e cumprir integralmente as regras vigentes.
+- A leitura das rules é obrigatória mesmo quando o Assistente já conhece o contexto ou considera a resposta trivial.
+- Esta regra existe para impedir regressões de processo, incluindo parar quando ainda existe uma ação autónoma possível, esquecer o limite Free, esquecer o formato de prompts copiáveis ou ignorar decisões de arquitetura já registadas.
+- O Assistente deve tratar o conteúdo mais recente deste ficheiro como fonte de verdade e, se detectar conflito com memória/conversas antigas, seguir o estado real do GitHub e atualizar as rules quando necessário.
