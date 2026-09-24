@@ -47,6 +47,7 @@
 
   <style>
 
+    body.article-loading > footer { display: none; }
     .article-breadcrumbs { margin: 0 0 1.25rem; color: var(--text-gray); font-size: .9rem; }
     .article-breadcrumbs ol { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding: 0; margin: 0; }
     .article-breadcrumbs li + li::before { content: "›"; margin-right: .5rem; color: var(--neon-green); }
@@ -306,7 +307,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1556367149800029" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="article-loading">
 
   <!-- HEADER GLOBAL -->
 
@@ -364,10 +365,113 @@
 
   </div>
 
+  <script>
+    (() => {
+      const slug = new URLSearchParams(window.location.search).get('slug');
+      const container = document.getElementById('article-content');
+      if (!slug || !container || slug.includes('/') || slug.includes('\\') || slug.includes('..') || /[\\u0000-\\u001f]/.test(slug)) return;
+
+      window.__articleIndexPromise = fetch('/content/noticias-index.json')
+        .then(response => {
+          if (!response.ok) throw new Error('Índice de notícias indisponível');
+          return response.json();
+        })
+        .then(index => {
+          if (!Array.isArray(index)) throw new Error('Índice de notícias inválido');
+          const entry = index.find(item => item.slug === slug) || index.find(item => String(item.slug || '').toLowerCase() === slug.toLowerCase());
+          if (!entry || typeof entry.path !== 'string' || !/^content\/(noticias|opiniao)\/[^/]+\.md$/.test(entry.path) || entry.path.includes('..')) return index;
+
+          const isOpinion = entry.type === 'opinion';
+          const title = String(entry.title || 'Sem título');
+          const category = String(entry.category || 'Geral');
+          const header = document.createElement('header');
+          header.className = 'article-heading';
+          const categoryTag = document.createElement('span');
+          categoryTag.className = 'tag';
+          categoryTag.textContent = category.toUpperCase();
+          const typeTag = document.createElement('span');
+          typeTag.className = 'tag';
+          typeTag.textContent = isOpinion ? 'Opinião' : 'Notícia';
+          const h1 = document.createElement('h1');
+          h1.textContent = title;
+          header.append(categoryTag, typeTag, h1);
+
+          let summary = null;
+          if (entry.subtitle) {
+            summary = document.createElement('p');
+            summary.className = 'article-summary';
+            summary.textContent = String(entry.subtitle);
+            header.appendChild(summary);
+          }
+          const date = entry.published ? new Date(entry.published) : null;
+          if (entry.author || (date && !Number.isNaN(date.getTime()))) {
+            const byline = document.createElement('p');
+            byline.className = 'article-byline';
+            const dateText = date && !Number.isNaN(date.getTime()) ? 'Publicado em ' + date.toLocaleDateString('pt-PT') : '';
+            byline.textContent = [dateText, entry.author ? 'Por ' + entry.author : ''].filter(Boolean).join(' · ');
+            header.appendChild(byline);
+          }
+
+          container.replaceChildren(header);
+          document.title = title + ' | Chuta Pra Canto';
+          const backLink = document.getElementById('back-to-section');
+          if (backLink) {
+            backLink.href = isOpinion ? '/opiniao' : '/noticias';
+            backLink.textContent = isOpinion ? '← VOLTAR À OPINIÃO' : '← VOLTAR ÀS NOTÍCIAS';
+          }
+          const navNoticias = document.getElementById('nav-noticias');
+          const navOpinion = document.getElementById('nav-opiniao');
+          if (navNoticias) {
+            navNoticias.classList.toggle('active', !isOpinion);
+            if (isOpinion) navNoticias.removeAttribute('aria-current');
+            else navNoticias.setAttribute('aria-current', 'page');
+          }
+          if (navOpinion) {
+            navOpinion.classList.toggle('active', isOpinion);
+            if (isOpinion) navOpinion.setAttribute('aria-current', 'page');
+            else navOpinion.removeAttribute('aria-current');
+          }
+
+          const shell = { slug, entry, header, categoryTag, typeTag, h1, summary };
+          window.__articleInitialShell = shell;
+          const imagePriority = window.matchMedia('(min-width: 769px)').matches;
+          if (entry.image) {
+            const figure = document.createElement('figure');
+            figure.className = 'article-hero-image';
+            const image = document.createElement('img');
+            const imageUrl = new URL(String(entry.image), window.location.origin);
+            const safeImageUrl = (imageUrl.protocol === 'https:' || (imageUrl.origin === window.location.origin && imageUrl.protocol === 'http:')) && !imageUrl.username && !imageUrl.password
+              ? imageUrl.href
+              : new URL('/images/logo.png', window.location.origin).href;
+            if (imagePriority && !document.querySelector('link[rel="preload"][as="image"]')) {
+              const preload = document.createElement('link');
+              preload.rel = 'preload';
+              preload.as = 'image';
+              preload.href = safeImageUrl;
+              preload.fetchPriority = 'high';
+              document.head.appendChild(preload);
+            }
+            image.src = safeImageUrl;
+            image.alt = title;
+            image.loading = 'eager';
+            image.fetchPriority = imagePriority ? 'high' : 'auto';
+            image.decoding = 'async';
+            image.onerror = () => { image.onerror = null; image.src = '/images/logo.png'; };
+            figure.appendChild(image);
+            container.appendChild(figure);
+            shell.figure = figure;
+            shell.image = image;
+          }
+          return index;
+        })
+        .catch(() => null);
+    })();
+  </script>
+
   <footer>
   <div class="footer-container">
     <div class="footer-brand">
-      <img src="/images/logo.png" alt="Chuta Pra Canto" class="footer-logo">
+      <img src="/images/logo.png" alt="Chuta Pra Canto" class="footer-logo" width="220" height="50">
       <p>Análise tática, debate pós-jogo e opinião sobre futebol.</p>
     </div>
     <div class="footer-links">
@@ -490,67 +594,45 @@
       const container = document.getElementById('article-content');
       if (!slug || slug.includes('/') || slug.includes('\\') || slug.includes('..') || /[\u0000-\u001f]/.test(slug)) {
         container.textContent = 'Notícia não encontrada. O endereço parece estar incompleto.';
+        document.body.classList.remove('article-loading');
         return;
       }
       try {
-        const indexResponse = await fetch('/content/noticias-index.json');
-        if (!indexResponse.ok) throw new Error('Índice de notícias indisponível');
-        const index = await indexResponse.json();
+        let index = await window.__articleIndexPromise;
+        if (!Array.isArray(index)) {
+          const indexResponse = await fetch('/content/noticias-index.json');
+          if (!indexResponse.ok) throw new Error('Índice de notícias indisponível');
+          index = await indexResponse.json();
+        }
         if (!Array.isArray(index)) throw new Error('Índice de notícias inválido');
         const entry = index.find(item => item.slug === slug) || index.find(item => String(item.slug || '').toLowerCase() === slug.toLowerCase());
         if (!entry || typeof entry.path !== 'string' || !/^content\/(noticias|opiniao)\/[^/]+\.md$/.test(entry.path) || entry.path.includes('..')) throw new Error('Artigo não encontrado');
         const articleImageIsDesktopPriority = window.matchMedia('(min-width: 769px)').matches;
-        if (entry.image && articleImageIsDesktopPriority) {
-          const preloadUrl = safeArticleImage(entry.image);
-          if (preloadUrl && !document.querySelector('link[rel="preload"][as="image"]')) {
-            const preload = document.createElement('link');
-            preload.rel = 'preload';
-            preload.as = 'image';
-            preload.href = preloadUrl;
-            preload.fetchPriority = 'high';
-            document.head.appendChild(preload);
-          }
-        }
-
         const editorialType = String(entry.type || 'news');
         const isOpinion = editorialType === 'opinion';
         const sectionLabel = isOpinion ? 'Opinião' : 'Notícias';
         const sectionPath = isOpinion ? '/opiniao' : '/noticias';
+        const initialShell = window.__articleInitialShell?.slug === slug ? window.__articleInitialShell : null;
         const previewTitle = String(entry.title || 'Sem título');
         const previewDescription = String(entry.subtitle || '');
         const previewCategory = String(entry.category || 'Geral');
-        const previewHeader = document.createElement('header');
-        previewHeader.className = 'article-heading';
-        const previewCategoryTag = document.createElement('span');
-        previewCategoryTag.className = 'tag';
-        previewCategoryTag.dataset.articleCategory = '';
-        previewCategoryTag.textContent = previewCategory.toUpperCase();
-        const previewEditorialTag = document.createElement('span');
-        previewEditorialTag.className = 'tag';
-        previewEditorialTag.dataset.articleType = '';
-        previewEditorialTag.textContent = isOpinion ? 'Opinião' : 'Notícia';
-        const previewH1 = document.createElement('h1');
-        previewH1.textContent = previewTitle;
-        previewHeader.append(previewCategoryTag, previewEditorialTag, previewH1);
-        let previewSummary = null;
-        if (previewDescription) {
-          previewSummary = document.createElement('p');
-          previewSummary.className = 'article-summary';
-          previewSummary.textContent = previewDescription;
-          previewHeader.appendChild(previewSummary);
+        let previewHeader = initialShell?.header || null;
+        let previewCategoryTag = initialShell?.categoryTag || null;
+        let previewEditorialTag = initialShell?.typeTag || null;
+        let previewH1 = initialShell?.h1 || null;
+        let previewSummary = initialShell?.summary || null;
+        if (!previewHeader) {
+          previewHeader = document.createElement('header');
+          previewHeader.className = 'article-heading';
+          previewCategoryTag = document.createElement('span');
+          previewCategoryTag.className = 'tag';
+          previewEditorialTag = document.createElement('span');
+          previewEditorialTag.className = 'tag';
+          previewH1 = document.createElement('h1');
+          previewHeader.append(previewCategoryTag, previewEditorialTag, previewH1);
+          container.replaceChildren(previewHeader);
         }
-        const previewDate = entry.published ? new Date(entry.published) : null;
-        if (entry.author || (previewDate && !Number.isNaN(previewDate.getTime()))) {
-          const previewByline = document.createElement('p');
-          previewByline.className = 'article-byline';
-          const dateText = previewDate && !Number.isNaN(previewDate.getTime()) ? 'Publicado em ' + previewDate.toLocaleDateString('pt-PT') : '';
-          previewByline.textContent = [dateText, entry.author ? 'Por ' + entry.author : ''].filter(Boolean).join(' · ');
-          previewHeader.appendChild(previewByline);
-        }
-        container.replaceChildren(previewHeader);
-        document.title = previewTitle + ' | Chuta Pra Canto';
-
-        const encodedPath = entry.path.split('/').map(encodeURIComponent).join('/');
+                const encodedPath = entry.path.split('/').map(encodeURIComponent).join('/');
         const markdownPromise = (async () => {
           let response = await fetch('/' + encodedPath);
           if (!response.ok) {
@@ -710,6 +792,8 @@
           console.error('Erro ao carregar notícia:', error);
         }
         container.textContent = 'Não foi possível carregar esta notícia. Volta à página de Notícias e tenta outro artigo.';
+      } finally {
+        document.body.classList.remove('article-loading');
       }
     }
 

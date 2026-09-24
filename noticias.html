@@ -35,8 +35,8 @@
   
 
   <style>
-
-    /* BARRA DE FERRAMENTAS & FILTROS CLEAN */
+    body.news-loading > footer { display: none; }
+/* BARRA DE FERRAMENTAS & FILTROS CLEAN */
 
     .filter-toolbar {
 
@@ -603,7 +603,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1556367149800029" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="news-loading">
 
 
 
@@ -708,7 +708,7 @@
   <footer>
   <div class="footer-container">
     <div class="footer-brand">
-      <img src="/images/logo.png" alt="Chuta Pra Canto" class="footer-logo">
+      <img src="/images/logo.png" alt="Chuta Pra Canto" class="footer-logo" width="220" height="50">
       <p>Análise tática, debate pós-jogo e opinião sobre futebol.</p>
     </div>
     <div class="footer-links">
@@ -939,6 +939,8 @@
         if (resultsStatus) resultsStatus.textContent = 'Erro ao carregar notícias.';
         document.getElementById('noticias-list').innerHTML =
           '<p style="color: var(--text-gray); text-align: center; padding: 2.5rem 0;">Erro ao carregar notícias.</p>'; 
+      } finally {
+        document.body.classList.remove('news-loading');
       }
     }
 
