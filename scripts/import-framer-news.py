@@ -121,8 +121,6 @@ def article_from_page(session: requests.Session, url: str) -> dict | None:
     response = session.get(url, headers=HEADERS, timeout=TIMEOUT)
     response.raise_for_status()
     soup = BeautifulSoup(response.text, "html.parser")
-    if os.getenv("FRAMER_DEBUG") and url.endswith(tuple(urls for urls in [])):
-        pass
 
     objects = jsonld_objects(soup)
     if os.getenv("FRAMER_DEBUG"):
