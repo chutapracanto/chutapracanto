@@ -735,3 +735,12 @@ FIM.
 - Esta lembrança é obrigatória mesmo quando a tarefa parece pequena, porque o ficheiro contém decisões de arquitetura, limites, prioridades, histórico e regras de segurança que podem ser relevantes para a execução.
 - Não é necessário copiar o conteúdo do manual para o prompt; basta indicar o ficheiro e mandar lê-lo primeiro.
 - Depois da execução do Codex, o Assistente deve voltar a verificar o estado do GitHub e continuar o ciclo de validação/correção definido neste manual.
+## 22. FECHO DA IMPORTAÇÃO HISTÓRICA FRAMER — 2026-09-24
+
+- Regeneração pós-importação concluída com sucesso no workflow `Gerar índice de notícias`, run `36026495095`.
+- Validação confirmou 233 Markdown: 232 notícias em `content/noticias` e 1 opinião em `content/opiniao`.
+- `content/noticias-index.json` contém os 233 artigos/opiniões, sem caminhos ou slugs em falta ou duplicados, ordenado do mais recente para o mais antigo, preservando os 54 artigos anteriores.
+- `sitemap.xml` contém 241 URLs: 233 artigos correspondentes ao índice + 8 páginas públicas, sem URLs de artigos em falta ou extra.
+- Não houve alteração de conteúdo editorial nem nova execução do importador Framer durante a regeneração.
+- A importação histórica Framer está operacionalmente concluída. O workflow temporário `.github/workflows/importar-framer-uma-vez.yml` foi removido após a validação final, no commit `ced7e4113b9a4fb76102c2a32cd9325fc84ce8bd`.
+- O importer/scripts e restantes mecanismos só devem ser removidos ou alterados depois de verificar se ainda existe valor de auditoria/manutenção; não apagar artefactos de auditoria sem necessidade.
