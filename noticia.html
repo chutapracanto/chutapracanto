@@ -384,35 +384,50 @@
           const isOpinion = entry.type === 'opinion';
           const title = String(entry.title || 'Sem título');
           const category = String(entry.category || 'Geral');
-          const header = document.createElement('header');
+          const header = container.querySelector(':scope > header.article-heading') || document.createElement('header');
           header.className = 'article-heading';
-          const categoryTag = document.createElement('span');
+          const categoryTag = header.querySelector('[data-article-category]') || document.createElement('span');
           categoryTag.className = 'tag';
+          categoryTag.dataset.articleCategory = '';
           categoryTag.textContent = category.toUpperCase();
-          const typeTag = document.createElement('span');
+          const typeTag = header.querySelector('[data-article-type]') || document.createElement('span');
           typeTag.className = 'tag';
+          typeTag.dataset.articleType = '';
           typeTag.textContent = isOpinion ? 'Opinião' : 'Notícia';
-          const h1 = document.createElement('h1');
+          const h1 = header.querySelector('[data-article-title], h1') || document.createElement('h1');
+          h1.dataset.articleTitle = '';
           h1.textContent = title;
-          header.append(categoryTag, typeTag, h1);
+          if (h1.parentElement !== header) header.appendChild(h1);
+          header.insertBefore(categoryTag, h1);
+          header.insertBefore(typeTag, h1);
 
-          let summary = null;
+          let summary = header.querySelector('.article-summary');
           if (entry.subtitle) {
-            summary = document.createElement('p');
-            summary.className = 'article-summary';
+            if (!summary) {
+              summary = document.createElement('p');
+              summary.className = 'article-summary';
+              header.appendChild(summary);
+            }
             summary.textContent = String(entry.subtitle);
-            header.appendChild(summary);
+          } else {
+            summary?.remove();
+            summary = null;
           }
           const date = entry.published ? new Date(entry.published) : null;
+          let byline = header.querySelector('.article-byline');
           if (entry.author || (date && !Number.isNaN(date.getTime()))) {
-            const byline = document.createElement('p');
-            byline.className = 'article-byline';
+            if (!byline) {
+              byline = document.createElement('p');
+              byline.className = 'article-byline';
+              header.appendChild(byline);
+            }
             const dateText = date && !Number.isNaN(date.getTime()) ? 'Publicado em ' + date.toLocaleDateString('pt-PT') : '';
             byline.textContent = [dateText, entry.author ? 'Por ' + entry.author : ''].filter(Boolean).join(' · ');
-            header.appendChild(byline);
+          } else {
+            byline?.remove();
           }
 
-          container.replaceChildren(header);
+          if (header.parentElement !== container) container.replaceChildren(header);
           document.title = title + ' | Chuta Pra Canto';
           const backLink = document.getElementById('back-to-section');
           if (backLink) {
