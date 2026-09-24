@@ -323,26 +323,21 @@ MERGED — 9855a09b
 Deployment histórico successful, commit fff0fca.
 
 ### #23 — Sticky editorial progressivo + mobile Notícias
-ABERTA / NÃO MERGED em 2026-09-24, confirmada diretamente no GitHub.
-Base: `main` em `9855a09b4e27ddeea2ea5973392a399f60bb0921`.
-Branch: mobile-sticky-editorial.
-Head confirmado: `9e62d3e53f2a0a85a5dcc7a5b3a6987becec8550`.
-Preview confirmado: `https://507d6a7d.chutapracanto.pages.dev`.
-Deployment do HEAD: SUCCESS.
-- header/cabeçalho encolhem/transparecem progressivamente no scroll;
-- mobile Notícias passa a cartões verticais;
-- imagem 16:9;
-- texto legível;
-- desktop mantém layout;
-- não altera intencionalmente cores/tipografia.
+FECHADA SEM MERGE.
+Não é produção.
+A melhoria foi reaplicada na PR #24 sobre a main atual e validada antes do merge.
 
-Prioridade imediata:
-1. validar #23;
-2. corrigir diretamente;
-3. validar novamente;
-4. só então merge;
-5. confirmar main pós-merge.
-PR #24 não existe no último estado verificado.
+### #24 — Sticky editorial progressivo e mobile de Notícias — base atual
+MERGED — d1ac249d0cd5fee66e25d7162a97872dc82e28e3
+- reaplicação do sticky editorial progressivo;
+- mobile Notícias em cartões verticais com imagem 16:9;
+- desktop preservado;
+- 2 ficheiros alterados: noticia.html e style.css;
+- validação visual/funcional em 390, 320, 768 e 1280 px;
+- performance medida com Lighthouse;
+- consola permaneceu inconclusiva por limitação do browser incorporado, sem alteração de código nessa ronda;
+- PR mergeada em 2026-09-24;
+- produção passa agora para validação pós-merge.
 
 ## 4A. IMPORTAÇÃO DO ARQUIVO FRAMER
 
@@ -415,13 +410,13 @@ AI_PROJECT_RULES.md deve ser atualizado sempre que uma nova regra, prioridade, a
 ## 5. ESTADO CONSOLIDADO
 
 Produção inclui:
-#1 #2 #3 #4 #5 #6 #7 #8 #9 #10 #11 #12 #13 #14 #15 #16 #18 #20 #22.
+#1 #2 #3 #4 #5 #6 #7 #8 #9 #10 #11 #12 #13 #14 #15 #16 #18 #20 #22 #24.
 
 Não produção:
-#17 #19 #21.
+#17 #19 #21 #23.
 
 Aberta:
-#23.
+nenhuma PR relacionada ao sticky editorial.
 
 ## 6. REGRAS EDITORIAIS
 
@@ -541,7 +536,7 @@ FASE 3C — Opinião/Crónicas — CONCLUÍDA (#13/#14/#18)
 FASE 3D — Política/privacidade/AdSense técnico — CONCLUÍDA (#15)
 FASE 3E — Pesquisa imagens — CONCLUÍDA (#16)
 FASE 4 — Domínio/monetização técnica — CONCLUÍDA TECNICAMENTE (#20); operação AdSense/Search Console continua separada
-FASE 5 — UX editorial/navegação/partilha/sticky — PARCIALMENTE CONCLUÍDA (#22; #23 em validação)
+FASE 5 — UX editorial/navegação/partilha/sticky — CONCLUÍDA TECNICAMENTE (#22 + #24); validação pós-merge continua
 FASE 6 — Performance mensurável — PRÓXIMA APÓS VALIDAÇÃO DO #23
 FASE 7 — Dados estruturados de futebol — FUTURA
 FASE 8 — Google News/Publisher Center — FUTURA
@@ -557,11 +552,11 @@ FASE 10 — Crescimento/distribuição — FUTURA
 - não iniciar agora compra/configuração de .pt; a decisão atual é tratar .pt como próxima fase quando a operação de domínio for retomada.
 
 ### FASE 5 — UX editorial
-- terminar #23;
-- confirmar sticky;
-- confirmar mobile;
-- confirmar partilha/navegação de #22;
-- verificar regressões.
+- #24 concluído e mergeado;
+- sticky confirmado;
+- mobile confirmado;
+- partilha/navegação de #22 preservadas;
+- falta apenas confirmação pós-merge em produção.
 
 ### FASE 6 — Performance
 - baseline atual;
@@ -619,10 +614,9 @@ Nunca inventar dados.
 ## 13. PRIORIDADES
 
 P0 AGORA:
-1. Validar #23 contra o estado real de main, incluindo UX e performance.
-2. Corrigir #23 apenas dentro do escopo e voltar a validar.
-3. Fazer merge de #23 somente após validação suficiente.
-4. Confirmar main + deployment de produção + regressões.
+1. Confirmar deployment pós-merge do #24.
+2. Confirmar produção .com e regressões principais.
+3. Se não houver regressões, estabelecer baseline atual de performance em produção.
 
 P1:
 5. Baseline mensurável de performance/LCP/CLS/INP/TBT.
