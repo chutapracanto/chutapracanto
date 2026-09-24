@@ -366,6 +366,9 @@ Estado atual:
 - workflow: .github/workflows/testar-importacao-framer.yml;
 - correção de import os aplicada no commit 04c78526a9953bb250130800b3bc5a818124b9e1;
 - o check framer-dry-run desse commit está SUCCESS;
+- validação de imagem foi acrescentada ao importer nos commits 43f291630fb69825172324118b60ec0edcc5aafc e ec1731934d4377343e6585ef4e36a17ee779dbfc;
+- imagem ausente/inacessível agora conta como falha e bloqueia a entrada no lote de importação;
+- o novo dry-run do último commit ainda está a ser criado/executado pelo GitHub Actions;
 - isso não autoriza importação real: ainda é necessário validar o relatório completo e a estratégia de imagens;
 - não gastar Codex para esta fase enquanto o Assistente conseguir continuar pelo GitHub.
 
