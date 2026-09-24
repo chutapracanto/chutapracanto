@@ -367,6 +367,7 @@ Estado atual:
 - correção de import os aplicada no commit 04c78526a9953bb250130800b3bc5a818124b9e1;
 - o check framer-dry-run desse commit está SUCCESS;
 - validação de imagem foi acrescentada ao importer nos commits 43f291630fb69825172324118b60ec0edcc5aafc e ec1731934d4377343e6585ef4e36a17ee779dbfc;
+- documentação da validação foi clarificada no commit ff152d19f99de675380228d6151998a93a956290;
 - imagem ausente/inacessível agora conta como falha e bloqueia a entrada no lote de importação;
 - o novo dry-run do último commit ainda está a ser criado/executado pelo GitHub Actions;
 - foi criado temporariamente .github/workflows/importar-framer-uma-vez.yml para a importação real, com proteção contra sobrescrita; depois da execução deve ser removido;
