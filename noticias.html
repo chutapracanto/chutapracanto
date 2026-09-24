@@ -999,7 +999,7 @@
       paginaItens.forEach(item => {
 
         const card = document.createElement('a');
-        card.href = `noticia.html?slug=${encodeURIComponent(item.slug)}`;
+        card.href = `/noticia?slug=${encodeURIComponent(item.slug)}`;
         card.className = 'news-list-card';
         const imageWrap = document.createElement('div');
         imageWrap.className = 'news-list-img';
