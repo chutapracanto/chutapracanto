@@ -35,8 +35,8 @@
   
 
   <style>
-
-    /* BARRA DE FERRAMENTAS & FILTROS CLEAN */
+    body.news-loading > footer { display: none; }
+/* BARRA DE FERRAMENTAS & FILTROS CLEAN */
 
     .filter-toolbar {
 
@@ -313,9 +313,11 @@
 
       display: grid;
 
-      grid-template-columns: 220px 1fr;
+      grid-template-columns: 220px minmax(0, 1fr);
 
-      height: 140px;
+      min-height: 140px;
+
+      height: auto;
 
       background-color: var(--card-bg);
 
@@ -349,8 +351,11 @@
 
       width: 100%;
 
-      height: 100%;
+      height: auto;
 
+      aspect-ratio: 16 / 9;
+
+      align-self: start;
 
       overflow: hidden;
 
@@ -570,9 +575,11 @@
 
       .news-list-card {
 
-        grid-template-columns: 130px 1fr;
+        grid-template-columns: 130px minmax(0, 1fr);
 
-        height: 130px;
+        min-height: 130px;
+
+        height: auto;
 
       }
 
@@ -596,7 +603,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1556367149800029" crossorigin="anonymous"></script>
 </head>
 
-<body>
+<body class="news-loading">
 
 
 
@@ -701,7 +708,7 @@
   <footer>
   <div class="footer-container">
     <div class="footer-brand">
-      <img src="/images/logo.png" alt="Chuta Pra Canto" class="footer-logo">
+      <img src="/images/logo.png" alt="Chuta Pra Canto" class="footer-logo" width="220" height="50">
       <p>Análise tática, debate pós-jogo e opinião sobre futebol.</p>
     </div>
     <div class="footer-links">
@@ -932,6 +939,8 @@
         if (resultsStatus) resultsStatus.textContent = 'Erro ao carregar notícias.';
         document.getElementById('noticias-list').innerHTML =
           '<p style="color: var(--text-gray); text-align: center; padding: 2.5rem 0;">Erro ao carregar notícias.</p>'; 
+      } finally {
+        document.body.classList.remove('news-loading');
       }
     }
 
@@ -999,7 +1008,7 @@
       paginaItens.forEach(item => {
 
         const card = document.createElement('a');
-        card.href = `noticia.html?slug=${encodeURIComponent(item.slug)}`;
+        card.href = `/noticia?slug=${encodeURIComponent(item.slug)}`;
         card.className = 'news-list-card';
         const imageWrap = document.createElement('div');
         imageWrap.className = 'news-list-img';
