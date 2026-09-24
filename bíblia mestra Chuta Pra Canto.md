@@ -172,7 +172,9 @@ Todo prompt para Codex deve:
 
 # 3. ESTADO REAL DO GITHUB NO MOMENTO DA CONSOLIDAÇÃO
 
-**Main atual verificada:** `c6bee91789b98fba07ad88d8f013b42e5e2f8b5e`.
+**Main verificada no momento da consolidação:** `c6bee91789b98fba07ad88d8f013b42e5e2f8b5e`.
+
+**HEAD atual após a consolidação desta documentação:** passa a incluir os commits de consolidação da Bíblia Mestra e atualização das Rules; verificar o ref `main` diretamente antes de qualquer nova implementação.
 
 Esse SHA é posterior às duas bíblias originais e ao handoff. Isto é importante: os documentos históricos podem ter um HEAD antigo.
 
