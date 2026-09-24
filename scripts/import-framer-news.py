@@ -95,6 +95,24 @@ def jsonld_objects(soup: BeautifulSoup) -> list[dict]:
     return objects
 
 
+def image_is_reachable(session: requests.Session, image_url: str) -> tuple[bool, str]:
+    if not image_url:
+        return False, "missing-image"
+    try:
+        response = session.get(
+            image_url,
+            headers={**HEADERS, "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8"},
+            timeout=TIMEOUT,
+            stream=True,
+        )
+        content_type = response.headers.get("content-type", "").lower()
+        ok = response.ok and content_type.startswith("image/")
+        response.close()
+        return ok, content_type or str(response.status_code)
+    except Exception as exc:
+        return False, str(exc)
+
+
 def article_from_page(session: requests.Session, url: str) -> dict | None:
     response = session.get(url, headers=HEADERS, timeout=TIMEOUT)
     response.raise_for_status()
@@ -166,6 +184,10 @@ def article_from_page(session: requests.Session, url: str) -> dict | None:
     slug = urlparse(url).path.rstrip("/").split("/")[-1]
     slug = slugify(unquote(slug))
 
+    image_ok, image_status = image_is_reachable(session, image)
+    if not image_ok:
+        return None
+
     return {
         "slug": slug,
         "title": title,
@@ -175,6 +197,7 @@ def article_from_page(session: requests.Session, url: str) -> dict | None:
         "published": published,
         "modified": modified,
         "image": image,
+        "imageStatus": image_status,
         "sourceUrl": url,
         "body": body_text,
     }
@@ -293,6 +316,7 @@ def main() -> int:
         "items": imported,
         "skippedItems": skipped,
         "failedItems": failed,
+        "imageValidated": sum(1 for item in imported if item.get("imageStatus")),
     }
     Path("/tmp/framer-import-report.json").write_text(
         json.dumps(report, ensure_ascii=False, indent=2) + "\n",
@@ -304,6 +328,7 @@ def main() -> int:
         "readyToImport": len(imported),
         "skipped": len(skipped),
         "failed": len(failed),
+        "imageValidated": sum(1 for item in imported if item.get("imageStatus")),
         "write": args.write,
     }, ensure_ascii=False))
 
