@@ -570,6 +570,45 @@ def main() -> int:
                 continue
             frontmatter = match.group(1)
             frontmatter = re.sub(
+                r"(?m)^title:\s*.*$",
+                f"title: {yaml_quote(item['title'])}",
+                frontmatter,
+                count=1,
+            )
+            if re.search(r"(?m)^subtitle:\s*", frontmatter):
+                frontmatter = re.sub(
+                    r"(?m)^subtitle:\s*.*$",
+                    f"subtitle: {yaml_quote(item['subtitle'])}",
+                    frontmatter,
+                    count=1,
+                )
+            elif re.search(r"(?m)^subtitulo:\s*", frontmatter):
+                frontmatter = re.sub(
+                    r"(?m)^subtitulo:\s*.*$",
+                    f"subtitulo: {yaml_quote(item['subtitle'])}",
+                    frontmatter,
+                    count=1,
+                )
+            else:
+                frontmatter = frontmatter.rstrip() + "\nsubtitle: " + yaml_quote(item["subtitle"]) + "\n---\n"
+            path.write_text(frontmatter + "\n" + body + "\n", encoding="utf-8")
+            repaired += 1
+        print(json.dumps({"repaired": repaired}, ensure_ascii=False))
+        return 0
+
+    for item in imported:
+            path = ROOT / item["_existing_path"]
+            if not path.exists():
+                raise RuntimeError(f"Alvo de reparação não encontrado: {path}")
+            current = path.read_text(encoding="utf-8")
+            match = re.match(r"^(---\s*\n[\s\S]*?\n---\s*\n?)([\s\S]*)$", current)
+            if not match:
+                raise RuntimeError(f"Frontmatter inválido no alvo: {path}")
+            body = item["body"].strip()
+            if not body:
+                continue
+            frontmatter = match.group(1)
+            frontmatter = re.sub(
                 r'(?m)^title:\s*.*        print(json.dumps({"repaired": repaired}, ensure_ascii=False))
         return 0
 
