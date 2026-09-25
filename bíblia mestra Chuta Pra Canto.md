@@ -4995,3 +4995,58 @@ A área futura de dados/API de competições permanece uma fase estrutural ofici
 A execução operacional detalhada foi consolidada em `docs/AI_EXECUTION_PROTOCOL.md`. Este protocolo passa a complementar as Rules e a Bíblia.
 
 Regra central: **UM BLOQUEIO NÃO É UM RESULTADO.** Uma IA não deve limitar-se a identificar uma dependência externa e parar. Deve executar tudo o que estiver ao seu alcance e, quando algo depender da Rute ou do Codex, transformar essa dependência em instruções concretas e retomáveis.
+
+
+
+## ATUALIZAÇÃO VIGENTE — CLOUDFLARE E ENGAGEMENT PERSISTENTE — 2026-09-25
+
+### Correção de infraestrutura
+A documentação histórica desta Bíblia referia um Cloudflare Worker separado chamado `chutapracanto`. Essa informação está desatualizada.
+
+A Rute confirmou diretamente no Dashboard da Cloudflare que **não existe atualmente esse Worker separado**.
+
+O `_worker.js` do repositório continua a existir e é uma peça do runtime Pages existente. Não confundir estas duas realidades e não voltar a assumir a existência do Worker separado.
+
+### Decisão vigente para a reação de artigos
+A PR #33 (`eb76d46beda2a2b1bf762fec2a5776480e80dfca`) implementou coração/gosto com `localStorage`. Essa solução é **transitória** e não deve ser tratada como arquitetura final.
+
+A intenção funcional permanece:
+- coração/gosto junto à partilha;
+- acessível;
+- reação simples, sem comentários nem contas obrigatórias;
+- persistência real;
+- contador público quando tecnicamente justificável;
+- medição de engagement sem criar uma plataforma paralela desnecessária.
+
+Arquitetura de referência:
+```
+frontend do artigo
+→ /api/article-like
+→ runtime Pages / _worker.js
+→ armazenamento persistente Cloudflare D1
+→ resposta com estado/contador
+```
+
+D1 é a primeira opção técnica a avaliar porque está integrado no ecossistema Cloudflare existente e está disponível no Workers Free. A documentação atual indica 5M rows read/dia, 100k rows written/dia e 5 GB de storage no Free; desde 01/09/2026 os limites diários são efetivamente aplicados. A implementação deve, portanto, ser pequena, indexada, idempotente e monitorizada.
+
+### Regra Supabase
+Supabase só deve entrar se houver uma demonstração concreta de ganho materialmente superior para rentabilidade, automatização ou escala futura e sem depender de Pro/billing obrigatório para manter a solução operacional.
+
+Não ligar Supabase apenas porque oferece Postgres ou porque é conhecido. Se D1 satisfizer a necessidade, manter D1.
+
+### Framer
+O inventário `docs/framer/framer-url-redirect-inventory-2026-09-25.json` está concluído (213/213). Não é o próximo passo técnico. Redirects continuam dependentes do controlo do host/projeto histórico.
+
+### Fases futuras preservadas
+Depois de estabilizar a Fase 2, permanecem:
+1. **Fase 3:** dados/API de futebol e competições;
+2. **Fase 4:** SEO e indexação real;
+3. **Fase 5:** performance mensurável baseada em evidência;
+4. **Fase 6:** monetização;
+5. **Fase 7:** distribuição e crescimento;
+6. **Fase 8:** automação e escala.
+
+Essas fases não são substituídas pela frente de engagement. O like persistente é uma conclusão da Fase 2 e uma preparação útil para futura medição/monetização/automação, mas não deve antecipar indevidamente as fases seguintes.
+
+### Próxima dependência
+A próxima ação externa necessária é confirmar, na sessão Cloudflare, o runtime real de `/api/*`, a existência/binding de D1 e o plano atual, sem ativar billing e sem alterar produção.
