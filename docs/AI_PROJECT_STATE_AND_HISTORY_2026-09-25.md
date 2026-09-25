@@ -1790,3 +1790,62 @@ A documentação oficial atual do Framer confirma que Redirects funcionam para s
 
 ### Decisão
 O inventário está concluído. A execução dos redirects fica dependente de confirmar acesso/controlo do projeto Framer histórico ou de um mecanismo externo que possa emitir redirects para `chutapracanto.framer.website`. Não alterar DNS, conteúdo ou redirects por inferência.
+
+
+
+## 53. RECONCILIAÇÃO DO ESTADO CLOUDFLARE E NOVA ORDEM DA FASE 2 — 2026-09-25
+
+### Correção factual importante
+A documentação histórica referia a existência de um Cloudflare Worker separado chamado `chutapracanto`. Essa referência está agora **desatualizada**.
+
+A Rute confirmou diretamente, com o Dashboard da Cloudflare aberto, que **não existe atualmente um Worker Cloudflare separado chamado `chutapracanto`**. Essa confirmação externa prevalece sobre a documentação histórica.
+
+Não confundir:
+- `_worker.js` continua a existir no repositório e contém o Worker/runtime da aplicação Pages;
+- o Worker separado `chutapracanto` referido nas bíblias/handoffs históricos foi apagado e não deve voltar a ser tratado como infraestrutura ativa.
+
+### Verificação GitHub atual
+O `_worker.js` presente na `main` trata as rotas `/api/admin/*` e é o candidato/runtime efetivo a considerar para a futura API de reações. Não existe, na pesquisa atual do repositório, configuração/binding D1 já identificado.
+
+### Decisão arquitetural provisória para likes
+A implementação localStorage da PR #33 **não é a solução final**. Deve ser tratada como implementação transitória/reversível de UX.
+
+Objetivo final:
+```
+artigo → /api/article-like → runtime Pages/_worker.js → armazenamento persistente → resposta com estado/contador
+```
+
+A primeira opção técnica a investigar é **Cloudflare D1**, integrado no runtime já existente, sem criar outro Worker.
+
+A documentação oficial atual do Cloudflare confirma D1 no Workers Free e os limites atuais devem ser respeitados: 5M rows read/dia, 100k rows written/dia, 5 GB de storage incluído; desde 01/09/2026 os limites diários do Free são efetivamente aplicados e queries falham até ao reset se forem excedidos. Isto torna obrigatória a implementação eficiente, com índices/queries seletivas e monitorização de utilização.
+
+### Supabase — regra de decisão
+Supabase **não é obrigatório** nesta fase e não deve ser ligado por defeito.
+
+Só deve ser considerado se uma análise concreta demonstrar um ganho materialmente superior e relevante para:
+- rentabilidade;
+- automatização;
+- capacidade futura do CPC;
+- manutenção/escala;
+
+**e** se a arquitetura puder permanecer dentro de uma utilização gratuita sustentável, sem assumir Pro, créditos ou billing futuro.
+
+Na ausência dessa vantagem demonstrada, preservar a simplicidade da stack atual e preferir D1.
+
+### Framer redirects
+O inventário `docs/framer/framer-url-redirect-inventory-2026-09-25.json` está concluído (213/213). Esta frente **não é o próximo passo técnico**. A execução dos redirects continua dependente de controlo do host/projeto histórico Framer.
+
+### Nova sequência operacional da Fase 2
+1. Confirmar no ambiente externo o runtime real que recebe `/api/*` — sem assumir o Worker separado antigo.
+2. Confirmar se já existe D1 e se existe binding no runtime correto.
+3. Confirmar plano Cloudflare e garantir que nenhuma operação ativa billing/upgrade.
+4. Se D1 estiver disponível no Free, desenhar a tabela mínima e proteção anti-abuso.
+5. Só depois implementar a API persistente de likes.
+6. Substituir a persistência localStorage da PR #33 pela solução persistente, preservando a UX acessível.
+7. Validar contagem, idempotência, persistência entre dispositivos/sessões e comportamento de erro/limite.
+8. Atualizar índice/documentação apenas se a implementação alterar o fluxo editorial; não alterar conteúdo sem necessidade.
+
+### Próxima ação externa
+A única dependência que precisa do Codex neste momento é a inspeção da sessão Cloudflare/Dashboard/CLI para os pontos 1–3 acima. Não criar tabela, endpoint, PR ou merge nesta inspeção.
+
+**Estado:** FASE 2 — infraestrutura de engagement em preparação; PR #33 é provisória, não final. Worker separado antigo: confirmado como inexistente. D1: ainda não verificado. Supabase: não ligado.
