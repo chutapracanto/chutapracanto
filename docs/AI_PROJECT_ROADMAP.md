@@ -46,7 +46,7 @@ Não responder apenas "o próximo passo é X" quando X estiver ao alcance da IA.
 | Fase | Frente | Estado em 2026-09-25 |
 |---|---|---|
 | 0 | Continuidade, regras e memória operacional | **CONSOLIDADA** |
-| 1 | Recuperação/consolidação do conteúdo histórico | **BLOQUEADA** |
+| 1 | Recuperação/consolidação do conteúdo histórico | **UNBLOCKED / EM EXECUÇÃO** |
 | 2 | Sistema editorial e publicação própria | **PARCIAL / CONSOLIDAR** |
 | 3 | Dados de futebol e API de competições | **PENDENTE** |
 | 4 | SEO técnico + indexação real | **PARCIAL / CONTINUAR APÓS BASE ESTÁVEL** |
@@ -123,12 +123,12 @@ Está registada uma lacuna posterior a 22/08/2026.
 - saltar para uma nova fase apenas porque a fonte histórica está bloqueada.
 
 ## Estado
-**BLOQUEADA POR DEPENDÊNCIA EXTERNA REAL.**
+**UNBLOCKED / EM EXECUÇÃO.**
 
 Bloqueio atual:
-> fonte histórica do Framer posterior a 22/08/2026 não está acessível no ambiente atual.
+A fonte histórica foi disponibilizada via export CMS em `docs/framer/framer-news-export-2026-09-25.json`.
 
-Quando a fonte existir, retomar esta fase diretamente.
+A reconciliação dos 163 registos pós-22/08 está agora em execução; só depois será feita qualquer importação.
 
 ---
 
@@ -461,7 +461,7 @@ Antes de fazer trabalho no CPC:
 11. Atualizar documentação.
 12. Só depois responder.
 
-**Estado operacional neste momento: FASE 1 BLOQUEADA pela fonte histórica posterior do Framer.**
+**Estado operacional neste momento: FASE 1 UNBLOCKED / EM EXECUÇÃO.**
 
 FIM.
 
