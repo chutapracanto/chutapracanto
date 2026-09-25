@@ -1183,3 +1183,17 @@ Sempre que o índice for regenerado, validar pelo menos:
 - `noticia.html`: contém canonical e JSON-LD.
 - Não foi feita nesta etapa uma medição de indexação real no Google Search Console; não inferir indexação a partir destes sinais técnicos.
 - Estado: **sinais técnicos básicos presentes; auditoria de indexação real continua separada de SEO on-page técnico.**
+
+## 37. RECONCILIAÇÃO DO HEAD REAL — 2026-09-25
+
+- O HEAD real de `main` foi verificado diretamente no GitHub antes de continuar.
+- HEAD atual: `2192b856aecb679ba2d7e1bedeeab8fdd2ef248c`.
+- Commit: `docs: registar auditoria seo técnica`.
+- O HEAD atual está 1 commit à frente de `31f2bb3dd41c199b729cc2fe54f1eacff06f7e64`, sem divergência atrás.
+- A única alteração nesse avanço foi documentação do próprio ledger; não houve alteração de código, conteúdo editorial, workflow ou configuração de produção.
+- Não existem PRs abertas neste momento.
+- O HEAD `f7ef4d9...` anteriormente registado no início deste documento está desatualizado; o estado real do GitHub prevalece.
+- Consequência: a primeira passagem de LCP continua integrada em produção, mas este novo commit não altera a conclusão técnica sobre LCP/CLS.
+- Distinção operacional: LCP first pass = **implementada, sem melhoria quantitativa before/after comprovada**; CLS = **problema ainda aberto, sem causa causalmente comprovada**; SEO técnico básico = **implementado e auditado**; indexação real = **ainda não medida no Search Console**.
+- Próxima execução deve avançar a partir deste estado, sem criar uma nova fase de documentação por si só.
+
