@@ -5050,3 +5050,19 @@ Essas fases não são substituídas pela frente de engagement. O like persistent
 
 ### Próxima dependência
 A próxima ação externa necessária é confirmar, na sessão Cloudflare, o runtime real de `/api/*`, a existência/binding de D1 e o plano atual, sem ativar billing e sem alterar produção.
+
+
+## ATUALIZAÇÃO DE EXECUÇÃO — 2026-09-25 — FECHO DOS PEDIDOS UX / ENGAGEMENT
+
+Os cinco pedidos apresentados foram reconciliados com GitHub e com o Roadmap oficial.
+
+- Sticky: compacto/transparente e persistente no topo após recolher — implementação final na PR #36.
+- Navegação: sem quebra de linha durante a transição — implementação final na PR #36.
+- Mobile: navegação sobe mais no recolhimento — implementação final na PR #36.
+- Coração: apenas ícone junto à partilha, persistente em D1, sem contador público — implementação final na PR #36.
+- Framer: inventário 213/213 concluído; redirects dependem de controlo do host histórico e permanecem separados da frente técnica atual.
+
+A PR #36 ainda não está mergeada. Portanto, estas alterações não são produção.
+
+### Próxima sequência
+Validação browser/Preview → merge #36 → validação de deployment/produção → fechar esta frente → avançar para a próxima ação do Roadmap.
