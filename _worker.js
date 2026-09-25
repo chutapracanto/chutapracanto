@@ -601,6 +601,167 @@ function construirUrlPublicaNoticia(origin, slug) {
   );
 }
 
+async function prepararShellNoticiasInicial(request, env, response) {
+  if (
+    !response ||
+    !response.ok ||
+    !response.headers.get("Content-Type")?.includes("text/html")
+  ) {
+    return response;
+  }
+
+  const url = new URL(request.url);
+  if (url.pathname !== "/noticias" && url.pathname !== "/noticias.html") {
+    return response;
+  }
+
+  try {
+    const indexResponse = await env.ASSETS.fetch(
+      new Request(new URL("/content/noticias-index.json", request.url))
+    );
+    if (!indexResponse.ok) return response;
+
+    const index = await indexResponse.json();
+    if (!Array.isArray(index)) return response;
+
+    const entry = index.find(item => (item?.type || "news") === "news" && item?.slug && item?.image);
+    if (!entry) return response;
+
+    const title = String(entry.title || "Sem título");
+    const category = String(entry.category || "Geral");
+    const subtitle = String(entry.subtitle || "");
+    const image = construirUrlImagem(entry.image, url.origin);
+    const href = "/noticia?slug=" + encodeURIComponent(String(entry.slug));
+
+    const cardHtml = [
+      '<a class="news-list-card" href="' + escaparHtml(href) + '">',
+      '<div class="news-list-img">',
+      '<img src="' + escaparHtml(image) + '" alt="' + escaparHtml(title) + '" loading="eager" fetchpriority="high" decoding="async">',
+      '</div>',
+      '<div class="news-list-content">',
+      '<div class="news-list-meta"><span class="tag">' + escaparHtml(category.toUpperCase()) + '</span></div>',
+      '<h3>' + escaparHtml(title) + '</h3>',
+      subtitle ? '<p>' + escaparHtml(subtitle) + '</p>' : '',
+      '</div>',
+      '</a>'
+    ].join("");
+
+    const headers = new Headers(response.headers);
+    headers.delete("Content-Length");
+    headers.append(
+      "Link",
+      `<${image}>; rel="preload"; as="image"; fetchpriority="high"`
+    );
+    const htmlResponse = new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers
+    });
+
+    return new HTMLRewriter()
+      .on("#noticias-list", {
+        element(element) {
+          element.setInnerContent(cardHtml, { html: true });
+        }
+      })
+      .transform(htmlResponse);
+  } catch {
+    return response;
+  }
+}
+
+async function prepararShellArtigoInicial(request, env, response) {
+  if (
+    !response ||
+    !response.ok ||
+    !response.headers.get("Content-Type")?.includes("text/html")
+  ) {
+    return response;
+  }
+
+  const url = new URL(request.url);
+  const slug = obterSlugDaNoticia(url);
+
+  if (!slug) return response;
+
+  try {
+    const indexResponse = await env.ASSETS.fetch(
+      new Request(new URL("/content/noticias-index.json", request.url))
+    );
+    if (!indexResponse.ok) return response;
+
+    const index = await indexResponse.json();
+    if (!Array.isArray(index)) return response;
+
+    const entry =
+      index.find(item => item?.slug === slug) ||
+      index.find(item => String(item?.slug || "").toLowerCase() === slug.toLowerCase());
+    if (!entry) return response;
+
+    const title = String(entry.title || "Sem título");
+    const category = String(entry.category || "Geral");
+    const editorialLabel = entry.type === "opinion" ? "Opinião" : "Notícia";
+    const subtitle = String(entry.subtitle || "");
+    const image = entry.image
+      ? construirUrlImagem(entry.image, url.origin)
+      : "";
+
+    const sectionLabel = entry.type === "opinion" ? "Opinião" : "Notícias";
+    const sectionPath = entry.type === "opinion" ? "/opiniao" : "/noticias";
+    const breadcrumbHtml = [
+      '<nav class="article-breadcrumbs" aria-label="Breadcrumb">',
+      '<ol>',
+      '<li><a href="/">Home</a></li>',
+      '<li><a href="' + sectionPath + '">' + escaparHtml(sectionLabel) + '</a></li>',
+      '<li aria-current="page">' + escaparHtml(title) + '</li>',
+      '</ol>',
+      '</nav>'
+    ].join("");
+
+    const headerHtml = [
+      breadcrumbHtml,
+      '<header class="article-heading">',
+      '<span class="tag">' + escaparHtml(category.toUpperCase()) + '</span>',
+      '<span class="tag">' + escaparHtml(editorialLabel) + '</span>',
+      '<h1>' + escaparHtml(title) + '</h1>',
+      subtitle
+        ? '<p class="article-summary">' + escaparHtml(subtitle) + '</p>'
+        : "",
+      entry.published || entry.author
+        ? '<p class="article-byline">' + escaparHtml([
+            entry.published
+              ? "Publicado em " + new Date(entry.published).toLocaleDateString("pt-PT")
+              : "",
+            entry.author ? "Por " + entry.author : ""
+          ].filter(Boolean).join(" · ")) + '</p>'
+        : "",
+      '</header>'
+    ].join("");
+
+    const imageHtml = image
+      ? '<figure class="article-hero-image"><img src="' + escaparHtml(image) + '" alt="' + escaparHtml(title) + '" loading="eager" fetchpriority="high" decoding="async"></figure>'
+      : "";
+
+    const headers = new Headers(response.headers);
+    headers.delete("Content-Length");
+    const htmlResponse = new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers
+    });
+
+    return new HTMLRewriter()
+      .on("#article-content", {
+        element(element) {
+          element.setInnerContent(headerHtml + imageHtml, { html: true });
+        }
+      })
+      .transform(htmlResponse);
+  } catch {
+    return response;
+  }
+}
+
 function isSocialCrawler(request) {
   const userAgent =
     request.headers.get("User-Agent") || "";
@@ -1673,11 +1834,25 @@ export default {
       const assetResponse =
         await env.ASSETS.fetch(request);
 
+      const responseNoticiasInicial =
+        await prepararShellNoticiasInicial(
+          request,
+          env,
+          assetResponse
+        );
+
+      const responseInicial =
+        await prepararShellArtigoInicial(
+          request,
+          env,
+          responseNoticiasInicial
+        );
+
       const responseComPartilha =
         await prepararPaginaParaPartilha(
           request,
           env,
-          assetResponse
+          responseInicial
         );
 
       return responseComPartilha;
