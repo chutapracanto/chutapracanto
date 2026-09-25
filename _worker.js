@@ -1243,6 +1243,122 @@ async function prepararPaginaParaPartilha(
 // ============================================================
 // API ADMIN
 // ============================================================
+async function handleArticleLikeAPI(request, env) {
+  const url = new URL(request.url);
+  const noindexHeaders = { "X-Robots-Tag": "noindex, nofollow, noarchive" };
+  const respond = (data, status = 200, headers = {}) =>
+    json(data, status, { ...noindexHeaders, ...headers });
+
+  if (request.method !== "POST") {
+    return respond(
+      { error: "Método não permitido.", message: "Método não permitido." },
+      405,
+      { Allow: "POST" }
+    );
+  }
+
+  if (request.headers.get("Origin") !== url.origin) {
+    return respond({ error: "Origem não permitida.", message: "Origem não permitida." }, 403);
+  }
+
+  if (!(request.headers.get("Content-Type") || "").toLowerCase().includes("application/json")) {
+    return respond({ error: "Content-Type inválido.", message: "Content-Type inválido." }, 415);
+  }
+
+  let payload;
+  try {
+    payload = JSON.parse(await lerCorpoLimitado(request, 1024));
+  } catch {
+    return respond({ error: "Pedido inválido.", message: "Pedido inválido." }, 400);
+  }
+
+  const slug = typeof payload?.slug === "string" ? payload.slug.trim() : "";
+  const visitorId = typeof payload?.visitorId === "string" ? payload.visitorId : "";
+  const action = payload?.action;
+  const uuidV4 = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+  if (
+    !slug ||
+    slug.length > 160 ||
+    /[\\/\u0000-\u001f\u007f]/u.test(slug)
+  ) {
+    return respond({ error: "Artigo inválido.", message: "Artigo inválido." }, 400);
+  }
+  if (!uuidV4.test(visitorId)) {
+    return respond({ error: "Identificador inválido.", message: "Identificador inválido." }, 400);
+  }
+  if (action !== "status" && action !== "like" && action !== "unlike") {
+    return respond({ error: "Ação inválida.", message: "Ação inválida." }, 400);
+  }
+  if (!env.ARTICLE_LIKES_DB || !env.ASSETS) {
+    return respond({ error: "Gosto temporariamente indisponível.", message: "Gosto temporariamente indisponível." }, 503);
+  }
+
+  try {
+    const indexResponse = await env.ASSETS.fetch(
+      new Request(new URL("/content/noticias-index.json", url.origin))
+    );
+    if (!indexResponse.ok) {
+      return respond({ error: "Gosto temporariamente indisponível.", message: "Gosto temporariamente indisponível." }, 503);
+    }
+
+    const index = await indexResponse.json();
+    const articleExists = Array.isArray(index) && index.some((entry) =>
+      entry && entry.slug === slug &&
+      (() => {
+        const pathParts = String(entry.path || "").split("/");
+        return pathParts.length === 3 && pathParts[0] === "content" &&
+          (pathParts[1] === "noticias" || pathParts[1] === "opiniao") &&
+          pathParts[2].endsWith(".md");
+      })()
+    );
+    if (!articleExists) {
+      return respond({ error: "Artigo não encontrado.", message: "Artigo não encontrado." }, 404);
+    }
+
+    const digest = await crypto.subtle.digest(
+      "SHA-256",
+      new TextEncoder().encode(visitorId)
+    );
+    const visitorHash = Array.from(new Uint8Array(digest), (byte) =>
+      byte.toString(16).padStart(2, "0")
+    ).join("");
+
+    let created = false;
+    let removed = false;
+    if (action === "like") {
+      const insert = await env.ARTICLE_LIKES_DB
+        .prepare("INSERT INTO article_likes (article_slug, visitor_hash) VALUES (?, ?) ON CONFLICT(article_slug, visitor_hash) DO NOTHING")
+        .bind(slug, visitorHash)
+        .run();
+      created = Number(insert?.meta?.changes || 0) > 0;
+    } else if (action === "unlike") {
+      const removal = await env.ARTICLE_LIKES_DB
+        .prepare("DELETE FROM article_likes WHERE article_slug = ? AND visitor_hash = ?")
+        .bind(slug, visitorHash)
+        .run();
+      removed = Number(removal?.meta?.changes || 0) > 0;
+    }
+
+    const current = await env.ARTICLE_LIKES_DB
+      .prepare("SELECT COUNT(*) AS count, COALESCE(MAX(CASE WHEN visitor_hash = ? THEN 1 ELSE 0 END), 0) AS liked FROM article_likes WHERE article_slug = ?")
+      .bind(visitorHash, slug)
+      .first();
+
+    return respond({
+      ok: true,
+      slug,
+      liked: Number(current?.liked || 0) === 1,
+      count: Number(current?.count || 0),
+      created,
+      removed
+    });
+  } catch (error) {
+    console.error("Article likes API error:", error);
+    return respond({ error: "Gosto temporariamente indisponível.", message: "Gosto temporariamente indisponível." }, 503);
+  }
+}
+
 
 async function handleAdminAPI(request, env) {
   const url = new URL(request.url);
@@ -1814,7 +1930,11 @@ export default {
 
     try {
       if (
-        url.pathname.startsWith(
+        url.pathname === "/api/article-like") {
+        return handleArticleLikeAPI(request, env);
+      }
+
+      if (url.pathname.startsWith(
           "/api/admin/"
         )
       ) {
