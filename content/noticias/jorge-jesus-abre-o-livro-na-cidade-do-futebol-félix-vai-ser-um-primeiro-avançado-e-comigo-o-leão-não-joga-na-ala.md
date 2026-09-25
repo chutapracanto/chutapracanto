@@ -9,4 +9,24 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/jorge-jesus-abre-o-liv
 image: "https://framerusercontent.com/images/E1aX8yjMehvXvgotHqV61ZHzbls.jpg?width=463&height=309"
 ---
 
-Na apresentação da sua primeira convocatória ao comando da Seleção Nacional, Jorge Jesus explicou na Cidade do Futebol os critérios da lista para a Liga das Nações e detalhou as suas ideias táticas. Num discurso marcado pela frontalidade, o novo selecionador nacional desvalorizou a ausência de revolução em relação ao Mundial, defendeu opções individuais e explicou como pretende rentabilizar talentos como João Félix, Rafael Leão ou Fábio Silva. ​ As opções individuais e as ideias táticas para o ataque ​O selecionador abordou as escolhas para o setor ofensivo e a posição dos criativos: ​ João Félix e Rafael Leão pelo centro: JJ garantiu que Félix não é jogador de faixa e que "com o tempo, vai ser um primeiro avançado" devido à sua leitura de espaço. Sobre Rafael Leão, lembrou o passado no Sporting: "Comigo nunca jogou numa faixa, mas sim como primeiro avançado." ​ A importância de Fábio Silva: O avançado do Borussia Dortmund foi chamado por oferecer apoio que outros não dão: "Tem características diferentes. O Gonçalo Ramos e o Cris não sabem puxar o jogo." ​ A ausência de António Silva: O central do Bournemouth ficou de fora por uma opção de continuidade: "Optei por dar continuidade aos mesmos. Dos quatro centrais, dois já trabalharam comigo (Tomás Araújo e Rúben Dias)." ​ Aposta em Gonçalo Inácio: Confrontado com o momento do central do Sporting, o técnico foi perentório: "É uma opinião, eu tenho uma diferente. Comigo ele vai jogar bem." ​ Metodologia de treino e a adaptação ao cargo ​Jesus explicou como está a gerir a transição de treinador de clube para selecionador nacional: ​ Trabalho de sala e campo: Prometeu aceleração do processo tático sem palestras longas: "Tenho treino de campo e treino de sala, não faço palestras. Acredito na inteligência dos jogadores." ​ Renovação em avaliação: Sobre jovens como Rodrigo Mora ou Flávio Gonçalves, revelou contacto com Luís Freire (Sub-21), mas considerou que "ainda não era a oportunidade deles, embora sejam o futuro" . ​ Sem receio do contexto: Questionado sobre potenciais assobios a Palhinha em Alvalade, atirou: "Interessa-me é a qualidade dos jogadores. Estão lá para representar a Seleção."
+
+
+
+Na apresentação da sua primeira convocatória ao comando da Seleção Nacional, Jorge Jesus explicou na Cidade do Futebol os critérios da lista para a Liga das Nações e detalhou as suas ideias táticas. Num discurso marcado pela frontalidade, o novo selecionador nacional desvalorizou a ausência de revolução em relação ao Mundial, defendeu opções individuais e explicou como pretende rentabilizar talentos como João Félix, Rafael Leão ou Fábio Silva.
+
+**As opções individuais e as ideias táticas para o ataque**
+
+O selecionador abordou as escolhas para o setor ofensivo e a posição dos criativos:
+
+- **João Félix e Rafael Leão pelo centro:** JJ garantiu que Félix não é jogador de faixa e que _"com o tempo, vai ser um primeiro avançado"_ devido à sua leitura de espaço. Sobre Rafael Leão, lembrou o passado no Sporting: _"Comigo nunca jogou numa faixa, mas sim como primeiro avançado."_
+- **A importância de Fábio Silva:** O avançado do Borussia Dortmund foi chamado por oferecer apoio que outros não dão: _"Tem características diferentes. O Gonçalo Ramos e o Cris não sabem puxar o jogo."_
+- **A ausência de António Silva:** O central do Bournemouth ficou de fora por uma opção de continuidade: _"Optei por dar continuidade aos mesmos. Dos quatro centrais, dois já trabalharam comigo (Tomás Araújo e Rúben Dias)."_
+- **Aposta em Gonçalo Inácio:** Confrontado com o momento do central do Sporting, o técnico foi perentório: _"É uma opinião, eu tenho uma diferente. Comigo ele vai jogar bem."_
+
+**Metodologia de treino e a adaptação ao cargo**
+
+Jesus explicou como está a gerir a transição de treinador de clube para selecionador nacional:
+
+- **Trabalho de sala e campo:** Prometeu aceleração do processo tático sem palestras longas: _"Tenho treino de campo e treino de sala, não faço palestras. Acredito na inteligência dos jogadores."_
+- **Renovação em avaliação:** Sobre jovens como Rodrigo Mora ou Flávio Gonçalves, revelou contacto com Luís Freire (Sub-21), mas considerou que _"ainda não era a oportunidade deles, embora sejam o futuro"_.
+- **Sem receio do contexto:** Questionado sobre potenciais assobios a Palhinha em Alvalade, atirou: _"Interessa-me é a qualidade dos jogadores. Estão lá para representar a Seleção."_

@@ -9,4 +9,21 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/sinfonia-branca-no-ber
 image: "https://framerusercontent.com/images/GoaEVeckFlQ29pHWPZhE579KOY.jpg?width=960&height=640"
 ---
 
-​O Real Madrid continua imparável no arranque da LaLiga EA Sports. Depois de ultrapassar Espanyol e Real Sociedad, a formação orientada por José Mourinho deu mais um espetáculo de poderio ofensivo no Santiago Bernabéu ao golear o Málaga CF por 4-0. Com uma entrada avassaladora e um quarto de hora de inspiração pura no primeiro tempo, os merengues resolveram a contenda de forma precoce, somando o terceiro triunfo consecutivo em três partidas na prova. ​ Vendaval ofensivo de 11 minutos arruma a contenda ​A superioridade madridista traduziu-se no marcador num curto espaço de tempo na primeira metade, sufocando qualquer réplica da formação visitante: ​ Desenho individual de classe: Ao minuto 19, Jude Bellingham desequilibrou na cara da defensiva forasteira, serpentou entre os adversários e disparou um remate cruzado sem hipóteses para Alfonso Herrero. ​ Infortúnio sob a baliza: Pouco depois, o internacional inglês voltou a insurgir-se nas alturas para um cabeceamento fulgurante. Na tentativa de suster o golpe, o guardião Alfonso Herrero acabou por introduzir a bola na própria baliza. ​ Ligação de estrelas: Antes da meia-hora, Alexander-Arnold tirou um cruzamento açucarado para o coração da área, onde Kylian Mbappé armou um remate de primeira categórico, fixando o 3-0 com que se recolheu aos balneários. ​ Gestão inteligente e o selo de Güler vindo do banco ​Na etapa complementar, com a vitória no bolso, José Mourinho geriu o desgaste do grupo e lançou sangue fresco na partida, promovendo as entradas de Bernardo Silva, Yan Diomande e Arda Güler. ​Sem acelerar em demasia, a equipa da casa manteve o controlo absoluto dos ritmos do encontro. A fechar a contagem, Vinícius Jr. vestiu a pele de garçom e serviu Arda Güler com um passe milimétrico, permitindo ao jovem turco faturar e carimbar o 4-0 definitivo.
+
+
+
+O Real Madrid continua imparável no arranque da LaLiga EA Sports. Depois de ultrapassar Espanyol e Real Sociedad, a formação orientada por José Mourinho deu mais um espetáculo de poderio ofensivo no Santiago Bernabéu ao golear o Málaga CF por 4-0. Com uma entrada avassaladora e um quarto de hora de inspiração pura no primeiro tempo, os _merengues_ resolveram a contenda de forma precoce, somando o terceiro triunfo consecutivo em três partidas na prova.
+
+**Vendaval ofensivo de 11 minutos arruma a contenda**
+
+A superioridade madridista traduziu-se no marcador num curto espaço de tempo na primeira metade, sufocando qualquer réplica da formação visitante:
+
+- **Desenho individual de classe:** Ao minuto 19, Jude Bellingham desequilibrou na cara da defensiva forasteira, serpentou entre os adversários e disparou um remate cruzado sem hipóteses para Alfonso Herrero.
+- **Infortúnio sob a baliza:** Pouco depois, o internacional inglês voltou a insurgir-se nas alturas para um cabeceamento fulgurante. Na tentativa de suster o golpe, o guardião Alfonso Herrero acabou por introduzir a bola na própria baliza.
+- **Ligação de estrelas:** Antes da meia-hora, Alexander-Arnold tirou um cruzamento açucarado para o coração da área, onde Kylian Mbappé armou um remate de primeira categórico, fixando o 3-0 com que se recolheu aos balneários.
+
+**Gestão inteligente e o selo de Güler vindo do banco**
+
+Na etapa complementar, com a vitória no bolso, José Mourinho geriu o desgaste do grupo e lançou sangue fresco na partida, promovendo as entradas de Bernardo Silva, Yan Diomande e Arda Güler.
+
+Sem acelerar em demasia, a equipa da casa manteve o controlo absoluto dos ritmos do encontro. A fechar a contagem, Vinícius Jr. vestiu a pele de garçom e serviu Arda Güler com um passe milimétrico, permitindo ao jovem turco faturar e carimbar o 4-0 definitivo.

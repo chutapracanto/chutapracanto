@@ -9,4 +9,27 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/«o-bernardo-e-o-rúbe
 image: "https://framerusercontent.com/images/JRZQb8N8hIadTietCgTOGxQEIg.jpg?width=1200&height=630"
 ---
 
-Claudio Echeverri já respira a mística do Manto Sagrado. Nas suas primeiras declarações oficiais prestadas aos microfones da BTV, o prodígio argentino de 20 anos cedido pelo Manchester City até ao término da temporada deu livre curso à satisfação por ingressar na estrutura encarnada, revelando os bastidores cruciais da transferência e assumindo sem rodeios o peso histórico da camisola que escolheu ostentar. ​ A chancela de luxo de Rúben Dias e Bernardo Silva no balneário do City ​A opção por rumar a Lisboa maturou-se no balneário do campeão inglês, onde o jovem virtuoso colheu conselhos valiosos de autênticos símbolos da formação do Seixal: ​ Conselheiros de elite em Manchester: "Quando estive em Manchester, joguei com o Rúben. Falou-me muito bem do Benfica, disse-me que era um clube grandíssimo, com adeptos e ambiente ótimos. O Bernardo Silva igual... É um dos melhores com quem joguei e ouvir aquilo deu-me uma enorme tranquilidade. Disse-me coisas lindas sobre a dimensão do clube." ​ Reencontro de cumplicidade com Prestianni: "Conheço o Prestianni desde muito pequeno, partilhámos balneário nas seleções jovens. Ficou genuinamente radiante quando soube da minha vinda." ​ O vulcão da Luz e a herança pesada do número 30 ​Recordando a experiência prévia de pisar o relvado do Estádio da Luz como adversário num duelo da Liga dos Campeões, Echeverri confessou o fascínio pelo fervor das bancadas e prestou tributo aos compatriotas que fizeram história com a camisola 30: ​ O fervor da Catedral: "O estádio é deslumbrante. Fiquei impressionado quando cá joguei na Champions. Os adeptos criam uma atmosfera incandescente, muito semelhante ao ambiente apaixonado a que estamos habituados na Argentina, sempre a empurrar a equipa." ​ A herança de Otamendi e Saviola: "Vestir esta camisola já envolve uma responsabilidade gigantesca, mas herdar o número 30 do Otamendi, que é uma referência absoluta, é incrível. O Saviola também marcou uma era com este número. Oxalá consiga trilhar um caminho semelhante e dar o meu contributo ao máximo." ​ Sede de títulos no horizonte encarnado ​De olhos postos no decorrer da temporada ao serviço do coletivo comandado por Marco Silva, o internacional jovem albiceleste traçou uma fasquia ambiciosa para o seu trajeto na Luz: ​ Foco no topo: "O ano perfeito traduz-se em alcançar a totalidade dos objetivos e erguer os troféus que um clube desta dimensão merece. Deixo um agradecimento especial aos adeptos pelo carinho que me demonstraram desde o primeiro minuto. Continuem a apoiar-nos!"
+
+
+
+Claudio Echeverri já respira a mística do Manto Sagrado. Nas suas primeiras declarações oficiais prestadas aos microfones da BTV, o prodígio argentino de 20 anos cedido pelo Manchester City até ao término da temporada deu livre curso à satisfação por ingressar na estrutura encarnada, revelando os bastidores cruciais da transferência e assumindo sem rodeios o peso histórico da camisola que escolheu ostentar.
+
+**A chancela de luxo de Rúben Dias e Bernardo Silva no balneário do City**
+
+A opção por rumar a Lisboa maturou-se no balneário do campeão inglês, onde o jovem virtuoso colheu conselhos valiosos de autênticos símbolos da formação do Seixal:
+
+- **Conselheiros de elite em Manchester:** _"Quando estive em Manchester, joguei com o Rúben. Falou-me muito bem do Benfica, disse-me que era um clube grandíssimo, com adeptos e ambiente ótimos. O Bernardo Silva igual... É um dos melhores com quem joguei e ouvir aquilo deu-me uma enorme tranquilidade. Disse-me coisas lindas sobre a dimensão do clube."_
+- **Reencontro de cumplicidade com Prestianni:** _"Conheço o Prestianni desde muito pequeno, partilhámos balneário nas seleções jovens. Ficou genuinamente radiante quando soube da minha vinda."_
+
+**O vulcão da Luz e a herança pesada do número 30**
+
+Recordando a experiência prévia de pisar o relvado do Estádio da Luz como adversário num duelo da Liga dos Campeões, Echeverri confessou o fascínio pelo fervor das bancadas e prestou tributo aos compatriotas que fizeram história com a camisola 30:
+
+- **O fervor da Catedral:** _"O estádio é deslumbrante. Fiquei impressionado quando cá joguei na Champions. Os adeptos criam uma atmosfera incandescente, muito semelhante ao ambiente apaixonado a que estamos habituados na Argentina, sempre a empurrar a equipa."_
+- **A herança de Otamendi e Saviola:** _"Vestir esta camisola já envolve uma responsabilidade gigantesca, mas herdar o número 30 do Otamendi, que é uma referência absoluta, é incrível. O Saviola também marcou uma era com este número. Oxalá consiga trilhar um caminho semelhante e dar o meu contributo ao máximo."_
+
+**Sede de títulos no horizonte encarnado**
+
+De olhos postos no decorrer da temporada ao serviço do coletivo comandado por Marco Silva, o internacional jovem albiceleste traçou uma fasquia ambiciosa para o seu trajeto na Luz:
+
+- **Foco no topo:** _"O ano perfeito traduz-se em alcançar a totalidade dos objetivos e erguer os troféus que um clube desta dimensão merece. Deixo um agradecimento especial aos adeptos pelo carinho que me demonstraram desde o primeiro minuto. Continuem a apoiar-nos!"_

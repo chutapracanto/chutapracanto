@@ -9,4 +9,27 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/sporting-bate-vitória
 image: "https://framerusercontent.com/images/lqGiuJACPECmET6XiJBXjbf9zE.webp?width=1280&height=720"
 ---
 
-O Estádio José Alvalade voltou a abrir portas para a competição oficial e assistiu ao triunfo do Sporting sobre o Vitória SC por 3-2, no encontro que abriu a 2.ª jornada da Liga Portugal Betclic. Os leões construíram uma vantagem confortável no primeiro tempo, mas voltaram a evidenciar quebras de rendimento na etapa complementar, repetindo os sinais de alarme observados no arranque do campeonato. ​Ioannidis em destaque e regresso das claques ​Após o desaire na Amadora na jornada de abertura, a equipa verde e branca entrou em campo pressionada a dar uma resposta positiva. A reação começou a desenhar-se logo aos nove minutos: numa jogada de insistência de Fotis Ioannidis, o jovem Flávio Gonçalves aproveitou para se estrear a marcar pela equipa principal. ​O avançado grego, a regressar à plena forma após lesão prolongada, assumiu o papel de figura central do encontro. Aos 22 minutos, no seguimento de um excelente trabalho individual de Geny Catamo, Ioannidis recebeu, trabalhou sobre a oposição e assinou o 2-0. ​A noite de regresso ao anfiteatro leonino ficou também marcada pelo regresso oficial dos grupos organizados de adeptos à Bancada Sul, reatando uma dinâmica de apoio histórica em Alvalade. Embalado pelas bancadas, o reforço Sergi Altimira ampliou a vantagem antes do descanso, ao disparar do meio da rua para o 3-0, num primeiro tempo em que a formação orientada por Tiago Margarido se mostrou pouco incisiva. ​'Fantasmas' no regresso dos balneários ​Com três alterações promovidas ao intervalo, o Vitória SC regressou dos balneários com outra atitude e começou a dividir o jogo. A maior agressividade dos vimaranenses deu frutos ao minuto 66, quando Samuel Silva, num remate bem colocado em situação de superioridade numérica, reduziu a desvantagem. ​A ansiedade instalou-se nas bancadas e o ambiente ficou ainda mais tenso logo a seguir. Na sequência de uma perda de bola de Zalazar, Strata cruzou para o coração da área, onde apareceu Alioune Ndoye a assinar o 3-2 e a encostar os leões à parede. ​Gestão final para segurar os primeiros três pontos ​Tal como tinha acontecido na Amadora, a reta final da partida ficou marcada pela instabilidade emocional do Sporting. Tiago Margarido colocou em campo uma dupla de ataque com Luis Suárez e Ioannidis, mas foi o Vitória SC que continuou por cima do jogo, ameaçando o empate perante o nervosismo crescente do público. ​Apesar do sufoco exercido pela formação de Guimarães, a equipa verde e branca conseguiu serenar o ritmo nos últimos dez minutos. Os leões trancaram os caminhos para a baliza e seguraram a vantagem mínima até ao apito final, carimbando assim o primeiro triunfo da época no campeonato, ainda que com fortes avisos para o futuro.
+
+
+
+O Estádio José Alvalade voltou a abrir portas para a competição oficial e assistiu ao triunfo do Sporting sobre o Vitória SC por 3-2, no encontro que abriu a 2.ª jornada da Liga Portugal Betclic. Os leões construíram uma vantagem confortável no primeiro tempo, mas voltaram a evidenciar quebras de rendimento na etapa complementar, repetindo os sinais de alarme observados no arranque do campeonato.
+
+### Ioannidis em destaque e regresso das claques
+
+Após o desaire na Amadora na jornada de abertura, a equipa verde e branca entrou em campo pressionada a dar uma resposta positiva. A reação começou a desenhar-se logo aos nove minutos: numa jogada de insistência de Fotis Ioannidis, o jovem Flávio Gonçalves aproveitou para se estrear a marcar pela equipa principal.
+
+O avançado grego, a regressar à plena forma após lesão prolongada, assumiu o papel de figura central do encontro. Aos 22 minutos, no seguimento de um excelente trabalho individual de Geny Catamo, Ioannidis recebeu, trabalhou sobre a oposição e assinou o 2-0.
+
+A noite de regresso ao anfiteatro leonino ficou também marcada pelo regresso oficial dos grupos organizados de adeptos à Bancada Sul, reatando uma dinâmica de apoio histórica em Alvalade. Embalado pelas bancadas, o reforço Sergi Altimira ampliou a vantagem antes do descanso, ao disparar do meio da rua para o 3-0, num primeiro tempo em que a formação orientada por Tiago Margarido se mostrou pouco incisiva.
+
+### 'Fantasmas' no regresso dos balneários
+
+Com três alterações promovidas ao intervalo, o Vitória SC regressou dos balneários com outra atitude e começou a dividir o jogo. A maior agressividade dos vimaranenses deu frutos ao minuto 66, quando Samuel Silva, num remate bem colocado em situação de superioridade numérica, reduziu a desvantagem.
+
+A ansiedade instalou-se nas bancadas e o ambiente ficou ainda mais tenso logo a seguir. Na sequência de uma perda de bola de Zalazar, Strata cruzou para o coração da área, onde apareceu Alioune Ndoye a assinar o 3-2 e a encostar os leões à parede.
+
+### Gestão final para segurar os primeiros três pontos
+
+Tal como tinha acontecido na Amadora, a reta final da partida ficou marcada pela instabilidade emocional do Sporting. Tiago Margarido colocou em campo uma dupla de ataque com Luis Suárez e Ioannidis, mas foi o Vitória SC que continuou por cima do jogo, ameaçando o empate perante o nervosismo crescente do público.
+
+Apesar do sufoco exercido pela formação de Guimarães, a equipa verde e branca conseguiu serenar o ritmo nos últimos dez minutos. Os leões trancaram os caminhos para a baliza e seguraram a vantagem mínima até ao apito final, carimbando assim o primeiro triunfo da época no campeonato, ainda que com fortes avisos para o futuro.

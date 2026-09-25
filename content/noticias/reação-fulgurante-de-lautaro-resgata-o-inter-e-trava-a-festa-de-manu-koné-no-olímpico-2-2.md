@@ -9,4 +9,21 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/reação-fulgurante-de
 image: "https://framerusercontent.com/images/tDHBZ7M433K8ZMuiZMRnRjCyPxQ.webp?width=900&height=506"
 ---
 
-Em mais um clássico eletrizante da Serie A, a Roma e o Inter mediram forças no Stadio Olimpico num duelo de parada e resposta que acabou empatado a duas bolas (2-2). Com o jovem português Rodrigo Mora a começar no banco dos giallorossi , a partida ficou marcada pela entrada avassaladora da equipa da casa, pela exibição inspirada de Manu Koné e pela capacidade de reação dos nerazzurri , capitaneados por um Lautaro Martínez implacável. ​ Entrada fulgurante e o 'show' de Koné no primeiro tempo ​A turma orientada pela Roma entrou com as linhas subidas e dominou por completo os ritmos do encontro durante os primeiros 45 minutos: ​ Eficácia madrugadora (6'): Paulo Dybala desenhou um cruzamento milimétrico para o segundo poste, Nahuel Molina amorteceu com inteligência para o coração da grande área e Manu Koné apareceu a fuzilar de primeira, sem hipóteses de defesa, inaugurando o marcador. ​ Bis a fechar o primeiro ato: Mantendo a pressão sufocante sobre a primeira fase de construção do Inter, o médio francês aproveitou uma sobra na área para assinar o segundo golo da conta pessoal e levar a Roma para o intervalo com uma vantagem confortável de 2-0. ​ Capacidade de sofrimento e a resposta de Lautaro Martínez ​Perante a desvantagem pontual, o Inter regressou dos balneários com outra agressividade e reduziu logo na abertura do segundo tempo: ​ Sinal de revolta imediato (46'): Marcus Thuram rasgou o corredor esquerdo e cruzou rasteiro para a área, onde Lautaro Martínez se antecipou de forma fulgurante à marcação para bater Mile Svilar e fazer o 2-1. ​ Empate com assinatura do capitão: A partir dos bancos, as alterações de Cristian Chivu deram a rotação necessária para encostar a Roma ao seu reduto. Na reta final, após um amortecimento de cabeça de Yann Bisseck, Lautaro voltou a fazer valer a sua classe na área para selar o 2-2 final.
+
+
+
+Em mais um clássico eletrizante da Serie A, a Roma e o Inter mediram forças no Stadio Olimpico num duelo de parada e resposta que acabou empatado a duas bolas (2-2). Com o jovem português Rodrigo Mora a começar no banco dos _giallorossi_, a partida ficou marcada pela entrada avassaladora da equipa da casa, pela exibição inspirada de Manu Koné e pela capacidade de reação dos _nerazzurri_, capitaneados por um Lautaro Martínez implacável.
+
+**Entrada fulgurante e o 'show' de Koné no primeiro tempo**
+
+A turma orientada pela Roma entrou com as linhas subidas e dominou por completo os ritmos do encontro durante os primeiros 45 minutos:
+
+- **Eficácia madrugadora (6'):** Paulo Dybala desenhou um cruzamento milimétrico para o segundo poste, Nahuel Molina amorteceu com inteligência para o coração da grande área e Manu Koné apareceu a fuzilar de primeira, sem hipóteses de defesa, inaugurando o marcador.
+- **Bis a fechar o primeiro ato:** Mantendo a pressão sufocante sobre a primeira fase de construção do Inter, o médio francês aproveitou uma sobra na área para assinar o segundo golo da conta pessoal e levar a Roma para o intervalo com uma vantagem confortável de 2-0.
+
+**Capacidade de sofrimento e a resposta de Lautaro Martínez**
+
+Perante a desvantagem pontual, o Inter regressou dos balneários com outra agressividade e reduziu logo na abertura do segundo tempo:
+
+- **Sinal de revolta imediato (46'):** Marcus Thuram rasgou o corredor esquerdo e cruzou rasteiro para a área, onde Lautaro Martínez se antecipou de forma fulgurante à marcação para bater Mile Svilar e fazer o 2-1.
+- **Empate com assinatura do capitão:** A partir dos bancos, as alterações de Cristian Chivu deram a rotação necessária para encostar a Roma ao seu reduto. Na reta final, após um amortecimento de cabeça de Yann Bisseck, Lautaro voltou a fazer valer a sua classe na área para selar o 2-2 final.

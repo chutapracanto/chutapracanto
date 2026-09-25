@@ -9,4 +9,26 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/operação-champions-e
 image: "https://framerusercontent.com/images/mjhd1J7Q90ovmFmo9lkKrHszk4.jpg?width=1696&height=1131"
 ---
 
-​A UEFA formalizou a validação das opções do Sporting CP para a fase de liga da Liga dos Campeões 2026/27. Sob o comando tático de Rui Borges, o clube de Alvalade carimbou o registo de 25 futebolistas na Lista A, numa convocatória marcada pela integração plena das dez aquisições estivais e pela chamada do promissor Rodrigo Rodrigues, resgatado ao Gil Vicente para os quadros da equipa B. ​ Dez trunfos de verão no palco milionário e o contingente da Lista B ​A estrutura verde e branca muniu a equipa técnica de profunda densidade e variedade tática para atacar a mais prestigiada prova de clubes do planeta, acautelando a gestão dos jovens da formação: ​ Inclusão total das caras novas: Kaique, Ibrahima Ba, Moncef Zekri, Sergi Altimira, Silas Andersen, Issa Doumbia, Pedro Lima, Rodrigo Zalazar, Nestory Irankunda e Jesse Derry receberam o selo europeu para a Lista A. ​ Aposta vinda da equipa B: O jovem avançado Rodrigo Rodrigues assegurou igualmente vaga na lista principal das águias e leões para os palcos internacionais. ​ Salvaguarda dos jovens prodígios: Nomes como Rodrigo Dias, Flávio Gonçalves, Rafael Nel e João Simões integram a Lista B, ficando 100% elegíveis para as opções de Rui Borges ao longo da caminhada. ​ Mapeamento da Lista A do Sporting: ​ Guarda-redes: Rui Silva, Kaique e Diego Callai. ​ Defesas: Iván Fresneda, Georgios Vagiannidis, Eduardo Quaresma, Ibrahima Ba, Gonçalo Inácio, Zeno Debast, Nuno Santos, Maxi Araújo e Moncef Zekri. ​ Médios: Sergi Altimira, Silas Andersen, Issa Doumbia, Samuel Justo, Pedro Lima e Rodrigo Zalazar. ​ Avançados: Geny Catamo, Luís Guilherme, Nestory Irankunda, Jesse Derry, Rodrigo Rodrigues, Luis Suárez e Fotis Ioannidis. ​ Contagem decrescente para o choque europeu ​A cumprir a terceira presença consecutiva na elite europeia, o Sporting abre as portas do Estádio José Alvalade já na próxima quarta-feira, dia 9 de setembro, medindo forças com os turcos do Galatasaray.
+
+
+
+A UEFA formalizou a validação das opções do Sporting CP para a fase de liga da Liga dos Campeões 2026/27. Sob o comando tático de Rui Borges, o clube de Alvalade carimbou o registo de 25 futebolistas na Lista A, numa convocatória marcada pela integração plena das dez aquisições estivais e pela chamada do promissor Rodrigo Rodrigues, resgatado ao Gil Vicente para os quadros da equipa B.
+
+**Dez trunfos de verão no palco milionário e o contingente da Lista B**
+
+A estrutura verde e branca muniu a equipa técnica de profunda densidade e variedade tática para atacar a mais prestigiada prova de clubes do planeta, acautelando a gestão dos jovens da formação:
+
+- **Inclusão total das caras novas:** Kaique, Ibrahima Ba, Moncef Zekri, Sergi Altimira, Silas Andersen, Issa Doumbia, Pedro Lima, Rodrigo Zalazar, Nestory Irankunda e Jesse Derry receberam o selo europeu para a Lista A.
+- **Aposta vinda da equipa B:** O jovem avançado Rodrigo Rodrigues assegurou igualmente vaga na lista principal das águias e leões para os palcos internacionais.
+- **Salvaguarda dos jovens prodígios:** Nomes como Rodrigo Dias, Flávio Gonçalves, Rafael Nel e João Simões integram a Lista B, ficando 100% elegíveis para as opções de Rui Borges ao longo da caminhada.
+
+**Mapeamento da Lista A do Sporting:**
+
+- **Guarda-redes:** Rui Silva, Kaique e Diego Callai.
+- **Defesas:** Iván Fresneda, Georgios Vagiannidis, Eduardo Quaresma, Ibrahima Ba, Gonçalo Inácio, Zeno Debast, Nuno Santos, Maxi Araújo e Moncef Zekri.
+- **Médios:** Sergi Altimira, Silas Andersen, Issa Doumbia, Samuel Justo, Pedro Lima e Rodrigo Zalazar.
+- **Avançados:** Geny Catamo, Luís Guilherme, Nestory Irankunda, Jesse Derry, Rodrigo Rodrigues, Luis Suárez e Fotis Ioannidis.
+
+**Contagem decrescente para o choque europeu**
+
+A cumprir a terceira presença consecutiva na elite europeia, o Sporting abre as portas do Estádio José Alvalade já na próxima quarta-feira, dia 9 de setembro, medindo forças com os turcos do Galatasaray.

@@ -9,4 +9,23 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/avisos-na-ressaca-euro
 image: "https://framerusercontent.com/images/2P8fYSMnyXXEcOG8Tr5It39VDw.webp?width=1597&height=1064"
 ---
 
-Na antecâmara de uma das deslocações mais traiçoeiras do calendário nacional, Rui Borges apresentou-se na sala de imprensa com o discurso afiado. Embalado pelo impacto europeu a meio da semana, o técnico do Sporting projetou o embate frente ao Famalicão de Carlos Carvalhal, lançando um forte alerta contra a descompressão pós-Champions e passando a pente fino o rendimento dos seus ativos. ​ O perigo famalicense e a armadilha do pós-Champions ​Apesar de a tabela classificativa não refletir a qualidade de jogo do opositor, o treinador leonino recusa qualquer ponta de facilitismo no Minho: ​ Adversário de posse e autoridade: Rui Borges enalteceu a identidade do conjunto de Carlos Carvalhal, sublinhando tratar-se de "uma equipa que não tem os pontos que merecia" e que se afirma como "das que tem mais percentagem de posse de bola" , impulsionada pela experiência do seu comando técnico. ​ Exigência acima da Champions: A transição da prova milionária para a realidade doméstica foi o grande foco de preocupação: "A mudança de chip não costuma ser a melhor (...) Temos de olhar para o FC Famalicão com muito respeito, a exigência tem de ser maior do que a que tivemos com o Galatasaray." ​ Rotação sem perda de identidade: Com a densidade do calendário a fazer-se sentir, o técnico admitiu promover retoches na equipa titular, reiterando total confiança na resposta do grupo. ​ Luzes sobre Suárez, a pérola Doumbia e o boletim clínico ​A conferência serviu ainda para analisar a evolução individual das peças-chave do xadrez verde e branco: ​ Suárez em estado de graça: A viver o melhor arranque da carreira, o avançado uruguaio colheu rasgados elogios ( "trabalha nos limites" ), com Borges a saudar a competitividade no setor ofensivo perante o regresso gradual de Fotis e a afirmação de Nel. ​ O fenómeno Ousmane Doumbia: Confrontado com a cobiça do futebol italiano, o técnico desfez-se em elogios ao jovem médio: "Tem um potencial fabuloso. Tem muito futebol de rua e vai jogar da mesma forma contra uma equipa do Campeonato de Portugal ou da Champions. Vai ser um jogador fabuloso." ​ Ausências e adaptações em marcha: Ibrahima Ba e João Simões estão fora das opções para o duelo de domingo. Em sentido inverso, os reforços Jesse Derry e Nestor Irankunda cumprem processos de integração, com o britânico a revelar-se "muito próximo de jogar" .
+
+
+
+Na antecâmara de uma das deslocações mais traiçoeiras do calendário nacional, Rui Borges apresentou-se na sala de imprensa com o discurso afiado. Embalado pelo impacto europeu a meio da semana, o técnico do Sporting projetou o embate frente ao Famalicão de Carlos Carvalhal, lançando um forte alerta contra a descompressão pós-Champions e passando a pente fino o rendimento dos seus ativos.
+
+**O perigo famalicense e a armadilha do pós-Champions**
+
+Apesar de a tabela classificativa não refletir a qualidade de jogo do opositor, o treinador leonino recusa qualquer ponta de facilitismo no Minho:
+
+- **Adversário de posse e autoridade:** Rui Borges enalteceu a identidade do conjunto de Carlos Carvalhal, sublinhando tratar-se de _"uma equipa que não tem os pontos que merecia"_ e que se afirma como _"das que tem mais percentagem de posse de bola"_, impulsionada pela experiência do seu comando técnico.
+- **Exigência acima da Champions:** A transição da prova milionária para a realidade doméstica foi o grande foco de preocupação: _"A mudança de chip não costuma ser a melhor (...) Temos de olhar para o FC Famalicão com muito respeito, a exigência tem de ser maior do que a que tivemos com o Galatasaray."_
+- **Rotação sem perda de identidade:** Com a densidade do calendário a fazer-se sentir, o técnico admitiu promover retoches na equipa titular, reiterando total confiança na resposta do grupo.
+
+**Luzes sobre Suárez, a pérola Doumbia e o boletim clínico**
+
+A conferência serviu ainda para analisar a evolução individual das peças-chave do xadrez verde e branco:
+
+- **Suárez em estado de graça:** A viver o melhor arranque da carreira, o avançado uruguaio colheu rasgados elogios (_"trabalha nos limites"_), com Borges a saudar a competitividade no setor ofensivo perante o regresso gradual de Fotis e a afirmação de Nel.
+- **O fenómeno Ousmane Doumbia:** Confrontado com a cobiça do futebol italiano, o técnico desfez-se em elogios ao jovem médio: _"Tem um potencial fabuloso. Tem muito futebol de rua e vai jogar da mesma forma contra uma equipa do Campeonato de Portugal ou da Champions. Vai ser um jogador fabuloso."_
+- **Ausências e adaptações em marcha:** Ibrahima Ba e João Simões estão fora das opções para o duelo de domingo. Em sentido inverso, os reforços Jesse Derry e Nestor Irankunda cumprem processos de integração, com o britânico a revelar-se _"muito próximo de jogar"_.

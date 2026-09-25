@@ -15,6 +15,27 @@ relatedYouTube: ""
 relatedSpotify: ""
 ---
 
-![Rui Borges admite "dores de crescimento" após sofrimento em Alvalade: "Não podemos acabar assim"](https://framerusercontent.com/images/e80UQP3Tj7VUsbUic3RjdfWQ.jpeg)
 
-<p dir="ltr">O Sporting somou o primeiro triunfo na Liga Portugal Betclic ao vencer o Vitória SC por 3-2, mas o desfecho acabou marcado por alguma tensão nas bancadas do Estádio José Alvalade. Depois de recolher aos balneários a vencer por 3-0, a equipa verde e branca permitiu dois golos rápidos no segundo tempo. Na <em>flash interview</em> da Sport TV, o treinador leonino, Rui Borges, não escondeu a insatisfação com a quebra de rendimento da equipa.</p><h3 dir="ltr">Duas metades opostas e perda de intensidade</h3><p dir="ltr">Rui Borges começou por dividir o encontro em duas partes distintas, elogiando a entrada forte dos seus jogadores antes do descanso e apontando baterias ao comportamento na etapa complementar:</p><p dir="ltr">"São duas partes um pouco distintas. Uma grande 1.ª parte onde não deixámos o Vitória ter bola ou andar perto da nossa baliza. Chegámos aos golos com qualidade pela intensidade que metemos. Na 2.ª parte a energia cai e ficámos muito permissivos, macios, e em espaços curtos tivemos reações não tão fortes."</p><p dir="ltr">O técnico assumiu que a equipa tem de saber gerir melhor a vantagem sem recuar as linhas ou perder o foco:</p><p dir="ltr">"É algo que temos de trabalhar, porque jamais queremos que a equipa baixe o ritmo ou venha mais para trás. O intuito era pressionar e condicionar ao máximo o Vitória, mas mérito do outro lado, que depois do 3-1 ganhou algum ânimo extra. Começámos a ficar meio abananados e a malta começou a entrar na desconfiança. Dores de crescimento, mas temos de crescer rapidamente. A ganhar 3-0, não podemos acabar o jogo com um 3-2 e alguma desconfiança."</p><p dir="auto">Substituições e mensagem aos adeptos</p><p dir="ltr">Confrontado sobre se a equipa caiu de rendimento após as alterações no relvado, o treinador considerou que a coincidência temporal não retira responsabilidades ao grupo:</p><p dir="ltr">"As substituições são feitas quando estamos a sofrer o 3-1. É coincidência. Tentamos sempre passar uma energia nova, uma intensidade nova. Umas vezes conseguimos, outras não.  Faz parte do processo coletivo por todas as mudanças que houve. A nossa qualidade não vai ser igual à da época passada nem relativamente àquela que tínhamos há dois anos. É perceber o que temos de fazer para melhorar."</p><p dir="ltr">A terminar, Rui Borges abordou o ambiente de ansiedade sentido no estádio e fez um apelo aos adeptos em Alvalade:</p><p dir="ltr">"Quando o Sporting foi campeão, a energia era muito positiva, sentia-se um ambiente muito bom. E nestes momentos é importante os adeptos apoiarem, faz parte. Mas nós também temos de puxar por eles. Fizemos isso na 1.ª parte, mas também peço que apoiem quando não estamos tão bem. Acredito que no futuro sejamos melhores e que os adeptos estejam do nosso lado durante os 90 minutos."</p>
+
+
+O Sporting somou o primeiro triunfo na Liga Portugal Betclic ao vencer o Vitória SC por 3-2, mas o desfecho acabou marcado por alguma tensão nas bancadas do Estádio José Alvalade. Depois de recolher aos balneários a vencer por 3-0, a equipa verde e branca permitiu dois golos rápidos no segundo tempo. Na _flash interview_ da Sport TV, o treinador leonino, Rui Borges, não escondeu a insatisfação com a quebra de rendimento da equipa.
+
+### Duas metades opostas e perda de intensidade
+
+Rui Borges começou por dividir o encontro em duas partes distintas, elogiando a entrada forte dos seus jogadores antes do descanso e apontando baterias ao comportamento na etapa complementar:
+
+"São duas partes um pouco distintas. Uma grande 1.ª parte onde não deixámos o Vitória ter bola ou andar perto da nossa baliza. Chegámos aos golos com qualidade pela intensidade que metemos. Na 2.ª parte a energia cai e ficámos muito permissivos, macios, e em espaços curtos tivemos reações não tão fortes."
+
+O técnico assumiu que a equipa tem de saber gerir melhor a vantagem sem recuar as linhas ou perder o foco:
+
+"É algo que temos de trabalhar, porque jamais queremos que a equipa baixe o ritmo ou venha mais para trás. O intuito era pressionar e condicionar ao máximo o Vitória, mas mérito do outro lado, que depois do 3-1 ganhou algum ânimo extra. Começámos a ficar meio abananados e a malta começou a entrar na desconfiança. Dores de crescimento, mas temos de crescer rapidamente. A ganhar 3-0, não podemos acabar o jogo com um 3-2 e alguma desconfiança."
+
+Substituições e mensagem aos adeptos
+
+Confrontado sobre se a equipa caiu de rendimento após as alterações no relvado, o treinador considerou que a coincidência temporal não retira responsabilidades ao grupo:
+
+"As substituições são feitas quando estamos a sofrer o 3-1. É coincidência. Tentamos sempre passar uma energia nova, uma intensidade nova. Umas vezes conseguimos, outras não. Faz parte do processo coletivo por todas as mudanças que houve. A nossa qualidade não vai ser igual à da época passada nem relativamente àquela que tínhamos há dois anos. É perceber o que temos de fazer para melhorar."
+
+A terminar, Rui Borges abordou o ambiente de ansiedade sentido no estádio e fez um apelo aos adeptos em Alvalade:
+
+"Quando o Sporting foi campeão, a energia era muito positiva, sentia-se um ambiente muito bom. E nestes momentos é importante os adeptos apoiarem, faz parte. Mas nós também temos de puxar por eles. Fizemos isso na 1.ª parte, mas também peço que apoiem quando não estamos tão bem. Acredito que no futuro sejamos melhores e que os adeptos estejam do nosso lado durante os 90 minutos."

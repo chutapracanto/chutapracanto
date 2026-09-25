@@ -9,4 +9,21 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/autocritica-severa-ap�
 image: "https://framerusercontent.com/images/2P8fYSMnyXXEcOG8Tr5It39VDw.webp?width=1597&height=1064"
 ---
 
-​O rescaldo do empate concedido pelo Sporting CP na deslocação ao terreno do FC Famalicão (1-1) ficou marcado por uma leitura crua, límpida e sem rodeios de Rui Borges. Na zona de entrevistas rápidas à Sport TV, o comandante dos leões lamentou a quebra súbita de tensão coletiva no apagar das luzes do encontro, desvalorizou qualquer peso emocional do desfecho e apontou baterias à receção ao FC Arouca, fechando hermeticamente as portas a qualquer distração com o Clássico entre os seus diretos rivais. ​ Dissecação do golpe fatal e a lição do rigor elétrico ​Com um discurso focado no detalhe tático, o timoneiro verde e branco analisou os instantes de permissividade que deitaram por terra os três pontos: ​ Eclipse defensivo nos descontos: Rui Borges vincou que a equipa ostentou um compromisso exemplar ao longo de 89 minutos, mas apontou o dedo à falta de agressividade e energia defensiva no flanco esquerdo no lance que deu origem ao infeliz autogolo de Gonçalo Inácio. ​ A ironia do destino e a gestão de ritmos: Lembrou que, após uns 20 minutos iniciais cinzentos e marcados por perdas de bola desnecessárias, o Sporting assumiu o controlo absoluto perante um bloco médio-baixo. O técnico assumiu que o Famalicão acabou por encontrar nos descontos a "felicidade que lhe tinha escapado em batalhas anteriores". ​ Foco cego no Arouca e tolerância zero a facilitismos ​Recusando alimentar cenários externos ou fazer contas à tabela classificativa, o treinador mandou uma mensagem contundente para o interior do balneário: ​ Exigência de 90+ minutos: O líder leonino sublinhou que a elite do futebol exige eletricidade constante do primeiro ao último segundo, reforçando que a equipa tem de amadurecer a passos largos para erradicar qualquer laivo de conforto quando em vantagem. ​ Mente limpa para o regresso a Alvalade: Alheio ao confronto direto entre FC Porto e SL Benfica na jornada que se avizinha, Rui Borges garantiu prioridade absoluta ao duelo caseiro com o FC Arouca, com vista a fechar o ciclo com um triunfo antes da paragem para os compromissos das seleções.
+
+
+
+O rescaldo do empate concedido pelo Sporting CP na deslocação ao terreno do FC Famalicão (1-1) ficou marcado por uma leitura crua, límpida e sem rodeios de Rui Borges. Na zona de entrevistas rápidas à Sport TV, o comandante dos leões lamentou a quebra súbita de tensão coletiva no apagar das luzes do encontro, desvalorizou qualquer peso emocional do desfecho e apontou baterias à receção ao FC Arouca, fechando hermeticamente as portas a qualquer distração com o Clássico entre os seus diretos rivais.
+
+**Dissecação do golpe fatal e a lição do rigor elétrico**
+
+Com um discurso focado no detalhe tático, o timoneiro verde e branco analisou os instantes de permissividade que deitaram por terra os três pontos:
+
+- **Eclipse defensivo nos descontos:** Rui Borges vincou que a equipa ostentou um compromisso exemplar ao longo de 89 minutos, mas apontou o dedo à falta de agressividade e energia defensiva no flanco esquerdo no lance que deu origem ao infeliz autogolo de Gonçalo Inácio.
+- **A ironia do destino e a gestão de ritmos:** Lembrou que, após uns 20 minutos iniciais cinzentos e marcados por perdas de bola desnecessárias, o Sporting assumiu o controlo absoluto perante um bloco médio-baixo. O técnico assumiu que o Famalicão acabou por encontrar nos descontos a "felicidade que lhe tinha escapado em batalhas anteriores".
+
+**Foco cego no Arouca e tolerância zero a facilitismos**
+
+Recusando alimentar cenários externos ou fazer contas à tabela classificativa, o treinador mandou uma mensagem contundente para o interior do balneário:
+
+- **Exigência de 90+ minutos:** O líder leonino sublinhou que a elite do futebol exige eletricidade constante do primeiro ao último segundo, reforçando que a equipa tem de amadurecer a passos largos para erradicar qualquer laivo de conforto quando em vantagem.
+- **Mente limpa para o regresso a Alvalade:** Alheio ao confronto direto entre FC Porto e SL Benfica na jornada que se avizinha, Rui Borges garantiu prioridade absoluta ao duelo caseiro com o FC Arouca, com vista a fechar o ciclo com um triunfo antes da paragem para os compromissos das seleções.

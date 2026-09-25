@@ -9,4 +9,23 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/alverca-avassalador-de
 image: "https://framerusercontent.com/images/D6vx8dPc3y6VINERpEnG8B9fs.jpg?width=1280&height=720"
 ---
 
-Demorou o seu tempo, mas a justiça futebolística acabou por bater à porta do FC Alverca no nevoeiro da Choupana. Ao cabo de algumas jornadas a "morrer na praia", a turma ribatejana desbloqueou a primeira vitória da temporada na Liga Portugal com uma demonstração de força, inteligência tática e eficácia demolidora, vergando o Nacional por 1-3. ​ A teia tática de Sérgio Ferreira e o vendaval de Dawda Camara ​A chave do triunfo começou a ser desenhada no quadro tático antes do apito inicial, com o técnico visitante a dar uma verdadeira lição de estratégia: ​ Morfologia tática mutável: Alternando com uma fluidez impressionante entre o 3x4x3 e o 4x4x2, o Alverca promoveu três novidades de raiz (Chissumba, Dawda Camara e Diogo Spencer) que destroçaram por completo o plano do estreante Alexandre Santos. ​ Abertura do ativo: Aproveitando a inadaptação insular ao novo 4x2x3x1, Chissumba castigou um alívio defeituoso de Gasolina para armar um remate rasteiro, colocado e fulgurante. ​ O 'show' de Spencer e o bis de Dawda: Inspiradíssimo no corredor direito, Diogo Spencer tirou dois cruzamentos de régua e esquadro para o avançado espanhol Dawda Camara bisar no encontro primeiro de cabeça e depois de oportunismo puro na cara do golo. ​ Desperdício insular e o rasgo acrobático de Matchoi ​Ferido no orgulho perante os seus adeptos, o Nacional regressou dos balneários disposto a lavar a face, mas esbarrou no desperdício e na solidez ribatejana: ​ Pólvora seca e protestos: Matchoi Djalo falhou o golo de forma inacreditável à boca da baliza e Labidi somou disparos sem direção, numa fase de grande pressão em que os insulares ainda reclamaram uma grande penalidade sobre Pablo Ruan. ​ Pobreza de eficácia vs. momento de inspiração: Aos 80 minutos, na sequência de um estrondoso cabeceamento à barra de Allen Obando, Matchoi resgatou a honra da casa com uma recarga em pontapé acrobático de belo efeito. ​ Tranca na porta: O forcing final dos insulares esbarrou na serenidade de Matheus Mendes e na coesão defensiva do Alverca, que segurou com unhas e dentes três pontos de ouro.
+
+
+
+Demorou o seu tempo, mas a justiça futebolística acabou por bater à porta do FC Alverca no nevoeiro da Choupana. Ao cabo de algumas jornadas a "morrer na praia", a turma ribatejana desbloqueou a primeira vitória da temporada na Liga Portugal com uma demonstração de força, inteligência tática e eficácia demolidora, vergando o Nacional por 1-3.
+
+**A teia tática de Sérgio Ferreira e o vendaval de Dawda Camara**
+
+A chave do triunfo começou a ser desenhada no quadro tático antes do apito inicial, com o técnico visitante a dar uma verdadeira lição de estratégia:
+
+- **Morfologia tática mutável:** Alternando com uma fluidez impressionante entre o 3x4x3 e o 4x4x2, o Alverca promoveu três novidades de raiz (Chissumba, Dawda Camara e Diogo Spencer) que destroçaram por completo o plano do estreante Alexandre Santos.
+- **Abertura do ativo:** Aproveitando a inadaptação insular ao novo 4x2x3x1, Chissumba castigou um alívio defeituoso de Gasolina para armar um remate rasteiro, colocado e fulgurante.
+- **O 'show' de Spencer e o bis de Dawda:** Inspiradíssimo no corredor direito, Diogo Spencer tirou dois cruzamentos de régua e esquadro para o avançado espanhol Dawda Camara bisar no encontro primeiro de cabeça e depois de oportunismo puro na cara do golo.
+
+**Desperdício insular e o rasgo acrobático de Matchoi**
+
+Ferido no orgulho perante os seus adeptos, o Nacional regressou dos balneários disposto a lavar a face, mas esbarrou no desperdício e na solidez ribatejana:
+
+- **Pólvora seca e protestos:** Matchoi Djalo falhou o golo de forma inacreditável à boca da baliza e Labidi somou disparos sem direção, numa fase de grande pressão em que os insulares ainda reclamaram uma grande penalidade sobre Pablo Ruan.
+- **Pobreza de eficácia vs. momento de inspiração:** Aos 80 minutos, na sequência de um estrondoso cabeceamento à barra de Allen Obando, Matchoi resgatou a honra da casa com uma recarga em pontapé acrobático de belo efeito.
+- **Tranca na porta:** O _forcing_ final dos insulares esbarrou na serenidade de Matheus Mendes e na coesão defensiva do Alverca, que segurou com unhas e dentes três pontos de ouro.

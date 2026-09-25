@@ -9,4 +9,24 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/vitória-sc-bate-nacio
 image: "https://framerusercontent.com/images/pPC5gtppVhU6kBoAneadVZUiLc.webp?width=960&height=540"
 ---
 
-O Vitória SC somou mais três pontos no Estádio D. Afonso Henriques ao vencer o Nacional por 1-0. A formação vimaranense entrou com forte pressão, adiantou-se muito cedo no marcador e dominou larga escala do encontro, mas a falta de eficácia na segunda metade deixou o triunfo em aberto até ao apito final. ​Entrada fulgurante e domínio vimaranense ​A equipa da casa assumiu as rédeas do jogo desde o apito inicial: ​ Aviso e golo madrugador (4'): Depois de Tony Strata ter colocado Renato Marin à prova, o marcador funcionou aos quatro minutos. Num cruzamento tirado do corredor direito, Gustavo Silva apareceu na área para finalizar de pé direito e fazer o 1-0. ​ Acomulação de ocasiões: Durante o primeiro tempo, o volume ofensivo dos conquistadores manteve o Nacional encostado à sua área. Miguel Nogueira e Gustavo Silva estiveram perto de dilatar a vantagem, perante uma equipa madeirense sem argumentos para incomodar o guarda-redes Oliwier Zych. ​Penálti falhado, bola no travessão e sufoco final ​Na etapa complementar, a incerteza no resultado manteve-se devido à falta de contundência dos locais na hora de finalizar: ​ Castigo máximo desperdiçado: O Vitória SC dispôs de uma grande penalidade para ampliar a margem, mas Samu Silva falhou a cobrança perante Renato Marin, mantendo os insulares no jogo. ​ Ameaça visitante: Pouco depois de Liziero ter atirado uma bola à barra, o Nacional começou a ganhar metros e esteve perto do empate num lance perigoso conduzido por Daniel de la Cruz. ​ Triunfo seguro até ao fim: Já no Período de compensação, Oumar Camara ainda dispôs de uma soberana oportunidade para matar a partida, mas não concretizou. Apesar do desperdício, a defensiva vimaranense segurou a vantagem mínima até ao fecho da partida. ​A vitória acaba por premiar a equipa com maior volume de jogo e oportunidades criadas, assegurando a conquista dos três pontos perante os seus adeptos.
+
+
+
+O Vitória SC somou mais três pontos no Estádio D. Afonso Henriques ao vencer o Nacional por 1-0. A formação vimaranense entrou com forte pressão, adiantou-se muito cedo no marcador e dominou larga escala do encontro, mas a falta de eficácia na segunda metade deixou o triunfo em aberto até ao apito final.
+
+### Entrada fulgurante e domínio vimaranense
+
+A equipa da casa assumiu as rédeas do jogo desde o apito inicial:
+
+- **Aviso e golo madrugador (4'):** Depois de Tony Strata ter colocado Renato Marin à prova, o marcador funcionou aos quatro minutos. Num cruzamento tirado do corredor direito, Gustavo Silva apareceu na área para finalizar de pé direito e fazer o 1-0.
+- **Acomulação de ocasiões:** Durante o primeiro tempo, o volume ofensivo dos _conquistadores_ manteve o Nacional encostado à sua área. Miguel Nogueira e Gustavo Silva estiveram perto de dilatar a vantagem, perante uma equipa madeirense sem argumentos para incomodar o guarda-redes Oliwier Zych.
+
+### Penálti falhado, bola no travessão e sufoco final
+
+Na etapa complementar, a incerteza no resultado manteve-se devido à falta de contundência dos locais na hora de finalizar:
+
+- **Castigo máximo desperdiçado:** O Vitória SC dispôs de uma grande penalidade para ampliar a margem, mas Samu Silva falhou a cobrança perante Renato Marin, mantendo os insulares no jogo.
+- **Ameaça visitante:** Pouco depois de Liziero ter atirado uma bola à barra, o Nacional começou a ganhar metros e esteve perto do empate num lance perigoso conduzido por Daniel de la Cruz.
+- **Triunfo seguro até ao fim:** Já no Período de compensação, Oumar Camara ainda dispôs de uma soberana oportunidade para matar a partida, mas não concretizou. Apesar do desperdício, a defensiva vimaranense segurou a vantagem mínima até ao fecho da partida.
+
+A vitória acaba por premiar a equipa com maior volume de jogo e oportunidades criadas, assegurando a conquista dos três pontos perante os seus adeptos.

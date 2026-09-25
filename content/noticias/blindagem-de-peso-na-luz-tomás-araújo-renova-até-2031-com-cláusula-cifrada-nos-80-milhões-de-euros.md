@@ -9,4 +9,21 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/blindagem-de-peso-na-l
 image: "https://framerusercontent.com/images/1wv1JuTss5ATWvsXrowHkBEQ6R4.webp?width=1200&height=734"
 ---
 
-​O Benfica amarrou uma das joias mais reluzentes da sua formação ao oficializar, ao final da tarde desta quarta-feira, a renovação de contrato com Tomás Araújo. O internacional português prolongou a sua ligação aos encarnados por mais duas temporadas estendendo o vínculo de 2029 para o verão de 2031, num acordo que contempla uma valorização salarial assinalável e fixa a nova cláusula de rescisão nos 80 milhões de euros. ​ Do ADN do Seixal à liderança no balneário ​A extensão contratual reflete o percurso exemplar de um atleta moldado na casa e promovido ao lote de capitães da equipa principal: ​ Evolução de águia ao peito: Chegado à estrutura encarnada em 2016, com apenas 14 anos, o defesa cumpriu todo o processo formativo na academia encarnada até se estrear na equipa sénior na época 2021/22. ​ Maturidade e liderança: Após um período de maturação crucial ao serviço do Gil Vicente, o central regressou à Luz para se afirmar em definitivo. O seu crescimento exponencial dentro e fora de campo valeu-lhe a eleição como um dos capitães do plantel para a presente temporada. ​ Pedra basilar no xadrez de Marco Silva ​A blindagem do central surge numa altura em que o atleta atravessa uma fase fulgurante no arranque da competição: ​ Rendimento de alto nível: Tomás Araújo assumiu a titularidade indiscutível na linha defensiva encarnada, somando já sete partidas oficiais, um golo e uma assistência no arranque da época. ​ Símbolo de estabilidade: Com esta manobra estratégica, a estrutura do Benfica garante a continuidade de um dos defesas mais cobiçados do futebol europeu, segurando o seu talento no centro da defesa a longo prazo.
+
+
+
+O Benfica amarrou uma das joias mais reluzentes da sua formação ao oficializar, ao final da tarde desta quarta-feira, a renovação de contrato com Tomás Araújo. O internacional português prolongou a sua ligação aos encarnados por mais duas temporadas estendendo o vínculo de 2029 para o verão de 2031, num acordo que contempla uma valorização salarial assinalável e fixa a nova cláusula de rescisão nos 80 milhões de euros.
+
+**Do ADN do Seixal à liderança no balneário**
+
+A extensão contratual reflete o percurso exemplar de um atleta moldado na casa e promovido ao lote de capitães da equipa principal:
+
+- **Evolução de águia ao peito:** Chegado à estrutura encarnada em 2016, com apenas 14 anos, o defesa cumpriu todo o processo formativo na academia encarnada até se estrear na equipa sénior na época 2021/22.
+- **Maturidade e liderança:** Após um período de maturação crucial ao serviço do Gil Vicente, o central regressou à Luz para se afirmar em definitivo. O seu crescimento exponencial dentro e fora de campo valeu-lhe a eleição como um dos capitães do plantel para a presente temporada.
+
+**Pedra basilar no xadrez de Marco Silva**
+
+A blindagem do central surge numa altura em que o atleta atravessa uma fase fulgurante no arranque da competição:
+
+- **Rendimento de alto nível:** Tomás Araújo assumiu a titularidade indiscutível na linha defensiva encarnada, somando já sete partidas oficiais, um golo e uma assistência no arranque da época.
+- **Símbolo de estabilidade:** Com esta manobra estratégica, a estrutura do Benfica garante a continuidade de um dos defesas mais cobiçados do futebol europeu, segurando o seu talento no centro da defesa a longo prazo.

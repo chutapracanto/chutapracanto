@@ -9,4 +9,19 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/renascer-em-brugge-ast
 image: "https://framerusercontent.com/images/du4lZ3uachSsp4TNhrpNLTQXEE.jpg?width=1600&height=900"
 ---
 
-O Aston Villa deu o pontapé de saída na fase de liga da Liga dos Campeões com um triunfo conquistado com unhas e dentes em solo belga. A formação orientada por Unai Emery superiorizou-se ao Club Brugge por 3-2, arrecadando a primeira vitória oficial de 2026/27 após um início de época atribulado no plano interno e carimbando a redenção europeia em grande estilo. ​ Vendaval ofensivo, génio de Jackson e reação belga ​Depois de quatro jogos oficiais sem conhecer o sabor do triunfo, o emblema de Birmingham apresentou-se no Jan Breydel Stadium com um cinismo letal na primeira metade: ​ Incapaç de travar McGinn: Na sequência de uma grande incursão de Pau Torres, o capitão John McGinn desfechou um remate em arco, sem hipóteses para Yann Sommer, inaugurando o marcador. ​ Resposta com perfume lusitano: O extremo português Carlos Forbs esteve na génese da jogada do empate, concluída por Hugo Vetlesen após um autêntico 'bailado' de Jan Virgili perante Wan-Bissaka. ​ Aceleração devastadora antes do descanso: A resposta dos villans não se fez esperar. Emi Buendía recolocou os ingleses na frente na sequência de um excelente trabalho do reforço João Gomes e Nicolas Jackson estreou-se a faturar com a camisola do Villa numa cavalaria em profundidade à sua imagem, fixando o 1-3 ao intervalo. ​ Sufoco na etapa complementar e gestão pragmática ​Amparada por uma confortável vantagem de dois golos, a equipa de Unai Emery optou por fechar os caminhos para a sua baliza e gerir os ritmos de jogo na segunda metade. O Club Brugge aproveitou o recuo estratégico dos visitantes para reentrar na discussão do resultado, reduzindo de grande penalidade por intermédio de Tresoldi. Apesar da pressão sufocante dos belgas nos minutos finais e de perdões capitais nas duas balizas, o 2-3 prevaleceu até ao apito final.
+
+
+
+O Aston Villa deu o pontapé de saída na fase de liga da Liga dos Campeões com um triunfo conquistado com unhas e dentes em solo belga. A formação orientada por Unai Emery superiorizou-se ao Club Brugge por 3-2, arrecadando a primeira vitória oficial de 2026/27 após um início de época atribulado no plano interno e carimbando a redenção europeia em grande estilo.
+
+**Vendaval ofensivo, génio de Jackson e reação belga**
+
+Depois de quatro jogos oficiais sem conhecer o sabor do triunfo, o emblema de Birmingham apresentou-se no Jan Breydel Stadium com um cinismo letal na primeira metade:
+
+- **Incapaç de travar McGinn:** Na sequência de uma grande incursão de Pau Torres, o capitão John McGinn desfechou um remate em arco, sem hipóteses para Yann Sommer, inaugurando o marcador.
+- **Resposta com perfume lusitano:** O extremo português Carlos Forbs esteve na génese da jogada do empate, concluída por Hugo Vetlesen após um autêntico 'bailado' de Jan Virgili perante Wan-Bissaka.
+- **Aceleração devastadora antes do descanso:** A resposta dos _villans_ não se fez esperar. Emi Buendía recolocou os ingleses na frente na sequência de um excelente trabalho do reforço João Gomes e Nicolas Jackson estreou-se a faturar com a camisola do Villa numa cavalaria em profundidade à sua imagem, fixando o 1-3 ao intervalo.
+
+**Sufoco na etapa complementar e gestão pragmática**
+
+Amparada por uma confortável vantagem de dois golos, a equipa de Unai Emery optou por fechar os caminhos para a sua baliza e gerir os ritmos de jogo na segunda metade. O Club Brugge aproveitou o recuo estratégico dos visitantes para reentrar na discussão do resultado, reduzindo de grande penalidade por intermédio de Tresoldi. Apesar da pressão sufocante dos belgas nos minutos finais e de perdões capitais nas duas balizas, o 2-3 prevaleceu até ao apito final.

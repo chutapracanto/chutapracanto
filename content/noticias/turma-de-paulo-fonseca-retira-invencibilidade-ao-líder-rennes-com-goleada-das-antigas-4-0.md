@@ -9,4 +9,21 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/turma-de-paulo-fonseca
 image: "https://framerusercontent.com/images/z538QvYvNIXk3YiizhfNRyp2Vs.jpg?width=1400&height=933"
 ---
 
-O Olympique Lyonnais carimbou este sábado a exibição mais vistosa da sua campanha em 2026/27 ao atropelar o Rennes por 4-0. A formação comandada pelo técnico português Paulo Fonseca não deu hipóteses ao emblema que liderava a Ligue 1 sem qualquer derrota e carimbou um triunfo incontestável no Groupama Stadium, marcado por dois golos em cada metade do encontro. ​ Bis de Nuamah colocou o jogo no sentido único ​Apesar do excelente arranque de campeonato do Rennes que trazia no currículo três vitórias e uma igualdade diante do campeão PSG, a estratégia visitante ruiu perante o fulgor ofensivo dos 'gones': ​ Inspirado Nuamah abre o caminho (7' e 30'): O jovem extremo ganês tornou-se a figura da primeira parte ao faturar por duas vezes. O golo madrugador nasceu de uma assistência açucarada de Corentin Tolisso, tendo o atacante voltado a fazer balançar as redes à passagem da meia hora de jogo. ​ Athekame em plano de destaque: Na defesa, o lateral suíço Zachary Athekame (cedido pelo Milan) revelou-se um verdadeiro motor pelo corredor direito, somando ações de relevo no apoio ao ataque. ​ Tolisso coroa exibição perfeita antes do apito final ​A etapa complementar serviu para confirmar a supremacia caseira e para gerir a vantagem com classe: ​ Capitão fecha a conta: Athekame coroou a sua grande exibição com golo e assistência, servindo Corentin Tolisso para o quarto e último tento da noite, o primeiro da conta pessoal do internacional francês na presente época. ​ Resultados da tarde em França: A jornada arrancou com o triunfo do Paris FC frente ao Strasbourg (2-1), registando-se ainda vitórias caseiras de Angers (sobre o Troyes), Le Mans (diante do Lorient) e Toulouse (frente ao Le Havre).
+
+
+
+O Olympique Lyonnais carimbou este sábado a exibição mais vistosa da sua campanha em 2026/27 ao atropelar o Rennes por 4-0. A formação comandada pelo técnico português Paulo Fonseca não deu hipóteses ao emblema que liderava a Ligue 1 sem qualquer derrota e carimbou um triunfo incontestável no Groupama Stadium, marcado por dois golos em cada metade do encontro.
+
+**Bis de Nuamah colocou o jogo no sentido único**
+
+Apesar do excelente arranque de campeonato do Rennes que trazia no currículo três vitórias e uma igualdade diante do campeão PSG, a estratégia visitante ruiu perante o fulgor ofensivo dos 'gones':
+
+- **Inspirado Nuamah abre o caminho (7' e 30'):** O jovem extremo ganês tornou-se a figura da primeira parte ao faturar por duas vezes. O golo madrugador nasceu de uma assistência açucarada de Corentin Tolisso, tendo o atacante voltado a fazer balançar as redes à passagem da meia hora de jogo.
+- **Athekame em plano de destaque:** Na defesa, o lateral suíço Zachary Athekame (cedido pelo Milan) revelou-se um verdadeiro motor pelo corredor direito, somando ações de relevo no apoio ao ataque.
+
+**Tolisso coroa exibição perfeita antes do apito final**
+
+A etapa complementar serviu para confirmar a supremacia caseira e para gerir a vantagem com classe:
+
+- **Capitão fecha a conta:** Athekame coroou a sua grande exibição com golo e assistência, servindo Corentin Tolisso para o quarto e último tento da noite, o primeiro da conta pessoal do internacional francês na presente época.
+- **Resultados da tarde em França:** A jornada arrancou com o triunfo do Paris FC frente ao Strasbourg (2-1), registando-se ainda vitórias caseiras de Angers (sobre o Troyes), Le Mans (diante do Lorient) e Toulouse (frente ao Le Havre).

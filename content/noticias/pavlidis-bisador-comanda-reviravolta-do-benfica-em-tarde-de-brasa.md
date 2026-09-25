@@ -9,4 +9,21 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/pavlidis-bisador-coman
 image: "https://framerusercontent.com/images/gLIrkmY0yUxjOg04XXRC7zE9qU.webp?width=1224&height=689"
 ---
 
-Debaixo de um calor sufocante e perante uma Luz inicialmente adormecida, o SL Benfica superou um teste de fogo na receção ao Gil Vicente, carimbando um triunfo por 3-1 em duelo a contar para a 6.ª jornada da Liga Portugal. A turma de Marco Silva teve de descer à mina para desatar um nó cego forjado pelos barcelenses, encontrando em Vangelis Pavlidis a frieza de um matador e na irreverência da jovem guarda o combustível necessário para incendiar o marcador na reta final. ​ Susto madrugador em Barcelos e a fome insaciável de Pavlidis ​A entrada das águias pautou-se por uma pressão alta, mas a eficácia cirúrgica do Gil Vicente gelou os bancadas nos instantes iniciais: ​ Eficácia gilista ao primeiro sopro (7'): Na primeira incursão com perigo, Gil Martins desenhou uma combinação de veludo no corredor esquerdo e serviu Héctor Hernández, que desviou com classe para inaugurar o marcador e gelar a Catedral. ​ Instinto de caçador redime a igualdade (29'): Perante um bloco médio-baixo extremamente compacto e disciplinado, o Benfica acusou falta de rasgo entrelinhas. O golo do empate acabou por brotar da fome de golo de Vangelis Pavlidis, com o grego a reagir antes de todos a uma sobra na grande área para restabelecer a igualdade antes do descanso. ​ Assalto ao ferro, magia do banco e a cambalhota consumada ​O segundo tempo transformou-se num autêntico monólogo encarnado, com a baliza de Lucão a ser submetida a uma autêntica tempestade: ​ Bombardeamento à barra: O golo da reviravolta parecia negado pelos deuses do futebol. Schjelderup carimbou a trave aos 61', Lucão vestiu a pele de herói a remate de Pavlidis aos 67' e Gianluca Prestianni voltou a fazer tremer o ferro aos 85'. ​ Penálti de classe e a pincelada de Prestianni: A resistência gilista ruiu inevitavelmente aos 87', quando Touré derrubou Fredrik Aursnes na grande área. Da marca dos 11 metros, Pavlidis bisou com frieza absoluta. Já no período de compensação (90+3'), Claudio Echeverri serviu Prestianni para o argentino selar o 3-1 num remate cruzado de rara beleza, cabendo ainda a Samuel Soares assinar uma defesa monumental no último suspiro perante Andreas Lausen.
+
+
+
+Debaixo de um calor sufocante e perante uma Luz inicialmente adormecida, o SL Benfica superou um teste de fogo na receção ao Gil Vicente, carimbando um triunfo por 3-1 em duelo a contar para a 6.ª jornada da Liga Portugal. A turma de Marco Silva teve de descer à mina para desatar um nó cego forjado pelos barcelenses, encontrando em Vangelis Pavlidis a frieza de um matador e na irreverência da jovem guarda o combustível necessário para incendiar o marcador na reta final.
+
+**Susto madrugador em Barcelos e a fome insaciável de Pavlidis**
+
+A entrada das águias pautou-se por uma pressão alta, mas a eficácia cirúrgica do Gil Vicente gelou os bancadas nos instantes iniciais:
+
+- **Eficácia gilista ao primeiro sopro (7'):** Na primeira incursão com perigo, Gil Martins desenhou uma combinação de veludo no corredor esquerdo e serviu Héctor Hernández, que desviou com classe para inaugurar o marcador e gelar a Catedral.
+- **Instinto de caçador redime a igualdade (29'):** Perante um bloco médio-baixo extremamente compacto e disciplinado, o Benfica acusou falta de rasgo entrelinhas. O golo do empate acabou por brotar da fome de golo de Vangelis Pavlidis, com o grego a reagir antes de todos a uma sobra na grande área para restabelecer a igualdade antes do descanso.
+
+**Assalto ao ferro, magia do banco e a cambalhota consumada**
+
+O segundo tempo transformou-se num autêntico monólogo encarnado, com a baliza de Lucão a ser submetida a uma autêntica tempestade:
+
+- **Bombardeamento à barra:** O golo da reviravolta parecia negado pelos deuses do futebol. Schjelderup carimbou a trave aos 61', Lucão vestiu a pele de herói a remate de Pavlidis aos 67' e Gianluca Prestianni voltou a fazer tremer o ferro aos 85'.
+- **Penálti de classe e a pincelada de Prestianni:** A resistência gilista ruiu inevitavelmente aos 87', quando Touré derrubou Fredrik Aursnes na grande área. Da marca dos 11 metros, Pavlidis bisou com frieza absoluta. Já no período de compensação (90+3'), Claudio Echeverri serviu Prestianni para o argentino selar o 3-1 num remate cruzado de rara beleza, cabendo ainda a Samuel Soares assinar uma defesa monumental no último suspiro perante Andreas Lausen.

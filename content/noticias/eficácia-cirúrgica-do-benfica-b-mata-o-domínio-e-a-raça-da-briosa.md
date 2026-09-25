@@ -9,4 +9,23 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/eficácia-cirúrgica-d
 image: "https://framerusercontent.com/images/N9UM7VyA9FVOulKxkqveJYm9yKQ.jpg?width=1208&height=725"
 ---
 
-Noite de profunda ingratidão no Estádio Cidade de Coimbra. Numa partida em que a Académica pegou nas rédeas do jogo, dominou a posse de bola e empurrou o adversário para a sua grande área, a frieza encarnada acabou por prevalecer. O Benfica B construiu um triunfo volumoso por 0-3, alicerçado na velocidade estonteante das suas transições ofensivas e numa lição letal de eficácia. ​ Eficácia encarnada amordaça o melhor arranque dos estudantes ​A equipa da casa entrou com o bloco subido e uma agressividade tática que sufocou a construção contrária desde o apito inicial: ​ Milagre sobre a linha (13'): Kévin Zohi esteve a milímetros de inaugurar o marcador com um desvio subtil, valendo ao Benfica B um corte providencial de Duarte Soares mesmo em cima da linha de golo. ​ Tiro frio contra a corrente (16'): Na resposta imediata e quando a Briosa mandava no jogo, Tiago Freitas acelerou pelo corredor direito e tirou um cruzamento tenso para a finalização fulgurante de Francisco Silva. ​ Estocada em transição rápida (29'): Com a Académica balanceada para a frente em busca da reação, Olívio Tomé descobriu uma autoestrada na direita, penetrou na área e desferiu um remate cruzado e sem hipóteses, assinando o 0-2 antes do descanso. ​ Poste, muralha encarnada e o tiro de misericórdia ​A etapa complementar trouxe uma Académica ligada à corrente máxima, empurrada pelas bancadas e disposta a reescrever o destino da partida, mas a infelicidade e a noite inspirada do guarda-redes das águias ditaram o desfecho: ​ Vendaval ofensivo sem recompensa: Ilies Fauré fez estremecer o poste com um disparo violento, Amadou Coundoul obrigou Diogo Ferreira a uma defesa impossível e o perigo rondou a baliza visitante através de remates de Leandro Silva, Afonso Rodrigues e Martim Tavares. ​ Transição letal sela o 0-3 (62'): Em pleno sufoco da equipa da casa, Olívio Tomé voltou a ligar os turbos na transição rápida e serviu de bandeja Felipe Lima para o terceiro e definitivo golo do encontro. ​ Monopólio estéril nas estatísticas: Até ao apito final, a Briosa carregou sobre a grande área encarnada, somando mais posse de bola, mais remates e mais pontapés de canto, mas a frieza encarnada fez toda a diferença no marcador.
+
+
+
+Noite de profunda ingratidão no Estádio Cidade de Coimbra. Numa partida em que a Académica pegou nas rédeas do jogo, dominou a posse de bola e empurrou o adversário para a sua grande área, a frieza encarnada acabou por prevalecer. O Benfica B construiu um triunfo volumoso por 0-3, alicerçado na velocidade estonteante das suas transições ofensivas e numa lição letal de eficácia.
+
+**Eficácia encarnada amordaça o melhor arranque dos estudantes**
+
+A equipa da casa entrou com o bloco subido e uma agressividade tática que sufocou a construção contrária desde o apito inicial:
+
+- **Milagre sobre a linha (13'):** Kévin Zohi esteve a milímetros de inaugurar o marcador com um desvio subtil, valendo ao Benfica B um corte providencial de Duarte Soares mesmo em cima da linha de golo.
+- **Tiro frio contra a corrente (16'):** Na resposta imediata e quando a Briosa mandava no jogo, Tiago Freitas acelerou pelo corredor direito e tirou um cruzamento tenso para a finalização fulgurante de Francisco Silva.
+- **Estocada em transição rápida (29'):** Com a Académica balanceada para a frente em busca da reação, Olívio Tomé descobriu uma autoestrada na direita, penetrou na área e desferiu um remate cruzado e sem hipóteses, assinando o 0-2 antes do descanso.
+
+**Poste, muralha encarnada e o tiro de misericórdia**
+
+A etapa complementar trouxe uma Académica ligada à corrente máxima, empurrada pelas bancadas e disposta a reescrever o destino da partida, mas a infelicidade e a noite inspirada do guarda-redes das águias ditaram o desfecho:
+
+- **Vendaval ofensivo sem recompensa:** Ilies Fauré fez estremecer o poste com um disparo violento, Amadou Coundoul obrigou Diogo Ferreira a uma defesa impossível e o perigo rondou a baliza visitante através de remates de Leandro Silva, Afonso Rodrigues e Martim Tavares.
+- **Transição letal sela o 0-3 (62'):** Em pleno sufoco da equipa da casa, Olívio Tomé voltou a ligar os turbos na transição rápida e serviu de bandeja Felipe Lima para o terceiro e definitivo golo do encontro.
+- **Monopólio estéril nas estatísticas:** Até ao apito final, a Briosa carregou sobre a grande área encarnada, somando mais posse de bola, mais remates e mais pontapés de canto, mas a frieza encarnada fez toda a diferença no marcador.

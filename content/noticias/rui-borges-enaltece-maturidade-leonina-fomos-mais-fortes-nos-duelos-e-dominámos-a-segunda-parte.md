@@ -9,4 +9,21 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/rui-borges-enaltece-ma
 image: "https://framerusercontent.com/images/nijXfO5OXQQfWFXtz9nyrzk8Ysw.webp?width=1280&height=720"
 ---
 
-Após a vitória por 3-1 diante do Galatasaray na estreia da fase de liga da Liga dos Campeões, Rui Borges analisou o triunfo aos microfones da Sport TV. O técnico do Sporting destacou a capacidade de reação da sua equipa perante o ímpeto inicial dos turcos, sublinhando a evolução exibicional no segundo tempo e o apoio decisivo das bancadas de Alvalade. ​ Ajuste de intensidade e resposta ao golo fortuito ​Rui Borges admitiu as dificuldades sentidas na fase inicial da partida, mas elogiou o crescimento coletivo da equipa ao longo dos 90 minutos: ​ Superação do susto inicial: "Era importante começar a ganhar. Temos uma equipa jovem, com muita gente a estrear-se na Champions. O Galatasaray entrou muito pressionante e forte na intensidade, fazendo o 0-1 num lance de bola parada com alguma sorte. Tivemos dificuldade em ligar o jogo nos primeiros 25 minutos, mas fomos equilibrando", explicou o treinador. ​ Crescimento e domínio na segunda metade: "Na segunda parte fomos claramente superiores. Entrámos mais intensos, mais competitivos e muito mais fortes nos duelos. Crescemos na partida, chegámos aos golos da reviravolta e não permitimos que o Galatasaray voltasse a criar perigo." ​ Mobilidade tática e a fortaleza de Alvalade ​O técnico leonino abordou ainda as dinâmicas ofensivas entre Rodrigo Zalazar e Luis Guilherme, valorizando a liberdade posicionamento conferida aos seus homens da frente: ​ Mobilidade para desarmar a pressão: "A entrada do Luis Guilherme permitiu maior liberdade para trocas posicionais. São jogadores com características distintas e essa abertura é fundamental no nosso modelo para desorganizar blocos pressionantes." ​ Mensagem aos adeptos: "Queremos que Alvalade continue a ser uma fortaleza. Precisamos desta energia do primeiro ao último minuto, especialmente nos momentos em que as coisas não correrem tão bem", concluiu.
+
+
+
+Após a vitória por 3-1 diante do Galatasaray na estreia da fase de liga da Liga dos Campeões, Rui Borges analisou o triunfo aos microfones da Sport TV. O técnico do Sporting destacou a capacidade de reação da sua equipa perante o ímpeto inicial dos turcos, sublinhando a evolução exibicional no segundo tempo e o apoio decisivo das bancadas de Alvalade.
+
+**Ajuste de intensidade e resposta ao golo fortuito**
+
+Rui Borges admitiu as dificuldades sentidas na fase inicial da partida, mas elogiou o crescimento coletivo da equipa ao longo dos 90 minutos:
+
+- **Superação do susto inicial:** "Era importante começar a ganhar. Temos uma equipa jovem, com muita gente a estrear-se na Champions. O Galatasaray entrou muito pressionante e forte na intensidade, fazendo o 0-1 num lance de bola parada com alguma sorte. Tivemos dificuldade em ligar o jogo nos primeiros 25 minutos, mas fomos equilibrando", explicou o treinador.
+- **Crescimento e domínio na segunda metade:** "Na segunda parte fomos claramente superiores. Entrámos mais intensos, mais competitivos e muito mais fortes nos duelos. Crescemos na partida, chegámos aos golos da reviravolta e não permitimos que o Galatasaray voltasse a criar perigo."
+
+**Mobilidade tática e a fortaleza de Alvalade**
+
+O técnico leonino abordou ainda as dinâmicas ofensivas entre Rodrigo Zalazar e Luis Guilherme, valorizando a liberdade posicionamento conferida aos seus homens da frente:
+
+- **Mobilidade para desarmar a pressão:** "A entrada do Luis Guilherme permitiu maior liberdade para trocas posicionais. São jogadores com características distintas e essa abertura é fundamental no nosso modelo para desorganizar blocos pressionantes."
+- **Mensagem aos adeptos:** "Queremos que Alvalade continue a ser uma fortaleza. Precisamos desta energia do primeiro ao último minuto, especialmente nos momentos em que as coisas não correrem tão bem", concluiu.

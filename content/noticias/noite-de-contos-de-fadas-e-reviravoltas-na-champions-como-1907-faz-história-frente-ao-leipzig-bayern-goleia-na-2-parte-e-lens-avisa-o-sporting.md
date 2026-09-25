@@ -9,4 +9,28 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/noite-de-contos-de-fad
 image: "https://framerusercontent.com/images/WawrMqxyTgScKofftWKkH0vnA.jpg?width=999&height=561"
 ---
 
-A Liga dos Campeões voltou a ser palco de grandes emoções europeias com uma jornada repleta de histórias marcantes. Do feito histórico dos italianos do Como 1907 ao rolo compressor do Bayern de Munique, passando pelo triunfo épico do Lens futuro adversário do Sporting, a prova milionária não deu tréguas. ​ História em solo italiano: Como 1907 verga RB Leipzig na estreia europeia (4-1) ​A grande sensação da noite chegou de Itália. O Como 1907 assinou uma página de ouro no seu historial ao somar os primeiros três pontos nas competições europeias com uma vitória categórica sobre os alemães do RB Leipzig. ​ Início avassalador: Martin Baturina gravou o seu nome na história do clube ao inaugurar o marcador com o primeiro golo de sempre do Como na Champions. Ainda antes do descanso (38'), Anastasios Douvikas ampliou a vantagem caseira. ​ Confirmar o sonho: Na etapa complementar, o jovem Assane Diao concluiu uma excelente jogada coletiva aos 54 minutos e Máximo Perrone selou a chapa quatro para o conjunto da casa. Andrija Maksimovic apontou o golo de honra dos germânicos. ​ Rolo compressor em Munique: Bayern acelera após o descanso e aplica 'chapa cinco' (5-0) ​Na Baviera, o Bayern de Munique teve de paciência para furar a muralha do Bodo/Glimt, mas acabou por construir uma goleada expressiva no Allianz Arena. ​ Ajuste na segunda metade: Depois de um primeiro tempo nulo e com os noruegueses a demonstrarem organização defensiva, a resistência ruiu na segunda parte coincidindo com a entrada do guardião Julian Lund. ​ Leque de estrelas em destaque: Jamal Musiala desfez o nó, Harry Kane e Alphonso Davies ampliaram a contagem e Michael Olise, com um bis de classe, fechou o marcador nos 5-0 para confirmar o favoritismo bávaro. ​ Épico e aviso ao Sporting: Lens opera reviravolta nos descontos em Praga (2-3) ​Num dos duelos mais emotivos da noite, o Lens que se prepara para medir forças com o Sporting na fase de liga viajou até ao reduto do Slavia de Praga e carimbou um triunfo dramático nos instantes finais. ​ Jogo de loucos e expulsão: A partida partiu no segundo tempo, logo após a expulsão do recém-entrado Konecny aos 51 minutos. Mesmo em inferioridade numérica, os checos adiantaram-se por Sturm, com Abdallah Sima a restabelecer a igualdade pouco depois. ​ Resposta checa e reviravolta gaulesa: O Slavia voltou à liderança com o bis de Sturm, mas o Lens demonstrou uma alma enorme na reta final. Já em período de compensação, Florian Thauvin (após assistência do luso Mezian Soares) empatou o encontro e Rubén Aguilar completou a reviravolta para o 2-3 final.
+
+
+
+A Liga dos Campeões voltou a ser palco de grandes emoções europeias com uma jornada repleta de histórias marcantes. Do feito histórico dos italianos do Como 1907 ao rolo compressor do Bayern de Munique, passando pelo triunfo épico do Lens futuro adversário do Sporting, a prova milionária não deu tréguas.
+
+**História em solo italiano: Como 1907 verga RB Leipzig na estreia europeia (4-1)**
+
+A grande sensação da noite chegou de Itália. O Como 1907 assinou uma página de ouro no seu historial ao somar os primeiros três pontos nas competições europeias com uma vitória categórica sobre os alemães do RB Leipzig.
+
+- **Início avassalador:** Martin Baturina gravou o seu nome na história do clube ao inaugurar o marcador com o primeiro golo de sempre do Como na Champions. Ainda antes do descanso (38'), Anastasios Douvikas ampliou a vantagem caseira.
+- **Confirmar o sonho:** Na etapa complementar, o jovem Assane Diao concluiu uma excelente jogada coletiva aos 54 minutos e Máximo Perrone selou a chapa quatro para o conjunto da casa. Andrija Maksimovic apontou o golo de honra dos germânicos.
+
+**Rolo compressor em Munique: Bayern acelera após o descanso e aplica 'chapa cinco' (5-0)**
+
+Na Baviera, o Bayern de Munique teve de paciência para furar a muralha do Bodo/Glimt, mas acabou por construir uma goleada expressiva no Allianz Arena.
+
+- **Ajuste na segunda metade:** Depois de um primeiro tempo nulo e com os noruegueses a demonstrarem organização defensiva, a resistência ruiu na segunda parte coincidindo com a entrada do guardião Julian Lund.
+- **Leque de estrelas em destaque:** Jamal Musiala desfez o nó, Harry Kane e Alphonso Davies ampliaram a contagem e Michael Olise, com um bis de classe, fechou o marcador nos 5-0 para confirmar o favoritismo bávaro.
+
+**Épico e aviso ao Sporting: Lens opera reviravolta nos descontos em Praga (2-3)**
+
+Num dos duelos mais emotivos da noite, o Lens que se prepara para medir forças com o Sporting na fase de liga viajou até ao reduto do Slavia de Praga e carimbou um triunfo dramático nos instantes finais.
+
+- **Jogo de loucos e expulsão:** A partida partiu no segundo tempo, logo após a expulsão do recém-entrado Konecny aos 51 minutos. Mesmo em inferioridade numérica, os checos adiantaram-se por Sturm, com Abdallah Sima a restabelecer a igualdade pouco depois.
+- **Resposta checa e reviravolta gaulesa:** O Slavia voltou à liderança com o bis de Sturm, mas o Lens demonstrou uma alma enorme na reta final. Já em período de compensação, Florian Thauvin (após assistência do luso Mezian Soares) empatou o encontro e Rubén Aguilar completou a reviravolta para o 2-3 final.

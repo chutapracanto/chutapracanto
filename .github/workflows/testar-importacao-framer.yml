@@ -1,4 +1,5 @@
 name: Testar importação histórica do Framer
+# [IMPORT-FRAMER-FORMATTING-REPAIR] trigger\n# branch repair commits are pushed directly; no main rebase is needed
 
 on:
   push:
@@ -37,7 +38,10 @@ jobs:
           FRAMER_DEBUG: "1"
         run: |
           if [ "$GITHUB_EVENT_NAME" = "push" ]; then
-            if git log -1 --pretty=%B | grep -Fq "[IMPORT-FRAMER-REAL]"; then
+            if git log -1 --pretty=%B | grep -Fq "[IMPORT-FRAMER-FORMATTING-REPAIR]"; then
+              echo "IMPORT-FRAMER-FORMATTING-REPAIR encontrado: reparação de formatação autorizada."
+              python scripts/import-framer-news.py --limit 0 --write --repair-existing
+            elif git log -1 --pretty=%B | grep -Fq "[IMPORT-FRAMER-REAL]"; then
               echo "IMPORT-FRAMER-REAL encontrado: execução de escrita autorizada."
               python scripts/import-framer-news.py --limit 0 --write
             else
@@ -67,9 +71,7 @@ jobs:
             exit 0
           fi
           git commit -m "content: importar arquivo histórico do Framer"
-          git fetch origin main
-          git rebase origin/main
-          git push origin HEAD:main
+          git push origin HEAD:$GITHUB_REF_NAME
       - name: Mostrar diagnóstico do relatório
         if: always()
         run: |
