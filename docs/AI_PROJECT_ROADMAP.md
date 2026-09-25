@@ -620,3 +620,28 @@ A documentação oficial Cloudflare atual indica D1 no Workers Free com 5M rows 
 **Fase 8 — Automação/escala:** publicação, validações, dados, distribuição, workflows, integrações e alertas; automatizar primeiro tarefas repetitivas, previsíveis e validáveis.
 
 **Estado operacional:** FASE 2 continua ativa, mas a próxima operação técnica é a inspeção Cloudflare necessária para substituir o like local por engagement persistente.
+
+## 23. ATUALIZAÇÃO OPERACIONAL — 2026-09-25 — AUDITORIA PR #34 / ENGAGEMENT PERSISTENTE
+
+A PR #34 foi auditada antes de merge. A implementação foi funcionalmente validada no Preview pela execução externa anterior, mas a revisão do código encontrou duas correções necessárias: alinhamento visual exato do coração com a base do botão Partilhar e aceitação de slugs Unicode existentes no conteúdo histórico.
+
+A solução foi reimplementada pelo Assistente a partir de `main` na branch `feat/article-likes-assistant-review`, mantendo o D1 já criado e sem criar Worker separado.
+
+### Estado da frente
+- D1 `cpc-article-likes`: preservado.
+- Binding `ARTICLE_LIKES_DB`: configurado em `wrangler.toml`.
+- Migration `0001_article_likes.sql`: presente.
+- `/api/article-like`: persistente, idempotente e sem contador visível.
+- UI: coração sem texto, com estados acessível/ativo/loading e mesma base visual do Partilhar.
+- `main`: intacta; nenhum merge executado.
+
+### Validação local do código
+- Sintaxe do `_worker.js` validada.
+- Sintaxe dos 3 scripts de `noticia.html` validada.
+- Unicidade do schema e validação de slug verificadas por inspeção.
+
+### Próxima etapa real
+Validar o Preview da nova branch e confirmar o binding D1 efetivo no deployment. Essa validação externa é a única parte que pode justificar Codex; não usar Codex para editar GitHub.
+
+**Estado:** FASE 2 — engagement persistente em implementação corrigida; aguardando validação externa da nova branch antes de fechar a frente.
+
