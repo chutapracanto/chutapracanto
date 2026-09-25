@@ -76,6 +76,10 @@
 
 
 
+    .featured-category-buttons {
+      display: contents;
+    }
+
     .filter-btn {
 
       background-color: var(--card-bg);
@@ -657,6 +661,7 @@
 
         <div class="filter-pills">
           <button class="filter-btn active" aria-pressed="true" onclick="filtrarNoticias('todos', this)">Todas</button>
+          <div class="featured-category-buttons" id="featuredCategoryButtons" aria-label="Categorias principais"></div>
           <div class="dropdown-wrapper" id="dropdownWrapper">
             <button class="filter-btn" id="categoryDropdownToggle" type="button" aria-expanded="false" aria-label="Mais categorias" onclick="toggleDropdown(event)">
               Mais <i class="fa-solid fa-chevron-down" style="font-size: 0.65rem;"></i>
@@ -767,10 +772,32 @@
       return String(texto || '').trim().toLocaleLowerCase('pt-PT').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
     }
 
+    const CATEGORIAS_EM_DESTAQUE = [
+      'SL Benfica',
+      'FC Porto',
+      'Sporting CP',
+      'Liga Portugal Betclic',
+      'UEFA Champions League',
+      'Seleção Nacional'
+    ];
+
+    function criarBotaoCategoria(categoria, classe = 'dropdown-item') {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = classe;
+      button.setAttribute('aria-pressed', 'false');
+      button.textContent = categoria.label;
+      if (categoria.id) button.dataset.categoryId = categoria.id;
+      button.addEventListener('click', () => filtrarNoticias(categoria.label, button));
+      return button;
+    }
+
     function renderizarCategorias(categorias) {
       const menu = document.getElementById('categoryDropdownMenu');
-      if (!menu) return;
+      const destaque = document.getElementById('featuredCategoryButtons');
+      if (!menu || !destaque) return;
       menu.replaceChildren();
+      destaque.replaceChildren();
       const categoriasUnicas = new Map();
       (Array.isArray(categorias) ? categorias : []).forEach(item => {
         const label = String(item?.label || '').trim();
@@ -779,18 +806,17 @@
           categoriasUnicas.set(chave, { ...item, label });
         }
       });
-      categoriasUnicas.forEach(categoria => {
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'dropdown-item';
-        button.setAttribute('aria-pressed', 'false');
-        button.textContent = categoria.label;
-        if (categoria.id) button.dataset.categoryId = categoria.id;
-        button.addEventListener('click', () => filtrarNoticias(categoria.label, button));
-        menu.appendChild(button);
+      const destaques = new Set(CATEGORIAS_EM_DESTAQUE.map(normalizarCategoria));
+      CATEGORIAS_EM_DESTAQUE.forEach(label => {
+        const categoria = categoriasUnicas.get(normalizarCategoria(label));
+        if (categoria) destaque.appendChild(criarBotaoCategoria(categoria, 'filter-btn'));
+      });
+      categoriasUnicas.forEach((categoria, chave) => {
+        if (destaques.has(chave)) return;
+        menu.appendChild(criarBotaoCategoria(categoria));
       });
       const wrapper = document.getElementById('dropdownWrapper');
-      if (wrapper) wrapper.hidden = categoriasUnicas.size === 0;
+      if (wrapper) wrapper.hidden = menu.children.length === 0;
     }
 
     function obterBotoesCategoria() {
