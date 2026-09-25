@@ -634,7 +634,7 @@ Os pedidos UX apresentados para o sticky/header e o botão de gosto foram reconc
 
 **Estado:**
 - implementação anterior (#29/#30) estava mergeada, mas não cumpria visualmente todos os requisitos pedidos;
-- correção adicional foi aplicada na branch `feat/article-likes-assistant-review`;
+- correção adicional foi aplicada na branch `feat/article-likes-sticky-final`;
 - ainda **NÃO está em main nem em produção**;
 - validação browser final continua necessária antes de merge.
 
@@ -672,5 +672,5 @@ A pesquisa recente sobre publishing desportivo aponta para maior valor de experi
 ### Ordem operacional atual
 1. Validar browser do sticky/header corrigido.
 2. Validar browser/API/D1 do PR #36.
-3. Se a validação passar, mergear #35 e validar deployment de produção.
+3. Se a validação passar, mergear #36 e validar deployment de produção.
 4. Separadamente, resolver a dependência do host Framer histórico e então aplicar/testar os 213 redirects.
