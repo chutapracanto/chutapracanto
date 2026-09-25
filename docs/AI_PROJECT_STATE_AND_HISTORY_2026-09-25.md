@@ -1593,3 +1593,27 @@ Importante: os 107 slugs coincidentes **não são classificados automaticamente 
 - Não foi feita ainda qualquer importação automática dos 56 candidatos nem atualização em massa dos 107 slugs coincidentes.
 - Não foi inventado nenhum conteúdo.
 - O próximo passo obrigatório é a reconciliação final dos candidatos, com validação suficiente para decidir por artigo.
+
+
+## 45. CORREÇÃO DA RECONCILIAÇÃO FRAMER — 2026-09-25
+
+A análise anterior que classificava os 107 slugs coincidentes como possíveis duplicados estava incompleta e foi corrigida.
+
+### Evidência atual
+- O índice atual tem **238 entradas**.
+- **180 entradas** do índice estão datadas de 05/08/2026 (incluindo a grande maioria do lote Framer histórico); este facto explica as 107 coincidências por slug.
+- Entre os **163 artigos Framer publicados depois de 22/08**, existem:
+  - **107** com o mesmo slug de uma entrada antiga do índice, mas essa entrada está em **05/08/2026**;
+  - **56** sem qualquer slug correspondente no índice.
+- Portanto, a coincidência de slug **não prova que os 107 artigos pós-22/08 estejam publicados no `.com`**.
+- A conclusão operacional correta é: **os 163 artigos pós-22/08 permanecem candidatos de recuperação/reconciliação**.
+
+### Correção documental
+- O inventário anterior de apenas 56 candidatos foi removido por poder induzir a conclusão errada de que só 56 artigos precisavam de análise.
+- Foi criado o inventário canónico provisório:
+  - `docs/framer/framer-post-22-08-reconciliation-2026-09-25.json`
+  - contém os 163 registos pós-22/08 e indica se existe apenas coincidência de slug com a entrada antiga de 05/08 ou se não existe no índice.
+- Não houve importação de conteúdo com base nesta análise.
+
+### Próxima validação obrigatória
+Os 163 devem ser comparados com o conteúdo efetivo dos Markdown atuais e com o comportamento de publicação/ordenamento do site. A regra de decisão não será `slug == slug`; será necessário determinar, por artigo, se o conteúdo pós-22/08 já está efetivamente representado no `.com`, se apenas existe uma versão antiga, ou se está ausente. Só depois se prepara a migração.
