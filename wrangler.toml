@@ -3,3 +3,9 @@ pages_build_output_dir = "."
 compatibility_date = "2026-09-16"
 
 # Cloudflare Pages
+
+[[d1_databases]]
+binding = "ARTICLE_LIKES_DB"
+database_name = "cpc-article-likes"
+database_id = "ba093005-9101-43f4-98fa-69d913edb09c"
+migrations_dir = "migrations"
