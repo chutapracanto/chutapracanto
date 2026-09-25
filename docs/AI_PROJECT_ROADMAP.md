@@ -512,3 +512,16 @@ Backlog prioritário:
 - importação histórica Framer já concluída;
 - PRs fechadas sem merge;
 - testes/abordagens que já falharam sem hipótese nova.
+
+## 19. ATUALIZAÇÃO OPERACIONAL — 2026-09-25 — AÇÃO DE GOSTO/CORAÇÃO
+
+A frente de UX editorial avançou após pesquisa de padrões de engagement em futebol/editorial.
+
+- PR #33 mergeada em `main`: `eb76d46beda2a2b1bf762fec2a5776480e80dfca`.
+- Reação de coração/gosto junto à partilha.
+- Persistência local por artigo e eventos de analytics quando disponíveis.
+- Sem backend/contador público nesta primeira versão.
+- 0 PRs abertas após o merge.
+- Produção ainda não foi validada por HTTP nesta sessão porque o domínio externo não está acessível ao ambiente atual.
+
+**Estado:** FASE 2 — UX editorial em execução; validação externa de produção permanece pendente.
