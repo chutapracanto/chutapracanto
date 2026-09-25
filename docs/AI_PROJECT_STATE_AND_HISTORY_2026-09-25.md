@@ -1849,3 +1849,41 @@ O inventário `docs/framer/framer-url-redirect-inventory-2026-09-25.json` está 
 A única dependência que precisa do Codex neste momento é a inspeção da sessão Cloudflare/Dashboard/CLI para os pontos 1–3 acima. Não criar tabela, endpoint, PR ou merge nesta inspeção.
 
 **Estado:** FASE 2 — infraestrutura de engagement em preparação; PR #33 é provisória, não final. Worker separado antigo: confirmado como inexistente. D1: ainda não verificado. Supabase: não ligado.
+
+## 54. AUDITORIA DA PR #34 E REIMPLEMENTAÇÃO CONTROLADA DO ENGAGEMENT — 2026-09-25
+
+A PR #34 foi auditada diretamente no GitHub antes de qualquer merge.
+
+### Resultado da auditoria
+- PR #34: aberta, não mergeada, head `140a3a219bf9bf4f2a5f46b6071f67823dc957b7`.
+- Alterações: `_worker.js`, `noticia.html`, `wrangler.toml` e `migrations/0001_article_likes.sql`.
+- A implementação funcional demonstrada no Preview cobre status, like, idempotência, unlike e persistência em D1.
+- Foram identificados dois pontos a corrigir antes de qualquer promoção: o botão de gosto não usava exatamente a base visual do botão Partilhar; e a validação do endpoint aceitava apenas slugs ASCII com hífen, incompatível com slugs Unicode existentes no conteúdo histórico.
+- O contador permanece apenas na resposta interna da API; não é renderizado na UI.
+
+### Decisão
+A PR #34 não será mergeada. O trabalho tecnicamente aproveitável foi reimplementado pelo Assistente numa branch própria a partir de `main`, preservando o D1 já criado no Cloudflare e sem criar outro Worker.
+
+Branch: `feat/article-likes-assistant-review`
+
+A reimplementação mantém:
+- D1 `cpc-article-likes` e binding `ARTICLE_LIKES_DB`;
+- unicidade `(article_slug, visitor_hash)`;
+- hash SHA-256 do identificador anónimo no servidor;
+- API `/api/article-like` com `status`, `like` e `unlike`;
+- validação de origem/content-type;
+- estado acessível com `aria-pressed`, `aria-busy`, `disabled` e live region invisível;
+- coração sem texto/contador visível;
+- persistência do identificador anónimo apenas no navegador;
+- eventos de analytics somente quando a alteração de estado é efetiva.
+
+### Validação executada
+- `_worker.js`: sintaxe JavaScript validada após remover apenas o wrapper `export default` para teste estático.
+- `noticia.html`: os 3 blocos `<script>` foram validados sintaticamente.
+- Estrutura do botão: sem label visível; base visual partilhada com `.share-button`.
+- Schema D1: PK composta garante idempotência por artigo/visitante.
+- Nenhuma alteração foi feita em `main` e nenhum merge foi executado.
+
+### Estado
+**FASE 2 — engagement persistente: implementação corrigida pronta para Preview; promoção para produção depende da validação externa final do deployment/Cloudflare.**
+
