@@ -1860,7 +1860,7 @@ Pedidos da utilizadora reconciliados com o GitHub real:
 - Framer: encaminhar URLs históricas para o destino equivalente no .com; inventário 213/213 já concluído, execução ainda dependente de controlo verificável do host/projeto Framer antigo.
 
 Estado técnico:
-- PR #35 está aberta e contém a implementação D1 do coração + correção adicional do sticky/header.
+- PR #36 está aberta e contém a implementação D1 do coração + correção adicional do sticky/header.
 - A PR #35 ainda não foi mergeada; portanto estas alterações não são produção.
 - PR #33 continua classificada como implementação transitória/localStorage.
 - PR #34 está fechada sem merge.
