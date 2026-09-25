@@ -525,3 +525,9 @@ A frente de UX editorial avançou após pesquisa de padrões de engagement em fu
 - Produção ainda não foi validada por HTTP nesta sessão porque o domínio externo não está acessível ao ambiente atual.
 
 **Estado:** FASE 2 — UX editorial em execução; validação externa de produção permanece pendente.
+
+## 20. ATUALIZAÇÃO OPERACIONAL — 2026-09-25 — INVENTÁRIO DE SLUGS
+
+Foi identificado um conjunto residual de **3 slugs/paths com caracteres zero-width** no conteúdo histórico. Não foram alterados nesta fase porque a correção exige compatibilidade de URLs e deve ser integrada no plano de normalização/redirects.
+
+**Estado:** inventariado; não alterar URLs canónicas até existir estratégia de compatibilidade.
