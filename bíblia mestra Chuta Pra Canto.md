@@ -4988,3 +4988,10 @@ A área futura de dados/API de competições permanece uma fase estrutural ofici
 
 
 > **Correção de escopo da migração Framer (2026-09-25):** a documentação histórica de “importação concluída” refere-se ao lote efetivamente validado em 24/09 (213 URLs únicas, 179 importadas, 34 duplicadas/ignoradas, 0 falhas). Não deve ser interpretada como prova de que todo o conteúdo publicado no Framer após 22/08/2026 foi migrado. O conteúdo posterior do Framer fica como recuperação pendente até ser identificado, comparado com o GitHub e validado. Ver ledger §40.
+
+
+## PROTOCOLO DE EXECUÇÃO E BLOQUEIOS — 2026-09-25
+
+A execução operacional detalhada foi consolidada em `docs/AI_EXECUTION_PROTOCOL.md`. Este protocolo passa a complementar as Rules e a Bíblia.
+
+Regra central: **UM BLOQUEIO NÃO É UM RESULTADO.** Uma IA não deve limitar-se a identificar uma dependência externa e parar. Deve executar tudo o que estiver ao seu alcance e, quando algo depender da Rute ou do Codex, transformar essa dependência em instruções concretas e retomáveis.
