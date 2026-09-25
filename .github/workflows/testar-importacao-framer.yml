@@ -1,4 +1,5 @@
 name: Testar importação histórica do Framer
+# [IMPORT-FRAMER-FORMATTING-REPAIR] trigger
 
 on:
   push:
