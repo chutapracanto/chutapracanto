@@ -1838,11 +1838,18 @@ export default {
       const assetResponse =
         await env.ASSETS.fetch(request);
 
+      const responseNoticiasInicial =
+        await prepararShellNoticiasInicial(
+          request,
+          env,
+          assetResponse
+        );
+
       const responseInicial =
         await prepararShellArtigoInicial(
           request,
           env,
-          assetResponse
+          responseNoticiasInicial
         );
 
       const responseComPartilha =
