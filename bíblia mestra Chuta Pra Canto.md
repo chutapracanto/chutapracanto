@@ -1,6 +1,6 @@
 # CHUTA PRA CANTO — BÍBLIA MESTRA DO PROJETO
 ## Documento de continuidade IA → IA
-**Data de consolidação:** 2026-09-24  
+**Data de consolidação/reconciliação:** 2026-09-25  
 **Repositório:** `chutapracanto/chutapracanto`  
 **Produção:** `main` → `https://chutapracanto.com`
 
@@ -16,6 +16,22 @@
 > 5. memória/conversas antigas.
 >
 > As duas bíblias originais e o handoff continuam no repositório como arquivo histórico. **Não apagar nem tratar como lixo.** Esta Bíblia existe para evitar que uma nova IA tenha de reconstruir o contexto a partir de vários documentos.
+
+
+> ## ESTADO VIGENTE — RECONCILIAÇÃO 2026-09-25
+> Esta secção é uma sobreposição operacional à documentação histórica abaixo. A Bíblia Mestra já consolidava as Bíblias da 1.ª e 2.ª conversas e o handoff da 3.ª; nesta atualização foi reconciliada com o ledger e com o estado real mais recente do GitHub.
+>
+> **Conversas/documentação consideradas:** 1.ª Bíblia + 2.ª Bíblia + Bíblia Mestra anterior + handoff da 3.ª conversa + ledger/documentação produzida pela 4.ª conversa + GitHub atual.
+>
+> **Estado real vence sempre:** o GitHub atual e as Rules prevalecem sobre qualquer descrição histórica.
+>
+> **Atualização crítica:** a PR #25 está fechada sem merge. A primeira passagem de LCP foi reaplicada sobre a main atual através da **PR #26, que foi mergeada**, e está integrada em produção. Não voltar a tratar a #25 como trabalho pendente ou produção.
+>
+> O LCP first pass está **implementado**, mas não deve ser descrito como uma melhoria quantitativa comprovada. O CLS continua **aberto sem causa causalmente comprovada**. A validação pós-merge de produção foi feita e confirmou os percursos principais com HTTP 200 e conteúdo visível. A indexação real no Google Search Console continua não medida.
+>
+> O arquivo Framer continua fechado: 213 URLs únicas, 179 importadas, 34 duplicadas/ignoradas, 0 falhas, 233 Markdown finais e 241 URLs no sitemap no fecho da importação. Auditorias posteriores podem ter alterado contagens de índice/sitemap; para números atuais, consultar o GitHub real/ledger.
+>
+> A 4.ª conversa introduziu ainda o **ledger operacional** e regras específicas para Codex. Essas estruturas passam a fazer parte do sistema de continuidade: não são alternativas à Bíblia, mas complementos.
 
 ---
 
@@ -55,28 +71,19 @@ Estas áreas não precisam de ser reabertas ou refeitas sem nova necessidade con
 - AdSense técnico preparado, mas aprovação/operação ainda não concluídas.
 - Search Console/Google News ainda são fases futuras.
 
-### ATIVO AGORA
-**Performance mensurável / PR #25.**
+### ESTADO ATUAL / ÚLTIMA FASE CONCLUÍDA
 
-PR #25:
-- título: `perf: primeira passagem de LCP mobile`;
-- branch: `perf-lcp-first-pass`;
-- aberta;
-- não mergeada;
-- head atual conhecido: `5e1ec62ed59c98394956b0cc6010eed4969f273c`;
-- base original: `1b78f71fc2b15d8766def78df0b89ea9d05e6f21`;
-- a main atual já avançou depois dessa base, portanto **não assumir que a PR está atualizada/mergeável**;
-- estado atual: **não fazer merge ainda**.
+A primeira passagem de LCP foi reaplicada sobre a main atual pela **PR #26**, que foi mergeada. A PR #25 original está fechada sem merge e não representa produção.
 
-Problema em aberto:
-- o shell inicial do artigo foi comprovado em HTML RAW;
-- não existe duplicação do shell após JavaScript;
-- LCP melhorou em várias medições;
-- permanece um **CLS 0,571** numa medição Lighthouse desktop de artigo;
-- a causa temporal desse CLS ainda não foi comprovada;
-- a medição PSI/Lighthouse de Opinião que deu bons números é inválida porque carregou uma mensagem de erro em vez do artigo;
-- o último diagnóstico externo pediu um Chrome Performance trace para identificar o shift e investigar `--article-progress`;
-- não houve alteração de código nesse último diagnóstico.
+Estado técnico:
+- primeira passagem de LCP: **IMPLEMENTADA EM PRODUÇÃO**;
+- melhoria quantitativa before/after: **NÃO COMPROVADA**;
+- CLS: **ABERTO**, sem causa temporal/casual comprovada;
+- produção pós-merge: **VALIDADA** nos percursos principais;
+- SEO técnico básico: **IMPLEMENTADO/AUDITADO**;
+- indexação real no Google Search Console: **ABERTA / NÃO MEDIDA**.
+
+Não reabrir automaticamente a performance. Qualquer nova investigação deve nascer de uma hipótese concreta e de uma decisão que dependa dessa evidência.
 
 ### ÚLTIMO PONTO DE CONTINUIDADE
 A última ação desta linha de trabalho foi enviar ao Codex um prompt para:
@@ -4904,6 +4911,60 @@ Se houver dependência externa real:
 - depois retomar a validação.
 
 FIM DO HANDOFF
+
+
+
+# 30. PROTOCOLO AUTOMÁTICO DE EXECUÇÃO E MEMÓRIA — 2026-09-25
+
+Este protocolo existe especificamente para evitar o padrão “falhou → desistiu → avançou para outra coisa” e o padrão “dizer qual é o próximo passo → parar → esperar que a utilizadora mande continuar”.
+
+## Antes de responder à utilizadora
+A IA deve fazer internamente esta verificação:
+1. A tarefa pedida está concluída de facto?
+2. Existe uma ação seguinte autónoma e segura?
+3. Existe uma ferramenta disponível para executar essa ação?
+4. Existe uma falha corrigível dentro do escopo?
+5. Existe alguma experiência anterior que torne uma repetição inútil?
+
+### Se a resposta for “sim” à ação autónoma
+**Executar imediatamente. Não responder ainda.**
+
+### Se houver erro dentro do escopo
+Não transformar o erro num “próximo passo” para a utilizadora.
+- identificar a falha;
+- registar evidência;
+- corrigir se estiver ao alcance;
+- validar novamente;
+- se a abordagem estiver invalidada, procurar a próxima abordagem tecnicamente diferente dentro do mesmo objetivo;
+- só abandonar quando existir razão objetiva para abandonar.
+
+### Se houver dependência externa real
+Parar apenas no ponto exato dessa dependência, explicar o que falta e deixar instrução acionável. Quando a dependência for resolvida, retomar a cadeia de execução.
+
+### Nunca fazer
+- “O próximo passo é…”, seguido de paragem, quando esse passo pode ser executado pela IA;
+- perguntar “queres que eu siga?” quando a autorização geral já cobre a ação;
+- pedir à utilizadora para escolher entre ações técnicas que as Rules/roadmap já permitem decidir;
+- saltar para outra tarefa apenas porque a tarefa atual encontrou um erro;
+- declarar “feito” sem validação adequada;
+- tratar “deploy successful” como validação funcional.
+
+## Registo automático
+Depois de cada ciclo relevante:
+- **implementação:** registar o que mudou e como foi validado;
+- **falha:** registar tentativa, erro, evidência e estado;
+- **correção:** registar causa e resultado;
+- **abando/adiamento:** registar motivo e se pode ser retomado;
+- **decisão:** registar a regra/decisão e onde passa a vigorar.
+
+A utilizadora não deve precisar de pedir estas atualizações.
+
+## Hierarquia operacional
+- GitHub/produção real = estado factual atual;
+- Rules = regras permanentes;
+- Bíblia Mestra = contexto e arquitetura consolidada;
+- Ledger = memória de execução, experiências e decisões;
+- Bíblias 1/2 e handoffs = arquivo histórico.
 
 
 ---
