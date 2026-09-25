@@ -156,6 +156,29 @@ jobs:
 
                   frontmatter = match.group(1)
 
+                  # Reparação de dados históricos importados do Framer:
+                  # alguns artigos tinham o corpo inteiro colado ao campo author.
+                  # O conteúdo correto já existe abaixo do frontmatter; aqui corrigimos
+                  # apenas o metadado, sem tocar no corpo editorial.
+                  author_match = re.search(
+                      r"^\\s*author\\s*:\\s*(.*?)\\s*$",
+                      frontmatter,
+                      re.MULTILINE
+                  )
+                  if author_match:
+                      author_value = parse_scalar(author_match.group(1))
+                      if (
+                          isinstance(author_value, str)
+                          and author_value.startswith("ChutaPraCanto ")
+                          and len(author_value) > 80
+                      ):
+                          repaired_frontmatter = frontmatter[:author_match.start(1)] + '"ChutaPraCanto"' + frontmatter[author_match.end(1):]
+                          if repaired_frontmatter != frontmatter:
+                              text = text.replace(frontmatter, repaired_frontmatter, 1)
+                              path.write_text(text, encoding="utf-8")
+                              frontmatter = repaired_frontmatter
+                              print(f"Author reparado: {path}")
+
                   slug = field(frontmatter, ["slug"]) or path.stem
                   title = field(frontmatter, ["title"]) or "Sem título"
                   subtitle = field(
@@ -229,6 +252,16 @@ jobs:
 
           noticias.sort(key=sort_timestamp, reverse=True)
 
+          invalid_authors = [
+              item for item in noticias
+              if isinstance(item.get("author"), str) and len(item["author"]) > 80
+          ]
+          if invalid_authors:
+              sample = ", ".join(item["slug"] for item in invalid_authors[:5])
+              raise ValueError(
+                  f"Metadados de autor inválidos ({len(invalid_authors)}). Exemplos: {sample}"
+              )
+
           if taxonomy_changed:
               Path("content/taxonomia.json").write_text(
                   json.dumps(taxonomy, ensure_ascii=False, indent=2) + "\n",
@@ -280,7 +313,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add content/noticias-index.json content/taxonomia.json sitemap.xml
+          git add content/noticias content/opiniao content/noticias-index.json content/taxonomia.json sitemap.xml
           if git diff --cached --quiet; then
             echo "Índice já está atualizado."
             exit 0
