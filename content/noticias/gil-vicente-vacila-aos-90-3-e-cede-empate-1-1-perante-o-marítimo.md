@@ -10,20 +10,21 @@ image: "https://framerusercontent.com/images/LYVjLsiuwyEWs0kP0pe27CIW1Q.jpg?widt
 ---
 
 
-O regresso do Gil Vicente ao EstÃ¡dio Cidade de Barcelos teve um sabor amargo e injusto. A equipa de LuÃ­s Pinto dominou, criou ocasiÃµes soberbas e adiantou-se no marcador com justiÃ§a, mas pagou caro o desperdÃ­cio ofensivo ao ver o MarÃ­timo arrancar um empate (1-1) jÃ¡ em perÃ­odo de compensaÃ§Ã£o, num golo de Israel Ayuma que gelou os mais de cinco mil adeptos nas bancadas.
 
-â**Soberania gilista, o mÃ­ssil de Murilo e a obra-prima falhada de Santi GarcÃ­a**
+O regresso do Gil Vicente ao Estádio Cidade de Barcelos teve um sabor amargo e injusto. A equipa de Luís Pinto dominou, criou ocasiões soberbas e adiantou-se no marcador com justiça, mas pagou caro o desperdício ofensivo ao ver o Marítimo arrancar um empate (1-1) já em período de compensação, num golo de Israel Ayuma que gelou os mais de cinco mil adeptos nas bancadas.
 
-âApÃ³s a derrota na Luz, o Gil Vicente entrou em campo com rotaÃ§Ã£o alta e assumiu o controlo absoluto dos ritmos de jogo frente aos insulares de Mitchell Van der Gaag:
+**Soberania gilista, o míssil de Murilo e a obra-prima falhada de Santi García**
 
-- â**Desenho tÃ¡tico Ã  esquerda e bomba no miolo (18'):** Andreas Lausen, imperial a ditar tempos na mediarredores, lanÃ§ou Gil Martins sobre o corredor esquerdo. O jovem extremo serviu Murilo Souza no coraÃ§Ã£o da Ã¡rea, que fuzilou Fran Vieites Ã  lei da bomba para o 1-0.
-- â**Avalanche de ocasiÃµes:** O golo libertou os galos para momentos de grande nÃ­vel. HÃ©ctor HernÃ¡ndez falhou a baliza apÃ³s incursÃ£o venenosa de Ricardo Esgaio, Murilo viu o bis anulado por fora de jogo e Santi GarcÃ­a esteve perto de assinar o golo da jornada: tirou Guzzo do caminho com um tÃºnel brilhante e disparou uma bomba de fora da Ã¡rea que roÃ§ou o travessÃ£o de Vieites.
-- â**ReaÃ§Ã£o insÃ³lita antes do descanso:** O MarÃ­timo sÃ³ respirou nos instantes finais da primeira parte, ameaÃ§ando o empate em cabeceamentos de Guzzo e Romain Correia, travados por Buatu e LucÃ£o.
+Após a derrota na Luz, o Gil Vicente entrou em campo com rotação alta e assumiu o controlo absoluto dos ritmos de jogo frente aos insulares de Mitchell Van der Gaag:
 
-â**Ajuste insular, gestÃ£o inconclusiva e o balde de Ã¡gua fria no fecho**
+- **Desenho tático à esquerda e bomba no miolo (18'):** Andreas Lausen, imperial a ditar tempos na mediarredores, lançou Gil Martins sobre o corredor esquerdo. O jovem extremo serviu Murilo Souza no coração da área, que fuzilou Fran Vieites à lei da bomba para o 1-0.
+- **Avalanche de ocasiões:** O golo libertou os galos para momentos de grande nível. Héctor Hernández falhou a baliza após incursão venenosa de Ricardo Esgaio, Murilo viu o bis anulado por fora de jogo e Santi García esteve perto de assinar o golo da jornada: tirou Guzzo do caminho com um túnel brilhante e disparou uma bomba de fora da área que roçou o travessão de Vieites.
+- **Reação insólita antes do descanso:** O Marítimo só respirou nos instantes finais da primeira parte, ameaçando o empate em cabeceamentos de Guzzo e Romain Correia, travados por Buatu e Lucão.
 
-âO intervalo trouxe um MarÃ­timo mais agressivo, impulsionado pela entrada de Nilton Varela a dar largura e profundidade:
+**Ajuste insular, gestão inconclusiva e o balde de água fria no fecho**
 
-- â**Susto de Maxime e resposta de Gil:** Maxime DomÃ­nguez quase marcou Ã  antiga equipa num remate travado por voo de LucÃ£o, enquanto Gil Martins continuou a fustigar a defensiva madeirense, sÃ³ travado por uma grande intervenÃ§Ã£o de JuliÃ£o.
-- â**Refresco sem fecho de jogo:** Com as entradas de Kaba e Joelson Fernandes, os gilistas estabilizaram a partida e voltaram a encostar o MarÃ­timo Ã  sua Ã¡rea, mas Elimbi desperdiÃ§ou a oportunidade soberba para selar o 2-0.
-- â**Castigo mÃ¡ximo (90+3'):** A incapacidade de matar o jogo acabou por custar caro. Na Ãºltima rÃ©stia de crenÃ§a insular, a bola sobrou na Ã¡rea para Israel Ayuma, que disparou forte e sem hipÃ³teses para LucÃ£o, selando uma igualdade dramÃ¡tica.
+O intervalo trouxe um Marítimo mais agressivo, impulsionado pela entrada de Nilton Varela a dar largura e profundidade:
+
+- **Susto de Maxime e resposta de Gil:** Maxime Domínguez quase marcou à antiga equipa num remate travado por voo de Lucão, enquanto Gil Martins continuou a fustigar a defensiva madeirense, só travado por uma grande intervenção de Julião.
+- **Refresco sem fecho de jogo:** Com as entradas de Kaba e Joelson Fernandes, os gilistas estabilizaram a partida e voltaram a encostar o Marítimo à sua área, mas Elimbi desperdiçou a oportunidade soberba para selar o 2-0.
+- **Castigo máximo (90+3'):** A incapacidade de matar o jogo acabou por custar caro. Na última réstia de crença insular, a bola sobrou na área para Israel Ayuma, que disparou forte e sem hipóteses para Lucão, selando uma igualdade dramática.

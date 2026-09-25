@@ -10,19 +10,20 @@ image: "https://framerusercontent.com/images/hwFb79vLhJvIOgj4Lnn86SCc1Y.jpg?widt
 ---
 
 
-âO Liverpool somou o primeiro triunfo na Premier League ao superar o Ipswich Town por 0-2 fora de portas. Num arranque de partida avassalador impulsionado pela inspiraÃ§Ã£o de Cody Gakpo e pela eficÃ¡cia de Alexander Isak, a formaÃ§Ã£o dos _reds_ resolveu o encontro nos primeiros dez minutos, sabendo depois gerir a reaÃ§Ã£o do conjunto orientado por Andoni Iraola.
 
-â**Arranque avassalador, bis de Isak e magia de Gakpo**
+O Liverpool somou o primeiro triunfo na Premier League ao superar o Ipswich Town por 0-2 fora de portas. Num arranque de partida avassalador impulsionado pela inspiração de Cody Gakpo e pela eficácia de Alexander Isak, a formação dos _reds_ resolveu o encontro nos primeiros dez minutos, sabendo depois gerir a reação do conjunto orientado por Andoni Iraola.
 
-âA entrada da equipa visitante em Portman Road desmantelou por completo a organizaÃ§Ã£o defensiva do recÃ©m-promovido Ipswich:
+**Arranque avassalador, bis de Isak e magia de Gakpo**
 
-- â**Selo de classe aos 6 minutos:** Cody Gakpo desmarcou Alexander Isak no corredor direito da grande Ã¡rea, com o avanÃ§ado sueco a disparar um remate fortÃ­ssimo sem hipÃ³teses de defesa para inaugurar o marcador.
-- â**Trivela artÃ­stica e bis consumado:** Aos 9 minutos, Gakpo recuou na construÃ§Ã£o e isolou Isak na esquerda com um passe de trivela. O internacional sueco tirou o adversÃ¡rio do caminho com classe e finalizou com frieza para o 0-2, fixando o bis pessoal.
-- â**PressÃ£o alta e erros do opositor:** A intensidade defensiva dos _reds_ provocou sucessivas perdas de bola no setor recuado do Ipswich, valendo ao conjunto da casa as intervenÃ§Ãµes do guarda-redes Kjell Scherpen a remates fora da Ã¡rea para evitar um resultado mais volumoso antes do intervalo.
+A entrada da equipa visitante em Portman Road desmantelou por completo a organização defensiva do recém-promovido Ipswich:
 
-â**GestÃ£o de ritmos na etapa complementar e reaÃ§Ã£o do Ipswich**
+- **Selo de classe aos 6 minutos:** Cody Gakpo desmarcou Alexander Isak no corredor direito da grande área, com o avançado sueco a disparar um remate fortíssimo sem hipóteses de defesa para inaugurar o marcador.
+- **Trivela artística e bis consumado:** Aos 9 minutos, Gakpo recuou na construção e isolou Isak na esquerda com um passe de trivela. O internacional sueco tirou o adversário do caminho com classe e finalizou com frieza para o 0-2, fixando o bis pessoal.
+- **Pressão alta e erros do opositor:** A intensidade defensiva dos _reds_ provocou sucessivas perdas de bola no setor recuado do Ipswich, valendo ao conjunto da casa as intervenções do guarda-redes Kjell Scherpen a remates fora da área para evitar um resultado mais volumoso antes do intervalo.
 
-âNo segundo tempo, a perda de intensidade do Liverpool permitiu a subida de rendimento da formaÃ§Ã£o visitada (que manteve o portuguÃªs Florentino LuÃ­s no banco):
+**Gestão de ritmos na etapa complementar e reação do Ipswich**
 
-- â**Aumento de audÃ¡cia do Ipswich:** Com a queda de rendimento de Florian Wirtz na tomada de decisÃ£o no Ãºltimo terÃ§o, o Ipswich encontrou espaÃ§o entre linhas atravÃ©s de Julio Enciso, criando dificuldades Ã  linha defensiva de Anfield e ao central JÃ©rÃ©my Jacquet.
-- â**SeguranÃ§a na baliza:** Alisson Becker foi chamado a intervir em momentos determinantes da segunda parte, segurando a vantagem conquistada nos instantes iniciais e selando os trÃªs pontos para a equipa de Liverpool.
+No segundo tempo, a perda de intensidade do Liverpool permitiu a subida de rendimento da formação visitada (que manteve o português Florentino Luís no banco):
+
+- **Aumento de audácia do Ipswich:** Com a queda de rendimento de Florian Wirtz na tomada de decisão no último terço, o Ipswich encontrou espaço entre linhas através de Julio Enciso, criando dificuldades à linha defensiva de Anfield e ao central Jérémy Jacquet.
+- **Segurança na baliza:** Alisson Becker foi chamado a intervir em momentos determinantes da segunda parte, segurando a vantagem conquistada nos instantes iniciais e selando os três pontos para a equipa de Liverpool.

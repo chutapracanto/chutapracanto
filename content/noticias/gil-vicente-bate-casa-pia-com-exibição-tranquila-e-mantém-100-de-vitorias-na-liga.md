@@ -10,20 +10,21 @@ image: "https://framerusercontent.com/images/lDRqeJx2nkOQNlbL0oegg67E0TI.jpg?wid
 ---
 
 
-O Gil Vicente regressou Ã  competiÃ§Ã£o no campeonato, apÃ³s o adiamento do duelo frente ao SC Braga, com um triunfo categÃ³rico sobre o Casa Pia por 2-0, no EstÃ¡dio Cidade de Barcelos. A turma de LuÃ­s Pinto impÃ´s o seu favoritismo e resolveu a partida ainda no primeiro tempo, perante um conjunto casapiano sem argumentos defensivos nem ofensivos para inverter o rumo dos acontecimentos.
 
-### âDomÃ­nio minhoto e golos de classe antes do descanso
+O Gil Vicente regressou à competição no campeonato, após o adiamento do duelo frente ao SC Braga, com um triunfo categórico sobre o Casa Pia por 2-0, no Estádio Cidade de Barcelos. A turma de Luís Pinto impôs o seu favoritismo e resolveu a partida ainda no primeiro tempo, perante um conjunto casapiano sem argumentos defensivos nem ofensivos para inverter o rumo dos acontecimentos.
 
-âA formaÃ§Ã£o barcelense entrou personalizada na partida e materializou a superioridade nos primeiros 45 minutos:
+### Domínio minhoto e golos de classe antes do descanso
 
-- â**Estreia a marcar (1-0):** Aos 30 minutos, Elimbi serviu HÃ©ctor HernÃ¡ndez no corredor direito, com o avanÃ§ado espanhol a aguentar o choque e a cruzar para Gil Martins. O jovem extremo portuguÃªs finalizou com uma picadinha de classe por cima de AndrÃ© Gomes, estreando-se a marcar no seu segundo jogo consecutivo como titular.
-- â**Calma da marca dos onze metros (2-0):** Em cima do apito para o intervalo, uma mÃ£o na bola inequÃ­voca de Lawrence Ofori dentro da Ã¡rea permitiu a HÃ©ctor HernÃ¡ndez cobrar a grande penalidade com enorme tranquilidade, deslocando o guarda-redes e dilatando a vantagem gilista.
+A formação barcelense entrou personalizada na partida e materializou a superioridade nos primeiros 45 minutos:
 
-### âGestÃ£o inteligente e controlo atÃ© ao apito final
+- **Estreia a marcar (1-0):** Aos 30 minutos, Elimbi serviu Héctor Hernández no corredor direito, com o avançado espanhol a aguentar o choque e a cruzar para Gil Martins. O jovem extremo português finalizou com uma picadinha de classe por cima de André Gomes, estreando-se a marcar no seu segundo jogo consecutivo como titular.
+- **Calma da marca dos onze metros (2-0):** Em cima do apito para o intervalo, uma mão na bola inequívoca de Lawrence Ofori dentro da área permitiu a Héctor Hernández cobrar a grande penalidade com enorme tranquilidade, deslocando o guarda-redes e dilatando a vantagem gilista.
 
-âNa etapa complementar, a postura do encontro sofreu poucas alteraÃ§Ãµes:
+### Gestão inteligente e controlo até ao apito final
 
-- â**Tentativa de resposta forasteira:** O Casa Pia ainda procurou subir no terreno atravÃ©s de incursÃµes de Abdu ContÃ© e Rochinha, mas sem conseguir colocar a baliza de LucÃ£o sob sobressalto real.
-- â**GestÃ£o e rotaÃ§Ã£o:** Com a partida controlada, LuÃ­s Pinto aproveitou para lanÃ§ar novos trunfos, promovendo a estreia de Diogo Prioste e dando minutos a Murilo Souza e Carlos Eduardo. HÃ©ctor HernÃ¡ndez dispÃ´s de oportunidades para bisar, enquanto Clau Mendes ainda ameaÃ§ou o tento de honra casapiano perto dos 80 minutos.
+Na etapa complementar, a postura do encontro sofreu poucas alterações:
 
-âCom este resultado, o Gil Vicente mantÃ©m o registo perfeito na Liga Portugal, somando seis pontos em dois jogos disputados (tendo ainda a partida em atraso frente ao SC Braga).
+- **Tentativa de resposta forasteira:** O Casa Pia ainda procurou subir no terreno através de incursões de Abdu Conté e Rochinha, mas sem conseguir colocar a baliza de Lucão sob sobressalto real.
+- **Gestão e rotação:** Com a partida controlada, Luís Pinto aproveitou para lançar novos trunfos, promovendo a estreia de Diogo Prioste e dando minutos a Murilo Souza e Carlos Eduardo. Héctor Hernández dispôs de oportunidades para bisar, enquanto Clau Mendes ainda ameaçou o tento de honra casapiano perto dos 80 minutos.
+
+Com este resultado, o Gil Vicente mantém o registo perfeito na Liga Portugal, somando seis pontos em dois jogos disputados (tendo ainda a partida em atraso frente ao SC Braga).

@@ -16,12 +16,13 @@ relatedSpotify: ""
 ---
 
 
-Ousmane Diomande estÃ¡ oficialmente de saÃ­da do Sporting CP. A SAD leonina confirmou esta segunda-feira, em comunicado enviado Ã  CMVM, o acordo com o Nottingham Forest para a transferÃªncia a tÃ­tulo definitivo do central costa-marfinense, num negÃ³cio selado nos **40 milhÃµes de euros**.
 
-âNa nota remetida ao regulador do mercado, o clube de Alvalade esclarece que assume os encargos com a intermediaÃ§Ã£o do negÃ³cio (1,5 milhÃµes de euros), ficando o pagamento relativo ao mecanismo de solidariedade repartido em partes iguais entre os dois emblemas.
+Ousmane Diomande está oficialmente de saída do Sporting CP. A SAD leonina confirmou esta segunda-feira, em comunicado enviado à CMVM, o acordo com o Nottingham Forest para a transferência a título definitivo do central costa-marfinense, num negócio selado nos **40 milhões de euros**.
 
-### âO legado de leÃ£o ao peito
+Na nota remetida ao regulador do mercado, o clube de Alvalade esclarece que assume os encargos com a intermediação do negócio (1,5 milhões de euros), ficando o pagamento relativo ao mecanismo de solidariedade repartido em partes iguais entre os dois emblemas.
 
-âAos 22 anos, o internacional costa-marfinense pÃµe fim a uma caminhada marcante de trÃªs Ã©pocas e meia em Alvalade. Recrutado em janeiro de 2023 por indicaÃ§Ã£o de RÃºben Amorim depois de ter saltado Ã  vista na II Liga ao serviÃ§o do Mafra, onde atuava por emprÃ©stimo do Midtjylland, Diomande nÃ£o demorou a impor a sua estampa fÃ­sica e qualidade tÃ©cnica na linha defensiva verde e branca.
+### O legado de leão ao peito
 
-âO defesa despede-se de Lisboa como figura influente do trajeto recente do clube: soma **132 jogos e 7 golos** de leÃ£o ao peito, deixando o seu nome associado Ã  conquista de **dois Campeonatos Nacionais e uma TaÃ§a de Portugal**.
+Aos 22 anos, o internacional costa-marfinense põe fim a uma caminhada marcante de três épocas e meia em Alvalade. Recrutado em janeiro de 2023 por indicação de Rúben Amorim depois de ter saltado à vista na II Liga ao serviço do Mafra, onde atuava por empréstimo do Midtjylland, Diomande não demorou a impor a sua estampa física e qualidade técnica na linha defensiva verde e branca.
+
+O defesa despede-se de Lisboa como figura influente do trajeto recente do clube: soma **132 jogos e 7 golos** de leão ao peito, deixando o seu nome associado à conquista de **dois Campeonatos Nacionais e uma Taça de Portugal**.

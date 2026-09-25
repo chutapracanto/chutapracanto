@@ -10,18 +10,19 @@ image: "https://framerusercontent.com/images/vTEfKKNBlkyDjDvhrhZMunj58T8.jpg?wid
 ---
 
 
-O Benfica voltou a agitar o mercado no fecho da janela de transferÃªncias ao garantir mais um talento de craveira internacional para o seu setor criativo. Claudio Echeverri foi formalmente apresentado como novo jogador das Ã¡guias, chegando Ã  Luz por emprÃ©stimo do Manchester City atÃ© ao tÃ©rmino da presente temporada. O acordo entre os dois clubes contempla uma opÃ§Ã£o de compra fixada nos 21 milhÃµes de euros, permitindo Ã  estrutura encarnada segurar em definitivo o passe da joia argentina caso decida acionar a clÃ¡usula no final da Ã©poca.
 
-â**Da consolidaÃ§Ã£o no River Plate Ã  rodagem nos palcos europeus**
+O Benfica voltou a agitar o mercado no fecho da janela de transferências ao garantir mais um talento de craveira internacional para o seu setor criativo. Claudio Echeverri foi formalmente apresentado como novo jogador das águias, chegando à Luz por empréstimo do Manchester City até ao término da presente temporada. O acordo entre os dois clubes contempla uma opção de compra fixada nos 21 milhões de euros, permitindo à estrutura encarnada segurar em definitivo o passe da joia argentina caso decida acionar a cláusula no final da época.
 
-âContratado pelos _citizens_ ao River Plate em 2024 por 18,5 milhÃµes de euros, o prodÃ­gio de 20 anos vinculado ao emblema britÃ¢nico atÃ© 2028 prossegue a sua rota de afirmaÃ§Ã£o no futebol europeu apÃ³s vivÃªncias em palcos de exigÃªncia mÃ¡xima:
+**Da consolidação no River Plate à rodagem nos palcos europeus**
 
-- â**Bagagem na Bundesliga e La Liga:** Na Ã©poca transata, Echeverri rodou ao serviÃ§o do Bayer Leverkusen e do Girona, somando minutos valiosos e adaptando-se Ã s dinÃ¢micas do futebol do Velho Continente.
-- â**Procura do palco ideal para explodir:** Sem espaÃ§o imediato no plantÃ£o estelar de Pep Guardiola, o internacional jovem argentino encontrou no projeto encarnado o contexto perfeito para assumir o protagonismo e libertar todo o seu potencial criativo.
+Contratado pelos _citizens_ ao River Plate em 2024 por 18,5 milhões de euros, o prodígio de 20 anos vinculado ao emblema britânico até 2028 prossegue a sua rota de afirmação no futebol europeu após vivências em palcos de exigência máxima:
 
-â**Duelo de magia no xadrez tÃ¡tico de Marco Silva**
+- **Bagagem na Bundesliga e La Liga:** Na época transata, Echeverri rodou ao serviço do Bayer Leverkusen e do Girona, somando minutos valiosos e adaptando-se às dinâmicas do futebol do Velho Continente.
+- **Procura do palco ideal para explodir:** Sem espaço imediato no plantão estelar de Pep Guardiola, o internacional jovem argentino encontrou no projeto encarnado o contexto perfeito para assumir o protagonismo e libertar todo o seu potencial criativo.
 
-âA incorporaÃ§Ã£o do criativo sul-americano traz virtuosismo, capacidade de aceleraÃ§Ã£o e critÃ©rio no Ãºltimo terÃ§o do terreno, reforÃ§ando o leque de opÃ§Ãµes de Marco Silva:
+**Duelo de magia no xadrez tático de Marco Silva**
 
-- â**ConcorrÃªncia feroz com Sudakov:** Echeverri chega a Lisboa com credenciais para disputar palmo a palmo a titularidade na posiÃ§Ã£o de '10' com Georgy Sudakov, elevando de forma assinalÃ¡vel a fasquia de qualidade no miolo.
-- â**Perfil de desequilÃ­brio puro:** Forte no drible em espaÃ§os curtos, virtuoso na visÃ£o de jogo e capitÃ£o de ideias no momento do passe, o argentino aporta o rasgo e a imprevisibilidade necessÃ¡rios para furar blocos defensivos recuados.
+A incorporação do criativo sul-americano traz virtuosismo, capacidade de aceleração e critério no último terço do terreno, reforçando o leque de opções de Marco Silva:
+
+- **Concorrência feroz com Sudakov:** Echeverri chega a Lisboa com credenciais para disputar palmo a palmo a titularidade na posição de '10' com Georgy Sudakov, elevando de forma assinalável a fasquia de qualidade no miolo.
+- **Perfil de desequilíbrio puro:** Forte no drible em espaços curtos, virtuoso na visão de jogo e capitão de ideias no momento do passe, o argentino aporta o rasgo e a imprevisibilidade necessários para furar blocos defensivos recuados.

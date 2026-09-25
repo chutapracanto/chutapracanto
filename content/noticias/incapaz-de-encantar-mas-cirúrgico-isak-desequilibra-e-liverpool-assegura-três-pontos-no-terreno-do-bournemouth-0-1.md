@@ -10,12 +10,13 @@ image: "https://framerusercontent.com/images/L9AviMnzULpv1ZI1FlTq5377cbw.jpg?wid
 ---
 
 
-O Liverpool saiu vitorioso da visita ao Vitality Stadium ao bater o Bournemouth por 0-1, num duelo caraterizado pela rigidez tÃ¡tica e escassez de rasgos ofensivos. Num encontro em que a vertente estratÃ©gica se sobrepÃ´s ao espetÃ¡culo, valeu a acuidade de Alexander Isak para desatar o nÃ³ e garantir o segundo triunfo da Ã©poca para a formaÃ§Ã£o forasteira.
 
-â**Bloqueio mÃºtuo no primeiro tempo e a estocada de Isak**
+O Liverpool saiu vitorioso da visita ao Vitality Stadium ao bater o Bournemouth por 0-1, num duelo caraterizado pela rigidez tática e escassez de rasgos ofensivos. Num encontro em que a vertente estratégica se sobrepôs ao espetáculo, valeu a acuidade de Alexander Isak para desatar o nó e garantir o segundo triunfo da época para a formação forasteira.
 
-âA partida desenrolou-se num registo de grande contenÃ§Ã£o e estudo, com as grandes decisÃµes guardadas para a segunda metade:
+**Bloqueio mútuo no primeiro tempo e a estocada de Isak**
 
-- â**Primeira parte amarrada:** A formaÃ§Ã£o da casa conseguiu acumular mais chegadas Ã s imediaÃ§Ãµes do terÃ§o final, mas esbarrou na falta de critÃ©rio no momento da definiÃ§Ã£o. Do lado dos _reds_, a produÃ§Ã£o ofensiva limitou-se a criar algum sobressalto atravÃ©s das bolas paradas batidas por Dominik Szoboszlai.
-- â**AceleraÃ§Ã£o decisiva de Gakpo e Isak (55'):** O regresso dos balneÃ¡rios trouxe um Liverpool mais pragmÃ¡tico na exploraÃ§Ã£o dos espaÃ§os. Pouco depois do minuto dez da etapa complementar, Cody Gakpo desequilibrou na asa lateral e serviu Alexander Isak, que rematou com precisÃ£o para inaugurar e fechar o marcador.
-- â**Controlo de contenÃ§Ã£o e situaÃ§Ã£o na tabela:** Em desvantagem, o Bournemouth ainda procurou adiantar blocos e assumir uma postura mais audaz, mas a organizaÃ§Ã£o defensiva visitante estancou todas as intenÃ§Ãµes sem permitir grandes calafrios. Com este resultado, o Liverpool eleva a sua conta pessoal para nove pontos e segura a invencibilidade na prova, enquanto a turma da casa continua sem festejar qualquer triunfo.
+A partida desenrolou-se num registo de grande contenção e estudo, com as grandes decisões guardadas para a segunda metade:
+
+- **Primeira parte amarrada:** A formação da casa conseguiu acumular mais chegadas às imediações do terço final, mas esbarrou na falta de critério no momento da definição. Do lado dos _reds_, a produção ofensiva limitou-se a criar algum sobressalto através das bolas paradas batidas por Dominik Szoboszlai.
+- **Aceleração decisiva de Gakpo e Isak (55'):** O regresso dos balneários trouxe um Liverpool mais pragmático na exploração dos espaços. Pouco depois do minuto dez da etapa complementar, Cody Gakpo desequilibrou na asa lateral e serviu Alexander Isak, que rematou com precisão para inaugurar e fechar o marcador.
+- **Controlo de contenção e situação na tabela:** Em desvantagem, o Bournemouth ainda procurou adiantar blocos e assumir uma postura mais audaz, mas a organização defensiva visitante estancou todas as intenções sem permitir grandes calafrios. Com este resultado, o Liverpool eleva a sua conta pessoal para nove pontos e segura a invencibilidade na prova, enquanto a turma da casa continua sem festejar qualquer triunfo.

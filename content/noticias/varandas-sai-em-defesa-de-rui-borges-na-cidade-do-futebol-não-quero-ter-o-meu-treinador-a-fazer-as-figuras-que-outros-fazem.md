@@ -10,21 +10,22 @@ image: "https://framerusercontent.com/images/NL5Ca6gBYTPt9efa28wgFOIpdQ.jpg?widt
 ---
 
 
-âÃ margem da segunda ediÃ§Ã£o dos _Portugal Football Globes_, na Cidade do Futebol, em Oeiras, o presidente do Sporting, Frederico Varandas, prestou declaraÃ§Ãµes aos jornalistas para abordar o momento desportivo da equipa principal. Perante a perda de seis pontos nas Ãºltimas jornadas, o lÃ­der leonino garantiu a continuidade absoluta do tÃ©cnico Rui Borges, destacou o seu palmarÃ©s e aproveitou para lanÃ§ar duras crÃ­ticas Ã  atitude dos clubes rivais.
 
-### â**ConfianÃ§a total na equipa tÃ©cnica e crÃ­ticas Ã  concorrÃªncia**
+À margem da segunda edição dos _Portugal Football Globes_, na Cidade do Futebol, em Oeiras, o presidente do Sporting, Frederico Varandas, prestou declarações aos jornalistas para abordar o momento desportivo da equipa principal. Perante a perda de seis pontos nas últimas jornadas, o líder leonino garantiu a continuidade absoluta do técnico Rui Borges, destacou o seu palmarés e aproveitou para lançar duras críticas à atitude dos clubes rivais.
 
-âFrederico Varandas assegurou que o lugar do treinador "nunca esteve em causa" e reforÃ§ou que a estrutura mantÃ©m inteira confianÃ§a no processo para alcanÃ§ar os objetivos da temporada a conquista do tÃ­tulo nacional e o apuramento para a Liga dos CampeÃµes:
+### **Confiança total na equipa técnica e críticas à concorrência**
 
-- â**Estatuto e histÃ³rico vitorioso:** O presidente lembrou o percurso de Rui Borges no clube, sublinhando que o tÃ©cnico jÃ¡ conquistou o campeonato, a dobradinha e assinou a melhor prestaÃ§Ã£o verde e branca na Liga dos CampeÃµes.
-- â**Recusa do discurso sobre arbitragens:** Varandas elogiou a dignidade do treinador ao nÃ£o utilizar fatores externos como desculpa para os maus resultados: _"Era tÃ£o fÃ¡cil o meu treinador nas duas Ãºltimas jornadas ir para a conferÃªncia de imprensa agarrar-se a coisas externas do clube, como outros treinadores e outras figuras fazem com as quais nÃ£o me identifico."_
-- â**Aviso Ã  navegaÃ§Ã£o:** O dirigente revelou que pede explicitamente a Rui Borges para nÃ£o abordar questÃµes de arbitragem e atirou: _"NÃ£o quero ter o meu treinador a fazer as figuras que outros fazem."_
-- â**GestÃ£o da contestaÃ§Ã£o:** Confrontado com as crÃ­ticas dos adeptos, o presidente desvalorizou a pressÃ£o e lembrou que as decisÃµes estruturais nÃ£o podem ser tomadas em funÃ§Ã£o do ruÃ­do das bancadas.
+Frederico Varandas assegurou que o lugar do treinador "nunca esteve em causa" e reforçou que a estrutura mantém inteira confiança no processo para alcançar os objetivos da temporada a conquista do título nacional e o apuramento para a Liga dos Campeões:
 
-### â**ValidaÃ§Ã£o do mercado e alerta para as desconcentraÃ§Ãµes individuais**
+- **Estatuto e histórico vitorioso:** O presidente lembrou o percurso de Rui Borges no clube, sublinhando que o técnico já conquistou o campeonato, a dobradinha e assinou a melhor prestação verde e branca na Liga dos Campeões.
+- **Recusa do discurso sobre arbitragens:** Varandas elogiou a dignidade do treinador ao não utilizar fatores externos como desculpa para os maus resultados: _"Era tão fácil o meu treinador nas duas últimas jornadas ir para a conferência de imprensa agarrar-se a coisas externas do clube, como outros treinadores e outras figuras fazem com as quais não me identifico."_
+- **Aviso à navegação:** O dirigente revelou que pede explicitamente a Rui Borges para não abordar questões de arbitragem e atirou: _"Não quero ter o meu treinador a fazer as figuras que outros fazem."_
+- **Gestão da contestação:** Confrontado com as críticas dos adeptos, o presidente desvalorizou a pressão e lembrou que as decisões estruturais não podem ser tomadas em função do ruído das bancadas.
 
-âNa anÃ¡lise ao rendimento da equipa, o lÃ­der do Sporting defendeu a construÃ§Ã£o do plantel e o futebol jogado, mas exigiu maior rigor defensivo aos atletas:
+### **Validação do mercado e alerta para as desconcentrações individuais**
 
-- â**Planeamento de verÃ£o cumprido:** Varandas frisou que o clube fez o mercado que pretendia e com antecipaÃ§Ã£o, dando o exemplo da adaptaÃ§Ã£o de novas soluÃ§Ãµes para o meio-campo: _"Hoje alguÃ©m fala do Hjulmand? JÃ¡ temos grandes jogadores ali."_
-- â**Qualidade de jogo vs. eficÃ¡cia:** O dirigente reiterou que a equipa joga bem, domina e cria muitas ocasiÃµes de golo, mas precisa de erradicar erros infantis.
-- â**Recado a Debast:** Sem panos quentes, Varandas apontou a necessidade de maior foco individual no relvado: _"NÃ£o podemos ter entradas como a do Debast, os jogadores tÃªm de evitar fazer autogolos."_
+Na análise ao rendimento da equipa, o líder do Sporting defendeu a construção do plantel e o futebol jogado, mas exigiu maior rigor defensivo aos atletas:
+
+- **Planeamento de verão cumprido:** Varandas frisou que o clube fez o mercado que pretendia e com antecipação, dando o exemplo da adaptação de novas soluções para o meio-campo: _"Hoje alguém fala do Hjulmand? Já temos grandes jogadores ali."_
+- **Qualidade de jogo vs. eficácia:** O dirigente reiterou que a equipa joga bem, domina e cria muitas ocasiões de golo, mas precisa de erradicar erros infantis.
+- **Recado a Debast:** Sem panos quentes, Varandas apontou a necessidade de maior foco individual no relvado: _"Não podemos ter entradas como a do Debast, os jogadores têm de evitar fazer autogolos."_

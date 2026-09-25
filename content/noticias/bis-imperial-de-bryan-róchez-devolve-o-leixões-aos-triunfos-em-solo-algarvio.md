@@ -10,14 +10,15 @@ image: "https://framerusercontent.com/images/hP1dUgdnjwurlYYohZSCgg4Ro38.webp?wi
 ---
 
 
-âO LeixÃµes rumou ao sul do paÃ­s e rubricou um triunfo personalizado no EstÃ¡dio Municipal de PortimÃ£o, impondo-se ao Portimonense por 0-2 em encontro referente Ã  4.Âª jornada da Liga Portugal 2 Meu Super. Numa manhÃ£ em que o pragmatismo e o discernimento ditaram leis, a figura da partida acabou por ser Bryan RÃ³chez, autor de um bis decisivo que devolveu o conjunto de Matosinhos ao caminho das vitÃ³rias.
 
-â**Inspirado em cima do descanso**
+O Leixões rumou ao sul do país e rubricou um triunfo personalizado no Estádio Municipal de Portimão, impondo-se ao Portimonense por 0-2 em encontro referente à 4.ª jornada da Liga Portugal 2 Meu Super. Numa manhã em que o pragmatismo e o discernimento ditaram leis, a figura da partida acabou por ser Bryan Róchez, autor de um bis decisivo que devolveu o conjunto de Matosinhos ao caminho das vitórias.
 
-âA fase inicial da contenda foi pautada por um registo cinzento, com ambos os conjuntos a revelarem acentuada timidez ofensiva e a manterem as balizas a salvo de grandes calafrios. Contudo, quando a primeira metade parecia condenada ao nulo, a inspiraÃ§Ã£o de Bryan RÃ³chez fez a diferenÃ§a: no aproveitamento de um lance de bola parada, o internacional hondurenho desferiu um remate de execuÃ§Ã£o sublime, abrindo o ativo e levando a formaÃ§Ã£o visitante em vantagem para o descanso.
+**Inspirado em cima do descanso**
 
-â**Castigo mÃ¡ximo tranca as aspiraÃ§Ãµes do Portimonense**
+A fase inicial da contenda foi pautada por um registo cinzento, com ambos os conjuntos a revelarem acentuada timidez ofensiva e a manterem as balizas a salvo de grandes calafrios. Contudo, quando a primeira metade parecia condenada ao nulo, a inspiração de Bryan Róchez fez a diferença: no aproveitamento de um lance de bola parada, o internacional hondurenho desferiu um remate de execução sublime, abrindo o ativo e levando a formação visitante em vantagem para o descanso.
 
-âNa etapa complementar, a turma algarvia procurou sacudir o infortÃºnio e intensificou o caudal ofensivo, aproveitando o perÃ­odo em que o LeixÃµes procedia ao reajustamento da sua retaguarda devido Ã  saÃ­da por lesÃ£o de AssunÃ§Ã£o. Todavia, a reaÃ§Ã£o dos homens da casa sofreu um travÃ£o definitivo quando o central Samy cortou o esfÃ©rico com a mÃ£o no interior da grande Ã¡rea. Da marca dos onze metros, RÃ³chez manteve o sangue-frio, enganou o guardiÃ£o e carimbou a sentenÃ§a do jogo.
+**Castigo máximo tranca as aspirações do Portimonense**
 
-âCom esta vitÃ³ria, a armada liderada por Carlos Fangueiro escala provisoriamente Ã  8.Âª posiÃ§Ã£o da tabela classificativa, somando seis pontos, ao passo que o Portimonense desce ao 5.Âº lugar, mantendo os mesmos sete pontos com que entrou para a jornada.
+Na etapa complementar, a turma algarvia procurou sacudir o infortúnio e intensificou o caudal ofensivo, aproveitando o período em que o Leixões procedia ao reajustamento da sua retaguarda devido à saída por lesão de Assunção. Todavia, a reação dos homens da casa sofreu um travão definitivo quando o central Samy cortou o esférico com a mão no interior da grande área. Da marca dos onze metros, Róchez manteve o sangue-frio, enganou o guardião e carimbou a sentença do jogo.
+
+Com esta vitória, a armada liderada por Carlos Fangueiro escala provisoriamente à 8.ª posição da tabela classificativa, somando seis pontos, ao passo que o Portimonense desce ao 5.º lugar, mantendo os mesmos sete pontos com que entrou para a jornada.

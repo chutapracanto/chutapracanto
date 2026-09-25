@@ -10,17 +10,18 @@ image: "https://framerusercontent.com/images/tk7sfoJFndnm3j23xyaGvqUEOwA.jpg?wid
 ---
 
 
-ApÃ³s o triunfo categÃ³rico por 4-0 no relvado do Moreirense, Marco Silva apresentou-se visivelmente satisfeito na sala de imprensa para chancelar a superioridade encarnada. Sem rodeios, o tÃ©cnico do Benfica enalteceu o compromisso tÃ¡tico e a fome de golo de uma equipa que trancou a baliza a sete chaves e instalou o seu futebol em pleno meio-campo adversÃ¡rio.
 
-â**DomÃ­nio territorial, atitude exemplar e gestÃ£o cirÃºrgica**
+Após o triunfo categórico por 4-0 no relvado do Moreirense, Marco Silva apresentou-se visivelmente satisfeito na sala de imprensa para chancelar a superioridade encarnada. Sem rodeios, o técnico do Benfica enalteceu o compromisso tático e a fome de golo de uma equipa que trancou a baliza a sete chaves e instalou o seu futebol em pleno meio-campo adversário.
 
-âNa leitura da partida, o estratega encarnado sublinhou a maturidade com que o coletivo construiu e geriu o resultado do primeiro ao Ãºltimo minuto:
+**Domínio territorial, atitude exemplar e gestão cirúrgica**
 
-- â**Sufoco asfixiante sem conceder trÃ©guas:** "Foi uma vitÃ³ria indiscutÃ­vel e categoricamente justa. Na primeira parte, jogÃ¡mos praticamente num raio de 50 metros, totalmente instalados no meio-campo ofensivo. Ã exceÃ§Ã£o de um livre pontual nas costas da nossa linha, fomos irrepreensÃ­veis", vincou o tÃ©cnico, rendido Ã  entrega de homens como Pavlidis e Rafa Silva nas tarefas de recuperaÃ§Ã£o defensiva.
-- â**Entrada avassaladora a matar o jogo:** A palestra ao intervalo surtiu efeito imediato: "Era obrigatÃ³rio entrar na segunda metade com a mesma rotaÃ§Ã£o. Fizemos o segundo e o terceiro golos num Ã¡pice, o que nos conferiu a margem ideal para gerir ativos e lanÃ§ar jogadores como o Aursnes e o Jhon DurÃ¡n sem perdas de rendimento."
+Na leitura da partida, o estratega encarnado sublinhou a maturidade com que o coletivo construiu e geriu o resultado do primeiro ao último minuto:
 
-â**A alquimia entre Prestianni e Schjelderup**
+- **Sufoco asfixiante sem conceder tréguas:** "Foi uma vitória indiscutível e categoricamente justa. Na primeira parte, jogámos praticamente num raio de 50 metros, totalmente instalados no meio-campo ofensivo. À exceção de um livre pontual nas costas da nossa linha, fomos irrepreensíveis", vincou o técnico, rendido à entrega de homens como Pavlidis e Rafa Silva nas tarefas de recuperação defensiva.
+- **Entrada avassaladora a matar o jogo:** A palestra ao intervalo surtiu efeito imediato: "Era obrigatório entrar na segunda metade com a mesma rotação. Fizemos o segundo e o terceiro golos num ápice, o que nos conferiu a margem ideal para gerir ativos e lançar jogadores como o Aursnes e o Jhon Durán sem perdas de rendimento."
 
-âO grande destaque da noite recaiu sobre o virtuosismo da dupla composta por Gianluca Prestianni e Andreas Schjelderup, uma ligaÃ§Ã£o que Marco Silva considerou natural e determinante para o desequilÃ­brio no ataque:
+**A alquimia entre Prestianni e Schjelderup**
 
-- â**Cumplicidade de alta voltagem:** "O futebol vive de conexÃµes humanas e tÃ¡ticas. O Andreas e o Prestianni partilham essa eletricidade. SÃ£o dois predestinados, com uma virtuosismo tÃ©cnico que lhes permite desarmar defesas tanto por dentro como no corredor exterior", concluiu, apludindo ainda o trabalho de retaguarda garantido por Dahl no apoio ao lado esquerdo.
+O grande destaque da noite recaiu sobre o virtuosismo da dupla composta por Gianluca Prestianni e Andreas Schjelderup, uma ligação que Marco Silva considerou natural e determinante para o desequilíbrio no ataque:
+
+- **Cumplicidade de alta voltagem:** "O futebol vive de conexões humanas e táticas. O Andreas e o Prestianni partilham essa eletricidade. São dois predestinados, com uma virtuosismo técnico que lhes permite desarmar defesas tanto por dentro como no corredor exterior", concluiu, apludindo ainda o trabalho de retaguarda garantido por Dahl no apoio ao lado esquerdo.

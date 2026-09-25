@@ -10,16 +10,17 @@ image: "https://framerusercontent.com/images/hkHEFBCweEILoNMJadypuIcXp5M.webp?wi
 ---
 
 
-âO Milan iniciou a sua caminhada na Serie A 2026/27 com uma vitÃ³ria por 2-1 na visita ao terreno do Torino. A formaÃ§Ã£o orientada por RÃºben Amorim construiu o resultado favorÃ¡vel no decorrer do segundo tempo, somando os primeiros trÃªs pontos da Ã©poca em ItÃ¡lia.
 
-### âBis de eficÃ¡cia em dois minutos
+O Milan iniciou a sua caminhada na Serie A 2026/27 com uma vitória por 2-1 na visita ao terreno do Torino. A formação orientada por Rúben Amorim construiu o resultado favorável no decorrer do segundo tempo, somando os primeiros três pontos da época em Itália.
 
-âApÃ³s um primeiro tempo sem golos, os _rossoneri_ desatascaram o encontro com uma entrada fulgurante na etapa complementar:
+### Bis de eficácia em dois minutos
 
-- â**Titularidade no ataque:** Com GonÃ§alo Ramos a figurar no onze inicial, o conjunto visitante adiantou-se no marcador aos 64 minutos, por intermÃ©dio de Alphadjo Cisse.
-- â**Vantagem dilatada:** Apenas dois minutos volvidos, aos 66', Adrien Rabiot aumentou a contagem para o Milan e deu maior conforto Ã  equipa do tÃ©cnico portuguÃªs.
-- â**ReaÃ§Ã£o insuficiente:** O Torino ainda conseguiu reduzir a diferenÃ§a aos 70 minutos, com um golo de Che Adams, mas a defensiva milanesa segurou a vantagem mÃ­nima atÃ© ao apito final.
+Após um primeiro tempo sem golos, os _rossoneri_ desatascaram o encontro com uma entrada fulgurante na etapa complementar:
 
-### âBaixa de peso no ataque
+- **Titularidade no ataque:** Com Gonçalo Ramos a figurar no onze inicial, o conjunto visitante adiantou-se no marcador aos 64 minutos, por intermédio de Alphadjo Cisse.
+- **Vantagem dilatada:** Apenas dois minutos volvidos, aos 66', Adrien Rabiot aumentou a contagem para o Milan e deu maior conforto à equipa do técnico português.
+- **Reação insuficiente:** O Torino ainda conseguiu reduzir a diferença aos 70 minutos, com um golo de Che Adams, mas a defensiva milanesa segurou a vantagem mínima até ao apito final.
 
-âO encontro ficou tambÃ©m marcado pela ausÃªncia de Rafael LeÃ£o. O avanÃ§ado internacional portuguÃªs nÃ£o entrou nas opÃ§Ãµes de RÃºben Amorim para esta jornada de abertura devido a uma lesÃ£o muscular, falhando assim o arranque oficial da temporada.
+### Baixa de peso no ataque
+
+O encontro ficou também marcado pela ausência de Rafael Leão. O avançado internacional português não entrou nas opções de Rúben Amorim para esta jornada de abertura devido a uma lesão muscular, falhando assim o arranque oficial da temporada.

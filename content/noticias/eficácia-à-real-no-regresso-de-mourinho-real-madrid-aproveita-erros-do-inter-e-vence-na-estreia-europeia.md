@@ -10,10 +10,11 @@ image: "https://framerusercontent.com/images/FME16616ENj4cl9ABN4pHGZoaw.jpg?widt
 ---
 
 
-âO Santiago BernabÃ©u viveu mais uma noite de contornos bem conhecidos na abertura da fase de liga da Liga dos CampeÃµes. No regresso de JosÃ© Mourinho Ã  competiÃ§Ã£o ao comando dos _merengues_ e precisamente contra o seu antigo clube, o Real Madrid bateu o Internazionale por 2-1, superiorizando-se na eficÃ¡cia e aproveitando as facilidades concedidas pela defensiva italiana.
 
-â**Destaques do encontro:**
+O Santiago Bernabéu viveu mais uma noite de contornos bem conhecidos na abertura da fase de liga da Liga dos Campeões. No regresso de José Mourinho à competição ao comando dos _merengues_ e precisamente contra o seu antigo clube, o Real Madrid bateu o Internazionale por 2-1, superiorizando-se na eficácia e aproveitando as facilidades concedidas pela defensiva italiana.
 
-- â**Courtois travou o Ã­mpeto inicial:** O Inter entrou dominador e criou as primeiras grandes ocasiÃµes, mas o guardiÃ£o belga negou o golo a Marcus Thuram e Lautaro MartÃ­nez.
-- â**Erros pagos a peso de ouro (1.Âª parte):** Bisseck errou na saÃ­da de bola, Brahim interceptou e isolou Kylian MbappÃ© para o 1-0. Pouco depois, o guarda-redes MartÃ­nez comprometeu num atraso, perdendo a bola para Federico Valverde, que sÃ³ teve de encostar para a baliza deserta.
-- â**Troca de golpes e incerteza no final:** A segunda parte ficou marcada pelo desperdÃ­cio de ambas as equipas com destaques para falhas de Thuram e Bellingham. Aos minutos finais, Lautaro serviu Carlos Augusto para o 2-1, mas o Real Madrid ativou o modo de sofrimento e segurou a vantagem.
+**Destaques do encontro:**
+
+- **Courtois travou o ímpeto inicial:** O Inter entrou dominador e criou as primeiras grandes ocasiões, mas o guardião belga negou o golo a Marcus Thuram e Lautaro Martínez.
+- **Erros pagos a peso de ouro (1.ª parte):** Bisseck errou na saída de bola, Brahim interceptou e isolou Kylian Mbappé para o 1-0. Pouco depois, o guarda-redes Martínez comprometeu num atraso, perdendo a bola para Federico Valverde, que só teve de encostar para a baliza deserta.
+- **Troca de golpes e incerteza no final:** A segunda parte ficou marcada pelo desperdício de ambas as equipas com destaques para falhas de Thuram e Bellingham. Aos minutos finais, Lautaro serviu Carlos Augusto para o 2-1, mas o Real Madrid ativou o modo de sofrimento e segurou a vantagem.

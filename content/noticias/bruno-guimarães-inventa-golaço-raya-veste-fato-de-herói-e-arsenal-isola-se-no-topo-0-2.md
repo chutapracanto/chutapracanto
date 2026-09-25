@@ -10,12 +10,13 @@ image: "https://framerusercontent.com/images/nmef7DJmclqdrizM3YdJUEo2IQ.jpg?widt
 ---
 
 
-âO Arsenal de Mikel Arteta continua a assinar um arranque de temporada memorÃ¡vel e irrepreensÃ­vel, somando o sexto triunfo consecutivo em todas as competiÃ§Ãµes quatro deles a contar para a Premier League. Num Stadium of Light vulcÃ¢nico e perante um Sunderland altamente agressivo, a turma de Londres soube resistir aos momentos de maior sufoco, beneficiou de uma intervenÃ§Ã£o decisiva de David Raya e arrancou uma vitÃ³ria de autoridade por 0-2 para trancar a sete chaves a lideranÃ§a isolada do campeonato inglÃªs.
 
-â**MÃ£o de ferro de Raya e o mÃ­ssil de Bruno GuimarÃ£es que rompeu a teia**
+O Arsenal de Mikel Arteta continua a assinar um arranque de temporada memorável e irrepreensível, somando o sexto triunfo consecutivo em todas as competições quatro deles a contar para a Premier League. Num Stadium of Light vulcânico e perante um Sunderland altamente agressivo, a turma de Londres soube resistir aos momentos de maior sufoco, beneficiou de uma intervenção decisiva de David Raya e arrancou uma vitória de autoridade por 0-2 para trancar a sete chaves a liderança isolada do campeonato inglês.
 
-âCom Viktor GyÃ¶keres a assistir ao encontro a partir do banco de suplentes (apÃ³s a titularidade europeia a meio da semana diante do Napoli), os _gunners_ sentiram sÃ©rias dificuldades para furar o bloco compacto do conjunto da casa durante os primeiros 45 minutos. No entanto, o regresso dos balneÃ¡rios reservou um turbilhÃ£o de emoÃ§Ãµes num curto espaÃ§o de dois minutos:
+**Mão de ferro de Raya e o míssil de Bruno Guimarães que rompeu a teia**
 
-- â**Susto e milagre de Raya (56'):** O momento de maior afliÃ§Ã£o para os forasteiros surgiu quando o Sunderland beneficiou de uma grande penalidade. Chamado a assumir a responsabilidade, Enzo Le FÃ©e esbarrou numa estirada monumental do guardiÃ£o espanhol David Raya, que segurou o nulo e travou a explosÃ£o de alegria nas bancadas.
-- â**A inspiraÃ§Ã£o genial do mÃ©dio brasileiro (58'):** O impacto do penÃ¡lti defendido funcionou como um autÃªntico murro na mesa. Na resposta imediata, Bruno GuimarÃ£es encheu-se de coragem e, Ã  entrada da grande Ã¡rea, disparou um mÃ­ssil de rara beleza para o fundo das redes, assinando o golaÃ§o da jornada.
-- â**Saka arruma a casa nos descontos:** Com o Sunderland totalmente balanceado para o ataque, o Arsenal matou o jogo aos 90'. Reinildo Mandava cometeu falta para grande penalidade e acabou expulso, cabendo a Bukayo Saka a frieza de converter a partir dos onze metros para selar o 0-2 final.
+Com Viktor Gyökeres a assistir ao encontro a partir do banco de suplentes (após a titularidade europeia a meio da semana diante do Napoli), os _gunners_ sentiram sérias dificuldades para furar o bloco compacto do conjunto da casa durante os primeiros 45 minutos. No entanto, o regresso dos balneários reservou um turbilhão de emoções num curto espaço de dois minutos:
+
+- **Susto e milagre de Raya (56'):** O momento de maior aflição para os forasteiros surgiu quando o Sunderland beneficiou de uma grande penalidade. Chamado a assumir a responsabilidade, Enzo Le Fée esbarrou numa estirada monumental do guardião espanhol David Raya, que segurou o nulo e travou a explosão de alegria nas bancadas.
+- **A inspiração genial do médio brasileiro (58'):** O impacto do penálti defendido funcionou como um autêntico murro na mesa. Na resposta imediata, Bruno Guimarães encheu-se de coragem e, à entrada da grande área, disparou um míssil de rara beleza para o fundo das redes, assinando o golaço da jornada.
+- **Saka arruma a casa nos descontos:** Com o Sunderland totalmente balanceado para o ataque, o Arsenal matou o jogo aos 90'. Reinildo Mandava cometeu falta para grande penalidade e acabou expulso, cabendo a Bukayo Saka a frieza de converter a partir dos onze metros para selar o 0-2 final.

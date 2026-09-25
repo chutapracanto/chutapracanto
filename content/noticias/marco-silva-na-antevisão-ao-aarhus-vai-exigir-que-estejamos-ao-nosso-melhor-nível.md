@@ -10,18 +10,19 @@ image: "https://framerusercontent.com/images/mVGll96Wum8JKExwmgkmYdjlPJY.jpg?wid
 ---
 
 
-Na conferÃªncia de imprensa de antevisÃ£o Ã  segunda mÃ£o do _play-off_ de acesso Ã  fase de liga da Liga Europa, Marco Silva abordou o duelo diante do Aarhus, na Dinamarca. O tÃ©cnico encarnado alertou para as dificuldades do encontro, apesar da vantagem trazida da primeira mÃ£o, e evitou comentar movimentaÃ§Ãµes de mercado nas vÃ©speras de uma partida decisiva.
 
-### âAnÃ¡lise ao encontro e reaÃ§Ã£o esperada do adversÃ¡rio
+Na conferência de imprensa de antevisão à segunda mão do _play-off_ de acesso à fase de liga da Liga Europa, Marco Silva abordou o duelo diante do Aarhus, na Dinamarca. O técnico encarnado alertou para as dificuldades do encontro, apesar da vantagem trazida da primeira mão, e evitou comentar movimentações de mercado nas vésperas de uma partida decisiva.
 
-âO treinador das _Ã¡guias_ garantiu que a equipa viaja com confianÃ§a, mas ciente do desafio que terÃ¡ pela frente:
+### Análise ao encontro e reação esperada do adversário
 
-- â**Vantagem e exibiÃ§Ã£o no primeiro jogo:** Marco Silva recordou a superioridade demonstrada na primeira mÃ£o, sublinhando que o resultado poderia ter sido mais volumoso perante o domÃ­nio do Benfica, apesar do golo sofrido que considerou "completamente evitÃ¡vel".
-- â**ExigÃªncia mÃ¡xima na Dinamarca:** O tÃ©cnico antevÃª uma resposta forte do conjunto dinamarquÃªs a jogar em casa, reiterando que o Benfica terÃ¡ de se apresentar no seu melhor nÃ­vel para carimbar o apuramento.
+O treinador das _águias_ garantiu que a equipa viaja com confiança, mas ciente do desafio que terá pela frente:
 
-### âGestÃ£o do plantel e foco exclusivo na competiÃ§Ã£o
+- **Vantagem e exibição no primeiro jogo:** Marco Silva recordou a superioridade demonstrada na primeira mão, sublinhando que o resultado poderia ter sido mais volumoso perante o domínio do Benfica, apesar do golo sofrido que considerou "completamente evitável".
+- **Exigência máxima na Dinamarca:** O técnico antevê uma resposta forte do conjunto dinamarquês a jogar em casa, reiterando que o Benfica terá de se apresentar no seu melhor nível para carimbar o apuramento.
 
-âConfrontado com questÃµes sobre o mercado de transferÃªncias, o treinador preferiu focar a atenÃ§Ã£o na preparaÃ§Ã£o da equipa:
+### Gestão do plantel e foco exclusivo na competição
 
-- â**SituaÃ§Ã£o do plantel:** Marco Silva confirmou a ausÃªncia de Fredrik Aursnes por lesÃ£o e explicou que Richard RÃ­os continua a trabalhar com o grupo, cumprindo o processo de adaptaÃ§Ã£o Ã s dinÃ¢micas coletivas.
-- â**Foco no jogo decisivo:** Recusando abordar possÃ­veis reforÃ§os para a posiÃ§Ã£o de Sudakov ou rumores de mercado, o tÃ©cnico vincou que a prioridade absoluta estÃ¡ no sexto jogo europeu da temporada e na consolidaÃ§Ã£o da evoluÃ§Ã£o da equipa.
+Confrontado com questões sobre o mercado de transferências, o treinador preferiu focar a atenção na preparação da equipa:
+
+- **Situação do plantel:** Marco Silva confirmou a ausência de Fredrik Aursnes por lesão e explicou que Richard Ríos continua a trabalhar com o grupo, cumprindo o processo de adaptação às dinâmicas coletivas.
+- **Foco no jogo decisivo:** Recusando abordar possíveis reforços para a posição de Sudakov ou rumores de mercado, o técnico vincou que a prioridade absoluta está no sexto jogo europeu da temporada e na consolidação da evolução da equipa.

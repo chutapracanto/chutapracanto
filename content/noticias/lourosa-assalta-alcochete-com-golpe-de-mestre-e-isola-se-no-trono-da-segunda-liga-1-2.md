@@ -10,18 +10,19 @@ image: "https://framerusercontent.com/images/ufw0Im3sS23OrgSULqghkUPft2Q.webp?wi
 ---
 
 
-O LusitÃ¢nia de Lourosa transformou o fecho da 6.Âª jornada da Liga Portugal 2 numa verdadeira apoteose de estofo e pragmaticidade ao vergar o Sporting B por 1-2, em pleno relvado do EstÃ¡dio AurÃ©lio Pereira. Num choque de titÃ£s entre os escoltadores do topo da tabela, a armada comandada por Ricardo Silva aceitou viver sob tempestade perante a fÃºria do futebol vertiginoso dos leÃµes, envergou o fato de macaco com brio e desferiu um veneno fatal em cima do apito final, ultrapassando o Penafiel para reinar de forma invicta e isolada na Segunda Liga.
 
-â**Sufoco verde e branco, o assalto de Nel e o laboratÃ³rio de ArsÃ©nio**
+O Lusitânia de Lourosa transformou o fecho da 6.ª jornada da Liga Portugal 2 numa verdadeira apoteose de estofo e pragmaticidade ao vergar o Sporting B por 1-2, em pleno relvado do Estádio Aurélio Pereira. Num choque de titãs entre os escoltadores do topo da tabela, a armada comandada por Ricardo Silva aceitou viver sob tempestade perante a fúria do futebol vertiginoso dos leões, envergou o fato de macaco com brio e desferiu um veneno fatal em cima do apito final, ultrapassando o Penafiel para reinar de forma invicta e isolada na Segunda Liga.
 
-âA entrada em cena dos jovens comandados por Tiago Fernandes pautou-se por uma intensidade avassaladora, sufocando as linhas de passe forasteiras desde os primeiros compassos:
+**Sufoco verde e branco, o assalto de Nel e o laboratório de Arsénio**
 
-- â**IncursÃ£o letal e voo certeiro (26'):** Depois de um mÃ­ssil de Bidu ter feito estremecer a barra logo aos 7 minutos, a superioridade leonina materializou-se no marcador. Micael SanhÃ¡ tirou partido da apatia defensiva do Lourosa no flanco e desenhou um cruzamento milimÃ©trico para o segundo poste, onde Rafael Nel se elevou com imponÃªncia para cabecear sem apelo nem agravo para o 1-0.
-- â**A magia de ArsÃ©nio e a resposta de cabeÃ§a (42'):** Quando os visitados pareciam ter o destino da partida sob controlo absoluto, o Lourosa sacou da sua arma mais mortÃ­fera. Na cobranÃ§a de um livre desenhado com rÃ©gua e esquadro por ArsÃ©nio, o central Guilherme Soares saltou mais alto do que toda a gente ao segundo poste e restabeleceu a igualdade antes do recolher aos balneÃ¡rios, contra a corrente do jogo.
+A entrada em cena dos jovens comandados por Tiago Fernandes pautou-se por uma intensidade avassaladora, sufocando as linhas de passe forasteiras desde os primeiros compassos:
 
-â**Luz no regresso de SimÃµes e a estocada de gelo ao minuto 90+1**
+- **Incursão letal e voo certeiro (26'):** Depois de um míssil de Bidu ter feito estremecer a barra logo aos 7 minutos, a superioridade leonina materializou-se no marcador. Micael Sanhá tirou partido da apatia defensiva do Lourosa no flanco e desenhou um cruzamento milimétrico para o segundo poste, onde Rafael Nel se elevou com imponência para cabecear sem apelo nem agravo para o 1-0.
+- **A magia de Arsénio e a resposta de cabeça (42'):** Quando os visitados pareciam ter o destino da partida sob controlo absoluto, o Lourosa sacou da sua arma mais mortífera. Na cobrança de um livre desenhado com régua e esquadro por Arsénio, o central Guilherme Soares saltou mais alto do que toda a gente ao segundo poste e restabeleceu a igualdade antes do recolher aos balneários, contra a corrente do jogo.
 
-âA segunda metade manteve o Sporting B com os olhos postos no golo, mas encontrou na muralha edificada pelo guarda-redes Brian AraÃºjo um obstÃ¡culo intransponÃ­vel:
+**Luz no regresso de Simões e a estocada de gelo ao minuto 90+1**
 
-- â**Regresso comovente e aplausos na bancada (75'):** O momento mais emotivo da tarde deu-se com a entrada em campo de JoÃ£o SimÃµes. O jovem prodÃ­gio da equipa principal dos leÃµes regressou Ã  competiÃ§Ã£o cinco meses apÃ³s a lesÃ£o contraÃ­da diante do Arsenal, trazendo perfume e critÃ©rio ao miolo verde e branco.
-- â**GÃ©nio a rasgar e o delÃ­rio de JoÃ£o Silva (90+1'):** Com o nulo a desenhar-se perante o desgaste fÃ­sico, o Lourosa renasceu da pausa para hidrataÃ§Ã£o com uma frieza cirÃºrgica. JÃ¡ no perÃ­odo de compensaÃ§Ã£o, ArsÃ©nio inventou um passe magistral a rasgar toda a estrutura leonina, Miguel Teixeira serviu de bandeja na Ã¡rea e JoÃ£o Silva sÃ³ teve de encostar para selar uma reviravolta Ã©pica e colocar um ponto final no encontro.
+A segunda metade manteve o Sporting B com os olhos postos no golo, mas encontrou na muralha edificada pelo guarda-redes Brian Araújo um obstáculo intransponível:
+
+- **Regresso comovente e aplausos na bancada (75'):** O momento mais emotivo da tarde deu-se com a entrada em campo de João Simões. O jovem prodígio da equipa principal dos leões regressou à competição cinco meses após a lesão contraída diante do Arsenal, trazendo perfume e critério ao miolo verde e branco.
+- **Génio a rasgar e o delírio de João Silva (90+1'):** Com o nulo a desenhar-se perante o desgaste físico, o Lourosa renasceu da pausa para hidratação com uma frieza cirúrgica. Já no período de compensação, Arsénio inventou um passe magistral a rasgar toda a estrutura leonina, Miguel Teixeira serviu de bandeja na área e João Silva só teve de encostar para selar uma reviravolta épica e colocar um ponto final no encontro.

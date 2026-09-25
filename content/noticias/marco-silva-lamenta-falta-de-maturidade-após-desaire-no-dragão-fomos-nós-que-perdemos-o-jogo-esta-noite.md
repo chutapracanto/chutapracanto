@@ -10,25 +10,26 @@ image: "https://framerusercontent.com/images/2DQN2yJtDV5KesLszN1pNEhfwg.webp?wid
 ---
 
 
-Apesar de ter deixado uma imagem positiva no EstÃ¡dio do DragÃ£o durante o perÃ­odo em que atuou com 11 elementos, o Benfica saiu derrotado perante o FC Porto por 3-1. Na anÃ¡lise apÃ³s o apito final, Marco Silva apontou a expulsÃ£o de Clement Lenglet como o ponto de viragem do ClÃ¡ssico, lamentando a falta de maturidade da equipa encarnada nos momentos decisivos da partida, mas desvalorizou o atraso na tabela e a polÃ©mica com a arbitragem.
 
-â**Personalidade inicial e o impacto da expulsÃ£o**
+Apesar de ter deixado uma imagem positiva no Estádio do Dragão durante o período em que atuou com 11 elementos, o Benfica saiu derrotado perante o FC Porto por 3-1. Na análise após o apito final, Marco Silva apontou a expulsão de Clement Lenglet como o ponto de viragem do Clássico, lamentando a falta de maturidade da equipa encarnada nos momentos decisivos da partida, mas desvalorizou o atraso na tabela e a polémica com a arbitragem.
 
-âO tÃ©cnico das Ã¡guias destacou a postura corajosa com que o Benfica abordou o jogo, lamentando que o controlo inicial se tenha esfumado por erros prÃ³prios:
+**Personalidade inicial e o impacto da expulsão**
 
-- â**Entrada personalizada:** Marco Silva elogiou a abordagem inicial da equipa, referindo que o Benfica jogou _"com identidade e a coragem"_ habitual, condicionando a construÃ§Ã£o do FC Porto e criando a primeira grande oportunidade da partida.
-- â**Falta de equilÃ­brio emocional:** O treinador encarnado assumiu a responsabilidade pelo desfecho, sublinhando que a equipa falhou na gestÃ£o do ambiente: _"Havia aspetos em que era importante manter o equilÃ­brio emocional, independentemente das provocaÃ§Ãµes e do ambiente. Fomos nÃ³s que perdemos o jogo."_
+O técnico das águias destacou a postura corajosa com que o Benfica abordou o jogo, lamentando que o controlo inicial se tenha esfumado por erros próprios:
 
-â**A reaÃ§Ã£o com dez unidades e o apelo Ã  maturidade**
+- **Entrada personalizada:** Marco Silva elogiou a abordagem inicial da equipa, referindo que o Benfica jogou _"com identidade e a coragem"_ habitual, condicionando a construção do FC Porto e criando a primeira grande oportunidade da partida.
+- **Falta de equilíbrio emocional:** O treinador encarnado assumiu a responsabilidade pelo desfecho, sublinhando que a equipa falhou na gestão do ambiente: _"Havia aspetos em que era importante manter o equilíbrio emocional, independentemente das provocações e do ambiente. Fomos nós que perdemos o jogo."_
 
-âMesmo em inferioridade numÃ©rica, Marco Silva revelou que acreditou sempre na capacidade da equipa em ferir o adversÃ¡rio, apontando falhas na decisÃ£o no melhor momento do Benfica:
+**A reação com dez unidades e o apelo à maturidade**
 
-- â**Discurso ao intervalo e golo:** O tÃ©cnico revelou ter transmitido confianÃ§a ao balneÃ¡rio de que a equipa iria marcar na segunda parte o que veio a confirmar-se, aproveitando um perÃ­odo em que o FC Porto sentia dificuldades para pressionar a posse encarnada.
-- â**Erros de decisÃ£o e defesa da Ã¡rea:** Marco Silva criticou a tomada de decisÃ£o no lance que antecedeu a reviravolta portista, apontando uma _"mudanÃ§a de corredor que nÃ£o fazia sentido"_ e falhas na abordagem defensiva dentro da grande Ã¡rea, reforÃ§ando a necessidade da equipa _"crescer e ser mais madura"_.
+Mesmo em inferioridade numérica, Marco Silva revelou que acreditou sempre na capacidade da equipa em ferir o adversário, apontando falhas na decisão no melhor momento do Benfica:
 
-â**Arbitragem e a distÃ¢ncia na classificaÃ§Ã£o**
+- **Discurso ao intervalo e golo:** O técnico revelou ter transmitido confiança ao balneário de que a equipa iria marcar na segunda parte o que veio a confirmar-se, aproveitando um período em que o FC Porto sentia dificuldades para pressionar a posse encarnada.
+- **Erros de decisão e defesa da área:** Marco Silva criticou a tomada de decisão no lance que antecedeu a reviravolta portista, apontando uma _"mudança de corredor que não fazia sentido"_ e falhas na abordagem defensiva dentro da grande área, reforçando a necessidade da equipa _"crescer e ser mais madura"_.
 
-âQuestionado sobre as incidÃªncias do ClÃ¡ssico e o impacto da derrota na luta pelo tÃ­tulo, o treinador do Benfica manteve o foco estritamente desportivo:
+**Arbitragem e a distância na classificação**
 
-- â**Sem desculpas na arbitragem:** Marco Silva alinhou pelo mesmo diapasÃ£o do tÃ©cnico portista quanto Ã  conduÃ§Ã£o do encontro: _"NÃ£o houve coisas estranhas. Nada, zero. Tenho de me concentrar no que Ã© importante para a equipa. Mas se o mister Farioli disse que nÃ£o houve coisas estranhas, temos de acreditar."_
-- â**Foco nos objetivos da Ã©poca:** Quanto Ã  distÃ¢ncia pontual na tabela, o treinador desvalorizou o ruÃ­do externo, garantindo que o grupo permanece focado nas metas internas e europeias: _"As narrativas que sÃ£o criadas nÃ£o sÃ£o um problema para nÃ³s. Temos de nos concentrar naquilo que Ã© importante para nÃ³s e reagir com forÃ§a."_
+Questionado sobre as incidências do Clássico e o impacto da derrota na luta pelo título, o treinador do Benfica manteve o foco estritamente desportivo:
+
+- **Sem desculpas na arbitragem:** Marco Silva alinhou pelo mesmo diapasão do técnico portista quanto à condução do encontro: _"Não houve coisas estranhas. Nada, zero. Tenho de me concentrar no que é importante para a equipa. Mas se o mister Farioli disse que não houve coisas estranhas, temos de acreditar."_
+- **Foco nos objetivos da época:** Quanto à distância pontual na tabela, o treinador desvalorizou o ruído externo, garantindo que o grupo permanece focado nas metas internas e europeias: _"As narrativas que são criadas não são um problema para nós. Temos de nos concentrar naquilo que é importante para nós e reagir com força."_

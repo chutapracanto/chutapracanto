@@ -1,7 +1,7 @@
 ---
 title: "Arranque para esquecer: Tottenham sofre derrota pesada no reduto do Brentford"
 slug: "arranque-para-esquecer-tottenham-sofre-derrota-pesada-no-reduto-do-brentford"
-subtitle: "Investimento milionário não evitou revés concludente na jornada inaugural da Premier League."
+subtitle: "Investimento milionário não travou exibição cinzenta da equipa londrina; Mateus Fernandes entrou ao intervalo mas não evitou descalabro."
 category: "Premier League"
 published: "2026-08-22T00:00:00.000Z"
 author: "ChutaPraCanto"
@@ -16,17 +16,18 @@ relatedSpotify: ""
 ---
 
 
-Nem a forte renovaÃ§Ã£o no mercado de transferÃªncias livrou o Tottenham de um arranque traumatizante na Premier League. A equipa de Londres caiu com estrondo na visita ao Brentford, num duelo em que a fragilidade defensiva voltou a vir ao de cima.
 
-### âPrimeira parte para esquecer
+Nem a forte renovação no mercado de transferências livrou o Tottenham de um arranque traumatizante na Premier League. A equipa de Londres caiu com estrondo na visita ao Brentford, num duelo em que a fragilidade defensiva voltou a vir ao de cima.
 
-âO Brentford assumiu as despesas do jogo desde o apito inicial e expÃ´s as lacunas da defensiva visitante com dois golos antes do descanso:
+### Primeira parte para esquecer
 
-- â**Abertura do marcador (12'):** Numa jogada bem desenhada pelo lado direito, Lewis-Potter apareceu sem oposiÃ§Ã£o na grande Ã¡rea para inaugurar o marcador.
-- â**AmpliaÃ§Ã£o do resultado (32'):** O guardiÃ£o Kinsky nÃ£o conseguiu segurar um primeiro remate e Janelt aproveitou a sobra para encostar para o 2-0.
+O Brentford assumiu as despesas do jogo desde o apito inicial e expôs as lacunas da defensiva visitante com dois golos antes do descanso:
 
-### âEntrada de Mateus Fernandes e fecho do marcador
+- **Abertura do marcador (12'):** Numa jogada bem desenhada pelo lado direito, Lewis-Potter apareceu sem oposição na grande área para inaugurar o marcador.
+- **Ampliação do resultado (32'):** O guardião Kinsky não conseguiu segurar um primeiro remate e Janelt aproveitou a sobra para encostar para o 2-0.
 
-âA entrada do internacional portuguÃªs Mateus Fernandes ao intervalo nÃ£o surtiu o efeito desejado na dinÃ¢mica ofensiva dos _spurs_. Logo no reatar do encontro, um lance estudado na marcaÃ§Ã£o de um pontapÃ© de canto permitiu a Kayode assinar o 3-0.
+### Entrada de Mateus Fernandes e fecho do marcador
 
-âAtÃ© ao apito final, os visitados geriram a vantagem sem sobressaltos e ainda dispuseram de soberana oportunidade para ampliar, mas o avanÃ§ado Igor Thiago acertou no poste na cobranÃ§a de uma grande penalidade. Entrada triunfal para o Brentford, enquanto o Tottenham fica desde jÃ¡ pressionado a rever processos.
+A entrada do internacional português Mateus Fernandes ao intervalo não surtiu o efeito desejado na dinâmica ofensiva dos _spurs_. Logo no reatar do encontro, um lance estudado na marcação de um pontapé de canto permitiu a Kayode assinar o 3-0.
+
+Até ao apito final, os visitados geriram a vantagem sem sobressaltos e ainda dispuseram de soberana oportunidade para ampliar, mas o avançado Igor Thiago acertou no poste na cobrança de uma grande penalidade. Entrada triunfal para o Brentford, enquanto o Tottenham fica desde já pressionado a rever processos.

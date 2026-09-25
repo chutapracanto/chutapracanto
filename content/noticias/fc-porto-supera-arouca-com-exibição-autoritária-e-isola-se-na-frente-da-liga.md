@@ -10,21 +10,22 @@ image: "https://framerusercontent.com/images/gh1GlffjxC4HhpILR49Mv11YXo.webp?wid
 ---
 
 
-O FC Porto recebeu e venceu o FC Arouca por 2-0 no EstÃ¡dio do DragÃ£o, assumindo de forma provisÃ³ria a lideranÃ§a isolada do campeonato. A formaÃ§Ã£o orientada por Francesco Farioli assinou a exibiÃ§Ã£o mais conseguida da temporada, dominando o encontro do inÃ­cio ao fim e construindo um triunfo incontestÃ¡vel, apesar de um longo rol de oportunidades desperdiÃ§adas.
 
-### âPressÃ£o sufocante e muralha em nulo ao intervalo
+O FC Porto recebeu e venceu o FC Arouca por 2-0 no Estádio do Dragão, assumindo de forma provisória a liderança isolada do campeonato. A formação orientada por Francesco Farioli assinou a exibição mais conseguida da temporada, dominando o encontro do início ao fim e construindo um triunfo incontestável, apesar de um longo rol de oportunidades desperdiçadas.
 
-âFarioli promoveu os regressos de Alberto Costa e AndrÃ© Silva ao onze titular e os dragÃµes impuseram um ritmo avassalador desde os primeiros instantes:
+### Pressão sufocante e muralha em nulo ao intervalo
 
-- â**Sufoco inicial:** Com uma pressÃ£o alta e forte que anulou a saÃ­da de bola arouquense, o jogo instalou-se quase exclusivamente no meio-campo ofensivo portista. PepÃª e William Gomes dispuseram de soberanas ocasiÃµes perante a baliza, mas esbarraram sucessivamente na inspiraÃ§Ã£o do guarda-redes Arruabarrena.
-- â**IncontornÃ¡vel falta de eficÃ¡cia:** Apesar do ligeiro equilÃ­brio na posse de bola a meio do primeiro tempo por parte da equipa de Vasco Seabra â sem qualquer consequÃªncia prÃ¡tica â, os dragÃµes continuaram a acumular lances de perigo, incluindo um cabeceamento perigoso de Froholdt travado pelo guardiÃ£o uruguaio antes do descanso.
+Farioli promoveu os regressos de Alberto Costa e André Silva ao onze titular e os dragões impuseram um ritmo avassalador desde os primeiros instantes:
 
-### âGolos espanhÃ³is e solidez para fechar as contas
+- **Sufoco inicial:** Com uma pressão alta e forte que anulou a saída de bola arouquense, o jogo instalou-se quase exclusivamente no meio-campo ofensivo portista. Pepê e William Gomes dispuseram de soberanas ocasiões perante a baliza, mas esbarraram sucessivamente na inspiração do guarda-redes Arruabarrena.
+- **Incontornável falta de eficácia:** Apesar do ligeiro equilíbrio na posse de bola a meio do primeiro tempo por parte da equipa de Vasco Seabra — sem qualquer consequência prática —, os dragões continuaram a acumular lances de perigo, incluindo um cabeceamento perigoso de Froholdt travado pelo guardião uruguaio antes do descanso.
 
-âA etapa complementar manteve o mesmo figurino de sentido Ãºnico, com o FC Porto a intensificar o cerco Ã  baliza visitante:
+### Golos espanhóis e solidez para fechar as contas
 
-- â**AvanÃ§os e golos anulados:** Antes do golo inaugural, os portistas viram um golo ser invalidado por falta sobre o guarda-redes, PepÃª atirar de cabeÃ§a ao travessÃ£o e Kiwior ver um tento anulado por fora de jogo posicional de AndrÃ© Silva.
-- â**Gabri Veiga abre o marcador:** A resistÃªncia arouquense ruiu quando William Gomes conduziu uma transiÃ§Ã£o rÃ¡pida e serviu Gabri Veiga, com o espanhol a rematar de pÃ© esquerdo para o 1-0.
-- â**Garantia de trÃªs pontos:** Em vantagem, Farioli confortou a estrutura defensiva no habituado bloco 5-4-1. JÃ¡ na reta final, num ataque rÃ¡pido desenhado por Deniz Gul, o basco Borja Sainz apareceu isolado frente a Arruabarrena e nÃ£o perdoou, selando o 2-0 final.
+A etapa complementar manteve o mesmo figurino de sentido único, com o FC Porto a intensificar o cerco à baliza visitante:
 
-âCom este resultado, o FC Porto prolonga o momento vitorioso no campeonato, mantendo simultaneamente a baliza inviolada na prova.
+- **Avanços e golos anulados:** Antes do golo inaugural, os portistas viram um golo ser invalidado por falta sobre o guarda-redes, Pepê atirar de cabeça ao travessão e Kiwior ver um tento anulado por fora de jogo posicional de André Silva.
+- **Gabri Veiga abre o marcador:** A resistência arouquense ruiu quando William Gomes conduziu uma transição rápida e serviu Gabri Veiga, com o espanhol a rematar de pé esquerdo para o 1-0.
+- **Garantia de três pontos:** Em vantagem, Farioli confortou a estrutura defensiva no habituado bloco 5-4-1. Já na reta final, num ataque rápido desenhado por Deniz Gul, o basco Borja Sainz apareceu isolado frente a Arruabarrena e não perdoou, selando o 2-0 final.
+
+Com este resultado, o FC Porto prolonga o momento vitorioso no campeonato, mantendo simultaneamente a baliza inviolada na prova.

@@ -10,22 +10,23 @@ image: "https://framerusercontent.com/images/074BI87A7qrhUHX7sKMXl71h9xc.jpg?wid
 ---
 
 
-âO ciclo de Jorge Jesus ao comando da SeleÃ§Ã£o Nacional arrancou oficialmente com a divulgaÃ§Ã£o dos 25 convocados para a maratona de quatro jogos da Liga das NaÃ§Ãµes. Mantendo a espinha dorsal da equipa que esteve no Campeonato do Mundo, o novo selecionador nacional promoveu quatro regressos e estreias, numa lista que marca o arranque da campanha de setembro e outubro.
 
-### â**Continuidade do Mundial e quatro nomes novos na era JJ**
+O ciclo de Jorge Jesus ao comando da Seleção Nacional arrancou oficialmente com a divulgação dos 25 convocados para a maratona de quatro jogos da Liga das Nações. Mantendo a espinha dorsal da equipa que esteve no Campeonato do Mundo, o novo selecionador nacional promoveu quatro regressos e estreias, numa lista que marca o arranque da campanha de setembro e outubro.
 
-âSem promover uma rutura radical em relaÃ§Ã£o ao lote que esteve no Mundial, Jorge Jesus introduziu ajustes cirÃºrgicos nos vÃ¡rios setores da equipa:
+### **Continuidade do Mundial e quatro nomes novos na era JJ**
 
-- â**Estreia absoluta e regressos:** Samuel Soares (Benfica) surge como a grande surpresa ao somar a sua primeira chamada Ã  SeleÃ§Ã£o A. Para alÃ©m do guardiÃ£o encarnado, Nuno Tavares, JoÃ£o Palhinha e FÃ¡bio Silva sÃ£o as restantes novidades face aos eleitos que estiveram no continente norte-americano.
-- â**Os sacrificados:** Em sentido inverso, JosÃ© SÃ¡, NÃ©lson Semedo, Matheus Nunes, Samu Costa e GonÃ§alo Guedes acabaram por ficar de fora desta primeira convocatÃ³ria do novo selecionador.
-- â**CalendÃ¡rio exigente:** Portugal prepara-se para disputar quatro encontros num curto espaÃ§o de dez dias: PaÃ­s de Gales (24 de setembro, casa), Noruega (27 de setembro, fora), Dinamarca (1 de outubro, fora) e Noruega (4 de outubro, casa).
+Sem promover uma rutura radical em relação ao lote que esteve no Mundial, Jorge Jesus introduziu ajustes cirúrgicos nos vários setores da equipa:
 
-### â**A ConvocatÃ³ria Completa de Jorge Jesus**
+- **Estreia absoluta e regressos:** Samuel Soares (Benfica) surge como a grande surpresa ao somar a sua primeira chamada à Seleção A. Para além do guardião encarnado, Nuno Tavares, João Palhinha e Fábio Silva são as restantes novidades face aos eleitos que estiveram no continente norte-americano.
+- **Os sacrificados:** Em sentido inverso, José Sá, Nélson Semedo, Matheus Nunes, Samu Costa e Gonçalo Guedes acabaram por ficar de fora desta primeira convocatória do novo selecionador.
+- **Calendário exigente:** Portugal prepara-se para disputar quatro encontros num curto espaço de dez dias: País de Gales (24 de setembro, casa), Noruega (27 de setembro, fora), Dinamarca (1 de outubro, fora) e Noruega (4 de outubro, casa).
 
-â**Guarda-redes:** Diogo Costa (FC Porto), Rui Silva (Sporting) e Samuel Soares (Benfica).
+### **A Convocatória Completa de Jorge Jesus**
 
-â**Defesas:** RÃºben Dias (Manchester City), TomÃ¡s AraÃºjo (Benfica), Renato Veiga (Villarreal), GonÃ§alo InÃ¡cio (Sporting), JoÃ£o Cancelo (Barcelona), Diogo Dalot (Manchester United), Nuno Mendes (PSG) e Nuno Tavares (Lazio).
+**Guarda-redes:** Diogo Costa (FC Porto), Rui Silva (Sporting) e Samuel Soares (Benfica).
 
-â**MÃ©dios:** JoÃ£o Palhinha (Benfica), Vitinha (PSG), RÃºben Neves (Al Hilal), JoÃ£o Neves (PSG), Bernardo Silva (Real Madrid) e Bruno Fernandes (Manchester United).
+**Defesas:** Rúben Dias (Manchester City), Tomás Araújo (Benfica), Renato Veiga (Villarreal), Gonçalo Inácio (Sporting), João Cancelo (Barcelona), Diogo Dalot (Manchester United), Nuno Mendes (PSG) e Nuno Tavares (Lazio).
 
-â**AvanÃ§ados:** Francisco TrincÃ£o (Al Ahli), Francisco ConceiÃ§Ã£o (Juventus), Pedro Neto (Chelsea), Rafael LeÃ£o (Galatasaray), JoÃ£o FÃ©lix (Al Nassr), FÃ¡bio Silva (Borussia Dortmund), GonÃ§alo Ramos (PSG) e Cristiano Ronaldo (Al Nassr).
+**Médios:** João Palhinha (Benfica), Vitinha (PSG), Rúben Neves (Al Hilal), João Neves (PSG), Bernardo Silva (Real Madrid) e Bruno Fernandes (Manchester United).
+
+**Avançados:** Francisco Trincão (Al Ahli), Francisco Conceição (Juventus), Pedro Neto (Chelsea), Rafael Leão (Galatasaray), João Félix (Al Nassr), Fábio Silva (Borussia Dortmund), Gonçalo Ramos (PSG) e Cristiano Ronaldo (Al Nassr).

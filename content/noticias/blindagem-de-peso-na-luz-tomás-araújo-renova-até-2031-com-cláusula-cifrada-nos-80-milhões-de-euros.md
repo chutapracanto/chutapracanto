@@ -10,18 +10,19 @@ image: "https://framerusercontent.com/images/1wv1JuTss5ATWvsXrowHkBEQ6R4.webp?wi
 ---
 
 
-âO Benfica amarrou uma das joias mais reluzentes da sua formaÃ§Ã£o ao oficializar, ao final da tarde desta quarta-feira, a renovaÃ§Ã£o de contrato com TomÃ¡s AraÃºjo. O internacional portuguÃªs prolongou a sua ligaÃ§Ã£o aos encarnados por mais duas temporadas estendendo o vÃ­nculo de 2029 para o verÃ£o de 2031, num acordo que contempla uma valorizaÃ§Ã£o salarial assinalÃ¡vel e fixa a nova clÃ¡usula de rescisÃ£o nos 80 milhÃµes de euros.
 
-â**Do ADN do Seixal Ã  lideranÃ§a no balneÃ¡rio**
+O Benfica amarrou uma das joias mais reluzentes da sua formação ao oficializar, ao final da tarde desta quarta-feira, a renovação de contrato com Tomás Araújo. O internacional português prolongou a sua ligação aos encarnados por mais duas temporadas estendendo o vínculo de 2029 para o verão de 2031, num acordo que contempla uma valorização salarial assinalável e fixa a nova cláusula de rescisão nos 80 milhões de euros.
 
-âA extensÃ£o contratual reflete o percurso exemplar de um atleta moldado na casa e promovido ao lote de capitÃ£es da equipa principal:
+**Do ADN do Seixal à liderança no balneário**
 
-- â**EvoluÃ§Ã£o de Ã¡guia ao peito:** Chegado Ã  estrutura encarnada em 2016, com apenas 14 anos, o defesa cumpriu todo o processo formativo na academia encarnada atÃ© se estrear na equipa sÃ©nior na Ã©poca 2021/22.
-- â**Maturidade e lideranÃ§a:** ApÃ³s um perÃ­odo de maturaÃ§Ã£o crucial ao serviÃ§o do Gil Vicente, o central regressou Ã  Luz para se afirmar em definitivo. O seu crescimento exponencial dentro e fora de campo valeu-lhe a eleiÃ§Ã£o como um dos capitÃ£es do plantel para a presente temporada.
+A extensão contratual reflete o percurso exemplar de um atleta moldado na casa e promovido ao lote de capitães da equipa principal:
 
-â**Pedra basilar no xadrez de Marco Silva**
+- **Evolução de águia ao peito:** Chegado à estrutura encarnada em 2016, com apenas 14 anos, o defesa cumpriu todo o processo formativo na academia encarnada até se estrear na equipa sénior na época 2021/22.
+- **Maturidade e liderança:** Após um período de maturação crucial ao serviço do Gil Vicente, o central regressou à Luz para se afirmar em definitivo. O seu crescimento exponencial dentro e fora de campo valeu-lhe a eleição como um dos capitães do plantel para a presente temporada.
 
-âA blindagem do central surge numa altura em que o atleta atravessa uma fase fulgurante no arranque da competiÃ§Ã£o:
+**Pedra basilar no xadrez de Marco Silva**
 
-- â**Rendimento de alto nÃ­vel:** TomÃ¡s AraÃºjo assumiu a titularidade indiscutÃ­vel na linha defensiva encarnada, somando jÃ¡ sete partidas oficiais, um golo e uma assistÃªncia no arranque da Ã©poca.
-- â**SÃ­mbolo de estabilidade:** Com esta manobra estratÃ©gica, a estrutura do Benfica garante a continuidade de um dos defesas mais cobiÃ§ados do futebol europeu, segurando o seu talento no centro da defesa a longo prazo.
+A blindagem do central surge numa altura em que o atleta atravessa uma fase fulgurante no arranque da competição:
+
+- **Rendimento de alto nível:** Tomás Araújo assumiu a titularidade indiscutível na linha defensiva encarnada, somando já sete partidas oficiais, um golo e uma assistência no arranque da época.
+- **Símbolo de estabilidade:** Com esta manobra estratégica, a estrutura do Benfica garante a continuidade de um dos defesas mais cobiçados do futebol europeu, segurando o seu talento no centro da defesa a longo prazo.

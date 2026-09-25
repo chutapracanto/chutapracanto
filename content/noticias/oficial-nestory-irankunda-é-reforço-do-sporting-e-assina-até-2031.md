@@ -1,7 +1,7 @@
 ---
 title: "Oficial: Nestory Irankunda é reforço do Sporting e assina até 2031"
 slug: "oficial-nestory-irankunda-é-reforço-do-sporting-e-assina-até-2031"
-subtitle: "\"Poderoso e muito rápido\": reforço de 20 anos apresenta-se aos adeptos leoninos e garante polivalência para jogar em qualquer posição do ataque."
+subtitle: "​\"Poderoso e muito rápido\": reforço de 20 anos apresenta-se aos adeptos leoninos e garante polivalência para jogar em qualquer posição do ataque."
 category: "Sporting CP"
 published: "2026-08-15T00:00:00.000Z"
 author: "ChutaPraCanto"
@@ -16,14 +16,15 @@ relatedSpotify: ""
 ---
 
 
-O Sporting assegurou mais uma cara nova para o ataque. O jovem extremo australiano, de 20 anos, desvincula-se do Bayern Munique para rumar em definitivo ao EstÃ¡dio JosÃ© Alvalade, num vÃ­nculo vÃ¡lido para as prÃ³ximas cinco temporadas, atÃ© ao verÃ£o de 2031. De forma a blindar o jogador perante o assÃ©dio de outros clubes, a direÃ§Ã£o leonina fixou a sua clÃ¡usula de rescisÃ£o nos 80 milhÃµes de euros.
 
-### â"Poderoso e muito rÃ¡pido": As primeiras declaraÃ§Ãµes de leÃ£o ao peito
+O Sporting assegurou mais uma cara nova para o ataque. O jovem extremo australiano, de 20 anos, desvincula-se do Bayern Munique para rumar em definitivo ao Estádio José Alvalade, num vínculo válido para as próximas cinco temporadas, até ao verão de 2031. De forma a blindar o jogador perante o assédio de outros clubes, a direção leonina fixou a sua cláusula de rescisão nos 80 milhões de euros.
 
-âNas primeiras palavras com a camisola verde e branca, o internacional australiano nÃ£o escondeu o entusiasmo por esta nova etapa no futebol portuguÃªs e revelou ambiÃ§Ã£o em deixar a sua marca no clube.
+### "Poderoso e muito rápido": As primeiras declarações de leão ao peito
 
-âÃs plataformas oficiais do Sporting, o jovem avanÃ§ado aproveitou tambÃ©m para se dar a conhecer aos adeptos, destacando a sua forte capacidade fÃ­sica e polivalÃªncia no setor ofensivo:
+Nas primeiras palavras com a camisola verde e branca, o internacional australiano não escondeu o entusiasmo por esta nova etapa no futebol português e revelou ambição em deixar a sua marca no clube.
 
-"Sou poderoso, muito rÃ¡pido e capaz de saltar muito alto. Consigo, tambÃ©m, marcar e dar a marcar Ã  equipa."
+Às plataformas oficiais do Sporting, o jovem avançado aproveitou também para se dar a conhecer aos adeptos, destacando a sua forte capacidade física e polivalência no setor ofensivo:
 
-âIrankunda garantiu ainda total disponibilidade para atuar onde for necessÃ¡rio nas opÃ§Ãµes da frente de ataque, reforÃ§ando que se sente confortÃ¡vel "em qualquer lugar do ataque".
+"Sou poderoso, muito rápido e capaz de saltar muito alto. Consigo, também, marcar e dar a marcar à equipa."
+
+Irankunda garantiu ainda total disponibilidade para atuar onde for necessário nas opções da frente de ataque, reforçando que se sente confortável "em qualquer lugar do ataque".

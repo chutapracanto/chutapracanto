@@ -16,25 +16,26 @@ relatedSpotify: ""
 ---
 
 
-O Benfica venceu o AGF Aarhus por 3-1 na primeira mÃ£o do _playoff_ da Liga Europa, garantindo uma vantagem importante para a eliminatÃ³ria. No final da partida, Marco Silva elogiou a exibiÃ§Ã£o global da equipa, embora nÃ£o tenha escondido algum desagrado pelo golo sofrido.
 
-### âVitÃ³ria "saborosa" apesar do lapso defensivo
+O Benfica venceu o AGF Aarhus por 3-1 na primeira mão do _playoff_ da Liga Europa, garantindo uma vantagem importante para a eliminatória. No final da partida, Marco Silva elogiou a exibição global da equipa, embora não tenha escondido algum desagrado pelo golo sofrido.
 
-âAnalisando o desempenho das _Ã¡guias_, o tÃ©cnico encarnado destacou a forte prestaÃ§Ã£o na etapa inicial e o controlo exercido no segundo tempo:
+### Vitória "saborosa" apesar do lapso defensivo
 
-- â**DomÃ­nio e reaÃ§Ã£o:** "Fizemos uma primeira parte de bom nÃ­vel e fomos muito fortes nas bolas paradas. Fica um sabor amargo por um golo que nÃ£o devÃ­amos ter sofrido, mas reagimos bem. Trinta segundos nÃ£o beliscam uma exibiÃ§Ã£o muito boa, mas estes erros tÃªm de desaparecer."
-- â**GestÃ£o na segunda parte:** "No segundo tempo fomos controladores. Faltou alguma frescura e o adversÃ¡rio abdicou de jogar, fechando-se em 30 metros. CriÃ¡mos menos oportunidades, mas foi uma vitÃ³ria saborosa e que cumpre o nosso primeiro objetivo."
+Analisando o desempenho das _águias_, o técnico encarnado destacou a forte prestação na etapa inicial e o controlo exercido no segundo tempo:
 
-### âGestÃ£o do plantel e o papel de Leandro Barreiro
+- **Domínio e reação:** "Fizemos uma primeira parte de bom nível e fomos muito fortes nas bolas paradas. Fica um sabor amargo por um golo que não devíamos ter sofrido, mas reagimos bem. Trinta segundos não beliscam uma exibição muito boa, mas estes erros têm de desaparecer."
+- **Gestão na segunda parte:** "No segundo tempo fomos controladores. Faltou alguma frescura e o adversário abdicou de jogar, fechando-se em 30 metros. Criámos menos oportunidades, mas foi uma vitória saborosa e que cumpre o nosso primeiro objetivo."
 
-âSobre as opÃ§Ãµes tomadas durante o encontro, o treinador explicou a gestÃ£o do meio-campo e a rotaÃ§Ã£o da equipa:
+### Gestão do plantel e o papel de Leandro Barreiro
 
-- â**Troca no setor intermÃ©dio:** "A saÃ­da do Barreiro para a entrada do Rios esteve ligada ao cartÃ£o amarelo. Taticamente o Leandro esteve muito bem nos apoios frontais e na ligaÃ§Ã£o aos corredores. O Rios trouxe-nos caracterÃ­sticas diferentes."
-- â**Refrescar a frente de ataque:** "As restantes alteraÃ§Ãµes, como as entradas de Andreas Schjelderup e Jhon DurÃ¡n, serviram essencialmente para dar frescura Ã  equipa."
+Sobre as opções tomadas durante o encontro, o treinador explicou a gestão do meio-campo e a rotação da equipa:
 
-### âA importÃ¢ncia da semana limpa de trabalho
+- **Troca no setor intermédio:** "A saída do Barreiro para a entrada do Rios esteve ligada ao cartão amarelo. Taticamente o Leandro esteve muito bem nos apoios frontais e na ligação aos corredores. O Rios trouxe-nos características diferentes."
+- **Refrescar a frente de ataque:** "As restantes alterações, como as entradas de Andreas Schjelderup e Jhon Durán, serviram essencialmente para dar frescura à equipa."
 
-âCom o adiamento do compromisso para o campeonato, o Benfica terÃ¡ vÃ¡rios dias sem jogos oficiais antes da viagem Ã  Dinamarca. Marco Silva considerou a decisÃ£o acertada:
+### A importância da semana limpa de trabalho
 
-- â**IntegraÃ§Ã£o e recuperaÃ§Ã£o:** "AndÃ¡vamos a jogar de trÃªs em trÃªs dias e optÃ¡mos por ter esta semana limpa. NÃ£o nos arrependemos. Ã fundamental para integrar jogadores que chegaram mais tarde como o Circati e para dar ritmo a quem vem de lesÃ£o, como o Fredrik Aursnes."
-- â**Alvo Palhinha em suspenso:** Confrontado com as notÃ­cias sobre o iminente reforÃ§o de JoÃ£o Palhinha, o tÃ©cnico encarnado manteve a reserva habitual: "NÃ£o comento nomes de jogadores que nÃ£o sÃ£o oficiais do Benfica."
+Com o adiamento do compromisso para o campeonato, o Benfica terá vários dias sem jogos oficiais antes da viagem à Dinamarca. Marco Silva considerou a decisão acertada:
+
+- **Integração e recuperação:** "Andávamos a jogar de três em três dias e optámos por ter esta semana limpa. Não nos arrependemos. É fundamental para integrar jogadores que chegaram mais tarde como o Circati e para dar ritmo a quem vem de lesão, como o Fredrik Aursnes."
+- **Alvo Palhinha em suspenso:** Confrontado com as notícias sobre o iminente reforço de João Palhinha, o técnico encarnado manteve a reserva habitual: "Não comento nomes de jogadores que não são oficiais do Benfica."

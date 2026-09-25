@@ -10,19 +10,20 @@ image: "https://framerusercontent.com/images/3ziFr8SiUNbZkX3ysBWdYCcJ9w.jpg?widt
 ---
 
 
-âO Benfica confirmou formalmente junto da ComissÃ£o do Mercado de Valores MobiliÃ¡rios (CMVM) a contrataÃ§Ã£o do internacional portuguÃªs JoÃ£o Palhinha, proveniente do Bayern Munique. O mÃ©dio de 31 anos Ã© o reforÃ§o mais desejado pelo treinador Marco Silva, reeditando a parceria de sucesso mantida no Fulham.
 
-### âPormenores financeiros e contratuais da transferÃªncia
+O Benfica confirmou formalmente junto da Comissão do Mercado de Valores Mobiliários (CMVM) a contratação do internacional português João Palhinha, proveniente do Bayern Munique. O médio de 31 anos é o reforço mais desejado pelo treinador Marco Silva, reeditando a parceria de sucesso mantida no Fulham.
 
-âOs contornos do negÃ³cio com os alemÃ£es e a duraÃ§Ã£o do vÃ­nculo do jogador ficaram selados nos seguintes termos:
+### Pormenores financeiros e contratuais da transferência
 
-- â**Valores da transferÃªncia:** As _Ã¡guias_ pagam um montante fixo de 14 milhÃµes de euros pela totalidade do passe, ao qual podem acrescer atÃ© 5 milhÃµes de euros mediante o cumprimento de objetivos prÃ©-definidos.
-- â**VÃ­nculo e clÃ¡usula:** Palhinha assinou um contrato vÃ¡lido por quatro temporadas, atÃ© 30 de junho de 2030, ficando salvaguardado por uma clÃ¡usula de rescisÃ£o fixada nos 50 milhÃµes de euros.
-- â**CondiÃ§Ãµes salariais:** O mÃ©dio aufere um vencimento anual lÃ­quido a rondar os 2,5 milhÃµes de euros por Ã©poca, acrescido de um prÃ©mio de assinatura na ordem de 1 milhÃ£o de euros.
+Os contornos do negócio com os alemães e a duração do vínculo do jogador ficaram selados nos seguintes termos:
 
-### âReencontro com Marco Silva no Seixal
+- **Valores da transferência:** As _águias_ pagam um montante fixo de 14 milhões de euros pela totalidade do passe, ao qual podem acrescer até 5 milhões de euros mediante o cumprimento de objetivos pré-definidos.
+- **Vínculo e cláusula:** Palhinha assinou um contrato válido por quatro temporadas, até 30 de junho de 2030, ficando salvaguardado por uma cláusula de rescisão fixada nos 50 milhões de euros.
+- **Condições salariais:** O médio aufere um vencimento anual líquido a rondar os 2,5 milhões de euros por época, acrescido de um prémio de assinatura na ordem de 1 milhão de euros.
 
-âA chegada do jogador marca o regresso a um tÃ©cnico com quem tem forte cumplicidade no relvado:
+### Reencontro com Marco Silva no Seixal
 
-- â**Visita ao Benfica Campus:** Palhinha esteve nas instalaÃ§Ãµes do Seixal no dia em que a equipa encerrava a preparaÃ§Ã£o para a visita ao Aarhus, na Dinamarca, a contar para a segunda mÃ£o do playoff de acesso Ã  fase de Liga da Liga Europa.
-- â**Reencontro de sucesso:** O mÃ©dio volta a ser orientados por Marco Silva, com quem trabalhou em Inglaterra ao serviÃ§o do Fulham entre 2022 e 2024.
+A chegada do jogador marca o regresso a um técnico com quem tem forte cumplicidade no relvado:
+
+- **Visita ao Benfica Campus:** Palhinha esteve nas instalações do Seixal no dia em que a equipa encerrava a preparação para a visita ao Aarhus, na Dinamarca, a contar para a segunda mão do playoff de acesso à fase de Liga da Liga Europa.
+- **Reencontro de sucesso:** O médio volta a ser orientados por Marco Silva, com quem trabalhou em Inglaterra ao serviço do Fulham entre 2022 e 2024.

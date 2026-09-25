@@ -10,14 +10,15 @@ image: "https://framerusercontent.com/images/ZnDsLIz4DRrixq16ZCdfdCUZQ.jpg?width
 ---
 
 
-O Real Madrid venceu a Real Sociedad por 4-1, no regresso de JosÃ© Mourinho ao Santiago BernabÃ©u, em jogo a contar para a La Liga. Kylian MbappÃ© foi a grande figura da partida ao apontar um _hat-trick_, num encontro em que VinÃ­cius Jr. tambÃ©m inscreveu o seu nome na lista dos marcadores.
 
-### âDo empate ao intervalo Ã  goleada no segundo tempo
+O Real Madrid venceu a Real Sociedad por 4-1, no regresso de José Mourinho ao Santiago Bernabéu, em jogo a contar para a La Liga. Kylian Mbappé foi a grande figura da partida ao apontar um _hat-trick_, num encontro em que Vinícius Jr. também inscreveu o seu nome na lista dos marcadores.
 
-âApesar do domÃ­nio inicial, o marcador sÃ³ se moveu perto do descanso, num jogo que ganhou ritmo no segundo perÃ­odo:
+### Do empate ao intervalo à goleada no segundo tempo
 
-- â**Vantagem e reaÃ§Ã£o imediata:** Aos 39 minutos, MbappÃ© aproveitou um passe de Valverde para abrir o marcador de pÃ© esquerdo. Contudo, a Real Sociedad respondeu aos 44 minutos por Sucic, que tirou partido de uma descoordenaÃ§Ã£o defensiva da equipa da casa para restabelecer a igualdade antes do intervalo.
-- â**CombinaÃ§Ã£o de luxo no ataque:** Na segunda parte, os _merengues_ aceleraram o ritmo. Aos 60 minutos, MbappÃ© tabelou com Bellingham e voltou a colocar o Real Madrid em vantagem. Sete minutos depois, Bellingham recuperou a bola na Ã¡rea adversÃ¡ria e serviu VinÃ­cius Jr. para o 3-1.
-- â**Classe a fechar a contagem:** Aos 80 minutos, VinÃ­cius Jr. retribuiu com uma assistÃªncia de classe para MbappÃ©, que picou a bola sobre Remiro e selou o _hat-trick_. Brahim DÃ­az ainda viu um golo ser anulado por posiÃ§Ã£o irregular de EspÃ­ no inÃ­cio do lance.
+Apesar do domínio inicial, o marcador só se moveu perto do descanso, num jogo que ganhou ritmo no segundo período:
 
-âCom este resultado, a equipa orientada por JosÃ© Mourinho mantÃ©m o registo vitorioso no arranque do campeonato espanhol, somando duas vitÃ³rias em dois jogos disputados.
+- **Vantagem e reação imediata:** Aos 39 minutos, Mbappé aproveitou um passe de Valverde para abrir o marcador de pé esquerdo. Contudo, a Real Sociedad respondeu aos 44 minutos por Sucic, que tirou partido de uma descoordenação defensiva da equipa da casa para restabelecer a igualdade antes do intervalo.
+- **Combinação de luxo no ataque:** Na segunda parte, os _merengues_ aceleraram o ritmo. Aos 60 minutos, Mbappé tabelou com Bellingham e voltou a colocar o Real Madrid em vantagem. Sete minutos depois, Bellingham recuperou a bola na área adversária e serviu Vinícius Jr. para o 3-1.
+- **Classe a fechar a contagem:** Aos 80 minutos, Vinícius Jr. retribuiu com uma assistência de classe para Mbappé, que picou a bola sobre Remiro e selou o _hat-trick_. Brahim Díaz ainda viu um golo ser anulado por posição irregular de Espí no início do lance.
+
+Com este resultado, a equipa orientada por José Mourinho mantém o registo vitorioso no arranque do campeonato espanhol, somando duas vitórias em dois jogos disputados.

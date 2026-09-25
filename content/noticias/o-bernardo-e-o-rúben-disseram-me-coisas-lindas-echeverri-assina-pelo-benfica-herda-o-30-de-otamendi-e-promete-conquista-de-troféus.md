@@ -10,24 +10,25 @@ image: "https://framerusercontent.com/images/JRZQb8N8hIadTietCgTOGxQEIg.jpg?widt
 ---
 
 
-Claudio Echeverri jÃ¡ respira a mÃ­stica do Manto Sagrado. Nas suas primeiras declaraÃ§Ãµes oficiais prestadas aos microfones da BTV, o prodÃ­gio argentino de 20 anos cedido pelo Manchester City atÃ© ao tÃ©rmino da temporada deu livre curso Ã  satisfaÃ§Ã£o por ingressar na estrutura encarnada, revelando os bastidores cruciais da transferÃªncia e assumindo sem rodeios o peso histÃ³rico da camisola que escolheu ostentar.
 
-â**A chancela de luxo de RÃºben Dias e Bernardo Silva no balneÃ¡rio do City**
+Claudio Echeverri já respira a mística do Manto Sagrado. Nas suas primeiras declarações oficiais prestadas aos microfones da BTV, o prodígio argentino de 20 anos cedido pelo Manchester City até ao término da temporada deu livre curso à satisfação por ingressar na estrutura encarnada, revelando os bastidores cruciais da transferência e assumindo sem rodeios o peso histórico da camisola que escolheu ostentar.
 
-âA opÃ§Ã£o por rumar a Lisboa maturou-se no balneÃ¡rio do campeÃ£o inglÃªs, onde o jovem virtuoso colheu conselhos valiosos de autÃªnticos sÃ­mbolos da formaÃ§Ã£o do Seixal:
+**A chancela de luxo de Rúben Dias e Bernardo Silva no balneário do City**
 
-- â**Conselheiros de elite em Manchester:** _"Quando estive em Manchester, joguei com o RÃºben. Falou-me muito bem do Benfica, disse-me que era um clube grandÃ­ssimo, com adeptos e ambiente Ã³timos. O Bernardo Silva igual... Ã um dos melhores com quem joguei e ouvir aquilo deu-me uma enorme tranquilidade. Disse-me coisas lindas sobre a dimensÃ£o do clube."_
-- â**Reencontro de cumplicidade com Prestianni:** _"ConheÃ§o o Prestianni desde muito pequeno, partilhÃ¡mos balneÃ¡rio nas seleÃ§Ãµes jovens. Ficou genuinamente radiante quando soube da minha vinda."_
+A opção por rumar a Lisboa maturou-se no balneário do campeão inglês, onde o jovem virtuoso colheu conselhos valiosos de autênticos símbolos da formação do Seixal:
 
-â**O vulcÃ£o da Luz e a heranÃ§a pesada do nÃºmero 30**
+- **Conselheiros de elite em Manchester:** _"Quando estive em Manchester, joguei com o Rúben. Falou-me muito bem do Benfica, disse-me que era um clube grandíssimo, com adeptos e ambiente ótimos. O Bernardo Silva igual... É um dos melhores com quem joguei e ouvir aquilo deu-me uma enorme tranquilidade. Disse-me coisas lindas sobre a dimensão do clube."_
+- **Reencontro de cumplicidade com Prestianni:** _"Conheço o Prestianni desde muito pequeno, partilhámos balneário nas seleções jovens. Ficou genuinamente radiante quando soube da minha vinda."_
 
-âRecordando a experiÃªncia prÃ©via de pisar o relvado do EstÃ¡dio da Luz como adversÃ¡rio num duelo da Liga dos CampeÃµes, Echeverri confessou o fascÃ­nio pelo fervor das bancadas e prestou tributo aos compatriotas que fizeram histÃ³ria com a camisola 30:
+**O vulcão da Luz e a herança pesada do número 30**
 
-- â**O fervor da Catedral:** _"O estÃ¡dio Ã© deslumbrante. Fiquei impressionado quando cÃ¡ joguei na Champions. Os adeptos criam uma atmosfera incandescente, muito semelhante ao ambiente apaixonado a que estamos habituados na Argentina, sempre a empurrar a equipa."_
-- â**A heranÃ§a de Otamendi e Saviola:** _"Vestir esta camisola jÃ¡ envolve uma responsabilidade gigantesca, mas herdar o nÃºmero 30 do Otamendi, que Ã© uma referÃªncia absoluta, Ã© incrÃ­vel. O Saviola tambÃ©m marcou uma era com este nÃºmero. OxalÃ¡ consiga trilhar um caminho semelhante e dar o meu contributo ao mÃ¡ximo."_
+Recordando a experiência prévia de pisar o relvado do Estádio da Luz como adversário num duelo da Liga dos Campeões, Echeverri confessou o fascínio pelo fervor das bancadas e prestou tributo aos compatriotas que fizeram história com a camisola 30:
 
-â**Sede de tÃ­tulos no horizonte encarnado**
+- **O fervor da Catedral:** _"O estádio é deslumbrante. Fiquei impressionado quando cá joguei na Champions. Os adeptos criam uma atmosfera incandescente, muito semelhante ao ambiente apaixonado a que estamos habituados na Argentina, sempre a empurrar a equipa."_
+- **A herança de Otamendi e Saviola:** _"Vestir esta camisola já envolve uma responsabilidade gigantesca, mas herdar o número 30 do Otamendi, que é uma referência absoluta, é incrível. O Saviola também marcou uma era com este número. Oxalá consiga trilhar um caminho semelhante e dar o meu contributo ao máximo."_
 
-âDe olhos postos no decorrer da temporada ao serviÃ§o do coletivo comandado por Marco Silva, o internacional jovem albiceleste traÃ§ou uma fasquia ambiciosa para o seu trajeto na Luz:
+**Sede de títulos no horizonte encarnado**
 
-- â**Foco no topo:** _"O ano perfeito traduz-se em alcanÃ§ar a totalidade dos objetivos e erguer os trofÃ©us que um clube desta dimensÃ£o merece. Deixo um agradecimento especial aos adeptos pelo carinho que me demonstraram desde o primeiro minuto. Continuem a apoiar-nos!"_
+De olhos postos no decorrer da temporada ao serviço do coletivo comandado por Marco Silva, o internacional jovem albiceleste traçou uma fasquia ambiciosa para o seu trajeto na Luz:
+
+- **Foco no topo:** _"O ano perfeito traduz-se em alcançar a totalidade dos objetivos e erguer os troféus que um clube desta dimensão merece. Deixo um agradecimento especial aos adeptos pelo carinho que me demonstraram desde o primeiro minuto. Continuem a apoiar-nos!"_

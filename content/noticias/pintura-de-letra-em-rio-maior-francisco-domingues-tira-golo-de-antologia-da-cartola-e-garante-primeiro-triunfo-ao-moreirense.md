@@ -10,21 +10,22 @@ image: "https://framerusercontent.com/images/W3QosShd4xkdevTpoMg19fBwrU.jpg?widt
 ---
 
 
-âA 4.Âª jornada da Liga Portugal Betclic reservou um duelo de alta exigÃªncia entre dois conjuntos em busca do primeiro sorriso da temporada. Na visita ao reduto do Casa Pia AC, o Moreirense de Vasco Botelho da Costa superiorizou-se e conquistou uma vitÃ³ria preciosa por 0-1. Num encontro pautado por bom futebol e rigor tÃ¡tico, a diferenÃ§a acabou por ser ditada por um momento de pura genialidade individual que promete ficar gravado na galeria dos melhores golos do campeonato.
 
-â**GÃ©nio de Francisco Domingues ilumina primeira metade de bom nÃ­vel**
+A 4.ª jornada da Liga Portugal Betclic reservou um duelo de alta exigência entre dois conjuntos em busca do primeiro sorriso da temporada. Na visita ao reduto do Casa Pia AC, o Moreirense de Vasco Botelho da Costa superiorizou-se e conquistou uma vitória preciosa por 0-1. Num encontro pautado por bom futebol e rigor tático, a diferença acabou por ser ditada por um momento de pura genialidade individual que promete ficar gravado na galeria dos melhores golos do campeonato.
 
-âApesar de as balizas terem estado relativamente protegidas de sobressaltos de maior nos minutos iniciais, a partida desenrolou-se num ritmo vivo e atrativo de parte a parte:
+**Génio de Francisco Domingues ilumina primeira metade de bom nível**
 
-- â**InvenÃ§Ã£o monumental:** Aos 24 anos, Francisco Domingues assinou uma obra de arte ao inventar um remate de letra, em cima do limite da grande Ã¡rea, batendo o guardiÃ£o AndrÃ© Gomes com uma categoria principesca.
-- â**Personalidade cÃ³nega:** Embalada pelo tento surreal do lateral formado no Benfica, a formaÃ§Ã£o de Moreira de CÃ³negos manteve-se serena, exibindo-se confiante na circulaÃ§Ã£o e espreitando a oportunidade para dilatar a vantagem antes do descanso.
+Apesar de as balizas terem estado relativamente protegidas de sobressaltos de maior nos minutos iniciais, a partida desenrolou-se num ritmo vivo e atrativo de parte a parte:
 
-â**Sufoco dos**_**gansos**_**esbarra na solidez e no ferro da baliza**
+- **Invenção monumental:** Aos 24 anos, Francisco Domingues assinou uma obra de arte ao inventar um remate de letra, em cima do limite da grande área, batendo o guardião André Gomes com uma categoria principesca.
+- **Personalidade cónega:** Embalada pelo tento surreal do lateral formado no Benfica, a formação de Moreira de Cónegos manteve-se serena, exibindo-se confiante na circulação e espreitando a oportunidade para dilatar a vantagem antes do descanso.
 
-âInsatisfeito com o rumo dos acontecimentos, Filipe Coelho operou mexidas ao intervalo e alterou a postura dos homens da casa para a etapa complementar:
+**Sufoco dos**_**gansos**_**esbarra na solidez e no ferro da baliza**
 
-- â**PressÃ£o sufocante:** O Casa Pia reapareceu dos balneÃ¡rios com as linhas subidas, impondo uma pressÃ£o alta que desequilibrou o plano de jogo do Moreirense e partiu o encontro.
-- â**Susto no ferro:** ApÃ³s um compasso de espera invulgar devido a um percalÃ§o na gestÃ£o das substituiÃ§Ãµes forasteiras, Henrique AraÃºjo saltou do banco e esteve perto do golo no seu primeiro toque na bola, desferindo um cabeceamento fulgurante que embateu com estrondo no poste de AndrÃ© Ferreira.
-- â**Muralha imperturbÃ¡vel:** Sob a arbitragem de LuÃ­s Godinho, os pupilos de Vasco Botelho da Costa souberam vestir o fato de macaco. Com Batista irrepreensÃ­vel na conquista de quase todos os duelos individuais, o Moreirense trancou as garras e segurou a vantagem atÃ© ao apito final.
+Insatisfeito com o rumo dos acontecimentos, Filipe Coelho operou mexidas ao intervalo e alterou a postura dos homens da casa para a etapa complementar:
 
-âCom este desfecho, o Moreirense reage com carÃ¡ter ao desaire sofrido na jornada anterior em Arouca (4-0) e garante os primeiros trÃªs pontos na prova, ao passo que o Casa Pia continua sem conseguir somar na presente ediÃ§Ã£o da liga.
+- **Pressão sufocante:** O Casa Pia reapareceu dos balneários com as linhas subidas, impondo uma pressão alta que desequilibrou o plano de jogo do Moreirense e partiu o encontro.
+- **Susto no ferro:** Após um compasso de espera invulgar devido a um percalço na gestão das substituições forasteiras, Henrique Araújo saltou do banco e esteve perto do golo no seu primeiro toque na bola, desferindo um cabeceamento fulgurante que embateu com estrondo no poste de André Ferreira.
+- **Muralha imperturbável:** Sob a arbitragem de Luís Godinho, os pupilos de Vasco Botelho da Costa souberam vestir o fato de macaco. Com Batista irrepreensível na conquista de quase todos os duelos individuais, o Moreirense trancou as garras e segurou a vantagem até ao apito final.
+
+Com este desfecho, o Moreirense reage com caráter ao desaire sofrido na jornada anterior em Arouca (4-0) e garante os primeiros três pontos na prova, ao passo que o Casa Pia continua sem conseguir somar na presente edição da liga.

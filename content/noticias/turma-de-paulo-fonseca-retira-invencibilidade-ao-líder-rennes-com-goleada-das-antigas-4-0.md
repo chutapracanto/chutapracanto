@@ -10,18 +10,19 @@ image: "https://framerusercontent.com/images/z538QvYvNIXk3YiizhfNRyp2Vs.jpg?widt
 ---
 
 
-O Olympique Lyonnais carimbou este sÃ¡bado a exibiÃ§Ã£o mais vistosa da sua campanha em 2026/27 ao atropelar o Rennes por 4-0. A formaÃ§Ã£o comandada pelo tÃ©cnico portuguÃªs Paulo Fonseca nÃ£o deu hipÃ³teses ao emblema que liderava a Ligue 1 sem qualquer derrota e carimbou um triunfo incontestÃ¡vel no Groupama Stadium, marcado por dois golos em cada metade do encontro.
 
-â**Bis de Nuamah colocou o jogo no sentido Ãºnico**
+O Olympique Lyonnais carimbou este sábado a exibição mais vistosa da sua campanha em 2026/27 ao atropelar o Rennes por 4-0. A formação comandada pelo técnico português Paulo Fonseca não deu hipóteses ao emblema que liderava a Ligue 1 sem qualquer derrota e carimbou um triunfo incontestável no Groupama Stadium, marcado por dois golos em cada metade do encontro.
 
-âApesar do excelente arranque de campeonato do Rennes que trazia no currÃ­culo trÃªs vitÃ³rias e uma igualdade diante do campeÃ£o PSG, a estratÃ©gia visitante ruiu perante o fulgor ofensivo dos 'gones':
+**Bis de Nuamah colocou o jogo no sentido único**
 
-- â**Inspirado Nuamah abre o caminho (7' e 30'):** O jovem extremo ganÃªs tornou-se a figura da primeira parte ao faturar por duas vezes. O golo madrugador nasceu de uma assistÃªncia aÃ§ucarada de Corentin Tolisso, tendo o atacante voltado a fazer balanÃ§ar as redes Ã  passagem da meia hora de jogo.
-- â**Athekame em plano de destaque:** Na defesa, o lateral suÃ­Ã§o Zachary Athekame (cedido pelo Milan) revelou-se um verdadeiro motor pelo corredor direito, somando aÃ§Ãµes de relevo no apoio ao ataque.
+Apesar do excelente arranque de campeonato do Rennes que trazia no currículo três vitórias e uma igualdade diante do campeão PSG, a estratégia visitante ruiu perante o fulgor ofensivo dos 'gones':
 
-â**Tolisso coroa exibiÃ§Ã£o perfeita antes do apito final**
+- **Inspirado Nuamah abre o caminho (7' e 30'):** O jovem extremo ganês tornou-se a figura da primeira parte ao faturar por duas vezes. O golo madrugador nasceu de uma assistência açucarada de Corentin Tolisso, tendo o atacante voltado a fazer balançar as redes à passagem da meia hora de jogo.
+- **Athekame em plano de destaque:** Na defesa, o lateral suíço Zachary Athekame (cedido pelo Milan) revelou-se um verdadeiro motor pelo corredor direito, somando ações de relevo no apoio ao ataque.
 
-âA etapa complementar serviu para confirmar a supremacia caseira e para gerir a vantagem com classe:
+**Tolisso coroa exibição perfeita antes do apito final**
 
-- â**CapitÃ£o fecha a conta:** Athekame coroou a sua grande exibiÃ§Ã£o com golo e assistÃªncia, servindo Corentin Tolisso para o quarto e Ãºltimo tento da noite, o primeiro da conta pessoal do internacional francÃªs na presente Ã©poca.
-- â**Resultados da tarde em FranÃ§a:** A jornada arrancou com o triunfo do Paris FC frente ao Strasbourg (2-1), registando-se ainda vitÃ³rias caseiras de Angers (sobre o Troyes), Le Mans (diante do Lorient) e Toulouse (frente ao Le Havre).
+A etapa complementar serviu para confirmar a supremacia caseira e para gerir a vantagem com classe:
+
+- **Capitão fecha a conta:** Athekame coroou a sua grande exibição com golo e assistência, servindo Corentin Tolisso para o quarto e último tento da noite, o primeiro da conta pessoal do internacional francês na presente época.
+- **Resultados da tarde em França:** A jornada arrancou com o triunfo do Paris FC frente ao Strasbourg (2-1), registando-se ainda vitórias caseiras de Angers (sobre o Troyes), Le Mans (diante do Lorient) e Toulouse (frente ao Le Havre).

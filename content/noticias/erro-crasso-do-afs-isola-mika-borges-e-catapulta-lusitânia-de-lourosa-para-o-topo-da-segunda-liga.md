@@ -10,20 +10,21 @@ image: "https://framerusercontent.com/images/ddyOb5XpuKe4hgdIQojccnSoes.jpg?widt
 ---
 
 
-âA 5.Âª jornada da Segunda Liga encerrou com chave de ouro no EstÃ¡dio Carlos OsÃ³rio, em Oliveira de AzemÃ©is casa emprestada do LusitÃ¢nia de Lourosa. Num duelo marcado pelo ritmo frenÃ©tico, qualidade tÃ©cnica de parte a parte e emoÃ§Ã£o levada ao limite, a formaÃ§Ã£o lusitanista bateu o AFS por 2-1, selando a vitÃ³ria no suspiro final e garantindo a lideranÃ§a isolada da prova.
 
-â**Obra-prima de Collard, resposta rÃ¡pida de Pinho e parada e resposta**
+A 5.ª jornada da Segunda Liga encerrou com chave de ouro no Estádio Carlos Osório, em Oliveira de Azeméis casa emprestada do Lusitânia de Lourosa. Num duelo marcado pelo ritmo frenético, qualidade técnica de parte a parte e emoção levada ao limite, a formação lusitanista bateu o AFS por 2-1, selando a vitória no suspiro final e garantindo a liderança isolada da prova.
 
-âA etapa inicial ofereceu um espetÃ¡culo de alto nÃ­vel, com o Lourosa a apostar na verticalidade estonteante das suas alas e o AFS a tentar controlar o ritmo atravÃ©s da posse de bola:
+**Obra-prima de Collard, resposta rápida de Pinho e parada e resposta**
 
-- â**Pintura do meio da rua aos 26':** O marcador abriu-se com um momento de pura inspiraÃ§Ã£o. O central Dylan Collard recuperou a bola em zona adiantada, rodou sobre o adversÃ¡rio com classe e desferiu um mÃ­ssil teleguiado que ainda beijou a barra antes de repousar no fundo das redes.
-- â**ReaÃ§Ã£o imediata de Rodrigo Pinho (30'):** O AFS nÃ£o se deixou abalar e respondeu no imediato. Aproveitando uma desconcentraÃ§Ã£o posicional do bloco defensivo contrÃ¡rio, Roni Moura isolou Rodrigo Pinho na esquerda da Ã¡rea e o experiente avanÃ§ado picou com mestria sobre a saÃ­da de Marco Ribeiro, reestabelecendo a igualdade.
-- â**Vertigem de Mandiang e PaulitÃ©:** Com a partida completamente aberta, o LusitÃ¢nia de Lourosa voltou a carregar e dispÃ´s das melhores ocasiÃµes antes do descanso, impulsionado pela irreverÃªncia e velocidade da sua dupla ofensiva.
+A etapa inicial ofereceu um espetáculo de alto nível, com o Lourosa a apostar na verticalidade estonteante das suas alas e o AFS a tentar controlar o ritmo através da posse de bola:
 
-â**Respeito mÃºtuo, a oferta de PivÃ´ e a frieza de Mika Borges aos 87'**
+- **Pintura do meio da rua aos 26':** O marcador abriu-se com um momento de pura inspiração. O central Dylan Collard recuperou a bola em zona adiantada, rodou sobre o adversário com classe e desferiu um míssil teleguiado que ainda beijou a barra antes de repousar no fundo das redes.
+- **Reação imediata de Rodrigo Pinho (30'):** O AFS não se deixou abalar e respondeu no imediato. Aproveitando uma desconcentração posicional do bloco defensivo contrário, Roni Moura isolou Rodrigo Pinho na esquerda da área e o experiente avançado picou com mestria sobre a saída de Marco Ribeiro, reestabelecendo a igualdade.
+- **Vertigem de Mandiang e Paulité:** Com a partida completamente aberta, o Lusitânia de Lourosa voltou a carregar e dispôs das melhores ocasiões antes do descanso, impulsionado pela irreverência e velocidade da sua dupla ofensiva.
 
-âNo segundo tempo, a turma de Vila das Aves regressou mais intensa e colocou a defensiva da casa em sentido, mas as mexidas a partir do banco acabaram por equilibrar as forÃ§as:
+**Respeito mútuo, a oferta de Pivô e a frieza de Mika Borges aos 87'**
 
-- â**Calculismo e medo de errar:** Apesar do ritmo elevado, a prudÃªncia e o receio de sofrer um contragolpe fatal retiraram algum discernimento no Ãºltimo terÃ§o, parecendo fadar o encontro a um nulo em pontos.
-- â**O deslize proibido e a calma de Mika Borges (87'):** Quando o empate jÃ¡ parecia inevitÃ¡vel, um atraso infeliz do lateral Mateus PivÃ´ isolou Mika Borges na grande Ã¡rea. Com sangue-frio no momento da decisÃ£o, o extremo colocou a bola entre as pernas de Dani Rebollo e fez explodir de alegria as bancadas.
-- â**LideranÃ§a blindada com garras:** O AFS ainda bombeou bolas para a Ã¡rea no desespero final, mas a muralha defensiva do Lourosa respondeu com sobriedade e segurou com unhas e dentes os trÃªs pontos que valem o topo do campeonato.
+No segundo tempo, a turma de Vila das Aves regressou mais intensa e colocou a defensiva da casa em sentido, mas as mexidas a partir do banco acabaram por equilibrar as forças:
+
+- **Calculismo e medo de errar:** Apesar do ritmo elevado, a prudência e o receio de sofrer um contragolpe fatal retiraram algum discernimento no último terço, parecendo fadar o encontro a um nulo em pontos.
+- **O deslize proibido e a calma de Mika Borges (87'):** Quando o empate já parecia inevitável, um atraso infeliz do lateral Mateus Pivô isolou Mika Borges na grande área. Com sangue-frio no momento da decisão, o extremo colocou a bola entre as pernas de Dani Rebollo e fez explodir de alegria as bancadas.
+- **Liderança blindada com garras:** O AFS ainda bombeou bolas para a área no desespero final, mas a muralha defensiva do Lourosa respondeu com sobriedade e segurou com unhas e dentes os três pontos que valem o topo do campeonato.

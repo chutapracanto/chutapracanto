@@ -10,38 +10,39 @@ image: "https://framerusercontent.com/images/9JYrJ6dOZcXVf1sECvCUHq5C43E.jpg?wid
 ---
 
 
-A UEFA definiu a rota completa de Benfica e Torreense para a fase regular da Liga Europa. Entre desafios de exigÃªncia mÃ¡xima, deslocaÃ§Ãµes emotivas e duelos histÃ³ricos, as duas formaÃ§Ãµes lusas tÃªm jÃ¡ traÃ§ado o roteiro que ditarÃ¡ a sua sorte na competiÃ§Ã£o europeia entre setembro e janeiro.
 
-â**Batismo de fogo em San Siro precede embate no DragÃ£o**
+A UEFA definiu a rota completa de Benfica e Torreense para a fase regular da Liga Europa. Entre desafios de exigência máxima, deslocações emotivas e duelos históricos, as duas formações lusas têm já traçado o roteiro que ditará a sua sorte na competição europeia entre setembro e janeiro.
 
-âO arranque europeu da turma da Luz nÃ£o podia antever teste de maior exigÃªncia. A 16 de setembro, as Ã¡guias viajam atÃ© MilÃ£o para medir forÃ§as com o AC Milan de RÃºben Amorim e GonÃ§alo Ramos num dos palcos mais emblemÃ¡ticos do futebol mundial. Para adensar o grau de dificuldade, a batalha em ItÃ¡lia antecede imediatamente o ClÃ¡ssico frente ao FC Porto no EstÃ¡dio do DragÃ£o, agendado para o fim de semana seguinte.
+**Batismo de fogo em San Siro precede embate no Dragão**
 
-âNa ronda posterior, a catedral encarnada veste-se de gala para receber o histÃ³rico Celtic de Glasglow. A caminhada na fase regular culminarÃ¡ a 28 de janeiro na Luz, num duelo de sentimentos especiais com o regresso de Vangelis Pavlidis Ã s origens perante o AZ Alkmaar.
+O arranque europeu da turma da Luz não podia antever teste de maior exigência. A 16 de setembro, as águias viajam até Milão para medir forças com o AC Milan de Rúben Amorim e Gonçalo Ramos num dos palcos mais emblemáticos do futebol mundial. Para adensar o grau de dificuldade, a batalha em Itália antecede imediatamente o Clássico frente ao FC Porto no Estádio do Dragão, agendado para o fim de semana seguinte.
 
-â**Agenda das Ãguias:**
+Na ronda posterior, a catedral encarnada veste-se de gala para receber o histórico Celtic de Glasglow. A caminhada na fase regular culminará a 28 de janeiro na Luz, num duelo de sentimentos especiais com o regresso de Vangelis Pavlidis às origens perante o AZ Alkmaar.
 
-- â**1.Âª Jornada:** AC Milan vs. Benfica (F) â 16 de setembro, 20:00
-- â**2.Âª Jornada:** Benfica vs. Celtic (C) â 15 de outubro, 20:00
-- â**3.Âª Jornada:** Omonia vs. Benfica (F) â 22 de outubro, 20:00
-- â**4.Âª Jornada:** Benfica vs. Lech PoznaÅ (C) â 5 de novembro, 20:00
-- â**5.Âª Jornada:** Viktoria PlzeÅ vs. Benfica (F) â 26 de novembro, 17:45
-- â**6.Âª Jornada:** Benfica vs. OFI Creta (C) â 10 de dezembro, 20:00
-- â**7.Âª Jornada:** NEC Nijmegen vs. Benfica (F) â 21 de janeiro, 17:45
-- â**8.Âª Jornada:** Benfica vs. AZ Alkmaar (C) â 28 de janeiro, 20:00
+**Agenda das Águias:**
 
-â**Odisseia escandinava marca estreia histÃ³rica do Torreense**
+- **1.ª Jornada:** AC Milan vs. Benfica (F) — 16 de setembro, 20:00
+- **2.ª Jornada:** Benfica vs. Celtic (C) — 15 de outubro, 20:00
+- **3.ª Jornada:** Omonia vs. Benfica (F) — 22 de outubro, 20:00
+- **4.ª Jornada:** Benfica vs. Lech Poznań (C) — 5 de novembro, 20:00
+- **5.ª Jornada:** Viktoria Plzeň vs. Benfica (F) — 26 de novembro, 17:45
+- **6.ª Jornada:** Benfica vs. OFI Creta (C) — 10 de dezembro, 20:00
+- **7.ª Jornada:** NEC Nijmegen vs. Benfica (F) — 21 de janeiro, 17:45
+- **8.ª Jornada:** Benfica vs. AZ Alkmaar (C) — 28 de janeiro, 20:00
 
-âPor seu turno, o Torreense prepara-se para escrever a primeira pÃ¡gina da sua histÃ³ria em provas europeias. A aventura azuis-grenÃ¡ comeÃ§a a 17 de setembro no extremo norte da Europa, com uma visita ao terreno do LillestrÃ¸m, na Noruega. Ultrapassado o obstÃ¡culo escandinavo, os refletores viram-se para o EstÃ¡dio Dr. MagalhÃ£es Pessoa, em Leiria, que serÃ¡ palco do duelo de alto gabarito frente aos ingleses do Sunderland na 2.Âª jornada.
+**Odisseia escandinava marca estreia histórica do Torreense**
 
-âO pÃ©riplo internacional da turma de Torres Vedras fecha a 28 de janeiro, com a receÃ§Ã£o aos gregos do Olympiacos, anteriores conquistadores do trofÃ©u.
+Por seu turno, o Torreense prepara-se para escrever a primeira página da sua história em provas europeias. A aventura azuis-grená começa a 17 de setembro no extremo norte da Europa, com uma visita ao terreno do Lillestrøm, na Noruega. Ultrapassado o obstáculo escandinavo, os refletores viram-se para o Estádio Dr. Magalhães Pessoa, em Leiria, que será palco do duelo de alto gabarito frente aos ingleses do Sunderland na 2.ª jornada.
 
-â**Agenda do Torreense:**
+O périplo internacional da turma de Torres Vedras fecha a 28 de janeiro, com a receção aos gregos do Olympiacos, anteriores conquistadores do troféu.
 
-- â**1.Âª Jornada:** LillestrÃ¸m vs. Torreense (F) â 17 de setembro, 20:00
-- â**2.Âª Jornada:** Torreense vs. Sunderland (C) â 15 de outubro, 17:45
-- â**3.Âª Jornada:** FerencvÃ¡ros vs. Torreense (F) â 22 de outubro, 17:45
-- â**4.Âª Jornada:** Torreense vs. Ararat-Armenia (C) â 5 de novembro, 20:00
-- â**5.Âª Jornada:** Torreense vs. Celtic (C) â 26 de novembro, 20:00
-- â**6.Âª Jornada:** Real Sociedad vs. Torreense (F) â 10 de dezembro, 20:00
-- â**7.Âª Jornada:** Lech PoznaÅ vs. Torreense (F) â 21 de janeiro, 20:00
-- â**8.Âª Jornada:** Torreense vs. Olympiacos (C) â 28 de janeiro, 20:00
+**Agenda do Torreense:**
+
+- **1.ª Jornada:** Lillestrøm vs. Torreense (F) — 17 de setembro, 20:00
+- **2.ª Jornada:** Torreense vs. Sunderland (C) — 15 de outubro, 17:45
+- **3.ª Jornada:** Ferencváros vs. Torreense (F) — 22 de outubro, 17:45
+- **4.ª Jornada:** Torreense vs. Ararat-Armenia (C) — 5 de novembro, 20:00
+- **5.ª Jornada:** Torreense vs. Celtic (C) — 26 de novembro, 20:00
+- **6.ª Jornada:** Real Sociedad vs. Torreense (F) — 10 de dezembro, 20:00
+- **7.ª Jornada:** Lech Poznań vs. Torreense (F) — 21 de janeiro, 20:00
+- **8.ª Jornada:** Torreense vs. Olympiacos (C) — 28 de janeiro, 20:00

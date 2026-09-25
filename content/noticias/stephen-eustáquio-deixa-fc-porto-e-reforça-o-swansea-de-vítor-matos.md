@@ -10,19 +10,20 @@ image: "https://framerusercontent.com/images/GLrFqqc1AAwkTm5k7WHASaPsJ7M.webp?wi
 ---
 
 
-O FC Porto fechou a transferÃªncia de Stephen EustÃ¡quio para o Swansea City. Fora dos planos do tÃ©cnico Francesco Farioli para a presente temporada, o mÃ©dio canadiano ruma ao _Championship_ num negÃ³cio que garante um encaixe financeiro imediato Ã  administraÃ§Ã£o liderada por AndrÃ© Villas-Boas.
 
-### âEncaixe financeiro e detalhes do negÃ³cio
+O FC Porto fechou a transferência de Stephen Eustáquio para o Swansea City. Fora dos planos do técnico Francesco Farioli para a presente temporada, o médio canadiano ruma ao _Championship_ num negócio que garante um encaixe financeiro imediato à administração liderada por André Villas-Boas.
 
-âA entrar no Ãºltimo ano de ligaÃ§Ã£o contratual aos _dragÃµes_, a saÃ­da do internacional canadiano acabou por ser selada nestes moldes:
+### Encaixe financeiro e detalhes do negócio
 
-- â**Valores envolvidos:** A operaÃ§Ã£o garante cerca de 4 milhÃµes de euros aos cofres azuis e brancos, valor ao qual acrescem quantias por objetivos desportivos.
-- â**Plusvalia futura:** O FC Porto salvaguardou ainda 10% de uma futura mais-valia no caso de uma eventual transferÃªncia do jogador de 29 anos.
-- â**EspaÃ§o no plantel:** EustÃ¡quio tinha somado apenas dois minutos na presente ediÃ§Ã£o da Liga Portugal Betclic (frente ao Rio Ave), apÃ³s ter estado cedido aos norte-americanos do Los Angeles FC na segunda metade da Ã©poca transata.
+A entrar no último ano de ligação contratual aos _dragões_, a saída do internacional canadiano acabou por ser selada nestes moldes:
 
-### âNovo capÃ­tulo e legado de azul e branco
+- **Valores envolvidos:** A operação garante cerca de 4 milhões de euros aos cofres azuis e brancos, valor ao qual acrescem quantias por objetivos desportivos.
+- **Plusvalia futura:** O FC Porto salvaguardou ainda 10% de uma futura mais-valia no caso de uma eventual transferência do jogador de 29 anos.
+- **Espaço no plantel:** Eustáquio tinha somado apenas dois minutos na presente edição da Liga Portugal Betclic (frente ao Rio Ave), após ter estado cedido aos norte-americanos do Los Angeles FC na segunda metade da época transata.
 
-âEm Inglaterra, o internacional canadiano vai trabalhar sob o comando do tÃ©cnico portuguÃªs VÃ­tor Matos:
+### Novo capítulo e legado de azul e branco
 
-- â**PalmarÃ©s de dragÃ£o ao peito:** EustÃ¡quio encerra a sua ligaÃ§Ã£o ao FC Porto apÃ³s 157 jogos oficiais e 12 golos apontados.
-- â**TÃ­tulos conquistados:** No percurso na invicta, o mÃ©dio venceu dois Campeonatos Nacionais, trÃªs TaÃ§as de Portugal, trÃªs SupertaÃ§as CÃ¢ndido de Oliveira e uma TaÃ§a da Liga.
+Em Inglaterra, o internacional canadiano vai trabalhar sob o comando do técnico português Vítor Matos:
+
+- **Palmarés de dragão ao peito:** Eustáquio encerra a sua ligação ao FC Porto após 157 jogos oficiais e 12 golos apontados.
+- **Títulos conquistados:** No percurso na invicta, o médio venceu dois Campeonatos Nacionais, três Taças de Portugal, três Supertaças Cândido de Oliveira e uma Taça da Liga.

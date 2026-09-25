@@ -10,18 +10,19 @@ image: "https://framerusercontent.com/images/TDWE3mDubNvdfgGESFfSn28kM.jpg?width
 ---
 
 
-âO Brentford protagonizou uma das grandes surpresas da 5.Âª jornada da Premier League ao atropelar o Chelsea por expressivos 3-0, num encontro disputado em solo adversÃ¡rio e marcado por um forte cunho portuguÃªs. Numa partida em que os _blues_ pecaram pela falta de eficÃ¡cia no domÃ­nio territorial, a frieza dos _bees_ na etapa complementar fez toda a diferenÃ§a, com o internacional sub-21 FÃ¡bio Carvalho a sair do banco para fechar a contagem com classe pura.
 
-â**DomÃ­nio estÃ©ril do Chelsea e o castigo letal de Jaidon Anthony**
+O Brentford protagonizou uma das grandes surpresas da 5.ª jornada da Premier League ao atropelar o Chelsea por expressivos 3-0, num encontro disputado em solo adversário e marcado por um forte cunho português. Numa partida em que os _blues_ pecaram pela falta de eficácia no domínio territorial, a frieza dos _bees_ na etapa complementar fez toda a diferença, com o internacional sub-21 Fábio Carvalho a sair do banco para fechar a contagem com classe pura.
 
-âA turma comandada por Xabi Alonso assumiu as rÃ©deas da partida desde o apito inicial, instalando-se no meio-campo contrÃ¡rio, mas esbarrando constantemente na muralha defensiva da casa:
+**Domínio estéril do Chelsea e o castigo letal de Jaidon Anthony**
 
-- â**Pedro Neto em busca do golo:** O extremo portuguÃªs foi o elemento mais incisivo dos forasteiros na primeira parte. Logo aos 10 minutos, dispÃ´s da primeira ocasiÃ£o de perigo, mas o remate saiu dÃ©bil e foi presa fÃ¡cil para CaoimhÃ­n Kelleher. No reatar, Neto continuou a ameaÃ§ar, disparando por cima e vendo um remate cortado pela defensiva contrÃ¡ria.
-- â**A eficÃ¡cia impiedosa do Brentford (61'):** Depois de um aviso sÃ©rio com uma bola na barra, os locais desfizeram o nulo. Jannik Schuster cruzou com conta, peso e medida para Jaidon Anthony, que, de cabeÃ§a, inaugurou o marcador e desatou a festa nas bancadas.
+A turma comandada por Xabi Alonso assumiu as rédeas da partida desde o apito inicial, instalando-se no meio-campo contrário, mas esbarrando constantemente na muralha defensiva da casa:
 
-â**O assalto final, a aposta em Quenda e a estocada de FÃ¡bio Carvalho**
+- **Pedro Neto em busca do golo:** O extremo português foi o elemento mais incisivo dos forasteiros na primeira parte. Logo aos 10 minutos, dispôs da primeira ocasião de perigo, mas o remate saiu débil e foi presa fácil para Caoimhín Kelleher. No reatar, Neto continuou a ameaçar, disparando por cima e vendo um remate cortado pela defensiva contrária.
+- **A eficácia impiedosa do Brentford (61'):** Depois de um aviso sério com uma bola na barra, os locais desfizeram o nulo. Jannik Schuster cruzou com conta, peso e medida para Jaidon Anthony, que, de cabeça, inaugurou o marcador e desatou a festa nas bancadas.
 
-âProcurando reagir Ã  desvantagem, Xabi Alonso lanÃ§ou Geovany Quenda aos 71 minutos por troca com Danny Welbeck, injetando frescura no ataque, mas o castigo acabou por adensar-se:
+**O assalto final, a aposta em Quenda e a estocada de Fábio Carvalho**
 
-- â**Oportunismo de Igor Thiago (83'):** Numa fase em que o Chelsea arriscava tudo na busca pela igualdade, um ressalto infeliz no coraÃ§Ã£o da grande Ã¡rea sobrou para o brasileiro Igor Thiago, que nÃ£o perdoou e ampliou a vantagem.
-- â**O show de FÃ¡bio Carvalho nos descontos (90+4'):** O melhor estava reservado para o epÃ­logo. LanÃ§ado aos 87 minutos altura em que Pedro Neto foi substituÃ­do, enquanto Quenda cumpriu os noventa minutos , FÃ¡bio Carvalho precisou de apenas sete minutos para brilhar. Servido por Kevin Schade, o jovem mÃ©dio faturou com categoria, fixando o intransigente 3-0.
+Procurando reagir à desvantagem, Xabi Alonso lançou Geovany Quenda aos 71 minutos por troca com Danny Welbeck, injetando frescura no ataque, mas o castigo acabou por adensar-se:
+
+- **Oportunismo de Igor Thiago (83'):** Numa fase em que o Chelsea arriscava tudo na busca pela igualdade, um ressalto infeliz no coração da grande área sobrou para o brasileiro Igor Thiago, que não perdoou e ampliou a vantagem.
+- **O show de Fábio Carvalho nos descontos (90+4'):** O melhor estava reservado para o epílogo. Lançado aos 87 minutos altura em que Pedro Neto foi substituído, enquanto Quenda cumpriu os noventa minutos , Fábio Carvalho precisou de apenas sete minutos para brilhar. Servido por Kevin Schade, o jovem médio faturou com categoria, fixando o intransigente 3-0.

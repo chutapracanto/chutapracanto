@@ -10,24 +10,25 @@ image: "https://framerusercontent.com/images/6HdyDDJ26fxOyb0s3PStHvbWGA.webp?wid
 ---
 
 
-O SC Braga carimbou o envio da sua lista oficial Ã  UEFA para a fase de liga da Liga ConferÃªncia 2026/27. No contingente de 49 futebolistas submetido pela estrutura arsenalista, a grande nota de destaque recai sobre o jovem mÃ©dio espanhol Tommy MarquÃ©s pÃ©rola de 19 anos resgatada ao Barcelona, que assume a vaga de Lelo (cedido ao AlmerÃ­a) na Lista A.
 
-â**Redesenho da Lista A, muniÃ§Ãµes ofensivas e o trunfo da Lista B**
+O SC Braga carimbou o envio da sua lista oficial à UEFA para a fase de liga da Liga Conferência 2026/27. No contingente de 49 futebolistas submetido pela estrutura arsenalista, a grande nota de destaque recai sobre o jovem médio espanhol Tommy Marqués pérola de 19 anos resgatada ao Barcelona, que assume a vaga de Lelo (cedido ao Almería) na Lista A.
 
-âDepois de ultrapassar com distinÃ§Ã£o duas prÃ©-eliminatÃ³rias e um exigente _play-off_, o emblema minhoto reforÃ§ou a profundidade do seu xadrez tÃ¡tico para a maratona europeia, aliando a maturidade dos rostos habituais Ã  pujanÃ§a do novo arsenal atacante:
+**Redesenho da Lista A, munições ofensivas e o trunfo da Lista B**
 
-- â**Novidade de peso no meio-campo:** Tommy MarquÃ©s garante entrada direta na lista principal, juntando-se a figuras de proa como JoÃ£o Moutinho, Denis Huseinbasic e Dorgeles.
-- â**Frente de ataque recheada de soluÃ§Ãµes:** O setor ofensivo minhoto ganha contornos temÃ­veis com opÃ§Ãµes do calibre de Jonas Wind, Pau VÃ­ctor, Fran Navarro, Ricardo Horta, Gabri MartÃ­nez e Viktor MiloÅ¡eviÄ.
-- â**Aposta vincada na formaÃ§Ã£o:** Dos 49 atletas registados, 24 integram a Lista B (futebolistas nascidos a partir de 1 de janeiro de 2005), dominada por jovens talentos que alinham na equipa B.
-- â**Ajustes de mercado:** O jovem Luisinho foi retirado da Lista B apÃ³s ter sido oficializada a sua cedÃªncia por emprÃ©stimo ao Feirense.
+Depois de ultrapassar com distinção duas pré-eliminatórias e um exigente _play-off_, o emblema minhoto reforçou a profundidade do seu xadrez tático para a maratona europeia, aliando a maturidade dos rostos habituais à pujança do novo arsenal atacante:
 
-â**Mapeamento dos Sectores IntermÃ©dio e Ofensivo do SC Braga**
+- **Novidade de peso no meio-campo:** Tommy Marqués garante entrada direta na lista principal, juntando-se a figuras de proa como João Moutinho, Denis Huseinbasic e Dorgeles.
+- **Frente de ataque recheada de soluções:** O setor ofensivo minhoto ganha contornos temíveis com opções do calibre de Jonas Wind, Pau Víctor, Fran Navarro, Ricardo Horta, Gabri Martínez e Viktor Milošević.
+- **Aposta vincada na formação:** Dos 49 atletas registados, 24 integram a Lista B (futebolistas nascidos a partir de 1 de janeiro de 2005), dominada por jovens talentos que alinham na equipa B.
+- **Ajustes de mercado:** O jovem Luisinho foi retirado da Lista B após ter sido oficializada a sua cedência por empréstimo ao Feirense.
 
-- â**MÃ©dios:** JoÃ£o Moutinho, Tommy MarquÃ©s, Dorgeles, Denis Huseinbasic, Gorby, Ege Tiknaz, Diego Rodrigues*, Guilherme Barbosa*, JoÃ£o Lomba*, Tiago Ferreira*, Rodrigo Marques*, JoÃ£o Trovisco* e AntÃ³nio Gil*.
-- â**AvanÃ§ados:** Fran Navarro, Pau VÃ­ctor, Gabriel Silva, Viktor MiloÅ¡eviÄ, Jonas Wind, Ricardo Horta, Gabri MartÃ­nez, JoÃ£o AragÃ£o*, Nuno PatrÃ­cio*, TomÃ¡s Gomes "MÃ¼ller"_, RÃºben Furtado_, Francisco FranÃ§a* e Kauan Kelvin*.
+**Mapeamento dos Sectores Intermédio e Ofensivo do SC Braga**
 
-â_*Inscritos na Lista B_
+- **Médios:** João Moutinho, Tommy Marqués, Dorgeles, Denis Huseinbasic, Gorby, Ege Tiknaz, Diego Rodrigues*, Guilherme Barbosa*, João Lomba*, Tiago Ferreira*, Rodrigo Marques*, João Trovisco* e António Gil*.
+- **Avançados:** Fran Navarro, Pau Víctor, Gabriel Silva, Viktor Milošević, Jonas Wind, Ricardo Horta, Gabri Martínez, João Aragão*, Nuno Patrício*, Tomás Gomes "Müller"_, Rúben Furtado_, Francisco França* e Kauan Kelvin*.
 
-â**CalendÃ¡rio de fogo na fase de liga**
+_*Inscritos na Lista B_
 
-âA caminhada dos Gverreiros do Minho na Liga ConferÃªncia arranca a 15 de outubro, com a deslocaÃ§Ã£o ao reduto do Copenhaga, seguida da receÃ§Ã£o ao Gent na Pedreira, a 22 de outubro. Em novembro, a equipa bracarense regressa Ã  Dinamarca para defrontar o Aarhus (dia 5), medindo forÃ§as em casa com os finlandeses do KuPS a 26 do mesmo mÃªs.
+**Calendário de fogo na fase de liga**
+
+A caminhada dos Gverreiros do Minho na Liga Conferência arranca a 15 de outubro, com a deslocação ao reduto do Copenhaga, seguida da receção ao Gent na Pedreira, a 22 de outubro. Em novembro, a equipa bracarense regressa à Dinamarca para defrontar o Aarhus (dia 5), medindo forças em casa com os finlandeses do KuPS a 26 do mesmo mês.

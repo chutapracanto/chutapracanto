@@ -10,20 +10,21 @@ image: "https://framerusercontent.com/images/nijXfO5OXQQfWFXtz9nyrzk8Ysw.webp?wi
 ---
 
 
-Na antevisÃ£o Ã  receÃ§Ã£o ao Galatasaray, a contar para a jornada de abertura da fase de liga da Liga dos CampeÃµes, Rui Borges encarou os microfones com um discurso pautado pela maturidade, ambiÃ§Ã£o q.b. e pÃ©s bem assentes na terra. O comandante verde e branco enalteceu a bagagem europeia do campeÃ£o turco, desdramatizou a juventude da sua equipa e frisou que a prioridade absoluta da temporada continua a morar nas provas domÃ©sticas, sem todavia abdicar de entrar a vencer em Alvalade.
 
-â**Respeito ao campeÃ£o turco, prioridades bem assentes e o trunfo de Alvalade**
+Na antevisão à receção ao Galatasaray, a contar para a jornada de abertura da fase de liga da Liga dos Campeões, Rui Borges encarou os microfones com um discurso pautado pela maturidade, ambição q.b. e pés bem assentes na terra. O comandante verde e branco enalteceu a bagagem europeia do campeão turco, desdramatizou a juventude da sua equipa e frisou que a prioridade absoluta da temporada continua a morar nas provas domésticas, sem todavia abdicar de entrar a vencer em Alvalade.
 
-âProjetando um embate de elevado grau de exigÃªncia perante um crÃ³nico interveniente nas lides milionÃ¡rias, o tÃ©cnico leonino abordou a estreia em casa e desconstruiu a pressÃ£o por metas obrigatÃ³rias:
+**Respeito ao campeão turco, prioridades bem assentes e o trunfo de Alvalade**
 
-- â**O estampa do rival e a forÃ§a de Alvalade:** Â«Ã uma equipa muito experiente nesta competiÃ§Ã£o, penso que seja a 29.Âª participaÃ§Ã£o deles na prova. SÃ£o campeÃµes turcos, tÃªm muita qualidade individual e querem ser sempre dominadores. No entanto, temos de pensar em nÃ³s. ComeÃ§ar em Alvalade Ã© bom e a equipa estÃ¡ motivada.Â»
-- â**O foco cirÃºrgico no objetivo nacional:** Questionado sobre atÃ© onde pode caminhar este Sporting na Europa, o treinador foi perentÃ³rio: Â«A nossa Champions Ã© o campeonato e serÃ¡ sempre o campeonato. Passar a fase de liga Ã© um objetivo obrigatÃ³rio? NÃ£o. O objetivo era estarmos inseridos na prova e darmos continuidade ao crescimento europeu do Sporting.Â»
-- â**A ausÃªncia de Osimhen e a perspetiva coletiva:** Â«NÃ£o preparÃ¡mos o jogo de maneira diferente. O Osimhen Ã© um jogador diferente, mas vÃ£o jogar com 11. O Galatasaray tem muita qualidade e tentÃ¡mos olhar para as dinÃ¢micas coletivas.Â»
+Projetando um embate de elevado grau de exigência perante um crónico interveniente nas lides milionárias, o técnico leonino abordou a estreia em casa e desconstruiu a pressão por metas obrigatórias:
 
-â**GestÃ£o de Zekri, exigÃªncia mÃ¡xima sobre Zalazar e a desmistificaÃ§Ã£o do 'caso' SuÃ¡rez**
+- **O estampa do rival e a força de Alvalade:** «É uma equipa muito experiente nesta competição, penso que seja a 29.ª participação deles na prova. São campeões turcos, têm muita qualidade individual e querem ser sempre dominadores. No entanto, temos de pensar em nós. Começar em Alvalade é bom e a equipa está motivada.»
+- **O foco cirúrgico no objetivo nacional:** Questionado sobre até onde pode caminhar este Sporting na Europa, o treinador foi perentório: «A nossa Champions é o campeonato e será sempre o campeonato. Passar a fase de liga é um objetivo obrigatório? Não. O objetivo era estarmos inseridos na prova e darmos continuidade ao crescimento europeu do Sporting.»
+- **A ausência de Osimhen e a perspetiva coletiva:** «Não preparámos o jogo de maneira diferente. O Osimhen é um jogador diferente, mas vão jogar com 11. O Galatasaray tem muita qualidade e tentámos olhar para as dinâmicas coletivas.»
 
-âPassando a pente fino a atualidade do plantel, Rui Borges explicou a integraÃ§Ã£o dos novos rostos, deu cobertura Ã s suas opÃ§Ãµes e utilizou uma pitada de ironia para arrumar polÃ©micas:
+**Gestão de Zekri, exigência máxima sobre Zalazar e a desmistificação do 'caso' Suárez**
 
-- â**Cautela com Zekri e o regresso de SimÃµes:** Â«Zekri foi a nossa primeira opÃ§Ã£o para reforÃ§ar a lateral esquerda. DemorÃ¡mos um pouco devido a uma lesÃ£o e ele tem de ter paciÃªncia para podermos contar com ele a 200 por cento. Quanto ao JoÃ£o SimÃµes, voltou hoje aos treinos e estamos felizes, mas ainda nÃ£o Ã© opÃ§Ã£o para este jogo.Â»
-- â**A fasquia elevada para Rodrigo Zalazar:** Â«EstÃ¡ num crescimento prÃ³prio, numa dinÃ¢mica diferente da que tinha em Braga. EstÃ¡ cada vez melhor e estou muito feliz com o que tem sido. Vai dar mais, vou meter-lhe pressÃ£o para fazer mais do que os 16 golos da temporada passada.Â»
-- â**Ironia para fechar o dossier Luis SuÃ¡rez:** Confrontado sobre o processo de integraÃ§Ã£o do avanÃ§ado, desvalorizou com humor: Â«Diz 'reabilitar', atÃ© parece que saiu da prisÃ£o... NÃ£o Ã© assunto, nem sequer houve caso.Â»
+Passando a pente fino a atualidade do plantel, Rui Borges explicou a integração dos novos rostos, deu cobertura às suas opções e utilizou uma pitada de ironia para arrumar polémicas:
+
+- **Cautela com Zekri e o regresso de Simões:** «Zekri foi a nossa primeira opção para reforçar a lateral esquerda. Demorámos um pouco devido a uma lesão e ele tem de ter paciência para podermos contar com ele a 200 por cento. Quanto ao João Simões, voltou hoje aos treinos e estamos felizes, mas ainda não é opção para este jogo.»
+- **A fasquia elevada para Rodrigo Zalazar:** «Está num crescimento próprio, numa dinâmica diferente da que tinha em Braga. Está cada vez melhor e estou muito feliz com o que tem sido. Vai dar mais, vou meter-lhe pressão para fazer mais do que os 16 golos da temporada passada.»
+- **Ironia para fechar o dossier Luis Suárez:** Confrontado sobre o processo de integração do avançado, desvalorizou com humor: «Diz 'reabilitar', até parece que saiu da prisão... Não é assunto, nem sequer houve caso.»

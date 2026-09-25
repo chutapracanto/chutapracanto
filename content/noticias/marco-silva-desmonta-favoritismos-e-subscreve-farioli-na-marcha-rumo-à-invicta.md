@@ -10,20 +10,21 @@ image: "https://framerusercontent.com/images/JFt37THsVpmuDzE1ECcXXmKQsco.jpg?wid
 ---
 
 
-âA antecÃ¢mara do primeiro ClÃ¡ssico da temporada ganhou contornos de alta tensÃ£o tÃ¡tica e diplomÃ¡tica. Na sala de imprensa do Seixal, Marco Silva perspetivou a visita de domingo ao EstÃ¡dio do DragÃ£o com um discurso sereno, mas afiado, projetando o embate com o FC Porto sem ponta de submissÃ£o ao calendÃ¡rio apertado, elogiando a metamorfose azul e branca e deixando uma nota de humor perspicaz a responder ao homÃ³logo portista.
 
-â**DiagnÃ³stico ao dragÃ£o mutÃ¡vel, gestÃ£o de Aursnes e a dÃºvida Barrenechea**
+A antecâmara do primeiro Clássico da temporada ganhou contornos de alta tensão tática e diplomática. Na sala de imprensa do Seixal, Marco Silva perspetivou a visita de domingo ao Estádio do Dragão com um discurso sereno, mas afiado, projetando o embate com o FC Porto sem ponta de submissão ao calendário apertado, elogiando a metamorfose azul e branca e deixando uma nota de humor perspicaz a responder ao homólogo portista.
 
-âMarco Silva disseca com precisÃ£o cirÃºrgica a identidade do opositor, ciente de que na Invicta a exigÃªncia roÃ§a o limite:
+**Diagnóstico ao dragão mutável, gestão de Aursnes e a dúvida Barrenechea**
 
-- â**Poderio nas bolas paradas e solidez recuada:** O timoneiro das Ã¡guias alertou para os trunfos mais perigosos do FC Porto: _"Ã uma equipa muito forte, sÃ³lida e agressiva (...) Tem resolvido muitos jogos com bola parada e tem a agressividade certa para atacar esse momento. Quando o adversÃ¡rio cria, hÃ¡ um guarda-redes a grande nÃ­vel."_
-- â**A alternÃ¢ncia de blocos de Farioli:** A leitura tÃ¡tica ao rival estende-se Ã s dinÃ¢micas de jogo, com o tÃ©cnico encarnado a avisar para a versatilidade portista: _"Tem um primeiro momento com pressÃ£o alta, homem a homem no campo todo, e outro num bloco mÃ©dio-baixo com cinco defesas."_
-- â**Aursnes em plena rotaÃ§Ã£o e boletim clÃ­nico:** Elogiando a polivalÃªncia de Fredrik Aursnes (_"sabemos que pode ser um bom lateral, mas Ã© um excelente mÃ©dio"_), Marco Silva revelou que apenas Enzo Barrenechea estÃ¡ sob avaliaÃ§Ã£o mÃ©dica rigorosa, mantendo todos os outros ativos operacionais.
+Marco Silva disseca com precisão cirúrgica a identidade do opositor, ciente de que na Invicta a exigência roça o limite:
 
-â**Desgaste europeu sacudido, favoritismo rejeitado e a piscadela de olho a Farioli**
+- **Poderio nas bolas paradas e solidez recuada:** O timoneiro das águias alertou para os trunfos mais perigosos do FC Porto: _"É uma equipa muito forte, sólida e agressiva (...) Tem resolvido muitos jogos com bola parada e tem a agressividade certa para atacar esse momento. Quando o adversário cria, há um guarda-redes a grande nível."_
+- **A alternância de blocos de Farioli:** A leitura tática ao rival estende-se às dinâmicas de jogo, com o técnico encarnado a avisar para a versatilidade portista: _"Tem um primeiro momento com pressão alta, homem a homem no campo todo, e outro num bloco médio-baixo com cinco defesas."_
+- **Aursnes em plena rotação e boletim clínico:** Elogiando a polivalência de Fredrik Aursnes (_"sabemos que pode ser um bom lateral, mas é um excelente médio"_), Marco Silva revelou que apenas Enzo Barrenechea está sob avaliação médica rigorosa, mantendo todos os outros ativos operacionais.
 
-âApesar da disparidade na preparaÃ§Ã£o com o FC Porto a desfrutar de uma semana limpa enquanto o Benfica batalhou a meio da semana, a ambiÃ§Ã£o da turma da Luz permanece intacta:
+**Desgaste europeu sacudido, favoritismo rejeitado e a piscadela de olho a Farioli**
 
-- â**Sem muletas no calendÃ¡rio:** Marco Silva recusa dar margem a desculpas fÃ­sicas ou concetuais: _"NÃ£o acho que, por termos jogado durante a semana, o FC Porto passe a ser favorito. Quem estiver numa melhor noite ou mais coeso... estes jogos definem-se nos pormenores."_
-- â**Sintonia irÃ³nica sobre a arbitragem:** Confrontado com os reparos de Francesco Farioli Ã  equipa de arbitragem feitos minutos antes, Marco Silva respondeu com subtileza: _"Vou repetir o que o mister Farioli disse hÃ¡ 45 minutos. Espero que haja igualdade em todos os momentos do jogo. Vou copiar o que foi dito."_
-- â**Mentalidade dominadora:** A perspetiva de jogar para o empate foi prontamente descartada pelo tÃ©cnico encarnado: _"NÃ£o hÃ¡ nenhum jogo que preparemos para nÃ£o vencer. O nosso objetivo Ã© ir ao Porto para vencer o jogo."_
+Apesar da disparidade na preparação com o FC Porto a desfrutar de uma semana limpa enquanto o Benfica batalhou a meio da semana, a ambição da turma da Luz permanece intacta:
+
+- **Sem muletas no calendário:** Marco Silva recusa dar margem a desculpas físicas ou concetuais: _"Não acho que, por termos jogado durante a semana, o FC Porto passe a ser favorito. Quem estiver numa melhor noite ou mais coeso... estes jogos definem-se nos pormenores."_
+- **Sintonia irónica sobre a arbitragem:** Confrontado com os reparos de Francesco Farioli à equipa de arbitragem feitos minutos antes, Marco Silva respondeu com subtileza: _"Vou repetir o que o mister Farioli disse há 45 minutos. Espero que haja igualdade em todos os momentos do jogo. Vou copiar o que foi dito."_
+- **Mentalidade dominadora:** A perspetiva de jogar para o empate foi prontamente descartada pelo técnico encarnado: _"Não há nenhum jogo que preparemos para não vencer. O nosso objetivo é ir ao Porto para vencer o jogo."_

@@ -10,20 +10,21 @@ image: "https://framerusercontent.com/images/hEoxTFktwBMFpOPPbfMvmLtcKY.jpg?widt
 ---
 
 
-âO Sporting CP cumpriu com solenidade o compromisso na 5.Âª jornada da Liga Portugal Betclic ao superiorizar-se ao CD Nacional por 2-0, no EstÃ¡dio JosÃ© Alvalade. Numa noite em que os holofotes incidiam sobre a frente de ataque leonina, Luis SuÃ¡rez tratou de dissipar qualquer ruÃ­do com uma exibiÃ§Ã£o de gala: marcou, serviu e festejou com o sorriso de quem resolve, garantindo um triunfo sereno e incontestÃ¡vel para a turma de Alvalade.
 
-â**Muralha de Marin ruiu na marca dos onze metros**
+O Sporting CP cumpriu com solenidade o compromisso na 5.ª jornada da Liga Portugal Betclic ao superiorizar-se ao CD Nacional por 2-0, no Estádio José Alvalade. Numa noite em que os holofotes incidiam sobre a frente de ataque leonina, Luis Suárez tratou de dissipar qualquer ruído com uma exibição de gala: marcou, serviu e festejou com o sorriso de quem resolve, garantindo um triunfo sereno e incontestável para a turma de Alvalade.
 
-âA partitura inicial revelou o figurino expectÃ¡vel, com o Sporting a ditar a cadÃªncia do jogo perante uma teia defensiva rigorosa do conjunto insular:
+**Muralha de Marin ruiu na marca dos onze metros**
 
-- â**EstratÃ©gia insular e guarda-redes inspirado:** O Nacional barricou-se num coeso 5x4x1 e contou com uma exibiÃ§Ã£o superinspirada de Renato Marin entre os postes, travando os primeiros ensaios da equipa da casa.
-- â**Sangue-frio de SuÃ¡rez aos 30':** A insistÃªncia verde e branca deu frutos quando Maxi AraÃºjo foi derrubado na grande Ã¡rea. Chamado Ã  responsabilidade, Luis SuÃ¡rez assumiu a cobranÃ§a do castigo mÃ¡ximo e desfez a igualdade, celebrando de forma efusiva.
-- â**MarÃ­timos sem antÃ­doto:** Incapazes de ferir a estrutura leonina em transiÃ§Ã£o, os comandados do treinador interino Bruno Abreu recolheram ao balneÃ¡rio sem registar qualquer ocasiÃ£o flagrante.
+A partitura inicial revelou o figurino expectável, com o Sporting a ditar a cadência do jogo perante uma teia defensiva rigorosa do conjunto insular:
 
-â**Passe de Debast, altruÃ­smo de SuÃ¡rez e gestÃ£o com classe**
+- **Estratégia insular e guarda-redes inspirado:** O Nacional barricou-se num coeso 5x4x1 e contou com uma exibição superinspirada de Renato Marin entre os postes, travando os primeiros ensaios da equipa da casa.
+- **Sangue-frio de Suárez aos 30':** A insistência verde e branca deu frutos quando Maxi Araújo foi derrubado na grande área. Chamado à responsabilidade, Luis Suárez assumiu a cobrança do castigo máximo e desfez a igualdade, celebrando de forma efusiva.
+- **Marítimos sem antídoto:** Incapazes de ferir a estrutura leonina em transição, os comandados do treinador interino Bruno Abreu recolheram ao balneário sem registar qualquer ocasião flagrante.
 
-âO regresso dos balneÃ¡rios trouxe a estocada final e a confirmaÃ§Ã£o do domÃ­nio leonino na partida:
+**Passe de Debast, altruísmo de Suárez e gestão com classe**
 
-- â**Passe de rÃ©gua e esquadro aos 50':** Zeno Debast descobriu as costas da linha defensiva forasteira com um passe milimÃ©trico para SuÃ¡rez. No coraÃ§Ã£o da Ã¡rea, o colombiano vestiu o fato de garÃ§om e serviu FlÃ¡vio GonÃ§alves, que apenas teve de encostar para o 2-0.
-- â**AmeaÃ§a de Ioannidis ao ferro:** Com o marcador confortÃ¡vel, a equipa de Rui Borges tirou o pÃ© do acelerador, mas continuou a criar perigo com IvÃ¡n Fresneda a obrigar Marin a boas intervenÃ§Ãµes e Fotis Ioannidis a fazer tremer a barra num gesto tÃ©cnico de classe.
-- â**Controlo absoluto atÃ© ao apito:** Sem rÃ©stia de reaÃ§Ã£o do opositor, o Sporting anestesiou o jogo atravÃ©s da circulaÃ§Ã£o de bola e assegurou os trÃªs pontos diante dos seus adeptos.
+O regresso dos balneários trouxe a estocada final e a confirmação do domínio leonino na partida:
+
+- **Passe de régua e esquadro aos 50':** Zeno Debast descobriu as costas da linha defensiva forasteira com um passe milimétrico para Suárez. No coração da área, o colombiano vestiu o fato de garçom e serviu Flávio Gonçalves, que apenas teve de encostar para o 2-0.
+- **Ameaça de Ioannidis ao ferro:** Com o marcador confortável, a equipa de Rui Borges tirou o pé do acelerador, mas continuou a criar perigo com Iván Fresneda a obrigar Marin a boas intervenções e Fotis Ioannidis a fazer tremer a barra num gesto técnico de classe.
+- **Controlo absoluto até ao apito:** Sem réstia de reação do opositor, o Sporting anestesiou o jogo através da circulação de bola e assegurou os três pontos diante dos seus adeptos.

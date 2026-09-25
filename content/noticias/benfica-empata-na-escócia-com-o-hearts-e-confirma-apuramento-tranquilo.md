@@ -16,14 +16,15 @@ relatedSpotify: ""
 ---
 
 
-Com a eliminatÃ³ria praticamente resolvida apÃ³s o triunfo expressivo na primeira mÃ£o no EstÃ¡dio da Luz, o Benfica empatou 1-1 no terreno do Hearts e assegurou o apuramento. Marco Silva aproveitou o encontro na EscÃ³cia para promover sete alteraÃ§Ãµes no onze inicial, lanÃ§ando nomes como JosÃ© Neto, Amar Dedic, Manu Silva, Richard RÃ­os, Schjelderup, Lukebakio e Jhon DurÃ¡n.
 
-Apesar das novidades no alinhamento, as Ã¡guias assumiram o controlo do jogo na primeira parte, construindo vÃ¡rias ocasiÃµes para inaugurar o marcador. Jhon DurÃ¡n, apÃ³s excelente combinaÃ§Ã£o entre Lenglet e Sudakov, esteve perto do golo, assim como Amar Dedic e Schjelderup, que desperdiÃ§aram boas soberanias antes do intervalo.
+Com a eliminatória praticamente resolvida após o triunfo expressivo na primeira mão no Estádio da Luz, o Benfica empatou 1-1 no terreno do Hearts e assegurou o apuramento. Marco Silva aproveitou o encontro na Escócia para promover sete alterações no onze inicial, lançando nomes como José Neto, Amar Dedic, Manu Silva, Richard Ríos, Schjelderup, Lukebakio e Jhon Durán.
 
-âDo lado do Hearts, apenas alguns lances de bola parada e remates de longe assustavam Samuel Soares, mas o nulo manteve-se atÃ© ao descanso, penalizando a falta de eficÃ¡cia da equipa portuguesa.
+Apesar das novidades no alinhamento, as águias assumiram o controlo do jogo na primeira parte, construindo várias ocasiões para inaugurar o marcador. Jhon Durán, após excelente combinação entre Lenglet e Sudakov, esteve perto do golo, assim como Amar Dedic e Schjelderup, que desperdiçaram boas soberanias antes do intervalo.
+
+Do lado do Hearts, apenas alguns lances de bola parada e remates de longe assustavam Samuel Soares, mas o nulo manteve-se até ao descanso, penalizando a falta de eficácia da equipa portuguesa.
 
 ### Golo de Lukebakio anula susto na segunda parte
 
-âO regresso dos balneÃ¡rios trouxe um Benfica mais apÃ¡tico e o Hearts aproveitou para crescer na partida. Depois de ver um golo anulado por fora de jogo a Calvin Miller, a formaÃ§Ã£o escocesa colocou-se mesmo em vantagem atravÃ©s de um disparo forte e sem hipÃ³teses de TomÃ¡s MagnÃºsson, na sequÃªncia de um remate de fora da Ã¡rea.
+O regresso dos balneários trouxe um Benfica mais apático e o Hearts aproveitou para crescer na partida. Depois de ver um golo anulado por fora de jogo a Calvin Miller, a formação escocesa colocou-se mesmo em vantagem através de um disparo forte e sem hipóteses de Tomás Magnússon, na sequência de um remate de fora da área.
 
-âA reaÃ§Ã£o encarnada foi imediata: no fecho da partida, o lateral JosÃ© Neto incorporou-se no ataque e serviu Dodi Lukebakio na grande Ã¡rea, com o extremo belga a rematar rasteiro para o 1-1 final. O empate selou a passagem sem sobresaltos da equipa de Marco Silva Ã  prÃ³xima fase.
+A reação encarnada foi imediata: no fecho da partida, o lateral José Neto incorporou-se no ataque e serviu Dodi Lukebakio na grande área, com o extremo belga a rematar rasteiro para o 1-1 final. O empate selou a passagem sem sobresaltos da equipa de Marco Silva à próxima fase.

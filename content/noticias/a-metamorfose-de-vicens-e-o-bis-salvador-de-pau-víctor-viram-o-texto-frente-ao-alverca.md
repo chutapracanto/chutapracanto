@@ -10,26 +10,27 @@ image: "https://framerusercontent.com/images/YNq9bsfeBVoiPZGjoFZjpw7Nro.jpg?widt
 ---
 
 
-Despojado do desgaste acumulado nas maratonas de qualificaÃ§Ã£o europeia, o SC Braga reentrou no grande palco da Liga Portugal Betclic com uma demonstraÃ§Ã£o vincada de resiliÃªncia, ao superiorizar-se ao FC Alverca por 1-2. No Complexo Desportivo do Alverca, a formaÃ§Ã£o orientada por Vicens despiu as vestes de uma primeira parte estÃ©ril para encarnar a autÃªntica fibra de _Gverreiro_, valendo a visÃ£o cirÃºrgica do seu tÃ©cnico ao descanso e a veia matadora de Pau VÃ­ctor para desenhar uma reviravolta de classe na segunda metade.
 
-â**Pragmatismo ribatejanos e o estrangulamento da posse bracarense**
+Despojado do desgaste acumulado nas maratonas de qualificação europeia, o SC Braga reentrou no grande palco da Liga Portugal Betclic com uma demonstração vincada de resiliência, ao superiorizar-se ao FC Alverca por 1-2. No Complexo Desportivo do Alverca, a formação orientada por Vicens despiu as vestes de uma primeira parte estéril para encarnar a autêntica fibra de _Gverreiro_, valendo a visão cirúrgica do seu técnico ao descanso e a veia matadora de Pau Víctor para desenhar uma reviravolta de classe na segunda metade.
 
-âA partitura inicial desenrolou-se sob a batuta e a iniciativa dos visitantes, mas a astÃºcia caseira acabou por ditar a lei dos primeiros 45 minutos:
+**Pragmatismo ribatejanos e o estrangulamento da posse bracarense**
 
-- â**Posse estÃ©ril:** A turma minhota instalou-se no meio-campo adversÃ¡rio e ultrapassou a primeira vaga de pressÃ£o com facilidade, mas esbarrou invariavelmente na teia defensiva, baixa e compacta, delineada por SÃ©rgio Ferreira.
-- â**Veneno de Chiquinho:** Na primeira transiÃ§Ã£o vertiginosa desenhada pelos locais, aos 27 minutos, o regressado Chiquinho cavou uma grande penalidade e, com sangue-frio da marca dos onze metros, inaugurou o marcador no Ribatejo.
-- â**Inconformismo sem fruto:** O SC Braga procurou sacudir a letargia atÃ© ao intervalo com o ala Diogo Travassos a assumir as despesas do atrevimento, mas a escassez de presenÃ§a na Ã¡rea manteve a vantagem ribatejana na recolha aos balneÃ¡rios.
+A partitura inicial desenrolou-se sob a batuta e a iniciativa dos visitantes, mas a astúcia caseira acabou por ditar a lei dos primeiros 45 minutos:
 
-â**A liÃ§Ã£o ao intervalo: RevoluciÃ³n ofensiva e a tempestade de Pau VÃ­ctor**
+- **Posse estéril:** A turma minhota instalou-se no meio-campo adversário e ultrapassou a primeira vaga de pressão com facilidade, mas esbarrou invariavelmente na teia defensiva, baixa e compacta, delineada por Sérgio Ferreira.
+- **Veneno de Chiquinho:** Na primeira transição vertiginosa desenhada pelos locais, aos 27 minutos, o regressado Chiquinho cavou uma grande penalidade e, com sangue-frio da marca dos onze metros, inaugurou o marcador no Ribatejo.
+- **Inconformismo sem fruto:** O SC Braga procurou sacudir a letargia até ao intervalo com o ala Diogo Travassos a assumir as despesas do atrevimento, mas a escassez de presença na área manteve a vantagem ribatejana na recolha aos balneários.
 
-âInconformado com a apatia coletiva, Vicens operou uma autÃªntica revoluÃ§Ã£o no ataque ao intervalo, lanÃ§ando Gabri MartÃ­nez e Fran Navarro e recuando Pau VÃ­ctor para a zona de criaÃ§Ã£o. O impacto no relvado foi demolidor:
+**A lição ao intervalo: Revolución ofensiva e a tempestade de Pau Víctor**
 
-- â**Desenho de TÄ±knaz e o empate:** Aos 50 minutos, Demir Ege TÄ±knaz urdiu uma jogada de veludo pelo corredor direito, servindo Pau VÃ­ctor no coraÃ§Ã£o da grande Ã¡rea para o encosto fÃ¡cil do 1-1.
-- â**Selo da reviravolta aos 57':** Com o Alverca em sobressalto, Fran Navarro obrigou Matheus Mendes a uma estirada monumental; na sequÃªncia, apÃ³s um remate no ferro e com a defensiva da casa pregada ao relvado, Pau VÃ­ctor voltou a vestir o fato de oportunista e encostou para o 1-2.
+Inconformado com a apatia coletiva, Vicens operou uma autêntica revolução no ataque ao intervalo, lançando Gabri Martínez e Fran Navarro e recuando Pau Víctor para a zona de criação. O impacto no relvado foi demolidor:
 
-â**Trincheira de raÃ§a sob ambiente fervilhante**
+- **Desenho de Tıknaz e o empate:** Aos 50 minutos, Demir Ege Tıknaz urdiu uma jogada de veludo pelo corredor direito, servindo Pau Víctor no coração da grande área para o encosto fácil do 1-1.
+- **Selo da reviravolta aos 57':** Com o Alverca em sobressalto, Fran Navarro obrigou Matheus Mendes a uma estirada monumental; na sequência, após um remate no ferro e com a defensiva da casa pregada ao relvado, Pau Víctor voltou a vestir o fato de oportunista e encostou para o 1-2.
 
-âO segundo tento minhotos acendeu a contestaÃ§Ã£o nas bancadas locais, e a reta final do encontro exigiu uma entrega abnegada da comitiva arsenalista:
+**Trincheira de raça sob ambiente fervilhante**
 
-- â**GestÃ£o e reaÃ§Ã£o deseperada:** O SC Braga anestesiou a partida com bola atÃ© Ã  pausa de hidrataÃ§Ã£o, momento em que o Alverca se lanÃ§ou num ataque desesperado de tudo-ou-nada.
-- â**Muralha bracarense:** Sob uma atmosfera ao rubro e de fortes protestos, os _Gverreiros do Minho_ recolheram Ã  sua trincheira, defenderam a vantagem com unhas e dentes e garantiram uma vitÃ³ria de suor e raÃ§a antes de celebrar com os seus adeptos.
+O segundo tento minhotos acendeu a contestação nas bancadas locais, e a reta final do encontro exigiu uma entrega abnegada da comitiva arsenalista:
+
+- **Gestão e reação deseperada:** O SC Braga anestesiou a partida com bola até à pausa de hidratação, momento em que o Alverca se lançou num ataque desesperado de tudo-ou-nada.
+- **Muralha bracarense:** Sob uma atmosfera ao rubro e de fortes protestos, os _Gverreiros do Minho_ recolheram à sua trincheira, defenderam a vantagem com unhas e dentes e garantiram uma vitória de suor e raça antes de celebrar com os seus adeptos.

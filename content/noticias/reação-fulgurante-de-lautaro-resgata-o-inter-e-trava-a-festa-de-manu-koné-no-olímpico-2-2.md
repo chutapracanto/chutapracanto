@@ -10,18 +10,19 @@ image: "https://framerusercontent.com/images/tDHBZ7M433K8ZMuiZMRnRjCyPxQ.webp?wi
 ---
 
 
-Em mais um clÃ¡ssico eletrizante da Serie A, a Roma e o Inter mediram forÃ§as no Stadio Olimpico num duelo de parada e resposta que acabou empatado a duas bolas (2-2). Com o jovem portuguÃªs Rodrigo Mora a comeÃ§ar no banco dos _giallorossi_, a partida ficou marcada pela entrada avassaladora da equipa da casa, pela exibiÃ§Ã£o inspirada de Manu KonÃ© e pela capacidade de reaÃ§Ã£o dos _nerazzurri_, capitaneados por um Lautaro MartÃ­nez implacÃ¡vel.
 
-â**Entrada fulgurante e o 'show' de KonÃ© no primeiro tempo**
+Em mais um clássico eletrizante da Serie A, a Roma e o Inter mediram forças no Stadio Olimpico num duelo de parada e resposta que acabou empatado a duas bolas (2-2). Com o jovem português Rodrigo Mora a começar no banco dos _giallorossi_, a partida ficou marcada pela entrada avassaladora da equipa da casa, pela exibição inspirada de Manu Koné e pela capacidade de reação dos _nerazzurri_, capitaneados por um Lautaro Martínez implacável.
 
-âA turma orientada pela Roma entrou com as linhas subidas e dominou por completo os ritmos do encontro durante os primeiros 45 minutos:
+**Entrada fulgurante e o 'show' de Koné no primeiro tempo**
 
-- â**EficÃ¡cia madrugadora (6'):** Paulo Dybala desenhou um cruzamento milimÃ©trico para o segundo poste, Nahuel Molina amorteceu com inteligÃªncia para o coraÃ§Ã£o da grande Ã¡rea e Manu KonÃ© apareceu a fuzilar de primeira, sem hipÃ³teses de defesa, inaugurando o marcador.
-- â**Bis a fechar o primeiro ato:** Mantendo a pressÃ£o sufocante sobre a primeira fase de construÃ§Ã£o do Inter, o mÃ©dio francÃªs aproveitou uma sobra na Ã¡rea para assinar o segundo golo da conta pessoal e levar a Roma para o intervalo com uma vantagem confortÃ¡vel de 2-0.
+A turma orientada pela Roma entrou com as linhas subidas e dominou por completo os ritmos do encontro durante os primeiros 45 minutos:
 
-â**Capacidade de sofrimento e a resposta de Lautaro MartÃ­nez**
+- **Eficácia madrugadora (6'):** Paulo Dybala desenhou um cruzamento milimétrico para o segundo poste, Nahuel Molina amorteceu com inteligência para o coração da grande área e Manu Koné apareceu a fuzilar de primeira, sem hipóteses de defesa, inaugurando o marcador.
+- **Bis a fechar o primeiro ato:** Mantendo a pressão sufocante sobre a primeira fase de construção do Inter, o médio francês aproveitou uma sobra na área para assinar o segundo golo da conta pessoal e levar a Roma para o intervalo com uma vantagem confortável de 2-0.
 
-âPerante a desvantagem pontual, o Inter regressou dos balneÃ¡rios com outra agressividade e reduziu logo na abertura do segundo tempo:
+**Capacidade de sofrimento e a resposta de Lautaro Martínez**
 
-- â**Sinal de revolta imediato (46'):** Marcus Thuram rasgou o corredor esquerdo e cruzou rasteiro para a Ã¡rea, onde Lautaro MartÃ­nez se antecipou de forma fulgurante Ã  marcaÃ§Ã£o para bater Mile Svilar e fazer o 2-1.
-- â**Empate com assinatura do capitÃ£o:** A partir dos bancos, as alteraÃ§Ãµes de Cristian Chivu deram a rotaÃ§Ã£o necessÃ¡ria para encostar a Roma ao seu reduto. Na reta final, apÃ³s um amortecimento de cabeÃ§a de Yann Bisseck, Lautaro voltou a fazer valer a sua classe na Ã¡rea para selar o 2-2 final.
+Perante a desvantagem pontual, o Inter regressou dos balneários com outra agressividade e reduziu logo na abertura do segundo tempo:
+
+- **Sinal de revolta imediato (46'):** Marcus Thuram rasgou o corredor esquerdo e cruzou rasteiro para a área, onde Lautaro Martínez se antecipou de forma fulgurante à marcação para bater Mile Svilar e fazer o 2-1.
+- **Empate com assinatura do capitão:** A partir dos bancos, as alterações de Cristian Chivu deram a rotação necessária para encostar a Roma ao seu reduto. Na reta final, após um amortecimento de cabeça de Yann Bisseck, Lautaro voltou a fazer valer a sua classe na área para selar o 2-2 final.

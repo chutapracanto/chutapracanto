@@ -16,23 +16,24 @@ relatedSpotify: ""
 ---
 
 
-O **FC Porto** estÃ¡ a movimentar-se com forÃ§a no mercado de transferÃªncias e tem **Santiago GimÃ©nez** na lista de prioridades. Os dragÃµes encontram-se em negociaÃ§Ãµes com o **AC Milan** para garantir o emprÃ©stimo do avanÃ§ado internacional mexicano.
 
-A contrataÃ§Ã£o conta com o forte aval de **Francesco Farioli**. O tÃ©cnico dos dragÃµes conhece em detalhe o valor e o perfil do jogador fruto da passagem de ambos pelo futebol neerlandÃªs, onde GimÃ©nez construiu uma reputaÃ§Ã£o de goleador temÃ­vel.
+O **FC Porto** está a movimentar-se com força no mercado de transferências e tem **Santiago Giménez** na lista de prioridades. Os dragões encontram-se em negociações com o **AC Milan** para garantir o empréstimo do avançado internacional mexicano.
 
-### Do brilhantismo no Feyenoord Ã s lesÃµes em MilÃ£o
+A contratação conta com o forte aval de **Francesco Farioli**. O técnico dos dragões conhece em detalhe o valor e o perfil do jogador fruto da passagem de ambos pelo futebol neerlandês, onde Giménez construiu uma reputação de goleador temível.
 
-O percurso de Santiago GimÃ©nez na Europa atingiu o ponto mais alto ao serviÃ§o do **Feyenoord**, clube onde assinou nÃºmeros impressionantes:
+### Do brilhantismo no Feyenoord às lesões em Milão
 
-- **65 golos em 105 jogos** no futebol neerlandÃªs.
-- **HerÃ³i nacional:** Autor do golo decisivo que deu a vitÃ³ria ao MÃ©xico na final da Gold Cup.
+O percurso de Santiago Giménez na Europa atingiu o ponto mais alto ao serviço do **Feyenoord**, clube onde assinou números impressionantes:
 
-No entanto, a mudanÃ§a para ItÃ¡lia na Ã©poca 2024/2025 nÃ£o correu como esperado. Ao serviÃ§o do AC Milan, o avanÃ§ado somou **7 golos em 37 partidas**, num rendimento fortemente condicionado por um historial fustigado por lesÃµes.
+- **65 golos em 105 jogos** no futebol neerlandês.
+- **Herói nacional:** Autor do golo decisivo que deu a vitória ao México na final da Gold Cup.
 
-### O impacto no ataque dragÃ£o
+No entanto, a mudança para Itália na época 2024/2025 não correu como esperado. Ao serviço do AC Milan, o avançado somou **7 golos em 37 partidas**, num rendimento fortemente condicionado por um historial fustigado por lesões.
 
-A grande questÃ£o que paira no DragÃ£o Ã© se o internacional mexicano conseguirÃ¡ relanÃ§ar a carreira na Invicta. Se estiver na plenitude da sua forma fÃ­sica e mental, GimÃ©nez tem todas as qualidades para se tornar a grande referÃªncia ofensiva da equipa de Farioli nesta nova temporada.
+### O impacto no ataque dragão
 
-As negociaÃ§Ãµes continuam em curso e o desfecho pode ser conhecido nos prÃ³ximos dias.
+A grande questão que paira no Dragão é se o internacional mexicano conseguirá relançar a carreira na Invicta. Se estiver na plenitude da sua forma física e mental, Giménez tem todas as qualidades para se tornar a grande referência ofensiva da equipa de Farioli nesta nova temporada.
 
-_E tu? Achas que Santiago GimÃ©nez Ã© o ponta de lanÃ§a ideal para o FC Porto ou o historial de lesÃµes Ã© um risco? Deixa a tua opiniÃ£o nos comentÃ¡rios e partilha este artigo._
+As negociações continuam em curso e o desfecho pode ser conhecido nos próximos dias.
+
+_E tu? Achas que Santiago Giménez é o ponta de lança ideal para o FC Porto ou o historial de lesões é um risco? Deixa a tua opinião nos comentários e partilha este artigo._

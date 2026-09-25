@@ -10,20 +10,21 @@ image: "https://framerusercontent.com/images/zhomD1Fc7QNDByrLTmsfxtYnGTo.jpg?wid
 ---
 
 
-O Manchester United assinalou o seu regresso ao grande palco da Liga dos CampeÃµes com uma exibiÃ§Ã£o de pura categoria e rigor, aplicando uma goleada sem espinhas por 4-0 aos azeris do Sabah. Perante a moldura humana do "Teatro dos Sonhos", a formaÃ§Ã£o orientada por Michael Carrick soube congelar a impetuosidade inicial do adversÃ¡rio e desferir golpes letais nos momentos certos, carimbando uma entrada de leÃ£o na fase de liga.
 
-â**Abertura de mestre por Bruno Fernandes e um vendaval antes do descanso**
+O Manchester United assinalou o seu regresso ao grande palco da Liga dos Campeões com uma exibição de pura categoria e rigor, aplicando uma goleada sem espinhas por 4-0 aos azeris do Sabah. Perante a moldura humana do "Teatro dos Sonhos", a formação orientada por Michael Carrick soube congelar a impetuosidade inicial do adversário e desferir golpes letais nos momentos certos, carimbando uma entrada de leão na fase de liga.
 
-âApesar da postura intrÃ©pida do conjunto do AzerbaijÃ£o nos instantes iniciais, a qualidade individual dos _Red Devils_ acabou por cavar um fosso insuperÃ¡vel:
+**Abertura de mestre por Bruno Fernandes e um vendaval antes do descanso**
 
-- â**Desenho perfeito e golo de Matheus Cunha (26'):** A teia defensiva forasteira cedeu na sequÃªncia de uma recuperaÃ§Ã£o em zona adiantada. O maestro Bruno Fernandes descobriu Dorgu no corredor esquerdo e o lateral serviu de bandeja para a finalizaÃ§Ã£o de primeira de Matheus Cunha, que inaugurou o ativo.
-- â**O selo do capitÃ£o e a frieza de Sesko (42' e 45'):** Com o jogo sob controlo, o United desferiu dois golpes de misericÃ³rdia Ã  beira do intervalo. Tielemans encontrou Bruno Fernandes no coraÃ§Ã£o da Ã¡rea para o 2-0 e, logo a seguir, Mbeumo isolou Benjamin Sesko o prodÃ­gio esloveno tirou o guardiÃ£o Pokatilov da equaÃ§Ã£o com um drible sublime e encostou com classe para a baliza deserta.
+Apesar da postura intrépida do conjunto do Azerbaijão nos instantes iniciais, a qualidade individual dos _Red Devils_ acabou por cavar um fosso insuperável:
 
-â**GestÃ£o de esforÃ§o e o oportunismo de Lisandro a fechar a contagem**
+- **Desenho perfeito e golo de Matheus Cunha (26'):** A teia defensiva forasteira cedeu na sequência de uma recuperação em zona adiantada. O maestro Bruno Fernandes descobriu Dorgu no corredor esquerdo e o lateral serviu de bandeja para a finalização de primeira de Matheus Cunha, que inaugurou o ativo.
+- **O selo do capitão e a frieza de Sesko (42' e 45'):** Com o jogo sob controlo, o United desferiu dois golpes de misericórdia à beira do intervalo. Tielemans encontrou Bruno Fernandes no coração da área para o 2-0 e, logo a seguir, Mbeumo isolou Benjamin Sesko o prodígio esloveno tirou o guardião Pokatilov da equação com um drible sublime e encostou com classe para a baliza deserta.
 
-âNa etapa complementar, o coletivo de Carrick baixou a rotaÃ§Ã£o, geriu os Ã­ndices fÃ­sicos e aproveitou a bola parada para fechar o marcador:
+**Gestão de esforço e o oportunismo de Lisandro a fechar a contagem**
 
-- â**Oportunismo Ã  ponta de alcaide por Lisandro MartÃ­nez (68'):** Numa jogada ensaiada na cobranÃ§a de um livre, Bruno Fernandes picou a bola com conta, peso e medida para Zirkzee, que tentou um pormenor de calcanhar. Na sequÃªncia, uma abordagem infeliz de Pokatilov deixou o esfÃ©rico Ã  mercÃª de Lisandro MartÃ­nez, que sÃ³ teve de empurrar para o 4-0.
-- â**Susto na barra a fechar:** O Sabah ainda esboÃ§ou uma reaÃ§Ã£o na busca do tento de honra, mas a cabeÃ§ada de Mpina esbarrou com estrondo no travessÃ£o de Bayindir, selando a folhada de quatro golos.
+Na etapa complementar, o coletivo de Carrick baixou a rotação, geriu os índices físicos e aproveitou a bola parada para fechar o marcador:
 
-âCom este triunfo moralizador, o Manchester United amealha os primeiros trÃªs pontos na prova e ganha balanÃ§o para a exigente deslocaÃ§Ã£o ao reduto do AtlÃ©tico de Madrid, agendada para 13 de outubro.
+- **Oportunismo à ponta de alcaide por Lisandro Martínez (68'):** Numa jogada ensaiada na cobrança de um livre, Bruno Fernandes picou a bola com conta, peso e medida para Zirkzee, que tentou um pormenor de calcanhar. Na sequência, uma abordagem infeliz de Pokatilov deixou o esférico à mercê de Lisandro Martínez, que só teve de empurrar para o 4-0.
+- **Susto na barra a fechar:** O Sabah ainda esboçou uma reação na busca do tento de honra, mas a cabeçada de Mpina esbarrou com estrondo no travessão de Bayindir, selando a folhada de quatro golos.
+
+Com este triunfo moralizador, o Manchester United amealha os primeiros três pontos na prova e ganha balanço para a exigente deslocação ao reduto do Atlético de Madrid, agendada para 13 de outubro.

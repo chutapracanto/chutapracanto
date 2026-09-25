@@ -10,19 +10,20 @@ image: "https://framerusercontent.com/images/B4VP5qaRfleODoHJP8ihRKTu8.jpg?width
 ---
 
 
-Gabriel Mec jÃ¡ veste oficialmente de azul e branco e a sua apresentaÃ§Ã£o em discurso direto revelou a personalidade vincada de quem chega Ã  Invicta para deixar marca. Em declaraÃ§Ãµes exclusivas aos meios do clube, a joia brasileira de 18 anos blindada atÃ© 2031 com uma clÃ¡usula de rescisÃ£o fixada nos 80 milhÃµes de euros confessou o fascÃ­nio pela dimensÃ£o do campeÃ£o nacional, detalhou os bastidores do seu crescimento no GrÃ©mio e prometeu um futebol de puro improviso e sem receio de arriscar.
 
-â**A heranÃ§a de Porto Alegre: Do legado de Jardel Ã  tutoria determinante de LuÃ­s Castro**
+Gabriel Mec já veste oficialmente de azul e branco e a sua apresentação em discurso direto revelou a personalidade vincada de quem chega à Invicta para deixar marca. Em declarações exclusivas aos meios do clube, a joia brasileira de 18 anos blindada até 2031 com uma cláusula de rescisão fixada nos 80 milhões de euros confessou o fascínio pela dimensão do campeão nacional, detalhou os bastidores do seu crescimento no Grémio e prometeu um futebol de puro improviso e sem receio de arriscar.
 
-âA mudanÃ§a para o DragÃ£o representa a concretizaÃ§Ã£o de um sonho de infÃ¢ncia para o jovem prodÃ­gio, que fez questÃ£o de assinalar a histÃ³rica ponte entre o GrÃ©mio e o FC Porto:
+**A herança de Porto Alegre: Do legado de Jardel à tutoria determinante de Luís Castro**
 
-- â**TradiÃ§Ã£o de sucesso na Invicta:** _"Toda a gente conhece a grandeza do FC Porto, duas vezes campeÃ£o europeu e o clube mais titulado de Portugal. Quando surgiu a oportunidade nem pensei duas vezes. Olho para os exemplos do PepÃª e do Super MÃ¡rio Jardel, que Ã© um Ã­dolo absoluto aqui. Segui os passos deles para realizar o meu sonho de vencer trofÃ©us e revalidar o tÃ­tulo nacional."_
-- â**A marca da equipa tÃ©cnica portuguesa:** _"O LuÃ­s Castro nÃ£o foi apenas um treinador, foi um amigo que me disse as verdades que eu precisava de ouvir. Ele e o VÃ­tor Severino ajudaram-me dentro e fora de campo. Disseram-me que eu tinha potencial para a Europa, mas que precisava de evoluir em certos aspetos, e trabalharam comigo para me preparar para este nÃ­vel."_
+A mudança para o Dragão representa a concretização de um sonho de infância para o jovem prodígio, que fez questão de assinalar a histórica ponte entre o Grémio e o FC Porto:
 
-â**Selo de Ronaldinho, identidade prÃ³pria e o caldeirÃ£o azul e branco**
+- **Tradição de sucesso na Invicta:** _"Toda a gente conhece a grandeza do FC Porto, duas vezes campeão europeu e o clube mais titulado de Portugal. Quando surgiu a oportunidade nem pensei duas vezes. Olho para os exemplos do Pepê e do Super Mário Jardel, que é um ídolo absoluto aqui. Segui os passos deles para realizar o meu sonho de vencer troféus e revalidar o título nacional."_
+- **A marca da equipa técnica portuguesa:** _"O Luís Castro não foi apenas um treinador, foi um amigo que me disse as verdades que eu precisava de ouvir. Ele e o Vítor Severino ajudaram-me dentro e fora de campo. Disseram-me que eu tinha potencial para a Europa, mas que precisava de evoluir em certos aspetos, e trabalharam comigo para me preparar para este nível."_
 
-âPerante a inevitÃ¡vel comparaÃ§Ã£o com Ronaldinho GaÃºcho pelas origens gaÃºchas e pela criatividade virtuosa com bola, o atacante manteve a postura humilde, mas garantiu querer escrever o seu prÃ³prio nome na histÃ³ria do futebol:
+**Selo de Ronaldinho, identidade própria e o caldeirão azul e branco**
 
-- â**InspiraÃ§Ã£o sem cÃ³pia:** _"Fico feliz com a comparaÃ§Ã£o, Ã© o Ronaldinho! Vejo os vÃ­deos dele e fico inspirado, mas tenho de trabalhar muito e o meu foco Ã© criar a minha prÃ³pria imagem, a do Gabriel Mec."_
-- â**Ousadia e versatilidade tÃ¡tica:** _"Sou um jogador de improviso. NÃ£o tenho medo de errar: posso errar duas ou trÃªs vezes, mas vou tentar sempre mais uma. Do meio-campo para a frente posso atuar em qualquer posiÃ§Ã£o, com facilidade para sair a jogar pelos dois lados."_
-- â**Impacto na entrada para o DragÃ£o:** _"Estou ansioso por me estrear. SÃ³ de olhar para o estÃ¡dio jÃ¡ sinto arrepios ao imaginar a bancada cheia a cantar. Chego para somar, sei o peso desta camisola e vou dar tudo em campo."_
+Perante a inevitável comparação com Ronaldinho Gaúcho pelas origens gaúchas e pela criatividade virtuosa com bola, o atacante manteve a postura humilde, mas garantiu querer escrever o seu próprio nome na história do futebol:
+
+- **Inspiração sem cópia:** _"Fico feliz com a comparação, é o Ronaldinho! Vejo os vídeos dele e fico inspirado, mas tenho de trabalhar muito e o meu foco é criar a minha própria imagem, a do Gabriel Mec."_
+- **Ousadia e versatilidade tática:** _"Sou um jogador de improviso. Não tenho medo de errar: posso errar duas ou três vezes, mas vou tentar sempre mais uma. Do meio-campo para a frente posso atuar em qualquer posição, com facilidade para sair a jogar pelos dois lados."_
+- **Impacto na entrada para o Dragão:** _"Estou ansioso por me estrear. Só de olhar para o estádio já sinto arrepios ao imaginar a bancada cheia a cantar. Chego para somar, sei o peso desta camisola e vou dar tudo em campo."_

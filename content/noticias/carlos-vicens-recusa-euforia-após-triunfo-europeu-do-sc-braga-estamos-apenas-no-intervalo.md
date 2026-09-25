@@ -10,25 +10,26 @@ image: "https://framerusercontent.com/images/ICyKImtjJiJ3l1uL5wO8Zz0DxI.webp?wid
 ---
 
 
-âO SC Braga venceu o Austria Wien por 2-0 na primeira mÃ£o do _playoff_ da Liga ConferÃªncia, mas Carlos Vicens fez questÃ£o de arrefecer o entusiasmo. O tÃ©cnico arsenalista lembrou que a eliminatÃ³ria estÃ¡ a meio e anteviu dificuldades para a segunda mÃ£o, na Ãustria.
 
-### âRespeito pelo adversÃ¡rio e aviso para a 2.Âª mÃ£o
+O SC Braga venceu o Austria Wien por 2-0 na primeira mão do _playoff_ da Liga Conferência, mas Carlos Vicens fez questão de arrefecer o entusiasmo. O técnico arsenalista lembrou que a eliminatória está a meio e anteviu dificuldades para a segunda mão, na Áustria.
 
-âApesar do resultado favorÃ¡vel construÃ­do na Pedreira, o treinador dos minhotos frisou a necessidade de manter a exigÃªncia mÃ¡xima:
+### Respeito pelo adversário e aviso para a 2.ª mão
 
-- â**EliminatÃ³ria em aberto:** "Apenas chegÃ¡mos ao intervalo da eliminatÃ³ria. Temos uma vantagem, mas na prÃ³xima semana teremos de apresentar a nossa melhor versÃ£o. Um golo do adversÃ¡rio pode mudar tudo e teremos de saber sofrer."
-- â**Elogios ao Austria Wien:** "EnfrentÃ¡mos uma equipa com muita energia, forte nos duelos e extremamente comprometida. Para cumprirmos o objetivo de estar na fase de liga, teremos de trabalhar muito duro em Viena."
+Apesar do resultado favorável construído na Pedreira, o treinador dos minhotos frisou a necessidade de manter a exigência máxima:
 
-### âIncidente na substituiÃ§Ã£o e o reforÃ§o Milosevic
+- **Eliminatória em aberto:** "Apenas chegámos ao intervalo da eliminatória. Temos uma vantagem, mas na próxima semana teremos de apresentar a nossa melhor versão. Um golo do adversário pode mudar tudo e teremos de saber sofrer."
+- **Elogios ao Austria Wien:** "Enfrentámos uma equipa com muita energia, forte nos duelos e extremamente comprometida. Para cumprirmos o objetivo de estar na fase de liga, teremos de trabalhar muito duro em Viena."
 
-âInterrogado sobre o momento insÃ³lito em que o Ã¡rbitro impediu a entrada de Sergio Barcia para o lugar do lesionado VÃ­tor Carvalho, o espanhol direcionou as dÃºvidas para a equipa de arbitragem:
+### Incidente na substituição e o reforço Milosevic
 
-- â**GestÃ£o fÃ­sica e arbitragem:** "O VÃ­tor Carvalho avisou que precisava de sair. NÃ£o sou treinador de perder tempo e penalizar a equipa deixando um jogador fora afeta a saÃºde muscular do atleta. Ã uma pergunta que deve ser feita aos Ã¡rbitros."
-- â**Novo avanÃ§ado:** Sobre a oficializaÃ§Ã£o de Milosevic, o tÃ©cnico mostrou-se satisfeito: "Ã um avanÃ§ado jovem, com ambiÃ§Ã£o e vontade de triunfar. Vem para dar mais opÃ§Ãµes e qualidade ao nosso setor ofensivo."
+Interrogado sobre o momento insólito em que o árbitro impediu a entrada de Sergio Barcia para o lugar do lesionado Vítor Carvalho, o espanhol direcionou as dúvidas para a equipa de arbitragem:
 
-### âImpacto vindo do banco e superaÃ§Ã£o de Diego Rodrigues
+- **Gestão física e arbitragem:** "O Vítor Carvalho avisou que precisava de sair. Não sou treinador de perder tempo e penalizar a equipa deixando um jogador fora afeta a saúde muscular do atleta. É uma pergunta que deve ser feita aos árbitros."
+- **Novo avançado:** Sobre a oficialização de Milosevic, o técnico mostrou-se satisfeito: "É um avançado jovem, com ambição e vontade de triunfar. Vem para dar mais opções e qualidade ao nosso setor ofensivo."
 
-âA jogada do 2-0 foi desenhada por dois jogadores lanÃ§ados no segundo tempo, com destaque para a recuperaÃ§Ã£o de Diego Rodrigues:
+### Impacto vindo do banco e superação de Diego Rodrigues
 
-- â**AmbiÃ§Ã£o dos suplentes:** "Tanto o Dorgeles como o Diego entraram muito bem. Tenho insistido com os jogadores daquelas posiÃ§Ãµes para atacarem a baliza com ambiÃ§Ã£o."
-- â**SuperaÃ§Ã£o pessoal:** "Fico especialmente feliz pelo Diego, que passou por dias muito difÃ­ceis recentemente devido a uma intoxicaÃ§Ã£o alimentar."
+A jogada do 2-0 foi desenhada por dois jogadores lançados no segundo tempo, com destaque para a recuperação de Diego Rodrigues:
+
+- **Ambição dos suplentes:** "Tanto o Dorgeles como o Diego entraram muito bem. Tenho insistido com os jogadores daquelas posições para atacarem a baliza com ambição."
+- **Superação pessoal:** "Fico especialmente feliz pelo Diego, que passou por dias muito difíceis recentemente devido a uma intoxicação alimentar."

@@ -10,20 +10,21 @@ image: "https://framerusercontent.com/images/dio2EW6CpG2HdDvZszVwXXMZUgI.jpg?wid
 ---
 
 
-Num final de partida eletrizante no EstÃ¡dio Benito VillamarÃ­n, o Real Betis impÃ´s a primeira derrota da Ã©poca ao Real Madrid de JosÃ© Mourinho. A equipa orientada por Manuel Pellegrini venceu por 1-0 graÃ§as a um golo solitÃ¡rio de Troy Parrott na reta final e a uma exibiÃ§Ã£o monumental do guarda-redes Ãlvaro Valles, que travou um penÃ¡lti a Kylian MbappÃ© jÃ¡ em perÃ­odo de compensaÃ§Ã£o.
 
-â**DomÃ­nio merengue, crescimento andaluz e o golo do triunfo**
+Num final de partida eletrizante no Estádio Benito Villamarín, o Real Betis impôs a primeira derrota da época ao Real Madrid de José Mourinho. A equipa orientada por Manuel Pellegrini venceu por 1-0 graças a um golo solitário de Troy Parrott na reta final e a uma exibição monumental do guarda-redes Álvaro Valles, que travou um penálti a Kylian Mbappé já em período de compensação.
 
-âA equipa da capital entrou com a intenÃ§Ã£o de impor o seu ritmo, mas acabou por esbarrar no pragmatismo andaluz:
+**Domínio merengue, crescimento andaluz e o golo do triunfo**
 
-- â**PressÃ£o inicial de Mourinho:** O Real Madrid dominou a primeira metade do encontro, instalando-se no meio-campo adversÃ¡rio e criando perigo atravÃ©s das iniciativas de Arda GÃ¼ler e VinÃ­cius JÃºnior.
-- â**Crescimento do Betis:** Mais recuada no arranque, a formaÃ§Ã£o do Betis foi ajustando as suas linhas e encontrou mais espaÃ§o no segundo tempo para sair em transiÃ§Ã£o.
-- â**Selo de Troy Parrott:** Aos 81 minutos, na sequÃªncia de uma grande defesa de Thibaut Courtois a um primeiro cabeceamento, a bola sobrou para o avanÃ§ado irlandÃªs Troy Parrott, que na pequena Ã¡rea fuzilou as redes para inaugurar o marcador.
+A equipa da capital entrou com a intenção de impor o seu ritmo, mas acabou por esbarrar no pragmatismo andaluz:
 
-â**Drama no fecho: VAR anula bicicleta e Valles trava MbappÃ©**
+- **Pressão inicial de Mourinho:** O Real Madrid dominou a primeira metade do encontro, instalando-se no meio-campo adversário e criando perigo através das iniciativas de Arda Güler e Vinícius Júnior.
+- **Crescimento do Betis:** Mais recuada no arranque, a formação do Betis foi ajustando as suas linhas e encontrou mais espaço no segundo tempo para sair em transição.
+- **Selo de Troy Parrott:** Aos 81 minutos, na sequência de uma grande defesa de Thibaut Courtois a um primeiro cabeceamento, a bola sobrou para o avançado irlandês Troy Parrott, que na pequena área fuzilou as redes para inaugurar o marcador.
 
-âOs instantes finais da partida reservaram uma sequÃªncia de lances dramÃ¡ticos na grande Ã¡rea do Betis:
+**Drama no fecho: VAR anula bicicleta e Valles trava Mbappé**
 
-- â**GolaÃ§o anulado a EspÃ­:** Na resposta ao golo sofrido, um cruzamento de trivela de VinÃ­cius JÃºnior encontrou Carlos EspÃ­, que faturou com um pontapÃ© de bicicleta espetacular. No entanto, o VAR interveio e anulou o tento por posiÃ§Ã£o irregular do avanÃ§ado espanhol no inÃ­cio do lance.
-- â**PenÃ¡lti defendido nos descontos:** Pouco depois, VinÃ­cius JÃºnior foi derrubado na Ã¡rea por Natan. Chamado a converter a grande penalidade no perÃ­odo de compensaÃ§Ã£o, Kylian MbappÃ© permitiu a defesa a Ãlvaro Valles, segurando o 1-0 final.
-- â**Igualdade no topo:** Com este triunfo tangencial, o Real Betis cola-se aos _merengues_ e ao Barcelona na lideranÃ§a da La Liga, todos com nove pontos.
+Os instantes finais da partida reservaram uma sequência de lances dramáticos na grande área do Betis:
+
+- **Golaço anulado a Espí:** Na resposta ao golo sofrido, um cruzamento de trivela de Vinícius Júnior encontrou Carlos Espí, que faturou com um pontapé de bicicleta espetacular. No entanto, o VAR interveio e anulou o tento por posição irregular do avançado espanhol no início do lance.
+- **Penálti defendido nos descontos:** Pouco depois, Vinícius Júnior foi derrubado na área por Natan. Chamado a converter a grande penalidade no período de compensação, Kylian Mbappé permitiu a defesa a Álvaro Valles, segurando o 1-0 final.
+- **Igualdade no topo:** Com este triunfo tangencial, o Real Betis cola-se aos _merengues_ e ao Barcelona na liderança da La Liga, todos com nove pontos.

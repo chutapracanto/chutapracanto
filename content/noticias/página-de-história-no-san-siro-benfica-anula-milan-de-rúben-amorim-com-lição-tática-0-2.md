@@ -10,20 +10,21 @@ image: "https://framerusercontent.com/images/YORGZ608iSYjzHFziXmiewSfg0.jpg?widt
 ---
 
 
-Ponto final no enguiÃ§o: o SL Benfica conquistou a primeira vitÃ³ria da sua histÃ³ria no mÃ­tico EstÃ¡dio San Siro. Na estreia na fase de liga da Liga Europa, a equipa de Marco Silva apresentou-se altamente personalizada, rubricando uma exibiÃ§Ã£o madura e irrepreensÃ­vel perante 70 mil adeptos e derrotando o AC Milan de RÃºben Amorim por 0-2.
 
-### â**Encaixe perfeito, teia encarnada e a inspiraÃ§Ã£o de Lukebakio**
+Ponto final no enguiço: o SL Benfica conquistou a primeira vitória da sua história no mítico Estádio San Siro. Na estreia na fase de liga da Liga Europa, a equipa de Marco Silva apresentou-se altamente personalizada, rubricando uma exibição madura e irrepreensível perante 70 mil adeptos e derrotando o AC Milan de Rúben Amorim por 0-2.
 
-âPromovendo uma revoluÃ§Ã£o quase total no onze inicial em comparaÃ§Ã£o com o campeonato mantendo apenas TomÃ¡s AraÃºjo e Banjaqui, Marco Silva desenhou um plano tÃ¡tico que anulou as dinÃ¢micas dos _rossoneri_:
+### **Encaixe perfeito, teia encarnada e a inspiração de Lukebakio**
 
-- â**Encaixe e teia no miolo:** Sem bola, as Ã¡guias desdobraram-se num coeso 5-4-1, com Kaminski a recuar e Sudakov a fechar a esquerda. No meio-campo, JoÃ£o Palhinha e Fredrik Aursnes asfixiaram o jogo interior italiano, enquanto Circati e TomÃ¡s AraÃºjo mantiveram GonÃ§alo Ramos sob vigilÃ¢ncia apertada.
-- â**A magia de Lukebakio (16'):** Aos 16 minutos, numa incursÃ£o interior de Kaminski a partir da esquerda, Dodi Lukebakio recebeu no corredor, encarou a oposiÃ§Ã£o, fletiu para dentro e disparou de pÃ© esquerdo sem hipÃ³teses para Mike Maignan.
+Promovendo uma revolução quase total no onze inicial em comparação com o campeonato mantendo apenas Tomás Araújo e Banjaqui, Marco Silva desenhou um plano tático que anulou as dinâmicas dos _rossoneri_:
 
-### â**Maturidade, luvas de Trubin e a consagraÃ§Ã£o do homem da noite**
+- **Encaixe e teia no miolo:** Sem bola, as águias desdobraram-se num coeso 5-4-1, com Kaminski a recuar e Sudakov a fechar a esquerda. No meio-campo, João Palhinha e Fredrik Aursnes asfixiaram o jogo interior italiano, enquanto Circati e Tomás Araújo mantiveram Gonçalo Ramos sob vigilância apertada.
+- **A magia de Lukebakio (16'):** Aos 16 minutos, numa incursão interior de Kaminski a partir da esquerda, Dodi Lukebakio recebeu no corredor, encarou a oposição, fletiu para dentro e disparou de pé esquerdo sem hipóteses para Mike Maignan.
 
-âNa etapa complementar, o AC Milan procurou reagir com o apoio inflamado da bancada, mas a resposta encarnada foi de um pragmatismo absoluto:
+### **Maturidade, luvas de Trubin e a consagração do homem da noite**
 
-- â**Trubin intransponÃ­vel e controlo emocional:** No regresso Ã  titularidade, Anatoliy Trubin respondeu presente com intervenÃ§Ãµes seguras nos momentos em que o Milan tentou intensificar a pressÃ£o. Perante uma equipa italiana refÃ©m de processos robÃ³ticos, o Benfica geriu os ritmos com enorme maturidade.
-- â**O golpe de misericÃ³rdia de Kaminski:** Figura maior da noite, Jakub Kaminski juntou o golo Ã  assistÃªncia da primeira parte. Na sequÃªncia de uma transiÃ§Ã£o letal pela esquerda, Karouani tirou um cruzamento de rÃ©gua e esquadro e o internacional polaco apareceu na Ã¡rea a finalizar com classe para o 0-2 definitivo.
+Na etapa complementar, o AC Milan procurou reagir com o apoio inflamado da bancada, mas a resposta encarnada foi de um pragmatismo absoluto:
 
-âCom o apito final, confirmou-se a tripla vitÃ³ria das Ã¡guias: triunfo histÃ³rico em MilÃ£o, arranque com o pÃ© direito na Liga Europa e a gestÃ£o ideal de energias antes do ClÃ¡ssico no EstÃ¡dio do DragÃ£o.
+- **Trubin intransponível e controlo emocional:** No regresso à titularidade, Anatoliy Trubin respondeu presente com intervenções seguras nos momentos em que o Milan tentou intensificar a pressão. Perante uma equipa italiana refém de processos robóticos, o Benfica geriu os ritmos com enorme maturidade.
+- **O golpe de misericórdia de Kaminski:** Figura maior da noite, Jakub Kaminski juntou o golo à assistência da primeira parte. Na sequência de uma transição letal pela esquerda, Karouani tirou um cruzamento de régua e esquadro e o internacional polaco apareceu na área a finalizar com classe para o 0-2 definitivo.
+
+Com o apito final, confirmou-se a tripla vitória das águias: triunfo histórico em Milão, arranque com o pé direito na Liga Europa e a gestão ideal de energias antes do Clássico no Estádio do Dragão.

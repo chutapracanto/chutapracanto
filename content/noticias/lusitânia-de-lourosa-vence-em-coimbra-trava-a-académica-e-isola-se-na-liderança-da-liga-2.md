@@ -10,12 +10,13 @@ image: "https://framerusercontent.com/images/8E7A0x9BMbEcWPsWUBcsRBhsL3o.webp?wi
 ---
 
 
-O EstÃ¡dio Cidade de Coimbra foi palco do duelo cartaz da 4.Âª jornada da Liga Portugal 2 Meu Super, com o LusitÃ¢nia de Lourosa a superiorizar-se Ã  AcadÃ©mica por 0-2. Com este resultado, a formaÃ§Ã£o orientada por Ricardo Silva manteve a invencibilidade na prova, impÃ´s o primeiro desaire da temporada aos _estudantes_ e assumiu o topo da tabela classificativa de forma isolada, somando 10 pontos em 12 possÃ­veis.
 
-â**Infelicidade defensiva abriu caminho ao triunfo visitante**
+O Estádio Cidade de Coimbra foi palco do duelo cartaz da 4.ª jornada da Liga Portugal 2 Meu Super, com o Lusitânia de Lourosa a superiorizar-se à Académica por 0-2. Com este resultado, a formação orientada por Ricardo Silva manteve a invencibilidade na prova, impôs o primeiro desaire da temporada aos _estudantes_ e assumiu o topo da tabela classificativa de forma isolada, somando 10 pontos em 12 possíveis.
 
-âO encontro comeÃ§ou morno, com os primeiros 15 minutos marcados por um estudo mÃºtuo e extrema prudÃªncia de parte a parte. Contudo, aos 27 minutos, um lance caricato desequilibrou o marcador: Mandiang arrancou em velocidade, rematou para defesa incompleta de Carlos Alves e, na recarga, acertou no poste; ao tentar o alÃ­vio, Ricardo Teixeira viu a bola embater no colega KakÃ¡ e entrar na prÃ³pria baliza. A vencer, o Lourosa geriu a vantagem com maturidade atÃ© ao descanso, perante uma Briosa sem chama ofensiva.
+**Infelicidade defensiva abriu caminho ao triunfo visitante**
 
-â**Pragmatismo selou os trÃªs pontos no fecho do jogo**
+O encontro começou morno, com os primeiros 15 minutos marcados por um estudo mútuo e extrema prudência de parte a parte. Contudo, aos 27 minutos, um lance caricato desequilibrou o marcador: Mandiang arrancou em velocidade, rematou para defesa incompleta de Carlos Alves e, na recarga, acertou no poste; ao tentar o alívio, Ricardo Teixeira viu a bola embater no colega Kaká e entrar na própria baliza. A vencer, o Lourosa geriu a vantagem com maturidade até ao descanso, perante uma Briosa sem chama ofensiva.
 
-âNa etapa complementar, a equipa da casa tentou reagir atravÃ©s das bolas paradas, mas faltou-lhe discernimento para furar o bloco visitante. O cenÃ¡rio complicou-se aos 77 minutos, quando Edson Farias saiu lesionado jÃ¡ depois de esgotadas as substituiÃ§Ãµes, forÃ§ando a AcadÃ©mica a jogar com elementos fora das posiÃ§Ãµes de raiz. Com os locais balanceados para a frente, o golpe de misericÃ³rdia surgiu aos 90+6 minutos: Miguel Teixeira aproveitou um erro crasso de Ni Rodrigues, isolou-se perante Carlos Alves e estabeleceu o 0-2 final, carimbando trÃªs pontos de ouro.
+**Pragmatismo selou os três pontos no fecho do jogo**
+
+Na etapa complementar, a equipa da casa tentou reagir através das bolas paradas, mas faltou-lhe discernimento para furar o bloco visitante. O cenário complicou-se aos 77 minutos, quando Edson Farias saiu lesionado já depois de esgotadas as substituições, forçando a Académica a jogar com elementos fora das posições de raiz. Com os locais balanceados para a frente, o golpe de misericórdia surgiu aos 90+6 minutos: Miguel Teixeira aproveitou um erro crasso de Ni Rodrigues, isolou-se perante Carlos Alves e estabeleceu o 0-2 final, carimbando três pontos de ouro.

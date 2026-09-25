@@ -10,18 +10,19 @@ image: "https://framerusercontent.com/images/yXknCK0rGUyofgGNt2eRiHFZZk.jpg?widt
 ---
 
 
-O Emirates Stadium vestiu-se de gala esta terÃ§a-feira para testemunhar a eclosÃ£o de mais uma pÃ©rola da formaÃ§Ã£o _gunner_. Em duelo a contar para a terceira ronda da TaÃ§a da Liga inglesa, o Arsenal bateu o Ipswich Town por 4-2 numa noite marcada pela rotaÃ§Ã£o de peÃ§as de Mikel Arteta, mas, acima de tudo, pelo brilhantismo precoce de Max Dowman. Com apenas 16 anos, o jovem prodÃ­gio estreou-se a titular na presente temporada e respondeu com uma exibiÃ§Ã£o demolidora, rubricando dois golos e uma assistÃªncia perante a turma forasteira, que contou com o ex-benfiquista Florentino LuÃ­s no onze inicial.
 
-### â**Abertura de livro aos 7 minutos, frieza de Madueke e o selo do miolo**
+O Emirates Stadium vestiu-se de gala esta terça-feira para testemunhar a eclosão de mais uma pérola da formação _gunner_. Em duelo a contar para a terceira ronda da Taça da Liga inglesa, o Arsenal bateu o Ipswich Town por 4-2 numa noite marcada pela rotação de peças de Mikel Arteta, mas, acima de tudo, pelo brilhantismo precoce de Max Dowman. Com apenas 16 anos, o jovem prodígio estreou-se a titular na presente temporada e respondeu com uma exibição demolidora, rubricando dois golos e uma assistência perante a turma forasteira, que contou com o ex-benfiquista Florentino Luís no onze inicial.
 
-âA partida em Londres comeÃ§ou sob o signo da inspiraÃ§Ã£o individual e da vertigem ofensiva dos visitados:
+### **Abertura de livro aos 7 minutos, frieza de Madueke e o selo do miolo**
 
-- â**Pintura madrugadora de Max Dowman (7'):** Bastaram sete minutos na primeira titularidade da Ã©poca para a promessa de 16 anos encantar os bancadas. Numa combinaÃ§Ã£o repleta de classe com Eberechi Eze, Dowman tirou dois opositores do caminho com uma facilidade desconcertante e disparou colocado para o fundo das redes.
-- â**Oportunismo de Madueke (40'):** Ã beira do descanso, Noni Madueke aproveitou uma desconcentraÃ§Ã£o defensiva do Ipswich Town para roubar a bola e alargar a vantagem no marcador.
-- â**Bis com perfume de Zubimendi e mÃ­ssil de Merino:** O regresso dos balneÃ¡rios manteve a mesma partitura. Dowman voltou a faturar ao corresponder com distinÃ§Ã£o a um passe aÃ§ucarado de MartÃ­n Zubimendi, finalizando ao poste mais distante. Pouco depois, Mikel Merino juntou-se Ã  festa com um remate potente fora da Ã¡rea que ainda embateu no interior do poste antes de transpor a linha de golo.
+A partida em Londres começou sob o signo da inspiração individual e da vertigem ofensiva dos visitados:
 
-### â**RÃ©plica insular na reta final sem beliscar a invencibilidade**
+- **Pintura madrugadora de Max Dowman (7'):** Bastaram sete minutos na primeira titularidade da época para a promessa de 16 anos encantar os bancadas. Numa combinação repleta de classe com Eberechi Eze, Dowman tirou dois opositores do caminho com uma facilidade desconcertante e disparou colocado para o fundo das redes.
+- **Oportunismo de Madueke (40'):** À beira do descanso, Noni Madueke aproveitou uma desconcentração defensiva do Ipswich Town para roubar a bola e alargar a vantagem no marcador.
+- **Bis com perfume de Zubimendi e míssil de Merino:** O regresso dos balneários manteve a mesma partitura. Dowman voltou a faturar ao corresponder com distinção a um passe açucarado de Martín Zubimendi, finalizando ao poste mais distante. Pouco depois, Mikel Merino juntou-se à festa com um remate potente fora da área que ainda embateu no interior do poste antes de transpor a linha de golo.
 
-âApesar da pesada desvantagem, a equipa de Florentino LuÃ­s recusou entregar-se sem dar luta e conseguiu encurtar distÃ¢ncias na fase final do encontro:
+### **Réplica insular na reta final sem beliscar a invencibilidade**
 
-- â**Sustos travados a tempo:** O Ipswich Town reagiu no Ãºltimo terÃ§o do jogo e reduziu a contagem atravÃ©s das finalizaÃ§Ãµes de Anis Mehmeti e Chuba Akpom. Contudo, a reaÃ§Ã£o acabou por ser insuficiente para abalar a estabilidade do Arsenal, que carimbou com tranquilidade a passagem Ã  quarta ronda da Carabao Cup, mantendo o registo invicto em todas as frentes nesta temporada.
+Apesar da pesada desvantagem, a equipa de Florentino Luís recusou entregar-se sem dar luta e conseguiu encurtar distâncias na fase final do encontro:
+
+- **Sustos travados a tempo:** O Ipswich Town reagiu no último terço do jogo e reduziu a contagem através das finalizações de Anis Mehmeti e Chuba Akpom. Contudo, a reação acabou por ser insuficiente para abalar a estabilidade do Arsenal, que carimbou com tranquilidade a passagem à quarta ronda da Carabao Cup, mantendo o registo invicto em todas as frentes nesta temporada.

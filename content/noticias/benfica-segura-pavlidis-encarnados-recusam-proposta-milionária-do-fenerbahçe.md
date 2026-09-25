@@ -16,15 +16,16 @@ relatedSpotify: "https://open.spotify.com/episode/0qVRoVo5GnmBBm5PX1Jwko"
 ---
 
 
-O mercado de transferÃªncias continua em ebuliÃ§Ã£o, mas a posiÃ§Ã£o do SL Benfica quanto ao seu setor ofensivo Ã© clara: Vangelis Pavlidis nÃ£o estÃ¡ Ã  venda. Nas Ãºltimas horas, o FenerbahÃ§e tentou a contrataÃ§Ã£o do avanÃ§ado grego com uma proposta financeira tentadora, mas os responsÃ¡veis da Luz recusaram de pronto a investida da equipa turca.
 
-Pavlidis, que foi um dos elementos de maior destaque da equipa na prÃ©-Ã©poca e na ponta final da Ãºltima temporada, Ã© considerado uma peÃ§a fundamental e inegociÃ¡vel na estrutura tÃ¡tica para 2026/27. A equipa tÃ©cnica encarnada nÃ£o pretende abdicar do seu ponta-de-lanÃ§a titular nesta fase do planeamento, preferindo focar-se em blindar as opÃ§Ãµes jÃ¡ existentes.
+O mercado de transferências continua em ebulição, mas a posição do SL Benfica quanto ao seu setor ofensivo é clara: Vangelis Pavlidis não está à venda. Nas últimas horas, o Fenerbahçe tentou a contratação do avançado grego com uma proposta financeira tentadora, mas os responsáveis da Luz recusaram de pronto a investida da equipa turca.
 
-A recusa do Benfica demonstra a determinaÃ§Ã£o da direÃ§Ã£o em manter o nÃºcleo duro do plantel competitivo, num momento em que vÃ¡rios clubes europeus tentam resgatar os principais ativos da Liga Portugal. Com a porta fechada a saÃ­das no ataque, o foco na Luz mantÃ©m-se prioritariamente na prossecuÃ§Ã£o de reforÃ§os para o meio-campo.
+Pavlidis, que foi um dos elementos de maior destaque da equipa na pré-época e na ponta final da última temporada, é considerado uma peça fundamental e inegociável na estrutura tática para 2026/27. A equipa técnica encarnada não pretende abdicar do seu ponta-de-lança titular nesta fase do planeamento, preferindo focar-se em blindar as opções já existentes.
 
-**EPISÃDIO RELACIONADO**
+A recusa do Benfica demonstra a determinação da direção em manter o núcleo duro do plantel competitivo, num momento em que vários clubes europeus tentam resgatar os principais ativos da Liga Portugal. Com a porta fechada a saídas no ataque, o foco na Luz mantém-se prioritariamente na prossecução de reforços para o meio-campo.
 
-**#2 â Um-dÃ³-li-tÃ¡ no Benfica, Bomba Palhinha e o Mercado Porto, Sporting e a venda do Braga**
+**EPISÓDIO RELACIONADO**
+
+**#2 — Um-dó-li-tá no Benfica, Bomba Palhinha e o Mercado Porto, Sporting e a venda do Braga**
 
 $
 ![](https://i.ytimg.com/vi_webp/gXN8tok9DRU/maxresdefault.webp)

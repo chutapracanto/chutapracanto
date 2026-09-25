@@ -10,24 +10,25 @@ image: "https://framerusercontent.com/images/mW4AmOCPvcmFT4tN0kKfQX5wdo.jpg?widt
 ---
 
 
-O **Sporting CP** fechou a contrataÃ§Ã£o de **Nestory Irankunda** ao Watford. O acordo entre a SAD leonina e o emblema inglÃªs Ã© total, tendo o jovem atacante recebido luz verde para viajar para Lisboa nas prÃ³ximas horas, onde irÃ¡ realizar os exames mÃ©dicos e assinar um contrato vÃ¡lido por **cinco temporadas**.
 
-A operaÃ§Ã£o financeira envolve um **investimento fixo de 15 milhÃµes de euros**, valor que pode ascender aos **18 milhÃµes de euros** mediante o cumprimento de objetivos de rendimento do internacional australiano de 20 anos.
+O **Sporting CP** fechou a contratação de **Nestory Irankunda** ao Watford. O acordo entre a SAD leonina e o emblema inglês é total, tendo o jovem atacante recebido luz verde para viajar para Lisboa nas próximas horas, onde irá realizar os exames médicos e assinar um contrato válido por **cinco temporadas**.
 
-#### **NegociaÃ§Ãµes com o Bayern desbloquearam o processo**
+A operação financeira envolve um **investimento fixo de 15 milhões de euros**, valor que pode ascender aos **18 milhões de euros** mediante o cumprimento de objetivos de rendimento do internacional australiano de 20 anos.
 
-O desfecho da transferÃªncia esteve dependente de um entendimento prÃ©vio entre o Watford e o Bayern Munique. Quando venderam Irankunda aos _hornets_ por 4 milhÃµes de euros na Ã©poca passada, os bÃ¡varos salvaguardaram 50% dos direitos de uma futura venda.
+#### **Negociações com o Bayern desbloquearam o processo**
 
-Perante a valorizaÃ§Ã£o do jogador e o investimento do Sporting, o clube inglÃªs renegociou essa percentagem com o emblema alemÃ£o de forma a garantir um encaixe financeiro superior, retirando o Ãºltimo obstÃ¡culo Ã  mudanÃ§a do atleta para Alvalade.
+O desfecho da transferência esteve dependente de um entendimento prévio entre o Watford e o Bayern Munique. Quando venderam Irankunda aos _hornets_ por 4 milhões de euros na época passada, os bávaros salvaguardaram 50% dos direitos de uma futura venda.
 
-#### **O perfil do novo reforÃ§o leonino**
+Perante a valorização do jogador e o investimento do Sporting, o clube inglês renegociou essa percentagem com o emblema alemão de forma a garantir um encaixe financeiro superior, retirando o último obstáculo à mudança do atleta para Alvalade.
 
-Internacional absoluto pela AustrÃ¡lia, Nestory Irankunda Ã© um extremo de 20 anos que atua preferencialmente no corredor direito, embora ofereÃ§a versatilidade para jogar na esquerda ou no apoio ao ponta de lanÃ§a.
+#### **O perfil do novo reforço leonino**
 
-Dotado de **grande poder fÃ­sico e aceleraÃ§Ã£o forte** em espaÃ§os curtos, o jovem destaca-se por:
+Internacional absoluto pela Austrália, Nestory Irankunda é um extremo de 20 anos que atua preferencialmente no corredor direito, embora ofereça versatilidade para jogar na esquerda ou no apoio ao ponta de lança.
+
+Dotado de **grande poder físico e aceleração forte** em espaços curtos, o jovem destaca-se por:
 
 - **Capacidade no 1-contra-1**
-- **Agressividade no ataque Ã  profundidade**
-- **Facilidade no remate de meia distÃ¢ncia**
+- **Agressividade no ataque à profundidade**
+- **Facilidade no remate de meia distância**
 
-CaracterÃ­sticas que prometem dar mais imprevisibilidade e vertigem ao ataque verde e branco.
+Características que prometem dar mais imprevisibilidade e vertigem ao ataque verde e branco.

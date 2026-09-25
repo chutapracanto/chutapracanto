@@ -10,34 +10,35 @@ image: "https://framerusercontent.com/images/OespK3Dit9TyXr9YjZwDEJJu14.webp?wid
 ---
 
 
-O FÃ³rum Grimaldi, no Principado do MÃ³naco, vestiu-se de gala para traÃ§ar o destino europeu de FC Porto e Sporting CP na fase de liga da UEFA Champions League 2026/27. Colocados no Pote 2 do sorteio, os dois representantes nacionais ficaram a conhecer a rota de oito batalhas de altÃ­ssima exigÃªncia que os espera na maior competiÃ§Ã£o do futebol de clubes.
 
-âPara os dragÃµes de Francesco Farioli, a ediÃ§Ã£o marca o regresso ansiado ao convÃ­vio da elite europeia apÃ³s duas Ã©pocas de ausÃªncia. Por sua vez, a formaÃ§Ã£o de Rui Borges confirma o grande momento competitivo ao carimbar a terceira participaÃ§Ã£o consecutiva na prova â um marco histÃ³rico que os leÃµes nÃ£o registavam desde a era Paulo Bento.
+O Fórum Grimaldi, no Principado do Mónaco, vestiu-se de gala para traçar o destino europeu de FC Porto e Sporting CP na fase de liga da UEFA Champions League 2026/27. Colocados no Pote 2 do sorteio, os dois representantes nacionais ficaram a conhecer a rota de oito batalhas de altíssima exigência que os espera na maior competição do futebol de clubes.
 
-â**FC Porto: Duelos de titÃ£s com gigantes de Inglaterra e ItÃ¡lia**
+Para os dragões de Francesco Farioli, a edição marca o regresso ansiado ao convívio da elite europeia após duas épocas de ausência. Por sua vez, a formação de Rui Borges confirma o grande momento competitivo ao carimbar a terceira participação consecutiva na prova — um marco histórico que os leões não registavam desde a era Paulo Bento.
 
-âA caminhada portista na fase de liga reserva noites de gala no EstÃ¡dio do DragÃ£o e deslocaÃ§Ãµes exigentes. Destacam-se os embates de fogo com Manchester City e Liverpool, alÃ©m das partidas de alto grau de dificuldade frente a Napoli e Real Betis.
+**FC Porto: Duelos de titãs com gigantes de Inglaterra e Itália**
 
-- â**Manchester City** (Casa â Pote 1)
-- â**Liverpool FC** (Fora â Pote 1)
-- â**PSV Eindhoven** (Casa â Pote 2)
-- â**Real Betis** (Fora â Pote 2)
-- â**SSC Napoli** (Casa â Pote 3)
-- â**Feyenoord** (Fora â Pote 3)
-- â**Slavia Praha** (Casa â Pote 4)
-- â**LASK Linz** (Fora â Pote 4)
+A caminhada portista na fase de liga reserva noites de gala no Estádio do Dragão e deslocações exigentes. Destacam-se os embates de fogo com Manchester City e Liverpool, além das partidas de alto grau de dificuldade frente a Napoli e Real Betis.
 
-â**Sporting CP: Visita de gala do Barcelona e cartaz de luxo com o Man. United**
+- **Manchester City** (Casa — Pote 1)
+- **Liverpool FC** (Fora — Pote 1)
+- **PSV Eindhoven** (Casa — Pote 2)
+- **Real Betis** (Fora — Pote 2)
+- **SSC Napoli** (Casa — Pote 3)
+- **Feyenoord** (Fora — Pote 3)
+- **Slavia Praha** (Casa — Pote 4)
+- **LASK Linz** (Fora — Pote 4)
 
-âOs leÃµes terÃ£o tambÃ©m um sorteio recheado de grandes cartazes europeus. O conjunto verde e branco receberÃ¡ o FC Barcelona em Alvalade e rumarÃ¡ a Inglaterra para defrontar o Manchester City, num percurso marcado ainda pelo embate em casa perante o Manchester United e a deslocaÃ§Ã£o Ã  capital italiana para medir forÃ§as com a AS Roma.
+**Sporting CP: Visita de gala do Barcelona e cartaz de luxo com o Man. United**
 
-- â**FC Barcelona** (Casa â Pote 1)
-- â**Manchester City** (Fora â Pote 1)
-- â**Manchester United** (Casa â Pote 2)
-- â**AS Roma** (Fora â Pote 2)
-- â**Galatasaray** (Casa â Pote 3)
-- â**Shakhtar Donetsk** (Fora â Pote 3)
-- â**LASK Linz** (Casa â Pote 4)
-- â**RC Lens** (Fora â Pote 4)
+Os leões terão também um sorteio recheado de grandes cartazes europeus. O conjunto verde e branco receberá o FC Barcelona em Alvalade e rumará a Inglaterra para defrontar o Manchester City, num percurso marcado ainda pelo embate em casa perante o Manchester United e a deslocação à capital italiana para medir forças com a AS Roma.
 
-âA partida de saÃ­da na competiÃ§Ã£o estÃ¡ agendada para os dias 8, 9 e 10 de setembro. A UEFA oficializarÃ¡ este sÃ¡bado a distribuiÃ§Ã£o exata dos horÃ¡rios e a calendarizaÃ§Ã£o detalhada de todas as jornadas.
+- **FC Barcelona** (Casa — Pote 1)
+- **Manchester City** (Fora — Pote 1)
+- **Manchester United** (Casa — Pote 2)
+- **AS Roma** (Fora — Pote 2)
+- **Galatasaray** (Casa — Pote 3)
+- **Shakhtar Donetsk** (Fora — Pote 3)
+- **LASK Linz** (Casa — Pote 4)
+- **RC Lens** (Fora — Pote 4)
+
+A partida de saída na competição está agendada para os dias 8, 9 e 10 de setembro. A UEFA oficializará este sábado a distribuição exata dos horários e a calendarização detalhada de todas as jornadas.

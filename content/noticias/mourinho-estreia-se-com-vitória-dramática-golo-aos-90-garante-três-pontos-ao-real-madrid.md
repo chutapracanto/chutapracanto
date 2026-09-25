@@ -10,19 +10,20 @@ image: "https://framerusercontent.com/images/RJdw2fgGxQLMkhfTB5ldkFGJM.jpg?width
 ---
 
 
-O regresso de JosÃ© Mourinho ao comando do Real Madrid comeÃ§ou com emoÃ§Ã£o atÃ© ao Ãºltimo segundo. Na visita ao terreno do Espanyol, os _merengues_ garantiram um triunfo por 2-1, num duelo decidido com um golo ao cair da do pano no EstÃ¡dio CornellÃ -El Prat.
 
-### âEntrada forte e resposta inesperada
+O regresso de José Mourinho ao comando do Real Madrid começou com emoção até ao último segundo. Na visita ao terreno do Espanyol, os _merengues_ garantiram um triunfo por 2-1, num duelo decidido com um golo ao cair da do pano no Estádio Cornellà-El Prat.
 
-âA partida marcou a estreia oficial de vÃ¡rios reforÃ§os na equipa da capital, incluindo o internacional portuguÃªs Bernardo Silva, lanÃ§ado no onze titular ao lado de nomes como Dumfries, Diomande, Cucurella e EspÃ­:
+### Entrada forte e resposta inesperada
 
-- â**Vantagem madrugadora (9'):** Arda GÃ¼ler cobrou um livre com precisÃ£o a partir da esquerda e Jude Bellingham apareceu a cabecear sem hipÃ³teses para o 0-1.
-- â**Empate contra a corrente (30'):** Numa altura em que os visitantes controlavam o ritmo, Javier HernÃ¡ndez combinou bem na esquerda e cruzou para Alex Calatrava, que, sem oposiÃ§Ã£o na Ã¡rea, restabeleceu a igualdade.
+A partida marcou a estreia oficial de vários reforços na equipa da capital, incluindo o internacional português Bernardo Silva, lançado no onze titular ao lado de nomes como Dumfries, Diomande, Cucurella e Espí:
 
-### âPressÃ£o final e o golo da vitÃ³ria
+- **Vantagem madrugadora (9'):** Arda Güler cobrou um livre com precisão a partir da esquerda e Jude Bellingham apareceu a cabecear sem hipóteses para o 0-1.
+- **Empate contra a corrente (30'):** Numa altura em que os visitantes controlavam o ritmo, Javier Hernández combinou bem na esquerda e cruzou para Alex Calatrava, que, sem oposição na área, restabeleceu a igualdade.
 
-âNo segundo tempo, a equipa de JosÃ© Mourinho instalou-se no meio-campo adversÃ¡rio em busca dos trÃªs pontos. O perigo voltou a rondar a baliza do Espanyol, novamente por Bellingham de cabeÃ§a, mas a reviravolta no marcador sÃ³ se materializou no Ãºltimo minuto do tempo regulamentar:
+### Pressão final e o golo da vitória
 
-- â**DecisÃ£o ao minuto 90:** Kylian MbappÃ© arrancou com perigo, a bola sobrou para o jovem Carlos EspÃ­ que, com frieza, tirou o guarda-redes da frente e empurrou para o 2-1 final.
+No segundo tempo, a equipa de José Mourinho instalou-se no meio-campo adversário em busca dos três pontos. O perigo voltou a rondar a baliza do Espanyol, novamente por Bellingham de cabeça, mas a reviravolta no marcador só se materializou no último minuto do tempo regulamentar:
 
-âCom este triunfo suado na jornada inaugural, o Real Madrid soma os primeiros trÃªs pontos no campeonato e vira agora agulhas para o confronto da prÃ³xima quarta-feira frente Ã  Real Sociedad.
+- **Decisão ao minuto 90:** Kylian Mbappé arrancou com perigo, a bola sobrou para o jovem Carlos Espí que, com frieza, tirou o guarda-redes da frente e empurrou para o 2-1 final.
+
+Com este triunfo suado na jornada inaugural, o Real Madrid soma os primeiros três pontos no campeonato e vira agora agulhas para o confronto da próxima quarta-feira frente à Real Sociedad.

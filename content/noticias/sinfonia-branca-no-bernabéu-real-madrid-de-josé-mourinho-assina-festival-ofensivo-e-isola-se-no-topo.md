@@ -10,18 +10,19 @@ image: "https://framerusercontent.com/images/GoaEVeckFlQ29pHWPZhE579KOY.jpg?widt
 ---
 
 
-âO Real Madrid continua imparÃ¡vel no arranque da LaLiga EA Sports. Depois de ultrapassar Espanyol e Real Sociedad, a formaÃ§Ã£o orientada por JosÃ© Mourinho deu mais um espetÃ¡culo de poderio ofensivo no Santiago BernabÃ©u ao golear o MÃ¡laga CF por 4-0. Com uma entrada avassaladora e um quarto de hora de inspiraÃ§Ã£o pura no primeiro tempo, os _merengues_ resolveram a contenda de forma precoce, somando o terceiro triunfo consecutivo em trÃªs partidas na prova.
 
-â**Vendaval ofensivo de 11 minutos arruma a contenda**
+O Real Madrid continua imparável no arranque da LaLiga EA Sports. Depois de ultrapassar Espanyol e Real Sociedad, a formação orientada por José Mourinho deu mais um espetáculo de poderio ofensivo no Santiago Bernabéu ao golear o Málaga CF por 4-0. Com uma entrada avassaladora e um quarto de hora de inspiração pura no primeiro tempo, os _merengues_ resolveram a contenda de forma precoce, somando o terceiro triunfo consecutivo em três partidas na prova.
 
-âA superioridade madridista traduziu-se no marcador num curto espaÃ§o de tempo na primeira metade, sufocando qualquer rÃ©plica da formaÃ§Ã£o visitante:
+**Vendaval ofensivo de 11 minutos arruma a contenda**
 
-- â**Desenho individual de classe:** Ao minuto 19, Jude Bellingham desequilibrou na cara da defensiva forasteira, serpentou entre os adversÃ¡rios e disparou um remate cruzado sem hipÃ³teses para Alfonso Herrero.
-- â**InfortÃºnio sob a baliza:** Pouco depois, o internacional inglÃªs voltou a insurgir-se nas alturas para um cabeceamento fulgurante. Na tentativa de suster o golpe, o guardiÃ£o Alfonso Herrero acabou por introduzir a bola na prÃ³pria baliza.
-- â**LigaÃ§Ã£o de estrelas:** Antes da meia-hora, Alexander-Arnold tirou um cruzamento aÃ§ucarado para o coraÃ§Ã£o da Ã¡rea, onde Kylian MbappÃ© armou um remate de primeira categÃ³rico, fixando o 3-0 com que se recolheu aos balneÃ¡rios.
+A superioridade madridista traduziu-se no marcador num curto espaço de tempo na primeira metade, sufocando qualquer réplica da formação visitante:
 
-â**GestÃ£o inteligente e o selo de GÃ¼ler vindo do banco**
+- **Desenho individual de classe:** Ao minuto 19, Jude Bellingham desequilibrou na cara da defensiva forasteira, serpentou entre os adversários e disparou um remate cruzado sem hipóteses para Alfonso Herrero.
+- **Infortúnio sob a baliza:** Pouco depois, o internacional inglês voltou a insurgir-se nas alturas para um cabeceamento fulgurante. Na tentativa de suster o golpe, o guardião Alfonso Herrero acabou por introduzir a bola na própria baliza.
+- **Ligação de estrelas:** Antes da meia-hora, Alexander-Arnold tirou um cruzamento açucarado para o coração da área, onde Kylian Mbappé armou um remate de primeira categórico, fixando o 3-0 com que se recolheu aos balneários.
 
-âNa etapa complementar, com a vitÃ³ria no bolso, JosÃ© Mourinho geriu o desgaste do grupo e lanÃ§ou sangue fresco na partida, promovendo as entradas de Bernardo Silva, Yan Diomande e Arda GÃ¼ler.
+**Gestão inteligente e o selo de Güler vindo do banco**
 
-âSem acelerar em demasia, a equipa da casa manteve o controlo absoluto dos ritmos do encontro. A fechar a contagem, VinÃ­cius Jr. vestiu a pele de garÃ§om e serviu Arda GÃ¼ler com um passe milimÃ©trico, permitindo ao jovem turco faturar e carimbar o 4-0 definitivo.
+Na etapa complementar, com a vitória no bolso, José Mourinho geriu o desgaste do grupo e lançou sangue fresco na partida, promovendo as entradas de Bernardo Silva, Yan Diomande e Arda Güler.
+
+Sem acelerar em demasia, a equipa da casa manteve o controlo absoluto dos ritmos do encontro. A fechar a contagem, Vinícius Jr. vestiu a pele de garçom e serviu Arda Güler com um passe milimétrico, permitindo ao jovem turco faturar e carimbar o 4-0 definitivo.

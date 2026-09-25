@@ -16,18 +16,19 @@ relatedSpotify: ""
 ---
 
 
-âO SC Braga garantiu mais um reforÃ§o de peso para o setor intermÃ©dio. Os minhotos confirmaram, esta sexta-feira, a contrataÃ§Ã£o de Tommy MarquÃ©s, promissor mÃ©dio espanhol de 19 anos, oriundo do Barcelona.
 
-### âOs contornos financeiros do negÃ³cio
+O SC Braga garantiu mais um reforço de peso para o setor intermédio. Os minhotos confirmaram, esta sexta-feira, a contratação de Tommy Marqués, promissor médio espanhol de 19 anos, oriundo do Barcelona.
 
-âA operaÃ§Ã£o financeira envolveu valores significativos e salvaguardas futuras para o clube catalÃ£o:
+### Os contornos financeiros do negócio
 
-- â**Investimento inicial:** A transferÃªncia ficou selada por 11 milhÃµes de euros, existindo ainda uma parcela de 1 milhÃ£o de euros em variÃ¡veis, dependente da concretizaÃ§Ã£o de objetivos desportivos.
-- â**ClÃ¡usulas do Barcelona:** Os _blaugranas_ reservaram 20% sobre uma futura mais-valia e garantiram uma opÃ§Ã£o de recompra fixada nos 60 milhÃµes de euros.
-- â**Blindagem arsenalista:** O jovem centrocampista assinou um vÃ­nculo vÃ¡lido por cinco Ã©pocas (atÃ© junho de 2031) e ficou protegido por uma clÃ¡usula de rescisÃ£o de 60 milhÃµes de euros.
+A operação financeira envolveu valores significativos e salvaguardas futuras para o clube catalão:
 
-### âO nÃºmero 16 e o caminho aberto por Ruiz e Pau VÃ­ctor
+- **Investimento inicial:** A transferência ficou selada por 11 milhões de euros, existindo ainda uma parcela de 1 milhão de euros em variáveis, dependente da concretização de objetivos desportivos.
+- **Cláusulas do Barcelona:** Os _blaugranas_ reservaram 20% sobre uma futura mais-valia e garantiram uma opção de recompra fixada nos 60 milhões de euros.
+- **Blindagem arsenalista:** O jovem centrocampista assinou um vínculo válido por cinco épocas (até junho de 2031) e ficou protegido por uma cláusula de rescisão de 60 milhões de euros.
 
-âNa Ãºltima temporada, Tommy MarquÃ©s chegou a alinhar em dois encontros pela equipa principal do Barcelona, embora tenha jogado com maior regularidade na equipa secundÃ¡ria.
+### O número 16 e o caminho aberto por Ruiz e Pau Víctor
 
-âO mÃ©dio vai envergar o dorsal 16 no EstÃ¡dio Municipal de Braga e torna-se no terceiro futebolista em anos recentes a trocar o Camp Nou pela Pedreira, seguindo as pegadas de Abel Ruiz e Pau VÃ­ctor.
+Na última temporada, Tommy Marqués chegou a alinhar em dois encontros pela equipa principal do Barcelona, embora tenha jogado com maior regularidade na equipa secundária.
+
+O médio vai envergar o dorsal 16 no Estádio Municipal de Braga e torna-se no terceiro futebolista em anos recentes a trocar o Camp Nou pela Pedreira, seguindo as pegadas de Abel Ruiz e Pau Víctor.

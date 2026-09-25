@@ -10,21 +10,22 @@ image: "https://framerusercontent.com/images/kEGTHR2vH8MHTcbGUs3HT4fbDI8.jpg?wid
 ---
 
 
-Num arranque de Premier League marcado pelas estreias de Andoni Iraola no comando do Liverpool e de Matthias Jaissle no Newcastle, as duas equipas empataram 2-2 num duelo elÃ©trico. Um golo de grande penalidade convertido por Dominik Szoboszlai no Ãºltimo lance da partida evitou a derrota dos _reds_ em Tyneside.
 
-### âEntrada fulgurante do Newcastle e eficÃ¡cia no contra-ataque
+Num arranque de Premier League marcado pelas estreias de Andoni Iraola no comando do Liverpool e de Matthias Jaissle no Newcastle, as duas equipas empataram 2-2 num duelo elétrico. Um golo de grande penalidade convertido por Dominik Szoboszlai no último lance da partida evitou a derrota dos _reds_ em Tyneside.
 
-âNum St. James' Park lotado e apÃ³s uma homenagem a Kevin Keegan, o encontro arrancou com forte intensidade da equipa da casa, que apresentou o guarda-redes Hornicek (ex-SC Braga) e Amar DediÄ no onze titular:
+### Entrada fulgurante do Newcastle e eficácia no contra-ataque
 
-- â**Vantagem madrugadora (4'):** Numa transiÃ§Ã£o vertiginosa, Anthony Elanga surpreendeu a defensiva do Liverpool e inaugurou o marcador logo aos quatro minutos.
-- â**InconsequÃªncia visitante:** Apesar de deter maior posse de bola, a turma de Iraola revelou dificuldades na definiÃ§Ã£o no Ãºltimo terÃ§o durante a primeira parte. Apenas um disparo de Florian Wirtz, travado por uma boa intervenÃ§Ã£o de Hornicek, e as jogadas individuais de Alexander Isak criaram perigo real.
+Num St. James' Park lotado e após uma homenagem a Kevin Keegan, o encontro arrancou com forte intensidade da equipa da casa, que apresentou o guarda-redes Hornicek (ex-SC Braga) e Amar Dedić no onze titular:
 
-### âReaÃ§Ã£o de Gakpo, resposta rÃ¡pida e penÃ¡lti decisivo
+- **Vantagem madrugadora (4'):** Numa transição vertiginosa, Anthony Elanga surpreendeu a defensiva do Liverpool e inaugurou o marcador logo aos quatro minutos.
+- **Inconsequência visitante:** Apesar de deter maior posse de bola, a turma de Iraola revelou dificuldades na definição no último terço durante a primeira parte. Apenas um disparo de Florian Wirtz, travado por uma boa intervenção de Hornicek, e as jogadas individuais de Alexander Isak criaram perigo real.
 
-âA segunda metade trouxe ajustes tÃ¡ticos na formaÃ§Ã£o de Liverpool, com Cody Gakpo a atuar em zonas mais centrais e a dar frutos imediatos:
+### Reação de Gakpo, resposta rápida e penálti decisivo
 
-- â**Empate e rÃ©plica instantÃ¢nea:** Aos 55 minutos, Gakpo rematou forte e rasteiro da meia-direita para restabelecer a igualdade. Contudo, a reaÃ§Ã£o dos _magpies_ foi imediata: trÃªs minutos volvidos, Joe Willock concluiu com sucesso mais um contra-ataque letal.
-- â**Estreias e cerco final:** Iraola lanÃ§ou os reforÃ§os Ronald AraÃºjo e VÃ­ctor MuÃ±oz para tentar alterar o rumo do jogo. Alisson Becker ainda manteve o Liverpool na discussÃ£o ao travar um remate perigoso de Wissa aos 86 minutos.
-- â**Golo aos 90'+9:** JÃ¡ no PerÃ­odo de compensaÃ§Ã£o (90'+6), VÃ­ctor MuÃ±oz foi derrubado na Ã¡rea por Hornicek. Chamado Ã  conversÃ£o do castigo mÃ¡ximo aos 90'+9, Dominik Szoboszlai nÃ£o tremeu e selou o 2-2 final.
+A segunda metade trouxe ajustes táticos na formação de Liverpool, com Cody Gakpo a atuar em zonas mais centrais e a dar frutos imediatos:
 
-âCom este desfecho nos instantes finais, Iraola soma o primeiro ponto ao comando do Liverpool, enquanto a equipa de Jaissle deixa escapar o triunfo no Ãºltimo suspiro.
+- **Empate e réplica instantânea:** Aos 55 minutos, Gakpo rematou forte e rasteiro da meia-direita para restabelecer a igualdade. Contudo, a reação dos _magpies_ foi imediata: três minutos volvidos, Joe Willock concluiu com sucesso mais um contra-ataque letal.
+- **Estreias e cerco final:** Iraola lançou os reforços Ronald Araújo e Víctor Muñoz para tentar alterar o rumo do jogo. Alisson Becker ainda manteve o Liverpool na discussão ao travar um remate perigoso de Wissa aos 86 minutos.
+- **Golo aos 90'+9:** Já no Período de compensação (90'+6), Víctor Muñoz foi derrubado na área por Hornicek. Chamado à conversão do castigo máximo aos 90'+9, Dominik Szoboszlai não tremeu e selou o 2-2 final.
+
+Com este desfecho nos instantes finais, Iraola soma o primeiro ponto ao comando do Liverpool, enquanto a equipa de Jaissle deixa escapar o triunfo no último suspiro.

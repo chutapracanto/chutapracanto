@@ -16,13 +16,14 @@ relatedSpotify: ""
 ---
 
 
-A transferÃªncia de **Ousmane Diomande** para o Nottingham Forest encontra-se num impasse e corre o risco sÃ©rio de nÃ£o se concretizar. As negociaÃ§Ãµes entre a SAD do Sporting e o clube da Premier League estagnaram nos Ãºltimos dias, com ambos os lados irredutÃ­veis nas suas exigÃªncias financeiras.
 
-#### **DiferenÃ§a de 10 milhÃµes trava o acordo**
+A transferência de **Ousmane Diomande** para o Nottingham Forest encontra-se num impasse e corre o risco sério de não se concretizar. As negociações entre a SAD do Sporting e o clube da Premier League estagnaram nos últimos dias, com ambos os lados irredutíveis nas suas exigências financeiras.
 
-Na base do diferendo estÃ¡ uma divergÃªncia significativa nas avaliaÃ§Ãµes do central costa-marfinense:
+#### **Diferença de 10 milhões trava o acordo**
 
-- **A oferta inglesa:** O Nottingham Forest fixou o seu teto nos **40 milhÃµes de euros**, complementados por objetivos variÃ¡veis.
-- **A fasquia leonina:** O Sporting recusa libertar o defensor por um valor inferior a **50 milhÃµes de euros**.
+Na base do diferendo está uma divergência significativa nas avaliações do central costa-marfinense:
 
-Sem abertura de parte a parte para flexibilizar as posiÃ§Ãµes, o acordo pode mesmo cair em definitivo caso o emblema britÃ¢nico nÃ£o apresente uma proposta revista no curto prazo.
+- **A oferta inglesa:** O Nottingham Forest fixou o seu teto nos **40 milhões de euros**, complementados por objetivos variáveis.
+- **A fasquia leonina:** O Sporting recusa libertar o defensor por um valor inferior a **50 milhões de euros**.
+
+Sem abertura de parte a parte para flexibilizar as posições, o acordo pode mesmo cair em definitivo caso o emblema britânico não apresente uma proposta revista no curto prazo.
