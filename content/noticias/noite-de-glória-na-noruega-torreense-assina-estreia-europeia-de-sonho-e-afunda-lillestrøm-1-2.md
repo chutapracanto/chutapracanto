@@ -3,7 +3,7 @@ title: "Noite de glória na Noruega: Torreense assina estreia europeia de sonho 
 slug: "noite-de-glória-na-noruega-torreense-assina-estreia-europeia-de-sonho-e-afunda-lillestrøm-1-2"
 subtitle: "Alejandro Alfaro assinou o primeiro golo internacional do clube e Manuel Pozo ampliou a vantagem no arranque da 2.ª parte."
 category: "Liga Europa"
-published: "2026-08-05"
+published: "2026-09-17"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/noite-de-glória-na-noruega-torreense-assina-estreia-europeia-de-sonho-e-afunda-lillestrøm-(1-2)"
 image: "https://framerusercontent.com/images/hXo30yC1ez3g3cWve86sssurqnY.webp?width=1600&height=900"
