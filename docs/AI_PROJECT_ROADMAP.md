@@ -464,3 +464,10 @@ Antes de fazer trabalho no CPC:
 **Estado operacional neste momento: FASE 1 BLOQUEADA pela fonte histórica posterior do Framer.**
 
 FIM.
+
+
+## PROTOCOLO DE CONTINUIDADE E DESBLOQUEIO — 2026-09-25
+
+A Fase 0 inclui agora o protocolo obrigatório em `docs/AI_EXECUTION_PROTOCOL.md`.
+
+A IA não deve confundir “fase bloqueada” com “trabalho terminado”. Um bloqueio externo deve ser convertido numa dependência operacional concreta: ação autónoma, intervenção da Rute ou tarefa do Codex. A ordem global do Roadmap mantém-se; o protocolo apenas garante que a continuação é explicitamente acionável quando uma fase fica bloqueada.
