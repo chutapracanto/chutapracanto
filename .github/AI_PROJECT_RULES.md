@@ -1,5 +1,5 @@
 # CHUTA PRA CANTO — MANUAL OPERACIONAL / FONTE DE VERDADE
-Versão: 2026-09-24
+Versão: 2026-09-25
 Repo: chutapracanto/chutapracanto
 Produção: main
 Domínio: https://chutapracanto.com
@@ -177,8 +177,7 @@ MERGED — dfdaf5b7
 - tipos news/opinion/video/podcast;
 - autores com IDs estáveis;
 - pessoa vs organização;
-- workflow enriquece índice;
-- Admin preserva type e usa news por defeito.
+- workflow enriquece índice;- Admin preserva type e usa news por defeito.
 
 ### #7 — Fase 2B: separar Notícias e Opinião
 MERGED — fd76abea
@@ -377,8 +376,7 @@ Estado atual:
 - prioridade mudou de importar para diagnosticar como o Framer entrega o HTML/conteúdo das páginas e adaptar o extrator sem inventar conteúdo;
 - diagnóstico confirmou HTML HTTP 200 completo (~166–171 KB), título presente, 19 parágrafos no primeiro artigo e metadados Framer/search-index; não há JSON-LD. O problema está na seleção do contentor pelo parser atual, não na ausência de HTML;
 - extrator adaptado ao template Framer: contentor irmão do cabeçalho, data em `Publicado em`, autor após `Por`, categoria entre o link de retorno e o título, e meses portugueses;
-- commit de adaptação: 996897a0def026b6f625d1980b5f1544c74aee03; a próxima execução deve validar prontos/falhas antes de considerar a importação concluída;
-- diagnóstico dos campos confirmou título/data/categoria/autor/imagem corretos, mas o corpo estava em elementos `div`, não `p`; commit ce9a50994154ff32523798b12694ddab82641c92 passou a extrair o bloco de corpo diretamente;
+- commit de adaptação: 996897a0def026b6f625d1980b5f1544c74aee03; a próxima execução deve validar prontos/falhas antes de considerar a importação concluída;- diagnóstico dos campos confirmou título/data/categoria/autor/imagem corretos, mas o corpo estava em elementos `div`, não `p`; commit ce9a50994154ff32523798b12694ddab82641c92 passou a extrair o bloco de corpo diretamente;
 - o commit a02106e651e0a7346510c9d824559f175ddc1734a é o novo gatilho controlado de escrita;
 - a primeira importação válida preparou 179 artigos, mas o push foi rejeitado porque main avançou durante a execução; o workflow agora faz fetch/rebase de main antes de publicar;
 - o run 36022816703 confirmou: 213 URLs, 179 prontos, 34 duplicados/ignorados, 0 falhas;
@@ -666,31 +664,41 @@ Só parar perante conclusão ou dependência externa real.
 Se precisar de Codex: prompt curto, focado, sem reproduzir este manual.
 Se precisar da utilizadora: pedir apenas a ação indispensável.
 
-## 32. REGRA MÁXIMA — NUNCA PARAR SEM CONTINUIDADE — 2026-09-25
+## 30. REGRAS PERMANENTES — CODEX: LIMITES DE EXECUÇÃO E ECONOMIA DE CRÉDITOS — 2026-09-25
 
-Esta regra tem prioridade operacional sobre qualquer impulso de encerrar uma resposta por conveniência.
+- O Codex NÃO é executor por defeito do projeto. É uma ferramenta de capacidade complementar.
+- O Assistente é o responsável por 100% do trabalho que consegue executar diretamente, incluindo GitHub: inspeção, análise, edição de ficheiros, branches, commits, PRs, merges quando seguros e validação por código.
+- O Codex deve ser chamado apenas quando existir uma capacidade real que o ambiente do Assistente não disponibiliza, especialmente browser real/Chrome, DevTools Console/Network/Performance, Lighthouse/PageSpeed executados nesse ambiente, E2E/local, Cloudflare Dashboard/sessão local ou outra operação externa efetivamente indisponível ao Assistente.
+- É PROIBIDO usar Codex para tarefas que o Assistente consegue executar diretamente no GitHub/repositório, incluindo editar HTML, CSS, JS, JSON, Markdown, workflows ou documentação; criar commits; criar/alterar branches; abrir/alterar/fechar/mergear PRs; rever diffs que o Assistente consegue consultar; atualizar índices/ficheiros; ou fazer trabalho duplicado.
+- O Codex NÃO deve alterar o GitHub por iniciativa própria. Mesmo quando encontra um bug no código, deve reportar a causa, localização, evidência e correção recomendada ao Assistente. A implementação no GitHub pertence ao Assistente, salvo instrução explícita e excecional da utilizadora em contrário.
+- Quando o Codex for necessário, a tarefa deve ser mínima e fechada: executar somente a capacidade externa indisponível, recolher evidência objetiva e devolver um resumo curto. Não deve expandir o escopo, refatorar, criar melhorias paralelas ou repetir análises já feitas.
+- Para problemas de browser/performance, o Codex deve executar a medição/diagnóstico real quando essa for a capacidade em falta; não deve apenas explicar como fazer.
+- Se a tarefa externa revelar um problema de código, parar no limite da investigação e devolver: URL/ambiente, erro exato, reprodução, evidência relevante, ficheiro/área suspeita e correção recomendada. O Assistente fará a alteração no GitHub.
+- Antes de qualquer tarefa, o Codex deve ler `.github/AI_PROJECT_RULES.md` e `.github/CODEX_RULES.md`. Estas regras são obrigatórias e prevalecem sobre instruções genéricas ou pedidos que ampliem o escopo.
+- O prompt enviado ao Codex deve lembrar explicitamente a leitura destes dois ficheiros e indicar o limite exato da tarefa.
+- O Codex deve evitar executar comandos ou testes caros quando uma verificação barata responde à pergunta. Deve preferir uma execução objetiva, uma recolha de evidência e uma resposta curta.
+- Depois de cada intervenção do Codex, o Assistente deve verificar novamente o GitHub e continuar o ciclo de implementação/correção/validação.
 
-- **NUNCA simplesmente parar.**
-- Uma limitação de ferramenta não é motivo para terminar a interação sem encaminhamento executável.
-- Antes de responder à utilizadora, o Assistente deve procurar a próxima ação possível e executá-la.
-- Se conseguir continuar pelo GitHub, deve continuar pelo GitHub.
-- Se conseguir analisar, deve analisar.
-- Se conseguir implementar, deve implementar.
-- Se conseguir validar, deve validar.
-- Se conseguir corrigir, deve corrigir e voltar a validar.
-- Se uma capacidade estiver realmente indisponível, deve **imediatamente passar essa única parte ao executor adequado**, sem passar o trabalho inteiro para a utilizadora.
-- Para Codex: entregar imediatamente um prompt pronto a copiar, curto e específico, com tarefa, URL/ambiente, critérios de validação e limites. O prompt deve mandar ler `.github/AI_PROJECT_RULES.md` e `.github/CODEX_RULES.md`.
-- Para ação manual da utilizadora: entregar imediatamente passos numerados, mínimos e inequívocos, apenas quando a ação não puder ser executada por nenhuma ferramenta disponível.
-- Depois de uma ação externa, o Assistente deve retomar o trabalho: consultar o estado, validar, corrigir, validar novamente e continuar.
-- **É proibido terminar com frases equivalentes a "parei", "fica pendente", "agora é contigo", "avisa quando fizeres", "próximo passo" ou "aguardo" quando existe uma ação executável ou um encaminhamento imediato possível.**
-- Uma resposta nunca deve deixar a utilizadora a descobrir sozinha o que fazer.
-- Se houver duas partes — uma executável pelo Assistente e outra externa — executar primeiro tudo o que for possível e entregar a instrução externa na mesma resposta, na ordem correta.
-- Esta regra aplica-se a GitHub, Cloudflare, Canva, conteúdo, performance, deploy, validação, pesquisa, automações e qualquer outro trabalho do projeto.
-- Antes de enviar a resposta, fazer uma verificação mental obrigatória: **"Existe alguma coisa que eu ainda possa executar agora? Se sim, executá-la. Se não, existe uma dependência externa? Se sim, entregar já o executor e a instrução pronta."**
-- O objetivo é que nenhuma resposta termine num beco sem saída criado pelo próprio Assistente.
+### REGRA PRÁTICA DE ESCALADA
+
+1. Assistente verifica se consegue resolver diretamente.
+2. Se consegue: NÃO usa Codex.
+3. Se não consegue por limitação técnica real: usa Codex apenas para essa capacidade.
+4. Codex diagnostica/executa o mínimo necessário.
+5. Assistente retoma o trabalho e faz a correção no GitHub.
+6. Assistente valida novamente.
+
+Esta regra existe para reduzir consumo de créditos do Codex sem limitar a sua utilização quando ele é realmente necessário.
+
+## 31. REGISTO OPERACIONAL — 2026-09-25
+
+- Nova divisão de responsabilidades confirmada pela utilizadora: GitHub é integralmente responsabilidade do Assistente; Codex fica reservado para capacidades externas que o Assistente realmente não possui.
+- Foi criada a regra permanente de proibições do Codex em `.github/CODEX_RULES.md`.
+- O `AI_PROJECT_RULES.md` deve continuar a ser atualizado no mesmo ciclo sempre que forem introduzidas novas regras, decisões, fases, limitações, correções de processo ou alterações relevantes de arquitetura.
+- O `CODEX_RULES.md` deve receber novas restrições, permissões ou procedimentos específicos do Codex sempre que a experiência do projeto revelar uma situação nova.
+- Quando surgir uma nova regra operacional relevante para continuidade, atualizar os documentos de regras antes de encerrar a alteração.
+
 FIM.
-
-
 ## 16. ATUALIZAÇÃO OPERACIONAL — 2026-09-24 16:49 WEST
 
 - Regra permanente reforçada: esta documentação é atualizada no mesmo ciclo sempre que surgir uma nova regra, prioridade, decisão ou alteração relevante.
@@ -856,40 +864,7 @@ Quando o assistente enviar à utilizadora qualquer conteúdo cuja finalidade sej
 - Quando esta secção e uma secção histórica entrarem em conflito, esta secção mais recente prevalece, juntamente com o estado real do GitHub.
 
 
-## 30. REGRAS PERMANENTES — CODEX: LIMITES DE EXECUÇÃO — 2026-09-25
-
-- O Assistente é responsável por 100% do trabalho que consegue executar diretamente, incluindo GitHub.
-- Codex só deve ser usado para capacidades realmente indisponíveis ao Assistente: browser real, Chrome/DevTools, Lighthouse/PageSpeed no ambiente externo, E2E/local dependente da máquina, Cloudflare Dashboard/sessão ou equivalente.
-- Codex não deve editar GitHub, criar commits/branches, alterar PRs ou corrigir código por iniciativa própria. Deve devolver diagnóstico e evidência; a implementação fica com o Assistente, salvo instrução explícita e excecional da utilizadora.
-- Antes de qualquer tarefa do Codex, ler este ficheiro e .github/CODEX_RULES.md.
-- Os prompts enviados ao Codex devem lembrar explicitamente essa leitura.
-- Usar a menor execução necessária e evitar trabalho duplicado para poupar créditos.
-- O Assistente deve verificar novamente o GitHub depois de cada intervenção externa.
-
-## 31. INCIDENTE PR #25 — STREAM HTMLREWRITER — 2026-09-25
-
-- O deployment b83946e da PR #25 respondeu 200 em /noticias, mas o corpo tinha apenas ~42 bytes e a página ficava branca.
-- A investigação externa confirmou que índice, imagem e seletor estavam acessíveis e que a resposta antiga tinha ~31 KB.
-- A causa foi localizada na transformação de stream do HTMLRewriter de prepararShellNoticiasInicial, especificamente na inserção do preload dentro de head.
-- Correção aplicada na branch perf-lcp-first-pass: remover a inserção do preload via HTMLRewriter e enviar o preload da primeira imagem através do header HTTP Link, mantendo a injeção do primeiro cartão em #noticias-list.
-- Commit da correção: 629c238982c94e43be8ea93b3acc7dd5b3523f45.
-- A correção ainda exige deployment e validação externa de /noticias, HTML completo, ausência de duplicação e PSI antes de qualquer merge.
-- Regra aprendida: uma transformação de stream deve ser considerada suspeita quando a resposta final fica truncada; validar primeiro o tamanho/conteúdo RAW antes de alterar JavaScript ou métricas de performance.
-
-
 FIM.
-
-## 32. REGRA PERMANENTE — EXECUÇÃO ENXUTA, EVIDÊNCIA SUFICIENTE E PARAGEM — 2026-09-25
-
-- O objetivo de qualquer execução é chegar à decisão técnica com a **menor quantidade de trabalho necessária**, não acumular testes por precaução.
-- Depois de uma hipótese estar comprovada e os critérios de aceitação definidos estarem satisfeitos, parar a investigação. Não fazer regressões redundantes, medições repetidas ou explorações adicionais sem uma nova hipótese concreta.
-- Ordem de validação: reproduzir/confirmar -> validar a correção específica -> executar apenas regressões essenciais diretamente afetadas -> concluir.
-- Uma verificação opcional que não possa alterar a decisão deve ser omitida.
-- Ao delegar para o Codex, o Assistente deve definir explicitamente os critérios de conclusão e, quando possível, um limite de escopo. O Codex não deve transformar uma tarefa curta numa auditoria geral.
-- O Assistente também deve aplicar esta regra a si próprio: não prolongar análise quando já existe evidência suficiente para a decisão.
-- Resultado de validação deve privilegiar PASS/FAIL + evidência essencial, sem relatório longo.
-- Esta regra complementa, e não substitui, a regra de continuidade: continuar enquanto existir uma ação necessária; parar assim que a ação necessária e as validações suficientes estiverem concluídas.
-
 
 ## REGRA PERMANENTE — CODEX APENAS QUANDO EXPRESSAMENTE ESSENCIAL — 2026-09-25
 
