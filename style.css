@@ -56,15 +56,16 @@ h1, h2, h3, .logo, .btn-neon, .tag, .hero-tag {
    ========================================== */
 header {
   --header-progress: 0;
-  background: rgba(8, 11, 17, calc(.96 - (var(--header-progress) * .64)));
-  border-bottom: 1px solid rgba(26, 35, 50, calc(.92 - (var(--header-progress) * .72)));
+  background: rgba(8, 11, 17, calc(.96 - (var(--header-progress) * .78)));
+  border-bottom: 1px solid rgba(26, 35, 50, calc(.92 - (var(--header-progress) * .58)));
   padding: calc(1rem - (var(--header-progress) * .5rem)) 1.5rem;
   position: sticky;
   top: 0;
   z-index: 1000;
   width: 100%;
-  transition: background-color .08s linear, border-color .08s linear, padding .08s linear;
-  backdrop-filter: blur(calc(10px * (1 - var(--header-progress))));
+  transition: background-color .08s linear, border-color .08s linear, padding .08s linear, box-shadow .08s linear;
+  backdrop-filter: blur(calc(4px + (6px * (1 - var(--header-progress)))));
+  box-shadow: 0 4px 18px rgba(0, 0, 0, calc(.02 + (var(--header-progress) * .14)));
 }
 
 .header-container {
@@ -141,7 +142,7 @@ nav a:hover, nav a.active {
   }
   .header-container {
     flex-direction: column;
-    gap: calc(0.65rem - (var(--header-progress, 0) * 0.3rem));
+    gap: calc(0.5rem - (var(--header-progress, 0) * 0.38rem));
   }
   .logo-link {
     justify-content: center;
@@ -154,9 +155,17 @@ nav a:hover, nav a.active {
   }
   nav ul {
     justify-content: center;
-    flex-wrap: wrap;
-    gap: calc(0.5rem - (var(--header-progress, 0) * 0.2rem)) 1rem;
+    flex-wrap: nowrap;
+    gap: 0 .75rem;
     white-space: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  nav ul::-webkit-scrollbar {
+    display: none;
+  }
+  .site-header nav {
+    transform: translateY(calc(var(--header-progress, 0) * -3px));
   }
 }
 
@@ -559,10 +568,10 @@ footer {
 
 @media (max-width: 400px) {
   header {
-    padding: 0.65rem 0.75rem;
+    padding: calc(0.65rem - (var(--header-progress, 0) * 0.18rem)) 0.75rem;
   }
   nav ul {
-    column-gap: 0.75rem;
+    column-gap: 0.65rem;
   }
 }
 
