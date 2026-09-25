@@ -48,4 +48,12 @@ Usar a menor operação que responda à pergunta. Não repetir medições sem no
 ## Resposta
 Curta, factual e com resultados verificáveis. Se a investigação externa revelar um problema de código, parar no limite do diagnóstico e devolver a evidência ao Assistente.
 
+## Regra de continuidade
+
+- Nunca assumir que uma tarefa ficou concluída apenas porque atingiu uma limitação.
+- Se a tarefa pedida ao Codex for executável com as capacidades externas disponíveis, executar e validar nessa mesma sessão.
+- Se encontrar um bloqueio que pertence ao Assistente (por exemplo, correção no GitHub), devolver imediatamente a evidência e a correção mínima recomendada, sem tentar substituir o trabalho do Assistente.
+- Se o bloqueio exigir uma ação manual da utilizadora, identificar exatamente essa ação e o resultado esperado.
+- Nunca devolver apenas "não consigo" ou um relatório inconclusivo quando ainda existir uma ação executável.
+- A resposta deve sempre terminar com resultado verificável ou com o bloqueio externo exato e a ação concreta necessária.
 FIM.
