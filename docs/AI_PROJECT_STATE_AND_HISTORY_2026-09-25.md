@@ -1497,3 +1497,30 @@ Não foi:
 **Estado confirmado: FASE 1 BLOQUEADA; nenhuma inferência editorial autorizada.**
 
 A retomada técnica desta fase exige acesso a uma fonte histórica que contenha efetivamente as publicações posteriores a 22/08/2026 (projeto/CMS histórico do Framer ou export/backup equivalente). A partir dessa fonte, a comparação e a importação controlada podem ser executadas diretamente.
+
+
+## 43. ETAPA FUTURA DE ENCERRAMENTO DO DOMÍNIO FRAMER — 2026-09-25
+
+Foi registada uma decisão de encerramento da migração histórica que **não deve ser executada agora**.
+
+### Pré-condição obrigatória
+A etapa só pode começar depois de a Fase 1 estar completamente concluída e validada, incluindo:
+1. recuperação de todas as notícias Framer em falta;
+2. comparação e validação de slugs;
+3. migração do conteúdo identificado;
+4. validação do índice e sitemap;
+5. validação do Admin e produção.
+
+### Objetivo
+Desativar o site histórico em `https://chutapracanto.framer.website` e encaminhar os acessos para `https://chutapracanto.com`, incluindo homepage e URLs de notícias históricas.
+
+### Decisão técnica
+Não assumir previamente os Redirects normais do Framer. Quando a etapa chegar, investigar primeiro a configuração real do domínio histórico e identificar o mecanismo correto no hosting provider/origem que efetivamente controla esse domínio. O mecanismo deve ser tecnicamente seguro e gratuito, sem custo obrigatório, antes de qualquer implementação.
+
+### Inventário obrigatório antes da execução
+Inventariar URLs históricos e cruzá-los com os URLs existentes no `.com`, produzindo mapeamentos apenas para destinos reais. Validar ausência de loops, cadeias de redirects e destinos inexistentes, e validar respostas HTTP e destinos finais.
+
+### Estado
+**PLANEADO / NÃO EXECUTAR AGORA.**
+
+Esta decisão não altera a ordem do Roadmap nem desbloqueia a Fase 1. Enquanto a fonte histórica continuar indisponível, não alterar DNS, domínio, Framer, Cloudflare, redirects, conteúdo ou sitemap para antecipar esta etapa.
