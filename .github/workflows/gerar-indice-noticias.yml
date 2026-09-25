@@ -161,7 +161,7 @@ jobs:
                   # O conteúdo correto já existe abaixo do frontmatter; aqui corrigimos
                   # apenas o metadado, sem tocar no corpo editorial.
                   author_match = re.search(
-                      r"^\\s*author\\s*:\\s*(.*?)\\s*$",
+                      r"^\s*author\s*:\s*(.*?)\s*$",
                       frontmatter,
                       re.MULTILINE
                   )
