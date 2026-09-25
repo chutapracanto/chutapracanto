@@ -3,7 +3,7 @@ title: "Jorge Jesus abre o livro na Cidade do Futebol: \"Félix vai ser um prime
 slug: "jorge-jesus-abre-o-livro-na-cidade-do-futebol-félix-vai-ser-um-primeiro-avançado-e-comigo-o-leão-não-joga-na-ala"
 subtitle: "O novo selecionador nacional explicou a ausência de António Silva, elogiou Gonçalo Inácio e detalhou a visão para o ataque."
 category: "Seleção Nacional"
-published: "2026-08-05"
+published: "2026-09-18"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/jorge-jesus-abre-o-livro-na-cidade-do-futebol-félix-vai-ser-um-primeiro-avançado-e-comigo-o-leão-não-joga-na-ala"
 image: "https://framerusercontent.com/images/E1aX8yjMehvXvgotHqV61ZHzbls.jpg?width=463&height=309"

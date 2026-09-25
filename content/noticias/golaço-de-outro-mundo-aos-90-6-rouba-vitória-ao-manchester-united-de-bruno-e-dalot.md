@@ -3,7 +3,7 @@ title: "Golaço de outro mundo aos 90+6' rouba vitória ao Manchester United de 
 slug: "golaço-de-outro-mundo-aos-90-6-rouba-vitória-ao-manchester-united-de-bruno-e-dalot"
 subtitle: "Os 'Red Devils' estiveram por duas vezes na frente do marcador, mas viram Maitland-Niles assinar um golaço nos descontos no duelo desta tarde."
 category: "Premier League"
-published: "2026-08-05"
+published: "2026-09-06"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/golaço-de-outro-mundo-aos-90-6-rouba-vitória-ao-manchester-united-de-bruno-e-dalot"
 image: "https://framerusercontent.com/images/28RPF2KFc234110HsF898g4kRI.jpg?width=465&height=372"

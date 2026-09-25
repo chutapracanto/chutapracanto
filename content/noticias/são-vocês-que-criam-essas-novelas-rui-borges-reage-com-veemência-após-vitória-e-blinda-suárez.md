@@ -3,7 +3,7 @@ title: "«São vocês que criam essas novelas»: Rui Borges reage com veemência
 slug: "são-vocês-que-criam-essas-novelas-rui-borges-reage-com-veemência-após-vitória-e-blinda-suárez"
 subtitle: "O técnico do Sporting CP considerou a vitória sobre o Nacional irrefutável e elogiou o compromisso total do avançado colombiano."
 category: "Sporting CP"
-published: "2026-08-05"
+published: "2026-09-06"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/«são-vocês-que-criam-essas-novelas»-rui-borges-reage-com-veemência-após-vitória-e-blinda-suárez"
 image: "https://framerusercontent.com/images/w2fWwRqhcPuSjx1IyHMgpAD0fM.jpg?width=1024&height=683"

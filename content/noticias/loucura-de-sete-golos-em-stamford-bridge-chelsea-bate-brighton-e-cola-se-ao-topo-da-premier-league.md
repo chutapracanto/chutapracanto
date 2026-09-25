@@ -3,7 +3,7 @@ title: "Loucura de sete golos em Stamford Bridge: Chelsea bate Brighton e cola-s
 slug: "loucura-de-sete-golos-em-stamford-bridge-chelsea-bate-brighton-e-cola-se-ao-topo-da-premier-league"
 subtitle: "Turma de Xabi Alonso bate o Brighton num duelo frenético e junta-se a Man City e Hull City na liderança da prova."
 category: "Premier League"
-published: "2026-08-05"
+published: "2026-08-30"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/loucura-de-sete-golos-em-stamford-bridge-chelsea-bate-brighton-e-cola-se-ao-topo-da-premier-league"
 image: "https://framerusercontent.com/images/a50d2InSrwFWNy3E5yhrWDaq7Cc.jpg?width=970&height=545"

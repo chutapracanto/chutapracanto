@@ -3,7 +3,7 @@ title: "«Um relvado onde não se pode jogar futebol»: Marco Silva dispara cont
 slug: "um-relvado-onde-não-se-pode-jogar-futebol-marco-silva-dispara-contra-a-organização-e-explica-soluções-após-triunfo-encarnado"
 subtitle: "O técnico do Benfica criticou duramente o estado do terreno de jogo, mas elogiou a capacidade de controlo da sua equipa."
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-09-05"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/«um-relvado-onde-não-se-pode-jogar-futebol»-marco-silva-dispara-contra-a-organização-e-explica-soluções-após-triunfo-encarnado"
 image: "https://framerusercontent.com/images/hLIwJzR89ifCgnGYokKbVHaY.webp?width=960&height=540"

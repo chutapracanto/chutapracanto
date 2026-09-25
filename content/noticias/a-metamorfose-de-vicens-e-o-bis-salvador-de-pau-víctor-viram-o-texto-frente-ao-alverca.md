@@ -3,7 +3,7 @@ title: "A metamorfose de Vicens e o bis salvador de Pau Víctor viram o texto fr
 slug: "a-metamorfose-de-vicens-e-o-bis-salvador-de-pau-víctor-viram-o-texto-frente-ao-alverca"
 subtitle: "Depois de sofrer o primeiro golo de penálti no primeiro tempo, a equipa arsenalista respondeu com dois golos em sete minutos na etapa complementar."
 category: "SC Braga"
-published: "2026-08-05"
+published: "2026-09-05"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/a-metamorfose-de-vicens-e-o-bis-salvador-de-pau-víctor-viram-o-texto-frente-ao-alverca"
 image: "https://framerusercontent.com/images/YNq9bsfeBVoiPZGjoFZjpw7Nro.jpg?width=750&height=394"

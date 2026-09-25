@@ -3,7 +3,7 @@ title: "Marco Silva desvaloriza golo sofrido e enaltece a Luz: «Tem sido a noss
 slug: "marco-silva-desvaloriza-golo-sofrido-e-enaltece-a-luz-tem-sido-a-nossa-história-os-adversários-não-criam-nada-e-acabam-por-faturar"
 subtitle: "Técnico encarnado considerou o triunfo \"totalmente justo\" perante uma estrutura adversária que alinhou \"com uma linha de seis defesas\"."
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-08-31"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/marco-silva-desvaloriza-golo-sofrido-e-enaltece-a-luz-«tem-sido-a-nossa-história-os-adversários-não-criam-nada-e-acabam-por-faturar»"
 image: "https://framerusercontent.com/images/jeUpymat6nRMwrZGIcb8qa0Zmg.webp?width=1208&height=725"

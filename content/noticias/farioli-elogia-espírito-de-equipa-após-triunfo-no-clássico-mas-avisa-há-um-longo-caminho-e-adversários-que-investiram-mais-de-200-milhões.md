@@ -3,7 +3,7 @@ title: "Farioli elogia espírito de equipa após triunfo no Clássico, mas avisa
 slug: "farioli-elogia-espírito-de-equipa-após-triunfo-no-clássico-mas-avisa-há-um-longo-caminho-e-adversários-que-investiram-mais-de-200-milhões"
 subtitle: "O técnico italiano admitiu dificuldades no encaixe após a expulsão do rival, mas destacou a união do grupo e a eficácia na resposta ao empate."
 category: "FC Porto"
-published: "2026-08-05"
+published: "2026-09-20"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/farioli-elogia-espírito-de-equipa-após-triunfo-no-clássico-mas-avisa-«há-um-longo-caminho-e-adversários-que-investiram-mais-de-200-milhões»"
 image: "https://framerusercontent.com/images/fkHpjjK3p5rEMI2L4jldzultFU4.jpg?width=480&height=240"

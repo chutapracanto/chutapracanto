@@ -3,7 +3,7 @@ title: "Erro crasso do AFS isola Mika Borges e catapulta Lusitânia de Lourosa p
 slug: "erro-crasso-do-afs-isola-mika-borges-e-catapulta-lusitânia-de-lourosa-para-o-topo-da-segunda-liga"
 subtitle: "Dylan Collard assinou uma obra-prima do meio da rua e Mika Borges selou o triunfo nos instantes finais após erro crasso do AFS."
 category: "Liga Portugal 2 MeuSuper"
-published: "2026-08-05"
+published: "2026-09-07"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/erro-crasso-do-afs-isola-mika-borges-e-catapulta-lusitânia-de-lourosa-para-o-topo-da-segunda-liga"
 image: "https://framerusercontent.com/images/ddyOb5XpuKe4hgdIQojccnSoes.jpg?width=1144&height=644"

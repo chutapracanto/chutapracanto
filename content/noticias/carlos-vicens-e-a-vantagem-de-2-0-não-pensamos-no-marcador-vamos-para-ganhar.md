@@ -3,7 +3,7 @@ title: "Carlos Vicens e a vantagem de 2-0: \"Não pensamos no marcador, vamos pa
 slug: "carlos-vicens-e-a-vantagem-de-2-0-não-pensamos-no-marcador-vamos-para-ganhar"
 subtitle: "Treinador dos gverreiros desvaloriza os 2-0 da Pedreira, rejeita gerir o marcador na Áustria e confirma Milošević disponível para o play-off da Liga Conferência."
 category: "SC Braga"
-published: "2026-08-05"
+published: "2026-08-26"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/carlos-vicens-e-a-vantagem-de-2-0-não-pensamos-no-marcador-vamos-para-ganhar"
 image: "https://framerusercontent.com/images/BJ1py7ZJjhTMj4QFX1Qa7WSw4I.jpg?width=860&height=467"

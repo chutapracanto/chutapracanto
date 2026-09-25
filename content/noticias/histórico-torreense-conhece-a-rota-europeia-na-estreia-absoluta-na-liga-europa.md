@@ -3,7 +3,7 @@ title: "Histórico: Torreense conhece a rota europeia na estreia absoluta na Lig
 slug: "histórico-torreense-conhece-a-rota-europeia-na-estreia-absoluta-na-liga-europa"
 subtitle: "Do confronto com o Olympiacos às saídas exigentes: confira o sorteio e o recinto europeu do Torreense para a fase de liga."
 category: "Torreense"
-published: "2026-08-05"
+published: "2026-08-28"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/histórico-torreense-conhece-a-rota-europeia-na-estreia-absoluta-na-liga-europa"
 image: "https://framerusercontent.com/images/kvm72bOYqcuQsR92JXaRCafMh0.png?width=640&height=426"

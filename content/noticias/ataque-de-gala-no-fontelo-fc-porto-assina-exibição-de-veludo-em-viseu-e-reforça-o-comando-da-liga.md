@@ -3,7 +3,7 @@ title: "Ataque de gala no Fontelo: FC Porto assina exibição de veludo em Viseu
 slug: "ataque-de-gala-no-fontelo-fc-porto-assina-exibição-de-veludo-em-viseu-e-reforça-o-comando-da-liga"
 subtitle: "Três golos sem resposta na primeira metade arrumam a questão e seguram os dragões no topo da tabela."
 category: "FC Porto"
-published: "2026-08-05"
+published: "2026-08-29"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/ataque-de-gala-no-fontelo-fc-porto-assina-exibição-de-veludo-em-viseu-e-reforça-o-comando-da-liga"
 image: "https://framerusercontent.com/images/Sj2NZPM8KzMlvUGlxMIu8q16XI.jpg?width=1280&height=720"

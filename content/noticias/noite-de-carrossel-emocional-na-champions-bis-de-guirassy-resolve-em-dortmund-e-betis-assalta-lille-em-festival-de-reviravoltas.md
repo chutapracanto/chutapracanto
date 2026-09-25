@@ -3,7 +3,7 @@ title: "Noite de carrossel emocional na Champions: Bis de Guirassy resolve em Do
 slug: "noite-de-carrossel-emocional-na-champions-bis-de-guirassy-resolve-em-dortmund-e-betis-assalta-lille-em-festival-de-reviravoltas"
 subtitle: "Fábio Silva saltou do banco para assistir na vitória alemã, enquanto Marc Bartra bisou na reviravolta dos espanhóis."
 category: "UEFA Champions League"
-published: "2026-08-05"
+published: "2026-09-09"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/noite-de-carrossel-emocional-na-champions-bis-de-guirassy-resolve-em-dortmund-e-betis-assalta-lille-em-festival-de-reviravoltas"
 image: "https://framerusercontent.com/images/ft0LoWbEFcQnegRLf3tGjspB5Gc.jpg?width=800&height=450"

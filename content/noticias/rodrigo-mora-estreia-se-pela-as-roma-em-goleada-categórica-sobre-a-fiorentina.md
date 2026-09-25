@@ -3,7 +3,7 @@ title: "Rodrigo Mora estreia-se pela AS Roma em goleada categórica sobre a Fior
 slug: "rodrigo-mora-estreia-se-pela-as-roma-em-goleada-categórica-sobre-a-fiorentina"
 subtitle: "Ex-FC Porto atuou 53 minutos na goleada por 4-0 sobre a Fiorentina, num duelo marcado pelo hat-trick de Donyell Malen na jornada de abertura da Serie A."
 category: "Roma SerieA"
-published: "2026-08-05"
+published: "2026-08-24"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/rodrigo-mora-estreia-se-pela-as-roma-em-goleada-categórica-sobre-a-fiorentina"
 image: "https://framerusercontent.com/images/7tVU5tG3Fbo9AfwSt34gK6R6byg.jpg?width=1274&height=850"

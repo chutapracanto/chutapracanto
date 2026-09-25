@@ -3,7 +3,7 @@ title: "Gil Vicente bate Casa Pia com exibição tranquila e mantém 100% de vit
 slug: "gil-vicente-bate-casa-pia-com-exibição-tranquila-e-mantém-100-de-vitorias-na-liga"
 subtitle: "Equipa de Luís Pinto regressa à ação em grande plano, resolve o encontro antes do intervalo e soma seis pontos em dois jogos na Liga."
 category: "Liga Portugal Betclic"
-published: "2026-08-05"
+published: "2026-08-24"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/gil-vicente-bate-casa-pia-com-exibição-tranquila-e-mantém-100-de-vitorias-na-liga"
 image: "https://framerusercontent.com/images/lDRqeJx2nkOQNlbL0oegg67E0TI.jpg?width=1144&height=644"

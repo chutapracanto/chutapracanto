@@ -3,7 +3,7 @@ title: "Regresso à competição: Sporting recebe o Nacional com foco renovado e
 slug: "regresso-à-competição-sporting-recebe-o-nacional-com-foco-renovado-e-avisos-de-rui-borges"
 subtitle: "Na antevisão à 5.ª jornada da Liga Portugal, Rui Borges perspetivou a integração de João Simões e abordou o regresso de Nuno Santos."
 category: "Sporting CP"
-published: "2026-08-05"
+published: "2026-09-04"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/regresso-à-competição-sporting-recebe-o-nacional-com-foco-renovado-e-avisos-de-rui-borges"
 image: "https://framerusercontent.com/images/p1B51YDso5AsuCc8QZ3e6ZU2Meg.jpg?width=1024&height=683"

@@ -3,7 +3,7 @@ title: "«A nossa Champions é o campeonato»: Rui Borges projeta receção ao G
 slug: "a-nossa-champions-é-o-campeonato-rui-borges-projeta-receção-ao-galatasaray-rejeita-obsessões-europeias-e-blinda-o-balneário-leonino"
 subtitle: "O técnico leonino sublinhou que a prioridade continua a ser a Liga Portugal, mas garantiu uma equipa pronta para vencer o Galatasaray."
 category: "Sporting CP"
-published: "2026-08-05"
+published: "2026-09-08"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/«a-nossa-champions-é-o-campeonato»-rui-borges-projeta-receção-ao-galatasaray-rejeita-obsessões-europeias-e-blinda-o-balneário-leonino"
 image: "https://framerusercontent.com/images/nijXfO5OXQQfWFXtz9nyrzk8Ysw.webp?width=1280&height=720"

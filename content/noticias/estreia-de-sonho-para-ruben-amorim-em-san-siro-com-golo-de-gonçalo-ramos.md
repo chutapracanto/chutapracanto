@@ -3,7 +3,7 @@ title: "Estreia de sonho para Ruben Amorim em San Siro com golo de Gonçalo Ramo
 slug: "estreia-de-sonho-para-ruben-amorim-em-san-siro-com-golo-de-gonçalo-ramos"
 subtitle: "Técnico português estreia-se a vencer em casa, numa jornada marcada pelo primeiro golo de Gonçalo Ramos pelos rossoneri."
 category: "Serie A"
-published: "2026-08-05"
+published: "2026-08-28"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/estreia-de-sonho-para-ruben-amorim-em-san-siro-com-golo-de-gonçalo-ramos"
 image: "https://framerusercontent.com/images/QxpIPgWe8Psj0pkesHKDEWqWd0.jpg?width=1240&height=826"

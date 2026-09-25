@@ -3,7 +3,7 @@ title: "Reconstrução de sonho em Old Trafford: Bruno Fernandes veste a capa de
 slug: "reconstrução-de-sonho-em-old-trafford-bruno-fernandes-veste-a-capa-de-herói-e-comanda-regresso-às-vitórias-do-united"
 subtitle: "Internacional português incita a reação dos red devils após golo do Ipswich e bis de assistências de Matheus Cunha."
 category: "Premier League"
-published: "2026-08-05"
+published: "2026-08-30"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/reconstrução-de-sonho-em-old-trafford-bruno-fernandes-veste-a-capa-de-herói-e-comanda-regresso-às-vitórias-do-united"
 image: "https://framerusercontent.com/images/WGsEzPHRb7EpbNAGRkB7BOgsRuo.jpg?width=976&height=732"

@@ -3,7 +3,7 @@ title: "Pintura de Szoboszlai, pesadelo londrino e apuramento em Anfield: Liverp
 slug: "pintura-de-szoboszlai-pesadelo-londrino-e-apuramento-em-anfield-liverpool-de-iraola-afunda-tottenham-na-carabao-cup-3-1"
 subtitle: "Mac Allister, Gakpo e Szoboszlai assinaram a vitória da turma de Merseyside, que deixou os londrinos em maus lençóis."
 category: "Carabao Cup"
-published: "2026-08-05"
+published: "2026-09-15"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/pintura-de-szoboszlai-pesadelo-londrino-e-apuramento-em-anfield-liverpool-de-iraola-afunda-tottenham-na-carabao-cup-(3-1)"
 image: "https://framerusercontent.com/images/RuuXcUV8dmeXph7gCYx3TmDXOGo.jpg?width=820&height=547"

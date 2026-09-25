@@ -3,7 +3,7 @@ title: "«O Bernardo e o Rúben disseram-me coisas lindas»: Echeverri assina pe
 slug: "o-bernardo-e-o-rúben-disseram-me-coisas-lindas-echeverri-assina-pelo-benfica-herda-o-30-de-otamendi-e-promete-conquista-de-troféus"
 subtitle: "Médio-ofensivo de 20 anos destacou o papel determinante dos ex-jogadores encarnados na sua decisão de rumar a Lisboa."
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-09-02"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/«o-bernardo-e-o-rúben-disseram-me-coisas-lindas»-echeverri-assina-pelo-benfica-herda-o-30-de-otamendi-e-promete-conquista-de-troféus"
 image: "https://framerusercontent.com/images/JRZQb8N8hIadTietCgTOGxQEIg.jpg?width=1200&height=630"

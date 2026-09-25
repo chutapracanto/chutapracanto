@@ -3,7 +3,7 @@ title: "Alverca avassalador destroça o Nacional e assina estreia de sonho a ven
 slug: "alverca-avassalador-destroça-o-nacional-e-assina-estreia-de-sonho-a-vencer-1-3"
 subtitle: "Chissumba e Dawda Camara (bis) construíram uma vantagem gorda antes do intervalo na abertura da 6.ª jornada."
 category: "Liga Portugal Betclic"
-published: "2026-08-05"
+published: "2026-09-12"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/alverca-avassalador-destroça-o-nacional-e-assina-estreia-de-sonho-a-vencer-(1-3)"
 image: "https://framerusercontent.com/images/D6vx8dPc3y6VINERpEnG8B9fs.jpg?width=1280&height=720"

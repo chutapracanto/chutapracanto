@@ -3,7 +3,7 @@ title: "PSG resgata empate heroico em Lille: Génio de Vitinha evita queda do ca
 slug: "psg-resgata-empate-heroico-em-lille-génio-de-vitinha-evita-queda-do-campeão"
 subtitle: "Médio luso assina um golo e uma assistência nos minutos finais, salvando a equipa de Luis Enrique de um desaire em Lille."
 category: "Ligue 1"
-published: "2026-08-05"
+published: "2026-08-29"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/psg-resgata-empate-heroico-em-lille-génio-de-vitinha-evita-queda-do-campeão"
 image: "https://framerusercontent.com/images/3Y2A4zNxlvUn3norLBuAhA.jpg?width=1024&height=682"

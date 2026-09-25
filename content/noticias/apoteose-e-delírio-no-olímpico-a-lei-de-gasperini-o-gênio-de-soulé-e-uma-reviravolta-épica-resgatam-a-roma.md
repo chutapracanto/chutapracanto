@@ -3,7 +3,7 @@ title: "Apoteose e delírio no Olímpico: A lei de Gasperini, o gênio de Soulé
 slug: "apoteose-e-delírio-no-olímpico-a-lei-de-gasperini-o-gênio-de-soulé-e-uma-reviravolta-épica-resgatam-a-roma"
 subtitle: "Após o golo madrugador de Éderson no segundo tempo, os 'giallorossi' marcaram aos 89' e aos 90+3' para virar o marcador."
 category: "Serie A"
-published: "2026-08-05"
+published: "2026-09-06"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/apoteose-e-delírio-no-olímpico-a-lei-de-gasperini-o-gênio-de-soulé-e-uma-reviravolta-épica-resgatam-a-roma"
 image: "https://framerusercontent.com/images/AmgNY6HwP1CzIOBhsW224dAfQ.webp?width=900&height=506"

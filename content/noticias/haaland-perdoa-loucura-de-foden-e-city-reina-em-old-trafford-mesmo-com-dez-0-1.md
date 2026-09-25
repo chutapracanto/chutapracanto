@@ -3,7 +3,7 @@ title: "Haaland perdoa loucura de Foden e City reina em Old Trafford mesmo com d
 slug: "haaland-perdoa-loucura-de-foden-e-city-reina-em-old-trafford-mesmo-com-dez-0-1"
 subtitle: "Haaland faturou à hora de jogo após cruzamento de Cherki, num duelo onde o United atirou duas bolas ao ferro."
 category: "Premier League"
-published: "2026-08-05"
+published: "2026-09-14"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/haaland-perdoa-loucura-de-foden-e-city-reina-em-old-trafford-mesmo-com-dez-(0-1)"
 image: "https://framerusercontent.com/images/CRGuZAoLqkofdoT7YQ1MlLCam0.jpg?width=976&height=685"

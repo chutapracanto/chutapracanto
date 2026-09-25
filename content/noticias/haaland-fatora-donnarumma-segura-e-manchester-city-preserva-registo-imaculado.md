@@ -3,7 +3,7 @@ title: "Haaland fatora, Donnarumma segura e Manchester City preserva registo ima
 slug: "haaland-fatora-donnarumma-segura-e-manchester-city-preserva-registo-imaculado"
 subtitle: "Um golo de cabeça de Erling Haaland bastou para resolver o duelo no Etihad antes da viagem rumo ao Porto."
 category: "Premier League"
-published: "2026-08-05"
+published: "2026-09-05"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/haaland-fatora-donnarumma-segura-e-manchester-city-preserva-registo-imaculado"
 image: "https://framerusercontent.com/images/lNxOMSeBOw2Y26U9sk96Wt5Rc.png?width=1024&height=683"

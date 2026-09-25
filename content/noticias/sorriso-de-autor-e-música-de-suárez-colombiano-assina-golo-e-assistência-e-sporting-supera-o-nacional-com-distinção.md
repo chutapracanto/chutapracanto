@@ -3,7 +3,7 @@ title: "Sorriso de autor e música de Suárez: Colombiano assina golo e assistê
 slug: "sorriso-de-autor-e-música-de-suárez-colombiano-assina-golo-e-assistência-e-sporting-supera-o-nacional-com-distinção"
 subtitle: "O avançado colombiano desfez as dúvidas com um golo de penálti e uma assistência para Flávio Gonçalves no arranque da segunda metade."
 category: "Sporting CP"
-published: "2026-08-05"
+published: "2026-09-05"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/sorriso-de-autor-e-música-de-suárez-colombiano-assina-golo-e-assistência-e-sporting-supera-o-nacional-com-distinção"
 image: "https://framerusercontent.com/images/hEoxTFktwBMFpOPPbfMvmLtcKY.jpg?width=900&height=600"

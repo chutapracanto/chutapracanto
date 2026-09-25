@@ -3,7 +3,7 @@ title: "«Sempre que jogamos no Dragão, algo especial pode acontecer»: Farioli
 slug: "sempre-que-jogamos-no-dragão-algo-especial-pode-acontecer-farioli-projeta-duelo-de-gigantes-com-o-manchester-city-e-afasta-a-pressão-das-baixas"
 subtitle: "O técnico italiano elogiou o investimento e a qualidade do adversário, mas lembrou a força do Estádio do Dragão e a frescura física da sua equipa."
 category: "FC Porto"
-published: "2026-08-05"
+published: "2026-09-07"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/«sempre-que-jogamos-no-dragão-algo-especial-pode-acontecer»-farioli-projeta-duelo-de-gigantes-com-o-manchester-city-e-afasta-a-pressão-das-baixas"
 image: "https://framerusercontent.com/images/uJwh3Uf8ZUNJZNL6locaaw10bas.webp?width=2160&height=1440"

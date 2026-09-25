@@ -3,7 +3,7 @@ title: "Pesadelo no 'Teatro dos Sonhos': United desperdiça dois golos de avanç
 slug: "pesadelo-no-teatro-dos-sonhos-united-desperdiça-dois-golos-de-avanço-e-tomba-perante-o-brighton-na-carabao-cup-2-3"
 subtitle: "De sonho a pesadelo: Shea Lacey marca na estreia, mas Brighton assina reviravolta e afasta United da Carabao Cup."
 category: "Carabao Cup"
-published: "2026-08-05"
+published: "2026-09-16"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/pesadelo-no-teatro-dos-sonhos-united-desperdiça-dois-golos-de-avanço-e-tomba-perante-o-brighton-na-carabao-cup-(2-3)"
 image: "https://framerusercontent.com/images/NDuQgBnvwrq700tQ64066JfZhU.jpg?width=1200&height=630"

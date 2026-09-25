@@ -3,7 +3,7 @@ title: "Marco Silva enaltece alma encarnada e rendido à estreia de Echeverri: �
 slug: "marco-silva-enaltece-alma-encarnada-e-rendido-à-estreia-de-echeverri-há-jogos-que-temos-de-ganhar-a-acreditar-até-ao-fim"
 subtitle: "Com o Clássico no horizonte, Marco Silva elogiou a adaptação relâmpago do reforço argentino e a capacidade do grupo em saber sofrer para somar os três pontos."
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-09-13"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/marco-silva-enaltece-alma-encarnada-e-rendido-à-estreia-de-echeverri-«há-jogos-que-temos-de-ganhar-a-acreditar-até-ao-fim»"
 image: "https://framerusercontent.com/images/tk7sfoJFndnm3j23xyaGvqUEOwA.jpg?width=1208&height=725"

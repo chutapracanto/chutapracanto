@@ -3,7 +3,7 @@ title: "Varandas sai em defesa de Rui Borges na Cidade do Futebol: \"Não quero 
 slug: "varandas-sai-em-defesa-de-rui-borges-na-cidade-do-futebol-não-quero-ter-o-meu-treinador-a-fazer-as-figuras-que-outros-fazem"
 subtitle: "Na Cidade do Futebol, o presidente leonino enalteceu o palmarés de Rui Borges, recusou falar de arbitragens e criticou a postura da concorrência."
 category: "Sporting CP"
-published: "2026-08-05"
+published: "2026-09-21"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/varandas-sai-em-defesa-de-rui-borges-na-cidade-do-futebol-não-quero-ter-o-meu-treinador-a-fazer-as-figuras-que-outros-fazem"
 image: "https://framerusercontent.com/images/NL5Ca6gBYTPt9efa28wgFOIpdQ.jpg?width=834&height=600"

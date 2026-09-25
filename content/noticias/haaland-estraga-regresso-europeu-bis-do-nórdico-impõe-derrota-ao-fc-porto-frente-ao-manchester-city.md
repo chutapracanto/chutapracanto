@@ -3,7 +3,7 @@ title: "Haaland estraga regresso europeu: Bis do nórdico impõe derrota ao FC P
 slug: "haaland-estraga-regresso-europeu-bis-do-nórdico-impõe-derrota-ao-fc-porto-frente-ao-manchester-city"
 subtitle: "Haaland estraga regresso europeu: Bis do nórdico impõe derrota ao FC Porto frente ao Manchester City."
 category: "UEFA Champions League"
-published: "2026-08-05"
+published: "2026-09-08"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/haaland-estraga-regresso-europeu-bis-do-nórdico-impõe-derrota-ao-fc-porto-frente-ao-manchester-city"
 image: "https://framerusercontent.com/images/tkADfKgkzorHpkEsT1dyhcmSf8.jpg?width=770&height=515"

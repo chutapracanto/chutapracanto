@@ -3,7 +3,7 @@ title: "Marco Silva antevê Gil Vicente com alertas táticos, elogios a Prestian
 slug: "marco-silva-antevê-gil-vicente-com-alertas-táticos-elogios-a-prestianni-e-esclarecimentos-sobre-o-mercado"
 subtitle: "Técnico das águias confirma ausência de Alexander Bah, explica gestão de Echeverri e exige rigor defensivo no Seixal."
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-09-12"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/marco-silva-antevê-gil-vicente-com-alertas-táticos-elogios-a-prestianni-e-esclarecimentos-sobre-o-mercado"
 image: "https://framerusercontent.com/images/myn87lA90z751UGmGPqoTs2qqA.webp?width=1208&height=657"

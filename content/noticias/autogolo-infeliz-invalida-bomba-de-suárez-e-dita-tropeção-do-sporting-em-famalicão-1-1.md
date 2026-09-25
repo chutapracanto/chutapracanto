@@ -3,7 +3,7 @@ title: "Autogolo infeliz invalida bomba de Suárez e dita tropeção do Sporting
 slug: "autogolo-infeliz-invalida-bomba-de-suárez-e-dita-tropeção-do-sporting-em-famalicão-1-1"
 subtitle: "Flávio Gonçalves viu um golo ser-lhe anulado pelo VAR e o guardião Carevic assinou uma exibição brutal para travar a armada de Alvalade."
 category: "Sporting CP"
-published: "2026-08-05"
+published: "2026-09-13"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/autogolo-infeliz-invalida-bomba-de-suárez-e-dita-tropeção-do-sporting-em-famalicão-(1-1)"
 image: "https://framerusercontent.com/images/mceOUEpGUyf4HZpRQ7pHz9dJHo.jpg?width=1024&height=576"

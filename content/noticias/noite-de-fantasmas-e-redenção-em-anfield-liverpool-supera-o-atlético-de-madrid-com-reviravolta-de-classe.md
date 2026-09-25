@@ -3,7 +3,7 @@ title: "Noite de fantasmas e redenção em Anfield: Liverpool supera o Atlético
 slug: "noite-de-fantasmas-e-redenção-em-anfield-liverpool-supera-o-atlético-de-madrid-com-reviravolta-de-classe"
 subtitle: "Llorente ainda adiantou os colchoneros, mas Szoboszlai e Mac Allister garantiram a reviravolta em Inglaterra."
 category: "UEFA Champions League"
-published: "2026-08-05"
+published: "2026-09-10"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/noite-de-fantasmas-e-redenção-em-anfield-liverpool-supera-o-atlético-de-madrid-com-reviravolta-de-classe"
 image: "https://framerusercontent.com/images/5KE2i38BlJwUUhgIaNxE9V13cyI.jpg?width=465&height=372"

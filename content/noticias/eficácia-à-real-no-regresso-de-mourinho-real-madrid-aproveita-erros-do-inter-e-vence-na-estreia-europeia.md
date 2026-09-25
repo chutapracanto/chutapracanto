@@ -3,7 +3,7 @@ title: "Eficácia à 'real' no regresso de Mourinho: Real Madrid aproveita erros
 slug: "eficácia-à-real-no-regresso-de-mourinho-real-madrid-aproveita-erros-do-inter-e-vence-na-estreia-europeia"
 subtitle: "Carlos Augusto ainda reduziu perto do apito final, mas as intervenções de Thibaut Courtois seguraram os primeiros três pontos."
 category: "UEFA Champions League"
-published: "2026-08-05"
+published: "2026-09-08"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/eficácia-à-real-no-regresso-de-mourinho-real-madrid-aproveita-erros-do-inter-e-vence-na-estreia-europeia"
 image: "https://framerusercontent.com/images/FME16616ENj4cl9ABN4pHGZoaw.jpg?width=2416&height=1359"

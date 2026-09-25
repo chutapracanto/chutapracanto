@@ -3,7 +3,7 @@ title: "Noite de contos de fadas e reviravoltas na Champions: Como 1907 faz hist
 slug: "noite-de-contos-de-fadas-e-reviravoltas-na-champions-como-1907-faz-história-frente-ao-leipzig-bayern-goleia-na-2-parte-e-lens-avisa-o-sporting"
 subtitle: "Os italianos do Como venceram por 4-1 na estreia europeia, enquanto o Bayern só precisou de 45 minutos para golear o Bodo/Glimt."
 category: "UEFA Champions League"
-published: "2026-08-05"
+published: "2026-09-10"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/noite-de-contos-de-fadas-e-reviravoltas-na-champions-como-1907-faz-história-frente-ao-leipzig-bayern-goleia-na-2.ª-parte-e-lens-avisa-o-sporting"
 image: "https://framerusercontent.com/images/WawrMqxyTgScKofftWKkH0vnA.jpg?width=999&height=561"

@@ -3,7 +3,7 @@ title: "Benfica carimba acesso à fase de liga da Liga Europa com triunfo na Din
 slug: "benfica-carimba-acesso-à-fase-de-liga-da-liga-europa-com-triunfo-na-dinamarca"
 subtitle: "Gianluca Prestianni bisa na Dinamarca, Rafa Silva assina o outro tento e a equipa de Marco Silva assegura a presença na fase de liga com vitória por 3-1."
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-08-27"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/benfica-carimba-acesso-à-fase-de-liga-da-liga-europa-com-triunfo-na-dinamarca"
 image: "https://framerusercontent.com/images/RNe9k0ZC91uIB9IiHKnAwNOZ0.jpg?width=3410&height=2274"

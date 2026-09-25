@@ -3,7 +3,7 @@ title: "Poder e solidez em Villa Park: Cruzamento de Calafiori e desvio de Saka 
 slug: "poder-e-solidez-em-villa-park-cruzamento-de-calafiori-e-desvio-de-saka-mantêm-arsenal-100-vitorioso"
 subtitle: "Extremo inglês correspondeu com classe ao cruzamento de Calafiori para resolver um duelo emotivo."
 category: "Premier League"
-published: "2026-08-05"
+published: "2026-08-31"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/poder-e-solidez-em-villa-park-cruzamento-de-calafiori-e-desvio-de-saka-mantêm-arsenal-100-vitorioso"
 image: "https://framerusercontent.com/images/yo9MZ69op7OTyMhaILS0644BSo.jpg?width=1024&height=576"

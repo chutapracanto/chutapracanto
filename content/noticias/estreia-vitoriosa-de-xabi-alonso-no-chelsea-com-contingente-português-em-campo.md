@@ -3,7 +3,7 @@ title: "Estreia vitoriosa de Xabi Alonso no Chelsea com contingente português e
 slug: "estreia-vitoriosa-de-xabi-alonso-no-chelsea-com-contingente-português-em-campo"
 subtitle: "​Com Pedro Neto e Quenda a saltarem do banco na segunda parte, blues vencem no reduto do Fulham por 3-2 na jornada inaugural da Premier League."
 category: "Premier League"
-published: "2026-08-05"
+published: "2026-08-24"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/estreia-vitoriosa-de-xabi-alonso-no-chelsea-com-contingente-português-em-campo"
 image: "https://framerusercontent.com/images/wsRwuBnqpVHIaeNipDgxmdlH8vs.jpg?width=819&height=461"

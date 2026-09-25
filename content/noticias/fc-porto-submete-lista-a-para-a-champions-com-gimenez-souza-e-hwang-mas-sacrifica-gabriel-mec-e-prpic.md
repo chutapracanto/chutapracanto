@@ -3,7 +3,7 @@ title: "FC Porto submete Lista A para a Champions com Gimenez, Souza e Hwang, ma
 slug: "fc-porto-submete-lista-a-para-a-champions-com-gimenez-souza-e-hwang-mas-sacrifica-gabriel-mec-e-prpic"
 subtitle: "Com o limite de jogadores não formados localmente atingido, o técnico italiano definiu o lote de inscritos com Samu e Zaidu incluídos."
 category: "FC Porto"
-published: "2026-08-05"
+published: "2026-09-03"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/fc-porto-submete-lista-a-para-a-champions-com-gimenez-souza-e-hwang-mas-sacrifica-gabriel-mec-e-prpic"
 image: "https://framerusercontent.com/images/tzL3SWCz5Af6o3lS06WjI4iAENI.webp?width=1920&height=1080"

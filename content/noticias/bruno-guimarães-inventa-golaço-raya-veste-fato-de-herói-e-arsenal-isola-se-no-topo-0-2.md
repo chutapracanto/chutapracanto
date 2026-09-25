@@ -3,7 +3,7 @@ title: "Bruno Guimarães inventa golaço, Raya veste fato de herói e Arsenal is
 slug: "bruno-guimarães-inventa-golaço-raya-veste-fato-de-herói-e-arsenal-isola-se-no-topo-0-2"
 subtitle: "David Raya defendeu uma grande penalidade momentos antes do golaço de Bruno Guimarães que abriu caminho ao triunfo em Sunderland."
 category: "Premier League"
-published: "2026-08-05"
+published: "2026-09-12"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/bruno-guimarães-inventa-golaço-raya-veste-fato-de-herói-e-arsenal-isola-se-no-topo-(0-2)"
 image: "https://framerusercontent.com/images/nmef7DJmclqdrizM3YdJUEo2IQ.jpg?width=976&height=629"

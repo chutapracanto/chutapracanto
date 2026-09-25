@@ -3,7 +3,7 @@ title: "Dawda Camara decide cedo e Alverca soma segunda vitória seguida perante
 slug: "dawda-camara-decide-cedo-e-alverca-soma-segunda-vitória-seguida-perante-o-rio-ave-1-0"
 subtitle: "Um golo aos três minutos ditou a segunda vitória consecutiva da equipa de Sérgio Ferreira, num jogo dominado no primeiro tempo pelos ribatejanos."
 category: "Liga Portugal Betclic"
-published: "2026-08-05"
+published: "2026-09-19"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/dawda-camara-decide-cedo-e-alverca-soma-segunda-vitória-seguida-perante-o-rio-ave-(1-0)"
 image: "https://framerusercontent.com/images/opUW2SOuxP5mCMHKl1C7URTTo.webp?width=810&height=540"

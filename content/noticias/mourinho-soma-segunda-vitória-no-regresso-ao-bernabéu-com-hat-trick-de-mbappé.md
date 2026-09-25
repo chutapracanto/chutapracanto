@@ -3,7 +3,7 @@ title: "Mourinho soma segunda vitória no regresso ao Bernabéu com hat-trick de
 slug: "mourinho-soma-segunda-vitória-no-regresso-ao-bernabéu-com-hat-trick-de-mbappé"
 subtitle: "Avançado francês assina hat-trick e Vinícius Jr. fecha a goleada por 4-1 no reencontro do técnico português com os adeptos do Santiago Bernabéu."
 category: "La Liga"
-published: "2026-08-05"
+published: "2026-08-26"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/mourinho-soma-segunda-vitória-no-regresso-ao-bernabéu-com-hat-trick-de-mbappé"
 image: "https://framerusercontent.com/images/ZnDsLIz4DRrixq16ZCdfdCUZQ.jpg?width=1314&height=768"

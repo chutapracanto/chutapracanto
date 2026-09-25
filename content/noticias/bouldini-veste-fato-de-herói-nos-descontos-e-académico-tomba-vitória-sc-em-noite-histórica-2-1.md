@@ -3,7 +3,7 @@ title: "Bouldini veste fato de herói nos descontos e Académico tomba Vitória 
 slug: "bouldini-veste-fato-de-herói-nos-descontos-e-académico-tomba-vitória-sc-em-noite-histórica-2-1"
 subtitle: "Gohi e Gonçalo Nogueira marcaram na segunda parte, mas foi a estocada de Bouldini nos descontos a ditar a festa viseense."
 category: "Liga Portugal Betclic"
-published: "2026-08-05"
+published: "2026-09-12"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/bouldini-veste-fato-de-herói-nos-descontos-e-académico-tomba-vitória-sc-em-noite-histórica-(2-1)"
 image: "https://framerusercontent.com/images/IYAjzZERAcybT2bvnlzmpNg7SgY.jpg?width=1920&height=1080"

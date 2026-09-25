@@ -3,7 +3,7 @@ title: "Rotação cirúrgica de Rúben Amorim devolve Milan aos triunfos com not
 slug: "rotação-cirúrgica-de-rúben-amorim-devolve-milan-aos-triunfos-com-nota-artística-3-0"
 subtitle: "Com seis novidades no onze após o desgaste europeu, a turma de Rúben Amorim assinou uma exibição categórica antes da paragem internacional."
 category: "Serie A"
-published: "2026-08-05"
+published: "2026-09-21"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/rotação-cirúrgica-de-rúben-amorim-devolve-milan-aos-triunfos-com-nota-artística-(3-0)"
 image: "https://framerusercontent.com/images/yl3sqk5PJ42RKADY9oJqlWDx9xE.jpg?width=976&height=669"

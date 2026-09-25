@@ -3,7 +3,7 @@ title: "Fantasia sul-americana para o ataque da Luz: Claudio Echeverri é refor�
 slug: "fantasia-sul-americana-para-o-ataque-da-luz-claudio-echeverri-é-reforço-com-cláusula-de-21-milhões"
 subtitle: "Médio ofensivo de 20 anos assina por empréstimo do Manchester City, reservando as águias o direito de opção no final da época."
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-09-02"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/fantasia-sul-americana-para-o-ataque-da-luz-claudio-echeverri-é-reforço-com-cláusula-de-21-milhões"
 image: "https://framerusercontent.com/images/vTEfKKNBlkyDjDvhrhZMunj58T8.jpg?width=1200&height=675"

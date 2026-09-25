@@ -3,7 +3,7 @@ title: "Pérola gaúcha blindada no Dragão: FC Porto oficializa prodígio Gabri
 slug: "pérola-gaúcha-blindada-no-dragão-fc-porto-oficializa-prodígio-gabriel-mec-até-2031-com-cláusula-de-80-milhões"
 subtitle: "SAD azul e branca assegura 100% dos direitos do promissor atacante oriundo do Grémio de Porto Alegre."
 category: "FC Porto"
-published: "2026-08-05"
+published: "2026-09-02"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/pérola-gaúcha-blindada-no-dragão-fc-porto-oficializa-prodígio-gabriel-mec-até-2031-com-cláusula-de-80-milhões"
 image: "https://framerusercontent.com/images/3jKLfQkbnEzjTmAWeMQNMs1M7kQ.webp?width=1200&height=799"

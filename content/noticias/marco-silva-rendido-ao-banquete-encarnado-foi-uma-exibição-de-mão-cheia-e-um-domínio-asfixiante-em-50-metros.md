@@ -3,7 +3,7 @@ title: "Marco Silva rendido ao banquete encarnado: \"Foi uma exibição de mão 
 slug: "marco-silva-rendido-ao-banquete-encarnado-foi-uma-exibição-de-mão-cheia-e-um-domínio-asfixiante-em-50-metros"
 subtitle: "O técnico encarnado enalteceu o domínio territorial e a postura agressiva da equipa no reatar do segundo tempo."
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-09-09"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/marco-silva-rendido-ao-banquete-encarnado-foi-uma-exibição-de-mão-cheia-e-um-domínio-asfixiante-em-50-metros"
 image: "https://framerusercontent.com/images/tk7sfoJFndnm3j23xyaGvqUEOwA.jpg?width=1208&height=725"

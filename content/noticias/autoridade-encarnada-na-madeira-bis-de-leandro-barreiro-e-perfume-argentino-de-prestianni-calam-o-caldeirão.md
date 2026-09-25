@@ -3,7 +3,7 @@ title: "Autoridade encarnada na Madeira: Bis de Leandro Barreiro e perfume argen
 slug: "autoridade-encarnada-na-madeira-bis-de-leandro-barreiro-e-perfume-argentino-de-prestianni-calam-o-caldeirão"
 subtitle: "Passeio encarnado nos Barreiros: Águias somam três pontos com bis de Barreiro e golaço de Prestianni"
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-09-05"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/autoridade-encarnada-na-madeira-bis-de-leandro-barreiro-e-perfume-argentino-de-prestianni-calam-o-caldeirão"
 image: "https://framerusercontent.com/images/Jx4YYLEgkXN3RfNSb5OBtygLy8.webp?width=960&height=540"

@@ -3,7 +3,7 @@ title: "Blindagem de peso na Luz: Tomás Araújo renova até 2031 com cláusula 
 slug: "blindagem-de-peso-na-luz-tomás-araújo-renova-até-2031-com-cláusula-cifrada-nos-80-milhões-de-euros"
 subtitle: "Internacional português viu o salário revisto em alta e prolongou a ligação às águias por mais duas épocas."
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-09-02"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/blindagem-de-peso-na-luz-tomás-araújo-renova-até-2031-com-cláusula-cifrada-nos-80-milhões-de-euros"
 image: "https://framerusercontent.com/images/1wv1JuTss5ATWvsXrowHkBEQ6R4.webp?width=1200&height=734"

@@ -3,7 +3,7 @@ title: "Szoboszlai resgata Liverpool aos 90'+9 em estreia dramática no St. Jame
 slug: "szoboszlai-resgata-liverpool-aos-90-9-em-estreia-dramática-no-st-james-park"
 subtitle: "Médio húngaro converteu castigo máximo no último instante e evitou a derrota da equipa de Andoni Iraola em St. James' Park na jornada inaugural da Premier League."
 category: "Premier League"
-published: "2026-08-05"
+published: "2026-08-23"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/szoboszlai-resgata-liverpool-aos-90-9-em-estreia-dramática-no-st.-james-park"
 image: "https://framerusercontent.com/images/kEGTHR2vH8MHTcbGUs3HT4fbDI8.jpg?width=380&height=253"

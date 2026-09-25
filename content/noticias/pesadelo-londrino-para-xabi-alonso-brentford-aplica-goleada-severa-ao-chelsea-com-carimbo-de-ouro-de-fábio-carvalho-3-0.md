@@ -3,7 +3,7 @@ title: "Pesadelo londrino para Xabi Alonso: Brentford aplica goleada severa ao C
 slug: "pesadelo-londrino-para-xabi-alonso-brentford-aplica-goleada-severa-ao-chelsea-com-carimbo-de-ouro-de-fábio-carvalho-3-0"
 subtitle: "Equipa de Xabi Alonso dominou sem eficácia e acabou castigada pelos golos de Anthony, Igor Thiago e Fábio Carvalho."
 category: "Premier League"
-published: "2026-08-05"
+published: "2026-09-18"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/pesadelo-londrino-para-xabi-alonso-brentford-aplica-goleada-severa-ao-chelsea-com-carimbo-de-ouro-de-fábio-carvalho-(3-0)"
 image: "https://framerusercontent.com/images/TDWE3mDubNvdfgGESFfSn28kM.jpg?width=1920&height=1080"

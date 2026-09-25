@@ -3,7 +3,7 @@ title: "Farioli avisa para as lições de Rio Maior e defende análise ao City: 
 slug: "farioli-avisa-para-as-lições-de-rio-maior-e-defende-análise-ao-city-antes-de-serem-futebolistas-têm-de-ser-atletas"
 subtitle: "Técnico do FC Porto confirma Froholdt riscado das opções e detalha o plano de recuperação gradual para Giménez, Samu e Pietuszweski."
 category: "FC Porto"
-published: "2026-08-05"
+published: "2026-09-11"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/farioli-avisa-para-as-lições-de-rio-maior-e-defende-análise-ao-city-antes-de-serem-futebolistas-têm-de-ser-atletas"
 image: "https://framerusercontent.com/images/DHko8dw62bzIylunUAVSagD0Dc.webp?width=476&height=268"

@@ -3,7 +3,7 @@ title: "Autocritica severa após tempestade no Minho: «Não podemos entrar em f
 slug: "autocritica-severa-após-tempestade-no-minho-não-podemos-entrar-em-facilitismos-avisa-rui-borges"
 subtitle: "O técnico leonino lamentou a passividade no lance que originou o autogolo e exigiu concentração absoluta até ao apito final."
 category: "Sporting CP"
-published: "2026-08-05"
+published: "2026-09-13"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/autocritica-severa-após-tempestade-no-minho-«não-podemos-entrar-em-facilitismos»-avisa-rui-borges"
 image: "https://framerusercontent.com/images/2P8fYSMnyXXEcOG8Tr5It39VDw.webp?width=1597&height=1064"

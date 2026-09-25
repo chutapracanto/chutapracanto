@@ -3,7 +3,7 @@ title: "Soberania arsenalista na Pedreira: SC Braga dobra a resistência do Vit�
 slug: "soberania-arsenalista-na-pedreira-sc-braga-dobra-a-resistência-do-vitória-sc-e-reina-no-dérbi-do-minho"
 subtitle: "Genialidade na Pedreira: Pormenor de Diego Rodrigues decide dérbi minhoto a favor do SC Braga"
 category: "SC Braga"
-published: "2026-08-05"
+published: "2026-08-31"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/soberania-arsenalista-na-pedreira-sc-braga-dobra-a-resistência-do-vitória-sc-e-reina-no-dérbi-do-minho"
 image: "https://framerusercontent.com/images/Qcy2cijbS479nvY45J4dvfkfq5s.webp?width=960&height=540"

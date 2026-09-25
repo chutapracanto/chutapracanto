@@ -3,7 +3,7 @@ title: "Farioli elogia goleada do FC Porto, ironiza com \"coisas estranhas\" e a
 slug: "farioli-elogia-goleada-do-fc-porto-ironiza-com-coisas-estranhas-e-aponta-ao-clássico"
 subtitle: "Na ressaca da derrota com o Manchester City, o FC Porto goleia o Casa Pia por 1-4 e começa já a preparar o duelo com as águias."
 category: "FC Porto"
-published: "2026-08-05"
+published: "2026-09-12"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/farioli-elogia-goleada-do-fc-porto-ironiza-com-coisas-estranhas-e-aponta-ao-clássico"
 image: "https://framerusercontent.com/images/DHko8dw62bzIylunUAVSagD0Dc.webp?width=476&height=268"

@@ -3,7 +3,7 @@ title: "Noite de raça e inspiração: Ianis Stoica assina reviravolta tricolor 
 slug: "noite-de-raça-e-inspiração-ianis-stoica-assina-reviravolta-tricolor-no-acerto-da-liga-portugal"
 subtitle: "Gabri Martínez ainda colocou os minhotos em vantagem, mas o bis do avançado romeno selou o triunfo da equipa de Pepa."
 category: "SC Braga"
-published: "2026-08-05"
+published: "2026-09-10"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/noite-de-raça-e-inspiração-ianis-stoica-assina-reviravolta-tricolor-no-acerto-da-liga-portugal"
 image: "https://framerusercontent.com/images/OYf4Cqs4w7PKfKfxLEDq7twFCEg.webp?width=1024&height=576"

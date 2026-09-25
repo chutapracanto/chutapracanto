@@ -3,7 +3,7 @@ title: "Página de história no San Siro: Benfica anula Milan de Rúben Amorim c
 slug: "página-de-história-no-san-siro-benfica-anula-milan-de-rúben-amorim-com-lição-tática-0-2"
 subtitle: "Com rotação no onze, o Benfica desmontou o 3-4-3 dos italianos, somando os primeiros três pontos na Liga Europa."
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-09-16"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/página-de-história-no-san-siro-benfica-anula-milan-de-rúben-amorim-com-lição-tática-(0-2)"
 image: "https://framerusercontent.com/images/YORGZ608iSYjzHFziXmiewSfg0.jpg?width=630&height=415"

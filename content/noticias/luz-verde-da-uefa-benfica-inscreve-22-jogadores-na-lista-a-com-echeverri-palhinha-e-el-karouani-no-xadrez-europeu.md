@@ -3,7 +3,7 @@ title: "Luz verde da UEFA: Benfica inscreve 22 jogadores na Lista A com Echeverr
 slug: "luz-verde-da-uefa-benfica-inscreve-22-jogadores-na-lista-a-com-echeverri-palhinha-e-el-karouani-no-xadrez-europeu"
 subtitle: "A UEFA oficializou os 22 inscritos da estrutura encarnada na Lista A, salvaguardando o espaço das promessas da Lista B."
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-09-03"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/luz-verde-da-uefa-benfica-inscreve-22-jogadores-na-lista-a-com-echeverri-palhinha-e-el-karouani-no-xadrez-europeu"
 image: "https://framerusercontent.com/images/7j2P8X8FS3rEBSAKobHfgd7SJ5E.webp?width=1920&height=1080"

@@ -3,7 +3,7 @@ title: "Arouca estraga a festa em Alvalade: Leões venciam por 2-0, mas expulsã
 slug: "arouca-estraga-a-festa-em-alvalade-leões-venciam-por-2-0-mas-expulsão-de-debast-abriu-caminho-à-igualdade-2-2"
 subtitle: "Gonçalo Inácio e Luis Suárez adiantaram os leões na primeira parte, mas o cartão vermelho a Debast abriu caminho ao reaparecimento do Arouca."
 category: "Sporting CP"
-published: "2026-08-05"
+published: "2026-09-19"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/arouca-estraga-a-festa-em-alvalade-leões-venciam-por-2-0-mas-expulsão-de-debast-abriu-caminho-à-igualdade-(2-2)"
 image: "https://framerusercontent.com/images/nOr9o7voTxJIvNENTRs09FrG4s.webp?width=1024&height=576"

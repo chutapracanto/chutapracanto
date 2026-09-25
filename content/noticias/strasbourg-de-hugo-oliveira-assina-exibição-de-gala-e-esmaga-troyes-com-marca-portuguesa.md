@@ -3,7 +3,7 @@ title: "Strasbourg de Hugo Oliveira assina exibição de gala e esmaga Troyes co
 slug: "strasbourg-de-hugo-oliveira-assina-exibição-de-gala-e-esmaga-troyes-com-marca-portuguesa"
 subtitle: "Show de Diogo Sousa, Essugo e Harder: Strasbourg assina reviravolta espetacular na Ligue 1"
 category: "Ligue 1"
-published: "2026-08-05"
+published: "2026-09-06"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/strasbourg-de-hugo-oliveira-assina-exibição-de-gala-e-esmaga-troyes-com-marca-portuguesa"
 image: "https://framerusercontent.com/images/6FbteMzdDjA65oHXgu75UDqUZA.jpg?width=1500&height=1001"

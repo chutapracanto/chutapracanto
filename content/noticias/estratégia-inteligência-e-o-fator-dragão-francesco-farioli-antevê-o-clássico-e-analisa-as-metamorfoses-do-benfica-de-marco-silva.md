@@ -3,7 +3,7 @@ title: "Estratégia, inteligência e o fator Dragão: Francesco Farioli antevê 
 slug: "estratégia-inteligência-e-o-fator-dragão-francesco-farioli-antevê-o-clássico-e-analisa-as-metamorfoses-do-benfica-de-marco-silva"
 subtitle: "O técnico italiano confirmou duas ausências por lesão, mas garantiu a equipa motivada para travar a intensidade das águias."
 category: "FC Porto"
-published: "2026-08-05"
+published: "2026-09-19"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/estratégia-inteligência-e-o-fator-dragão-francesco-farioli-antevê-o-clássico-e-analisa-as-metamorfoses-do-benfica-de-marco-silva"
 image: "https://framerusercontent.com/images/fkHpjjK3p5rEMI2L4jldzultFU4.jpg?width=480&height=240"

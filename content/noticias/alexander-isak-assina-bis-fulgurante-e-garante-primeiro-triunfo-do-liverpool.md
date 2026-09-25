@@ -3,7 +3,7 @@ title: "Alexander Isak assina bis fulgurante e garante primeiro triunfo do Liver
 slug: "alexander-isak-assina-bis-fulgurante-e-garante-primeiro-triunfo-do-liverpool"
 subtitle: "Com assistência de trivela de Cody Gakpo em destaque, os 'reds' dominaram a primeira parte e geriram a vantagem em Portman Road."
 category: "Premier League"
-published: "2026-08-05"
+published: "2026-09-05"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/alexander-isak-assina-bis-fulgurante-e-garante-primeiro-triunfo-do-liverpool"
 image: "https://framerusercontent.com/images/hwFb79vLhJvIOgj4Lnn86SCc1Y.jpg?width=1080&height=751"

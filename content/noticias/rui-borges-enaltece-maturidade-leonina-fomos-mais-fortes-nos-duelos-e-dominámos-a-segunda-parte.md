@@ -3,7 +3,7 @@ title: "Rui Borges enaltece maturidade leonina: \"Fomos mais fortes nos duelos e
 slug: "rui-borges-enaltece-maturidade-leonina-fomos-mais-fortes-nos-duelos-e-dominámos-a-segunda-parte"
 subtitle: "O técnico verde e branco admitiu dificuldades nos primeiros 25 minutos, mas enalteceu a superioridade leonina na etapa complementar."
 category: "Sporting CP"
-published: "2026-08-05"
+published: "2026-09-10"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/rui-borges-enaltece-maturidade-leonina-fomos-mais-fortes-nos-duelos-e-dominámos-a-segunda-parte"
 image: "https://framerusercontent.com/images/nijXfO5OXQQfWFXtz9nyrzk8Ysw.webp?width=1280&height=720"

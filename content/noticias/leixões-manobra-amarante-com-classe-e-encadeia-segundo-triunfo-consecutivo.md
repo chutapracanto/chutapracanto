@@ -3,7 +3,7 @@ title: "Leixões manobra Amarante com classe e encadeia segundo triunfo consecut
 slug: "leixões-manobra-amarante-com-classe-e-encadeia-segundo-triunfo-consecutivo"
 subtitle: "Cláudio Araújo, Paraizo e Bryan Róchez assinaram os tentos do triunfo leixonense, que aguentou a reação forasteira na segunda parte."
 category: "Liga 2 Portugal MeuSuper"
-published: "2026-08-05"
+published: "2026-09-06"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/leixões-manobra-amarante-com-classe-e-encadeia-segundo-triunfo-consecutivo"
 image: "https://framerusercontent.com/images/hNyRy7SrhKvZm9GuGeVKefG9XRM.jpg?width=3275&height=2183"

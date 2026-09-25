@@ -3,7 +3,7 @@ title: "«Não podia estar mais satisfeito»: Rui Borges exalta exibição de ga
 slug: "não-podia-estar-mais-satisfeito-rui-borges-exalta-exibição-de-gala-e-seriedade-leonina-em-vila-do-conde"
 subtitle: "Treinador do Sporting elogia exibição «muito competente» em Vila do Conde, mas recusa triunfalismos após o 4-0 frente ao Rio Ave."
 category: "Sporting CP"
-published: "2026-08-05"
+published: "2026-08-28"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/«não-podia-estar-mais-satisfeito»-rui-borges-exalta-exibição-de-gala-e-seriedade-leonina-em-vila-do-conde"
 image: "https://framerusercontent.com/images/3sEuPBJ6KfE0XCJmt4qmQ16A.jpg?width=1280&height=720"

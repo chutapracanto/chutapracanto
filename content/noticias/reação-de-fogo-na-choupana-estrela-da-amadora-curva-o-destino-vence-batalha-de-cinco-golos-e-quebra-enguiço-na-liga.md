@@ -3,7 +3,7 @@ title: "Reação de fogo na Choupana: Estrela da Amadora curva o destino, vence 
 slug: "reação-de-fogo-na-choupana-estrela-da-amadora-curva-o-destino-vence-batalha-de-cinco-golos-e-quebra-enguiço-na-liga"
 subtitle: "Ianis Stoica, Abraham Marcus e Leandro Antonetti assinaram os golos da reviravolta numa tarde de grandes emoções no Funchal."
 category: "Primeira Liga Portugal Betclic"
-published: "2026-08-05"
+published: "2026-08-30"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/reação-de-fogo-na-choupana-estrela-da-amadora-curva-o-destino-vence-batalha-de-cinco-golos-e-quebra-enguiço-na-liga"
 image: "https://framerusercontent.com/images/gVFfXkJtIqVnsfk98H9cYn2mMI.jpg?width=1200&height=799"

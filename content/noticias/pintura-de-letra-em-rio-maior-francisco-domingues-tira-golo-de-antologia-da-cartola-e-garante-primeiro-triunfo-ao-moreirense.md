@@ -3,7 +3,7 @@ title: "Pintura de letra em Rio Maior: Francisco Domingues tira golo de antologi
 slug: "pintura-de-letra-em-rio-maior-francisco-domingues-tira-golo-de-antologia-da-cartola-e-garante-primeiro-triunfo-ao-moreirense"
 subtitle: "Lateral formado no Benfica assinou uma finalização de letra monumental que decidiu o encontro do primeiro tempo."
 category: "Primeira Liga Portugal Betclic"
-published: "2026-08-05"
+published: "2026-08-30"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/pintura-de-letra-em-rio-maior-francisco-domingues-tira-golo-de-antologia-da-cartola-e-garante-primeiro-triunfo-ao-moreirense"
 image: "https://framerusercontent.com/images/W3QosShd4xkdevTpoMg19fBwrU.jpg?width=1024&height=683"

@@ -3,7 +3,7 @@ title: "Académica vence em Tondela, segura pleno de pontos e consolida lideran�
 slug: "académica-vence-em-tondela-segura-pleno-de-pontos-e-consolida-liderança-da-ii-liga"
 subtitle: "Com nove pontos em nove possíveis, estudantes seguram a liderança isolada após triunfo categórico no Estádio João Cardoso."
 category: "Liga Portugal 2 MeuSuper"
-published: "2026-08-05"
+published: "2026-08-23"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/académica-vence-em-tondela-segura-pleno-de-pontos-e-consolida-liderança-da-ii-liga"
 image: "https://framerusercontent.com/images/QTPkA30TwCKY8SXjHHxqyBjIqC4.webp?width=1920&height=1200"

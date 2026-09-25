@@ -3,7 +3,7 @@ title: "Renascer em Brugge: Aston Villa de Unai Emery bate belgas por 3-2 e assi
 slug: "renascer-em-brugge-aston-villa-de-unai-emery-bate-belgas-por-3-2-e-assina-primeira-vitória-da-época"
 subtitle: "John McGinn, Emi Buendía e Nicolas Jackson construíram a vantagem dos ingleses antes do sufoco belga no segundo tempo."
 category: "UEFA Champions League"
-published: "2026-08-05"
+published: "2026-09-09"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/renascer-em-brugge-aston-villa-de-unai-emery-bate-belgas-por-3-2-e-assina-primeira-vitória-da-época"
 image: "https://framerusercontent.com/images/du4lZ3uachSsp4TNhrpNLTQXEE.jpg?width=1600&height=900"

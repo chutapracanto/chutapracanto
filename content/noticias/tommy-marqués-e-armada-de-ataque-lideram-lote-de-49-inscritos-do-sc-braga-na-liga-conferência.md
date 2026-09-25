@@ -3,7 +3,7 @@ title: "Tommy Marqués e 'armada' de ataque lideram lote de 49 inscritos do SC B
 slug: "tommy-marqués-e-armada-de-ataque-lideram-lote-de-49-inscritos-do-sc-braga-na-liga-conferência"
 subtitle: "Com 24 promessas registadas na Lista B e pesos pesados na Lista A, os Gverreiros preparam a estreia com o Copenhaga."
 category: "SC Braga"
-published: "2026-08-05"
+published: "2026-09-04"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/tommy-marqués-e-armada-de-ataque-lideram-lote-de-49-inscritos-do-sc-braga-na-liga-conferência"
 image: "https://framerusercontent.com/images/6HdyDDJ26fxOyb0s3PStHvbWGA.webp?width=1200&height=800"

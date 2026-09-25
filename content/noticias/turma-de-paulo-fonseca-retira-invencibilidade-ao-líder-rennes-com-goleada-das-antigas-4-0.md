@@ -3,7 +3,7 @@ title: "Turma de Paulo Fonseca retira invencibilidade ao líder Rennes com golea
 slug: "turma-de-paulo-fonseca-retira-invencibilidade-ao-líder-rennes-com-goleada-das-antigas-4-0"
 subtitle: "Ernest Nuamah bisou na primeira parte e Corentin Tolisso fechou a contagem na melhor exibição da equipa de Paulo Fonseca esta época."
 category: "Ligue 1"
-published: "2026-08-05"
+published: "2026-09-19"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/turma-de-paulo-fonseca-retira-invencibilidade-ao-líder-rennes-com-goleada-das-antigas-(4-0)"
 image: "https://framerusercontent.com/images/z538QvYvNIXk3YiizhfNRyp2Vs.jpg?width=1400&height=933"

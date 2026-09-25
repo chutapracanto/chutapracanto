@@ -3,7 +3,7 @@ title: "«Tivemos um espírito de Dragão»: Francesco Farioli enaltece exibiç�
 slug: "tivemos-um-espírito-de-dragão-francesco-farioli-enaltece-exibição-do-fc-porto-lamenta-pormenores-da-arbitragem-e-foca-no-campeonato"
 subtitle: "O técnico italiano elogiou a personalidade da equipa apesar das ausências e considerou que Gvardiol devia ter sido expulso."
 category: "FC Porto"
-published: "2026-08-05"
+published: "2026-09-08"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/«tivemos-um-espírito-de-dragão»-francesco-farioli-enaltece-exibição-do-fc-porto-lamenta-pormenores-da-arbitragem-e-foca-no-campeonato"
 image: "https://framerusercontent.com/images/7rkHIzdLWXsOZ8iBCQBhLrrgtU.webp?width=1200&height=800"

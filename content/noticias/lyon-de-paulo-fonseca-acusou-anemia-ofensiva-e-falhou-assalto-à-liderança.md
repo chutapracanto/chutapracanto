@@ -3,7 +3,7 @@ title: "Lyon de Paulo Fonseca acusou anemia ofensiva e falhou assalto à lideran
 slug: "lyon-de-paulo-fonseca-acusou-anemia-ofensiva-e-falhou-assalto-à-liderança"
 subtitle: "A equipa de Paulo Fonseca revelou uma enorme falta de inspiração no ataque e falhou a colagem ao primeiro lugar."
 category: "Ligue 1"
-published: "2026-08-05"
+published: "2026-09-12"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/lyon-de-paulo-fonseca-acusou-anemia-ofensiva-e-falhou-assalto-à-liderança"
 image: "https://framerusercontent.com/images/fan8xb1cCAP9ub9sOg86OmSMq0.jpg?width=1500&height=1001"

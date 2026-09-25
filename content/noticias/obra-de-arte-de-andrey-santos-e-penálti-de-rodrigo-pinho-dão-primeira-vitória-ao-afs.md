@@ -3,7 +3,7 @@ title: "Obra de arte de Andrey Santos e penálti de Rodrigo Pinho dão primeira 
 slug: "obra-de-arte-de-andrey-santos-e-penálti-de-rodrigo-pinho-dão-primeira-vitória-ao-afs"
 subtitle: "Bomba de fora da área de Andrey Santos desbloqueou um nulo cinzento e Rodrigo Pinho sentenciou a partir da marca dos onze metros."
 category: "Liga Portugal 2 MeuSuper"
-published: "2026-08-05"
+published: "2026-08-30"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/obra-de-arte-de-andrey-santos-e-penálti-de-rodrigo-pinho-dão-primeira-vitória-ao-afs"
 image: "https://framerusercontent.com/images/mEcFqUZwjKK6xDd74CmZhdB9Us.webp?width=1144&height=644"

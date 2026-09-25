@@ -3,7 +3,7 @@ title: "Sinfonia de sobressaltos em Anfield: Liverpool volta a claudicar perante
 slug: "sinfonia-de-sobressaltos-em-anfield-liverpool-volta-a-claudicar-perante-o-destemido-nottingham-forest"
 subtitle: "Isak e Víctor Muñoz anularam a audácia forasteira, mas a fragilidade defensiva voltou a travar a marcha dos reds em Anfield."
 category: "Premier League"
-published: "2026-08-05"
+published: "2026-08-29"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/sinfonia-de-sobressaltos-em-anfield-liverpool-volta-a-claudicar-perante-o-destemido-nottingham-forest"
 image: "https://framerusercontent.com/images/LZ4BhY6BYrfXdAvgRSK1ZlDk4c.jpg?width=1200&height=800"

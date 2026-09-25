@@ -3,7 +3,7 @@ title: "Eficácia de Paulo Fonseca no Groupama Stadium: Lyon supera Auxerre e as
 slug: "eficácia-de-paulo-fonseca-no-groupama-stadium-lyon-supera-auxerre-e-assume-liderança-provisória-da-ligue-1"
 subtitle: "Com golos de Bacher, Athekame e Nuamah, o conjunto de Paulo Fonseca somou a vitória e assumiu o comando provisório do campeonato."
 category: "Ligue 1"
-published: "2026-08-05"
+published: "2026-09-05"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/eficácia-de-paulo-fonseca-no-groupama-stadium-lyon-supera-auxerre-e-assume-liderança-provisória-da-ligue-1"
 image: "https://framerusercontent.com/images/tnZfDZU5HeY6l6NSzgB5aF9hoM.jpg?width=1200&height=630"

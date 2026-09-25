@@ -3,7 +3,7 @@ title: "Sinfonia branca no Bernabéu: Real Madrid de José Mourinho assina festi
 slug: "sinfonia-branca-no-bernabéu-real-madrid-de-josé-mourinho-assina-festival-ofensivo-e-isola-se-no-topo"
 subtitle: "Três jogos, três vitórias: turma de José Mourinho resolve o encontro em 11 minutos de luxo e passeia no segundo tempo."
 category: "La Liga"
-published: "2026-08-05"
+published: "2026-08-30"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/sinfonia-branca-no-bernabéu-real-madrid-de-josé-mourinho-assina-festival-ofensivo-e-isola-se-no-topo"
 image: "https://framerusercontent.com/images/GoaEVeckFlQ29pHWPZhE579KOY.jpg?width=960&height=640"

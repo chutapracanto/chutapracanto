@@ -3,7 +3,7 @@ title: "Lourosa assalta Alcochete com golpe de mestre e isola-se no trono da Seg
 slug: "lourosa-assalta-alcochete-com-golpe-de-mestre-e-isola-se-no-trono-da-segunda-liga-1-2"
 subtitle: "Rafael Nel adiantou o Sporting B, mas Guilherme Soares e João Silva desenharam a reviravolta da turma de Ricardo Silva."
 category: "Liga Portugal 2 MeuSuper"
-published: "2026-08-05"
+published: "2026-09-14"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/lourosa-assalta-alcochete-com-golpe-de-mestre-e-isola-se-no-trono-da-segunda-liga-(1-2)"
 image: "https://framerusercontent.com/images/ufw0Im3sS23OrgSULqghkUPft2Q.webp?width=1200&height=675"
