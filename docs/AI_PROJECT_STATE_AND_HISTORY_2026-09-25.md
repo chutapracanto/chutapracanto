@@ -1872,3 +1872,18 @@ Próximas validações:
 2. browser/API/D1 do PR #35;
 3. merge/deployment apenas depois de validação;
 4. resolver separadamente a dependência do host Framer histórico e testar os redirects.
+
+
+## 55. FECHO OPERACIONAL DOS PEDIDOS 1–5 — 2026-09-25
+
+Os cinco pedidos foram reconciliados com o estado GitHub e incorporados no backlog/roadmap:
+
+1. sticky compacto/transparente persistente — implementado na branch final;
+2. navegação sem reflow de linha — implementado na branch final;
+3. navegação mobile mais acima — implementado na branch final;
+4. coração-only junto à partilha com persistência D1 — implementado na PR #36;
+5. Framer → `.com` — inventário 213/213 concluído, execução bloqueada por controlo do host histórico.
+
+**Estado factual:** #36 aberta, código ainda fora de `main`/produção. A validação browser final é o único gate antes de merge/deployment desta frente.
+
+**Transição:** após PASS da validação externa, merge #36, validar deployment e só então marcar a frente UX/engagement como concluída. A frente Framer permanece separada.
