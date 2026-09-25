@@ -1757,3 +1757,17 @@ Decisão aplicada ao CPC: reação simples de coração/gosto, sem comentários,
 
 ### Estado
 **FASE 2 — UX editorial: ação de gosto implementada e mergeada; validação de produção externa pendente por limitação real do ambiente.**
+
+## 51. INVENTÁRIO DE SLUGS COM CARACTERES INVISÍVEIS — 2026-09-25
+
+A inspeção direta de `content/noticias` em `main` encontrou **237 ficheiros** e **3 nomes de ficheiro com caracteres zero-width**:
+- `​benfica-na-europa-marco-silva-perspetiva-o-aarhus-e-garante-que-o-mercado-encarnado-não-acabou.md`
+- `​carlos-vicens-recusa-euforia-após-triunfo-europeu-do-sc-braga-estamos-apenas-no-intervalo.md`
+- `​marco-silva-elogia-reação-encarnada-aborda-mercado-e-foca-na-europa-a-resposta-tinha-de-ser-esta.md`
+
+Os três aparecem também no `content/noticias-index.json` com o mesmo carácter invisível no `slug`, `path` e, em alguns casos, no título/subtítulo.
+
+### Decisão de segurança
+Não foram renomeados nesta operação. A alteração de slug/path canónico sem uma estratégia de compatibilidade poderia quebrar URLs históricas. O inventário fica como evidência para a frente de normalização de slugs e para o futuro mapeamento de redirects Framer → .com.
+
+**Estado:** identificado e documentado; nenhuma URL canónica alterada.
