@@ -997,3 +997,14 @@ O estado real do GitHub/produção continua a prevalecer sobre qualquer Markdown
 A execução operacional detalhada foi consolidada em `docs/AI_EXECUTION_PROTOCOL.md`. Este protocolo passa a complementar as Rules e a Bíblia.
 
 Regra central: **UM BLOQUEIO NÃO É UM RESULTADO.** Uma IA não deve limitar-se a identificar uma dependência externa e parar. Deve executar tudo o que estiver ao seu alcance e, quando algo depender da Rute ou do Codex, transformar essa dependência em instruções concretas e retomáveis.
+
+## REGRA PERMANENTE — CONTROLO DE CARACTERES DOS PROMPTS CODEX — 2026-09-25
+
+- Prompts preparados pelo Assistente para a Rute copiar para o Codex devem ser **curtos e controlados por caracteres**.
+- Limite operacional padrão: **máximo de 2.000 caracteres**, incluindo espaços.
+- Nunca enviar um prompt tão extenso que possa levar o Codex a tratá-lo como conteúdo/documento.
+- O prompt deve conter apenas tarefa, limites essenciais, validação e resultado esperado.
+- Não copiar contexto já existente nas Rules, ledger, roadmap ou GitHub; indicar ao Codex a fonte e mandar lê-la.
+- Se forem necessários mais detalhes, dividir a execução em prompts/etapas curtos.
+- Só ultrapassar 2.000 caracteres quando for tecnicamente inevitável; nesse caso, reduzir ao mínimo absoluto e justificar internamente a necessidade.
+- Esta regra substitui a formulação anterior de “poucas centenas de palavras” como critério principal: **o limite de caracteres é o controlo operacional**.
