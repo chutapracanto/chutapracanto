@@ -873,3 +873,12 @@ FIM.
 - Antes de preparar qualquer prompt, o Assistente deve perguntar internamente: **"Consigo fazer isto diretamente? Já temos evidência suficiente? Esta execução pode alterar a decisão?"** Se a resposta for "sim, consigo", "sim, já temos evidência suficiente" ou "não altera a decisão", não usar Codex.
 - Uma tarefa externa que falhe, seja bloqueada ou termine sem resultado não justifica novas tentativas automáticas. Só repetir se surgir uma necessidade concreta nova que exija realmente a capacidade externa.
 - O objetivo é **uso mínimo e essencial de créditos**, não validação redundante.
+
+
+## REGISTO OPERACIONAL DE ESTADO E HISTÓRICO — 2026-09-25
+
+- Foi criado `docs/AI_PROJECT_STATE_AND_HISTORY_2026-09-25.md`.
+- Este ficheiro é o ledger operacional de continuidade: regista o que foi implementado, validado, falhou, foi invalidado, não deve ser repetido e o que pode ser retomado no futuro com outra abordagem.
+- Antes de iniciar uma nova linha de trabalho, consultar este registo para evitar repetir experiências já falhadas ou testes já suficientes.
+- O registo deve ser atualizado no mesmo ciclo de alterações relevantes, especialmente depois de testes externos, correções de bugs, medições de performance, decisões de arquitetura ou encerramento de uma experiência.
+- As Rules continuam a ser a fonte de verdade operacional; o estado real do GitHub/produção continua a vencer qualquer documentação histórica.
