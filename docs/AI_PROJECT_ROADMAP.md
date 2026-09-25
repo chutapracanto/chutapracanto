@@ -465,7 +465,7 @@ Antes de fazer trabalho no CPC:
 11. Atualizar documentação.
 12. Só depois responder.
 
-**Estado operacional neste momento: FASE 1 UNBLOCKED / EM EXECUÇÃO.**
+**Estado operacional neste momento: FASE 2 — SISTEMA EDITORIAL/PUBLICAÇÃO PRÓPRIA / UX DE NOTÍCIAS.**
 
 FIM.
 
