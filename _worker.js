@@ -1282,7 +1282,7 @@ async function prepararPaginaParaPartilha(
   if (!uuidV4.test(visitorId)) {
     return respond({ error: "Identificador inválido.", message: "Identificador inválido." }, 400);
   }
-  if (action !== "status" && action !== "like") {
+  if (action !== "status" && action !== "like" && action !== "unlike") {
     return respond({ error: "Ação inválida.", message: "Ação inválida." }, 400);
   }
   if (!env.ARTICLE_LIKES_DB || !env.ASSETS) {
@@ -1320,12 +1320,19 @@ async function prepararPaginaParaPartilha(
     ).join("");
 
     let created = false;
+    let removed = false;
     if (action === "like") {
       const insert = await env.ARTICLE_LIKES_DB
         .prepare("INSERT INTO article_likes (article_slug, visitor_hash) VALUES (?, ?) ON CONFLICT(article_slug, visitor_hash) DO NOTHING")
         .bind(slug, visitorHash)
         .run();
       created = Number(insert?.meta?.changes || 0) > 0;
+    } else if (action === "unlike") {
+      const removal = await env.ARTICLE_LIKES_DB
+        .prepare("DELETE FROM article_likes WHERE article_slug = ? AND visitor_hash = ?")
+        .bind(slug, visitorHash)
+        .run();
+      removed = Number(removal?.meta?.changes || 0) > 0;
     }
 
     const current = await env.ARTICLE_LIKES_DB
@@ -1338,7 +1345,8 @@ async function prepararPaginaParaPartilha(
       slug,
       liked: Number(current?.liked || 0) === 1,
       count: Number(current?.count || 0),
-      created
+      created,
+      removed
     });
   } catch (error) {
     console.error("Article likes API error:", error);
