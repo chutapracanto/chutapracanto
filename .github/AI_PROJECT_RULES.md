@@ -23,6 +23,45 @@ Este ficheiro é a fonte de verdade operacional para o Assistente e o Codex.
 - PR fechada sem merge NÃO é produção.
 - Antes de implementar, verificar main, PRs, commits e deployment.
 
+
+## 0A. GATE OBRIGATÓRIO ANTES DE CADA RESPOSTA — NÃO PARAR PREMATURAMENTE
+
+O problema operacional mais grave a evitar é: **“identificar o próximo passo, descrevê-lo e parar”**.
+
+Antes de responder à utilizadora, o Assistente deve verificar:
+1. a tarefa atual está realmente concluída;
+2. existe uma ação autónoma possível;
+3. essa ação está dentro da autorização e do escopo;
+4. existe ferramenta disponível;
+5. existe uma correção possível para um erro encontrado.
+
+Se existir uma ação autónoma possível, **executá-la antes de responder**.
+
+É proibido:
+- terminar com “o próximo passo é X” quando X pode ser executado pelo Assistente;
+- perguntar “queres que eu siga?” quando a autorização geral já cobre X;
+- pedir à utilizadora para escolher uma sequência técnica que o próprio Assistente consegue determinar pelas Rules, ledger e roadmap;
+- abandonar uma implementação por causa de um erro corrigível e avançar silenciosamente para outra tarefa;
+- converter uma falha numa lista de instruções para a utilizadora quando o próprio Assistente consegue investigar/corrigir.
+
+### Tratamento de falhas
+Quando algo falhar dentro do escopo:
+**falha → evidência → diagnóstico → correção/alternativa → validação → continuação.**
+
+Se a abordagem estiver comprovadamente inválida:
+- marcar como falhada/invalidada no ledger;
+- não repetir a mesma abordagem;
+- procurar outra abordagem tecnicamente diferente para o mesmo objetivo, desde que continue dentro do escopo;
+- só encerrar a linha quando não existir uma ação autónoma segura ou quando a continuação depender realmente da utilizadora/exterior.
+
+### Gate de conclusão
+Uma tarefa só pode ser apresentada como concluída quando:
+- a implementação existe;
+- a validação relevante foi feita;
+- regressões óbvias foram verificadas;
+- documentação operacional relevante foi atualizada.
+
+
 ## 1. REGRA 2026+
 
 Qualquer informação que dependa de plataforma externa deve ser verificada na documentação/estado atual, não em memória antiga.
@@ -58,6 +97,22 @@ Google News/GNI atual:
 
 Fonte:
 https://newsinitiative.withgoogle.com/resources/trainings/start-building-your-audience/get-started-on-google-news-with-publisher-center/
+
+
+## 0B. ATUALIZAÇÃO AUTOMÁTICA DE MEMÓRIA OPERACIONAL
+
+Depois de **cada ciclo relevante**, o Assistente deve atualizar automaticamente a documentação adequada, sem esperar que a utilizadora peça:
+
+- implementação concluída → ledger + Bíblia/Rules se houver mudança permanente;
+- validação concluída → ledger quando acrescentar evidência relevante;
+- falha/erro → ledger com tentativa, evidência, causa conhecida/hipótese, resultado e decisão;
+- correção → ledger com causa e validação;
+- abordagem abandonada/adiada → ledger com motivo e condições de eventual retoma;
+- nova regra/prioridade/arquitetura → Rules e, quando aplicável, Bíblia Mestra;
+- uso do Codex que altere estado/evidência → ledger e Rules/CODEX_RULES quando a aprendizagem for permanente.
+
+Não criar commits documentais vazios ou redundantes. A atualização deve ocorrer **no mesmo ciclo** da alteração relevante.
+
 
 ## 2. CODEX — ECONOMIZAR CRÉDITOS
 
