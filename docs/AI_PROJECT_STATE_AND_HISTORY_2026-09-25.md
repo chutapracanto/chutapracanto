@@ -151,11 +151,11 @@ Não voltar a usar `pages.dev` como URL editorial/canónica.
 
 ---
 
-# 3. IMPORTAÇÃO HISTÓRICA DO FRAMER — CONCLUÍDA
+# 3. IMPORTAÇÃO HISTÓRICA DO FRAMER — LOTE VALIDADO, NÃO MIGRAÇÃO TOTAL
 
-Esta fase está **fechada**.
+O lote histórico efetivamente validado em 24/09 permanece confirmado, mas esta secção não representa a totalidade do arquivo Framer.
 
-Resultado documentado:
+Resultado do lote validado:
 
 - 213 URLs únicas encontradas;
 - 179 importadas;
@@ -175,12 +175,21 @@ Remoção do workflow temporário:
 
 `ced7e4113b9a4fb76102c2a32cd9325fc84ce8bd`
 
+## Escopo corrigido
+
+A importação acima cobre apenas o arquivo/lote que foi efetivamente encontrado e validado em 24/09.
+
+**Não prova que o conteúdo publicado no Framer depois de 22/08/2026 tenha sido migrado.**
+
+A recuperação posterior continua dependente de uma fonte histórica real que contenha essas publicações. A Fase 1 permanece bloqueada até essa fonte existir e permitir inventário e reconciliação.
+
 ## Não fazer
-- não repetir a importação;
+- não repetir a importação do lote já validado;
 - não reabrir o workflow temporário;
 - não duplicar os artigos;
 - não apagar os scripts históricos de auditoria/manutenção sem motivo;
-- não tratar documentos históricos como estado atual.
+- não tratar documentos históricos como estado atual;
+- não importar conteúdo posterior a 22/08/2026 por inferência.
 
 ## O que aconteceu durante a importação
 
@@ -193,9 +202,11 @@ A correção foi operacional:
 3. validar o sitemap;
 4. confirmar 233 entradas;
 5. confirmar 241 URLs;
-6. só depois fechar a fase.
+6. só depois fechar o lote.
 
 **Lição permanente:** um workflow que termina SUCCESS não significa automaticamente que todos os artefactos derivados estão atualizados.
+
+**Lição adicional:** a conclusão de um lote de importação não deve ser interpretada como prova de migração total sem reconciliação da fonte histórica completa.
 
 ---
 
