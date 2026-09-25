@@ -1674,3 +1674,36 @@ Commit de desbloqueio do Roadmap: d305c0ff0371a325772946dd84a1189466c11011.
 3. validar Admin;
 4. comparar o resultado servido com o estado GitHub já validado;
 5. só então fechar a reconciliação operacional.
+
+
+## 48. FECHO DA RECONCILIAÇÃO FRAMER E NOVO BACKLOG — 2026-09-25
+
+A reconciliação dos 163 registos Framer posteriores a 22/08/2026 foi concluída e integrada em main através da PR #27.
+
+### Resultado
+- 163/163 metadata reconciliada;
+- 0 mismatches e 0 ausências no índice para a população reconciliada;
+- corpo editorial dos artigos não alterado;
+- PR #27 mergeada: 73da0ac1d692a05a3138983e938454fc4be1c5c5;
+- workflow canónico de geração do índice/sitemap executado com sucesso após o merge;
+- sitemap servido em produção foi aberto e verificado pela utilizadora como funcional.
+
+### Itens registados para a próxima frente
+1. Notícias — reset de filtros/pesquisa: “Todas”/categorias devem devolver de forma previsível à listagem completa.
+2. Sticky header desktop/mobile: após encolher, permanecer compacto/transparente no topo; não desaparecer; texto sem mudança de linha/posição; mobile com navegação secundária mais acima.
+3. Like/heart: pesquisar evidência e padrões atuais de 2026+ no nicho de futebol/editorial antes de implementação.
+4. Framer → .com: preparar migração de URLs com mapeamento origem→destino real; redirects cross-domain não devem ser assumidos como capacidade nativa do Framer.
+5. Slugs: investigar e corrigir duplicações/variantes apenas com estratégia canónica e compatibilidade de URLs.
+
+### Decisões preservadas
+- Não repetir medições ou experiências de performance sem hipótese nova.
+- Não reabrir a importação histórica já fechada.
+- Não apagar scripts históricos que tenham valor de auditoria.
+- Não avançar para uma fase posterior esquecendo a fase oficial de dados/API de futebol.
+- Manter separadas a lane técnica e a lane criativa/distribuição.
+
+### Estado operacional
+**FASE 1: CONCLUÍDA quanto à reconciliação de metadata.**
+**FASE 2: PRÓXIMA FRENTE TÉCNICA.**
+
+A etapa de desativação/redirect do domínio histórico Framer permanece planeada, mas não deve ser executada antes do inventário e mapeamento de URLs.
