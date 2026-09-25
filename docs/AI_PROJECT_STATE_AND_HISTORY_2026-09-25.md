@@ -1228,3 +1228,31 @@ A partir deste ponto, qualquer nova investigação de performance deve depender 
 
 ### Regra de continuidade documental
 A partir de agora, quando uma alteração relevante, validação, falha, decisão ou mudança de estado do projeto for concluída, o Assistente atualiza **automaticamente** os ficheiros Markdown operacionais relevantes no mesmo ciclo. A utilizadora não precisa de pedir a atualização separadamente. Não serão criados commits documentais apenas por rotina quando nada relevante mudou.
+
+
+## 39. RECONCILIACAO DAS QUATRO CONVERSAS E CONTINUIDADE AUTOMATICA — 2026-09-25
+
+Foi feita a reconciliacao documental entre a Biblia da 1a conversa, a Biblia da 2a conversa, a Biblia Mestra da 3a conversa, a documentacao da 4a conversa e o estado real do GitHub.
+
+### Resultado
+- A Biblia Mestra anterior ja consolidava as duas Biblias anteriores e o handoff; nao foi necessario pedir as conversas 1 e 2 para recriarem documentos.
+- A Biblia Mestra foi atualizada para refletir o estado posterior da 4a conversa.
+- PR #25 permanece fechada sem merge.
+- A primeira passagem de LCP foi reaplicada na main atual pela PR #26 e esta em producao.
+- Producao pos-merge foi validada.
+- CLS continua aberto sem causa causal comprovada.
+- Indexacao real no Search Console continua nao medida.
+
+### Falha de continuidade identificada
+Foi identificado um padrao em que a IA identifica o proximo passo, descreve-o e para, obrigando a utilizadora a pedir continuacao. Quando o passo seguinte esta dentro da autorizacao, e seguro, tecnicamente possivel e nao depende de decisao externa, isso e considerado uma falha de execucao.
+
+### Regra aplicada
+As Rules e a Biblia Mestra passaram a ter um Gate Obrigatorio Antes de Cada Resposta:
+- executar a proxima acao autonoma antes de responder;
+- se houver erro corrigivel dentro do escopo, diagnosticar, corrigir e validar;
+- nao perguntar se deve continuar quando a autorizacao geral ja cobre a acao;
+- nao abandonar uma tarefa por causa de um erro corrigivel;
+- atualizar automaticamente a documentacao relevante no mesmo ciclo de uma implementacao, falha, correcao, abandono ou decisao relevante.
+
+### Estado
+IMPLEMENTADO / DOCUMENTADO. Esta alteracao e processual e nao altera o codigo do site.
