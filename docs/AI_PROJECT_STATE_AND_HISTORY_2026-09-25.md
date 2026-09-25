@@ -1849,3 +1849,26 @@ O inventário `docs/framer/framer-url-redirect-inventory-2026-09-25.json` está 
 A única dependência que precisa do Codex neste momento é a inspeção da sessão Cloudflare/Dashboard/CLI para os pontos 1–3 acima. Não criar tabela, endpoint, PR ou merge nesta inspeção.
 
 **Estado:** FASE 2 — infraestrutura de engagement em preparação; PR #33 é provisória, não final. Worker separado antigo: confirmado como inexistente. D1: ainda não verificado. Supabase: não ligado.
+
+
+## 54. RECONCILIAÇÃO DOS PEDIDOS UX / LIKE / FRAMER — 2026-09-25
+
+Pedidos da utilizadora reconciliados com o GitHub real:
+
+- Sticky/header: permanecer pequeno e transparente no topo após recolher, em desktop e mobile; manter texto da navegação na mesma linha; elevar a navegação no mobile.
+- Coração: apenas ícone junto à partilha, sem contador visível, persistência real em D1, idempotência por visitante/artigo e acessibilidade.
+- Framer: encaminhar URLs históricas para o destino equivalente no .com; inventário 213/213 já concluído, execução ainda dependente de controlo verificável do host/projeto Framer antigo.
+
+Estado técnico:
+- PR #35 está aberta e contém a implementação D1 do coração + correção adicional do sticky/header.
+- A PR #35 ainda não foi mergeada; portanto estas alterações não são produção.
+- PR #33 continua classificada como implementação transitória/localStorage.
+- PR #34 está fechada sem merge.
+- O inventário Framer continua concluído, mas redirects não foram executados.
+- A documentação Framer atual confirma a limitação de redirects normais para o domínio atual; domínio/host antigo → .com requer controlo no hosting do host antigo.
+
+Próximas validações:
+1. browser do sticky/header em desktop e mobile;
+2. browser/API/D1 do PR #35;
+3. merge/deployment apenas depois de validação;
+4. resolver separadamente a dependência do host Framer histórico e testar os redirects.
