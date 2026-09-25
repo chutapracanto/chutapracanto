@@ -621,27 +621,56 @@ A documentação oficial Cloudflare atual indica D1 no Workers Free com 5M rows 
 
 **Estado operacional:** FASE 2 continua ativa, mas a próxima operação técnica é a inspeção Cloudflare necessária para substituir o like local por engagement persistente.
 
-## 23. ATUALIZAÇÃO OPERACIONAL — 2026-09-25 — AUDITORIA PR #34 / ENGAGEMENT PERSISTENTE
 
-A PR #34 foi auditada antes de merge. A implementação foi funcionalmente validada no Preview pela execução externa anterior, mas a revisão do código encontrou duas correções necessárias: alinhamento visual exato do coração com a base do botão Partilhar e aceitação de slugs Unicode existentes no conteúdo histórico.
+## 23. ATUALIZAÇÃO OPERACIONAL — 2026-09-25 — RECONCILIAÇÃO DOS PEDIDOS UX / LIKE / FRAMER
 
-A solução foi reimplementada pelo Assistente a partir de `main` na branch `feat/article-likes-assistant-review`, mantendo o D1 já criado e sem criar Worker separado.
+Os pedidos UX apresentados para o sticky/header e o botão de gosto foram reconciliados com o estado real do GitHub.
 
-### Estado da frente
-- D1 `cpc-article-likes`: preservado.
-- Binding `ARTICLE_LIKES_DB`: configurado em `wrangler.toml`.
-- Migration `0001_article_likes.sql`: presente.
-- `/api/article-like`: persistente, idempotente e sem contador visível.
-- UI: coração sem texto, com estados acessível/ativo/loading e mesma base visual do Partilhar.
-- `main`: intacta; nenhum merge executado.
+### 1–3. Sticky/header
+**Objetivo confirmado:**
+- desktop e mobile: depois de encolher, o sticky permanece no topo, compacto e transparente, sem desaparecer;
+- desktop e mobile: a navegação mantém os textos na mesma linha durante a transição, sem reflow de linha;
+- mobile: a navegação secundária sobe mais alguns pixels quando o header recolhe.
 
-### Validação local do código
-- Sintaxe do `_worker.js` validada.
-- Sintaxe dos 3 scripts de `noticia.html` validada.
-- Unicidade do schema e validação de slug verificadas por inspeção.
+**Estado:**
+- implementação anterior (#29/#30) estava mergeada, mas não cumpria visualmente todos os requisitos pedidos;
+- correção adicional foi aplicada na branch `feat/article-likes-assistant-review`;
+- ainda **NÃO está em main nem em produção**;
+- validação browser final continua necessária antes de merge.
 
-### Próxima etapa real
-Validar o Preview da nova branch e confirmar o binding D1 efetivo no deployment. Essa validação externa é a única parte que pode justificar Codex; não usar Codex para editar GitHub.
+### 4. Coração/gosto
+**Objetivo confirmado:**
+- coração apenas por ícone, ao lado de Partilhar;
+- mesma linguagem visual circular da partilha;
+- sem contador visível;
+- estado persistente por servidor/D1;
+- idempotência por visitante/artigo;
+- acessibilidade e estados loading/active;
+- partilha permanece independente.
 
-**Estado:** FASE 2 — engagement persistente em implementação corrigida; aguardando validação externa da nova branch antes de fechar a frente.
+**Estado:**
+- PR #33: mergeada, mas transitória/localStorage;
+- PR #34: fechada sem merge;
+- PR #35: **aberta**, com a implementação persistente em D1 e coração-only;
+- a branch inclui também a correção adicional do sticky/header;
+- **NÃO está em main nem em produção**.
 
+### Evidência 2026+
+A pesquisa recente sobre publishing desportivo aponta para maior valor de experiências participativas/reactions como mecanismo de engagement e relação direta com audiência; não há base para tratar um like do site como sinal direto de ranking do Google. A implementação é, portanto, uma funcionalidade de engagement próprio, não uma promessa de SEO.
+
+### 5. Framer → .com
+**Objetivo confirmado:**
+- URLs históricas do Framer devem encaminhar para a notícia equivalente no .com quando houver correspondência;
+- páginas sem correspondência devem encaminhar para destino editorial apropriado/home, conforme o mapeamento.
+
+**Estado:**
+- inventário 213/213 já concluído em `docs/framer/framer-url-redirect-inventory-2026-09-25.json`;
+- nenhum redirect foi executado;
+- documentação oficial atual do Framer confirma que Redirects normais são intra-domínio; redirecionamento do domínio/host antigo para outro domínio depende do hosting provider do host antigo;
+- a execução continua **BLOQUEADA** até haver controlo verificável do projeto/host histórico `chutapracanto.framer.website`.
+
+### Ordem operacional atual
+1. Validar browser do sticky/header corrigido.
+2. Validar browser/API/D1 do PR #35.
+3. Se a validação passar, mergear #35 e validar deployment de produção.
+4. Separadamente, resolver a dependência do host Framer histórico e então aplicar/testar os 213 redirects.
