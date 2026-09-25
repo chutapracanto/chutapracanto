@@ -14,9 +14,9 @@
 
 ## Fase operacional atual
 
-**FASE 1 — recuperação/consolidação do conteúdo histórico.**
+**FASE 2 — sistema editorial e publicação própria / UX de Notícias.**
 
-Estado: **BLOQUEADA POR FONTE HISTÓRICA EXTERNA.**
+A Fase 1 de reconciliação do conteúdo Framer posterior a 22/08/2026 foi concluída quanto à metadata: 163/163 reconciliados, 0 mismatches/0 ausências no índice e PR #27 mergeada em main.
 
 O lote Framer validado em 24/09 foi:
 - 213 URLs únicas;
@@ -28,9 +28,9 @@ Isto NÃO prova que conteúdo Framer posterior a 22/08/2026 tenha sido migrado.
 
 Não fazer importação por inferência.
 
-## Próxima decisão válida
+## Próxima operação
 
-A linha Framer só avança quando existir uma fonte histórica real do conteúdo posterior a 22/08/2026. Até lá, não declarar migração total concluída.
+Consolidar a UX de Notícias e preparar a migração/redirects do antigo Framer. A etapa de redirects só avança após inventário real das URLs históricas e mapeamento para destinos .com existentes.
 
 ## Não saltar de fase
 
@@ -93,3 +93,10 @@ Para autonomia, bloqueios, pedidos à utilizadora e utilização do Codex, ler t
 `docs/AI_EXECUTION_PROTOCOL.md`
 
 Regra crítica: **UM BLOQUEIO NÃO É UM RESULTADO.** Se a IA não conseguir executar uma ação, deve identificar exatamente a dependência e transformar essa dependência em passos concretos para Rute ou num prompt executável para o Codex, quando aplicável. É proibido parar com formulações vagas como “fonte externa bloqueada”, “preciso de acesso” ou “próximo passo é X” sem explicar como desbloquear e o que deve regressar.
+
+
+## Estado operacional 2026-09-25
+- Fase 1: metadata dos 163 registos Framer pós-22/08 reconciliada e mergeada em produção.
+- Fase 2: próxima frente técnica.
+- Backlog imediato: reset “Todas”; sticky header; pesquisa sobre botão de coração/like; plano de redirects Framer → .com; normalização segura de slugs.
+- Fase 3 de dados/API, Fase 4 SEO/indexação, Fase 5 performance, Fase 6 monetização, Fase 7 distribuição e Fase 8 automação continuam preservadas.
