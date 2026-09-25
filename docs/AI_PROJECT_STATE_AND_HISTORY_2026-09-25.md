@@ -1174,3 +1174,12 @@ Sempre que o índice for regenerado, validar pelo menos:
 - Não repetir a abordagem de edição ficheiro-a-ficheiro.
 - O workflow passa a funcionar como mecanismo de saneamento automático para este padrão histórico.
 - Próxima auditoria deste problema só é necessária se surgir novamente um `author` anormal ou se uma nova importação introduzir outro padrão de corrupção.
+
+
+## 36. AUDITORIA SEO TÉCNICA RÁPIDA APÓS A REPARAÇÃO (2026-09-25)
+
+- `robots.txt`: válido e aponta para `https://chutapracanto.com/sitemap.xml`.
+- `sitemap.xml`: 246 URLs no estado atual.
+- `noticia.html`: contém canonical e JSON-LD.
+- Não foi feita nesta etapa uma medição de indexação real no Google Search Console; não inferir indexação a partir destes sinais técnicos.
+- Estado: **sinais técnicos básicos presentes; auditoria de indexação real continua separada de SEO on-page técnico.**
