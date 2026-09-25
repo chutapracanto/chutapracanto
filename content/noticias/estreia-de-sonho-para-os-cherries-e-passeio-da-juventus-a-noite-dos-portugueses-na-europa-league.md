@@ -9,4 +9,20 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/estreia-de-sonho-para-
 image: "https://framerusercontent.com/images/WQhHzuLhhbh1nJJ1gHlHtWBfck.jpg?width=465&height=310"
 ---
 
-A jornada inaugural da Liga Europa ficou marcada por desempenhos memoráveis e fortes contrastes para as figuras do futebol português espalhadas pelos relvados europeus, com destaque para a afirmação do Bournemouth e a demonstração de força da Juventus. ​ Arranque demolidor em San Sebastián e solidez de António Silva ​O Bournemouth escreveu uma página de ouro no seu historial europeu ao triunfar por 1-2 na visita ao Reale Arena, casa da Real Sociedad: ​ Eficácia avassaladora (20'): O conjunto inglês entrou com uma intensidade sufocante e resolveu praticamente a contenda nos primeiros 20 minutos, com os golos madrugadores de Justin Kluivert e Rayan a mudarem o rumo dos acontecimentos. ​ Muralha com António Silva: Com o internacional português António Silva a titular e em bom plano no eixo da defesa, os Cherries souberam resistir à pressão basca na segunda metade. A entrada de Gonçalo Guedes ao intervalo ainda deu nova alma à Real Sociedad que reduziu por Sergio Gómez, mas a coesão defensiva dos ingleses segurou três pontos históricos. ​ Avenida de golos em Turim e noite difícil em Londres ​Nos restantes palcos continentais, o destaque foi para as margens volumosas no marcador: ​ Chuva de golos da Juventus (5-0): Em Turim, a equipa orientada por Luciano Spalletti não deu hipóteses ao NEC Nijmegen. Francisco Conceição saltou do banco aos 61 minutos para integrar o festival ofensivo da Vecchia Signora . ​ Noite para esquecer para Joel Pereira (5-0): O guardião português foi titular na baliza do Lech Poznań, mas acabou por ser vítima da superioridade avassaladora do Crystal Palace em solo inglês. ​ Demonstração de força em Istambul: O Beşiktaş assinou uma das exibições mais categóricas da noite ao aplicar um expressivo 4-1 ao Olympique de Marseille.
+
+A jornada inaugural da Liga Europa ficou marcada por desempenhos memorÃ¡veis e fortes contrastes para as figuras do futebol portuguÃªs espalhadas pelos relvados europeus, com destaque para a afirmaÃ§Ã£o do Bournemouth e a demonstraÃ§Ã£o de forÃ§a da Juventus.
+
+### â**Arranque demolidor em San SebastiÃ¡n e solidez de AntÃ³nio Silva**
+
+âO Bournemouth escreveu uma pÃ¡gina de ouro no seu historial europeu ao triunfar por 1-2 na visita ao Reale Arena, casa da Real Sociedad:
+
+- â**EficÃ¡cia avassaladora (20'):** O conjunto inglÃªs entrou com uma intensidade sufocante e resolveu praticamente a contenda nos primeiros 20 minutos, com os golos madrugadores de Justin Kluivert e Rayan a mudarem o rumo dos acontecimentos.
+- â**Muralha com AntÃ³nio Silva:** Com o internacional portuguÃªs AntÃ³nio Silva a titular e em bom plano no eixo da defesa, os _Cherries_ souberam resistir Ã  pressÃ£o basca na segunda metade. A entrada de GonÃ§alo Guedes ao intervalo ainda deu nova alma Ã  Real Sociedad que reduziu por Sergio GÃ³mez, mas a coesÃ£o defensiva dos ingleses segurou trÃªs pontos histÃ³ricos.
+
+### â**Avenida de golos em Turim e noite difÃ­cil em Londres**
+
+âNos restantes palcos continentais, o destaque foi para as margens volumosas no marcador:
+
+- â**Chuva de golos da Juventus (5-0):** Em Turim, a equipa orientada por Luciano Spalletti nÃ£o deu hipÃ³teses ao NEC Nijmegen. Francisco ConceiÃ§Ã£o saltou do banco aos 61 minutos para integrar o festival ofensivo da _Vecchia Signora_.
+- â**Noite para esquecer para Joel Pereira (5-0):** O guardiÃ£o portuguÃªs foi titular na baliza do Lech PoznaÅ, mas acabou por ser vÃ­tima da superioridade avassaladora do Crystal Palace em solo inglÃªs.
+- â**DemonstraÃ§Ã£o de forÃ§a em Istambul:** O BeÅiktaÅ assinou uma das exibiÃ§Ãµes mais categÃ³ricas da noite ao aplicar um expressivo 4-1 ao Olympique de Marseille.

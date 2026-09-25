@@ -15,6 +15,21 @@ relatedYouTube: ""
 relatedSpotify: ""
 ---
 
-![Quinta-feira europeia: Benfica avassalador e SC Braga em vantagem nas pré-eliminatórias](https://framerusercontent.com/images/ycbszWojJI1w0LNN7vylumEGiQ.jpeg)
 
-<p dir="auto">Os clubes portugueses entraram com o pé direito na primeira mão da terceira pré-eliminatória das competições europeias. Na Luz, o <strong>SL Benfica</strong> deu um passo gigante rumo à fase de liga da Liga Europa ao golear os escoceses do Hearts, enquanto o <strong>SC Braga</strong> garantiu uma vantagem mínima sobre o Dínamo Minsk no caminho da Liga Conferência.</p><h4 dir="auto"><strong>Benfica cilindra Hearts (6-1) na Liga Europa</strong></h4><p dir="auto">O SL Benfica construiu um triunfo categórico frente ao Hearts, deixando a eliminatória praticamente decidida no Estádio da Luz.</p><p dir="auto">A supremacia encarnada desenhou-se logo no primeiro tempo, com golos de <strong>Rafa</strong>, <strong>Tomás Araújo</strong> e <strong>Vangelis Pavlidis</strong> (de grande penalidade). Na etapa complementar, a eficácia das águias manteve-se com os tentos de <strong>Gianluca Prestianni</strong>, <strong>Jhon Durán</strong> e <strong>Andreas Schjelderup</strong> (também de penálti). Os escoceses reduziram por intermédio de Tom Renaud.</p><ul dir="auto"><li data-preset-tag="p"><p><strong>Cenário no Play-off:</strong> Caso confirme o apuramento na segunda mão, o Benfica irá discutir o acesso à fase de liga perante o derrotado do confronto entre o <strong>Aarhus</strong> (Dinamarca) e o <strong>Sabah</strong> (Azerbaijão).</p></li></ul><h4 dir="auto"><strong>Ricardo Horta dá vantagem ao SC Braga (1-0)</strong></h4><p dir="auto">Na Liga Conferência, o SC Braga superou o Dínamo Minsk na Pedreira. Depois de já ter deixado para trás os sérvios do Zeleznicar Pancevo na ronda anterior, a equipa arsenalista garantiu a vitória graças a um golo de <strong>Ricardo Horta</strong>, de grande penalidade, a fechar a primeira parte.</p><p dir="auto">A segunda mão realiza-se no dia 13 de agosto, em <strong>território neutro (Bulgária)</strong>, devido às sanções que impedem os clubes bielorrussos de jogar no seu país.</p><ul dir="auto"><li data-preset-tag="p"><p><strong>Cenário no Play-off:</strong> Se carimbar a passagem na Bulgária, o conjunto bracarense medirá forças no play-off decisivo contra o vencedor da eliminatória entre o <strong>Beitar</strong> e o <strong>Áustria de Viena</strong>.</p></li></ul>
+Os clubes portugueses entraram com o pÃ© direito na primeira mÃ£o da terceira prÃ©-eliminatÃ³ria das competiÃ§Ãµes europeias. Na Luz, o **SL Benfica** deu um passo gigante rumo Ã  fase de liga da Liga Europa ao golear os escoceses do Hearts, enquanto o **SC Braga** garantiu uma vantagem mÃ­nima sobre o DÃ­namo Minsk no caminho da Liga ConferÃªncia.
+
+#### **Benfica cilindra Hearts (6-1) na Liga Europa**
+
+O SL Benfica construiu um triunfo categÃ³rico frente ao Hearts, deixando a eliminatÃ³ria praticamente decidida no EstÃ¡dio da Luz.
+
+A supremacia encarnada desenhou-se logo no primeiro tempo, com golos de **Rafa**, **TomÃ¡s AraÃºjo** e **Vangelis Pavlidis** (de grande penalidade). Na etapa complementar, a eficÃ¡cia das Ã¡guias manteve-se com os tentos de **Gianluca Prestianni**, **Jhon DurÃ¡n** e **Andreas Schjelderup** (tambÃ©m de penÃ¡lti). Os escoceses reduziram por intermÃ©dio de Tom Renaud.
+
+- **CenÃ¡rio no Play-off:** Caso confirme o apuramento na segunda mÃ£o, o Benfica irÃ¡ discutir o acesso Ã  fase de liga perante o derrotado do confronto entre o **Aarhus** (Dinamarca) e o **Sabah** (AzerbaijÃ£o).
+
+#### **Ricardo Horta dÃ¡ vantagem ao SC Braga (1-0)**
+
+Na Liga ConferÃªncia, o SC Braga superou o DÃ­namo Minsk na Pedreira. Depois de jÃ¡ ter deixado para trÃ¡s os sÃ©rvios do Zeleznicar Pancevo na ronda anterior, a equipa arsenalista garantiu a vitÃ³ria graÃ§as a um golo de **Ricardo Horta**, de grande penalidade, a fechar a primeira parte.
+
+A segunda mÃ£o realiza-se no dia 13 de agosto, em **territÃ³rio neutro (BulgÃ¡ria)**, devido Ã s sanÃ§Ãµes que impedem os clubes bielorrussos de jogar no seu paÃ­s.
+
+- **CenÃ¡rio no Play-off:** Se carimbar a passagem na BulgÃ¡ria, o conjunto bracarense medirÃ¡ forÃ§as no play-off decisivo contra o vencedor da eliminatÃ³ria entre o **Beitar** e o **Ãustria de Viena**.

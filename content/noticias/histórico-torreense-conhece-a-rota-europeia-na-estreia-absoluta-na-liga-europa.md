@@ -9,4 +9,20 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/histórico-torreense-c
 image: "https://framerusercontent.com/images/kvm72bOYqcuQsR92JXaRCafMh0.png?width=640&height=426"
 ---
 
-​O SCU Torreense já tem desenhado o roteiro para o capítulo mais marcante da sua história. A conquista memorável da Taça de Portugal valeu o passaporte direto para a UEFA Europa League 2026/27, e a formação de Torres Vedras ficou a conhecer, esta sexta-feira, os oito obstáculos que terá pela frente na fase de liga. ​Com lugar reservado no Pote 4 do sorteio, o emblema que milita na Liga Portugal 2 Meu Super enfrentará dois oponentes de cada pote, dividindo o calendário entre quatro batalhas no Estádio Municipal Dr. Magalhães Pessoa, em Leiria — casa emprestada do clube para cumprir os requisitos da UEFA —, e quatro deslocações exigentes. ​ O calendário de confrontos do Maior do Oeste: ​ Olympiacos (Casa — Leiria | Pote 1) ​ Real Sociedad (Fora — Pote 1) ​ Celtic FC (Casa — Leiria | Pote 2) ​ Ferencváros (Fora — Pote 2) ​ Sunderland (Casa — Leiria | Pote 3) ​ Lech Poznań (Fora — Pote 3) ​ FC Ararat-Armenia (Casa — Leiria | Pote 4) ​ Lillestrøm (Fora — Pote 4) ​Com visitas marcadas a palcos de prestígio como Anoeta ou o terreno do Lech Poznań, e a receção a históricos como Olympiacos, Celtic e Sunderland no recinto leiriense, o clube aguarda agora a definição dos horários e datas exatas por parte da UEFA. O tiro de partida na competição está agendado para os dias 16 e 17 de setembro.
+
+âO SCU Torreense jÃ¡ tem desenhado o roteiro para o capÃ­tulo mais marcante da sua histÃ³ria. A conquista memorÃ¡vel da TaÃ§a de Portugal valeu o passaporte direto para a UEFA Europa League 2026/27, e a formaÃ§Ã£o de Torres Vedras ficou a conhecer, esta sexta-feira, os oito obstÃ¡culos que terÃ¡ pela frente na fase de liga.
+
+âCom lugar reservado no Pote 4 do sorteio, o emblema que milita na Liga Portugal 2 Meu Super enfrentarÃ¡ dois oponentes de cada pote, dividindo o calendÃ¡rio entre quatro batalhas no EstÃ¡dio Municipal Dr. MagalhÃ£es Pessoa, em Leiria â casa emprestada do clube para cumprir os requisitos da UEFA â, e quatro deslocaÃ§Ãµes exigentes.
+
+â**O calendÃ¡rio de confrontos do Maior do Oeste:**
+
+- â**Olympiacos** (Casa â Leiria | Pote 1)
+- â**Real Sociedad** (Fora â Pote 1)
+- â**Celtic FC** (Casa â Leiria | Pote 2)
+- â**FerencvÃ¡ros** (Fora â Pote 2)
+- â**Sunderland** (Casa â Leiria | Pote 3)
+- â**Lech PoznaÅ** (Fora â Pote 3)
+- â**FC Ararat-Armenia** (Casa â Leiria | Pote 4)
+- â**LillestrÃ¸m** (Fora â Pote 4)
+
+âCom visitas marcadas a palcos de prestÃ­gio como Anoeta ou o terreno do Lech PoznaÅ, e a receÃ§Ã£o a histÃ³ricos como Olympiacos, Celtic e Sunderland no recinto leiriense, o clube aguarda agora a definiÃ§Ã£o dos horÃ¡rios e datas exatas por parte da UEFA. O tiro de partida na competiÃ§Ã£o estÃ¡ agendado para os dias 16 e 17 de setembro.

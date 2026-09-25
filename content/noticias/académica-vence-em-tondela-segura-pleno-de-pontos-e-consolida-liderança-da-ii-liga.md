@@ -9,4 +9,22 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/académica-vence-em-to
 image: "https://framerusercontent.com/images/QTPkA30TwCKY8SXjHHxqyBjIqC4.webp?width=1920&height=1200"
 ---
 
-Num duelo marcado por enorme intensidade e duas expulsões no conjunto da casa, a Académica bateu o Tondela por 2-0 no Estádio João Cardoso. O triunfo fora de portas permitiu à formação de Coimbra manter o registo 100% vitorioso e segurar o topo da tabela ao fim de três jornadas. ​Eficiência de Briosa ao intervalo ​Apoiada por uma forte mancha de adeptos nas bancadas, a equipa orientada por António Barbosa assumiu a iniciativa na etapa inicial: ​ Pressão e golo madrugador (30'): Depois de um aviso sério num remate de Mané defendido por Lucas Cañizares, a Briosa inaugurou o marcador na sequência de um canto batido por Leandro Silva. Afonso Rodrigues disparou e a bola embateu em Zé Ricardo, que acabou por trair o próprio guarda-redes. ​ Réplica da equipa da casa: O Tondela procurou responder de imediato, mas a cabeçada de Cascavel saiu ligeiramente por cima da baliza defendida por Carlos Alves. ​Nervos, expulsões e sentença nos descontos ​O segundo tempo trouxe um Tondela mais inconformado e a encostar a Académica à sua área, com Hugo Félix a ameaçar o empate logo no reatar do encontro: ​ Indisciplina custa caro: A perder, a tarefa do Tondela complicou-se radicalmente quando ficou reduzido a nove jogadores num curto espaço de tempo. O guarda-redes Lucas Cañizares viu o segundo amarelo aos 69 minutos, e Cícero seguiu o mesmo caminho aos 79'. ​ Carlos Alves sustém a pressão: Mesmo em inferioridade numérica, a turma de Ricardo Costa ainda assustou num pontapé de bicicleta de Tomané, que esbarrou numa intervenção atenta de Carlos Alves. ​ Matador em contra-ataque (90'+5'): Já na compensação, a Briosa aproveitou o adiantamento do conjunto auriverde. Numa transição rápida, Rui Gomes atirou ao poste na primeira instância, mas não perdoou na recarga perante o recém-entrado guarda-redes Carlão, selando o 2-0 final. ​Com este resultado, a Académica isola-se no topo da II Liga com nove pontos conquistados em nove possíveis, enquanto o Tondela permanece no nono posto com três pontos.
+
+Num duelo marcado por enorme intensidade e duas expulsÃµes no conjunto da casa, a AcadÃ©mica bateu o Tondela por 2-0 no EstÃ¡dio JoÃ£o Cardoso. O triunfo fora de portas permitiu Ã  formaÃ§Ã£o de Coimbra manter o registo 100% vitorioso e segurar o topo da tabela ao fim de trÃªs jornadas.
+
+### âEficiÃªncia de Briosa ao intervalo
+
+âApoiada por uma forte mancha de adeptos nas bancadas, a equipa orientada por AntÃ³nio Barbosa assumiu a iniciativa na etapa inicial:
+
+- â**PressÃ£o e golo madrugador (30'):** Depois de um aviso sÃ©rio num remate de ManÃ© defendido por Lucas CaÃ±izares, a Briosa inaugurou o marcador na sequÃªncia de um canto batido por Leandro Silva. Afonso Rodrigues disparou e a bola embateu em ZÃ© Ricardo, que acabou por trair o prÃ³prio guarda-redes.
+- â**RÃ©plica da equipa da casa:** O Tondela procurou responder de imediato, mas a cabeÃ§ada de Cascavel saiu ligeiramente por cima da baliza defendida por Carlos Alves.
+
+### âNervos, expulsÃµes e sentenÃ§a nos descontos
+
+âO segundo tempo trouxe um Tondela mais inconformado e a encostar a AcadÃ©mica Ã  sua Ã¡rea, com Hugo FÃ©lix a ameaÃ§ar o empate logo no reatar do encontro:
+
+- â**Indisciplina custa caro:** A perder, a tarefa do Tondela complicou-se radicalmente quando ficou reduzido a nove jogadores num curto espaÃ§o de tempo. O guarda-redes Lucas CaÃ±izares viu o segundo amarelo aos 69 minutos, e CÃ­cero seguiu o mesmo caminho aos 79'.
+- â**Carlos Alves sustÃ©m a pressÃ£o:** Mesmo em inferioridade numÃ©rica, a turma de Ricardo Costa ainda assustou num pontapÃ© de bicicleta de TomanÃ©, que esbarrou numa intervenÃ§Ã£o atenta de Carlos Alves.
+- â**Matador em contra-ataque (90'+5'):** JÃ¡ na compensaÃ§Ã£o, a Briosa aproveitou o adiantamento do conjunto auriverde. Numa transiÃ§Ã£o rÃ¡pida, Rui Gomes atirou ao poste na primeira instÃ¢ncia, mas nÃ£o perdoou na recarga perante o recÃ©m-entrado guarda-redes CarlÃ£o, selando o 2-0 final.
+
+âCom este resultado, a AcadÃ©mica isola-se no topo da II Liga com nove pontos conquistados em nove possÃ­veis, enquanto o Tondela permanece no nono posto com trÃªs pontos.

@@ -15,6 +15,15 @@ relatedYouTube: ""
 relatedSpotify: ""
 ---
 
-![SC Braga empata com o Dinamo Minsk e carimba passaporte para o playoff da Conference League](https://framerusercontent.com/images/yoN1HGbJh8s44dtfgYW8Tu485A.webp)
 
-<p dir="ltr">O SC Braga garantiu a qualificação para o <em>playoff</em> de acesso à fase de liga da Conference League. Em jogo disputado em Beroe, na Bulgária, a equipa minhota empatou 0-0 diante do Dinamo Minsk, fazendo valer a vantagem conseguida no encontro da primeira mão para selar o apuramento europeu.</p><h3 dir="ltr">Exibição cinzenta e falta de eficácia no último terço</h3><p dir="ltr">Apesar de ter tido o domínio do esférico ao longo de grande parte do primeiro tempo, o conjunto bracarense revelou enormes dificuldades na definição do último terço. Com pouca agressividade ofensiva e sem conseguir criar ocasiões claras de golo, a formação arsenalista acabou por permitir que a equipa bielorrussa respondesse em saídas rápidas para o contra-ataque e através de lances de bola parada.</p><p dir="ltr">No reatamento, os minhotos ensaiaram uma reação e estiveram perto de inaugurar o marcador, num remate de Ricardo Horta que embateu no poste. Contudo, o lance acabou por ser uma exceção num segundo tempo com reduzida dinâmica e poucas oportunidades.</p><p dir="ltr">Com o nulo a persistir, o Dinamo Minsk ganhou alento e criou perigo junto da baliza bracarense, onde o guarda-redes Bernardo Fontes se exibiu a bom nível para evitar males maiores. Na reta final da partida, e sem que as substituições operadas por Carlos Vicens mudassem o rumo do encontro, o técnico espanhol optou por alinhar com quatro centrais para segurar a vantagem agregada na eliminatória.</p><p dir="ltr">O nulo manteve-se até ao apito final, carimbando a continuidade do SC Braga nas competições europeias desta temporada.</p>
+O SC Braga garantiu a qualificaÃ§Ã£o para o _playoff_ de acesso Ã  fase de liga da Conference League. Em jogo disputado em Beroe, na BulgÃ¡ria, a equipa minhota empatou 0-0 diante do Dinamo Minsk, fazendo valer a vantagem conseguida no encontro da primeira mÃ£o para selar o apuramento europeu.
+
+### âExibiÃ§Ã£o cinzenta e falta de eficÃ¡cia no Ãºltimo terÃ§o
+
+âApesar de ter tido o domÃ­nio do esfÃ©rico ao longo de grande parte do primeiro tempo, o conjunto bracarense revelou enormes dificuldades na definiÃ§Ã£o do Ãºltimo terÃ§o. Com pouca agressividade ofensiva e sem conseguir criar ocasiÃµes claras de golo, a formaÃ§Ã£o arsenalista acabou por permitir que a equipa bielorrussa respondesse em saÃ­das rÃ¡pidas para o contra-ataque e atravÃ©s de lances de bola parada.
+
+âNo reatamento, os minhotos ensaiaram uma reaÃ§Ã£o e estiveram perto de inaugurar o marcador, num remate de Ricardo Horta que embateu no poste. Contudo, o lance acabou por ser uma exceÃ§Ã£o num segundo tempo com reduzida dinÃ¢mica e poucas oportunidades.
+
+âCom o nulo a persistir, o Dinamo Minsk ganhou alento e criou perigo junto da baliza bracarense, onde o guarda-redes Bernardo Fontes se exibiu a bom nÃ­vel para evitar males maiores. Na reta final da partida, e sem que as substituiÃ§Ãµes operadas por Carlos Vicens mudassem o rumo do encontro, o tÃ©cnico espanhol optou por alinhar com quatro centrais para segurar a vantagem agregada na eliminatÃ³ria.
+
+âO nulo manteve-se atÃ© ao apito final, carimbando a continuidade do SC Braga nas competiÃ§Ãµes europeias desta temporada.

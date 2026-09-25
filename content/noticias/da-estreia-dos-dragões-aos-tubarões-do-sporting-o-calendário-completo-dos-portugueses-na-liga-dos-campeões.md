@@ -9,4 +9,35 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/da-estreia-dos-dragõe
 image: "https://framerusercontent.com/images/SfhtMvnQXmXihe7qKnQqo2zNo.jpg?width=7226&height=4820"
 ---
 
-​O sorteio do calendário da fase regular da Liga dos Campeões ditou o rumo de FC Porto e Sporting na prova milionária. Os dragões começam o seu percurso no Estádio do Dragão perante um gigante europeu, enquanto os leões terão um início teoricamente mais acessível antes de um ciclo de elevado grau de exigência a fechar a fase de liga. ​ Porto abre diante do City e tem clássico no horizonte ​A estreia do FC Porto está agendada para 8 de setembro, com a receção ao Manchester City. A caminhada azul e branca conta com encontros exigentes fora de portas, destacando-se as deslocações a Roterdão (Feyenoord) e a Liverpool. O duelo na Holanda, marcado para 24 de novembro, ganha ainda maior relevância por anteceder a visita ao Estádio de Alvalade para o clássico da 12.ª jornada da Liga Portugal. O fecho da fase de liga acontece a 27 de janeiro, na Áustria, frente ao LASK. ​ Calendário do FC Porto: ​ 08/09/2026 (20h00): Manchester City (C) ​ 14/10/2026 (20h00): Real Betis (F) ​ 20/10/2026 (20h00): PSV Eindhoven (C) ​ 04/11/2026 (20h00): SSC Napoli (C) ​ 24/11/2026 (20h00): Feyenoord (F) ​ 09/12/2026 (20h00): Liverpool FC (F) ​ 19/01/2027 (20h00): Slavia Praha (C) ​ 27/01/2027 (20h00): LASK (F) ​ Sporting arranca com o Galatasaray e tem reta final duríssima ​O Sporting inicia a sua participação a 9 de setembro, em Alvalade, perante o Galatasaray. Após os primeiros quatro compromissos, a turma verde e branca enfrentará uma sequência de elevada dificuldade para fechar a fase de grupos. O embate caseiro com o Manchester United (que precede o clássico frente ao FC Porto) dá o mote para um ciclo final que inclui ainda as viagens aos terrenos da AS Roma e do Manchester City, para além da receção ao FC Barcelona. ​ Calendário do Sporting: ​ 09/09/2026 (20h00): Galatasaray (C) ​ 13/10/2026 (17h45): RC Lens (F) ​ 21/10/2026 (20h00): LASK (C) ​ 03/11/2026 (17h45): Shakhtar Donetsk (F) ​ 25/11/2026 (20h00): Manchester United (C) ​ 08/12/2026 (20h00): AS Roma (F) ​ 20/01/2027 (20h00): FC Barcelona (C) ​ 27/01/2027 (20h00): Manchester City
+
+âO sorteio do calendÃ¡rio da fase regular da Liga dos CampeÃµes ditou o rumo de FC Porto e Sporting na prova milionÃ¡ria. Os dragÃµes comeÃ§am o seu percurso no EstÃ¡dio do DragÃ£o perante um gigante europeu, enquanto os leÃµes terÃ£o um inÃ­cio teoricamente mais acessÃ­vel antes de um ciclo de elevado grau de exigÃªncia a fechar a fase de liga.
+
+â**Porto abre diante do City e tem clÃ¡ssico no horizonte**
+
+âA estreia do FC Porto estÃ¡ agendada para 8 de setembro, com a receÃ§Ã£o ao Manchester City. A caminhada azul e branca conta com encontros exigentes fora de portas, destacando-se as deslocaÃ§Ãµes a RoterdÃ£o (Feyenoord) e a Liverpool. O duelo na Holanda, marcado para 24 de novembro, ganha ainda maior relevÃ¢ncia por anteceder a visita ao EstÃ¡dio de Alvalade para o clÃ¡ssico da 12.Âª jornada da Liga Portugal. O fecho da fase de liga acontece a 27 de janeiro, na Ãustria, frente ao LASK.
+
+â**CalendÃ¡rio do FC Porto:**
+
+- â**08/09/2026 (20h00):** Manchester City (C)
+- â**14/10/2026 (20h00):** Real Betis (F)
+- â**20/10/2026 (20h00):** PSV Eindhoven (C)
+- â**04/11/2026 (20h00):** SSC Napoli (C)
+- â**24/11/2026 (20h00):** Feyenoord (F)
+- â**09/12/2026 (20h00):** Liverpool FC (F)
+- â**19/01/2027 (20h00):** Slavia Praha (C)
+- â**27/01/2027 (20h00):** LASK (F)
+
+â**Sporting arranca com o Galatasaray e tem reta final durÃ­ssima**
+
+âO Sporting inicia a sua participaÃ§Ã£o a 9 de setembro, em Alvalade, perante o Galatasaray. ApÃ³s os primeiros quatro compromissos, a turma verde e branca enfrentarÃ¡ uma sequÃªncia de elevada dificuldade para fechar a fase de grupos. O embate caseiro com o Manchester United (que precede o clÃ¡ssico frente ao FC Porto) dÃ¡ o mote para um ciclo final que inclui ainda as viagens aos terrenos da AS Roma e do Manchester City, para alÃ©m da receÃ§Ã£o ao FC Barcelona.
+
+â**CalendÃ¡rio do Sporting:**
+
+- â**09/09/2026 (20h00):** Galatasaray (C)
+- â**13/10/2026 (17h45):** RC Lens (F)
+- â**21/10/2026 (20h00):** LASK (C)
+- â**03/11/2026 (17h45):** Shakhtar Donetsk (F)
+- â**25/11/2026 (20h00):** Manchester United (C)
+- â**08/12/2026 (20h00):** AS Roma (F)
+- â**20/01/2027 (20h00):** FC Barcelona (C)
+- â**27/01/2027 (20h00):** Manchester City

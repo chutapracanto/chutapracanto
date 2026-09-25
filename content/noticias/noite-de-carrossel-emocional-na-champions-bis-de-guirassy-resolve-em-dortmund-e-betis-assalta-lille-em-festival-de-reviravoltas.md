@@ -9,4 +9,20 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/noite-de-carrossel-emo
 image: "https://framerusercontent.com/images/ft0LoWbEFcQnegRLf3tGjspB5Gc.jpg?width=800&height=450"
 ---
 
-​A jornada de abertura da fase de liga da Liga dos Campeões reservou dois duelos eletrizantes, repletos de golos, reviravoltas e portugueses em destaque. No Signal Iduna Park, o Borussia Dortmund superiorizou-se ao Villarreal num triunfo por 3-2, enquanto em França o Real Betis protagonizou uma recuperação memorável ao bater o Lille pelo mesmo resultado. ​ Bis de Guirassy e toque luso de Fábio Silva selam triunfo do Dortmund ​Após uma primeira parte nula, o marcador em Dortmund explodiu no segundo tempo com lances caricatos e eficácia máxima: ​ Infortúnio português e resposta espanhola: Aos 53', Maximilian Beier cruzou tenso e Renato Veiga acabou por desviar para a própria baliza. O Villarreal reajustou-se rapidamente e empatou aos 66' num cabeceamento de Santiago Mouriño após canto de Georges Mikautadze. ​ Fábio Silva entra e decide: Lançado por Niko Kovac, o avançado português precisou de apenas cinco minutos para assistir de primeira Serhou Guirassy para o 2-1 (80'). Pouco depois, o maliano sofreu penálti do próprio Mouriño e bisou a partir da marca de grande penalidade (85'). ​ Susto no fecho: Nos descontos (90+3'), num lance infeliz após defesa de Kobel, Guirassy marcou na própria baliza e reduziu para o 3-2 final. ​ Bartra bisa de cabeça, Mbappé vê vermelho e Betis vence em Lille ​Em França, Lille e Real Betis protagonizaram um autêntico festival ofensivo marcado pelo jogo aéreo e pela expulsão do irmão de Kylian Mbappé: ​ Chuva de golos ao intervalo: Ayase Ueda abriu o ativo para os gauleses (12') após cruzamento milimétrico de Ethan Mbappé. Marc Bartra empatou de cabeça aos 33', mas Alexsandro Ribeiro devolveu a vantagem ao Lille também nas alturas (36'). ​ Reviravolta e expulsão determinante: A etapa complementar começou com a reação fulgurante dos espanhóis. Bartra bisou de cabeça aos 49' e Troy Parrott consumou a reviravolta aos 53' num remate rasteiro. A tarefa do Lille ficou sentenciada aos 56', quando Ethan Mbappé recebeu cartão vermelho direto por cotovelada a Natan.
+
+âA jornada de abertura da fase de liga da Liga dos CampeÃµes reservou dois duelos eletrizantes, repletos de golos, reviravoltas e portugueses em destaque. No Signal Iduna Park, o Borussia Dortmund superiorizou-se ao Villarreal num triunfo por 3-2, enquanto em FranÃ§a o Real Betis protagonizou uma recuperaÃ§Ã£o memorÃ¡vel ao bater o Lille pelo mesmo resultado.
+
+â**Bis de Guirassy e toque luso de FÃ¡bio Silva selam triunfo do Dortmund**
+
+âApÃ³s uma primeira parte nula, o marcador em Dortmund explodiu no segundo tempo com lances caricatos e eficÃ¡cia mÃ¡xima:
+
+- â**InfortÃºnio portuguÃªs e resposta espanhola:** Aos 53', Maximilian Beier cruzou tenso e Renato Veiga acabou por desviar para a prÃ³pria baliza. O Villarreal reajustou-se rapidamente e empatou aos 66' num cabeceamento de Santiago MouriÃ±o apÃ³s canto de Georges Mikautadze.
+- â**FÃ¡bio Silva entra e decide:** LanÃ§ado por Niko Kovac, o avanÃ§ado portuguÃªs precisou de apenas cinco minutos para assistir de primeira Serhou Guirassy para o 2-1 (80'). Pouco depois, o maliano sofreu penÃ¡lti do prÃ³prio MouriÃ±o e bisou a partir da marca de grande penalidade (85').
+- â**Susto no fecho:** Nos descontos (90+3'), num lance infeliz apÃ³s defesa de Kobel, Guirassy marcou na prÃ³pria baliza e reduziu para o 3-2 final.
+
+â**Bartra bisa de cabeÃ§a, MbappÃ© vÃª vermelho e Betis vence em Lille**
+
+âEm FranÃ§a, Lille e Real Betis protagonizaram um autÃªntico festival ofensivo marcado pelo jogo aÃ©reo e pela expulsÃ£o do irmÃ£o de Kylian MbappÃ©:
+
+- â**Chuva de golos ao intervalo:** Ayase Ueda abriu o ativo para os gauleses (12') apÃ³s cruzamento milimÃ©trico de Ethan MbappÃ©. Marc Bartra empatou de cabeÃ§a aos 33', mas Alexsandro Ribeiro devolveu a vantagem ao Lille tambÃ©m nas alturas (36').
+- â**Reviravolta e expulsÃ£o determinante:** A etapa complementar comeÃ§ou com a reaÃ§Ã£o fulgurante dos espanhÃ³is. Bartra bisou de cabeÃ§a aos 49' e Troy Parrott consumou a reviravolta aos 53' num remate rasteiro. A tarefa do Lille ficou sentenciada aos 56', quando Ethan MbappÃ© recebeu cartÃ£o vermelho direto por cotovelada a Natan.

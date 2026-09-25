@@ -15,6 +15,17 @@ relatedYouTube: ""
 relatedSpotify: ""
 ---
 
-![Estoril e Famalicão Dividem Pontos na Abertura da I Liga](https://framerusercontent.com/images/Hcshcg7HFZbRA7swmMg1DcQ0NAc.jpg)
 
-<p dir="auto">O pontapé de saída da I Liga 2026/27 deu-se esta sexta-feira no Estádio António Coimbra da Mota, na Amoreira, com Estoril Praia e FC Famalicão a assinarem uma igualdade a uma bola (1-1).</p><p dir="auto">A jogar fora de portas, a turma famalicense entrou a carimbar o primeiro momento de festa da temporada. Aos 32 minutos, o avançado grego <strong>Georgios Koutsias</strong> — a estrear-se no principal escalão do futebol português — teve a honra de assinar o primeiro golo da competição, adiantando a sua equipa no marcador ainda antes do intervalo.</p><p dir="auto">Na etapa complementar, os canarinhos reagiram com determinação. A insistência do Estoril deu frutos nos pés de <strong>Yanis Begraoui</strong>, que restabeleceu a igualdade no marcador e assegurou a divisão de pontos no pontapé de saída do campeonato.</p><h3 dir="auto"><strong>Candidatos ao Título Entram em Ação</strong></h3><p dir="auto">A jornada de abertura promete aquecer no fim de semana com o pontapé de saída dos crónicos candidatos ao trono nacional:</p><ul dir="auto"><li data-preset-tag="p"><p><strong>Sábado (20:30):</strong> O <strong>Sporting CP</strong> vai à Reboleira medir forças com o Estrela da Amadora.</p></li><li data-preset-tag="p"><p><strong>Domingo (18:00):</strong> O campeão em título, <strong>FC Porto</strong>, estreia-se no Dragão frente ao Alverca.</p></li><li data-preset-tag="p"><p><strong>Domingo (20:30):</strong> O <strong>SL Benfica</strong> recebe o Académico de Viseu, num duelo disputado à porta fechada na Luz.</p></li></ul>
+O pontapÃ© de saÃ­da da I Liga 2026/27 deu-se esta sexta-feira no EstÃ¡dio AntÃ³nio Coimbra da Mota, na Amoreira, com Estoril Praia e FC FamalicÃ£o a assinarem uma igualdade a uma bola (1-1).
+
+A jogar fora de portas, a turma famalicense entrou a carimbar o primeiro momento de festa da temporada. Aos 32 minutos, o avanÃ§ado grego **Georgios Koutsias** â a estrear-se no principal escalÃ£o do futebol portuguÃªs â teve a honra de assinar o primeiro golo da competiÃ§Ã£o, adiantando a sua equipa no marcador ainda antes do intervalo.
+
+Na etapa complementar, os canarinhos reagiram com determinaÃ§Ã£o. A insistÃªncia do Estoril deu frutos nos pÃ©s de **Yanis Begraoui**, que restabeleceu a igualdade no marcador e assegurou a divisÃ£o de pontos no pontapÃ© de saÃ­da do campeonato.
+
+### **Candidatos ao TÃ­tulo Entram em AÃ§Ã£o**
+
+A jornada de abertura promete aquecer no fim de semana com o pontapÃ© de saÃ­da dos crÃ³nicos candidatos ao trono nacional:
+
+- **SÃ¡bado (20:30):** O **Sporting CP** vai Ã  Reboleira medir forÃ§as com o Estrela da Amadora.
+- **Domingo (18:00):** O campeÃ£o em tÃ­tulo, **FC Porto**, estreia-se no DragÃ£o frente ao Alverca.
+- **Domingo (20:30):** O **SL Benfica** recebe o AcadÃ©mico de Viseu, num duelo disputado Ã  porta fechada na Luz.

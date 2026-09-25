@@ -15,6 +15,24 @@ relatedYouTube: ""
 relatedSpotify: ""
 ---
 
-![FC Porto no Mercado: Santiago Giménez no radar para reforçar o ataque!](https://framerusercontent.com/images/TfKtJ9JuWEMvgOveMaaJQfFJyPw.png)
 
-<p dir="auto">O <strong>FC Porto</strong> está a movimentar-se com força no mercado de transferências e tem <strong>Santiago Giménez</strong> na lista de prioridades. Os dragões encontram-se em negociações com o <strong>AC Milan</strong> para garantir o empréstimo do avançado internacional mexicano.</p><p dir="auto">A contratação conta com o forte aval de <strong>Francesco Farioli</strong>. O técnico dos dragões conhece em detalhe o valor e o perfil do jogador fruto da passagem de ambos pelo futebol neerlandês, onde Giménez construiu uma reputação de goleador temível.</p><h3 dir="auto">Do brilhantismo no Feyenoord às lesões em Milão</h3><p dir="auto">O percurso de Santiago Giménez na Europa atingiu o ponto mais alto ao serviço do <strong>Feyenoord</strong>, clube onde assinou números impressionantes:</p><ul dir="auto"><li data-preset-tag="p"><p><strong>65 golos em 105 jogos</strong> no futebol neerlandês.</p></li><li data-preset-tag="p"><p><strong>Herói nacional:</strong> Autor do golo decisivo que deu a vitória ao México na final da Gold Cup.</p></li></ul><p dir="auto">No entanto, a mudança para Itália na época 2024/2025 não correu como esperado. Ao serviço do AC Milan, o avançado somou <strong>7 golos em 37 partidas</strong>, num rendimento fortemente condicionado por um historial fustigado por lesões.</p><h3 dir="auto">O impacto no ataque dragão</h3><p dir="auto">A grande questão que paira no Dragão é se o internacional mexicano conseguirá relançar a carreira na Invicta. Se estiver na plenitude da sua forma física e mental, Giménez tem todas as qualidades para se tornar a grande referência ofensiva da equipa de Farioli nesta nova temporada.</p><p dir="auto">As negociações continuam em curso e o desfecho pode ser conhecido nos próximos dias.</p><p dir="auto"><em>E tu? Achas que Santiago Giménez é o ponta de lança ideal para o FC Porto ou o historial de lesões é um risco? Deixa a tua opinião nos comentários e partilha este artigo.</em></p>
+O **FC Porto** estÃ¡ a movimentar-se com forÃ§a no mercado de transferÃªncias e tem **Santiago GimÃ©nez** na lista de prioridades. Os dragÃµes encontram-se em negociaÃ§Ãµes com o **AC Milan** para garantir o emprÃ©stimo do avanÃ§ado internacional mexicano.
+
+A contrataÃ§Ã£o conta com o forte aval de **Francesco Farioli**. O tÃ©cnico dos dragÃµes conhece em detalhe o valor e o perfil do jogador fruto da passagem de ambos pelo futebol neerlandÃªs, onde GimÃ©nez construiu uma reputaÃ§Ã£o de goleador temÃ­vel.
+
+### Do brilhantismo no Feyenoord Ã s lesÃµes em MilÃ£o
+
+O percurso de Santiago GimÃ©nez na Europa atingiu o ponto mais alto ao serviÃ§o do **Feyenoord**, clube onde assinou nÃºmeros impressionantes:
+
+- **65 golos em 105 jogos** no futebol neerlandÃªs.
+- **HerÃ³i nacional:** Autor do golo decisivo que deu a vitÃ³ria ao MÃ©xico na final da Gold Cup.
+
+No entanto, a mudanÃ§a para ItÃ¡lia na Ã©poca 2024/2025 nÃ£o correu como esperado. Ao serviÃ§o do AC Milan, o avanÃ§ado somou **7 golos em 37 partidas**, num rendimento fortemente condicionado por um historial fustigado por lesÃµes.
+
+### O impacto no ataque dragÃ£o
+
+A grande questÃ£o que paira no DragÃ£o Ã© se o internacional mexicano conseguirÃ¡ relanÃ§ar a carreira na Invicta. Se estiver na plenitude da sua forma fÃ­sica e mental, GimÃ©nez tem todas as qualidades para se tornar a grande referÃªncia ofensiva da equipa de Farioli nesta nova temporada.
+
+As negociaÃ§Ãµes continuam em curso e o desfecho pode ser conhecido nos prÃ³ximos dias.
+
+_E tu? Achas que Santiago GimÃ©nez Ã© o ponta de lanÃ§a ideal para o FC Porto ou o historial de lesÃµes Ã© um risco? Deixa a tua opiniÃ£o nos comentÃ¡rios e partilha este artigo._

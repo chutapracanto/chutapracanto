@@ -15,6 +15,15 @@ relatedYouTube: ""
 relatedSpotify: ""
 ---
 
-![Oficial: Nestory Irankunda é reforço do Sporting e assina até 2031](https://framerusercontent.com/images/WhS1HY8R3xGQdvW4uyT5BgzE.webp)
 
-<p dir="ltr">O Sporting assegurou mais uma cara nova para o ataque. O jovem extremo australiano, de 20 anos, desvincula-se do Bayern Munique para rumar em definitivo ao Estádio José Alvalade, num vínculo válido para as próximas cinco temporadas, até ao verão de 2031. De forma a blindar o jogador perante o assédio de outros clubes, a direção leonina fixou a sua cláusula de rescisão nos 80 milhões de euros.</p><h3 dir="ltr">"Poderoso e muito rápido": As primeiras declarações de leão ao peito</h3><p dir="ltr">Nas primeiras palavras com a camisola verde e branca, o internacional australiano não escondeu o entusiasmo por esta nova etapa no futebol português e revelou ambição em deixar a sua marca no clube.</p><p dir="ltr">Às plataformas oficiais do Sporting, o jovem avançado aproveitou também para se dar a conhecer aos adeptos, destacando a sua forte capacidade física e polivalência no setor ofensivo:</p><p dir="ltr">"Sou poderoso, muito rápido e capaz de saltar muito alto. Consigo, também, marcar e dar a marcar à equipa."</p><p dir="ltr">Irankunda garantiu ainda total disponibilidade para atuar onde for necessário nas opções da frente de ataque, reforçando que se sente confortável "em qualquer lugar do ataque".</p>
+O Sporting assegurou mais uma cara nova para o ataque. O jovem extremo australiano, de 20 anos, desvincula-se do Bayern Munique para rumar em definitivo ao EstÃ¡dio JosÃ© Alvalade, num vÃ­nculo vÃ¡lido para as prÃ³ximas cinco temporadas, atÃ© ao verÃ£o de 2031. De forma a blindar o jogador perante o assÃ©dio de outros clubes, a direÃ§Ã£o leonina fixou a sua clÃ¡usula de rescisÃ£o nos 80 milhÃµes de euros.
+
+### â"Poderoso e muito rÃ¡pido": As primeiras declaraÃ§Ãµes de leÃ£o ao peito
+
+âNas primeiras palavras com a camisola verde e branca, o internacional australiano nÃ£o escondeu o entusiasmo por esta nova etapa no futebol portuguÃªs e revelou ambiÃ§Ã£o em deixar a sua marca no clube.
+
+âÃs plataformas oficiais do Sporting, o jovem avanÃ§ado aproveitou tambÃ©m para se dar a conhecer aos adeptos, destacando a sua forte capacidade fÃ­sica e polivalÃªncia no setor ofensivo:
+
+"Sou poderoso, muito rÃ¡pido e capaz de saltar muito alto. Consigo, tambÃ©m, marcar e dar a marcar Ã  equipa."
+
+âIrankunda garantiu ainda total disponibilidade para atuar onde for necessÃ¡rio nas opÃ§Ãµes da frente de ataque, reforÃ§ando que se sente confortÃ¡vel "em qualquer lugar do ataque".

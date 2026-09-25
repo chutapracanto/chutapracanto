@@ -9,4 +9,20 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/joão-palhinha-em-disc
 image: "https://framerusercontent.com/images/DyRYBFRsiZAmzftpVzY6loqCskc.jpg?width=1208&height=725"
 ---
 
-Em declarações aos canais oficiais do clube, João Palhinha abordou os motivos que o levaram a aceitar o convite das águias , o reencontro com o treinador Marco Silva e o impacto da mudança a nível familiar e pessoal. ​O peso da estrutura e o reencontro com Marco Silva ​O médio assumiu que a insistência da liderança encarnada e do corpo técnico foram determinantes para o desfecho do negócio: ​ Papel decisivo do treinador: Palhinha destacou à televisão do clube que trabalhar novamente com Marco Silva — responsável por potenciar o seu rendimento no Fulham — teve um peso crucial na tomada de decisão, elogiando a força exercida pela estrutura e pela presidência para fechar a contratação. ​ Compromisso e retribuição: O internacional português garantiu chegar para ajudar a manter o bom momento da equipa e retribuir no relvado o investimento e o apoio demonstrados pelos adeptos. ​Fator familiar e o regresso às origens no Seixal ​A mudança para a Luz envolveu escolhas pessoais e o regresso a um local onde realizou captações no início da carreira: ​ Razões familiares: O jogador revelou na entrevista que teve de abdicar de várias coisas e que a estabilidade dos filhos e da família pesou no regresso a Portugal, encarando o projeto com o objetivo de conquistar títulos para celebrar junto dos seus. ​ Memórias da formação: Aos 16 anos, enquanto representava o Sacavenense, Palhinha realizou treinos de captação no Seixal sem ter ficado no clube. Anos mais tarde, o médio considerou "especial e marcante" o regresso à infraestrutura encarnada, expressando gratidão por todo o percurso construído até ao momento. ​ Orgulho familiar: O médio sublinhou o impacto simbólico que a assinatura pelo Benfica tem para a sua família, em particular para o seu pai, a quem considera um pilar fundamental da carreira.
+
+Em declaraÃ§Ãµes aos canais oficiais do clube, JoÃ£o Palhinha abordou os motivos que o levaram a aceitar o convite das _Ã¡guias_, o reencontro com o treinador Marco Silva e o impacto da mudanÃ§a a nÃ­vel familiar e pessoal.
+
+### âO peso da estrutura e o reencontro com Marco Silva
+
+âO mÃ©dio assumiu que a insistÃªncia da lideranÃ§a encarnada e do corpo tÃ©cnico foram determinantes para o desfecho do negÃ³cio:
+
+- â**Papel decisivo do treinador:** Palhinha destacou Ã  televisÃ£o do clube que trabalhar novamente com Marco Silva â responsÃ¡vel por potenciar o seu rendimento no Fulham â teve um peso crucial na tomada de decisÃ£o, elogiando a forÃ§a exercida pela estrutura e pela presidÃªncia para fechar a contrataÃ§Ã£o.
+- â**Compromisso e retribuiÃ§Ã£o:** O internacional portuguÃªs garantiu chegar para ajudar a manter o bom momento da equipa e retribuir no relvado o investimento e o apoio demonstrados pelos adeptos.
+
+### âFator familiar e o regresso Ã s origens no Seixal
+
+âA mudanÃ§a para a Luz envolveu escolhas pessoais e o regresso a um local onde realizou captaÃ§Ãµes no inÃ­cio da carreira:
+
+- â**RazÃµes familiares:** O jogador revelou na entrevista que teve de abdicar de vÃ¡rias coisas e que a estabilidade dos filhos e da famÃ­lia pesou no regresso a Portugal, encarando o projeto com o objetivo de conquistar tÃ­tulos para celebrar junto dos seus.
+- â**MemÃ³rias da formaÃ§Ã£o:** Aos 16 anos, enquanto representava o Sacavenense, Palhinha realizou treinos de captaÃ§Ã£o no Seixal sem ter ficado no clube. Anos mais tarde, o mÃ©dio considerou "especial e marcante" o regresso Ã  infraestrutura encarnada, expressando gratidÃ£o por todo o percurso construÃ­do atÃ© ao momento.
+- â**Orgulho familiar:** O mÃ©dio sublinhou o impacto simbÃ³lico que a assinatura pelo Benfica tem para a sua famÃ­lia, em particular para o seu pai, a quem considera um pilar fundamental da carreira.

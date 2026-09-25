@@ -9,4 +9,18 @@ sourceUrl: "https://chutapracanto.framer.website/noticias/sorteio-da-liga-confer
 image: "https://framerusercontent.com/images/ceOIWF2TvrY5cjj062OdG9UuKk.webp?width=960&height=540"
 ---
 
-Está traçado o roteiro europeu do SC Braga para a fase de liga da UEFA Conference League 2026/27. Após uma caminhada irrepreensível nas fases preliminares onde deixou pelo caminho Zeleznicar Pancevo, Dinamo Minsk e Austria Wien, a formação minhota, que figurava no estatuto de cabeça de série (Pote 1), conheceu esta sexta-feira os seis adversários que terá pela frente na luta pelos oitavos de final. ​Neste modelo competitivo da UEFA, os arsenalistas vão disputar seis partidas frente a equipas de potes distintos, dividindo forças entre o Pedreira e três exigentes deslocações ao norte da Europa. ​ O calendário de confrontos dos gverreiros: ​ FC København (Fora — Pote 1) ​ KAA Gent (Casa — Pote 2) ​ KuPS (Casa — Pote 3) ​ SK Brann (Fora — Pote 4) ​ Aarhus GF (Fora — Pote 5) ​ KF Egnatia (Casa — Pote 6) ​Com partidas decisivas perante o público bracarense e saídas exigentes à Dinamarca e Noruega, a estreia do SC Braga na prova está agendada para 2 de outubro de 2026, com o calendário detalhado dos horários a ser divulgado pela UEFA nos próximos dias.
+
+EstÃ¡ traÃ§ado o roteiro europeu do SC Braga para a fase de liga da UEFA Conference League 2026/27. ApÃ³s uma caminhada irrepreensÃ­vel nas fases preliminares onde deixou pelo caminho Zeleznicar Pancevo, Dinamo Minsk e Austria Wien, a formaÃ§Ã£o minhota, que figurava no estatuto de cabeÃ§a de sÃ©rie (Pote 1), conheceu esta sexta-feira os seis adversÃ¡rios que terÃ¡ pela frente na luta pelos oitavos de final.
+
+âNeste modelo competitivo da UEFA, os arsenalistas vÃ£o disputar seis partidas frente a equipas de potes distintos, dividindo forÃ§as entre o Pedreira e trÃªs exigentes deslocaÃ§Ãµes ao norte da Europa.
+
+â**O calendÃ¡rio de confrontos dos gverreiros:**
+
+- â**FC KÃ¸benhavn** (Fora â Pote 1)
+- â**KAA Gent** (Casa â Pote 2)
+- â**KuPS** (Casa â Pote 3)
+- â**SK Brann** (Fora â Pote 4)
+- â**Aarhus GF** (Fora â Pote 5)
+- â**KF Egnatia** (Casa â Pote 6)
+
+âCom partidas decisivas perante o pÃºblico bracarense e saÃ­das exigentes Ã  Dinamarca e Noruega, a estreia do SC Braga na prova estÃ¡ agendada para 2 de outubro de 2026, com o calendÃ¡rio detalhado dos horÃ¡rios a ser divulgado pela UEFA nos prÃ³ximos dias.

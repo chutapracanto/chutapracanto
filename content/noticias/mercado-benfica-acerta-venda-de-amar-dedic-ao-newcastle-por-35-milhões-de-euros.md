@@ -15,6 +15,15 @@ relatedYouTube: ""
 relatedSpotify: ""
 ---
 
-![Mercado: Benfica acerta venda de Amar Dedic ao Newcastle por 35 milhões de euros](https://framerusercontent.com/images/qUerYUofm3rhwn898rEOAAtmpY.jpeg)
 
-<p dir="ltr">Está fechada mais uma grande transação no mercado de transferências da Luz. O Benfica chegou a acordo com o Newcastle para a transferência em definitivo de Amar Dedic, num negócio fixado nos 35 milhões de euros, avança o jornalista especializado Fabrizio Romano. O valor preenche na íntegra as exigências da estrutura encarnada para libertar o internacional bósnio.</p><h3 dir="ltr">Vontade do jogador e reencontro com Matthias Jaissle foram decisivos</h3><p dir="ltr">Apesar do desejo das águias em manter o lateral-direito no plantel, a determinação de Dedic em rumar à Premier League acabou por ser determinante para o desfecho das negociações. O defesa de 23 anos encarava a mudança para o emblema inglês como prioridade absoluta, motivado também pelo reencontro com o técnico Matthias Jaissle, com quem já tinha trabalhado na fase em que representou o Red Bull Salzburg.</p><p dir="ltr">Dedic encerra assim uma passagem de apenas uma época na Luz, onde chegou no verão de 2025 vindo do futebol austríaco por 12 milhões de euros. O seu rendimento em Lisboa e a presença na fase final do Mundial catapultaram a sua valorização no mercado internacional, tendo o Newcastle ganho a corrida à concorrência europeia.</p><h3 dir="ltr">Encaixe financeiro e leque de opções na Luz</h3><p dir="ltr">Com a concretização desta venda, os encarnados alcançam uma mais-valia financeira significativa em termos de gestão. No plano desportivo para o lado direito da defesa, o plantel benfiquista continua a contar com Alexander Bah e com o jovem Daniel Banjaqui como soluções para a posição.</p>
+âEstÃ¡ fechada mais uma grande transaÃ§Ã£o no mercado de transferÃªncias da Luz. O Benfica chegou a acordo com o Newcastle para a transferÃªncia em definitivo de Amar Dedic, num negÃ³cio fixado nos 35 milhÃµes de euros, avanÃ§a o jornalista especializado Fabrizio Romano. O valor preenche na Ã­ntegra as exigÃªncias da estrutura encarnada para libertar o internacional bÃ³snio.
+
+### âVontade do jogador e reencontro com Matthias Jaissle foram decisivos
+
+âApesar do desejo das Ã¡guias em manter o lateral-direito no plantel, a determinaÃ§Ã£o de Dedic em rumar Ã  Premier League acabou por ser determinante para o desfecho das negociaÃ§Ãµes. O defesa de 23 anos encarava a mudanÃ§a para o emblema inglÃªs como prioridade absoluta, motivado tambÃ©m pelo reencontro com o tÃ©cnico Matthias Jaissle, com quem jÃ¡ tinha trabalhado na fase em que representou o Red Bull Salzburg.
+
+âDedic encerra assim uma passagem de apenas uma Ã©poca na Luz, onde chegou no verÃ£o de 2025 vindo do futebol austrÃ­aco por 12 milhÃµes de euros. O seu rendimento em Lisboa e a presenÃ§a na fase final do Mundial catapultaram a sua valorizaÃ§Ã£o no mercado internacional, tendo o Newcastle ganho a corrida Ã  concorrÃªncia europeia.
+
+### âEncaixe financeiro e leque de opÃ§Ãµes na Luz
+
+âCom a concretizaÃ§Ã£o desta venda, os encarnados alcanÃ§am uma mais-valia financeira significativa em termos de gestÃ£o. No plano desportivo para o lado direito da defesa, o plantel benfiquista continua a contar com Alexander Bah e com o jovem Daniel Banjaqui como soluÃ§Ãµes para a posiÃ§Ã£o.
