@@ -46,7 +46,7 @@ Não responder apenas "o próximo passo é X" quando X estiver ao alcance da IA.
 | Fase | Frente | Estado em 2026-09-25 |
 |---|---|---|
 | 0 | Continuidade, regras e memória operacional | **CONSOLIDADA** |
-| 1 | Recuperação/consolidação do conteúdo histórico | **UNBLOCKED / EM EXECUÇÃO** |
+| 1 | Recuperação/consolidação do conteúdo histórico | **CONCLUÍDA — reconciliação de metadata dos 163 registos pós-22/08 validada** |
 | 2 | Sistema editorial e publicação própria | **PARCIAL / CONSOLIDAR** |
 | 3 | Dados de futebol e API de competições | **PENDENTE** |
 | 4 | SEO técnico + indexação real | **PARCIAL / CONTINUAR APÓS BASE ESTÁVEL** |
@@ -55,7 +55,7 @@ Não responder apenas "o próximo passo é X" quando X estiver ao alcance da IA.
 | 7 | Distribuição e crescimento | **PENDENTE / FRENTE CRIATIVA SEPARADA** |
 | 8 | Automação e escala | **PENDENTE** |
 
-**Fase operacional atual:** **FASE 1**, porque existe conteúdo histórico do Framer posterior a 22/08/2026 ainda não reconciliado.
+**Fase operacional atual:** **FASE 2 — consolidação do sistema editorial/publicação própria**, após conclusão da reconciliação de metadata dos 163 registos Framer e merge em produção.
 
 ---
 
@@ -123,7 +123,11 @@ Está registada uma lacuna posterior a 22/08/2026.
 - saltar para uma nova fase apenas porque a fonte histórica está bloqueada.
 
 ## Estado
-**UNBLOCKED / EM EXECUÇÃO.**
+**CONCLUÍDA quanto à reconciliação de metadata do lote pós-22/08.**
+
+Resultado: 163/163 reconciliados; 0 mismatches/0 ausências no índice; conteúdo editorial não alterado; PR #27 mergeada em main (73da0ac1d692a05a3138983e938454fc4be1c5c5); workflow canónico de índice/sitemap validado após o merge.
+
+A migração/encerramento do domínio histórico Framer continua como etapa futura separada e só deve ser executada depois de inventário de URLs, mapeamento e validação de redirects.
 
 Bloqueio atual:
 A fonte histórica foi disponibilizada via export CMS em `docs/framer/framer-news-export-2026-09-25.json`.
@@ -471,3 +475,40 @@ FIM.
 A Fase 0 inclui agora o protocolo obrigatório em `docs/AI_EXECUTION_PROTOCOL.md`.
 
 A IA não deve confundir “fase bloqueada” com “trabalho terminado”. Um bloqueio externo deve ser convertido numa dependência operacional concreta: ação autónoma, intervenção da Rute ou tarefa do Codex. A ordem global do Roadmap mantém-se; o protocolo apenas garante que a continuação é explicitamente acionável quando uma fase fica bloqueada.
+
+
+## 17. ATUALIZAÇÃO OPERACIONAL — 2026-09-25 — PÓS-RECONCILIAÇÃO FRAMER
+
+A Fase 1 deixou de ser a frente operacional principal após a conclusão da reconciliação de metadata dos 163 registos Framer posteriores a 22/08/2026.
+
+### Fechado
+- 163/163 registos reconciliados;
+- 0 mismatches e 0 ausências no índice para a população reconciliada;
+- conteúdo editorial não reescrito;
+- PR #27 mergeada em main (73da0ac1d692a05a3138983e938454fc4be1c5c5);
+- workflow canónico de geração do índice/sitemap executado com sucesso após o merge;
+- sitemap servido em produção verificado pela utilizadora como acessível/funcional.
+
+### Próxima frente técnica
+**FASE 2 — Sistema editorial e publicação própria / UX de Notícias.**
+
+Backlog prioritário:
+1. reset de pesquisa/filtros: “Todas” deve devolver claramente à listagem completa;
+2. sticky header: desktop e mobile devem permanecer compactos/translúcidos no topo após encolher, sem desaparecer; tipografia sem quebra de linha durante a transição; no mobile, a navegação secundária deve subir;
+3. ação de gosto/coração junto à partilha — pesquisar primeiro práticas atuais de sites/editoriais de futebol e evidência sobre engagement antes de implementar;
+4. migração/redirects do antigo Framer para o .com: inventariar URLs reais e mapear cada origem para o destino equivalente; não assumir que os Redirects nativos do Framer resolvem cross-domain;
+5. normalização de slugs/variantes no índice/sitemap, sem alterar URLs canónicas sem plano de compatibilidade.
+
+### Ideias preservadas para fases futuras
+- dados/API de futebol e competições (Fase 3);
+- Search Console/indexação real (Fase 4);
+- performance apenas com hipótese/evidência nova (Fase 5);
+- monetização (Fase 6);
+- distribuição/Shorts/Reels/YouTube/podcast (Fase 7);
+- automação e escala (Fase 8).
+
+### Explicitamente não reabrir sem nova evidência
+- LCP/CLS e experiências de performance já validadas;
+- importação histórica Framer já concluída;
+- PRs fechadas sem merge;
+- testes/abordagens que já falharam sem hipótese nova.
