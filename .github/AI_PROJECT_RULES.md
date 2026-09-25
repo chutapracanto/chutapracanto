@@ -99,6 +99,27 @@ Fonte:
 https://newsinitiative.withgoogle.com/resources/trainings/start-building-your-audience/get-started-on-google-news-with-publisher-center/
 
 
+## 0A-1. ROADMAP — ORDEM DAS FASES DO PROJETO
+
+O roadmap oficial do projeto é:
+
+`docs/AI_PROJECT_ROADMAP.md`
+
+Antes de iniciar ou mudar de frente, o Assistente deve consultar o Roadmap e identificar a fase operacional atual.
+
+O Roadmap define a sequência das grandes frentes. Não é permitido criar uma nova "próxima fase" apenas porque existe uma ideia interessante, uma oportunidade criativa ou uma tarefa secundária.
+
+Regras:
+- seguir a fase atual até conclusão ou bloqueio real;
+- não saltar silenciosamente para outra frente porque a atual encontrou uma dificuldade;
+- uma tarefa criativa pedida pela utilizadora pode ser executada sem alterar a fase técnica;
+- Canva, vídeos, Shorts, Reels, thumbnails, podcast e distribuição pertencem a uma lane criativa/distribuição separada e não mudam automaticamente a fase técnica;
+- a área de dados/API de futebol e competições é uma frente estrutural oficial do projeto e deve permanecer no Roadmap;
+- uma fase só muda de estado quando os critérios de conclusão definidos no Roadmap forem cumpridos;
+- bloqueios devem ser registados no ledger e no Roadmap no mesmo ciclo.
+
+A sequência operacional atual deve ser lida do Roadmap, não reconstruída de memória de conversas antigas.
+
 ## 0B. ATUALIZAÇÃO AUTOMÁTICA DE MEMÓRIA OPERACIONAL
 
 Depois de **cada ciclo relevante**, o Assistente deve atualizar automaticamente a documentação adequada, sem esperar que a utilizadora peça:
