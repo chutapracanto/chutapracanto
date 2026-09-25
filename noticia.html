@@ -1143,22 +1143,24 @@
 
           liked = Boolean(data.liked);
           totalLikes = Number.isFinite(Number(data.count)) ? Math.max(0, Number(data.count)) : 0;
-          if (action === 'like' && status) {
-            status.textContent = data.created ? 'Gosto registado.' : 'Já tinhas gostado deste artigo.';
+          if (action !== 'status' && status) {
+            status.textContent = action === 'like'
+              ? (data.created ? 'Gosto registado.' : 'Já tinhas gostado deste artigo.')
+              : (data.removed ? 'Gosto removido.' : 'Este artigo já não tinha gosto.');
           }
-          if (action === 'like' && data.created) {
-            const eventData = { content_type: 'article', item_id: articleSlug, value: 1 };
+          if ((action === 'like' && data.created) || (action === 'unlike' && data.removed)) {
+            const eventData = { content_type: 'article', item_id: articleSlug, value: action === 'like' ? 1 : 0 };
             if (typeof window.gtag === 'function') {
-              window.gtag('event', 'article_like', eventData);
+              window.gtag('event', action === 'like' ? 'article_like' : 'article_unlike', eventData);
             } else if (Array.isArray(window.dataLayer)) {
-              window.dataLayer.push({ event: 'article_like', ...eventData });
+              window.dataLayer.push({ event: action === 'like' ? 'article_like' : 'article_unlike', ...eventData });
             }
           }
         } catch (error) {
           if (status) {
             status.textContent = action === 'like'
               ? 'Não foi possível registar o gosto. Tenta novamente.'
-              : 'Não foi possível verificar o gosto neste momento.';
+              : action === 'unlike' ? 'Não foi possível remover o gosto. Tenta novamente.' : 'Não foi possível verificar o gosto neste momento.';
           }
         } finally {
           busy = false;
@@ -1167,7 +1169,7 @@
       };
 
       trigger.addEventListener('click', () => {
-        if (!liked) void enviar('like');
+        void enviar(liked ? 'unlike' : 'like');
       });
       atualizar();
       void enviar('status');
