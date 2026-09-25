@@ -1524,3 +1524,42 @@ Inventariar URLs históricos e cruzá-los com os URLs existentes no `.com`, prod
 **PLANEADO / NÃO EXECUTAR AGORA.**
 
 Esta decisão não altera a ordem do Roadmap nem desbloqueia a Fase 1. Enquanto a fonte histórica continuar indisponível, não alterar DNS, domínio, Framer, Cloudflare, redirects, conteúdo ou sitemap para antecipar esta etapa.
+
+
+## 44. PROTOCOLO OBRIGATÓRIO DE DESBLOQUEIO OPERACIONAL — 2026-09-25
+
+### Problema identificado
+Foi identificado um padrão recorrente em que a IA deteta uma dependência externa, regista o bloqueio e continua com documentação ou descreve o próximo passo sem fornecer à utilizadora uma forma concreta de desbloquear a tarefa.
+
+### Correção aplicada
+Foi criado:
+- `docs/AI_EXECUTION_PROTOCOL.md`
+
+E reforçados:
+- `.github/AI_START_HERE.md`
+- `.github/AI_PROJECT_RULES.md`
+- `.github/CODEX_RULES.md`
+- `bíblia mestra Chuta Pra Canto.md`
+
+### Nova regra operacional
+**UM BLOQUEIO NÃO É UM RESULTADO.**
+
+Quando a IA não consegue executar diretamente uma ação, deve primeiro verificar se existe ação autónoma disponível. Se não existir, deve identificar a dependência exata e transformá-la numa instrução acionável para a Rute ou num prompt executável para o Codex, conforme quem tenha a capacidade necessária.
+
+É proibido terminar apenas com formulações vagas como “fonte externa bloqueada”, “acesso necessário”, “investigar posteriormente” ou “o próximo passo é X” quando existe uma forma concreta de desbloquear a tarefa.
+
+Foi também corrigida a regra que dizia para nunca pedir imagens/documentos/prints: agora estes recursos só podem ser pedidos quando forem efetivamente a dependência concreta e a IA deve explicar exatamente o que precisa e como o utilizador o deve obter.
+
+### Estados obrigatórios de saída
+- CONCLUÍDO
+- CONTINUAÇÃO AUTOMÁTICA
+- AGUARDA RUTE
+- AGUARDA CODEX
+- BLOQUEIO REAL
+
+AGUARDA RUTE e AGUARDA CODEX exigem instruções acionáveis. BLOQUEIO REAL exige explicar qual capacidade/fonte está realmente em falta.
+
+### Objetivo
+Eliminar o padrão de “bater no ceguinho” e reduzir ao mínimo a transferência de trabalho técnico para a utilizadora, mantendo a autonomia da IA e o uso do Codex apenas quando necessário.
+
+Estado: **IMPLEMENTADO / DOCUMENTADO.**
