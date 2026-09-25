@@ -231,7 +231,7 @@ def html_node_to_markdown(node) -> str:
         block(child)
 
     text = "\n".join(lines)
-    text = limpar_caracteres_invisiveis(text)
+    text = re.sub(r"[\u200B\u200C\u200D\uFEFF\u2060]", "", text)
     text = re.sub(r"[ \t]+\n", "\n", text)
     text = re.sub(r"\n{3,}", "\n\n", text)
     return text.strip()
