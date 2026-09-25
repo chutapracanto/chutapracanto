@@ -634,7 +634,7 @@ Os pedidos UX apresentados para o sticky/header e o botão de gosto foram reconc
 
 **Estado:**
 - implementação anterior (#29/#30) estava mergeada, mas não cumpria visualmente todos os requisitos pedidos;
-- correção adicional foi aplicada na branch `feat/article-likes-sticky-final`;
+- correção adicional foi aplicada na branch `feat/article-likes-sticky-final-v2`;
 - ainda **NÃO está em main nem em produção**;
 - validação browser final continua necessária antes de merge.
 
@@ -651,7 +651,7 @@ Os pedidos UX apresentados para o sticky/header e o botão de gosto foram reconc
 **Estado:**
 - PR #33: mergeada, mas transitória/localStorage;
 - PR #34: fechada sem merge;
-- PR #36: **aberta**, com a implementação persistente em D1 e coração-only;
+- PR #37: **aberta**, com a implementação persistente em D1 e coração-only;
 - a branch inclui também a correção adicional do sticky/header;
 - **NÃO está em main nem em produção**.
 
@@ -671,7 +671,7 @@ A pesquisa recente sobre publishing desportivo aponta para maior valor de experi
 
 ### Ordem operacional atual
 1. Validar browser do sticky/header corrigido.
-2. Validar browser/API/D1 do PR #36.
+2. Validar browser/API/D1 do PR #37.
 3. Se a validação passar, mergear #36 e validar deployment de produção.
 4. Separadamente, resolver a dependência do host Framer histórico e então aplicar/testar os 213 redirects.
 
@@ -682,11 +682,11 @@ A pesquisa recente sobre publishing desportivo aponta para maior valor de experi
 - Sticky pequeno/transparente persistente: implementado na branch final, aguarda validação browser e produção.
 - Navegação sem mudança de linha: implementado na branch final, aguarda validação browser.
 - Navegação mobile mais acima: implementado na branch final, aguarda validação browser.
-- Coração-only persistente em D1: implementado na PR #36, aguarda validação browser/Preview e merge.
+- Coração-only persistente em D1: implementado na PR #37, aguarda validação browser/Preview e merge.
 - Framer → `.com`: inventário 213/213 concluído; redirects continuam bloqueados pela falta de controlo verificável do host histórico.
 
 ### Estado da transição
-A frente de implementação está concluída no GitHub na PR #36, mas **não deve ser considerada concluída em produção** até browser validation + merge + deployment validation.
+A frente de implementação está concluída no GitHub na PR #37, mas **não deve ser considerada concluída em produção** até browser validation + merge + deployment validation.
 
 ### Próxima ação executiva
 A única ação pendente que não é executável integralmente pelo GitHub é a validação browser/Cloudflare do Preview. Depois dessa validação, o fluxo é: PASS → merge #36 → validar deployment → confirmar `main`/produção → fechar Fase 2 UX/engagement.
