@@ -91,3 +91,12 @@ Se a capacidade necessária não estiver disponível, indicar exatamente a limit
 Este ficheiro é parte das regras operacionais do projeto. Sempre que surgir uma nova limitação, risco, desperdício de créditos, capacidade útil ou decisão específica sobre o Codex, o Assistente deve atualizar este ficheiro e o `.github/AI_PROJECT_RULES.md` no mesmo ciclo.
 
 FIM.
+
+
+## REGRA PERMANENTE — USO EXCLUSIVAMENTE ESSENCIAL — 2026-09-25
+
+- O Codex só deve executar tarefas que dependam realmente das suas capacidades externas e que sejam **essenciais** para a decisão ou desbloqueio do trabalho.
+- Não repetir verificações já feitas, não "bater no seguimento", não fazer confirmações redundantes e não iniciar testes adicionais apenas porque existem testes possíveis.
+- Se o resultado já permitir a decisão pedida, terminar imediatamente.
+- Se uma tarefa falhar ou não puder ser executada, não insistir nem repetir automaticamente. Só voltar a executá-la se existir uma necessidade nova e concreta que exija a capacidade externa.
+- Cada execução deve ter escopo mínimo, critério de conclusão claro e consumo mínimo de créditos.
