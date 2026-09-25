@@ -1197,3 +1197,34 @@ Sempre que o índice for regenerado, validar pelo menos:
 - Distinção operacional: LCP first pass = **implementada, sem melhoria quantitativa before/after comprovada**; CLS = **problema ainda aberto, sem causa causalmente comprovada**; SEO técnico básico = **implementado e auditado**; indexação real = **ainda não medida no Search Console**.
 - Próxima execução deve avançar a partir deste estado, sem criar uma nova fase de documentação por si só.
 
+
+
+## 38. VALIDAÇÃO PÓS-MERGE / PRODUÇÃO — 2026-09-25
+
+Foi feita a validação externa da produção após a reconciliação do HEAD e da auditoria SEO técnica.
+
+### Produção
+- Home: HTTP 200 e conteúdo visível.
+- `/noticias`: HTTP 200 e conteúdo visível.
+- Artigo: HTTP 200 e conteúdo visível.
+- `/opiniao`: HTTP 200 e conteúdo visível.
+- Não foram observados novos problemas concretos nesta validação.
+
+### Limitações
+- Google Search Console não ficou acessível na sessão externa: houve redirecionamento para autenticação/login. Portanto, sitemap processado, cobertura e indexação real continuam **não validados**.
+- Consola do browser não foi verificada nesta ronda por limitação do ambiente.
+
+### Estado técnico
+- Produção funcional: **VALIDADO** nos percursos acima.
+- SEO técnico básico: **IMPLEMENTADO/AUDITADO**.
+- Indexação Google real: **ABERTA / NÃO MEDIDA**.
+- LCP first pass: **IMPLEMENTADA, sem melhoria quantitativa before/after comprovada**.
+- CLS: **ABERTO, sem causa causalmente comprovada**.
+
+### Decisão
+Esta validação não justifica reabrir automaticamente PR #25, repetir testes já concluídos ou criar uma nova fase documental. PR #25 continua fechada sem merge.
+
+A partir deste ponto, qualquer nova investigação de performance deve depender de uma hipótese/decisão concreta. Se não houver essa necessidade, o trabalho pode avançar para as áreas de maior relevância do projeto, sem transformar performance residual num ciclo de micro-otimizações.
+
+### Regra de continuidade documental
+A partir de agora, quando uma alteração relevante, validação, falha, decisão ou mudança de estado do projeto for concluída, o Assistente atualiza **automaticamente** os ficheiros Markdown operacionais relevantes no mesmo ciclo. A utilizadora não precisa de pedir a atualização separadamente. Não serão criados commits documentais apenas por rotina quando nada relevante mudou.
