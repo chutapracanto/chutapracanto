@@ -1563,3 +1563,33 @@ AGUARDA RUTE e AGUARDA CODEX exigem instruções acionáveis. BLOQUEIO REAL exig
 Eliminar o padrão de “bater no ceguinho” e reduzir ao mínimo a transferência de trabalho técnico para a utilizadora, mantendo a autonomia da IA e o uso do Codex apenas quando necessário.
 
 Estado: **IMPLEMENTADO / DOCUMENTADO.**
+
+
+## 44. FONTE HISTÓRICA DO FRAMER DISPONIBILIZADA — 2026-09-25
+
+A fonte primária que estava a bloquear a Fase 1 foi finalmente disponibilizada através de export do CMS Framer e colocada no GitHub.
+
+### Fonte recebida
+- Export JSON do CMS da coleção **News**.
+- Total de registos no export: **213**.
+- O ficheiro original foi colocado na raiz como `News.json`; foi reorganizado para `docs/framer/framer-news-export-2026-09-25.json`.
+- O ficheiro de raiz `News.json` foi removido depois da cópia validada para a localização documental.
+- Commits de organização:
+  - `426c784d093e742d15ff19069e3d1d210a99f1dd` — criação da localização documental.
+  - `88142d9adbb4bb76bb354b24469d742529b8828c` — remoção do duplicado na raiz.
+
+### Primeira reconciliação objetiva
+Considerando como histórico pós-22/08 os registos com `Published > 2026-08-22T23:59:59.999Z`:
+- 163 registos Framer são posteriores a 22/08.
+- 107 desses 163 têm um **slug já existente** no índice atual.
+- 56 desses 163 **não têm slug correspondente** no índice atual e são candidatos objetivos a conteúdo ausente.
+- O export não contém slugs duplicados internamente: 213 registos = 213 slugs únicos.
+
+Importante: os 107 slugs coincidentes **não são classificados automaticamente como duplicados descartáveis**. A data do Framer é posterior à data publicada atualmente no site para esses casos, pelo que podem representar republicações/versões posteriores do mesmo conteúdo. Um caso já verificado (`águias-desafiam-ac-milan-no-arranque-da-liga-europa`) apresenta equivalência textual integral entre o conteúdo Framer e o Markdown atual, mas com datas de publicação diferentes. A reconciliação final deve, portanto, validar conteúdo/metadata antes de decidir entre ignorar, atualizar metadata ou importar.
+
+### Estado
+- A dependência "fonte histórica do Framer inacessível" está **REMOVIDA**.
+- A Fase 1 continua a ser a fase operacional.
+- Não foi feita ainda qualquer importação automática dos 56 candidatos nem atualização em massa dos 107 slugs coincidentes.
+- Não foi inventado nenhum conteúdo.
+- O próximo passo obrigatório é a reconciliação final dos candidatos, com validação suficiente para decidir por artigo.
