@@ -1141,3 +1141,36 @@ Sempre que o índice for regenerado, validar pelo menos:
 - imagem presente quando aplicável;
 - tipo editorial válido;
 - sitemap sem duplicados.
+
+
+## 35. REPARAÇÃO AUTOMÁTICA DOS METADADOS — VALIDAÇÃO FINAL (2026-09-25)
+
+### Falha identificada
+- A primeira versão do reparador automático de `author` continha um erro de regex: a expressão tinha `^\\\\s*` em vez de `^\\s*`.
+- Resultado: o passo podia detetar o problema no índice, mas não correspondia corretamente à linha `author` no frontmatter dos Markdown históricos.
+- A execução do workflow nos commits anteriores falhou por esta causa. Isto explica por que razão a reparação automática não tinha sido efetivamente aplicada aos ficheiros-fonte, apesar de o índice já ter sido corrigido.
+
+### Correção aplicada
+- Commit: `f581f5af6917e17ca1993362fbef49f843436da3`
+- Corrigida a regex do workflow `.github/workflows/gerar-indice-noticias.yml`.
+- O commit acionou efetivamente o workflow `Gerar índice de notícias` por evento `push`.
+
+### Execução validada
+- Workflow run: `36128360256`
+- Job `gerar-indice`: concluído com sucesso.
+- Passos `Gerar índice` e `Commit índice atualizado`: concluídos com sucesso.
+- Commit produzido automaticamente: `69617d9e01f4ce7326259661c774b40983490137` (`Atualizar índice de notícias`).
+
+### Verificações após a execução
+- `content/noticias-index.json`: 238 entradas.
+- Autores com comprimento anormal no índice: 0.
+- Foram verificados diretamente vários Markdown que constavam da pesquisa dos ficheiros afetados; o campo `author` está agora corretamente separado do corpo editorial e normalizado para `"ChutaPraCanto"` no frontmatter.
+- O índice deriva agora o nome canónico `Chuta Pra Canto` a partir de `content/authors.json`, mantendo `ChutaPraCanto` como alias. Isto é intencional e consistente com o modelo editorial de autores.
+- A correção preserva o corpo editorial: a reparação altera apenas o metadado `author`.
+
+### Estado
+- **RESOLVIDO E VALIDADO.**
+- Não é necessário editar manualmente os ~177 ficheiros afetados individualmente.
+- Não repetir a abordagem de edição ficheiro-a-ficheiro.
+- O workflow passa a funcionar como mecanismo de saneamento automático para este padrão histórico.
+- Próxima auditoria deste problema só é necessária se surgir novamente um `author` anormal ou se uma nova importação introduzir outro padrão de corrupção.
