@@ -1617,3 +1617,31 @@ A análise anterior que classificava os 107 slugs coincidentes como possíveis d
 
 ### Próxima validação obrigatória
 Os 163 devem ser comparados com o conteúdo efetivo dos Markdown atuais e com o comportamento de publicação/ordenamento do site. A regra de decisão não será `slug == slug`; será necessário determinar, por artigo, se o conteúdo pós-22/08 já está efetivamente representado no `.com`, se apenas existe uma versão antiga, ou se está ausente. Só depois se prepara a migração.
+
+
+## 46. FASE 1 DESBLOQUEADA — RECONCILIAÇÃO DOS 163 REGISTOS FRAMER — 2026-09-25
+
+A fonte histórica que bloqueava a Fase 1 está disponível no GitHub através do export CMS docs/framer/framer-news-export-2026-09-25.json.
+
+### Estado factual
+- Export Framer: 213 registos.
+- Registos publicados depois de 22/08/2026: 163.
+- Inventário canónico de reconciliação: docs/framer/framer-post-22-08-reconciliation-2026-09-25.json.
+- Os 163 continuam a ser a população operacional da reconciliação.
+- A coincidência de slug com entradas antigas datadas de 05/08 não é prova de migração atual.
+- Não foi feita importação em massa com base apenas no slug.
+
+### Ação imediata
+A Fase 1 passa de BLOQUEADA para UNBLOCKED / EM EXECUÇÃO. A próxima operação é comparar os 163 registos Framer com o conteúdo Markdown efetivamente existente e com os metadados de publicação do .com, classificando cada artigo antes de qualquer importação.
+
+### Regra de decisão
+Por artigo, distinguir entre:
+1. conteúdo já representado corretamente no .com;
+2. conteúdo existente mas com metadata/data histórica incorreta e que precisa de correção;
+3. conteúdo atualizado/diferente que precisa de reconciliação;
+4. conteúdo ausente que pode ser importado;
+5. conteúdo não suficientemente provado para alteração.
+
+Só depois dessa classificação serão alterados content/noticias, content/noticias-index.json, sitemap e/ou produção.
+
+Commit de desbloqueio do Roadmap: d305c0ff0371a325772946dd84a1189466c11011.
