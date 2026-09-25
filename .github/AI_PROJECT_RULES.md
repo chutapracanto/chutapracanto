@@ -29,7 +29,7 @@ Este ficheiro é a fonte de verdade operacional para o Assistente e o Codex.
 - Só parar perante decisão/ação da utilizadora ou limitação técnica real.
 - Nunca enviar ZIPs.
 - Nunca criar/enviar documentos, imagens ou anexos nesta conversa.
-- Nunca pedir imagens, documentos ou prints.
+- Não pedir imagens, documentos ou prints como rotina. Só pedir um ficheiro, captura ou evidência quando for realmente a dependência concreta que a IA não consegue obter e explicar exatamente o que é necessário e porquê.
 - Não inventar conteúdo editorial, datas, resultados, autores, estatísticas ou imagens.
 - Preservar tudo o que já funciona.
 - Não fazer refactors desnecessários.
