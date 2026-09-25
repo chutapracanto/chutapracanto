@@ -1300,7 +1300,12 @@ async function prepararPaginaParaPartilha(
     const index = await indexResponse.json();
     const articleExists = Array.isArray(index) && index.some((entry) =>
       entry && entry.slug === slug &&
-      /^content/(?:noticias|opiniao)/[^/]+.md$/i.test(entry.path || "")
+      (() => {
+        const pathParts = String(entry.path || "").split("/");
+        return pathParts.length === 3 && pathParts[0] === "content" &&
+          (pathParts[1] === "noticias" || pathParts[1] === "opiniao") &&
+          pathParts[2].endsWith(".md");
+      })()
     );
     if (!articleExists) {
       return respond({ error: "Artigo não encontrado.", message: "Artigo não encontrado." }, 404);
