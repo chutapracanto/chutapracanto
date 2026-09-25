@@ -125,6 +125,142 @@ def image_is_reachable(session: requests.Session, image_url: str) -> tuple[bool,
         return False, str(exc)
 
 
+
+def html_node_to_markdown(node) -> str:
+    """Converte o HTML editorial do Framer para Markdown sem achatar a estrutura."""
+    from bs4 import NavigableString
+
+    block_tags = {"p", "div", "section", "article", "header", "main", "figure"}
+    skip_tags = {"script", "style", "noscript"}
+    heading_tags = {"h1": "#", "h2": "##", "h3": "###", "h4": "####"}
+    lines = []
+
+    def inline(n):
+        if isinstance(n, NavigableString):
+            return re.sub(r"[ \t\r\n]+", " ", str(n))
+        if not getattr(n, "name", None):
+            return ""
+        tag = n.name.lower()
+        if tag in skip_tags:
+            return ""
+        if tag == "br":
+            return "\n"
+        if tag in {"strong", "b"}:
+            value = "".join(inline(c) for c in n.children).strip()
+            return f"**{value}**" if value else ""
+        if tag in {"em", "i"}:
+            value = "".join(inline(c) for c in n.children).strip()
+            return f"_{value}_" if value else ""
+        if tag == "u":
+            return "".join(inline(c) for c in n.children)
+        if tag == "a":
+            value = "".join(inline(c) for c in n.children).strip()
+            href = n.get("href")
+            if href and value:
+                return f"[{value}]({urljoin(BASE, href)})"
+            return value
+        if tag == "img":
+            src = n.get("src") or n.get("data-src") or ""
+            alt = clean(n.get("alt") or "")
+            return f"![{alt}]({urljoin(BASE, src)})" if src else ""
+        style = (n.get("style") or "").lower()
+        value = "".join(inline(c) for c in n.children)
+        if "font-weight" in style and ("bold" in style or "700" in style or "800" in style or "900" in style):
+            value = value.strip()
+            return f"**{value}**" if value else ""
+        return value
+
+    def block(n, prefix=""):
+        if isinstance(n, NavigableString):
+            value = clean(str(n))
+            if value:
+                lines.append(prefix + value)
+            return
+        if not getattr(n, "name", None) or n.name.lower() in skip_tags:
+            return
+        tag = n.name.lower()
+        if tag in heading_tags:
+            value = inline(n).strip()
+            if value:
+                lines.append(prefix + heading_tags[tag] + " " + value)
+                lines.append("")
+            return
+        if tag == "blockquote":
+            value = inline(n).strip()
+            if value:
+                lines.extend(prefix + "> " + x for x in value.splitlines() if x.strip())
+                lines.append("")
+            return
+        if tag in {"ul", "ol"}:
+            ordered = tag == "ol"
+            for idx, li in enumerate(n.find_all("li", recursive=False), 1):
+                value_parts = []
+                nested = []
+                for child in li.children:
+                    if getattr(child, "name", None) in {"ul", "ol"}:
+                        nested.append(child)
+                    else:
+                        value_parts.append(inline(child))
+                value = re.sub(r"[ \t]+", " ", "".join(value_parts)).strip()
+                marker = f"{idx}. " if ordered else "- "
+                if value:
+                    lines.append(prefix + marker + value)
+                for child in nested:
+                    block(child, prefix + "  ")
+            lines.append("")
+            return
+        if tag in block_tags:
+            has_block_children = any(
+                getattr(child, "name", None) in block_tags.union({"h1","h2","h3","h4","ul","ol","blockquote"})
+                for child in n.children
+            )
+            if has_block_children:
+                for child in n.children:
+                    block(child, prefix)
+            else:
+                value = re.sub(r"[ \t]+", " ", inline(n)).strip()
+                if value:
+                    lines.append(prefix + value)
+                    lines.append("")
+            return
+        value = inline(n).strip()
+        if value:
+            lines.append(prefix + value)
+
+    for child in node.children:
+        block(child)
+
+    text = "\n".join(lines)
+    text = limpar_caracteres_invisiveis(text)
+    text = re.sub(r"[ \t]+\n", "\n", text)
+    text = re.sub(r"\n{3,}", "\n\n", text)
+    return text.strip()
+
+
+def extract_body_from_html(soup: BeautifulSoup) -> str:
+    """Obtém o corpo editorial com estrutura HTML antes de recorrer ao texto plano."""
+    direct = soup.find_all("div", class_=lambda value: value and "framer-j471f3" in value)
+    if direct:
+        node = max(direct, key=lambda n: len(n.get_text(" ", strip=True)))
+        body = html_node_to_markdown(node)
+        if len(body) >= 120:
+            return body
+
+    candidates = []
+    for selector in ("article", "[role='article']", "main"):
+        for node in soup.select(selector):
+            paragraphs = node.find_all(["p", "h2", "h3", "h4", "ul", "ol", "blockquote"])
+            text_len = len(node.get_text(" ", strip=True))
+            if len(paragraphs) >= 2 and text_len >= 300:
+                candidates.append((text_len, node))
+    if candidates:
+        node = max(candidates, key=lambda item: item[0])[1]
+        body = html_node_to_markdown(node)
+        if len(body) >= 120:
+            return body
+    return ""
+
+
 def article_from_page(session: requests.Session, url: str) -> dict | None:
     response = session.get(url, headers=HEADERS, timeout=TIMEOUT)
     response.raise_for_status()
@@ -201,8 +337,9 @@ def article_from_page(session: requests.Session, url: str) -> dict | None:
     image = clean(str(image)) or first_meta(soup, "og:image", "twitter:image")
     image = urljoin(url, image) if image else ""
 
-    body_text = ""
-    if article_ld.get("articleBody"):
+    body_text = extract_body_from_html(soup)
+
+    if not body_text and article_ld.get("articleBody"):
         body_text = clean(str(article_ld["articleBody"]))
 
     if not body_text:
@@ -320,6 +457,7 @@ def main() -> int:
     parser.add_argument("--write", action="store_true")
     parser.add_argument("--limit", type=int, default=213)
     parser.add_argument("--delay", type=float, default=0.2)
+    parser.add_argument("--repair-existing", action="store_true", help="Reextrai e substitui apenas o corpo dos artigos já existentes, preservando o frontmatter local.")
     args = parser.parse_args()
 
     CONTENT.mkdir(parents=True, exist_ok=True)
@@ -338,6 +476,8 @@ def main() -> int:
         for x in existing
         if x.get("title") and x.get("published")
     }
+    existing_by_source = {str(x.get("sourceUrl", "")): x for x in existing if x.get("sourceUrl")}
+    existing_by_slug = {str(x.get("slug", "")): x for x in existing if x.get("slug")}
 
     imported = []
     skipped = []
@@ -350,6 +490,24 @@ def main() -> int:
                 skipped.append((url, "missing-title-date-or-body"))
                 continue
             item_key = title_date_key(item["title"], item["published"])
+            if args.repair_existing:
+                existing_entry = (
+                    existing_by_source.get(item["sourceUrl"])
+                    or existing_by_slug.get(item["slug"])
+                    or next(
+                        (x for x in existing
+                         if title_date_key(str(x.get("title", "")), str(x.get("published", ""))) == item_key),
+                        None,
+                    )
+                )
+                if not existing_entry or not existing_entry.get("path"):
+                    skipped.append((url, "repair-target-not-found"))
+                    continue
+                item["_existing_path"] = str(existing_entry["path"])
+                imported.append(item)
+                print(f"[{n}/{len(urls)}] REPAIR {item['published']} {item['title']}")
+                continue
+
             if (
                 item["slug"] in existing_slugs
                 or item["sourceUrl"] in existing_sources
@@ -395,6 +553,24 @@ def main() -> int:
     }, ensure_ascii=False))
 
     if not args.write:
+        return 0
+
+    if args.repair_existing:
+        repaired = 0
+        for item in imported:
+            path = ROOT / item["_existing_path"]
+            if not path.exists():
+                raise RuntimeError(f"Alvo de reparação não encontrado: {path}")
+            current = path.read_text(encoding="utf-8")
+            match = re.match(r"^(---\s*\n[\s\S]*?\n---\s*\n?)([\s\S]*)$", current)
+            if not match:
+                raise RuntimeError(f"Frontmatter inválido no alvo: {path}")
+            body = item["body"].strip()
+            if not body:
+                continue
+            path.write_text(match.group(1) + "\n" + body + "\n", encoding="utf-8")
+            repaired += 1
+        print(json.dumps({"repaired": repaired}, ensure_ascii=False))
         return 0
 
     for item in imported:
