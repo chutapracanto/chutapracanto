@@ -4,6 +4,21 @@ Repo: chutapracanto/chutapracanto
 Produção: main
 Domínio: https://chutapracanto.com
 
+## 0-BOOT. LEITURA INICIAL OBRIGATÓRIA
+
+Antes de qualquer tarefa/resposta sobre o Chuta Pra Canto, ler:
+
+`.github/AI_START_HERE.md`
+
+Depois, conforme o escopo:
+1. `.github/AI_PROJECT_RULES.md`;
+2. `.github/CODEX_RULES.md`;
+3. `docs/AI_PROJECT_ROADMAP.md`;
+4. `docs/AI_PROJECT_STATE_AND_HISTORY_2026-09-25.md` quando houver histórico relevante;
+5. `bíblia mestra Chuta Pra Canto.md` quando houver contexto/arquitetura relevante.
+
+O `AI_START_HERE.md` é um índice de arranque, não substitui as Rules.
+
 ## 0. REGRAS MÁXIMAS
 
 Este ficheiro é a fonte de verdade operacional para o Assistente e o Codex.
