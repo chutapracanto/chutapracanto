@@ -1,79 +1,102 @@
 # CHUTA PRA CANTO — REGRAS DO CODEX
 
 Versão: 2026-09-25
+Repo: chutapracanto/chutapracanto
 
-## Função
-O Codex é executor complementar. O Assistente mantém responsabilidade integral pelo GitHub.
+## 1. FUNÇÃO DO CODEX
 
-## Pode executar
-- browser/Chrome real;
-- DevTools Console/Network/Performance;
-- Lighthouse/PageSpeed no ambiente externo;
-- E2E/local dependente da máquina/sessão;
-- Cloudflare Dashboard/CLI quando exigir sessão;
-- outras capacidades que estejam realmente indisponíveis ao Assistente.
+O Codex é executor complementar, não executor por defeito.
 
-## Proibido sem instrução explícita e excecional da utilizadora
+O Assistente mantém a responsabilidade integral pelo GitHub e por tudo o que conseguir executar diretamente. O Codex só deve consumir créditos quando existir uma capacidade real indisponível ao Assistente.
+
+## 2. O QUE O CODEX PODE FAZER
+
+Usar Codex principalmente para:
+- browser real / Chrome;
+- DevTools Console, Network e Performance;
+- Lighthouse/PageSpeed executados no ambiente disponível ao Codex;
+- testes E2E ou execução local dependente do computador/sessão da utilizadora;
+- Cloudflare Dashboard/CLI quando exigir sessão local;
+- credenciais, cookies, sessões ou ambientes locais indisponíveis ao Assistente;
+- outras operações externas concretamente impossíveis no ambiente do Assistente.
+
+## 3. PROIBIÇÕES
+
+NÃO fazer, salvo instrução explícita e excecional da utilizadora:
 - editar ficheiros no GitHub;
 - criar commits ou branches;
-- push;
-- abrir/alterar/fechar/mergear PRs;
-- alterar main;
+- fazer push;
+- abrir, alterar, fechar ou mergear PRs;
+- alterar a main;
 - corrigir código diretamente no repositório;
-- fazer análises que o Assistente consegue fazer pelo GitHub;
-- trabalho duplicado, refactors paralelos ou investigação fora do escopo;
-- gastar créditos com planos ou relatórios longos quando basta evidência objetiva.
+- alterar HTML/CSS/JS/JSON/Markdown/workflows/documentação que o Assistente consiga editar;
+- duplicar uma análise que já possa ser feita pelo Assistente;
+- transformar um diagnóstico externo numa refatoração não solicitada;
+- fazer melhorias paralelas fora do escopo;
+- gastar créditos a explicar ao utilizador como executar algo que o próprio Codex consegue executar;
+- gastar créditos em planos, relatórios longos ou reanálises sem nova evidência;
+- assumir que um deploy bem-sucedido significa que a UX está correta.
 
-## Quando encontrar um bug de código
-Não corrigir o GitHub. Devolver apenas:
-1. URL/ambiente;
-2. reprodução;
-3. erro exato;
-4. evidência;
-5. área/ficheiro suspeito;
-6. correção mínima recomendada.
+## 4. QUANDO ENCONTRAR UM BUG DE CÓDIGO
 
-O Assistente implementa a correção e valida no GitHub.
+Se a investigação externa encontrar um problema no código:
+1. não corrigir o GitHub;
+2. identificar o erro exato;
+3. indicar URL/ambiente e forma de reprodução;
+4. fornecer evidência objetiva;
+5. indicar ficheiro/área provável;
+6. recomendar a correção mínima;
+7. devolver resposta curta.
 
-## Leitura obrigatória
-Antes de executar qualquer tarefa:
-1. ler .github/AI_PROJECT_RULES.md;
-2. ler .github/CODEX_RULES.md;
-3. respeitar as regras mais recentes;
-4. executar apenas o escopo pedido.
+Depois disso, o Assistente implementa e valida a correção no GitHub.
 
-## Economia
-Usar a menor operação que responda à pergunta. Não repetir medições sem nova hipótese/evidência. Não fazer no Codex aquilo que o Assistente consegue fazer diretamente.
+## 5. ECONOMIA DE CRÉDITOS
 
-## Resposta
-Curta, factual e com resultados verificáveis. Se a investigação externa revelar um problema de código, parar no limite do diagnóstico e devolver a evidência ao Assistente.
+Antes de executar:
+- confirmar que a tarefa não pode ser feita pelo Assistente;
+- escolher a menor operação que responda à pergunta;
+- não repetir testes já suficientes;
+- não investigar áreas não relacionadas;
+- não fazer trabalho que o GitHub connector do Assistente consegue fazer.
 
-## Regra de continuidade
+## 6. LEITURA OBRIGATÓRIA
 
-- Nunca assumir que uma tarefa ficou concluída apenas porque atingiu uma limitação.
-- Se a tarefa pedida ao Codex for executável com as capacidades externas disponíveis, executar e validar nessa mesma sessão.
-- Se encontrar um bloqueio que pertence ao Assistente (por exemplo, correção no GitHub), devolver imediatamente a evidência e a correção mínima recomendada, sem tentar substituir o trabalho do Assistente.
-- Se o bloqueio exigir uma ação manual da utilizadora, identificar exatamente essa ação e o resultado esperado.
-- Nunca devolver apenas "não consigo" ou um relatório inconclusivo quando ainda existir uma ação executável.
-- A resposta deve sempre terminar com resultado verificável ou com o bloqueio externo exato e a ação concreta necessária.
+Antes de qualquer tarefa neste projeto:
+1. ler `.github/AI_PROJECT_RULES.md`;
+2. ler `.github/CODEX_RULES.md`;
+3. confirmar o limite da tarefa;
+4. executar apenas esse limite.
+
+## 7. FORMATO DA RESPOSTA
+
+Resposta curta e factual:
+- o que foi executado;
+- ambiente/URL/commit se relevante;
+- resultado;
+- erro/evidência se houver;
+- correção recomendada se houver.
+
+Não devolver relatórios longos quando um resultado objetivo basta.
+
+## 8. REGRA DE CONTINUIDADE
+
+Se a tarefa pedida for possível no ambiente do Codex, executar sem pedir à utilizadora para descobrir como fazer.
+
+Se a tarefa exigir GitHub, não assumir essa responsabilidade: devolver a evidência ao Assistente.
+
+Se a capacidade necessária não estiver disponível, indicar exatamente a limitação em vez de inventar um resultado.
+
+## 9. ATUALIZAÇÃO
+
+Este ficheiro é parte das regras operacionais do projeto. Sempre que surgir uma nova limitação, risco, desperdício de créditos, capacidade útil ou decisão específica sobre o Codex, o Assistente deve atualizar este ficheiro e o `.github/AI_PROJECT_RULES.md` no mesmo ciclo.
+
 FIM.
 
 
-## REGRA PERMANENTE — EXECUÇÃO ENXUTA E CRITÉRIO DE PARAGEM — 2026-09-25
+## REGRA PERMANENTE — CODEX APENAS QUANDO EXPRESSAMENTE ESSENCIAL — 2026-09-25
 
-- O objetivo não é maximizar a quantidade de testes; é obter a evidência mínima suficiente para responder à pergunta técnica.
-- Assim que a hipótese principal estiver comprovada e os critérios de aceitação estiverem satisfeitos, **parar**. Não continuar com regressões redundantes, relatórios extensos, novas medições sem nova hipótese ou navegação adicional.
-- Priorizar nesta ordem: (1) reproduzir/confirmar o problema, (2) validar a correção específica, (3) executar apenas os regressões essenciais diretamente afetados, (4) terminar.
-- Se uma verificação adicional for opcional e não puder alterar a decisão, não a executar.
-- Se o pedido disser explicitamente para terminar após certos checks, respeitar esse limite.
-- Para tarefas de validação, o resultado deve ser curto: check -> PASS/FAIL -> evidência essencial.
-- Não permanecer numa tarefa apenas porque ainda existem possíveis testes. Depois de evidência suficiente, concluir imediatamente.
-
-
-## REGRA PERMANENTE — USO EXCLUSIVAMENTE ESSENCIAL — 2026-09-25
-
-- O Codex só deve executar tarefas que dependam realmente das suas capacidades externas e que sejam **essenciais** para a decisão ou desbloqueio do trabalho.
-- Não repetir verificações já feitas, não "bater no seguimento", não fazer confirmações redundantes e não iniciar testes adicionais apenas porque existem testes possíveis.
-- Se o resultado já permitir a decisão pedida, terminar imediatamente.
-- Se uma tarefa falhar ou não puder ser executada, não insistir nem repetir automaticamente. Só voltar a executá-la se existir uma necessidade nova e concreta que exija a capacidade externa.
-- Cada execução deve ter escopo mínimo, critério de conclusão claro e consumo mínimo de créditos.
+- O Codex deve ser usado **apenas quando a capacidade necessária estiver realmente indisponível ao Assistente** e a tarefa for essencial para desbloquear ou validar o trabalho.
+- Não usar Codex para "bater no seguimento", repetir verificações já concluídas, confirmar novamente factos já comprovados, obter uma segunda confirmação sem nova hipótese, ou satisfazer uma preferência por validação adicional.
+- Antes de preparar qualquer prompt, o Assistente deve perguntar internamente: **"Consigo fazer isto diretamente? Já temos evidência suficiente? Esta execução pode alterar a decisão?"** Se a resposta for "sim, consigo", "sim, já temos evidência suficiente" ou "não altera a decisão", não usar Codex.
+- Uma tarefa externa que falhe, seja bloqueada ou termine sem resultado não justifica novas tentativas automáticas. Só repetir se surgir uma necessidade concreta nova que exija realmente a capacidade externa.
+- O objetivo é **uso mínimo e essencial de créditos**, não validação redundante.
