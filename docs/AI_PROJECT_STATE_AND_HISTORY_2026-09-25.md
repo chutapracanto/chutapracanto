@@ -1391,3 +1391,29 @@ Quando essa fonte estiver disponível, a operação correta já está definida:
 **MIGRAÇÃO FRAMER TOTAL: NÃO CONCLUÍDA.**
 
 Nenhuma nova frente de conteúdo, podcast, distribuição, monetização ou performance foi iniciada nesta linha de trabalho.
+
+
+## REORGANIZAÇÃO DO SISTEMA DE CONTINUIDADE — ROADMAP OFICIAL — 2026-09-25
+
+Foi identificada uma lacuna de processo: Rules, Bíblia e Ledger definiam como trabalhar e o que já tinha acontecido, mas não existia um documento único e obrigatório que definisse a sequência das grandes fases do projeto.
+
+Ação executada:
+- criado `docs/AI_PROJECT_ROADMAP.md`;
+- o Roadmap passou a definir a ordem das grandes frentes e os critérios de mudança de fase;
+- `.github/AI_PROJECT_RULES.md` passou a exigir a consulta do Roadmap antes de iniciar ou mudar de frente;
+- `bíblia mestra Chuta Pra Canto.md` passou a apontar para o Roadmap como documento de sequência operacional;
+- foi explicitada a separação entre lane técnica do site e lane criativa/distribuição;
+- foi explicitamente preservada como fase estrutural a futura integração de dados/API de competições.
+
+Estado operacional registado:
+- Fase 1 — recuperação/consolidação do conteúdo histórico: BLOQUEADA pela fonte histórica externa posterior a 22/08/2026;
+- não avançar para podcasts/cortes/distribuição como substituição da fase bloqueada;
+- não voltar a LCP/CLS sem hipótese/evidência nova;
+- não esquecer a fase de dados/API de futebol.
+
+Objetivo:
+evitar que uma IA reconstrua a rota a partir de memória de conversa, salte para uma frente criativa por iniciativa própria ou apresente repetidamente um "próximo passo" sem o executar.
+
+Commit do Roadmap: `f65ce68fae6c9d07114672dd202efb891b3d2023`
+Commit das Rules: `fc7526797734cd7ad87ab2ad9796b33d0549a2fa`
+Commit da Bíblia Mestra: `c7432fe44fa5b18fb2ea02fa21a11da4fec1310b`
