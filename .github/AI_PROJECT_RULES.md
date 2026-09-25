@@ -990,3 +990,10 @@ Aplicação:
 Não criar commits documentais artificiais: se não houve alteração relevante ou se a documentação não muda uma decisão/continuidade futura, não criar uma atualização só para “ter um registo”.
 
 O estado real do GitHub/produção continua a prevalecer sobre qualquer Markdown desatualizado.
+
+
+## PROTOCOLO DE EXECUÇÃO E BLOQUEIOS — 2026-09-25
+
+A execução operacional detalhada foi consolidada em `docs/AI_EXECUTION_PROTOCOL.md`. Este protocolo passa a complementar as Rules e a Bíblia.
+
+Regra central: **UM BLOQUEIO NÃO É UM RESULTADO.** Uma IA não deve limitar-se a identificar uma dependência externa e parar. Deve executar tudo o que estiver ao seu alcance e, quando algo depender da Rute ou do Codex, transformar essa dependência em instruções concretas e retomáveis.
