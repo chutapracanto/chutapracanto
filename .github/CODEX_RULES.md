@@ -132,3 +132,14 @@ Quando a IA não conseguir executar uma operação porque depende de browser/loc
 Se a tarefa não for do Codex, não o usar apenas para evitar trabalho que a IA consegue fazer.
 
 Quando a operação exigir ação da Rute, o Assistente deve explicar à Rute exatamente os passos necessários e o recurso que deve devolver. O Codex não deve ser usado como substituto de uma ação que só a Rute pode executar.
+
+## REGRA PERMANENTE — LIMITE DE TAMANHO DOS PROMPTS CODEX — 2026-09-25
+
+- Todo prompt enviado à Rute para copiar para o Codex deve ser **curto e controlado por caracteres**.
+- Limite operacional padrão: **máximo de 2.000 caracteres**, incluindo espaços.
+- O objetivo é impedir que o prompt seja interpretado como conteúdo para criar um documento dentro do Codex.
+- Não repetir contexto que já esteja nas Rules, ledger, roadmap ou GitHub: mandar o Codex ler a fonte de verdade.
+- Incluir apenas: tarefa, limites essenciais, validação e resultado esperado.
+- Se uma tarefa exigir mais contexto, **dividir em etapas/prompt(s) curtos**, em vez de enviar um prompt longo.
+- Exceção só quando uma operação técnica exigir inevitavelmente conteúdo superior a este limite; nesse caso, o Assistente deve reduzir ao mínimo possível e explicar a necessidade.
+- Esta regra prevalece sobre a preferência anterior por “poucas centenas de palavras”: o controlo principal passa a ser o número de caracteres.
