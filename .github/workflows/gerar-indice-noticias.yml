@@ -52,7 +52,8 @@ jobs:
                   continue
               text = path.read_text(encoding="utf-8-sig")
               date = str(item["framerPublished"])[:10]
-                            new_text, count = re.subn(r'(?m)^((?:published|date|dataNoticia|data)\\s*:\\s*)[\"']?\\d{4}-\\d{2}-\\d{2}[\"']?\\s*              if count != 1:
+              new_text, count = re.subn(r'(?m)^((?:published|date|dataNoticia|data)\s*:\s*)["']?\d{4}-\d{2}-\d{2}["']?\s*$', rf'\1"{date}"', text, count=1)
+              if count != 1:
                   raise SystemExit(f"published field missing/ambiguous: {path}")
               if new_text != text:
                   path.write_text(new_text, encoding="utf-8")
