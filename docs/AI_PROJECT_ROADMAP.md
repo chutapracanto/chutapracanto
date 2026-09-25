@@ -545,3 +545,78 @@ O inventário de redirects históricos foi concluído em `docs/framer/framer-url
 A documentação oficial do Framer confirma que redirects cross-domain/domain-level não são resolvidos pelo mecanismo normal de Redirects do projeto; essa parte depende do hosting provider do domínio antigo. Para `chutapracanto.framer.website`, a capacidade de controlar esse host histórico ainda não está disponível no ambiente atual.
 
 **Estado:** inventário concluído; execução dos redirects aguarda confirmação de controlo do host/projeto histórico.
+
+
+
+## 22. ATUALIZAÇÃO OPERACIONAL — 2026-09-25 — CLOUDFLARE / ENGAGEMENT / REORDENAÇÃO DA FASE 2
+
+### Correção do estado Cloudflare
+A referência histórica a um Worker separado chamado `chutapracanto` está desatualizada.
+
+A Rute confirmou diretamente no Dashboard da Cloudflare que **esse Worker separado não existe atualmente**.
+
+O que permanece ativo no repositório é o `_worker.js`, que deve ser tratado como parte da arquitetura Pages/runtime existente. Não criar nem ressuscitar um Worker separado para resolver a funcionalidade de likes.
+
+### Fase 2 — nova frente prioritária
+A ação de gosto/coração da PR #33 foi uma implementação transitória em `localStorage`. Não é considerada a arquitetura final porque não produz reação persistente nem contador público partilhado.
+
+A próxima frente técnica é:
+
+**ENGAGEMENT PERSISTENTE — coração/gosto real**
+
+Arquitetura candidata:
+```
+artigo
+  ↓
+/api/article-like
+  ↓
+_pages runtime / _worker.js_
+  ↓
+Cloudflare D1
+  ↓
+estado persistente + contador
+```
+
+### Ordem obrigatória
+1. Inspecionar Cloudflare real.
+2. Confirmar runtime de `/api/*`.
+3. Confirmar D1 existente/não existente.
+4. Confirmar binding existente/não existente.
+5. Confirmar plano e ausência de billing/upgrade obrigatório.
+6. Só então definir schema mínimo e proteção anti-abuso.
+7. Implementar endpoint persistente.
+8. Substituir o localStorage da PR #33.
+9. Validar persistência, idempotência, contagem e falhas.
+
+### Supabase — gate arquitetural
+Supabase não faz parte da implementação por defeito.
+
+Só passa a ser considerado se uma análise concreta provar **ganho materialmente superior** em rentabilidade/automatização/escala e se a solução puder continuar sustentável sem depender de Pro, créditos pagos ou billing obrigatório.
+
+Sem essa prova, **D1 é a opção de referência** por integração nativa com a stack Cloudflare existente.
+
+### Limites gratuitos que entram no desenho
+A documentação oficial Cloudflare atual indica D1 no Workers Free com 5M rows read/dia, 100k rows written/dia e 5 GB de storage; os limites diários são aplicados e, quando excedidos, as queries falham até ao reset. Portanto, a solução deve usar queries/indexes eficientes e evitar operações desnecessárias.
+
+### O que NÃO é o próximo passo
+- não investigar novamente o Framer;
+- não implementar redirects agora;
+- não criar Supabase;
+- não criar outro Worker;
+- não criar ainda tabelas/endpoint de likes;
+- não abrir PR/merge nesta inspeção externa.
+
+### Fases e ideias que permanecem depois da Fase 2
+**Fase 3 — Dados/API de futebol:** competições, épocas, equipas, classificações, fixtures, resultados, eventos, fornecedor gratuito/estável, cache, rate limits, stale-if-error e atualização automática.
+
+**Fase 4 — SEO/indexação real:** Search Console, sitemap enviado, cobertura, canonical, páginas excluídas, Google News/Publisher Center quando fizer sentido.
+
+**Fase 5 — Performance:** apenas hipóteses comprovadas, baseline, LCP/CLS/INP, imagens, scripts, cache e rede; não reabrir experiências antigas sem nova evidência.
+
+**Fase 6 — Monetização:** AdSense, afiliados, publicidade e parcerias; separar preparação técnica, aprovação e receita efetiva.
+
+**Fase 7 — Distribuição/crescimento:** Facebook, Instagram, TikTok, YouTube, Shorts, Reels, podcast, cortes e distribuição cruzada; lane criativa separada da fase técnica.
+
+**Fase 8 — Automação/escala:** publicação, validações, dados, distribuição, workflows, integrações e alertas; automatizar primeiro tarefas repetitivas, previsíveis e validáveis.
+
+**Estado operacional:** FASE 2 continua ativa, mas a próxima operação técnica é a inspeção Cloudflare necessária para substituir o like local por engagement persistente.
