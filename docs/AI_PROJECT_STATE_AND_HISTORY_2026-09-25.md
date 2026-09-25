@@ -1731,3 +1731,29 @@ A descrição da PR regista execução real de 213/213 URLs, 0 falhas e 213/213 
 **REPARAÇÃO DE FORMATAÇÃO: MERGED E VALIDADA NO REPOSITÓRIO.**
 
 A Fase 2 continua como frente operacional. Não reabrir a reconciliação histórica por esta alteração: trata-se de reparação de apresentação/estrutura do conteúdo já existente.
+
+## 50. AÇÃO DE GOSTO/CORAÇÃO NAS NOTÍCIAS — 2026-09-25 16:24
+
+### Pesquisa e decisão
+A pesquisa atual de 2026 encontrou uso crescente de formatos de participação/reação em experiências de futebol e cobertura desportiva. A Meta descreve reações e participação como parte das novas experiências de futebol nas suas plataformas; o Digital Content Next identifica polls, reactions e audience participation como formatos de engagement em cobertura desportiva; e o Footy Headlines lançou em fevereiro de 2026 view counts e upvote/downvote nos artigos. citeturn0search0turn0search5turn0search14
+
+Decisão aplicada ao CPC: reação simples de coração/gosto, sem comentários, contas ou sistema de votação complexo.
+
+### Implementação
+- PR #33 criada e mergeada.
+- Merge commit: `eb76d46beda2a2b1bf762fec2a5776480e80dfca`.
+- Apenas `noticia.html` foi alterado.
+- Botão acessível com `aria-pressed`.
+- Estado persistido localmente por slug via `localStorage`.
+- Eventos `article_like`/`article_unlike` enviados para gtag/dataLayer quando disponíveis.
+- Mobile mantém apenas o ícone para não aumentar a barra de ação.
+- Não foi criado backend/contador público porque a arquitetura atual não dispõe de uma camada persistente de reações; a implementação é deliberadamente reversível.
+
+### Validação
+- main atual: `eb76d46beda2a2b1bf762fec2a5776480e80dfca`.
+- 0 PRs abertas após o merge.
+- Markup, inicialização, localStorage e eventos foram confirmados no ficheiro efetivamente presente em main.
+- Validação HTTP da produção não foi possível nesta sessão: o acesso externo ao domínio não está disponível no ambiente atual. Portanto, produção/deployment não são declarados validados.
+
+### Estado
+**FASE 2 — UX editorial: ação de gosto implementada e mergeada; validação de produção externa pendente por limitação real do ambiente.**
