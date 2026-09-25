@@ -3,7 +3,7 @@ title: "Fábio Silva pronto para o plano de Jorge Jesus: \"A tática do mister p
 slug: "fábio-silva-pronto-para-o-plano-de-jorge-jesus-a-tática-do-mister-pode-potenciar-as-minhas-melhores-características"
 subtitle: "O avançado do Borussia Dortmund destacou o seu perfil tático de ligação entre linhas e elogiou o foco de Jorge Jesus nos aspetos táticos."
 category: "Seleção Nacional"
-published: "2026-09-22"
+published: "2026-08-05"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/fábio-silva-pronto-para-o-plano-de-jorge-jesus-a-tática-do-mister-pode-potenciar-as-minhas-melhores-características"
 image: "https://framerusercontent.com/images/pCIjMtWcr6Stcl8rXm8VHArgoJY.webp?width=450&height=253"
