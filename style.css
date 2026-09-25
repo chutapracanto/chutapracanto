@@ -583,7 +583,7 @@ footer {
 
 
 /* ==========================================
-   ARTIGO: TÍTULO/SUBTÍTULO FIXOS E PROGRESSIVOS
+   ARTIGO: TÍTULO/SUBTÍTULO COMO BLOCO VISUAL FIXO
    ========================================== */
 .article-page-header {
   --article-progress: 0;
@@ -592,7 +592,7 @@ footer {
 .article-back-link {
   display: inline-block;
   margin-bottom: 1rem;
-  font-size: .72rem;
+  font-size: .68rem;
   line-height: 1.2;
   transform: translateY(calc(var(--article-progress, 0) * -10px));
   opacity: calc(1 - (var(--article-progress, 0) * 1.2));
@@ -601,25 +601,27 @@ footer {
 
 .article-heading {
   --article-progress: 0;
+  --article-heading-scale: calc(1 - (var(--article-progress) * .62));
   position: sticky;
   top: var(--site-header-height, 0px);
   z-index: 900;
-  height: calc(var(--article-heading-natural-height, 180px) * (1 - (var(--article-progress) * .62)));
-  overflow: visible;
+  min-height: 88px;
+  height: max(88px, calc(var(--article-heading-natural-height, 210px) * var(--article-heading-scale)));
+  overflow: hidden;
   background: rgba(8, 8, 8, calc(.96 - (var(--article-progress) * .88)));
   border-top-color: rgba(57, 255, 20, calc(.08 - (var(--article-progress) * .07)));
   border-bottom-color: rgba(57, 255, 20, calc(.14 - (var(--article-progress) * .12)));
-  padding-top: calc(1.05rem - (var(--article-progress) * .72rem));
-  padding-bottom: calc(.95rem - (var(--article-progress) * .62rem));
+  padding: 1.05rem 0 .95rem;
   backdrop-filter: blur(calc(12px * (1 - var(--article-progress))));
-  transition: background-color .08s linear, border-color .08s linear, height .08s linear, padding .08s linear;
+  transition: background-color .08s linear, border-color .08s linear, height .08s linear;
 }
 
 .article-heading-visual {
   width: 100%;
   transform-origin: top left;
-  transform: scale(calc(1 - (var(--article-progress) * .62)));
+  transform: scale(var(--article-heading-scale));
   transition: transform .08s linear;
+  will-change: transform;
 }
 
 .article-heading h1 {
@@ -627,6 +629,7 @@ footer {
   font-size: 2.6rem;
   line-height: 1.2;
   white-space: normal;
+  opacity: 1;
 }
 
 .article-summary {
@@ -635,22 +638,35 @@ footer {
   margin-bottom: .35rem;
   max-height: none;
   overflow: visible;
+  opacity: 1;
 }
 
-.article-heading .tag,
-.article-byline {
+.article-heading > .article-heading-visual > .tag {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 .55rem .15rem 0;
+  font-size: .62rem;
+  line-height: 1.1;
+  color: rgba(255,255,255,.58);
+  opacity: 1;
+}
+
+.article-heading > .article-heading-visual > .tag + .tag {
+  margin-left: .15rem;
+  color: rgba(255,255,255,.42);
+}
+
+.article-heading .article-byline {
   opacity: calc(1 - (var(--article-progress) * 1.15));
   transition: opacity .08s linear;
 }
 
 @media (max-width: 768px) {
   .article-heading {
-    padding-top: .8rem;
-    padding-bottom: .75rem;
-  }
-
-  .article-heading-visual {
-    transform: scale(calc(1 - (var(--article-progress) * .58)));
+    min-height: 76px;
+    height: max(76px, calc(var(--article-heading-natural-height, 170px) * var(--article-heading-scale)));
+    padding: .8rem 0 .75rem;
+    --article-heading-scale: calc(1 - (var(--article-progress) * .58));
   }
 
   .article-heading h1 {
@@ -659,6 +675,11 @@ footer {
 
   .article-summary {
     font-size: 1rem;
+  }
+
+  .article-heading > .article-heading-visual > .tag {
+    font-size: .55rem;
+    margin-right: .4rem;
   }
 }
 
