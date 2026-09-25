@@ -1735,7 +1735,7 @@ A Fase 2 continua como frente operacional. Não reabrir a reconciliação histó
 ## 50. AÇÃO DE GOSTO/CORAÇÃO NAS NOTÍCIAS — 2026-09-25 16:24
 
 ### Pesquisa e decisão
-A pesquisa atual de 2026 encontrou uso crescente de formatos de participação/reação em experiências de futebol e cobertura desportiva. A Meta descreve reações e participação como parte das novas experiências de futebol nas suas plataformas; o Digital Content Next identifica polls, reactions e audience participation como formatos de engagement em cobertura desportiva; e o Footy Headlines lançou em fevereiro de 2026 view counts e upvote/downvote nos artigos. citeturn0search0turn0search5turn0search14
+A pesquisa atual de 2026 encontrou uso crescente de formatos de participação/reação em experiências de futebol e cobertura desportiva. A Meta descreve reações e participação como parte das novas experiências de futebol nas suas plataformas; o Digital Content Next identifica polls, reactions e audience participation como formatos de engagement em cobertura desportiva; e o Footy Headlines lançou em fevereiro de 2026 view counts e upvote/downvote nos artigos. Sources consultadas: Meta Newsroom (11/06/2026), Digital Content Next (08/06/2026) e Footy Headlines (21/02/2026).
 
 Decisão aplicada ao CPC: reação simples de coração/gosto, sem comentários, contas ou sistema de votação complexo.
 
