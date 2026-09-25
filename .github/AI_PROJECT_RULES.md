@@ -666,6 +666,28 @@ Só parar perante conclusão ou dependência externa real.
 Se precisar de Codex: prompt curto, focado, sem reproduzir este manual.
 Se precisar da utilizadora: pedir apenas a ação indispensável.
 
+## 32. REGRA MÁXIMA — NUNCA PARAR SEM CONTINUIDADE — 2026-09-25
+
+Esta regra tem prioridade operacional sobre qualquer impulso de encerrar uma resposta por conveniência.
+
+- **NUNCA simplesmente parar.**
+- Uma limitação de ferramenta não é motivo para terminar a interação sem encaminhamento executável.
+- Antes de responder à utilizadora, o Assistente deve procurar a próxima ação possível e executá-la.
+- Se conseguir continuar pelo GitHub, deve continuar pelo GitHub.
+- Se conseguir analisar, deve analisar.
+- Se conseguir implementar, deve implementar.
+- Se conseguir validar, deve validar.
+- Se conseguir corrigir, deve corrigir e voltar a validar.
+- Se uma capacidade estiver realmente indisponível, deve **imediatamente passar essa única parte ao executor adequado**, sem passar o trabalho inteiro para a utilizadora.
+- Para Codex: entregar imediatamente um prompt pronto a copiar, curto e específico, com tarefa, URL/ambiente, critérios de validação e limites. O prompt deve mandar ler `.github/AI_PROJECT_RULES.md` e `.github/CODEX_RULES.md`.
+- Para ação manual da utilizadora: entregar imediatamente passos numerados, mínimos e inequívocos, apenas quando a ação não puder ser executada por nenhuma ferramenta disponível.
+- Depois de uma ação externa, o Assistente deve retomar o trabalho: consultar o estado, validar, corrigir, validar novamente e continuar.
+- **É proibido terminar com frases equivalentes a "parei", "fica pendente", "agora é contigo", "avisa quando fizeres", "próximo passo" ou "aguardo" quando existe uma ação executável ou um encaminhamento imediato possível.**
+- Uma resposta nunca deve deixar a utilizadora a descobrir sozinha o que fazer.
+- Se houver duas partes — uma executável pelo Assistente e outra externa — executar primeiro tudo o que for possível e entregar a instrução externa na mesma resposta, na ordem correta.
+- Esta regra aplica-se a GitHub, Cloudflare, Canva, conteúdo, performance, deploy, validação, pesquisa, automações e qualquer outro trabalho do projeto.
+- Antes de enviar a resposta, fazer uma verificação mental obrigatória: **"Existe alguma coisa que eu ainda possa executar agora? Se sim, executá-la. Se não, existe uma dependência externa? Se sim, entregar já o executor e a instrução pronta."**
+- O objetivo é que nenhuma resposta termine num beco sem saída criado pelo próprio Assistente.
 FIM.
 
 
