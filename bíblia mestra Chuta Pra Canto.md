@@ -5050,3 +5050,21 @@ Essas fases não são substituídas pela frente de engagement. O like persistent
 
 ### Próxima dependência
 A próxima ação externa necessária é confirmar, na sessão Cloudflare, o runtime real de `/api/*`, a existência/binding de D1 e o plano atual, sem ativar billing e sem alterar produção.
+
+## ATUALIZAÇÃO VIGENTE — AUDITORIA PR #34 E IMPLEMENTAÇÃO CONTROLADA — 2026-09-25
+
+A PR #34 foi auditada antes de merge. A implementação anterior tinha cobertura funcional útil, mas apresentava dois problemas de integração com o objetivo final: o coração tinha regras visuais próprias em vez de reutilizar exatamente a base do Partilhar; e a validação de slug do endpoint aceitava apenas ASCII, incompatível com slugs Unicode existentes.
+
+A solução foi reimplementada pelo Assistente em `feat/article-likes-assistant-review`, a partir de `main`.
+
+A arquitetura vigente fica:
+```
+artigo → /api/article-like → _worker.js / Pages runtime → D1
+```
+
+O D1 `cpc-article-likes` já existente é preservado. O binding `ARTICLE_LIKES_DB` e a migration `0001_article_likes.sql` passam a fazer parte da implementação do repositório.
+
+A UX final mantém apenas o ícone de coração, sem texto ou contador visível. O estado é persistente no servidor; o identificador anónimo é mantido no navegador e transformado em hash no servidor. A unicidade é garantida pela chave `(article_slug, visitor_hash)`.
+
+A PR #34 permanece sem merge e não deve ser promovida. A branch do Assistente deve ser validada externamente antes de qualquer merge em `main`.
+
