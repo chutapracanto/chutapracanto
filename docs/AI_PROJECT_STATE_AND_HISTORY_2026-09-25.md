@@ -1707,3 +1707,27 @@ A reconciliação dos 163 registos Framer posteriores a 22/08/2026 foi concluíd
 **FASE 2: PRÓXIMA FRENTE TÉCNICA.**
 
 A etapa de desativação/redirect do domínio histórico Framer permanece planeada, mas não deve ser executada antes do inventário e mapeamento de URLs.
+
+## 49. REPARAÇÃO DA FORMATAÇÃO DOS ARTIGOS FRAMER — 2026-09-25 16:22
+
+### Estado real no GitHub
+A PR #32, criada sobre a main em `4c8d5089880eb22799e028b03a10f52fa3c4931d`, foi validada quanto ao escopo e mergeada em `main`.
+
+- PR #32: **MERGED**.
+- Merge commit: `7b91a3793620fd5802242a0775c552432afb5fa3`.
+- Head validado antes do merge: `57560ca3b16ac3720c5da710e9c36d435dc7d329`.
+- Main estava 0 commits atrás da branch da PR e a PR estava `mergeable: true`.
+- Não existem PRs abertas após o merge.
+- A alteração abrangeu **213 artigos históricos**: o corpo foi reconstruído a partir da estrutura HTML do Framer, preservando parágrafos, headings, negritos, itálicos, listas, blockquotes, links e imagens; títulos/subtítulos foram limpos de caracteres invisíveis/mojibake.
+- O importador recebeu uma rota explícita `--repair-existing` para futuras reparações controladas.
+- A alteração não modificou o índice nem o sitemap; o diff da PR foi limitado ao workflow do importador, ao script e aos conteúdos Markdown.
+
+### Validação executada
+Foram inspecionados no branch da PR exemplos representativos antes do merge e, após o merge, o conteúdo equivalente em `main`. A estrutura Markdown esperada está presente.
+
+A descrição da PR regista execução real de 213/213 URLs, 0 falhas e 213/213 artigos reparados. O connector atual não expõe os runs de push dessa execução como workflow runs associados ao commit, pelo que essa evidência permanece a evidência declarada pela própria execução/PR e não um status externo reproduzível pelo connector.
+
+### Decisão
+**REPARAÇÃO DE FORMATAÇÃO: MERGED E VALIDADA NO REPOSITÓRIO.**
+
+A Fase 2 continua como frente operacional. Não reabrir a reconciliação histórica por esta alteração: trata-se de reparação de apresentação/estrutura do conteúdo já existente.
