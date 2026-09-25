@@ -93,10 +93,10 @@ Este ficheiro é parte das regras operacionais do projeto. Sempre que surgir uma
 FIM.
 
 
-## REGRA PERMANENTE — CODEX APENAS QUANDO EXPRESSAMENTE ESSENCIAL — 2026-09-25
+## REGRA PERMANENTE — USO EXCLUSIVAMENTE ESSENCIAL — 2026-09-25
 
-- O Codex deve ser usado **apenas quando a capacidade necessária estiver realmente indisponível ao Assistente** e a tarefa for essencial para desbloquear ou validar o trabalho.
-- Não usar Codex para "bater no seguimento", repetir verificações já concluídas, confirmar novamente factos já comprovados, obter uma segunda confirmação sem nova hipótese, ou satisfazer uma preferência por validação adicional.
-- Antes de preparar qualquer prompt, o Assistente deve perguntar internamente: **"Consigo fazer isto diretamente? Já temos evidência suficiente? Esta execução pode alterar a decisão?"** Se a resposta for "sim, consigo", "sim, já temos evidência suficiente" ou "não altera a decisão", não usar Codex.
-- Uma tarefa externa que falhe, seja bloqueada ou termine sem resultado não justifica novas tentativas automáticas. Só repetir se surgir uma necessidade concreta nova que exija realmente a capacidade externa.
-- O objetivo é **uso mínimo e essencial de créditos**, não validação redundante.
+- O Codex só deve executar tarefas que dependam realmente das suas capacidades externas e que sejam **essenciais** para a decisão ou desbloqueio do trabalho.
+- Não repetir verificações já feitas, não "bater no seguimento", não fazer confirmações redundantes e não iniciar testes adicionais apenas porque existem testes possíveis.
+- Se o resultado já permitir a decisão pedida, terminar imediatamente.
+- Se uma tarefa falhar ou não puder ser executada, não insistir nem repetir automaticamente. Só voltar a executá-la se existir uma necessidade nova e concreta que exija a capacidade externa.
+- Cada execução deve ter escopo mínimo, critério de conclusão claro e consumo mínimo de créditos.
