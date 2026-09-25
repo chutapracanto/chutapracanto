@@ -4968,6 +4968,22 @@ A utilizadora não deve precisar de pedir estas atualizações.
 
 
 ---
+## ROADMAP OFICIAL — 2026-09-25
+
+A sequência das grandes fases do projeto passou a ter um documento próprio:
+
+`docs/AI_PROJECT_ROADMAP.md`
+
+A Bíblia Mestra define contexto e arquitetura; o Roadmap define a ordem operacional das fases. Em caso de dúvida sobre "o que vem a seguir", a IA deve consultar o Roadmap e o estado real do GitHub, não reconstruir a sequência a partir de memória de conversas.
+
+O Roadmap também separa explicitamente:
+- lane técnica: site, GitHub, Cloudflare, Admin, dados/API, SEO, performance, monetização técnica e automação;
+- lane criativa/distribuição: Canva, vídeos, Shorts, Reels, thumbnails, podcast, cortes e redes sociais.
+
+Executar uma tarefa criativa pedida pela utilizadora não altera automaticamente a fase técnica do projeto.
+
+A área futura de dados/API de competições permanece uma fase estrutural oficial e deve ser preservada conforme `docs/arquitetura-futura-competicoes.md`.
+
 ## FIM DA BÍBLIA MESTRA
 
 
