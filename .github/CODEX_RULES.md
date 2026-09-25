@@ -107,3 +107,12 @@ FIM.
 - O histórico de experiências, validações, falhas e decisões do projeto está em `docs/AI_PROJECT_STATE_AND_HISTORY_2026-09-25.md`.
 - Antes de executar uma tarefa externa, consultar esse registo quando a tarefa tocar em performance, testes anteriores, bugs conhecidos ou abordagens já tentadas.
 - Não repetir experiências marcadas como falhadas sem uma hipótese técnica nova e concreta.
+
+
+## REGRA PERMANENTE — SINCRONIZAÇÃO DOCUMENTAL APÓS USO DO CODEX — 2026-09-25
+
+Quando o Codex for usado de forma legítima para uma validação ou tarefa externa e o resultado alterar o estado, evidência, decisão ou limitações conhecidas do projeto, o Assistente deve atualizar automaticamente o ledger e, quando aplicável, estas regras no mesmo ciclo.
+
+A utilizadora não precisa de pedir essa atualização separadamente.
+
+Não criar documentação apenas porque o Codex foi executado: só registar o que muda a continuidade ou uma decisão futura.
