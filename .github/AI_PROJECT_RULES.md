@@ -882,3 +882,20 @@ FIM.
 - Antes de iniciar uma nova linha de trabalho, consultar este registo para evitar repetir experiências já falhadas ou testes já suficientes.
 - O registo deve ser atualizado no mesmo ciclo de alterações relevantes, especialmente depois de testes externos, correções de bugs, medições de performance, decisões de arquitetura ou encerramento de uma experiência.
 - As Rules continuam a ser a fonte de verdade operacional; o estado real do GitHub/produção continua a vencer qualquer documentação histórica.
+
+
+## REGRA PERMANENTE — SINCRONIZAÇÃO AUTOMÁTICA DOS DOCUMENTOS OPERACIONAIS — 2026-09-25
+
+Quando houver uma alteração relevante no projeto — implementação, validação, falha, correção, decisão técnica, mudança de estado de produção ou alteração de regra — o Assistente deve atualizar automaticamente os ficheiros Markdown operacionais relevantes no mesmo ciclo.
+
+A utilizadora **não precisa de pedir** a atualização dos `.md` separadamente.
+
+Aplicação:
+- `docs/AI_PROJECT_STATE_AND_HISTORY_2026-09-25.md`: registar estado, evidência, resultado, falhas, decisões e caminhos futuros quando relevante.
+- `.github/AI_PROJECT_RULES.md`: atualizar apenas quando surgir uma regra/prioridade/arquitetura/decisão operacional que deva ser permanente.
+- `.github/CODEX_RULES.md`: atualizar quando a mudança afetar regras, limites, economia de créditos ou uso do Codex.
+- Bíblia Mestra: atualizar apenas quando houver uma alteração estrutural/consolidada que justifique alterar o documento de contexto principal; não duplicar o ledger por rotina.
+
+Não criar commits documentais artificiais: se não houve alteração relevante ou se a documentação não muda uma decisão/continuidade futura, não criar uma atualização só para “ter um registo”.
+
+O estado real do GitHub/produção continua a prevalecer sobre qualquer Markdown desatualizado.
