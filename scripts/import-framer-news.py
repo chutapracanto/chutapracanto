@@ -50,7 +50,8 @@ def repair_mojibake(value: str) -> str:
 
 def clean(value: str | None) -> str:
     value = repair_mojibake(html.unescape(value or ""))
-    value = re.sub(r"[\u200B\u200C\u200D\uFEFF\u2060]", "", value)\n    return re.sub(r"\s+", " ", value).strip()
+    value = re.sub(r"[\u200B\u200C\u200D\uFEFF\u2060]", "", value)
+    return re.sub(r"\s+", " ", value).strip()
 
 
 def slugify(value: str) -> str:
