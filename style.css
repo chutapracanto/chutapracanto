@@ -56,8 +56,8 @@ h1, h2, h3, .logo, .btn-neon, .tag, .hero-tag {
    ========================================== */
 header {
   --header-progress: 0;
-  background: rgba(8, 11, 17, calc(1 - (var(--header-progress) * .01)));
-  border-bottom: 1px solid rgba(26, 35, 50, calc(1 - (var(--header-progress) * .78)));
+  background: rgba(8, 11, 17, calc(.96 - (var(--header-progress) * .64)));
+  border-bottom: 1px solid rgba(26, 35, 50, calc(.92 - (var(--header-progress) * .72)));
   padding: calc(1rem - (var(--header-progress) * .5rem)) 1.5rem;
   position: sticky;
   top: 0;
@@ -137,11 +137,11 @@ nav a:hover, nav a.active {
 
 @media (max-width: 768px) {
   header {
-    padding: 0.75rem 1rem;
+    padding: calc(0.75rem - (var(--header-progress, 0) * 0.25rem)) 0.75rem;
   }
   .header-container {
     flex-direction: column;
-    gap: 0.65rem;
+    gap: calc(0.65rem - (var(--header-progress, 0) * 0.3rem));
   }
   .logo-link {
     justify-content: center;
@@ -155,7 +155,8 @@ nav a:hover, nav a.active {
   nav ul {
     justify-content: center;
     flex-wrap: wrap;
-    gap: 0.5rem 1rem;
+    gap: calc(0.5rem - (var(--header-progress, 0) * 0.2rem)) 1rem;
+    white-space: nowrap;
   }
 }
 
