@@ -1083,3 +1083,61 @@ E, sobretudo, não deve repetir uma experiência falhada apenas porque o histór
 **Sem nova evidência, não reabrir problemas fechados.**
 
 FIM.
+
+
+# 34. AUDITORIA DE INTEGRIDADE DOS METADADOS — 2026-09-25
+
+Durante a continuação da auditoria foi encontrado um problema real nos dados históricos importados do Framer que não estava suficientemente registado:
+
+- `content/noticias-index.json` tinha 238 entradas;
+- 179 entradas tinham o campo `author` contaminado com o início/corpo do artigo, em vez de conter apenas `ChutaPraCanto`;
+- isto afetava potencialmente a byline, JSON-LD `author` e qualquer funcionalidade que consumisse o autor diretamente;
+- o problema estava também presente nos Markdown de origem desses artigos, portanto não era apenas um erro do índice.
+
+## Correção aplicada
+
+1. O workflow `.github/workflows/gerar-indice-noticias.yml` foi reforçado para:
+   - detetar autores históricos corrompidos;
+   - reparar o frontmatter para `author: "ChutaPraCanto"`;
+   - regravar apenas o metadado, preservando o corpo editorial;
+   - falhar explicitamente se continuar a existir um autor anormalmente longo;
+   - incluir os Markdown reparados no commit automático.
+2. O índice atual foi corrigido diretamente: **179 autores corrigidos**.
+3. Um artigo-fonte foi reparado diretamente como teste da correção.
+4. Validação atual:
+   - índice: 238 entradas;
+   - autores anormalmente longos: **0**;
+   - artigo de teste: frontmatter corrigido.
+
+## Estado da execução automática
+
+O commit que alterou o workflow não apresentou ainda um workflow run visível através do conector GitHub. Portanto, **não assumir que os restantes 178 Markdown já foram reparados no repositório apenas por causa do workflow**.
+
+O índice público já está corrigido. A reparação dos Markdown deve ser considerada concluída apenas quando o estado real do GitHub confirmar os ficheiros ou quando uma execução do workflow produzir o commit automático correspondente.
+
+## Decisão
+
+Este problema é uma **falha de integridade de dados da importação histórica**, não uma questão de performance.
+
+Não voltar a investigar LCP/CLS com estes metadados contaminados sem primeiro garantir que a autoria está limpa.
+
+A documentação Google Search Central confirma que `author.name` deve conter apenas o nome do autor e recomenda `author.url`/ou `sameAs` para desambiguação quando aplicável. citeturn0search0
+
+## Pode voltar a acontecer?
+
+Sim, se novos Markdown forem gerados com frontmatter inválido.
+
+Por isso o workflow passa agora a funcionar também como **validador de integridade**, não apenas como gerador do índice.
+
+## Nova regra
+
+Sempre que o índice for regenerado, validar pelo menos:
+
+- autor não contaminado;
+- slug sem duplicação;
+- path permitido;
+- título presente;
+- data válida;
+- imagem presente quando aplicável;
+- tipo editorial válido;
+- sitemap sem duplicados.
