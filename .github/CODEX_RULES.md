@@ -100,3 +100,10 @@ FIM.
 - Se o resultado já permitir a decisão pedida, terminar imediatamente.
 - Se uma tarefa falhar ou não puder ser executada, não insistir nem repetir automaticamente. Só voltar a executá-la se existir uma necessidade nova e concreta que exija a capacidade externa.
 - Cada execução deve ter escopo mínimo, critério de conclusão claro e consumo mínimo de créditos.
+
+
+## REGISTO OPERACIONAL — 2026-09-25
+
+- O histórico de experiências, validações, falhas e decisões do projeto está em `docs/AI_PROJECT_STATE_AND_HISTORY_2026-09-25.md`.
+- Antes de executar uma tarefa externa, consultar esse registo quando a tarefa tocar em performance, testes anteriores, bugs conhecidos ou abordagens já tentadas.
+- Não repetir experiências marcadas como falhadas sem uma hipótese técnica nova e concreta.
