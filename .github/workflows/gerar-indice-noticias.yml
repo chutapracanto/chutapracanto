@@ -24,6 +24,55 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Reconciliar datas históricas do Framer
+        shell: python
+        run: |
+          import json
+          import re
+          import unicodedata
+          from pathlib import Path
+
+          inventory = json.loads(Path("docs/framer/framer-post-22-08-reconciliation-2026-09-25.json").read_text(encoding="utf-8"))
+          files = list(Path("content/noticias").glob("*.md"))
+
+          def norm(value):
+              value = unicodedata.normalize("NFKD", str(value or ""))
+              value = "".join(c for c in value if not unicodedata.combining(c))
+              return re.sub(r"[^a-z0-9]+", "-", value.casefold()).strip("-")
+
+          by_norm = {norm(p.stem): p for p in files}
+          updated = 0
+          missing = []
+          unchanged = 0
+          for item in inventory:
+              path = Path(item.get("indexPath") or "")
+              if not path.exists():
+                  candidate = by_norm.get(norm(item.get("title", "")))
+                  path = candidate if candidate else path
+              if not path.exists():
+                  missing.append(item.get("title", item.get("slug", "")))
+                  continue
+              text = path.read_text(encoding="utf-8-sig")
+              date = str(item["framerPublished"])[:10]
+              new_text, count = re.subn(r"(?m)^(published\\s*:\\s*)[\\\"']?\\d{4}-\\d{2}-\\d{2}[\\\"']?\\s*$", rf'\\1"{date}"', text, count=1)
+              if count != 1:
+                  raise SystemExit(f"published field missing/ambiguous: {path}")
+              if new_text != text:
+                  path.write_text(new_text, encoding="utf-8")
+                  updated += 1
+              else:
+                  unchanged += 1
+
+          if missing:
+              print("Missing reconciliation targets:", len(missing))
+              for title in missing[:10]: print(title)
+              raise SystemExit(1)
+          if len(inventory) != 163:
+              raise SystemExit(f"Unexpected reconciliation inventory size: {len(inventory)}")
+          if updated + unchanged != 163:
+              raise SystemExit(f"Reconciliation count mismatch: updated={updated}, unchanged={unchanged}")
+          print(f"Framer reconciliation applied: {updated} updated, {unchanged} already correct, 163 total")
+
       - name: Gerar índice
         shell: python
         run: |
