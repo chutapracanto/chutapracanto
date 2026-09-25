@@ -651,7 +651,7 @@ Os pedidos UX apresentados para o sticky/header e o botão de gosto foram reconc
 **Estado:**
 - PR #33: mergeada, mas transitória/localStorage;
 - PR #34: fechada sem merge;
-- PR #35: **aberta**, com a implementação persistente em D1 e coração-only;
+- PR #36: **aberta**, com a implementação persistente em D1 e coração-only;
 - a branch inclui também a correção adicional do sticky/header;
 - **NÃO está em main nem em produção**.
 
@@ -671,6 +671,6 @@ A pesquisa recente sobre publishing desportivo aponta para maior valor de experi
 
 ### Ordem operacional atual
 1. Validar browser do sticky/header corrigido.
-2. Validar browser/API/D1 do PR #35.
+2. Validar browser/API/D1 do PR #36.
 3. Se a validação passar, mergear #35 e validar deployment de produção.
 4. Separadamente, resolver a dependência do host Framer histórico e então aplicar/testar os 213 redirects.
