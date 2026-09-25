@@ -1256,3 +1256,37 @@ As Rules e a Biblia Mestra passaram a ter um Gate Obrigatorio Antes de Cada Resp
 
 ### Estado
 IMPLEMENTADO / DOCUMENTADO. Esta alteracao e processual e nao altera o codigo do site.
+
+
+## 40. CORRECAO DE ESCOPO DA MIGRACAO FRAMER — 2026-09-25
+
+### Problema
+Uma validacao posterior distinguiu corretamente entre:
+- os 179 ficheiros historicos importados do Framer em 05/08/2026; e
+- noticias que foram publicadas no Framer posteriormente, depois do periodo em que o site proprio ja estava a receber noticias pelo Admin.
+
+A existencia de ficheiros Framer no repositorio **nao prova** que todo o arquivo posterior do Framer tenha sido migrado.
+
+### Estado confirmado
+- A importacao validada de 24/09 cobriu 213 URLs unicas encontradas no arquivo publico entao usado, com 179 importadas, 34 duplicadas/ignoradas e 0 falhas nessa execucao.
+- Isso nao deve ser interpretado como prova de que noticias publicadas no Framer depois de 22/08/2026 foram importadas.
+- A utilizadora informou que a ultima noticia efetivamente presente no site antes da fase posterior do Framer era de 22/08, houve uma publicacao manual em 23/08 e depois existiram noticias publicadas no Framer durante o periodo em que o sistema proprio ainda apresentava problemas.
+- Foram referidas tentativas de migracao em 16/09 e 17/09, mas o estado atual nao deve assumir que essas noticias foram recuperadas sem evidencia.
+
+### Decisao
+A classificacao historica **“importacao Framer concluida” fica limitada ao lote/arquivo efetivamente validado de 24/09**. Nao marcar a migracao de todo o conteudo posterior do Framer como concluida.
+
+Antes de qualquer nova importacao:
+1. identificar a fonte historica exata que contem as noticias posteriores a 22/08;
+2. construir a lista de URLs/slugs dessa fonte;
+3. comparar com o estado atual do GitHub/index;
+4. separar ja existentes, ausentes e duplicados;
+5. so depois importar o conjunto ausente;
+6. validar index, sitemap, Admin e producao.
+
+Nao executar uma importacao cega nem apagar o bloqueio/protecao existente sem uma fonte e lista verificadas.
+
+### Registo de aprendizagem
+O erro anterior foi de **interpretacao do alcance da importacao**, nao prova de que os 179 ficheiros tenham desaparecido. O repositorio contem os ficheiros do lote historico; a questao em aberto e o conteudo posterior do Framer.
+
+Estado: **ESCOPO CORRIGIDO / RECUPERACAO POSTERIOR DO FRAMER PENDENTE**.
