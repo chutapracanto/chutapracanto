@@ -3,7 +3,7 @@ title: "João Palhinha em discurso direto: \"Vou dar o meu melhor e retribuir to
 slug: "joão-palhinha-em-discurso-direto-vou-dar-o-meu-melhor-e-retribuir-todo-o-esforço"
 subtitle: "Novo reforço das águias explica decisão de regressar a Portugal e promete dar tudo para manter o Benfica a vencer."
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-08-26"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/joão-palhinha-em-discurso-direto-vou-dar-o-meu-melhor-e-retribuir-todo-o-esforço"
 image: "https://framerusercontent.com/images/DyRYBFRsiZAmzftpVzY6loqCskc.jpg?width=1208&height=725"

@@ -3,7 +3,7 @@ title: "Benfica doma o Estoril com obra de arte de Lenglet e embala na temporada
 slug: "benfica-doma-o-estoril-com-obra-de-arte-de-lenglet-e-embala-na-temporada"
 subtitle: "Golaço de fora da área do central francês e novo golo de Pavlidis garantem mais três pontos à equipa de Marco Silva."
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-08-31"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/benfica-doma-o-estoril-com-obra-de-arte-de-lenglet-e-embala-na-temporada"
 image: "https://framerusercontent.com/images/Q6AHJfNiAbC6XR1qcqnn8ZQ1kc.jpg?width=1280&height=720"

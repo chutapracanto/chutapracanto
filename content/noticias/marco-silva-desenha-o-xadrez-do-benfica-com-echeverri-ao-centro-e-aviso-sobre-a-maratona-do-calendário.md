@@ -3,7 +3,7 @@ title: "Marco Silva desenha o xadrez do Benfica com Echeverri ao centro e aviso 
 slug: "marco-silva-desenha-o-xadrez-do-benfica-com-echeverri-ao-centro-e-aviso-sobre-a-maratona-do-calendário"
 subtitle: "Na antevisão à 5.ª jornada da Liga, Marco Silva analisou a integração dos novos rostos e confirmou Aursnes nos convocados."
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-09-04"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/marco-silva-desenha-o-xadrez-do-benfica-com-echeverri-ao-centro-e-aviso-sobre-a-maratona-do-calendário"
 image: "https://framerusercontent.com/images/81nRx7UbT53oxeWlpxNHsAiTDM.webp?width=2159&height=1239"

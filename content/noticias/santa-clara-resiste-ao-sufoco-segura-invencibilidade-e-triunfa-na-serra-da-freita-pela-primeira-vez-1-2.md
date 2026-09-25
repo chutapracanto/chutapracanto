@@ -3,7 +3,7 @@ title: "Santa Clara resiste ao sufoco, segura invencibilidade e triunfa na Serra
 slug: "santa-clara-resiste-ao-sufoco-segura-invencibilidade-e-triunfa-na-serra-da-freita-pela-primeira-vez-1-2"
 subtitle: "Gonçalo Paciência e Djé Tavares adiantaram os açorianos na 1.ª parte, com Barbero a reduzir para os arouquenses no reatamento."
 category: "Liga Portugal Betclic"
-published: "2026-08-05"
+published: "2026-09-14"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/santa-clara-resiste-ao-sufoco-segura-invencibilidade-e-triunfa-na-serra-da-freita-pela-primeira-vez-(1-2)"
 image: "https://framerusercontent.com/images/KYNGS1cw8aAAzZlZYuflWoJpsc.jpg?width=1280&height=720"

@@ -3,7 +3,7 @@ title: "Leão avassalador em Vila do Conde: Sporting esmaga Rio Ave com noite de
 slug: "leão-avassalador-em-vila-do-conde-sporting-esmaga-rio-ave-com-noite-de-gala-e-maturidade-de-sobra"
 subtitle: "Leões resolvem a partida com quatro golos na primeira parte e assinam uma das exibições mais maduras da temporada em Vila do Conde."
 category: "Sporting SC"
-published: "2026-08-05"
+published: "2026-08-28"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/leão-avassalador-em-vila-do-conde-sporting-esmaga-rio-ave-com-noite-de-gala-e-maturidade-de-sobra"
 image: "https://framerusercontent.com/images/IZypvoXtygBPR2D38BlJFxBWf0.webp?width=1024&height=576"

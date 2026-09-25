@@ -3,7 +3,7 @@ title: "Académico de Viseu anula Estrela da Amadora e impõe primeira derrota d
 slug: "académico-de-viseu-anula-estrela-da-amadora-e-impõe-primeira-derrota-da-época-0-2"
 subtitle: "André Clóvis bisou nos primeiros 24 minutos e deu expressão à superioridade estratégica dos viseenses."
 category: "Liga Portugal Betclic"
-published: "2026-08-05"
+published: "2026-09-20"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/académico-de-viseu-anula-estrela-da-amadora-e-impõe-primeira-derrota-da-época-(0-2)"
 image: "https://framerusercontent.com/images/qbzKEXXdohuisMzdwWjZAQbaM.jpg?width=696&height=464"

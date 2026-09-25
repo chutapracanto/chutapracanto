@@ -3,7 +3,7 @@ title: "A primeira lista do 'Mister': Jorge Jesus aposta na continuidade com qua
 slug: "a-primeira-lista-do-mister-jorge-jesus-aposta-na-continuidade-com-quatro-novidades-rumo-à-liga-das-nações"
 subtitle: "Novo selecionador manteve a espinha dorsal do Mundial e promoveu as chamadas de Samuel Soares, Nuno Tavares, Palhinha e Fábio Silva."
 category: "Seleção Nacional"
-published: "2026-08-05"
+published: "2026-09-18"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/a-primeira-lista-do-mister-jorge-jesus-aposta-na-continuidade-com-quatro-novidades-rumo-à-liga-das-nações"
 image: "https://framerusercontent.com/images/074BI87A7qrhUHX7sKMXl71h9xc.jpg?width=1200&height=675"

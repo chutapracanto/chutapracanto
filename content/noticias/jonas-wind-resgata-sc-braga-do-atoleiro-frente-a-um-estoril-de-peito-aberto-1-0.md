@@ -3,7 +3,7 @@ title: "Jonas Wind resgata SC Braga do atoleiro frente a um Estoril de peito abe
 slug: "jonas-wind-resgata-sc-braga-do-atoleiro-frente-a-um-estoril-de-peito-aberto-1-0"
 subtitle: "O internacional dinamarquês entrou aos 81' e assinou um gesto técnico magistral para bater Joel Robles e isolar o Braga no comboio da frente."
 category: "SC Braga"
-published: "2026-08-05"
+published: "2026-09-15"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/jonas-wind-resgata-sc-braga-do-atoleiro-frente-a-um-estoril-de-peito-aberto-(1-0)"
 image: "https://framerusercontent.com/images/u2PDiTJztiueX1IMksE4ry0t94.jpg?width=920&height=518"

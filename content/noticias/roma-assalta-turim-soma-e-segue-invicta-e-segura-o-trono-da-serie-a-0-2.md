@@ -3,7 +3,7 @@ title: "Roma assalta Turim, soma e segue invicta e segura o trono da Serie A (0-
 slug: "roma-assalta-turim-soma-e-segue-invicta-e-segura-o-trono-da-serie-a-0-2"
 subtitle: "Donyell Malen faturou após um erro crasso de Lucas Perri e o jovem Pisilli selou a vitória no período de compensação."
 category: "Serie A"
-published: "2026-08-05"
+published: "2026-09-14"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/roma-assalta-turim-soma-e-segue-invicta-e-segura-o-trono-da-serie-a-(0-2)"
 image: "https://framerusercontent.com/images/zZwQERwzo3X6BOaFRZqHk4cmk.jpg?width=1900&height=1267"

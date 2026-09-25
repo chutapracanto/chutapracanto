@@ -3,7 +3,7 @@ title: "Marco Silva lamenta falta de maturidade após desaire no Dragão: «Fomo
 slug: "marco-silva-lamenta-falta-de-maturidade-após-desaire-no-dragão-fomos-nós-que-perdemos-o-jogo-esta-noite"
 subtitle: "O técnico encarnado elogiou a entrada com identidade no Dragão, mas criticou a gestão emocional e as abordagens defensivas na segunda parte."
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-09-20"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/marco-silva-lamenta-falta-de-maturidade-após-desaire-no-dragão-«fomos-nós-que-perdemos-o-jogo-esta-noite»"
 image: "https://framerusercontent.com/images/2DQN2yJtDV5KesLszN1pNEhfwg.webp?width=1224&height=689"

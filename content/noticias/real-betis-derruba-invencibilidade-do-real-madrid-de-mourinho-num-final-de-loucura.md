@@ -3,7 +3,7 @@ title: "Real Betis derruba invencibilidade do Real Madrid de Mourinho num final 
 slug: "real-betis-derruba-invencibilidade-do-real-madrid-de-mourinho-num-final-de-loucura"
 subtitle: "Real Betis derruba invencibilidade do Real Madrid num final de loucura."
 category: "La Liga"
-published: "2026-08-05"
+published: "2026-09-05"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/real-betis-derruba-invencibilidade-do-real-madrid-de-mourinho-num-final-de-loucura"
 image: "https://framerusercontent.com/images/dio2EW6CpG2HdDvZszVwXXMZUgI.jpg?width=1920&height=1080"

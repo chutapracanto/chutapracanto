@@ -3,7 +3,7 @@ title: "Reação de autor na Invicta: Bednarek e William Gomes assinam reviravol
 slug: "reação-de-autor-na-invicta-bednarek-e-william-gomes-assinam-reviravolta-do-fc-porto-no-regresso-da-liga"
 subtitle: "Um desacerto inicial permitiu ao Moreirense faturar, mas a reação azul e branca garantiu a manutenção do topo isolado da tabela."
 category: "FC Porto"
-published: "2026-08-05"
+published: "2026-09-04"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/reação-de-autor-na-invicta-bednarek-e-william-gomes-assinam-reviravolta-do-fc-porto-no-regresso-da-liga"
 image: "https://framerusercontent.com/images/tnCYJUmrlz3dzw1hAKilBJXvnug.webp?width=1920&height=1080"

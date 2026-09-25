@@ -3,7 +3,7 @@ title: "Embalo leonino na antecâmara de Alvalade: Rui Borges blinda o grupo e a
 slug: "embalo-leonino-na-antecâmara-de-alvalade-rui-borges-blinda-o-grupo-e-aponta-ao-topo-queremos-encurtar-distâncias"
 subtitle: "Técnico leonino elogiou a matriz do adversário, rejeitou ansiedades por pontos perdidos e confirmou o regresso de João Simões."
 category: "Sporting CP"
-published: "2026-08-05"
+published: "2026-09-18"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/embalo-leonino-na-antecâmara-de-alvalade-rui-borges-blinda-o-grupo-e-aponta-ao-topo-(-queremos-encurtar-distâncias-)"
 image: "https://framerusercontent.com/images/fA3EOw6HfGGRMxrFOe7PcGvk9Fk.webp?width=450&height=253"

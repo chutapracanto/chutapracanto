@@ -3,7 +3,7 @@ title: "Estreia de gala e fúria verde e branca em Alvalade: Leão verga o Galat
 slug: "estreia-de-gala-e-fúria-verde-e-branca-em-alvalade-leão-verga-o-galatasaray-e-entra-a-rugir-na-liga-dos-campeões"
 subtitle: "Luis Suárez sofreu e converteu a grande penalidade que abriu caminho à vitória categórica da equipa de Rui Borges."
 category: "Sporting CP UEFA Champions League"
-published: "2026-08-05"
+published: "2026-09-09"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/estreia-de-gala-e-fúria-verde-e-branca-em-alvalade-leão-verga-o-galatasaray-e-entra-a-rugir-na-liga-dos-campeões"
 image: "https://framerusercontent.com/images/Xc9b1h01AsFKGIL7TVn3ekBKXg.webp?width=1224&height=689"

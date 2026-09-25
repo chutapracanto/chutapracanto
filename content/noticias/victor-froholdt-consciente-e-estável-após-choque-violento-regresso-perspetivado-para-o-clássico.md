@@ -3,7 +3,7 @@ title: "Victor Froholdt consciente e estável após choque violento; regresso pe
 slug: "victor-froholdt-consciente-e-estável-após-choque-violento-regresso-perspetivado-para-o-clássico"
 subtitle: "Luz verde para Froholdt: Médio dinamarquês estável com meta de regresso apontada ao Clássico"
 category: "FC Porto"
-published: "2026-08-05"
+published: "2026-09-05"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/victor-froholdt-consciente-e-estável-após-choque-violento-regresso-perspetivado-para-o-clássico"
 image: "https://framerusercontent.com/images/x9FLM10K1joixY8E3rYQSsspX4I.webp?width=1200&height=675"

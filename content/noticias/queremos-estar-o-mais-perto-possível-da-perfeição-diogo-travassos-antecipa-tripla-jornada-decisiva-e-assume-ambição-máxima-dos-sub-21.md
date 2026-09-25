@@ -3,7 +3,7 @@ title: "«Queremos estar o mais perto possível da perfeição»: Diogo Travasso
 slug: "queremos-estar-o-mais-perto-possível-da-perfeição-diogo-travassos-antecipa-tripla-jornada-decisiva-e-assume-ambição-máxima-dos-sub-21"
 subtitle: "Com 19 pontos somados, a Seleção Nacional Sub-21 pode carimbar a qualificação para a fase final já esta sexta-feira."
 category: "Seleção Nacional Sub-21"
-published: "2026-08-05"
+published: "2026-09-22"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/«queremos-estar-o-mais-perto-possível-da-perfeição»-diogo-travassos-antecipa-tripla-jornada-decisiva-e-assume-ambição-máxima-dos-sub-21"
 image: "https://framerusercontent.com/images/GqAUVHN1tIt4lNsABKV7qd5jLzc.jpg?width=1243&height=783"

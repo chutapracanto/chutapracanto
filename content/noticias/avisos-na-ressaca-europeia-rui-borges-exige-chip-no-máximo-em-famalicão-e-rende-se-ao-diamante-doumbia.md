@@ -3,7 +3,7 @@ title: "Avisos na ressaca europeia: Rui Borges exige 'chip' no máximo em Famali
 slug: "avisos-na-ressaca-europeia-rui-borges-exige-chip-no-máximo-em-famalicão-e-rende-se-ao-diamante-doumbia"
 subtitle: "Técnico leonino destaca a qualidade de posse do Famalicão de Carlos Carvalhal e exige rotações no máximo após a Champions."
 category: "Sporting CP"
-published: "2026-08-05"
+published: "2026-09-12"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/avisos-na-ressaca-europeia-rui-borges-exige-chip-no-máximo-em-famalicão-e-rende-se-ao-diamante-doumbia"
 image: "https://framerusercontent.com/images/2P8fYSMnyXXEcOG8Tr5It39VDw.webp?width=1597&height=1064"

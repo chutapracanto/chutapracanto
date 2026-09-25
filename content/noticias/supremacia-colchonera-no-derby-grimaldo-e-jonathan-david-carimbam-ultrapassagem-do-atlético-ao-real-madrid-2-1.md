@@ -3,7 +3,7 @@ title: "Supremacia colchonera no derby: Grimaldo e Jonathan David carimbam ultra
 slug: "supremacia-colchonera-no-derby-grimaldo-e-jonathan-david-carimbam-ultrapassagem-do-atlético-ao-real-madrid-2-1"
 subtitle: "Grimaldo de penálti e Jonathan David adiantaram os colchoneros no segundo tempo antes da reação final dos merengues."
 category: "La Liga"
-published: "2026-08-05"
+published: "2026-09-20"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/supremacia-colchonera-no-derby-grimaldo-e-jonathan-david-carimbam-ultrapassagem-do-atlético-ao-real-madrid-(2-1)"
 image: "https://framerusercontent.com/images/mjCm9kYspVDkDbiE5zleLvlbak.jpg?width=976&height=663"

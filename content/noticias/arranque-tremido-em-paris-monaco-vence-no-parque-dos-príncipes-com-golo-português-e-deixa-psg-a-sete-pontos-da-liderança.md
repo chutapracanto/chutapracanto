@@ -3,7 +3,7 @@ title: "Arranque tremido em Paris: Monaco vence no Parque dos Príncipes com gol
 slug: "arranque-tremido-em-paris-monaco-vence-no-parque-dos-príncipes-com-golo-português-e-deixa-psg-a-sete-pontos-da-liderança"
 subtitle: "Com o lateral português Flávio Nazinho em destaque, a equipa do Principado somou a terceira vitória consecutiva e isolou-se na liderança."
 category: "Ligue 1"
-published: "2026-08-05"
+published: "2026-09-05"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/arranque-tremido-em-paris-monaco-vence-no-parque-dos-príncipes-com-golo-português-e-deixa-psg-a-sete-pontos-da-liderança"
 image: "https://framerusercontent.com/images/gy0zIidRCqlLlkxRV5GcagiVlsI.jpg?width=1160&height=650"

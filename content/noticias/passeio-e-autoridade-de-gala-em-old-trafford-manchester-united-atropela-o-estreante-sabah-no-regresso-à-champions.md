@@ -3,7 +3,7 @@ title: "Passeio e autoridade de gala em Old Trafford: Manchester United atropela
 slug: "passeio-e-autoridade-de-gala-em-old-trafford-manchester-united-atropela-o-estreante-sabah-no-regresso-à-champions"
 subtitle: "Matheus Cunha, Bruno Fernandes, Sesko e Lisandro Martínez assinaram os tentos do triunfo categórico dos Red Devils."
 category: "UEFA Champions League"
-published: "2026-08-05"
+published: "2026-09-10"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/passeio-e-autoridade-de-gala-em-old-trafford-manchester-united-atropela-o-estreante-sabah-no-regresso-à-champions"
 image: "https://framerusercontent.com/images/zhomD1Fc7QNDByrLTmsfxtYnGTo.jpg?width=3840&height=2160"

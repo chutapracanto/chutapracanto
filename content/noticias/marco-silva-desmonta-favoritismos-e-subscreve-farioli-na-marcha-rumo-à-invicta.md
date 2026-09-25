@@ -3,7 +3,7 @@ title: "Marco Silva desmonta favoritismos e subscreve Farioli na marcha rumo à 
 slug: "marco-silva-desmonta-favoritismos-e-subscreve-farioli-na-marcha-rumo-à-invicta"
 subtitle: "Técnico encarnado rejeita desculpas com o calendário europeu e exige coragem para travar as bolas paradas e a pressão azul e branca."
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-09-19"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/marco-silva-desmonta-favoritismos-e-subscreve-farioli-na-marcha-rumo-à-invicta"
 image: "https://framerusercontent.com/images/JFt37THsVpmuDzE1ECcXXmKQsco.jpg?width=1500&height=1000"

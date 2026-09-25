@@ -3,7 +3,7 @@ title: "Lusitânia de Lourosa vence em Coimbra, trava a Académica e isola-se na
 slug: "lusitânia-de-lourosa-vence-em-coimbra-trava-a-académica-e-isola-se-na-liderança-da-liga-2"
 subtitle: "Triunfo por 0-2 no Estádio Cidade de Coimbra garante invencibilidade e catapulta a equipa de Ricardo Silva para o topo da tabela."
 category: "Liga Portugal 2 MeuSuper"
-published: "2026-08-05"
+published: "2026-08-29"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/lusitânia-de-lourosa-vence-em-coimbra-trava-a-académica-e-isola-se-na-liderança-da-liga-2"
 image: "https://framerusercontent.com/images/8E7A0x9BMbEcWPsWUBcsRBhsL3o.webp?width=1144&height=644"

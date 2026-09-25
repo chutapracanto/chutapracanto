@@ -3,7 +3,7 @@ title: "Operação Champions em Alvalade: Sporting chancela 25 nomes na Lista A 
 slug: "operação-champions-em-alvalade-sporting-chancela-25-nomes-na-lista-a-com-armada-de-reforços-em-plano-de-destaque"
 subtitle: "Rui Borges integrou todas as aquisições de verão na convocatória europeia, reservando os jovens para a Lista B."
 category: "Sporting CP"
-published: "2026-08-05"
+published: "2026-09-03"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/operação-champions-em-alvalade-sporting-chancela-25-nomes-na-lista-a-com-armada-de-reforços-em-plano-de-destaque"
 image: "https://framerusercontent.com/images/mjhd1J7Q90ovmFmo9lkKrHszk4.jpg?width=1696&height=1131"

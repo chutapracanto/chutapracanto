@@ -3,7 +3,7 @@ title: "Manchester City avassalador goleia Crystal Palace com noites inspiradas 
 slug: "manchester-city-avassalador-goleia-crystal-palace-com-noites-inspiradas-de-cherki-e-haaland"
 subtitle: "Exibição de gala de Rayan Cherki e bis de Haaland constroem goleada folgada da equipa de Enzo Maresca em Selhurst Park."
 category: "Premier League"
-published: "2026-08-05"
+published: "2026-08-28"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/manchester-city-avassalador-goleia-crystal-palace-com-noites-inspiradas-de-cherki-e-haaland"
 image: "https://framerusercontent.com/images/CS2o3vBPglbWvsSAhnfV00Tonn8.jpg?width=1200&height=670"

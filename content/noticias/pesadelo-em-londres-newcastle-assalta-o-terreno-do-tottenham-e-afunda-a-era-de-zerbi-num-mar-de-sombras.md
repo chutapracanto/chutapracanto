@@ -3,7 +3,7 @@ title: "Pesadelo em Londres: Newcastle assalta o terreno do Tottenham e afunda a
 slug: "pesadelo-em-londres-newcastle-assalta-o-terreno-do-tottenham-e-afunda-a-era-de-zerbi-num-mar-de-sombras"
 subtitle: "Golos de Elanga e Yoane Wissa na segunda parte impõem segunda derrota consecutiva à equipa de De Zerbi."
 category: "Premier League"
-published: "2026-08-05"
+published: "2026-08-29"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/pesadelo-em-londres-newcastle-assalta-o-terreno-do-tottenham-e-afunda-a-era-de-zerbi-num-mar-de-sombras"
 image: "https://framerusercontent.com/images/3ZvswLF2l6VTcoMrRnLM27O9BrA.jpg?width=640&height=360"

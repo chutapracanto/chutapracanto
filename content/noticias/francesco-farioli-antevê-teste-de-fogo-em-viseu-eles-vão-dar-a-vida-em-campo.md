@@ -3,7 +3,7 @@ title: "Francesco Farioli antevê teste de fogo em Viseu: «Eles vão dar a vida
 slug: "francesco-farioli-antevê-teste-de-fogo-em-viseu-eles-vão-dar-a-vida-em-campo"
 subtitle: "Farioli antevê duelo de exigência máxima no Fontelo e garante foco absoluto no relvado em vésperas de fecho de mercado."
 category: "FC Porto"
-published: "2026-08-05"
+published: "2026-08-29"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/francesco-farioli-antevê-teste-de-fogo-em-viseu-«eles-vão-dar-a-vida-em-campo»"
 image: "https://framerusercontent.com/images/VM2Jzt3UB02O8dUcRxu2hDKuqYY.jpg?width=1024&height=683"

@@ -3,7 +3,7 @@ title: "Mec, Souza e Gimenez começam agora a pré-época»: Farioli analisa ref
 slug: "mec-souza-e-gimenez-começam-agora-a-pré-época-farioli-analisa-reforços-descarta-pressões-e-aponta-à-receção-ao-moreirense"
 subtitle: "Em vésperas de receber o Moreirense, o técnico italiano elogiou o potencial de Gabriel Mec e confirmou fecho do plantel até janeiro."
 category: "FC Porto"
-published: "2026-08-05"
+published: "2026-09-03"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/mec-souza-e-gimenez-começam-agora-a-pré-época»-farioli-analisa-reforços-descarta-pressões-e-aponta-à-receção-ao-moreirense"
 image: "https://framerusercontent.com/images/uJwh3Uf8ZUNJZNL6locaaw10bas.webp?width=2160&height=1440"

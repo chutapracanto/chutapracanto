@@ -3,7 +3,7 @@ title: "A magia do regresso a casa: Marco Silva desenha o reencontro com o passa
 slug: "a-magia-do-regresso-a-casa-marco-silva-desenha-o-reencontro-com-o-passado-e-lança-a-cartada-palhinha"
 subtitle: "Reencontro de emoções na Luz: Marco Silva convoca Palhinha e projeta receção ao Estoril com exigência máxima"
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-08-30"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/a-magia-do-regresso-a-casa-marco-silva-desenha-o-reencontro-com-o-passado-e-lança-a-cartada-palhinha"
 image: "https://framerusercontent.com/images/rZQuHiwDyg1tTsp7opR7pQRvVyE.webp?width=1920&height=1080"

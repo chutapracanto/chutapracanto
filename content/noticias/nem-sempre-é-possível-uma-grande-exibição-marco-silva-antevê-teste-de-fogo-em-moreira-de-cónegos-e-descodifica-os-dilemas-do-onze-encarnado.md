@@ -3,7 +3,7 @@ title: "«Nem sempre é possível uma grande exibição»: Marco Silva antevê t
 slug: "nem-sempre-é-possível-uma-grande-exibição-marco-silva-antevê-teste-de-fogo-em-moreira-de-cónegos-e-descodifica-os-dilemas-do-onze-encarnado"
 subtitle: "O técnico encarnado confirmou Echeverri e Karouani nos convocados e perspetivou rotação forçada perante a densidade do calendário."
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-09-08"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/«nem-sempre-é-possível-uma-grande-exibição»-marco-silva-antevê-teste-de-fogo-em-moreira-de-cónegos-e-descodifica-os-dilemas-do-onze-encarnado"
 image: "https://framerusercontent.com/images/myn87lA90z751UGmGPqoTs2qqA.webp?width=1208&height=657"

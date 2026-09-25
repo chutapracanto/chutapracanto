@@ -3,7 +3,7 @@ title: "Norte sem bússola e eficácia mortífera: Aston Villa deita Tottenham d
 slug: "norte-sem-bússola-e-eficácia-mortífera-aston-villa-deita-tottenham-de-de-zerbi-nos-lençóis-do-despromoção-2-3"
 subtitle: "Equipa de Roberto De Zerbi dominou no primeiro tempo, mas pagou caro o desperdício frente a um Aston Villa letal."
 category: "Premier League"
-published: "2026-08-05"
+published: "2026-09-19"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/norte-sem-bússola-e-eficácia-mortífera-aston-villa-deita-tottenham-de-de-zerbi-nos-lençóis-do-despromoção-(2-3)"
 image: "https://framerusercontent.com/images/u6k1i9D1iGVAYy6VPV6gJ7Dk.jpg?width=1600&height=900"

@@ -3,7 +3,7 @@ title: "FC Porto verga o Casa Pia com reação de líder e goleia a caminho do c
 slug: "fc-porto-verga-o-casa-pia-com-reação-de-líder-e-goleia-a-caminho-do-clássico-1-4"
 subtitle: "Henrique Araújo ainda colocou os gansos em vantagem, mas André Silva, Kiwior, Borja Sainz e Gimenez desenharam uma reviravolta categórica."
 category: "FC Porto"
-published: "2026-08-05"
+published: "2026-09-12"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/fc-porto-verga-o-casa-pia-com-reação-de-líder-e-goleia-a-caminho-do-clássico-(1-4)"
 image: "https://framerusercontent.com/images/VxtzHfubLWHh3Vxn3F0rsrnMA.jpg?width=1024&height=683"

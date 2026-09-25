@@ -3,7 +3,7 @@ title: "O ombro cedeu após o Clássico: Alexander Bah desfalca a Dinamarca e de
 slug: "o-ombro-cedeu-após-o-clássico-alexander-bah-desfalca-a-dinamarca-e-deixa-o-benfica-em-alerta-redobrado"
 subtitle: "Após ter sido titular e marcado frente ao FC Porto, o lateral encarnado voltou a sentir queixas e foi dado como inapto pela DBU."
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-09-22"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/o-ombro-cedeu-após-o-clássico-alexander-bah-desfalca-a-dinamarca-e-deixa-o-benfica-em-alerta-redobrado"
 image: "https://framerusercontent.com/images/MbxT5Ww6YeEc0Hro1sxQlZV4q4o.jpg?width=1200&height=800"

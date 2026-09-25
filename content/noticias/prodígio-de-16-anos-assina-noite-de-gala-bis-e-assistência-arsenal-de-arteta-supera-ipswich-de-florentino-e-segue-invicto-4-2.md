@@ -3,7 +3,7 @@ title: "Prodígio de 16 anos assina noite de gala, bis e assistência: Arsenal d
 slug: "prodígio-de-16-anos-assina-noite-de-gala-bis-e-assistência-arsenal-de-arteta-supera-ipswich-de-florentino-e-segue-invicto-4-2"
 subtitle: "Max Dowman bisou e assistiu na estreia a titular, numa noite em que Madueke e Mikel Merino também faturaram."
 category: "Carabao Cup"
-published: "2026-08-05"
+published: "2026-09-15"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/prodígio-de-16-anos-assina-noite-de-gala-bis-e-assistência-arsenal-de-arteta-supera-ipswich-de-florentino-e-segue-invicto-(4-2)"
 image: "https://framerusercontent.com/images/yXknCK0rGUyofgGNt2eRiHFZZk.jpg?width=1280&height=670"

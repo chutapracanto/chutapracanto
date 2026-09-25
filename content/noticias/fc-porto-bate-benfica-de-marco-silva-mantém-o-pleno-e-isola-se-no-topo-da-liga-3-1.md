@@ -3,7 +3,7 @@ title: "FC Porto bate Benfica de Marco Silva, mantém o pleno e isola-se no topo
 slug: "fc-porto-bate-benfica-de-marco-silva-mantém-o-pleno-e-isola-se-no-topo-da-liga-3-1"
 subtitle: "Gabri Veiga, Froholdt e Hwang Inbeom assinaram os golos da vitória azul e branca perante um Benfica reduzido a dez elementos."
 category: "SL Benfica FC Porto"
-published: "2026-08-05"
+published: "2026-09-20"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/fc-porto-bate-benfica-de-marco-silva-mantém-o-pleno-e-isola-se-no-topo-da-liga-(3-1)"
 image: "https://framerusercontent.com/images/3RyrBEv17ZHqsZkjbGqy59eRR4I.webp?width=1200&height=675"

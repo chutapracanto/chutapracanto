@@ -3,7 +3,7 @@ title: "Poder de fogo para o Dragão: Santiago Giménez vestido de azul e branco
 slug: "poder-de-fogo-para-o-dragão-santiago-giménez-vestido-de-azul-e-branco-com-o-número-29-nas-costas"
 subtitle: "Golos e minutos em campo podem forçar a compra em definitivo do novo camisola 29 dos dragões."
 category: "FC Porto"
-published: "2026-08-05"
+published: "2026-08-31"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/poder-de-fogo-para-o-dragão-santiago-giménez-vestido-de-azul-e-branco-com-o-número-29-nas-costas"
 image: "https://framerusercontent.com/images/lxwblsxZQnhLW9NgNkUdo0o9N20.jpg?width=861&height=574"

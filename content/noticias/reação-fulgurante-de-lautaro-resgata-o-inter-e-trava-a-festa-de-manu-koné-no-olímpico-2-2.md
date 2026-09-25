@@ -3,7 +3,7 @@ title: "Reação fulgurante de Lautaro resgata o Inter e trava a festa de Manu K
 slug: "reação-fulgurante-de-lautaro-resgata-o-inter-e-trava-a-festa-de-manu-koné-no-olímpico-2-2"
 subtitle: "Com Rodrigo Mora no banco, os giallorossi adiantaram-se com dois golos de Koné, mas o capitão argentino resgatou a igualdade para a turma de Chivu."
 category: "Serie A"
-published: "2026-08-05"
+published: "2026-09-19"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/reação-fulgurante-de-lautaro-resgata-o-inter-e-trava-a-festa-de-manu-koné-no-olímpico-(2-2)"
 image: "https://framerusercontent.com/images/tDHBZ7M433K8ZMuiZMRnRjCyPxQ.webp?width=900&height=506"

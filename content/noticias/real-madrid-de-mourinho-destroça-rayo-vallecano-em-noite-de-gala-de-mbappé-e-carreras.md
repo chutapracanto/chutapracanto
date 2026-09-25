@@ -3,7 +3,7 @@ title: "Real Madrid de Mourinho destroça Rayo Vallecano em noite de gala de Mba
 slug: "real-madrid-de-mourinho-destroça-rayo-vallecano-em-noite-de-gala-de-mbappé-e-carreras"
 subtitle: "Mbappé bisou, Carreras e Bellingham faturaram numa noite em que o contra-ataque merengue voltou a fazer estragos."
 category: "La Liga"
-published: "2026-08-05"
+published: "2026-09-12"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/real-madrid-de-mourinho-destroça-rayo-vallecano-em-noite-de-gala-de-mbappé-e-carreras"
 image: "https://framerusercontent.com/images/tzfWnneMcgBOqg5yCpROjqc6RGg.jpg?width=1200&height=900"

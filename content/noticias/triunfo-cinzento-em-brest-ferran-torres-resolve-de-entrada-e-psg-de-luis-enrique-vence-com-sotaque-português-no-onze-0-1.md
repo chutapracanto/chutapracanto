@@ -3,7 +3,7 @@ title: "Triunfo cinzento em Brest: Ferran Torres resolve de entrada e PSG de Lui
 slug: "triunfo-cinzento-em-brest-ferran-torres-resolve-de-entrada-e-psg-de-luis-enrique-vence-com-sotaque-português-no-onze-0-1"
 subtitle: "Nuno Mendes, Vitinha e João Neves alinharam de início numa partida decidida pelo golo madrugador do avançado espanhol."
 category: "Ligue 1"
-published: "2026-08-05"
+published: "2026-09-13"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/triunfo-cinzento-em-brest-ferran-torres-resolve-de-entrada-e-psg-de-luis-enrique-vence-com-sotaque-português-no-onze-(0-1)"
 image: "https://framerusercontent.com/images/qpZPJugmjDhpnP1C3GOmFmoKAMU.jpg?width=750&height=500"

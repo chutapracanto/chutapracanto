@@ -3,7 +3,7 @@ title: "Belloumi encanta em Stamford Bridge e gigantes voltam a derrapar na Prem
 slug: "belloumi-encanta-em-stamford-bridge-e-gigantes-voltam-a-derrapar-na-premier-league"
 subtitle: "O ex-Farense bisou na primeira parte e segurou a invencibilidade do Hull City, num dia em que o Liverpool não foi além do 0-0."
 category: "Premier League"
-published: "2026-08-05"
+published: "2026-09-12"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/belloumi-encanta-em-stamford-bridge-e-gigantes-voltam-a-derrapar-na-premier-league"
 image: "https://framerusercontent.com/images/gyaixXfl9AJ1RWOaBBFb6LBIzRI.jpg?width=2880&height=1859"

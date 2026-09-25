@@ -3,7 +3,7 @@ title: "Concorrência de peso na ala esquerda: Souffian El Karouani ruma à Luz 
 slug: "concorrência-de-peso-na-ala-esquerda-souffian-el-karouani-ruma-à-luz-com-opção-de-compra-muito-atrativa"
 subtitle: "Internacional marroquino assina até ao fim da época cedido pelo Al-Qadsiah, com cláusula de compra fixada nos 10 milhões de euros."
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-09-01"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/concorrência-de-peso-na-ala-esquerda-souffian-el-karouani-ruma-à-luz-com-opção-de-compra-muito-atrativa"
 image: "https://framerusercontent.com/images/SyxmXhNty6VZVKZ2OrYxnSqs.jpg?width=1208&height=725"

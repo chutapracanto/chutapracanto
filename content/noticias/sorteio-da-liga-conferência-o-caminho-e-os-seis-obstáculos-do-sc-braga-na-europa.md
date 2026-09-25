@@ -3,7 +3,7 @@ title: "Sorteio da Liga Conferência: O caminho e os seis obstáculos do SC Brag
 slug: "sorteio-da-liga-conferência-o-caminho-e-os-seis-obstáculos-do-sc-braga-na-europa"
 subtitle: "Os arsenalistas já conhecem os seis adversários no novo formato da competição europeia, com estreia agendada para outubro."
 category: "SC Braga"
-published: "2026-08-05"
+published: "2026-08-28"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/sorteio-da-liga-conferência-o-caminho-e-os-seis-obstáculos-do-sc-braga-na-europa"
 image: "https://framerusercontent.com/images/ceOIWF2TvrY5cjj062OdG9UuKk.webp?width=960&height=540"

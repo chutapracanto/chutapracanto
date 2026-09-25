@@ -3,7 +3,7 @@ title: "Estreia de sonho para os 'Cherries' e passeio da Juventus: A noite dos p
 slug: "estreia-de-sonho-para-os-cherries-e-passeio-da-juventus-a-noite-dos-portugueses-na-europa-league"
 subtitle: "Com António Silva no onze, o Bournemouth marcou dois golos em 20 minutos e travou a reação da Real Sociedad de Gonçalo Guedes."
 category: "Liga Europa"
-published: "2026-08-05"
+published: "2026-09-17"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/estreia-de-sonho-para-os-cherries-e-passeio-da-juventus-a-noite-dos-portugueses-na-europa-league"
 image: "https://framerusercontent.com/images/WQhHzuLhhbh1nJJ1gHlHtWBfck.jpg?width=465&height=310"

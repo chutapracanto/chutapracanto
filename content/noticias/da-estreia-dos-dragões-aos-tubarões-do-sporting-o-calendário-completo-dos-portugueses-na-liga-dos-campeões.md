@@ -3,7 +3,7 @@ title: "Da estreia dos dragões aos tubarões do Sporting: O calendário complet
 slug: "da-estreia-dos-dragões-aos-tubarões-do-sporting-o-calendário-completo-dos-portugueses-na-liga-dos-campeões"
 subtitle: "UEFA divulga datas da fase de liga: confira todos os horários e o alinhamento completo de dragões e leões até janeiro."
 category: "FC Porto SportingCP"
-published: "2026-08-05"
+published: "2026-08-29"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/da-estreia-dos-dragões-aos-tubarões-do-sporting-o-calendário-completo-dos-portugueses-na-liga-dos-campeões"
 image: "https://framerusercontent.com/images/SfhtMvnQXmXihe7qKnQqo2zNo.jpg?width=7226&height=4820"

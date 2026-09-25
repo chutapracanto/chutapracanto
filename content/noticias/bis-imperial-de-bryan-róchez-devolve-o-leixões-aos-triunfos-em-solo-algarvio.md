@@ -3,7 +3,7 @@ title: "Bis imperial de Bryan Róchez devolve o Leixões aos triunfos em solo al
 slug: "bis-imperial-de-bryan-róchez-devolve-o-leixões-aos-triunfos-em-solo-algarvio"
 subtitle: "Eficácia leixonense e deslize defensivo algarvio ditam o desfecho de um duelo decidido na bola parada e da marca de penálti."
 category: "Liga Portugal 2 MeuSuper"
-published: "2026-08-05"
+published: "2026-08-29"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/bis-imperial-de-bryan-róchez-devolve-o-leixões-aos-triunfos-em-solo-algarvio"
 image: "https://framerusercontent.com/images/hP1dUgdnjwurlYYohZSCgg4Ro38.webp?width=960&height=540"

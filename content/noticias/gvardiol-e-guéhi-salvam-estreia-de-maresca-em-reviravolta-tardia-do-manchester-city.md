@@ -3,7 +3,7 @@ title: "Gvardiol e Guéhi salvam estreia de Maresca em reviravolta tardia do Man
 slug: "gvardiol-e-guéhi-salvam-estreia-de-maresca-em-reviravolta-tardia-do-manchester-city"
 subtitle: "Golos tardios de Marc Guéhi e Josko Gvardiol, com duas assistências de Rayan Cherki, garantiram os primeiros três pontos a Enzo Maresca na estreia no campeonato."
 category: "Premier League"
-published: "2026-08-05"
+published: "2026-08-23"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/gvardiol-e-guéhi-salvam-estreia-de-maresca-em-reviravolta-tardia-do-manchester-city"
 image: "https://framerusercontent.com/images/v0Gn8v2xunH4TayMjKOT8S9iGI.jpg?width=3143&height=2138"

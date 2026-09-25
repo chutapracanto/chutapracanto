@@ -3,7 +3,7 @@ title: "Sp. Braga empata em Viena e segura apuramento para a fase de liga da Lig
 slug: "sp-braga-empata-em-viena-e-segura-apuramento-para-a-fase-de-liga-da-liga-conferência"
 subtitle: "​Gverreiros sofrem na Áustria, seguram nulo na 2.ª mão e confirmam presença na fase de liga da Liga Conferência graças à vantagem trazida da Pedreira."
 category: "SC Braga"
-published: "2026-08-05"
+published: "2026-08-27"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/sp.-braga-empata-em-viena-e-segura-apuramento-para-a-fase-de-liga-da-liga-conferência"
 image: "https://framerusercontent.com/images/ceOIWF2TvrY5cjj062OdG9UuKk.webp?width=960&height=540"

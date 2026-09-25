@@ -3,7 +3,7 @@ title: "«O Luís Castro preparou-me para a Europa e o Dragão dá-me arrepios»
 slug: "o-luís-castro-preparou-me-para-a-europa-e-o-dragão-dá-me-arrepios-gabriel-mec-funde-ambição-irreverência-e-a-mística-de-jardel"
 subtitle: "Recém-chegado do Grémio, o atacante de 18 anos elogiou o papel de Luís Castro no seu processo de maturação para o futebol europeu."
 category: "FC Porto"
-published: "2026-08-05"
+published: "2026-09-02"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/«o-luís-castro-preparou-me-para-a-europa-e-o-dragão-dá-me-arrepios»-gabriel-mec-funde-ambição-irreverência-e-a-mística-de-jardel"
 image: "https://framerusercontent.com/images/B4VP5qaRfleODoHJP8ihRKTu8.jpg?width=1600&height=1066"

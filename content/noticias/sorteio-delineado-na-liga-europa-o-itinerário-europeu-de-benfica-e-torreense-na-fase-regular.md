@@ -3,7 +3,7 @@ title: "Sorteio delineado na Liga Europa: O itinerário europeu de Benfica e Tor
 slug: "sorteio-delineado-na-liga-europa-o-itinerário-europeu-de-benfica-e-torreense-na-fase-regular"
 subtitle: "AC Milan e Celtic no horizonte das águias; Leiria serve de palco para a receção do Torreense ao Sunderland e Olympiacos."
 category: "Liga Europa"
-published: "2026-08-05"
+published: "2026-08-29"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/sorteio-delineado-na-liga-europa-o-itinerário-europeu-de-benfica-e-torreense-na-fase-regular"
 image: "https://framerusercontent.com/images/9JYrJ6dOZcXVf1sECvCUHq5C43E.jpg?width=1200&height=630"

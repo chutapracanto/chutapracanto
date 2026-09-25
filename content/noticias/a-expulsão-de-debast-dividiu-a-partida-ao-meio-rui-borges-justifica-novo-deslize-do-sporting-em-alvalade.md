@@ -3,7 +3,7 @@ title: "​\"A expulsão de Debast dividiu a partida ao meio\": Rui Borges justi
 slug: "a-expulsão-de-debast-dividiu-a-partida-ao-meio-rui-borges-justifica-novo-deslize-do-sporting-em-alvalade"
 subtitle: "O técnico do Sporting considerou que o Arouca só reentrou na partida através da grande penalidade e assumiu a insatisfação com a perda de pontos."
 category: "Sporting CP"
-published: "2026-08-05"
+published: "2026-09-19"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/​-a-expulsão-de-debast-dividiu-a-partida-ao-meio-rui-borges-justifica-novo-deslize-do-sporting-em-alvalade"
 image: "https://framerusercontent.com/images/xnBMu7GFvEbbXgk6uW2nabG4DY.webp?width=750&height=422"

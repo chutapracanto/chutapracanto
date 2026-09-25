@@ -3,7 +3,7 @@ title: "Champions League: FC Porto e Sporting conhecem os colossos no regresso d
 slug: "champions-league-fc-porto-e-sporting-conhecem-os-colossos-no-regresso-da-prova-milionária"
 subtitle: "Do embate entre FC Porto e Man. City à receção do Sporting ao FC Barcelona e Man. United: confira o sorteio completo das equipas portuguesas."
 category: "FC Porto SportingCP"
-published: "2026-08-05"
+published: "2026-08-28"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/champions-league-fc-porto-e-sporting-conhecem-os-colossos-no-regresso-da-prova-milionária"
 image: "https://framerusercontent.com/images/OespK3Dit9TyXr9YjZwDEJJu14.webp?width=1600&height=900"

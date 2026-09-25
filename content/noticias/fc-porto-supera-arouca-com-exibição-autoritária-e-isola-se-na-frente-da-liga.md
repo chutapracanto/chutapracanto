@@ -3,7 +3,7 @@ title: "FC Porto supera Arouca com exibição autoritária e isola-se na frente 
 slug: "fc-porto-supera-arouca-com-exibição-autoritária-e-isola-se-na-frente-da-liga"
 subtitle: "Tentos de Gabri Veiga e Borja Sainz confirmam exibição autoritária dos dragões no Dragão, mantendo a baliza inviolada na Liga."
 category: "FC Porto"
-published: "2026-08-05"
+published: "2026-08-23"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/fc-porto-supera-arouca-com-exibição-autoritária-e-isola-se-na-frente-da-liga"
 image: "https://framerusercontent.com/images/gh1GlffjxC4HhpILR49Mv11YXo.webp?width=960&height=540"

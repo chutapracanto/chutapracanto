@@ -3,7 +3,7 @@ title: "Blesa brilha no António Coimbra da Mota e Rio Ave estreia-se a vencer n
 slug: "blesa-brilha-no-antónio-coimbra-da-mota-e-rio-ave-estreia-se-a-vencer-na-liga"
 subtitle: "Avançado espanhol Blesa apontou o primeiro golo e assistiu Tamble Monteiro no segundo tempo para carimbar o primeiro triunfo vilacondense na I Liga."
 category: "Liga Portugal Betclic"
-published: "2026-08-05"
+published: "2026-08-23"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/blesa-brilha-no-antónio-coimbra-da-mota-e-rio-ave-estreia-se-a-vencer-na-liga"
 image: "https://framerusercontent.com/images/ktwGOQxtWtUWOKp3WR5BO7FUWX8.jpg?width=1024&height=683"

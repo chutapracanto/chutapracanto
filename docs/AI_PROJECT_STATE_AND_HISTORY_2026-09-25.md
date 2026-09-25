@@ -1645,3 +1645,32 @@ Por artigo, distinguir entre:
 Só depois dessa classificação serão alterados content/noticias, content/noticias-index.json, sitemap e/ou produção.
 
 Commit de desbloqueio do Roadmap: d305c0ff0371a325772946dd84a1189466c11011.
+
+
+## 47. RECONCILIAÇÃO DOS 163 REGISTOS FRAMER — METADATA CONCLUÍDA — 2026-09-25
+
+### Resultado validado no repositório
+- População operacional: **163/163** registos Framer publicados entre 23/08/2026 e 22/09/2026.
+- Os 163 ficheiros Markdown correspondentes foram reconciliados **apenas no campo de metadata de publicação** (published, date, dataNoticia ou data, conforme o frontmatter existente), usando exclusivamente a data framerPublished do export.
+- Não foi alterado o corpo editorial dos artigos.
+- O inventário de reconciliação ficou com indexPath resolvido para **163/163** registos.
+- content/noticias-index.json: **238 entradas**; os **163/163** registos do inventário têm agora a data Framer correta no índice; **0 mismatches / 0 ausências**.
+- sitemap.xml: **246 URLs** após regeneração.
+- O workflow canónico de geração do índice/sitemap terminou com **success** no run 67.
+- Os workflows temporários usados para executar a reconciliação foram removidos da branch; o workflow canónico foi restaurado ao conteúdo de main.
+- main não foi alterada diretamente. A execução permanece isolada em framer-reconciliation-2026-09-25.
+
+### Estado atual
+**RECONCILIAÇÃO DE METADATA: CONCLUÍDA E VALIDADA NO GITHUB.**
+
+### Validação externa ainda pendente
+- A tentativa de abrir a produção (chutapracanto.com), o sitemap servido e a área Admin no ambiente externo não foi acessível.
+- Não é possível, nesta sessão, declarar produção ou Admin validados.
+- A validação de índice, sitemap e metadata no repositório está concluída; produção/Admin ficam como dependência externa real.
+
+### Próxima operação automática após desbloqueio externo
+1. validar produção;
+2. validar sitemap servido em produção;
+3. validar Admin;
+4. comparar o resultado servido com o estado GitHub já validado;
+5. só então fechar a reconciliação operacional.

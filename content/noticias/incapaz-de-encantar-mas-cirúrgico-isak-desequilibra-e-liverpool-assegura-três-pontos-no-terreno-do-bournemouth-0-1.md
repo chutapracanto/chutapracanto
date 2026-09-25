@@ -3,7 +3,7 @@ title: "Incapaz de encantar, mas cirúrgico: Isak desequilibra e Liverpool asseg
 slug: "incapaz-de-encantar-mas-cirúrgico-isak-desequilibra-e-liverpool-assegura-três-pontos-no-terreno-do-bournemouth-0-1"
 subtitle: "Numa partida de reduzido espetáculo e encaixe tático rigoroso, o avançado sueco assinou o único golo da tarde no Vitality Stadium."
 category: "Premier League"
-published: "2026-08-05"
+published: "2026-09-20"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/incapaz-de-encantar-mas-cirúrgico-isak-desequilibra-e-liverpool-assegura-três-pontos-no-terreno-do-bournemouth-(0-1)"
 image: "https://framerusercontent.com/images/L9AviMnzULpv1ZI1FlTq5377cbw.jpg?width=820&height=547"

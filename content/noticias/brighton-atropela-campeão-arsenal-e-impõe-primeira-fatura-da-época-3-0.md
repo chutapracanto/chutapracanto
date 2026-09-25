@@ -3,7 +3,7 @@ title: "Brighton atropela campeão Arsenal e impõe primeira fatura da época (3
 slug: "brighton-atropela-campeão-arsenal-e-impõe-primeira-fatura-da-época-3-0"
 subtitle: "Inspirados pela irreverência do jovem Kostoulas, os 'seagulls' construíram a vitória com uma exibição de gala."
 category: "Premier League"
-published: "2026-08-05"
+published: "2026-09-19"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/brighton-atropela-campeão-arsenal-e-impõe-primeira-fatura-da-época-(3-0)"
 image: "https://framerusercontent.com/images/s8FKkRu9tERAcw5xRQubLY94sBs.webp?width=1800&height=1200"

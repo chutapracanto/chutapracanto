@@ -3,7 +3,7 @@ title: "PSG triunfa no Vélodrome com impacto de Ferran Torres e sotaque luso (1
 slug: "psg-triunfa-no-vélodrome-com-impacto-de-ferran-torres-e-sotaque-luso-1-2"
 subtitle: "Angel Gomes ainda respondeu ao golo inicial parisienses, mas a expulsão de Timothy Weah e o golo de Marquinhos ditaram o desfecho."
 category: "Ligue 1"
-published: "2026-08-05"
+published: "2026-09-21"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/psg-triunfa-no-vélodrome-com-impacto-de-ferran-torres-e-sotaque-luso-(1-2)"
 image: "https://framerusercontent.com/images/1FLplTWFDFLUq2w8GoNU4agBsU.jpg?width=1200&height=630"

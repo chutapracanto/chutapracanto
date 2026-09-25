@@ -3,7 +3,7 @@ title: "Demonstração de força dos tubarões europeus: PSG esmaga Slovan com g
 slug: "demonstração-de-força-dos-tubarões-europeus-psg-esmaga-slovan-com-gala-de-ferran-e-dembélé-arsenal-vence-em-nápoles"
 subtitle: "Ferran Torres assinou três golos e Dembélé esteve em destaque no atropelo do campeão europeu no Parque dos Príncipes."
 category: "UEFA Champions League"
-published: "2026-08-05"
+published: "2026-09-10"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/demonstração-de-força-dos-tubarões-europeus-psg-esmaga-slovan-com-gala-de-ferran-e-dembélé-arsenal-vence-em-nápoles"
 image: "https://framerusercontent.com/images/88H1AhDp48FllPHwpL43C3Nsjs.jpg?width=1200&height=674"

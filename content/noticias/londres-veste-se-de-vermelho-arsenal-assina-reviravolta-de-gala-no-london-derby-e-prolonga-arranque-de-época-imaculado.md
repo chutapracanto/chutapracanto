@@ -3,7 +3,7 @@ title: "Londres veste-se de vermelho: Arsenal assina reviravolta de gala no 'Lon
 slug: "londres-veste-se-de-vermelho-arsenal-assina-reviravolta-de-gala-no-london-derby-e-prolonga-arranque-de-época-imaculado"
 subtitle: "Morgan Rogers adiantou os 'blues' aos 2', mas Kai Havertz e Martin Odegaard carimbaram o triunfo dos 'gunners'."
 category: "Premier League"
-published: "2026-08-05"
+published: "2026-09-07"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/londres-veste-se-de-vermelho-arsenal-assina-reviravolta-de-gala-no-london-derby-e-prolonga-arranque-de-época-imaculado"
 image: "https://framerusercontent.com/images/F5wKIEHPGai0ZB6O6UsP2SsPeA.jpg?width=696&height=503"

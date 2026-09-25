@@ -3,7 +3,7 @@ title: "Passeio romano com carimbo luso: Rodrigo Mora estreia-se a marcar no mas
 slug: "passeio-romano-com-carimbo-luso-rodrigo-mora-estreia-se-a-marcar-no-massacre-ao-lecce"
 subtitle: "Jovem internacional português precisou de apenas cinco minutos em campo para tirar um adversário do caminho e estrear a conta em Itália."
 category: "Serie A"
-published: "2026-08-05"
+published: "2026-08-31"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/passeio-romano-com-carimbo-luso-rodrigo-mora-estreia-se-a-marcar-no-massacre-ao-lecce"
 image: "https://framerusercontent.com/images/eunNiNYFXkosn6C66v6V26AucAs.jpg?width=450&height=300"

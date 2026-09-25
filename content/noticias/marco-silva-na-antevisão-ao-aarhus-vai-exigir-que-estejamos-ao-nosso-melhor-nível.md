@@ -3,7 +3,7 @@ title: "Marco Silva na antevisão ao Aarhus: \"Vai exigir que estejamos ao nosso
 slug: "marco-silva-na-antevisão-ao-aarhus-vai-exigir-que-estejamos-ao-nosso-melhor-nível"
 subtitle: "​\"Exige que estejamos ao nosso melhor nível\": Marco Silva recorda vantagem trazida da 1.ª mão, confirma baixa de Aursnes e recusa falar de reforços."
 category: "SL Benfica"
-published: "2026-08-05"
+published: "2026-08-26"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/marco-silva-na-antevisão-ao-aarhus-vai-exigir-que-estejamos-ao-nosso-melhor-nível"
 image: "https://framerusercontent.com/images/mVGll96Wum8JKExwmgkmYdjlPJY.jpg?width=926&height=522"
