@@ -85,8 +85,10 @@
       position: relative;
       display: flex;
       justify-content: flex-end;
+      gap: .55rem;
       margin: 1.5rem 0 .75rem;
     }
+    .like-button,
     .share-button {
       width: 42px;
       height: 42px;
@@ -102,6 +104,35 @@
       font: 700 .8rem var(--font-body);
       transition: width .2s ease, background-color .2s ease, border-color .2s ease, transform .2s ease;
       overflow: hidden;
+    }
+    .like-button {
+      width: 42px;
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255, 255, 255, .22);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .04);
+      color: #fff;
+      cursor: pointer;
+      font: 700 .8rem var(--font-body);
+      transition: width .2s ease, background-color .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+    }
+    .like-button:hover,
+    .like-button:focus-visible {
+      border-color: rgba(57, 255, 20, .7);
+      color: var(--neon-green);
+      outline: none;
+      transform: translateY(-1px);
+    }
+    .like-button[aria-pressed="true"] {
+      border-color: var(--neon-green);
+      background: rgba(57, 255, 20, .14);
+      color: var(--neon-green);
+    }
+    .like-button .like-button-label {
+      margin-left: .4rem;
     }
     .share-button-label {
       max-width: 0;
@@ -252,9 +283,13 @@
       .article-summary {
         font-size: 1rem;
       }
+      .like-button,
       .share-button {
         width: 40px;
         height: 40px;
+      }
+      .like-button .like-button-label {
+        display: none;
       }
       .share-button:hover,
       .share-button:focus-visible,
@@ -349,6 +384,11 @@
     </div>
 
     <div class="share-section" id="share-box" hidden>
+
+      <button class="like-button" id="like-trigger" type="button" aria-pressed="false" aria-label="Gostar desta notícia" title="Gostar desta notícia">
+        <i class="fa-regular fa-heart" aria-hidden="true"></i>
+        <span class="like-button-label">Gostar</span>
+      </button>
 
       <button class="share-button" id="share-trigger" type="button" aria-expanded="false" aria-controls="share-menu" aria-label="Partilhar esta notícia" title="Partilhar esta notícia">
         <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
@@ -831,6 +871,7 @@
 
         addArticleJsonLd({ slug: entry.slug, title, description, image, datePublished: published, dateModified: modified, author, authorType, authorUrl, editorialType, editorialTypeLabel });
         await mostrarNoticiasRelacionadas(entry.slug, index);
+        configurarGosto(entry.slug);
         configurarPartilha();
 
       } catch (error) {
@@ -997,6 +1038,49 @@
 
       }
 
+    }
+
+    function configurarGosto(articleSlug) {
+      const trigger = document.getElementById('like-trigger');
+      if (!trigger || !articleSlug) return;
+
+      const storageKey = 'cpc:article-like:' + articleSlug;
+      let liked = false;
+      try {
+        liked = localStorage.getItem(storageKey) === '1';
+      } catch (error) {}
+
+      const atualizar = () => {
+        trigger.setAttribute('aria-pressed', String(liked));
+        trigger.setAttribute('aria-label', liked ? 'Retirar gosto desta notícia' : 'Gostar desta notícia');
+        trigger.title = liked ? 'Retirar gosto desta notícia' : 'Gostar desta notícia';
+        const icon = trigger.querySelector('i');
+        if (icon) {
+          icon.classList.toggle('fa-solid', liked);
+          icon.classList.toggle('fa-regular', !liked);
+        }
+      };
+
+      trigger.addEventListener('click', () => {
+        liked = !liked;
+        try {
+          localStorage.setItem(storageKey, liked ? '1' : '0');
+        } catch (error) {}
+        atualizar();
+
+        const eventData = {
+          content_type: 'article',
+          item_id: articleSlug,
+          value: liked ? 1 : 0
+        };
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', liked ? 'article_like' : 'article_unlike', eventData);
+        } else if (Array.isArray(window.dataLayer)) {
+          window.dataLayer.push({ event: liked ? 'article_like' : 'article_unlike', ...eventData });
+        }
+      });
+
+      atualizar();
     }
 
     function registarPartilha(plataforma) {
