@@ -834,4 +834,25 @@ Quando o assistente enviar à utilizadora qualquer conteúdo cuja finalidade sej
 - Quando esta secção e uma secção histórica entrarem em conflito, esta secção mais recente prevalece, juntamente com o estado real do GitHub.
 
 
+## 30. REGRAS PERMANENTES — CODEX: LIMITES DE EXECUÇÃO — 2026-09-25
+
+- O Assistente é responsável por 100% do trabalho que consegue executar diretamente, incluindo GitHub.
+- Codex só deve ser usado para capacidades realmente indisponíveis ao Assistente: browser real, Chrome/DevTools, Lighthouse/PageSpeed no ambiente externo, E2E/local dependente da máquina, Cloudflare Dashboard/sessão ou equivalente.
+- Codex não deve editar GitHub, criar commits/branches, alterar PRs ou corrigir código por iniciativa própria. Deve devolver diagnóstico e evidência; a implementação fica com o Assistente, salvo instrução explícita e excecional da utilizadora.
+- Antes de qualquer tarefa do Codex, ler este ficheiro e .github/CODEX_RULES.md.
+- Os prompts enviados ao Codex devem lembrar explicitamente essa leitura.
+- Usar a menor execução necessária e evitar trabalho duplicado para poupar créditos.
+- O Assistente deve verificar novamente o GitHub depois de cada intervenção externa.
+
+## 31. INCIDENTE PR #25 — STREAM HTMLREWRITER — 2026-09-25
+
+- O deployment b83946e da PR #25 respondeu 200 em /noticias, mas o corpo tinha apenas ~42 bytes e a página ficava branca.
+- A investigação externa confirmou que índice, imagem e seletor estavam acessíveis e que a resposta antiga tinha ~31 KB.
+- A causa foi localizada na transformação de stream do HTMLRewriter de prepararShellNoticiasInicial, especificamente na inserção do preload dentro de head.
+- Correção aplicada na branch perf-lcp-first-pass: remover a inserção do preload via HTMLRewriter e enviar o preload da primeira imagem através do header HTTP Link, mantendo a injeção do primeiro cartão em #noticias-list.
+- Commit da correção: 629c238982c94e43be8ea93b3acc7dd5b3523f45.
+- A correção ainda exige deployment e validação externa de /noticias, HTML completo, ausência de duplicação e PSI antes de qualquer merge.
+- Regra aprendida: uma transformação de stream deve ser considerada suspeita quando a resposta final fica truncada; validar primeiro o tamanho/conteúdo RAW antes de alterar JavaScript ou métricas de performance.
+
+
 FIM.
