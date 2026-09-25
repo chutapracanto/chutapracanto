@@ -878,3 +878,14 @@ Quando o assistente enviar à utilizadora qualquer conteúdo cuja finalidade sej
 
 
 FIM.
+
+## 32. REGRA PERMANENTE — EXECUÇÃO ENXUTA, EVIDÊNCIA SUFICIENTE E PARAGEM — 2026-09-25
+
+- O objetivo de qualquer execução é chegar à decisão técnica com a **menor quantidade de trabalho necessária**, não acumular testes por precaução.
+- Depois de uma hipótese estar comprovada e os critérios de aceitação definidos estarem satisfeitos, parar a investigação. Não fazer regressões redundantes, medições repetidas ou explorações adicionais sem uma nova hipótese concreta.
+- Ordem de validação: reproduzir/confirmar -> validar a correção específica -> executar apenas regressões essenciais diretamente afetadas -> concluir.
+- Uma verificação opcional que não possa alterar a decisão deve ser omitida.
+- Ao delegar para o Codex, o Assistente deve definir explicitamente os critérios de conclusão e, quando possível, um limite de escopo. O Codex não deve transformar uma tarefa curta numa auditoria geral.
+- O Assistente também deve aplicar esta regra a si próprio: não prolongar análise quando já existe evidência suficiente para a decisão.
+- Resultado de validação deve privilegiar PASS/FAIL + evidência essencial, sem relatório longo.
+- Esta regra complementa, e não substitui, a regra de continuidade: continuar enquanto existir uma ação necessária; parar assim que a ação necessária e as validações suficientes estiverem concluídas.
