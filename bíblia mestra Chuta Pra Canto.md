@@ -4969,3 +4969,6 @@ A utilizadora não deve precisar de pedir estas atualizações.
 
 ---
 ## FIM DA BÍBLIA MESTRA
+
+
+> **Correção de escopo da migração Framer (2026-09-25):** a documentação histórica de “importação concluída” refere-se ao lote efetivamente validado em 24/09 (213 URLs únicas, 179 importadas, 34 duplicadas/ignoradas, 0 falhas). Não deve ser interpretada como prova de que todo o conteúdo publicado no Framer após 22/08/2026 foi migrado. O conteúdo posterior do Framer fica como recuperação pendente até ser identificado, comparado com o GitHub e validado. Ver ledger §40.
