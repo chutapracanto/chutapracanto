@@ -3,7 +3,7 @@ title: "Era Jorge Jesus arranca na Cidade do Futebol: Arranque de estágio focad
 slug: "era-jorge-jesus-arranca-na-cidade-do-futebol-arranque-de-estágio-focado-na-recuperação-com-25-convocados"
 subtitle: "Trabalho individual e de recuperação dominou o arranque do estágio antes da receção ao País de Gales em Alvalade."
 category: "Seleção Nacional"
-published: "2026-08-05"
+published: "2026-09-21"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/era-jorge-jesus-arranca-na-cidade-do-futebol-arranque-de-estágio-focado-na-recuperação-com-25-convocados"
 image: "https://framerusercontent.com/images/rT3nDpjRJVNijxwBVePKDyChSU.jpeg?width=911&height=456"
