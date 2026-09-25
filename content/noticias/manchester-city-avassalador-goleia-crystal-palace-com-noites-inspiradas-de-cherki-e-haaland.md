@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/CS2o3vBPglbWvsSAhnfV00Tonn8.jpg?wid
 
 
 
+
 O Manchester City deu mais uma demonstração de força na Premier League ao vencer categoricamente o Crystal Palace por 4-1, esta sexta-feira, em Selhurst Park. Com Rúben Dias a patrulhar o eixo defensivo no onze inicial, a equipa orientada por Enzo Maresca impôs o seu ritmo desde o apito inicial e não demorou a dominar os acontecimentos.
 
 O marcador foi inaugurado aos 17 minutos, num lance típico do matador Erling Haaland: instinto de posicionamento no coração da grande área e uma finalização fria para colocar os _citizens_ em vantagem. Apesar da réplica e da entrega dos homens da casa, a turma de Manchester geriu os tempos do encontro com bola até ao descanso.

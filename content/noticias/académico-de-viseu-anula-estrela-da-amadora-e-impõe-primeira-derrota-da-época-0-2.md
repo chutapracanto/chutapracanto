@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/qbzKEXXdohuisMzdwWjZAQbaM.jpg?width
 
 
 
+
 O Académico de Viseu assinou uma exibição personalizada em Rio Maior ao bater o Estrela da Amadora por 0-2, em duelo referente à 7.ª jornada da Liga Portugal. Com uma lição tática exemplar, a turma viseense suprimiu a dinâmica ofensiva dos tricolores que vinham num arranque de época fulgurante, aproveitou a inspiração de André Clóvis na primeira metade e segurou a vantagem com uma organização coletiva irrepreensível até ao apito final.
 
 **Bis fulgurante de Clóvis e bloqueio na primeira fase de construção**

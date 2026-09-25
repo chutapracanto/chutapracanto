@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 O SC Braga garantiu a qualificação para o _playoff_ de acesso à fase de liga da Conference League. Em jogo disputado em Beroe, na Bulgária, a equipa minhota empatou 0-0 diante do Dinamo Minsk, fazendo valer a vantagem conseguida no encontro da primeira mão para selar o apuramento europeu.
 
 ### Exibição cinzenta e falta de eficácia no último terço

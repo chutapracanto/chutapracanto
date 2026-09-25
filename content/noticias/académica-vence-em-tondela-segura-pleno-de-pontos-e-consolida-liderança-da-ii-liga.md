@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/QTPkA30TwCKY8SXjHHxqyBjIqC4.webp?wi
 
 
 
+
 Num duelo marcado por enorme intensidade e duas expulsões no conjunto da casa, a Académica bateu o Tondela por 2-0 no Estádio João Cardoso. O triunfo fora de portas permitiu à formação de Coimbra manter o registo 100% vitorioso e segurar o topo da tabela ao fim de três jornadas.
 
 ### Eficiência de Briosa ao intervalo

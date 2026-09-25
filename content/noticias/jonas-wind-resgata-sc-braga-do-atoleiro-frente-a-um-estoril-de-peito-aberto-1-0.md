@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/u2PDiTJztiueX1IMksE4ry0t94.jpg?widt
 
 
 
+
 A receção do SC Braga ao Estoril Praia, no encerramento da 6.ª jornada da Liga Portugal, transformou-se num teste de paciência extrema e resiliência tática na Pedreira. Perante uma formação 'canarinha' corajosa e personalizada mas penalizada pela expulsão do central Ferro , a turma orientada por Carlos Vicens encontrou em Jonas Wind o salvador perfeito. Lançado no xadrez aos 81 minutos, o internacional nórdico precisou de apenas dois minutos para desatar o nó com uma obra-prima dentro da área e selar um triunfo por 1-0.
 
 ### **Ameaça 'canarinha', resposta no sufoco e o brilho de Pau Víctor**

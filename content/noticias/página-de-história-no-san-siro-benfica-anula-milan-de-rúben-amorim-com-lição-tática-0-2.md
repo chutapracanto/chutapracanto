@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/YORGZ608iSYjzHFziXmiewSfg0.jpg?widt
 
 
 
+
 Ponto final no enguiço: o SL Benfica conquistou a primeira vitória da sua história no mítico Estádio San Siro. Na estreia na fase de liga da Liga Europa, a equipa de Marco Silva apresentou-se altamente personalizada, rubricando uma exibição madura e irrepreensível perante 70 mil adeptos e derrotando o AC Milan de Rúben Amorim por 0-2.
 
 ### **Encaixe perfeito, teia encarnada e a inspiração de Lukebakio**

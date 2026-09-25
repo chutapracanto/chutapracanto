@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/pPC5gtppVhU6kBoAneadVZUiLc.webp?wid
 
 
 
+
 O Vitória SC somou mais três pontos no Estádio D. Afonso Henriques ao vencer o Nacional por 1-0. A formação vimaranense entrou com forte pressão, adiantou-se muito cedo no marcador e dominou larga escala do encontro, mas a falta de eficácia na segunda metade deixou o triunfo em aberto até ao apito final.
 
 ### Entrada fulgurante e domínio vimaranense

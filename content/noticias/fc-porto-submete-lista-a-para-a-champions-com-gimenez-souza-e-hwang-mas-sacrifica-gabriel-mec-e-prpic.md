@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/tzL3SWCz5Af6o3lS06WjI4iAENI.webp?wi
 
 
 
+
 O FC Porto carimbou o envio da sua lista definitiva à UEFA para a fase de liga da UEFA Champions League, submetida no limite do prazo regulamentar. Perante o teto regulamentar de 19 futebolistas não formados localmente, o técnico Francesco Farioli viu-se forçado a um rigoroso exercício de gestão do plantel, ditando o afastamento temporário da pérola brasileira Gabriel Mec recém-chegado à Invicta e do central croata Dominik Prpic.
 
 **Espinha dorsal salvaguardada, reforços em foco e apostas em recuperação**

@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 O **FC Porto** está a movimentar-se com força no mercado de transferências e tem **Santiago Giménez** na lista de prioridades. Os dragões encontram-se em negociações com o **AC Milan** para garantir o empréstimo do avançado internacional mexicano.
 
 A contratação conta com o forte aval de **Francesco Farioli**. O técnico dos dragões conhece em detalhe o valor e o perfil do jogador fruto da passagem de ambos pelo futebol neerlandês, onde Giménez construiu uma reputação de goleador temível.

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/VM2Jzt3UB02O8dUcRxu2hDKuqYY.jpg?wid
 
 
 
+
 Na alvorada de mais uma deslocação no campeonato, Francesco Farioli projetou o embate deste sábado frente ao Académico de Viseu com um discurso pautado pela exigência e pelo respeito ao opositor. O comandante dos dragões perspetivou um duelo de elevado grau de complexidade, sem descurar o pulsar do mercado de transferências e a gestão criteriosa do balneário azul e branco.
 
 **A identidade do opositor e a blindagem ao mercado**

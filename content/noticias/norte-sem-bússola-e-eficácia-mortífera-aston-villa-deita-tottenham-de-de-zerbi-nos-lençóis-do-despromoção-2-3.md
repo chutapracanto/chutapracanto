@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/u6k1i9D1iGVAYy6VPV6gJ7Dk.jpg?width=
 
 
 
+
 O pesadelo do Tottenham neste arranque de Premier League ganhou contornos dramáticos no relvado do norte de Londres. Numa tarde marcada pelo desperdício gritante e por um bloqueio na hora de decidir, a equipa de Roberto De Zerbi sucumbiu perante a frieza cirúrgica do Aston Villa por 2-3, tombando na tabela e entrando para a pausa internacional em plena zona de descida.
 
 **A muralha de Suzuki e o castigo fortuito à beira do descanso**

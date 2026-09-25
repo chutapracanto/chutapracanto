@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/YNq9bsfeBVoiPZGjoFZjpw7Nro.jpg?widt
 
 
 
+
 Despojado do desgaste acumulado nas maratonas de qualificação europeia, o SC Braga reentrou no grande palco da Liga Portugal Betclic com uma demonstração vincada de resiliência, ao superiorizar-se ao FC Alverca por 1-2. No Complexo Desportivo do Alverca, a formação orientada por Vicens despiu as vestes de uma primeira parte estéril para encarnar a autêntica fibra de _Gverreiro_, valendo a visão cirúrgica do seu técnico ao descanso e a veia matadora de Pau Víctor para desenhar uma reviravolta de classe na segunda metade.
 
 **Pragmatismo ribatejanos e o estrangulamento da posse bracarense**

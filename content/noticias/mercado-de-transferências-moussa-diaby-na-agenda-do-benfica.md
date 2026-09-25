@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 O Benfica está a acompanhar a situação de Moussa Diaby, extremo de 27 anos que atua tanto no flanco direito como no esquerdo. O internacional francês é conhecido pelo seu perfil extremamente rápido e pela elevada capacidade de explosão com bola.
 
 Atualmente ao serviço do Al-Ittihad, o clube saudita estará a pedir cerca de 20 milhões de euros para libertar o jogador.

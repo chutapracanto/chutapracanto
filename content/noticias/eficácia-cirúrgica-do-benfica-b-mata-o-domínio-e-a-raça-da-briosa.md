@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/N9UM7VyA9FVOulKxkqveJYm9yKQ.jpg?wid
 
 
 
+
 Noite de profunda ingratidão no Estádio Cidade de Coimbra. Numa partida em que a Académica pegou nas rédeas do jogo, dominou a posse de bola e empurrou o adversário para a sua grande área, a frieza encarnada acabou por prevalecer. O Benfica B construiu um triunfo volumoso por 0-3, alicerçado na velocidade estonteante das suas transições ofensivas e numa lição letal de eficácia.
 
 **Eficácia encarnada amordaça o melhor arranque dos estudantes**

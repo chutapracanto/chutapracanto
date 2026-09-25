@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/1wv1JuTss5ATWvsXrowHkBEQ6R4.webp?wi
 
 
 
+
 O Benfica amarrou uma das joias mais reluzentes da sua formação ao oficializar, ao final da tarde desta quarta-feira, a renovação de contrato com Tomás Araújo. O internacional português prolongou a sua ligação aos encarnados por mais duas temporadas estendendo o vínculo de 2029 para o verão de 2031, num acordo que contempla uma valorização salarial assinalável e fixa a nova cláusula de rescisão nos 80 milhões de euros.
 
 **Do ADN do Seixal à liderança no balneário**

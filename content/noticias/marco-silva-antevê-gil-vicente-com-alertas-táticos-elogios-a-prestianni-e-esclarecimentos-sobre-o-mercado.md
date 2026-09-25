@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/myn87lA90z751UGmGPqoTs2qqA.webp?wid
 
 
 
+
 Na antecâmara da receção ao Gil Vicente, este domingo no Estádio da Luz para a 6.ª jornada da Liga Portugal, Marco Silva apresentou-se na sala de imprensa do Seixal para a habitual conferência de antevisão. Entre a exigência de um calendário sem tréguas, o momento inspirativo de Gianluca Prestianni e o estado dos vários reforços, o técnico encarnado abordou sem rodeios os dossiers mais quentes da atualidade das águias.
 
 **Alerta para a organização gilista e o desafio da densidade competitiva**

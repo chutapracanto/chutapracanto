@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/E1aX8yjMehvXvgotHqV61ZHzbls.jpg?wid
 
 
 
+
 Na apresentação da sua primeira convocatória ao comando da Seleção Nacional, Jorge Jesus explicou na Cidade do Futebol os critérios da lista para a Liga das Nações e detalhou as suas ideias táticas. Num discurso marcado pela frontalidade, o novo selecionador nacional desvalorizou a ausência de revolução em relação ao Mundial, defendeu opções individuais e explicou como pretende rentabilizar talentos como João Félix, Rafael Leão ou Fábio Silva.
 
 **As opções individuais e as ideias táticas para o ataque**

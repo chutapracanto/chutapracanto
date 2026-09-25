@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/qpZPJugmjDhpnP1C3GOmFmoKAMU.jpg?wid
 
 
 
+
 Numa deslocação que prometia exigência, o Paris Saint-Germain cumpriu o objetivo pragmático de somar os três pontos ao vencer o Brest por 0-1, em jogo a contar para a 4.ª jornada da Ligue 1. Com o trio português formado por Nuno Mendes, Vitinha e João Neves a figurar no onze titular, o campeão francês assinou uma exibição desprovida de brilho, valendo o instinto madrugador de Ferran Torres e a inspiração entre os postes do guardião Safonov para segurar a vantagem mínima.
 
 **Golpe relâmpago de Ferran e o encaixe tático sem chama**

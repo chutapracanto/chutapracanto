@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 Nem a forte renovação no mercado de transferências livrou o Tottenham de um arranque traumatizante na Premier League. A equipa de Londres caiu com estrondo na visita ao Brentford, num duelo em que a fragilidade defensiva voltou a vir ao de cima.
 
 ### Primeira parte para esquecer

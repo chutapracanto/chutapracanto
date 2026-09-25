@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/fkHpjjK3p5rEMI2L4jldzultFU4.jpg?wid
 
 
 
+
 Na antecâmara do primeiro grande duelo de gigantes da temporada, Francesco Farioli assumiu o púlpito da sala de imprensa do Olival com a serenidade e a acuidade analítica que o caraterizam. Projetando a receção deste domingo ao SL Benfica, o técnico transalpino desfez o mito das decisões precoces, mediu a pulsação tática do rival encarnado e apelou ao vulcão do Estádio do Dragão para transformar a energia das bancadas na vertigem necessária para vencer o Clássico.
 
 **A metamorfose encarnada, o boletim de combate e o 'combustível' do Dragão**

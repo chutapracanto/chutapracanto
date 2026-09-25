@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/GoaEVeckFlQ29pHWPZhE579KOY.jpg?widt
 
 
 
+
 O Real Madrid continua imparável no arranque da LaLiga EA Sports. Depois de ultrapassar Espanyol e Real Sociedad, a formação orientada por José Mourinho deu mais um espetáculo de poderio ofensivo no Santiago Bernabéu ao golear o Málaga CF por 4-0. Com uma entrada avassaladora e um quarto de hora de inspiração pura no primeiro tempo, os _merengues_ resolveram a contenda de forma precoce, somando o terceiro triunfo consecutivo em três partidas na prova.
 
 **Vendaval ofensivo de 11 minutos arruma a contenda**

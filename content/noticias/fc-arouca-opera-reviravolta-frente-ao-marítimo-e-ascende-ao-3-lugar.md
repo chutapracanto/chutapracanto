@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/l0bpZlATeatW1qSSj3zo0r6Ew.jpg?width
 
 
 
+
 O Estádio Municipal de Arouca albergou uma batalha de alta intensidade e rotação, na qual o FC Arouca assinou uma réplica de gala ao operar uma reviravolta categórica (2-1) sobre o Marítimo, em encontro a contar para a 4.ª jornada da Liga Portugal Betclic. Num embate pautado pelo rigor tático e pela capacidade de superação, a formação orientada por Vasco Seabra soube digerir o percalço inicial, impondo o primeiro travão da temporada ao conjunto de Mitchell van der Gaag e carimbando a subida ao 3.º posto da tabela com nove pontos amealhados.
 
 **Do aviso de Tejón ao alívio antes do recolher aos balneários**

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/upaiNlWaMI4MTrkBWYhxJMP7No.webp?wid
 
 
 
+
 O FC Porto somou mais uma vitória no arranque da Liga Portugal Betclic ao superar o Rio Ave, por 2-0, no Estádio dos Arcos. Num encontro marcado pela eficácia nos momentos decisivos e por uma sólida organização defensiva, a equipa de Francesco Farioli voltou a demonstrar as armas que caraterizam o seu futebol, garantindo a liderança do campeonato sem golos sofridos.
 
 ### Surpresas no onze e resposta de bola parada

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/gy0zIidRCqlLlkxRV5GcagiVlsI.jpg?wid
 
 
 
+
 O Paris Saint-Germain sofreu um duro percalço no arranque da Ligue 1 ao cair em casa diante do Monaco por 1-2, na abertura da 3.ª jornada. Num duelo em que a noite começou em clima de celebração para os adeptos parisienses, a equipa do Principado acabou por desferir um golpe estratégico na etapa complementar, impulsionada por um golo do português Flávio Nazinho, mantendo o pecúlio 100% vitorioso no campeonato.
 
 **Festa das renovações e vantagem construída por Marquinhos**

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/hNyRy7SrhKvZm9GuGeVKefG9XRM.jpg?wid
 
 
 
+
 Numa tarde em que alinhou eficácia cirúrgica e rigor tático, o Leixões afastou as nuvens de instabilidade e somou a segunda vitória consecutiva na Segunda Liga ao bater o Amarante por 3-1. No relvado do Estádio do Mar, o coletivo desenhado por Carlos Fangueiro assinou uma exibição madura e de autoridade, tirando partido da intermitência forasteira e de uma grande penalidade desperdiçada que poderia ter incendiado a reta final.
 
 **Construção geométrica, o susto do VAR e o golpe de misericórdia ao descanso**

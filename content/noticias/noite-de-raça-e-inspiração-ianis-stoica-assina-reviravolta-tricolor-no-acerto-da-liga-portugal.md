@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/OYf4Cqs4w7PKfKfxLEDq7twFCEg.webp?wi
 
 
 
+
 Numa noite invulgar de quinta-feira, forçada pela interdição do Estádio José Gomes, o Estrela da Amadora transformou o Ribatejo no palco de uma exibição cheia de caráter e alma. A contar para o acerto de calendário da 3.ª jornada da Liga Portugal, a formação tricolor soube encaixar o golo madrugador do SC Braga para operar uma reviravolta brilhante (2-1), impulsionada por uma noite de inspiração pura de Ianis Stoica.
 
 **Obra-prima de Gabri e a reação tricolor em cima do descanso**

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/DyRYBFRsiZAmzftpVzY6loqCskc.jpg?wid
 
 
 
+
 Em declarações aos canais oficiais do clube, João Palhinha abordou os motivos que o levaram a aceitar o convite das _águias_, o reencontro com o treinador Marco Silva e o impacto da mudança a nível familiar e pessoal.
 
 ### O peso da estrutura e o reencontro com Marco Silva

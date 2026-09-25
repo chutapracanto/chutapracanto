@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/jeUpymat6nRMwrZGIcb8qa0Zmg.webp?wid
 
 
 
+
 O Benfica carimbou mais três pontos na Liga Portugal Betclic ao superar o Estoril Praia por 2-1, numa noite de exigência tática no Estádio da Luz. No rescaldo da partida, Marco Silva fez uma leitura detalhada das dificuldades impostas pelo muralha canarinha, abordou a estreia prematura de João Palhinha, definiu o raio de ação do jovem Gonçalo Moreira e fez questão de sublinhar a importância do "doping" vindo das bancadas na reta final do encontro.
 
 **Paciência contra a teia estorilista e a eficácia cirúrgica do rival**

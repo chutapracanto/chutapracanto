@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 O pontapé de saída da I Liga 2026/27 deu-se esta sexta-feira no Estádio António Coimbra da Mota, na Amoreira, com Estoril Praia e FC Famalicão a assinarem uma igualdade a uma bola (1-1).
 
 A jogar fora de portas, a turma famalicense entrou a carimbar o primeiro momento de festa da temporada. Aos 32 minutos, o avançado grego **Georgios Koutsias** — a estrear-se no principal escalão do futebol português — teve a honra de assinar o primeiro golo da competição, adiantando a sua equipa no marcador ainda antes do intervalo.

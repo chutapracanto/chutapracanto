@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/ufw0Im3sS23OrgSULqghkUPft2Q.webp?wi
 
 
 
+
 O Lusitânia de Lourosa transformou o fecho da 6.ª jornada da Liga Portugal 2 numa verdadeira apoteose de estofo e pragmaticidade ao vergar o Sporting B por 1-2, em pleno relvado do Estádio Aurélio Pereira. Num choque de titãs entre os escoltadores do topo da tabela, a armada comandada por Ricardo Silva aceitou viver sob tempestade perante a fúria do futebol vertiginoso dos leões, envergou o fato de macaco com brio e desferiu um veneno fatal em cima do apito final, ultrapassando o Penafiel para reinar de forma invicta e isolada na Segunda Liga.
 
 **Sufoco verde e branco, o assalto de Nel e o laboratório de Arsénio**

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/RuuXcUV8dmeXph7gCYx3TmDXOGo.jpg?wid
 
 
 
+
 O relvado mítico de Anfield voltou a ser palco de uma noite de gala e vertigem futebolística. Na receção ao Tottenham, em duelo a contar para a 3.ª eliminatória da Carabao Cup, o Liverpool fez valer o seu poderio ofensivo para bater a turma londrina por 3-1. A armada orientada por Andoni Iraola superiorizou-se ao conjunto de Roberto De Zerbi, carimbando a passagem à fase seguinte e aprofundando a tempestade sobre os _spurs_ que continuam sem vencer ou marcar qualquer golo no escalão principal inglês nesta época.
 
 ### **A magia de Ngumoha, o momento de forma de Gakpo e o sobressalto em Anfield**

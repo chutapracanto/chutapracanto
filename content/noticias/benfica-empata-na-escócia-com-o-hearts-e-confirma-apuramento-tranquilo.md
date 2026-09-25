@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 Com a eliminatória praticamente resolvida após o triunfo expressivo na primeira mão no Estádio da Luz, o Benfica empatou 1-1 no terreno do Hearts e assegurou o apuramento. Marco Silva aproveitou o encontro na Escócia para promover sete alterações no onze inicial, lançando nomes como José Neto, Amar Dedic, Manu Silva, Richard Ríos, Schjelderup, Lukebakio e Jhon Durán.
 
 Apesar das novidades no alinhamento, as águias assumiram o controlo do jogo na primeira parte, construindo várias ocasiões para inaugurar o marcador. Jhon Durán, após excelente combinação entre Lenglet e Sudakov, esteve perto do golo, assim como Amar Dedic e Schjelderup, que desperdiçaram boas soberanias antes do intervalo.

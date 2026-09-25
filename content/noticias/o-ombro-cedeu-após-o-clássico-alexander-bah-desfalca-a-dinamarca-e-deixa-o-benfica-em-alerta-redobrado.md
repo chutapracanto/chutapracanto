@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/MbxT5Ww6YeEc0Hro1sxQlZV4q4o.jpg?wid
 
 
 
+
 O departamento médico do Benfica e a estrutura da seleção dinamarquesa receberam, esta terça-feira, uma notícia de forte impacto. Alexander Bah, habitual titular do corredor direito dos encarnados, foi oficialmente dispensado dos trabalhos da seleção da Dinamarca devido a uma recaída na lesão no ombro direito, falhando assim os compromissos da Liga das Nações.
 
 ### **A batalha de impactos no Clássico, a dor no ombro e a dupla vaga na Dinamarca**

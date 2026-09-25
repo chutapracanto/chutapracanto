@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/p1B51YDso5AsuCc8QZ3e6ZU2Meg.jpg?wid
 
 
 
+
 Na antevisão à receção ao Nacional, em duelo referente à 5.ª jornada da Liga Portugal Betclic, Rui Borges passou em revista o momento do Sporting CP. O treinador abordou a estratégia para contornar as incertezas do banco adversário, exaltou o trabalho de retaguarda no fecho do mercado e revelou dados atualizados sobre o boletim clínico do balneário.
 
 **Incerteza no opositor, maturidade e adaptação ao modelo**

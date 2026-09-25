@@ -1,5 +1,5 @@
 ---
-title: "​Benfica na Europa: Marco Silva perspetiva o Aarhus e garante que o mercado encarnado não acabou"
+title: "Benfica na Europa: Marco Silva perspetiva o Aarhus e garante que o mercado encarnado não acabou"
 slug: "benfica-na-europa-marco-silva-perspetiva-o-aarhus-e-garante-que-o-mercado-encarnado-não-acabou"
 subtitle: "Técnico encarnado recusa facilitismo frente ao campeão dinamarquês, elogia o regresso de Bah e admite que o mercado das águias continuará em aberto até ao fecho da janela de transferências."
 category: "SL Benfica"
@@ -8,6 +8,7 @@ author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/​benfica-na-europa-marco-silva-perspetiva-o-aarhus-e-garante-que-o-mercado-encarnado-não-acabou"
 image: "https://framerusercontent.com/images/j1N5sdmFB4ldsVaYnB5uPxAXTU.jpg?width=1208&height=725"
 ---
+
 
 
 

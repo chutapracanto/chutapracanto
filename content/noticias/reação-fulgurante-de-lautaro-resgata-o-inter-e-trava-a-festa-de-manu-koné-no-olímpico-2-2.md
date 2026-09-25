@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/tDHBZ7M433K8ZMuiZMRnRjCyPxQ.webp?wi
 
 
 
+
 Em mais um clássico eletrizante da Serie A, a Roma e o Inter mediram forças no Stadio Olimpico num duelo de parada e resposta que acabou empatado a duas bolas (2-2). Com o jovem português Rodrigo Mora a começar no banco dos _giallorossi_, a partida ficou marcada pela entrada avassaladora da equipa da casa, pela exibição inspirada de Manu Koné e pela capacidade de reação dos _nerazzurri_, capitaneados por um Lautaro Martínez implacável.
 
 **Entrada fulgurante e o 'show' de Koné no primeiro tempo**

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/tnZfDZU5HeY6l6NSzgB5aF9hoM.jpg?widt
 
 
 
+
 O Olympique Lyonnais respondeu da melhor forma ao momento conturbado provocado pela eliminação europeia e somou três pontos fulcrais na Ligue 1 ao bater o Auxerre por 3-1. A equipa orientada pelo português Paulo Fonseca fez valer a superioridade ofensiva e a capacidade de reação num duelo movimentado, saltando, à condição, para o topo da tabela classificativa.
 
 **Primeira parte frenética: Golos anulados, resposta rápida e golo de Archer**

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/nijXfO5OXQQfWFXtz9nyrzk8Ysw.webp?wi
 
 
 
+
 Após a vitória por 3-1 diante do Galatasaray na estreia da fase de liga da Liga dos Campeões, Rui Borges analisou o triunfo aos microfones da Sport TV. O técnico do Sporting destacou a capacidade de reação da sua equipa perante o ímpeto inicial dos turcos, sublinhando a evolução exibicional no segundo tempo e o apoio decisivo das bancadas de Alvalade.
 
 **Ajuste de intensidade e resposta ao golo fortuito**

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/3Y2A4zNxlvUn3norLBuAhA.jpg?width=10
 
 
 
+
 Segunda jornada da Ligue 1 e segundo empate arrancado a ferros pelo Paris Saint-Germain. Na visita ao terreno do Lille, a formação orientada por Luis Enrique esteve à beira do colapso ao encontrar-se a perder por dois golos, mas resgatou um ponto ao cair do pano (2-2), impulsionada por uma atuação sublime de Vitinha na reta final.
 
 Orfãos do castigado Nuno Mendes e com João Neves riscado da ficha de jogo por doença, os campeões em título voltaram a evidenciar que continuam à procura da melhor rotação neste arranque de época.

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/tzfWnneMcgBOqg5yCpROjqc6RGg.jpg?wid
 
 
 
+
 Na ressaca da amarga derrota sofrida frente ao Real Betis, o Real Madrid deu uma demonstração de força e autoridade no Santiago Bernabéu ao golear o Rayo Vallecano por 4-1, em duelo a contar para a 5.ª jornada da La Liga. Sob o comando de José Mourinho e com Bernardo Silva a figurar no onze titular, os _merengues_ resolveram a contenda na primeira parte e colaram-se temporariamente ao FC Barcelona no topo da tabela.
 
 **Furacão merengue trucida fragilidades de Lejeune**

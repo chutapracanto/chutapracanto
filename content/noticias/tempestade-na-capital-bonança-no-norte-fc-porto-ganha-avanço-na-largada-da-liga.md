@@ -1,7 +1,7 @@
 ---
 title: "Tempestade na capital, bonança no Norte: FC Porto ganha avanço na largada da Liga"
 slug: "tempestade-na-capital-bonança-no-norte-fc-porto-ganha-avanço-na-largada-da-liga"
-subtitle: "​FC Porto é o único dos candidatos a vencer na estreia da Liga 2026/27, aproveitando as igualdades de Sporting na Reboleira e Benfica na Luz."
+subtitle: "FC Porto é o único dos candidatos a vencer na estreia da Liga 2026/27, aproveitando as igualdades de Sporting na Reboleira e Benfica na Luz."
 category: "SL Benfica FC Porto Sporting SC"
 published: "2026-08-11T00:00:00.000Z"
 author: "ChutaPraCanto"
@@ -14,6 +14,7 @@ featuredImageAlt: "Tempestade na capital, bonança no Norte: FC Porto ganha avan
 relatedYouTube: ""
 relatedSpotify: ""
 ---
+
 
 
 

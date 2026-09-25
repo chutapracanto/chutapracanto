@@ -1,7 +1,7 @@
 ---
 title: "Oficial: Nestory Irankunda é reforço do Sporting e assina até 2031"
 slug: "oficial-nestory-irankunda-é-reforço-do-sporting-e-assina-até-2031"
-subtitle: "​\"Poderoso e muito rápido\": reforço de 20 anos apresenta-se aos adeptos leoninos e garante polivalência para jogar em qualquer posição do ataque."
+subtitle: "\"Poderoso e muito rápido\": reforço de 20 anos apresenta-se aos adeptos leoninos e garante polivalência para jogar em qualquer posição do ataque."
 category: "Sporting CP"
 published: "2026-08-15T00:00:00.000Z"
 author: "ChutaPraCanto"
@@ -14,6 +14,7 @@ featuredImageAlt: "Oficial: Nestory Irankunda é reforço do Sporting e assina a
 relatedYouTube: ""
 relatedSpotify: ""
 ---
+
 
 
 

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/Xc9b1h01AsFKGIL7TVn3ekBKXg.webp?wid
 
 
 
+
 O Sporting deu o pontapé de saída na nova edição da Liga dos Campeões com uma exibição de fibra e categoria, atropelando o Galatasaray por 3-1 no relvado de Alvalade. Em noite de grandes decisões europeias, a formação orientada por Rui Borges soube sacudir a apatia inicial, vestir o fato de macaco e operar uma reviravolta categórica alimentada por rasgo individual e eficácia cirúrgica.
 
 **Susto madrugador, o 'míssil' de Geny e a resposta verde e branca**

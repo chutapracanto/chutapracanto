@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/7j2P8X8FS3rEBSAKobHfgd7SJ5E.webp?wi
 
 
 
+
 A UEFA formalizou a chancela das listas oficiais de inscritos para as provas continentais da época 2026/27. No baluarte da Luz, a estrutura do Benfica confirmou o registo de 22 futebolistas na Lista A para a fase de liga da UEFA Europa League, reservando ainda o contingente de jovens talentos através da Lista B. Sob o comando tático de Marco Silva, a grande nota de relevo incide na validação do trio de reforços fechado no fecho da janela de transferências: João Palhinha, Souffian El Karouani e o virtuoso Claudio Echeverri.
 
 **Arquitetura do plantel e o arsenal ao dispor de Marco Silva**

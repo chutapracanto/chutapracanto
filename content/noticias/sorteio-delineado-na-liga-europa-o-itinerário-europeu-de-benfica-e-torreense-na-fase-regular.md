@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/9JYrJ6dOZcXVf1sECvCUHq5C43E.jpg?wid
 
 
 
+
 A UEFA definiu a rota completa de Benfica e Torreense para a fase regular da Liga Europa. Entre desafios de exigência máxima, deslocações emotivas e duelos históricos, as duas formações lusas têm já traçado o roteiro que ditará a sua sorte na competição europeia entre setembro e janeiro.
 
 **Batismo de fogo em San Siro precede embate no Dragão**

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/zMMbqCf26FxWhK66OhLrpzj6nw.webp?wid
 
 
 
+
 O reencontro entre Rúben Amorim e o futebol português ganhou esta terça-feira contornos de grande expetativa. Agora ao leme do AC Milan, o técnico português realizou a conferência de imprensa de antevisão ao duelo com o Benfica, a contar para a jornada inaugural da fase de liga da Liga Europa, misturando boa disposição, rasgados elogios à estrutura encarnada e uma leitura tática apurada sobre a incerteza do onze de Marco Silva.
 
 ### **Piscadela de olho à história, análise ao xadrez encarnado e recusa do regresso a Portugal**

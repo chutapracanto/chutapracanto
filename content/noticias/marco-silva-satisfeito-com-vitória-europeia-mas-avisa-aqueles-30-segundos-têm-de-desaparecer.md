@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 O Benfica venceu o AGF Aarhus por 3-1 na primeira mão do _playoff_ da Liga Europa, garantindo uma vantagem importante para a eliminatória. No final da partida, Marco Silva elogiou a exibição global da equipa, embora não tenha escondido algum desagrado pelo golo sofrido.
 
 ### Vitória "saborosa" apesar do lapso defensivo

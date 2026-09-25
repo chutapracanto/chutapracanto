@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/O3tpkcOnmdE35Q4o39IBVHzcLkY.webp?wi
 
 
 
+
 Alessandro Circati é oficialmente jogador do Benfica. O defesa-central internacional australiano, de 22 anos, concluiu os habituais exames médicos, assinou um contrato válido por cinco temporadas até junho de 2031 e deixou as primeiras palavras com a camisola encarnada aos meios do clube.
 
 «É uma enorme honra, um privilégio. Estou nas nuvens, não podia estar mais feliz. Acho que é uma recompensa por muitos anos de trabalho duro. Estou muito feliz por estar aqui e mal posso esperar para jogar pelo Benfica», confessou o novo reforço das _águias_.

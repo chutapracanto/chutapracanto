@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/1FLplTWFDFLUq2w8GoNU4agBsU.jpg?widt
 
 
 
+
 O Paris Saint-Germain deu uma resposta de autoridade no grande clássico do futebol francês ao deslocar-se ao terreno do Olympique de Marseille e arrancar uma vitória por 1-2. Num duelo emotivo e resolvido com intensidade máxima no segundo tempo, a turma de Luis Enrique fez valer o seu pragmatismo para conquistar três pontos fulcrais no Stade Vélodrome, trepando até ao 6.º lugar da Ligue 1 com oito pontos somados em cinco partidas.
 
 **Domínio sem frutos e o desbloqueio do banco**

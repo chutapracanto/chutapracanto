@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/JFt37THsVpmuDzE1ECcXXmKQsco.jpg?wid
 
 
 
+
 A antecâmara do primeiro Clássico da temporada ganhou contornos de alta tensão tática e diplomática. Na sala de imprensa do Seixal, Marco Silva perspetivou a visita de domingo ao Estádio do Dragão com um discurso sereno, mas afiado, projetando o embate com o FC Porto sem ponta de submissão ao calendário apertado, elogiando a metamorfose azul e branca e deixando uma nota de humor perspicaz a responder ao homólogo portista.
 
 **Diagnóstico ao dragão mutável, gestão de Aursnes e a dúvida Barrenechea**

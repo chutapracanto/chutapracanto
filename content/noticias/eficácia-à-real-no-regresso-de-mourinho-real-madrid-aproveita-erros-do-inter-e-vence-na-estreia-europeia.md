@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/FME16616ENj4cl9ABN4pHGZoaw.jpg?widt
 
 
 
+
 O Santiago Bernabéu viveu mais uma noite de contornos bem conhecidos na abertura da fase de liga da Liga dos Campeões. No regresso de José Mourinho à competição ao comando dos _merengues_ e precisamente contra o seu antigo clube, o Real Madrid bateu o Internazionale por 2-1, superiorizando-se na eficácia e aproveitando as facilidades concedidas pela defensiva italiana.
 
 **Destaques do encontro:**

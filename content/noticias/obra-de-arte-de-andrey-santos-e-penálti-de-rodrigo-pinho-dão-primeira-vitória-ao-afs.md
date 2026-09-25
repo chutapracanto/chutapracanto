@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/mEcFqUZwjKK6xDd74CmZhdB9Us.webp?wid
 
 
 
+
 A tarde na Vila das Aves demorou a aquecer, mas acabou por brindar os adeptos com um espetáculo de grande nível na etapa complementar. Na receção ao Feirense, o AFS fez valer o seu poderio ofensivo para desatar um nó que parecia cego e vencer por 2-0, alcançando o primeiro triunfo na Liga Portugal 2. Um golo monumental de fora da área e uma grande penalidade a fechar a contenda ditaram o destino do encontro, mantendo os fogaceiros numa crise de golos e vitórias no arranque do campeonato.
 
 **Modorra inicial e raras faíscas junto aos postes**

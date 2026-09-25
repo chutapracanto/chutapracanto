@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/hLIwJzR89ifCgnGYokKbVHaY.webp?width
 
 
 
+
 No rescaldo de uma vitória folgada por 0-3 frente ao Marítimo, em duelo a contar para a Liga Portugal Betclic, o treinador do SL Benfica, Marco Silva, dividiu a sua intervenção na _flash interview_ da Sport TV entre a satisfação pelo controlo absoluto da partida e uma crítica feroz às condições do relvado insular. Sem rodeios, o técnico alertou para o impacto que este tipo de pisos tem na qualidade e na imagem do espetáculo em Portugal.
 
 **Veneno sobre o relvado e raio-X ao momento do jogo**

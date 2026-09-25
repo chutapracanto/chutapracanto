@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 O SC Braga garantiu mais um reforço de peso para o setor intermédio. Os minhotos confirmaram, esta sexta-feira, a contratação de Tommy Marqués, promissor médio espanhol de 19 anos, oriundo do Barcelona.
 
 ### Os contornos financeiros do negócio

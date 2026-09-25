@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/du4lZ3uachSsp4TNhrpNLTQXEE.jpg?widt
 
 
 
+
 O Aston Villa deu o pontapé de saída na fase de liga da Liga dos Campeões com um triunfo conquistado com unhas e dentes em solo belga. A formação orientada por Unai Emery superiorizou-se ao Club Brugge por 3-2, arrecadando a primeira vitória oficial de 2026/27 após um início de época atribulado no plano interno e carimbando a redenção europeia em grande estilo.
 
 **Vendaval ofensivo, génio de Jackson e reação belga**

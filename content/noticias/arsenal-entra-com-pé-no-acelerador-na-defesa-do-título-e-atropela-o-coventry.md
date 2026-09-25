@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 O duelo de campeões na jornada de abertura da Premier League sorriu ao detentor do título principal. No regresso dos grandes palcos ao Emirates Stadium, o Arsenal não deu hipóteses ao recém-promovido Coventry, construindo uma vitória folgada por 3-0.
 
 ### Pressão sufocante e vantagem construída na primeira parte

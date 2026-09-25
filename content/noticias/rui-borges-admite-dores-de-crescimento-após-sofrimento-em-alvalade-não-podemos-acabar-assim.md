@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 O Sporting somou o primeiro triunfo na Liga Portugal Betclic ao vencer o Vitória SC por 3-2, mas o desfecho acabou marcado por alguma tensão nas bancadas do Estádio José Alvalade. Depois de recolher aos balneários a vencer por 3-0, a equipa verde e branca permitiu dois golos rápidos no segundo tempo. Na _flash interview_ da Sport TV, o treinador leonino, Rui Borges, não escondeu a insatisfação com a quebra de rendimento da equipa.
 
 ### Duas metades opostas e perda de intensidade

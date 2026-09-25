@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/3ziFr8SiUNbZkX3ysBWdYCcJ9w.jpg?widt
 
 
 
+
 O Benfica confirmou formalmente junto da Comissão do Mercado de Valores Mobiliários (CMVM) a contratação do internacional português João Palhinha, proveniente do Bayern Munique. O médio de 31 anos é o reforço mais desejado pelo treinador Marco Silva, reeditando a parceria de sucesso mantida no Fulham.
 
 ### Pormenores financeiros e contratuais da transferência

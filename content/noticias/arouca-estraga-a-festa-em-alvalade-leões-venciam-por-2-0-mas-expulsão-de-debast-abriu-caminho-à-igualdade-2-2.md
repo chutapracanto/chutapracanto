@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/nOr9o7voTxJIvNENTRs09FrG4s.webp?wid
 
 
 
+
 O Sporting CP somou o segundo tropeção consecutivo no campeonato ao empatar a duas bolas frente ao FC Arouca, em Alvalade. Numa noite em que os leões podiam ter aproveitado o duelo direto entre FC Porto e Benfica para ganhar terreno no topo da tabela, a equipa de Rui Borges deitou tudo a perder na segunda metade, permitindo uma ponta final avassaladora dos visitantes.
 
 **Primeira parte de sentido único**

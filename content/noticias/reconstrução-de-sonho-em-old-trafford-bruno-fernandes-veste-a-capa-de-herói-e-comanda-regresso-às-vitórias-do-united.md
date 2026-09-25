@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/WGsEzPHRb7EpbNAGRkB7BOgsRuo.jpg?wid
 
 
 
+
 O Teatro dos Sonhos foi palco de uma tarde de grandes emoções, onde a apreensão inicial deu lugar a um autêntico festival de futebol. Na receção ao Ipswich Town, o Manchester United de Michael Carrick teve de provar do amargo de uma desvantagem precoce antes de dar asas a uma reviravolta categórica (5-2). No centro do espetáculo esteve o capitão Bruno Fernandes, numa exibição monumental coroada com um _hat-trick_ memorável que carimbou os primeiros três pontos dos _red devils_ na Premier League.
 
 **Susto vindo das alas e o resgate do capitão no momento certo**

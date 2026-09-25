@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/DHko8dw62bzIylunUAVSagD0Dc.webp?wid
 
 
 
+
 Na véspera do desafio em Rio Maior frente ao Casa Pia, a contar para a Liga Portugal, Francesco Farioli marcou presença na sala de imprensa do Olival com um discurso assertivo, frontal e cirúrgico. Entre os fantasmas do passado recente, o estado de emergência no departamento médico e a firme defesa da postura europeia diante do Manchester City, o técnico do FC Porto passou a pente fino o momento da estrutura azul e branca.
 
 **Alerta amarelo em Rio Maior e a memória viva do passado**

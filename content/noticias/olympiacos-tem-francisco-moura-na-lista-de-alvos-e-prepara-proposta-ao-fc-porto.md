@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 O **Olympiacos** está ativamente à procura de um reforço para a ala esquerda da defesa e elegeu **Francisco Moura** como a principal prioridade para a posição.
 
 Apesar de a SAD do FC Porto ainda não ter recebido qualquer oferta formal no Dragão, a entrada do clube grego em cena é iminente. O emblema liderado por Evangelos Marinakis planeia abrir a mesa de negociações com uma **proposta inicial a rondar os 7 milhões de euros**.

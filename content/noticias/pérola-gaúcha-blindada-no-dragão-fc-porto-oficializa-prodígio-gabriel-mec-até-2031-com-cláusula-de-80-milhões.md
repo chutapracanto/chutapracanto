@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/3jKLfQkbnEzjTmAWeMQNMs1M7kQ.webp?wi
 
 
 
+
 O FC Porto assegurou uma das promessas mais reluzentes do futebol sul-americano ao oficializar a contratação de Gabriel Mec. O jovem talento brasileiro desvincula-se do Grémio de Porto Alegre para rumar à Invicta a título definitivo, assinando um contrato de longa duração válido por cinco temporadas até 30 de junho de 2031. Para afastar a cobiça dos tubarões europeus, a SAD portista blindou o atleta com uma imponente cláusula de rescisão fixada nos 80 milhões de euros.
 
 **Enquadramento financeiro e detalhes da engenharia contratual**

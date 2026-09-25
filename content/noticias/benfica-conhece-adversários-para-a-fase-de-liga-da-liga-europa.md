@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/IwYh2Gw4YokZpnQbUZ9fnhh5dVs.jpg?wid
 
 
 
+
 O SL Benfica já tem traçado o seu caminho para a fase de liga da UEFA Europa League 2026/27. Depois de garantir o passaporte europeu com uma caminhada autoritária nas fases de qualificação — onde superou St. Gallen, Hearts e AGF Aarhus —, a formação liderada por Marco Silva partiu do Pote 1 no sorteio realizado esta sexta-feira.
 
 Neste modelo competitivo da UEFA, as águias terão de disputar oito batalhas contra dois oponentes de cada um dos quatro potes, dividindo o calendário em quatro noites europeias no Estádio da Luz e quatro deslocações exigentes.

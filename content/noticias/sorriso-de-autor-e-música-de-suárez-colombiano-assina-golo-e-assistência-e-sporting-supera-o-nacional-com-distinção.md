@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/hEoxTFktwBMFpOPPbfMvmLtcKY.jpg?widt
 
 
 
+
 O Sporting CP cumpriu com solenidade o compromisso na 5.ª jornada da Liga Portugal Betclic ao superiorizar-se ao CD Nacional por 2-0, no Estádio José Alvalade. Numa noite em que os holofotes incidiam sobre a frente de ataque leonina, Luis Suárez tratou de dissipar qualquer ruído com uma exibição de gala: marcou, serviu e festejou com o sorriso de quem resolve, garantindo um triunfo sereno e incontestável para a turma de Alvalade.
 
 **Muralha de Marin ruiu na marca dos onze metros**

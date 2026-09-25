@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/GLrFqqc1AAwkTm5k7WHASaPsJ7M.webp?wi
 
 
 
+
 O FC Porto fechou a transferência de Stephen Eustáquio para o Swansea City. Fora dos planos do técnico Francesco Farioli para a presente temporada, o médio canadiano ruma ao _Championship_ num negócio que garante um encaixe financeiro imediato à administração liderada por André Villas-Boas.
 
 ### Encaixe financeiro e detalhes do negócio

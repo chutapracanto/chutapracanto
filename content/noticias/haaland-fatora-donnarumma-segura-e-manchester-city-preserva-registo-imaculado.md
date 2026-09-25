@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/lNxOMSeBOw2Y26U9sk96Wt5Rc.png?width
 
 
 
+
 Com a viagem ao Estádio do Dragão desenhada no horizonte europeu, o Manchester City cumpriu o dever doméstico e superou a resistência do atrevido Coventry por 1-0. Num encontro em que Enzo Maresca promoveu as novidades de Enzo Fernández e Iliman Ndiaye na estrutura inicial, a turma de Manchester assegurou a terceira vitória em três jornadas na Premier League, mantendo a cadência perfeita na perseguição ao topo da tabela.
 
 **Selo de Haaland e desacerto na estocada final**

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/jUccBCpYsCKWDWZ7kRMg7la1ns.webp?wid
 
 
 
+
 Na sequência do triunfo por 3-1 diante do FC Alverca em Alvalade, Rui Borges analisou o momento da equipa e destacou a evolução no capítulo do rigor tático e da entrega ao longo dos 90 minutos.
 
 ### Exibição equilibrada e resposta da equipa

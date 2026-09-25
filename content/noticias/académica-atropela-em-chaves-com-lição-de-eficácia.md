@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 A história do regresso da Académica aos palcos do futebol profissional começou a ser escrita com contornos de verdadeira nota artística. Na jornada de abertura da Liga Portugal 2, a equipa orientada por António Barbosa deslocou-se a Chaves e assinou uma exibição categórica, traduzida num expressivo 1-4 construído à custa de um pragmatismo implacável.
 
 Apesar de o conjunto flaviense ter tido maior iniciativa de jogo, mais posse de bola e maior volume rematador, foi a Briosa quem deu uma autêntica lição de eficácia. Logo aos 7 minutos, na sequência de um arremesso lateral cobrado por Leandro Silva e aproveitando a hesitação da defensiva transmontana, Marcos Paulo surgiu solto ao segundo poste para inaugurar o marcador.

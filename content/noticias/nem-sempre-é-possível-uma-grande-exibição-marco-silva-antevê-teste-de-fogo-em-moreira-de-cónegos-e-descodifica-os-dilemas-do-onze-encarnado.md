@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/myn87lA90z751UGmGPqoTs2qqA.webp?wid
 
 
 
+
 Na antevisão ao duelo em atraso da 3.ª jornada da Liga Portugal Betclic, em que o Benfica visita o terreno do Moreirense, Marco Silva projetou um embate de exigência máxima num palco historicamente espinhoso. Com discurso direto e límpido, o técnico das águias dissecou a gestão do plantel, abordou a competitividade no corredor ofensivo e revelou o leque de soluções para colmatar a ausência de Alexander Bah na ala direita.
 
 **Respeito ao Moreirense, o sinal de Schjelderup e a firmeza sobre Sudakov**

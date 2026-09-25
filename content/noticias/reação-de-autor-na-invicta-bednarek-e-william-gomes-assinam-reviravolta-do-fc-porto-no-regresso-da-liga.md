@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/tnCYJUmrlz3dzw1hAKilBJXvnug.webp?wi
 
 
 
+
 A hora do despertador falhou ligeiramente no arranque, mas a capacidade de resposta evitou estragos maiores na Invicta. Num embate em que a equipa de Francesco Farioli pareceu entrar a um ritmo inferior e com ligeiro excesso de confiança fruto de alguma rotação, o FC Porto reagiu no momento certo, consumando a reviravolta por 2-1 sobre o Moreirense para manter o registo 100% vitorioso e isolar-se no topo da Liga Portugal Betclic.
 
 **Susto no passe, reação pela bola parada e protagonismo nas alas**

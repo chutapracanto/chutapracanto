@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/lxwblsxZQnhLW9NgNkUdo0o9N20.jpg?wid
 
 
 
+
 O ataque do FC Porto recebeu uma injeção de classe e imponência internacional. Santiago Giménez foi apresentado oficialmente como a nova cara do setor ofensivo portista, assinando um contrato válido até junho de 2027. Proveniente do AC Milan, o internacional mexicano chega à Invicta para envergar a camisola 29, prometendo agitar a frente de ataque da equipa azul e branca.
 
 **Anatomia de uma operação financeira e desportiva blindada**

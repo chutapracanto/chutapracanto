@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/81nRx7UbT53oxeWlpxNHsAiTDM.webp?wid
 
 
 
+
 Na antevisão à visita do SL Benfica ao Estádio do Marítimo, em duelo a contar para a 5.ª jornada da Liga Portugal Betclic, Marco Silva passou em revista a atualidade encarnada. O técnico das águias detalhou o enquadramento tático das novas caras do plantel, justificou a gestão de nomes como Lukebakio e deixou um aviso claro sobre a necessidade de rotação perante a elevada densidade de jogos no horizonte continental e doméstico.
 
 **Echeverri no corredor central e a abundância nas alas**

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/opUW2SOuxP5mCMHKl1C7URTTo.webp?widt
 
 
 
+
 O FC Alverca continua em plena espiral de ascensão na Liga Portugal. Após ter alcançado a primeira vitória da época na Choupana frente ao Nacional, a formação ribatejana regressou a casa para assinar o primeiro triunfo da temporada perante os seus adeptos, superando o Rio Ave por 1-0. Um golo madrugador de Dawda Camara revelou-se suficiente para carimbar três pontos de ouro numa exibição de grande personalidade dos homens de Sérgio Ferreira.
 
 **Início demolidor e gala de Chiquinho no monólogo ribatejano**

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/IZypvoXtygBPR2D38BlJFxBWf0.webp?wid
 
 
 
+
 As apelidadas «dores de crescimento» do renovado Sporting de Rui Borges ficaram à porta dos balneários em Vila do Conde. Longe de qualquer hesitação própria de um processo de reestruturação, a turma leonina assinou uma das exibições mais maduras, autoritárias e vistosas da temporada, atropelando o Rio Ave por 4-0 numa demonstração de força absoluta.
 
 **Primeiro tempo de luxo constrói goleada histórica em 45 minutos**

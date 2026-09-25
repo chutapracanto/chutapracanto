@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/3ZvswLF2l6VTcoMrRnLM27O9BrA.jpg?wid
 
 
 
+
 O Tottenham continua sem conseguir reagir neste arranque de Premier League e somou a segunda derrota consecutiva ao perder em casa por 0-2 frente ao Newcastle. A equipa orientada por Roberto De Zerbi voltou a demonstrar enormes dificuldades no capítulo ofensivo e continua sem qualquer golo marcado no campeonato, caindo para a zona baixa da tabela. Por sua vez, a formação visitante alcançou os quatro pontos e instalou-se provisoriamente no top-4 da prova.
 
 **Primeiro tempo sem eficácia e aviso dos magpies**

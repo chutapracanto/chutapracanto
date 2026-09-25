@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 Está prestes a fechar-se a grande novela do mercado de transferências. O Benfica alcançou um acordo total com o Bayern Munique para a contratação de João Palhinha, num negócio que está na fase final de pormenores burocráticos e que se perfila como uma das movimentações mais mediáticas da temporada 2026/2027.
 
 ### Os números do investimento encarnado

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/Ih835NYIhNjGwp34mg2xK4aeY8Q.jpg?wid
 
 
 
+
 O Benfica rubricou uma das exibições mais fulgurantes e conseguidas da temporada no regresso às lides domésticas, ao banalizar o Moreirense com um expressivo 4-0 na visita ao Estádio Comendador Joaquim de Almeida Freitas, em duelo em atraso referente à 3.ª jornada da Liga Portugal. Numa noite em que a irreverência e a audácia da juventude tomaram conta dos destinos do encontro, Andreas Schjelderup e Gianluca Prestianni vestiram o fato de gala e regeram uma autêntica sinfonia ofensiva.
 
 **Sociedade nórdico-argentina em ebulição e o sangue-frio de Pavlidis**

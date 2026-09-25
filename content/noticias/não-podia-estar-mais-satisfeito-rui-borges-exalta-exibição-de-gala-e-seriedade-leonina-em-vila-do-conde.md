@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/3sEuPBJ6KfE0XCJmt4qmQ16A.jpg?width=
 
 
 
+
 Após o triunfo incontestável do Sporting frente ao Rio Ave por 4-0, Rui Borges apresentou-se visivelmente satisfeito aos microfones da _SportTV_. O técnico dos leões elogiou a irrepreensível postura tática da equipa e a consistência demonstrada do primeiro ao último minuto.
 
 **Domínio absoluto e leitura tática perfeita**

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/a50d2InSrwFWNy3E5yhrWDaq7Cc.jpg?wid
 
 
 
+
 O Chelsea deu seguimento ao arranque vitorioso na Premier League ao vencer o Brighton & Hove Albion por 4-3 num duelo frenético e recheado de futebol ofensivo. A formação orientada por Xabi Alonso aproveitou a eficácia cirúrgica nos primeiros minutos para construir uma margem confortável, resistindo depois à reação forte dos forasteiros — que dominaram a posse de bola — para somar a segunda vitória em dois jogos e juntar-se a Manchester City e Hull City no topo da tabela com seis pontos.
 
 **Entrada avassaladora e inspiração lusa na frente**

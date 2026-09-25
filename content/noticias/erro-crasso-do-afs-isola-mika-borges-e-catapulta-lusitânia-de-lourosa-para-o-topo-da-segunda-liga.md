@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/ddyOb5XpuKe4hgdIQojccnSoes.jpg?widt
 
 
 
+
 A 5.ª jornada da Segunda Liga encerrou com chave de ouro no Estádio Carlos Osório, em Oliveira de Azeméis casa emprestada do Lusitânia de Lourosa. Num duelo marcado pelo ritmo frenético, qualidade técnica de parte a parte e emoção levada ao limite, a formação lusitanista bateu o AFS por 2-1, selando a vitória no suspiro final e garantindo a liderança isolada da prova.
 
 **Obra-prima de Collard, resposta rápida de Pinho e parada e resposta**

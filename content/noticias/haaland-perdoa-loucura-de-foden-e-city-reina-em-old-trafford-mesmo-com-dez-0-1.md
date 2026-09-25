@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/CRGuZAoLqkofdoT7YQ1MlLCam0.jpg?widt
 
 
 
+
 O dérbi de Manchester esteve longe de vestir as roupagens dos clássicos mais vistosos da Premier League, mas reservou um enredo invulgar e de elevado quilate dramático no relvado de Old Trafford. Num confronto onde o Manchester United jogou em superioridade numérica desde os 23 minutos fruto de uma agressão infantil de Phil Foden, foi o Manchester City quem acabou por sorrir, arrancando um triunfo cirúrgico por 0-1 graças ao faro de golo inato de Erling Haaland para se colar ao Arsenal no topo do campeonato.
 
 **Redenção em inferioridade, sustos no ferro e o plano de sobrevivência de Maresca**

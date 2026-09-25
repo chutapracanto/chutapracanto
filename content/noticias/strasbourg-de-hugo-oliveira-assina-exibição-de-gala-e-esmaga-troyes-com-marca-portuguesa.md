@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/6FbteMzdDjA65oHXgu75UDqUZA.jpg?widt
 
 
 
+
 O duelo entre Troyes e Strasbourg, referente à 3.ª jornada da Ligue 1, serviu de prova provada a uma das máximas mais intemporais do futebol: não importa como começa, mas sim como acaba. A formação de Estrasburgo, sob a batuta tática do português Hugo Oliveira, desenhou uma reviravolta categórica ao golear por 2-6, numa tarde marcada pelo brilho da armada lusa golo e assistência do ex-Vitória SC Diogo Sousa, estreia com passe para golo de Dário Essugo e a cartada final do ex-sportinguista Conrad Harder.
 
 **Susto madrugador e reação de gala antes do descanso**

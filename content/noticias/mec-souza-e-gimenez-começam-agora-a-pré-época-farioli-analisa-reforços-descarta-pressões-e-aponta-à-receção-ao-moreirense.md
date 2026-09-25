@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/uJwh3Uf8ZUNJZNL6locaaw10bas.webp?wi
 
 
 
+
 Francesco Farioli fez a antevisão ao duelo com o Moreirense para a 5.ª jornada da Liga Portugal e aproveitou para passar em revista o fecho de mercado do FC Porto. Em conferência de imprensa, o técnico italiano abordou a integração das últimas caras novas Santiago Gimenez, João Souza e Gabriel Mec, garantiu foco total nas competições internas e sublinhou a importância de manter os pilares da época passada.
 
 **A gestão dos reforços e o ponto de situação burocrático**

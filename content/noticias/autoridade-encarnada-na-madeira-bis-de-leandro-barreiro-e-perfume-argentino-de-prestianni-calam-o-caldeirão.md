@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/Jx4YYLEgkXN3RfNSb5OBtygLy8.webp?wid
 
 
 
+
 O SL Benfica rubricou uma exibição de gala no regresso às lides da Liga Portugal Betclic 26/27, ao superar o Marítimo por 0-3 no Estádio do Marítimo. Numa noite em que a inspiração vertiginosa de Gianluca Prestianni serviu de catalisador ofensivo e o apurado sentido de oportunidade de Leandro Barreiro desequilibrou os pratos da balança, a formação das águias construiu um triunfo gordo, irrepreensível e sem espinhas no arquipélago.
 
 **Eficácia madrugadora, asfixia territorial e o selo de Barreiro**

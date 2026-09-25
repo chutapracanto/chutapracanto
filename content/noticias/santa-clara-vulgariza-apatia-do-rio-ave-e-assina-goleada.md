@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/6cET1cDMZHKw4VWdppbrBKsrg.webp?widt
 
 
 
+
 Numa tarde em que o calor abrasador em Ponta Delgada só foi ultrapassado pela intensidade açoriana no relvado, o Santa Clara bateu o Rio Ave por categóricos 4-0. Com um ritmo competitivo e uma fome de vencer manifestamente superiores, a formação orientada por Petit vulgarizou a passividade dos vila-condenses e deu continuidade a um arranque de temporada absolutamente espetacular.
 
 **Início fulgurante, asas em chamas e perigo constante**

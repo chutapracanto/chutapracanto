@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/v0Gn8v2xunH4TayMjKOT8S9iGI.jpg?widt
 
 
 
+
 O Manchester City garantiu um triunfo dramático na jornada inaugural da Premier League ao revirar o marcador nos minutos finais e bater o Bournemouth por 2-1 no Etihad Stadium. A vitória ao cair do pano estragou a estreia oficial do internacional português António Silva nos _Cherries_, num duelo de novos treinadores entre Enzo Maresca e Marco Rose.
 
 ### Eficiência visitante perante o desperdício dos _citizens_

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/ZnDsLIz4DRrixq16ZCdfdCUZQ.jpg?width
 
 
 
+
 O Real Madrid venceu a Real Sociedad por 4-1, no regresso de José Mourinho ao Santiago Bernabéu, em jogo a contar para a La Liga. Kylian Mbappé foi a grande figura da partida ao apontar um _hat-trick_, num encontro em que Vinícius Jr. também inscreveu o seu nome na lista dos marcadores.
 
 ### Do empate ao intervalo à goleada no segundo tempo

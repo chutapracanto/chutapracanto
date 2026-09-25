@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/mjCm9kYspVDkDbiE5zleLvlbak.jpg?widt
 
 
 
+
 O Atlético de Madrid levou a melhor no grande duelo do futebol espanhol ao vencer o Real Madrid por 2-1, no Civitas Metropolitano, em partida a contar para a 7.ª jornada da LaLiga. Num confronto que começou fechado, o ponto de viragem surgiu no arranque do segundo tempo com o cartão vermelho exibido a Dean Huijsen, abrindo caminho para os tentos de Álex Grimaldo e Jonathan David. A reação final da equipa _merengue_, orquestrada por Bernardo Silva e finalizada por Antonio Rüdiger, acabou por ser insuficiente.
 
 **Prudência inicial e a grande penalidade que mudou o enredo**

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/lqGiuJACPECmET6XiJBXjbf9zE.webp?wid
 
 
 
+
 O Estádio José Alvalade voltou a abrir portas para a competição oficial e assistiu ao triunfo do Sporting sobre o Vitória SC por 3-2, no encontro que abriu a 2.ª jornada da Liga Portugal Betclic. Os leões construíram uma vantagem confortável no primeiro tempo, mas voltaram a evidenciar quebras de rendimento na etapa complementar, repetindo os sinais de alarme observados no arranque do campeonato.
 
 ### Ioannidis em destaque e regresso das claques

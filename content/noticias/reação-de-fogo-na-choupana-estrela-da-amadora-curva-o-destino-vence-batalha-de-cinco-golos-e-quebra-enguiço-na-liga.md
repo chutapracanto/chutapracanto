@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/gVFfXkJtIqVnsfk98H9cYn2mMI.jpg?widt
 
 
 
+
 O Estrela da Amadora viveu uma tarde de verdadeira libertação no Funchal ao colocar um ponto final num jejum de vitórias que já perdurava há nove partidas na Liga Portugal Betclic. Num espetáculo intenso e rico em pontos de viragem na Choupana, a formação tricolor soube erguer-se perante as adversidades para bater o Nacional por 2-3, selando o primeiro triunfo na prova ao décimo ensaio.
 
 **Golpe madrugador na ilha e a resposta com carga emotiva**

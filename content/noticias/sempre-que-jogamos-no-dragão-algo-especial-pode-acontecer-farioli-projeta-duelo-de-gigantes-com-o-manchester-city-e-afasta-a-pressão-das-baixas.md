@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/uJwh3Uf8ZUNJZNL6locaaw10bas.webp?wi
 
 
 
+
 Na véspera de se estrear nas lides milionárias da Liga dos Campeões perante o poderoso Manchester City, o treinador do FC Porto, Francesco Farioli, abordou o desafio com uma mistura perfeita de pragmatismo, ambição e uma boa dose de boa disposição. Em conferência de imprensa de antevisão, o técnico italiano desvalorizou as ausências de peso no eixo central e apontou à mística invicta do Estádio do Dragão como o ingrediente secreto para alcançar uma noite memorável.
 
 **Mística do Dragão, o império do City e a estreia aos 37 anos**

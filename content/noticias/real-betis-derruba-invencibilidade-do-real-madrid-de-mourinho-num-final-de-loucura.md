@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/dio2EW6CpG2HdDvZszVwXXMZUgI.jpg?wid
 
 
 
+
 Num final de partida eletrizante no Estádio Benito Villamarín, o Real Betis impôs a primeira derrota da época ao Real Madrid de José Mourinho. A equipa orientada por Manuel Pellegrini venceu por 1-0 graças a um golo solitário de Troy Parrott na reta final e a uma exibição monumental do guarda-redes Álvaro Valles, que travou um penálti a Kylian Mbappé já em período de compensação.
 
 **Domínio merengue, crescimento andaluz e o golo do triunfo**

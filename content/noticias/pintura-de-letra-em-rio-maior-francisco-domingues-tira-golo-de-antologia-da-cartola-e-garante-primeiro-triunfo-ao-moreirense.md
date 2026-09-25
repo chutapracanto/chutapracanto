@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/W3QosShd4xkdevTpoMg19fBwrU.jpg?widt
 
 
 
+
 A 4.ª jornada da Liga Portugal Betclic reservou um duelo de alta exigência entre dois conjuntos em busca do primeiro sorriso da temporada. Na visita ao reduto do Casa Pia AC, o Moreirense de Vasco Botelho da Costa superiorizou-se e conquistou uma vitória preciosa por 0-1. Num encontro pautado por bom futebol e rigor tático, a diferença acabou por ser ditada por um momento de pura genialidade individual que promete ficar gravado na galeria dos melhores golos do campeonato.
 
 **Génio de Francisco Domingues ilumina primeira metade de bom nível**

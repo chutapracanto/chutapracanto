@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/ursljLXmoSZupbZcduwoEUmW5Ww.jpg?wid
 
 
 
+
 O FC Porto agitou as águas do mercado de transferências e garantiu uma nova solução de enorme potencial para o setor recuado. Através das suas plataformas oficiais, o clube azul e branco confirmou a contratação de João Souza, promissor lateral-esquerdo brasileiro de apenas 20 anos, que chega à Invicta por empréstimo do Tottenham até ao fecho da presente temporada. O acordo de cedência temporária não contempla opção de compra, ficando a estrutura portista encarregue de suportar a totalidade dos vencimentos do atleta.
 
 **Da formação na Vila Belmiro à afirmação no futebol europeu**

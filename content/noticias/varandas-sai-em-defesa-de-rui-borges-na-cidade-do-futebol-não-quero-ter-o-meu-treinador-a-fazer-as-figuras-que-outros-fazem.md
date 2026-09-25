@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/NL5Ca6gBYTPt9efa28wgFOIpdQ.jpg?widt
 
 
 
+
 À margem da segunda edição dos _Portugal Football Globes_, na Cidade do Futebol, em Oeiras, o presidente do Sporting, Frederico Varandas, prestou declarações aos jornalistas para abordar o momento desportivo da equipa principal. Perante a perda de seis pontos nas últimas jornadas, o líder leonino garantiu a continuidade absoluta do técnico Rui Borges, destacou o seu palmarés e aproveitou para lançar duras críticas à atitude dos clubes rivais.
 
 ### **Confiança total na equipa técnica e críticas à concorrência**

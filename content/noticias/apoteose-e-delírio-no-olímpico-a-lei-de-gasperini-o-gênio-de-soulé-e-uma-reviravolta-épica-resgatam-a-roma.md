@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/AmgNY6HwP1CzIOBhsW224dAfQ.webp?widt
 
 
 
+
 O reencontro carregado de eletricidade entre Gian Piero Gasperini e a Atalanta transformou-se numa ode ao futebol de emoções puras, culminando numa noite de pura apoteose no Stadio Olimpico. Na receção ao conjunto de Bergamo, agora sob a batuta tática de Maurizio Sarri, a Roma que apresentou o promissor português Rodrigo Mora no onze inicial teve de descer aos infernos antes de tocar o céu, selando um triunfo por 2-1 com contornos épicos para manter a invencibilidade e o registo imaculado na Serie A.
 
 **Iniciativa sufocante e o veneno frio de Éderson**

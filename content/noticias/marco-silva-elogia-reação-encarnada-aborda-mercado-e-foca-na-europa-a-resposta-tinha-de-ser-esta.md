@@ -1,13 +1,14 @@
 ---
-title: "​Marco Silva elogia reação encarnada, aborda mercado e foca na Europa: \"A resposta tinha de ser esta\""
+title: "Marco Silva elogia reação encarnada, aborda mercado e foca na Europa: \"A resposta tinha de ser esta\""
 slug: "marco-silva-elogia-reação-encarnada-aborda-mercado-e-foca-na-europa-a-resposta-tinha-de-ser-esta"
-subtitle: "​Treinador do Benfica enalteceu o apoio da massa associativa em Rio Maior, justificou a exigência no banco até ao apito final e pisou o risco sobre o mercado de transferências"
+subtitle: "Treinador do Benfica enalteceu o apoio da massa associativa em Rio Maior, justificou a exigência no banco até ao apito final e pisou o risco sobre o mercado de transferências"
 category: "SL Benfica"
 published: "2026-08-05"
 author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/​marco-silva-elogia-reação-encarnada-aborda-mercado-e-foca-na-europa-a-resposta-tinha-de-ser-esta"
 image: "https://framerusercontent.com/images/9FEvZ4zMUyMtuH9ULHPlD4t72U.jpg?width=1208&height=725"
 ---
+
 
 
 

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/WQhHzuLhhbh1nJJ1gHlHtWBfck.jpg?widt
 
 
 
+
 A jornada inaugural da Liga Europa ficou marcada por desempenhos memoráveis e fortes contrastes para as figuras do futebol português espalhadas pelos relvados europeus, com destaque para a afirmação do Bournemouth e a demonstração de força da Juventus.
 
 ### **Arranque demolidor em San Sebastián e solidez de António Silva**

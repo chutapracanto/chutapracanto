@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/hwFb79vLhJvIOgj4Lnn86SCc1Y.jpg?widt
 
 
 
+
 O Liverpool somou o primeiro triunfo na Premier League ao superar o Ipswich Town por 0-2 fora de portas. Num arranque de partida avassalador impulsionado pela inspiração de Cody Gakpo e pela eficácia de Alexander Isak, a formação dos _reds_ resolveu o encontro nos primeiros dez minutos, sabendo depois gerir a reação do conjunto orientado por Andoni Iraola.
 
 **Arranque avassalador, bis de Isak e magia de Gakpo**

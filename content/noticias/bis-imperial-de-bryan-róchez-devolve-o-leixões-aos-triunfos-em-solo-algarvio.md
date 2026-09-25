@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/hP1dUgdnjwurlYYohZSCgg4Ro38.webp?wi
 
 
 
+
 O Leixões rumou ao sul do país e rubricou um triunfo personalizado no Estádio Municipal de Portimão, impondo-se ao Portimonense por 0-2 em encontro referente à 4.ª jornada da Liga Portugal 2 Meu Super. Numa manhã em que o pragmatismo e o discernimento ditaram leis, a figura da partida acabou por ser Bryan Róchez, autor de um bis decisivo que devolveu o conjunto de Matosinhos ao caminho das vitórias.
 
 **Inspirado em cima do descanso**

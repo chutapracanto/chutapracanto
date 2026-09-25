@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/rZQuHiwDyg1tTsp7opR7pQRvVyE.webp?wi
 
 
 
+
 O Estádio da Luz prepara-se para abrir finalmente as portas na nova temporada, esta segunda-feira (20h15), acolhendo a receção do Benfica ao Estoril Praia. Em conferência de imprensa, Marco Silva projetou o duelo de regresso à "catedral" com um misto de pragmatismo exigente e nostalgia assumida, marcando ainda o momento com a confirmação da entrada imediata de João Palhinha no lote de convocados.
 
 **Do coração na Amoreira ao rigor do relvado encarnado**

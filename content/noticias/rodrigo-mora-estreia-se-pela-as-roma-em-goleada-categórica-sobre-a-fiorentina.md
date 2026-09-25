@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/7tVU5tG3Fbo9AfwSt34gK6R6byg.jpg?wid
 
 
 
+
 A AS Roma entrou com o pé direito na Serie A 2026/27 ao golear a Fiorentina por 4-0 no Estádio Olímpico. O encontro de encerramento da primeira jornada ficou marcado pela estreia oficial de Rodrigo Mora, ex-FC Porto, numa exibição coletiva de grande nível da formação romana.
 
 ### Estreia em grande plano e brilho de De Gea

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/BJ1py7ZJjhTMj4QFX1Qa7WSw4I.jpg?widt
 
 
 
+
 Na conferência de imprensa de antevisão à segunda mão do _play-off_ de acesso à Liga Conferência frente ao Austria Wien, Carlos Vicens desvalorizou a vantagem de 2-0 conquistada na Pedreira e garantiu que o Sp. Braga entra em campo na Áustria focado em vencer o encontro.
 
 ### Foco absoluto na vitória e capacidade de sofrimento

@@ -1,5 +1,5 @@
 ---
-title: "​Carlos Vicens recusa euforia após triunfo europeu do SC Braga: \"Estamos apenas no intervalo\""
+title: "Carlos Vicens recusa euforia após triunfo europeu do SC Braga: \"Estamos apenas no intervalo\""
 slug: "carlos-vicens-recusa-euforia-após-triunfo-europeu-do-sc-braga-estamos-apenas-no-intervalo"
 subtitle: "Técnico do SC Braga recusa euforia após vitória por 2-0 sobre o Austria Wien, elogia a reação de Diego Rodrigues e aborda o reforço Milosevic."
 category: "SC Braga"
@@ -8,6 +8,7 @@ author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/​carlos-vicens-recusa-euforia-após-triunfo-europeu-do-sc-braga-estamos-apenas-no-intervalo"
 image: "https://framerusercontent.com/images/ICyKImtjJiJ3l1uL5wO8Zz0DxI.webp?width=1200&height=799"
 ---
+
 
 
 

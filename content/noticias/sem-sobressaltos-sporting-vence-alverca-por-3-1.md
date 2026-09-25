@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/GgbdeYBZaf7usOYkrz9DSeWQVss.jpg?wid
 
 
 
+
 Numa exibição marcada pela maturidade e pelo pragmatismo tático, o Sporting superou o FC Alverca por 3-1 em Alvalade. Depois de uma primeira metade cinzenta, a equipa verde e branca subiu a fasquia no segundo tempo, impôs a superioridade técnica e carimbou a segunda vitória consecutiva no campeonato.
 
 ### Raio de Maxi Araújo e resiliência ribatejana

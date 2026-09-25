@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/2DQN2yJtDV5KesLszN1pNEhfwg.webp?wid
 
 
 
+
 Apesar de ter deixado uma imagem positiva no Estádio do Dragão durante o período em que atuou com 11 elementos, o Benfica saiu derrotado perante o FC Porto por 3-1. Na análise após o apito final, Marco Silva apontou a expulsão de Clement Lenglet como o ponto de viragem do Clássico, lamentando a falta de maturidade da equipa encarnada nos momentos decisivos da partida, mas desvalorizou o atraso na tabela e a polémica com a arbitragem.
 
 **Personalidade inicial e o impacto da expulsão**

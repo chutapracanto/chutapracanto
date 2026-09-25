@@ -1,7 +1,7 @@
 ---
 title: "Rodrigo Mora apresentado na Roma: FC Porto encaixa 25 milhões por metade do passe"
 slug: "rodrigo-mora-apresentado-na-roma-fc-porto-encaixa-25-milhões-por-metade-do-passe"
-subtitle: "​Médio de 19 anos rumou a Itália acompanhado por Jorge Mendes e os dragões garantem um encaixe imediato de 25 milhões de euros por metade do passe, salvaguardando o valor total de 50 milhões."
+subtitle: "Médio de 19 anos rumou a Itália acompanhado por Jorge Mendes e os dragões garantem um encaixe imediato de 25 milhões de euros por metade do passe, salvaguardando o valor total de 50 milhões."
 category: "FC Porto"
 published: "2026-08-19T00:00:00.000Z"
 author: "ChutaPraCanto"
@@ -14,6 +14,7 @@ featuredImageAlt: "Rodrigo Mora apresentado na Roma: FC Porto encaixa 25 milhõe
 relatedYouTube: ""
 relatedSpotify: ""
 ---
+
 
 
 

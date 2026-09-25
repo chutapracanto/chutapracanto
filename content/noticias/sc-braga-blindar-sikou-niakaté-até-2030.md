@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/G4fiLMjbEcnrENJx7lWPwsFKM.jpg?width
 
 
 
+
 O SC Braga oficializou este domingo a extensão do vínculo contratual de Sikou Niakaté. O defesa-central internacional maliano, de 27 anos, prolongou a ligação à formação minhota por mais cinco temporadas, ficando agora comprometido com o clube até 2030.
 
 ### Confiança total durante o processo de recuperação

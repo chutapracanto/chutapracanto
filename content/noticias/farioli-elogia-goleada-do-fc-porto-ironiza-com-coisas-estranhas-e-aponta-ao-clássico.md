@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/DHko8dw62bzIylunUAVSagD0Dc.webp?wid
 
 
 
+
 O FC Porto respondeu à derrota europeia frente ao Manchester City com uma demonstração de força e autoridade ao golear o Casa Pia por 1-4. No rescaldo do encontro, Francesco Farioli destacou a frieza e o controlo da sua equipa após entrar a perder, deixou recados enigmáticos à arbitragem em Rio Maior e abriu já o livro para o clássico da próxima semana diante do Benfica.
 
 **Reviravolta de personalidade e o 'fator' bolas paradas**

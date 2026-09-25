@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 A transferência de **Ousmane Diomande** para o Nottingham Forest encontra-se num impasse e corre o risco sério de não se concretizar. As negociações entre a SAD do Sporting e o clube da Premier League estagnaram nos últimos dias, com ambos os lados irredutíveis nas suas exigências financeiras.
 
 #### **Diferença de 10 milhões trava o acordo**

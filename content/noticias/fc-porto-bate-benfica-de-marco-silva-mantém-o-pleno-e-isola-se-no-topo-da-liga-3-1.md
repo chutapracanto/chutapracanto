@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/3RyrBEv17ZHqsZkjbGqy59eRR4I.webp?wi
 
 
 
+
 O Estádio do Dragão vestiu-se a rigor para acolher um Clássico de contornos marcantes na 7.ª jornada da Liga Portugal. O FC Porto levou a melhor sobre o rival Benfica por 3-1, num duelo que começou aberto, mas que ficou fortemente condicionado pela expulsão prematura de Clément Lenglet na primeira parte. A eficácia da equipa de Francesco Farioli e o aproveitamento da vantagem numérica permitiram aos azuis e brancos manter a invencibilidade, somar por vitórias todos os jogos no campeonato e cavar uma distância de cinco pontos na liderança da prova.
 
 **Abertura eletrizante, golpe de Veiga e a precipitação de Lenglet**

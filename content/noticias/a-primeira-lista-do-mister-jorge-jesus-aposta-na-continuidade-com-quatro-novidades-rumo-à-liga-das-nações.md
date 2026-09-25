@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/074BI87A7qrhUHX7sKMXl71h9xc.jpg?wid
 
 
 
+
 O ciclo de Jorge Jesus ao comando da Seleção Nacional arrancou oficialmente com a divulgação dos 25 convocados para a maratona de quatro jogos da Liga das Nações. Mantendo a espinha dorsal da equipa que esteve no Campeonato do Mundo, o novo selecionador nacional promoveu quatro regressos e estreias, numa lista que marca o arranque da campanha de setembro e outubro.
 
 ### **Continuidade do Mundial e quatro nomes novos na era JJ**

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/z538QvYvNIXk3YiizhfNRyp2Vs.jpg?widt
 
 
 
+
 O Olympique Lyonnais carimbou este sábado a exibição mais vistosa da sua campanha em 2026/27 ao atropelar o Rennes por 4-0. A formação comandada pelo técnico português Paulo Fonseca não deu hipóteses ao emblema que liderava a Ligue 1 sem qualquer derrota e carimbou um triunfo incontestável no Groupama Stadium, marcado por dois golos em cada metade do encontro.
 
 **Bis de Nuamah colocou o jogo no sentido único**

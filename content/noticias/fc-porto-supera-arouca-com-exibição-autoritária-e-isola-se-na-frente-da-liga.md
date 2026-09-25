@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/gh1GlffjxC4HhpILR49Mv11YXo.webp?wid
 
 
 
+
 O FC Porto recebeu e venceu o FC Arouca por 2-0 no Estádio do Dragão, assumindo de forma provisória a liderança isolada do campeonato. A formação orientada por Francesco Farioli assinou a exibição mais conseguida da temporada, dominando o encontro do início ao fim e construindo um triunfo incontestável, apesar de um longo rol de oportunidades desperdiçadas.
 
 ### Pressão sufocante e muralha em nulo ao intervalo

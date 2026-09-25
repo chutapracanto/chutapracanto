@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/F5wKIEHPGai0ZB6O6UsP2SsPeA.jpg?widt
 
 
 
+
 O Emirates Stadium vibrou com mais uma noite memorável de futebol ao servir de palco para um duelo de intensidade pura no encerramento da 3.ª jornada da Premier League. O Arsenal recebeu e bateu o rival Chelsea que alinhou com o internacional português Pedro Neto no onze inicial por 2-1, assinando uma cambalhota no marcador recheada de classe e confirmando a excelente forma sob o comando de Mikel Arteta.
 
 **Tensão do mercado a abrir e a inevitável 'lei do ex'**

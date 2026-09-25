@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/tk7sfoJFndnm3j23xyaGvqUEOwA.jpg?wid
 
 
 
+
 Na ressaca de uma reviravolta trabalhada a ferro e fogo diante do Gil Vicente (3-1), que mantém o SL Benfica na peguidinha da liderança à espreita do Clássico, o técnico encarnado, Marco Silva, passou a pente fino as incidências da partida na sala de imprensa da Catedral. Num discurso marcado pela lucidez, o timoneiro das águias desmontou as teias táticas forjadas pelo adversário, colocou o acento na capacidade de reação perante o calor sufocante e desfez-se em elogios à estreia elétrica do jovem reforço argentino Claudio Echeverri.
 
 **A teia gilista, a fadiga no calor da Luz e a força do banco**

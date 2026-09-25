@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/mW4AmOCPvcmFT4tN0kKfQX5wdo.jpg?widt
 
 
 
+
 O **Sporting CP** fechou a contratação de **Nestory Irankunda** ao Watford. O acordo entre a SAD leonina e o emblema inglês é total, tendo o jovem atacante recebido luz verde para viajar para Lisboa nas próximas horas, onde irá realizar os exames médicos e assinar um contrato válido por **cinco temporadas**.
 
 A operação financeira envolve um **investimento fixo de 15 milhões de euros**, valor que pode ascender aos **18 milhões de euros** mediante o cumprimento de objetivos de rendimento do internacional australiano de 20 anos.

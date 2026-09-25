@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/ufYekoEVXBgWQ7jEd6ynnQdrbU.jpg?widt
 
 
 
+
 Numa das partidas mais frenéticas da época na Premier League, o Manchester City levou a melhor sobre o Sunderland com um triunfo por 5-3. O embate no Etihad Stadium transformou-se num espetáculo ofensivo vibrante, pintado com reviravoltas, a inspiração de Antoine Semenyo, um hat-trick memorável do visitante Brian Brobbey e um registo inédito fixado por Erling Haaland.
 
 **Carrossel de emoções e festival ofensivo antes do descanso**

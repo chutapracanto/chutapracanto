@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/nmef7DJmclqdrizM3YdJUEo2IQ.jpg?widt
 
 
 
+
 O Arsenal de Mikel Arteta continua a assinar um arranque de temporada memorável e irrepreensível, somando o sexto triunfo consecutivo em todas as competições quatro deles a contar para a Premier League. Num Stadium of Light vulcânico e perante um Sunderland altamente agressivo, a turma de Londres soube resistir aos momentos de maior sufoco, beneficiou de uma intervenção decisiva de David Raya e arrancou uma vitória de autoridade por 0-2 para trancar a sete chaves a liderança isolada do campeonato inglês.
 
 **Mão de ferro de Raya e o míssil de Bruno Guimarães que rompeu a teia**

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/tk7sfoJFndnm3j23xyaGvqUEOwA.jpg?wid
 
 
 
+
 Após o triunfo categórico por 4-0 no relvado do Moreirense, Marco Silva apresentou-se visivelmente satisfeito na sala de imprensa para chancelar a superioridade encarnada. Sem rodeios, o técnico do Benfica enalteceu o compromisso tático e a fome de golo de uma equipa que trancou a baliza a sete chaves e instalou o seu futebol em pleno meio-campo adversário.
 
 **Domínio territorial, atitude exemplar e gestão cirúrgica**

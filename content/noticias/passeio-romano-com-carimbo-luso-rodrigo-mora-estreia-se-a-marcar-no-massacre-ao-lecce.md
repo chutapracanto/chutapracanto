@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/eunNiNYFXkosn6C66v6V26AucAs.jpg?wid
 
 
 
+
 A Roma continua a rubricar um arranque de época em ritmo de autêntico rolo compressor na Serie A. Na deslocação ao reduto do Lecce, a turma comandada por Gian Piero Gasperini voltou a dar um recital ofensivo e carimbou uma goleada expressiva por 0-4. O grande momento da tarde acabou por ter assinatura portuguesa, com o jovem Rodrigo Mora a saltar do banco de suplentes para estrear a sua conta pessoal em solo italiano de forma categórica.
 
 **Fragilidades do Lecce abrem portas ao vendaval**_**giallorosso**_

@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 O Benfica tem praticamente fechada a contratação de Alessandro Circati, defesa-central de 22 anos que atua no Parma. Segundo avançado pelo especialista no mercado de transferências Fabrizio Romano, acompanhado por jornalistas como Gianluca Di Marzio e Matteo Moretto, os dois clubes alcançaram um acordo verbal para a transferência do internacional australiano por uma verba a rondar os 20 milhões de euros, acrescida de bónus por objetivos.
 
 ### Substituto de António Silva com perfil promissor

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/s8FKkRu9tERAcw5xRQubLY94sBs.webp?wi
 
 
 
+
 O líder e campeão em título Arsenal sofreu um estrondoso e inesperado dissabor na deslocação ao Falmer Stadium, saindo vergado a uma pesada derrota por 3-0 frente a um Brighton & Hove Albion irrepreensível. Após uma sequência perfeita de quatro vitórias no arranque do campeonato, a armada de Mikel Arteta viu a invencibilidade cair por terra numa tarde de absoluta inspiração e cinismo da formação caseira.
 
 **Eficácia cirúrgica constrói pesadelo ao intervalo**

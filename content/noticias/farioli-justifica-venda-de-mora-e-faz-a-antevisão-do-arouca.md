@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 Na antevisão à receção ao Arouca, a contar para a 3.ª jornada da Liga Portugal, Francesco Farioli passou em revista os temas mais quentes da atualidade do FC Porto. O técnico italiano explicou os contornos da venda de Rodrigo Mora, respondeu de forma perentória às críticas do advogado do jogador e analisou as opções para o mercado de transferências.
 
 ### A transferência de Rodrigo Mora e a resposta às críticas

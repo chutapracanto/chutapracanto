@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/gyaixXfl9AJ1RWOaBBFb6LBIzRI.jpg?wid
 
 
 
+
 A abertura da 4.ª jornada da Premier League vestiu-se de gala para entregar uma tarde recheada de emoção, reviravoltas e surpresas de primeira linha. Numa ronda em que Chelsea e Liverpool voltaram a escorregar na corrida ao topo do futebol inglês, o grande destaque acabou por pertencer a uma figura bem conhecida do público português, que assinou um verdadeiro conto de fadas no relvado do Stamford Bridge.
 
 **O show de Belloumi em Stamford Bridge e a agonia dos 'blues'**

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/6rzEEcNcAcDCi2d6tHxg0IB8WNQ.jpg?wid
 
 
 
+
 O Arsenal iniciou a época 2026/27 da melhor forma ao vencer o Manchester City por 3-0 na decisão da Supertaça de Inglaterra (Community Shield). Num duelo totalmente dominado pelos _gunners_, a equipa orientada por Mikel Arteta exibiu uma clara superioridade frente a um conjunto de Manchester apático e sem soluções defensivas.
 
 ### Entrada fulgurante e eficácia ao intervalo

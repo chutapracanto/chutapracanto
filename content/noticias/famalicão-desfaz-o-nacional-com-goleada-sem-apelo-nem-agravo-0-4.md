@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/f1tH4cAHohnYakHxZAXvRVQcM.jpg?width
 
 
 
+
 A Choupana foi palco de um autêntico passeio de futebol praticado pelo FC Famalicão. A formação comandada por Carlos Carvalhal não deu a mínima margem de manobra ao CD Nacional, carimbando um triunfo categórico por 0-4. Num encontro que ficou sentenciado logo na primeira metade, os minhotos aproveitaram a desconexão total dos homens da casa para somar os três pontos pela primeira vez no campeonato e afundar ainda mais o conjunto madeirense numa espiral de maus resultados.
 
 **Eficácia cirúrgica, apatia caseira e um 'bis' para a história**

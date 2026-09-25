@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/TDWE3mDubNvdfgGESFfSn28kM.jpg?width
 
 
 
+
 O Brentford protagonizou uma das grandes surpresas da 5.ª jornada da Premier League ao atropelar o Chelsea por expressivos 3-0, num encontro disputado em solo adversário e marcado por um forte cunho português. Numa partida em que os _blues_ pecaram pela falta de eficácia no domínio territorial, a frieza dos _bees_ na etapa complementar fez toda a diferença, com o internacional sub-21 Fábio Carvalho a sair do banco para fechar a contagem com classe pura.
 
 **Domínio estéril do Chelsea e o castigo letal de Jaidon Anthony**

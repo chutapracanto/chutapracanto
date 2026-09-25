@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/7rkHIzdLWXsOZ8iBCQBhLrrgtU.webp?wid
 
 
 
+
 Após o apito final que ditou a derrota do FC Porto por 0-2 frente ao Manchester City, no Estádio do Dragão, Francesco Farioli fez o rescaldo da sua estreia na Liga dos Campeões. Em discurso direto, o técnico italiano destacou a personalidade e o nível competitivo da sua equipa, elogiou a inspiração dos seus jogadores e apontou o dedo a pormenores da arbitragem que poderiam ter mudado o rumo do encontro.
 
 **Orgulho na exibição, a capacidade mortífera de Haaland e a contestação ao árbitro**

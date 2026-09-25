@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/GqAUVHN1tIt4lNsABKV7qd5jLzc.jpg?wid
 
 
 
+
 A Seleção Nacional Sub-21 prepara-se para iniciar a viagem rumo à Bulgária para dar o pontapé de saída numa tripla jornada decisiva na corrida ao Campeonato da Europa de 2027. Na antevisão ao regresso dos compromissos internacionais, o lateral Diogo Travassos reforço do SC Braga no último mercado de verão vestiu a camisola de porta-voz do balneário para vincar a determinação do grupo orientado por Luís Freire em prolongar a caminhada invicta.
 
 ### **Cultura de exigência, rotação de peças e o selo do apuramento à vista**

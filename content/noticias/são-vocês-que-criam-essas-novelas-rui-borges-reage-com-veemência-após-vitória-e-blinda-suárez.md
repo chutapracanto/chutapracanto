@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/w2fWwRqhcPuSjx1IyHMgpAD0fM.jpg?widt
 
 
 
+
 No rescaldo de uma exibição autoritária e sem mácula diante do CD Nacional (2-0), o treinador do Sporting CP, Rui Borges, assinou uma passagem incisiva pela _flash interview_ da Sport TV. Entre o raio-X a um triunfo incontestável e a projeção do regresso às noites de gala da Liga dos Campeões, o técnico verde e branco não hesitou em rebater as especulações em redor do ataque leonino, blindando o balneário com a determinação de quem tem os objetivos bem traçados.
 
 **Controlo absoluto, correção ao intervalo e solidez defensiva**

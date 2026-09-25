@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/fan8xb1cCAP9ub9sOg86OmSMq0.jpg?widt
 
 
 
+
 Numa noite de pontaria desafinada e pouca inspiração na capital francesa, o Lyon de Paulo Fonseca assinou uma exibição pálida e não foi além de uma igualdade sem golos (0-0) diante do surpreendente Paris FC. Com a janela aberta para a colagem ao topo da tabela classificativa da Ligue 1, ambas as equipas acabaram por esbarrar nas próprias limitações ofensivas num duelo tático sem chama.
 
 **Aves de rapina nas alas e um Lyon sem chama no miolo**

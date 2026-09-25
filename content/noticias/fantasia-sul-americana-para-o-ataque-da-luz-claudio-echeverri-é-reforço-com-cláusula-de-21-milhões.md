@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/vTEfKKNBlkyDjDvhrhZMunj58T8.jpg?wid
 
 
 
+
 O Benfica voltou a agitar o mercado no fecho da janela de transferências ao garantir mais um talento de craveira internacional para o seu setor criativo. Claudio Echeverri foi formalmente apresentado como novo jogador das águias, chegando à Luz por empréstimo do Manchester City até ao término da presente temporada. O acordo entre os dois clubes contempla uma opção de compra fixada nos 21 milhões de euros, permitindo à estrutura encarnada segurar em definitivo o passe da joia argentina caso decida acionar a cláusula no final da época.
 
 **Da consolidação no River Plate à rodagem nos palcos europeus**

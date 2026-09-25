@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/WawrMqxyTgScKofftWKkH0vnA.jpg?width
 
 
 
+
 A Liga dos Campeões voltou a ser palco de grandes emoções europeias com uma jornada repleta de histórias marcantes. Do feito histórico dos italianos do Como 1907 ao rolo compressor do Bayern de Munique, passando pelo triunfo épico do Lens futuro adversário do Sporting, a prova milionária não deu tréguas.
 
 **História em solo italiano: Como 1907 verga RB Leipzig na estreia europeia (4-1)**

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/tkADfKgkzorHpkEsT1dyhcmSf8.jpg?widt
 
 
 
+
 O FC Porto iniciou a sua caminhada na Liga dos Campeões com uma derrota caseira por 2-0 frente ao Manchester City, num duelo em que a eficácia de Erling Haaland fez toda a diferença diante de um inspirado Diogo Costa.
 
 **Destaques do encontro:**

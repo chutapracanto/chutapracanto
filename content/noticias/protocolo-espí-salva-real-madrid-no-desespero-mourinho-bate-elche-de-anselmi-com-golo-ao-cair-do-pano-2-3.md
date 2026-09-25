@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/0ndTaCeNOvivTParw8K1OYLykE.jpg?widt
 
 
 
+
 Numa noite de emoções à flor da pele e contornos de autêntico drama no Estádio Manuel Martínez Valero, o Real Madrid arrancou a aguilhão uma vitória por 2-3 frente a um valente Elche. A armada de José Mourinho parecia ter o destino da partida traçado na primeira metade, mas permitiu uma recuperação épica ao conjunto orientado por Martín Anselmi. Foi preciso esperar pelo período de compensação para que a cartada de recurso do técnico português a ativação do 'protocolo Espí' fizesse explodir a comitiva _blanca_ e garantisse três pontos vitais que colam os _merengues_ ao Barcelona na liderança, precisamente antes do escaldante dérbi da capital.
 
 ### **Arda Güler ilumina com golaço, Mbappé amplia e a resposta brava do Elche**

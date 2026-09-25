@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/ft0LoWbEFcQnegRLf3tGjspB5Gc.jpg?wid
 
 
 
+
 A jornada de abertura da fase de liga da Liga dos Campeões reservou dois duelos eletrizantes, repletos de golos, reviravoltas e portugueses em destaque. No Signal Iduna Park, o Borussia Dortmund superiorizou-se ao Villarreal num triunfo por 3-2, enquanto em França o Real Betis protagonizou uma recuperação memorável ao bater o Lille pelo mesmo resultado.
 
 **Bis de Guirassy e toque luso de Fábio Silva selam triunfo do Dortmund**

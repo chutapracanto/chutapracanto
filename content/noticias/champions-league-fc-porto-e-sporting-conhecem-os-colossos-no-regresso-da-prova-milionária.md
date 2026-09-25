@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/OespK3Dit9TyXr9YjZwDEJJu14.webp?wid
 
 
 
+
 O Fórum Grimaldi, no Principado do Mónaco, vestiu-se de gala para traçar o destino europeu de FC Porto e Sporting CP na fase de liga da UEFA Champions League 2026/27. Colocados no Pote 2 do sorteio, os dois representantes nacionais ficaram a conhecer a rota de oito batalhas de altíssima exigência que os espera na maior competição do futebol de clubes.
 
 Para os dragões de Francesco Farioli, a edição marca o regresso ansiado ao convívio da elite europeia após duas épocas de ausência. Por sua vez, a formação de Rui Borges confirma o grande momento competitivo ao carimbar a terceira participação consecutiva na prova — um marco histórico que os leões não registavam desde a era Paulo Bento.

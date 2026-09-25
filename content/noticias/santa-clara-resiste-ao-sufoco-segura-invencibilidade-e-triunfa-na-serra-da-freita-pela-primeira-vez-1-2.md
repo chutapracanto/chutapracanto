@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/KYNGS1cw8aAAzZlZYuflWoJpsc.jpg?widt
 
 
 
+
 O Santa Clara escreveu mais uma página de ouro na sua caminhada na Liga Portugal ao alcançar um feito inédito no seu historial: a primeira vitória de sempre no terreno do FC Arouca (1-2). Numa partida de duas facetas bem distintas, a turma insular construiu uma vantagem confortável de dois golos na primeira parte à custa de uma vertigem mortífera nas transições, vendo-se forçada a envergar o fato de macaco na segunda metade para suster a reação feroz dos homens de Vasco Seabra.
 
 **Veneno nas transições, faro de Paciência e o momento de génio de Djé Tavares**

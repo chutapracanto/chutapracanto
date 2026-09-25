@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/mceOUEpGUyf4HZpRQ7pHz9dJHo.jpg?widt
 
 
 
+
 O Sporting CP viveu uma noite de pesadelo em Vila Nova de Famalicão ao deixar fugir dois pontos vitais na corrida pelo topo da Liga Portugal. Num duelo vertiginoso, tenso e polémico do primeiro ao último segundo, a armada leonina esbarrou na inspiração sobre-humana do guardião Carevic, desperdiçou um volume avassalador de ocasiões e viu a vantagem arrancada por Luís Suárez ruir já no período de compensação, fruto de um lance aziago infetado por um autogolo de Gonçalo Inácio.
 
 **Golo anulado a Flávio, voos de Carevic e a luva milagrosa de Rui Silva**

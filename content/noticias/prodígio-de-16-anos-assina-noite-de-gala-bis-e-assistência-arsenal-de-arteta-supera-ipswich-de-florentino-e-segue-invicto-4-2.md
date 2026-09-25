@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/yXknCK0rGUyofgGNt2eRiHFZZk.jpg?widt
 
 
 
+
 O Emirates Stadium vestiu-se de gala esta terça-feira para testemunhar a eclosão de mais uma pérola da formação _gunner_. Em duelo a contar para a terceira ronda da Taça da Liga inglesa, o Arsenal bateu o Ipswich Town por 4-2 numa noite marcada pela rotação de peças de Mikel Arteta, mas, acima de tudo, pelo brilhantismo precoce de Max Dowman. Com apenas 16 anos, o jovem prodígio estreou-se a titular na presente temporada e respondeu com uma exibição demolidora, rubricando dois golos e uma assistência perante a turma forasteira, que contou com o ex-benfiquista Florentino Luís no onze inicial.
 
 ### **Abertura de livro aos 7 minutos, frieza de Madueke e o selo do miolo**

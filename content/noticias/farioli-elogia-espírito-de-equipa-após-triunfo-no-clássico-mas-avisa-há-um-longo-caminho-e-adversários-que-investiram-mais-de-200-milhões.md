@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/fkHpjjK3p5rEMI2L4jldzultFU4.jpg?wid
 
 
 
+
 O treinador azul e branco reconheceu que o jogo foi pautado por diferentes fases táticas, admitindo que a equipa teve de se reajustar perante um Benfica reduzido a dez unidades:
 
 - **Jogo de momentos e grande exibição:** Farioli caracterizou o duelo como _"complicado"_ e _"feito por momentos"_, sublinhando a grande exibição portista perante um _"excelente adversário"_.

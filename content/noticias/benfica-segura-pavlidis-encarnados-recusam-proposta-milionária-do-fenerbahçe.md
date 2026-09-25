@@ -17,6 +17,7 @@ relatedSpotify: "https://open.spotify.com/episode/0qVRoVo5GnmBBm5PX1Jwko"
 
 
 
+
 O mercado de transferências continua em ebulição, mas a posição do SL Benfica quanto ao seu setor ofensivo é clara: Vangelis Pavlidis não está à venda. Nas últimas horas, o Fenerbahçe tentou a contratação do avançado grego com uma proposta financeira tentadora, mas os responsáveis da Luz recusaram de pronto a investida da equipa turca.
 
 Pavlidis, que foi um dos elementos de maior destaque da equipa na pré-época e na ponta final da última temporada, é considerado uma peça fundamental e inegociável na estrutura tática para 2026/27. A equipa técnica encarnada não pretende abdicar do seu ponta-de-lança titular nesta fase do planeamento, preferindo focar-se em blindar as opções já existentes.

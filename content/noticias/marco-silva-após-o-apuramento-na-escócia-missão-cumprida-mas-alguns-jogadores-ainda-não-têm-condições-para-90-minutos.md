@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 Após o empate a uma bola frente ao Hearts, que garantiu a presença do Benfica no _playoff_ de acesso à Liga Europa contra os dinamarqueses do Aarhus, Marco Silva fez o rescaldo da partida em declarações à Sport TV. O técnico encarnado assumiu que a vantagem de 6-1 trazida da primeira mão pesou no desenrolar do jogo, mas não escondeu alguma insatisfação com o rendimento da equipa no segundo tempo.
 
 ### "Missão cumprida, mas a pressão não funcionou como devia"

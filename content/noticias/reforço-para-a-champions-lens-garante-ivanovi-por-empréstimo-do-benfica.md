@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/avYGrW5Qul6n9ZPkNCzUKSbIbRo.webp?wi
 
 
 
+
 O Lens fechou a contratação de Franjo Ivanović junto do Benfica. O avançado croata ruma ao futebol francês num negócio de empréstimo válido até ao final da temporada, sem opção de compra incluída no acordo entre os clubes.
 
 A cedência garante aos cofres encarnados um **valor fixo de 2,5 milhões de euros**, montante que pode subir até aos **3 milhões de euros** consoante o cumprimento de variáveis estabelecidas no contrato.

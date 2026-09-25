@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/pCIjMtWcr6Stcl8rXm8VHArgoJY.webp?wi
 
 
 
+
 No arranque dos trabalhos de campo da Seleção Nacional sob o comando de Jorge Jesus, Fábio Silva foi o internacional escolhido para falar aos jornalistas na Cidade do Futebol. De regresso à Equipa das Quinas dois anos depois, o avançado do Borussia Dortmund abordou o excelente momento de forma que atravessa na carreira, a admiração por Cristiano Ronaldo, o encaixe no modelo tático do novo selecionador e não escondeu o desejo de um dia voltar a vestir a camisola do FC Porto.
 
 ### **A maturação no Borussia Dortmund e o perfil de 'avançado móvel'**

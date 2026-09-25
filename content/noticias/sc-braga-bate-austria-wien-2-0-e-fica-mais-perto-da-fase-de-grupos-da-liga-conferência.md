@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/rh6tVoiPXJsPukTmD9mOqqcC0.webp?widt
 
 
 
+
 O SC Braga garantiu uma vantagem importante na primeira mão do _playoff_ de acesso à Liga Conferência, ao vencer o Austria Wien por 2-0, no Estádio Municipal de Braga. A formação arsenalista demonstrou superioridade e controlo ao longo da partida, viajando para Viena com uma margem confortável na eliminatória.
 
 ### Controlo minhoto e eficácia de Pau Víctor

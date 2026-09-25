@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/LZ4BhY6BYrfXdAvgRSK1ZlDk4c.jpg?widt
 
 
 
+
 Anfield Road foi palco de mais uma tarde de fortes emoções e desencanto para o Liverpool, que voltou a marcar passo na Premier League ao assinar uma igualdade a duas bolas (2-2) perante o Nottingham Forest. Na ressaca do nulo consentido em Newcastle, a armada orientada por Andoni Iraola revelou-se incapaz de impor o seu favoritismo teórico, sucumbindo à audácia de um visitante desinibido e a perigosas desconexões do seu setor recuado.
 
 **Afronta forasteira e a luva salvadora de Alisson**

@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 Está fechada mais uma grande transação no mercado de transferências da Luz. O Benfica chegou a acordo com o Newcastle para a transferência em definitivo de Amar Dedic, num negócio fixado nos 35 milhões de euros, avança o jornalista especializado Fabrizio Romano. O valor preenche na íntegra as exigências da estrutura encarnada para libertar o internacional bósnio.
 
 ### Vontade do jogador e reencontro com Matthias Jaissle foram decisivos

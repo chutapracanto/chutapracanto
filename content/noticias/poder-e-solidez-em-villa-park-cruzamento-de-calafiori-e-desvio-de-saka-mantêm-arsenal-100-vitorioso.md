@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/yo9MZ69op7OTyMhaILS0644BSo.jpg?widt
 
 
 
+
 O Arsenal continua a rubricar uma autêntica sinfonia de eficácia e maturidade neste arranque de temporada. Na deslocação a Villa Park para medir forças com o Aston Villa, a turma orientada por Mikel Arteta soube vestir o fato de macaco, ler o jogo com pinças e carimbar um triunfo categórico por 0-1, em duelo relativo à Premier League. A vitória teve um sabor duplamente especial: abrilhantou o jogo 250 do técnico espanhol ao comando dos _gunners_ e manteve o registo defensivo completamente imaculado nesta época.
 
 **Susto madrugador e a frieza tática dos**_**gunners**_

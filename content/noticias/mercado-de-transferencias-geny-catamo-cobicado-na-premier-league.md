@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 Geny Catamo desperta o interesse da Premier League, com o Sunderland na linha da frente para tentar a contratação do extremo leonino.
 
 Contudo, a posição da direção verde e branca é firme: os leões não têm qualquer intenção de vender, até porque o moçambicano é considerado uma peça fundamental no onze inicial. Assim, para aceitar negociar o jogador, o Sporting exige o pagamento integral da cláusula de rescisão, fixada nos 60 milhões de euros.

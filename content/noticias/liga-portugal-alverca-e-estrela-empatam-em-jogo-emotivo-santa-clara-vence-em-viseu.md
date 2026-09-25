@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 A 2.ª jornada da Liga Portugal Betclic ficou marcada por dois duelos intensos no centro e norte do país. No Complexo Desportivo FC Alverca, a equipa da casa e o Estrela da Amadora dividiram pontos num espetacular empate a dois golos. Já no regresso do Académico de Viseu aos jogos em casa na divisão principal, foi o Santa Clara quem levou a melhor ao vencer por 0-1.
 
 ### Quatro golos e expulsão na Ribatejo

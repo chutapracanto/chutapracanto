@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/r95sM8zMZ2N2sHYO3AODLHLkznE.webp?wi
 
 
 
+
 A Académica somou o segundo triunfo consecutivo na Liga Portugal 2 ao vencer o Feirense por 1-0, no Estádio Cidade de Coimbra. Num duelo marcado por momentos de grande intensidade e rigor disciplinar, a equipa de António Barbosa soube sofrer durante toda a segunda parte em inferioridade numérica para assegurar os três pontos.
 
 O encontro começou morno, mas ganhou vida com uma grande intervenção de Carlos Alves a sustentar a igualdade num golpe de cabeça perigoso de Luiz Gustavo, na sequência de um pontapé de canto dos fogaceiros.

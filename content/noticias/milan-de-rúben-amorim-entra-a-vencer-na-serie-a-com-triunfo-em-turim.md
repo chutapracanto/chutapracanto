@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/hkHEFBCweEILoNMJadypuIcXp5M.webp?wi
 
 
 
+
 O Milan iniciou a sua caminhada na Serie A 2026/27 com uma vitória por 2-1 na visita ao terreno do Torino. A formação orientada por Rúben Amorim construiu o resultado favorável no decorrer do segundo tempo, somando os primeiros três pontos da época em Itália.
 
 ### Bis de eficácia em dois minutos

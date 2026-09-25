@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/RJdw2fgGxQLMkhfTB5ldkFGJM.jpg?width
 
 
 
+
 O regresso de José Mourinho ao comando do Real Madrid começou com emoção até ao último segundo. Na visita ao terreno do Espanyol, os _merengues_ garantiram um triunfo por 2-1, num duelo decidido com um golo ao cair da do pano no Estádio Cornellà-El Prat.
 
 ### Entrada forte e resposta inesperada

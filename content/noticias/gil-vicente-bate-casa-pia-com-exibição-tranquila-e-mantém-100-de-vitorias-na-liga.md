@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/lDRqeJx2nkOQNlbL0oegg67E0TI.jpg?wid
 
 
 
+
 O Gil Vicente regressou à competição no campeonato, após o adiamento do duelo frente ao SC Braga, com um triunfo categórico sobre o Casa Pia por 2-0, no Estádio Cidade de Barcelos. A turma de Luís Pinto impôs o seu favoritismo e resolveu a partida ainda no primeiro tempo, perante um conjunto casapiano sem argumentos defensivos nem ofensivos para inverter o rumo dos acontecimentos.
 
 ### Domínio minhoto e golos de classe antes do descanso

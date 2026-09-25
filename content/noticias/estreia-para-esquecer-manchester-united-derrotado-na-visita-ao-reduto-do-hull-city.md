@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 O Manchester United entrou com o pé esquerdo na edição 2026/27 da Premier League, ao sair derrotado por 2-0 na deslocação ao reduto do recém-promovido Hull City. Num encontro decidido inteiramente durante os primeiros 45 minutos, os _Tigers_ superiorizaram-se através de lances de bola parada, surpreendendo os comandados de Michael Carrick.
 
 ### A eficácia dos _Tigers_ em bolas paradas

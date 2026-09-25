@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/ceOIWF2TvrY5cjj062OdG9UuKk.webp?wid
 
 
 
+
 Está traçado o roteiro europeu do SC Braga para a fase de liga da UEFA Conference League 2026/27. Após uma caminhada irrepreensível nas fases preliminares onde deixou pelo caminho Zeleznicar Pancevo, Dinamo Minsk e Austria Wien, a formação minhota, que figurava no estatuto de cabeça de série (Pote 1), conheceu esta sexta-feira os seis adversários que terá pela frente na luta pelos oitavos de final.
 
 Neste modelo competitivo da UEFA, os arsenalistas vão disputar seis partidas frente a equipas de potes distintos, dividindo forças entre o Pedreira e três exigentes deslocações ao norte da Europa.

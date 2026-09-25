@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/Sj2NZPM8KzMlvUGlxMIu8q16XI.jpg?widt
 
 
 
+
 Numa tarde em que o Fontelo esperava ver o Académico de Viseu fazer frente ao líder, o FC Porto transformou o relvado numa autêntica oficina de arte futebolística, impondo-se com um categórico 0-3 na 4.ª jornada da Liga Portugal Betclic. A armada de Francesco Farioli resolveu a contenda com um primeiro tempo avassalador, onde o virtuosismo técnico e a eficácia cirúrgica ditaram leis, assegurando a manutenção no topo da tabela e mantendo o registo 100% vitorioso na prova.
 
 **Sinfonia azul e branca rasga a defensiva dos viriatos**

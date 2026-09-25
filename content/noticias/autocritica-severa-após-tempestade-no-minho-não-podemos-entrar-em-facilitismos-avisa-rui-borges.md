@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/2P8fYSMnyXXEcOG8Tr5It39VDw.webp?wid
 
 
 
+
 O rescaldo do empate concedido pelo Sporting CP na deslocação ao terreno do FC Famalicão (1-1) ficou marcado por uma leitura crua, límpida e sem rodeios de Rui Borges. Na zona de entrevistas rápidas à Sport TV, o comandante dos leões lamentou a quebra súbita de tensão coletiva no apagar das luzes do encontro, desvalorizou qualquer peso emocional do desfecho e apontou baterias à receção ao FC Arouca, fechando hermeticamente as portas a qualquer distração com o Clássico entre os seus diretos rivais.
 
 **Dissecação do golpe fatal e a lição do rigor elétrico**

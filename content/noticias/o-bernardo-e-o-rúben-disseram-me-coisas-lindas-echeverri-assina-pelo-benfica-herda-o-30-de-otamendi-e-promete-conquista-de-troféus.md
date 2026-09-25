@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/JRZQb8N8hIadTietCgTOGxQEIg.jpg?widt
 
 
 
+
 Claudio Echeverri já respira a mística do Manto Sagrado. Nas suas primeiras declarações oficiais prestadas aos microfones da BTV, o prodígio argentino de 20 anos cedido pelo Manchester City até ao término da temporada deu livre curso à satisfação por ingressar na estrutura encarnada, revelando os bastidores cruciais da transferência e assumindo sem rodeios o peso histórico da camisola que escolheu ostentar.
 
 **A chancela de luxo de Rúben Dias e Bernardo Silva no balneário do City**

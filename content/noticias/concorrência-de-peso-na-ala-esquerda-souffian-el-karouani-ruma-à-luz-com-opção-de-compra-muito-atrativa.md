@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/SyxmXhNty6VZVKZ2OrYxnSqs.jpg?width=
 
 
 
+
 O Benfica voltou a agitar o mercado no fecho da janela de transferências ao fechar a contratação de Souffian El Karouani para blindar o corredor esquerdo da defesa. O internacional marroquino, de 25 anos, assina pelos encarnados a título de empréstimo até ao final da temporada, cedido pelo Al-Qadsiah. A operação contempla uma cláusula de opção de compra cifrada nos 10 milhões de euros valor manifestamente abaixo da sua atual cotação no mercado, sendo que a despesa salarial de sete milhões de euros anuais será repartida em partes iguais entre a estrutura das águias e o clube saudita.
 
 **Evolução meteórica na Holanda e oportunidade de ouro no mercado**

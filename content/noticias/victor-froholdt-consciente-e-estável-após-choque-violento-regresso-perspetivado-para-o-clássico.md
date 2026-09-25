@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/x9FLM10K1joixY8E3rYQSsspX4I.webp?wi
 
 
 
+
 As mais recentes atualizações do boletim clínico do FC Porto trazem uma onda de alívio à estrutura azul e branca. Após o choque aparatoso e a queda inanimada nos minutos finais do embate com o Moreirense lance que motivou a expulsão direta de Guilherme Liberato e a acionamento da vaga de substituição extra, o médio Victor Froholdt encontra-se plenamente consciente, lúcido e em franca recuperação.
 
 **Protocolo neurológico rigoroso e prazos de salvaguarda**

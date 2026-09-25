@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/zZwQERwzo3X6BOaFRZqHk4cmk.jpg?width
 
 
 
+
 A AS Roma continua a transformar o arranque da Serie A num verdadeiro monólogo de autor e carimbou mais uma exibição imperial ao vergar o Torino por 0-2, em pleno Estádio Olímpico Grande Torino. A armada orientada por Gian Piero Gasperini impôs uma supremacia sufocante desde o apito inicial, transformando uma grande prenda do guardião caseiro no golo de Donyell Malen, antes do jovem prodígio Niccolò Pisilli dar o golpe de misericórdia já no cair do pano.
 
 **Oferta de ouro, a finura de Dybala e o momento iluminado de Malen**

@@ -17,6 +17,7 @@ relatedSpotify: "https://open.spotify.com/episode/0qVRoVo5GnmBBm5PX1Jwko"
 
 
 
+
 O Newcastle poderá estar interessado na contratação do médio do FC Porto, Froholt, como solução para preencher a vaga deixada por Bruno Guimarães, que acabou de ser vendido ao Arsenal num negócio a rondar os 87,5 milhões de euros.
 
 Com esta saída de peso no meio-campo, os _magpies_ viram agora agulhas para o jovem talento dinamarquês. Contudo, a posição do FC Porto é firme: os dragões não pretendem facilitar e remetem qualquer transferência para o valor da cláusula de rescisão, fixada nos 85 milhões de euros.

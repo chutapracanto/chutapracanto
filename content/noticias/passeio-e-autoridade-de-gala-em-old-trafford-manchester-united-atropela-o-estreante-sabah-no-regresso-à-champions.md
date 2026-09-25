@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/zhomD1Fc7QNDByrLTmsfxtYnGTo.jpg?wid
 
 
 
+
 O Manchester United assinalou o seu regresso ao grande palco da Liga dos Campeões com uma exibição de pura categoria e rigor, aplicando uma goleada sem espinhas por 4-0 aos azeris do Sabah. Perante a moldura humana do "Teatro dos Sonhos", a formação orientada por Michael Carrick soube congelar a impetuosidade inicial do adversário e desferir golpes letais nos momentos certos, carimbando uma entrada de leão na fase de liga.
 
 **Abertura de mestre por Bruno Fernandes e um vendaval antes do descanso**

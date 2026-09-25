@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/WO6RDwX6ek4394fbgVm2q5TMBY.jpg?widt
 
 
 
+
 O FC Porto B somou os primeiros pontos na II Liga 2026/27 ao vencer o Feirense por 1-0, em jogo a contar para a 3.ª jornada da competição. Um golo solitário assinado na etapa inicial permitiu aos jovens _dragões_ garantirem o triunfo no regresso dos fogaceiros ao Estádio Marcolino Castro.
 
 ### Entrada forte e golo decisivo de Martim Cunha

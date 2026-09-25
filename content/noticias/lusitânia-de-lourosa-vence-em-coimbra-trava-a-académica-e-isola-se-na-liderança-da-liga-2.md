@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/8E7A0x9BMbEcWPsWUBcsRBhsL3o.webp?wi
 
 
 
+
 O Estádio Cidade de Coimbra foi palco do duelo cartaz da 4.ª jornada da Liga Portugal 2 Meu Super, com o Lusitânia de Lourosa a superiorizar-se à Académica por 0-2. Com este resultado, a formação orientada por Ricardo Silva manteve a invencibilidade na prova, impôs o primeiro desaire da temporada aos _estudantes_ e assumiu o topo da tabela classificativa de forma isolada, somando 10 pontos em 12 possíveis.
 
 **Infelicidade defensiva abriu caminho ao triunfo visitante**

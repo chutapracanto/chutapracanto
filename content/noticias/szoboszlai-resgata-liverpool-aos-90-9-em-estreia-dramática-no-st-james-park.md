@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/kEGTHR2vH8MHTcbGUs3HT4fbDI8.jpg?wid
 
 
 
+
 Num arranque de Premier League marcado pelas estreias de Andoni Iraola no comando do Liverpool e de Matthias Jaissle no Newcastle, as duas equipas empataram 2-2 num duelo elétrico. Um golo de grande penalidade convertido por Dominik Szoboszlai no último lance da partida evitou a derrota dos _reds_ em Tyneside.
 
 ### Entrada fulgurante do Newcastle e eficácia no contra-ataque

@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 Ousmane Diomande está oficialmente de saída do Sporting CP. A SAD leonina confirmou esta segunda-feira, em comunicado enviado à CMVM, o acordo com o Nottingham Forest para a transferência a título definitivo do central costa-marfinense, num negócio selado nos **40 milhões de euros**.
 
 Na nota remetida ao regulador do mercado, o clube de Alvalade esclarece que assume os encargos com a intermediação do negócio (1,5 milhões de euros), ficando o pagamento relativo ao mecanismo de solidariedade repartido em partes iguais entre os dois emblemas.

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/mjhd1J7Q90ovmFmo9lkKrHszk4.jpg?widt
 
 
 
+
 A UEFA formalizou a validação das opções do Sporting CP para a fase de liga da Liga dos Campeões 2026/27. Sob o comando tático de Rui Borges, o clube de Alvalade carimbou o registo de 25 futebolistas na Lista A, numa convocatória marcada pela integração plena das dez aquisições estivais e pela chamada do promissor Rodrigo Rodrigues, resgatado ao Gil Vicente para os quadros da equipa B.
 
 **Dez trunfos de verão no palco milionário e o contingente da Lista B**

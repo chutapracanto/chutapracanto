@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 O Sporting recebe este sábado o FC Alverca em Alvalade, pelas 20h30, no encontro que encerra a jornada desportiva da 3.ª ronda da Liga Portugal Betclic. Após um arranque irregular no campeonato — que contou com um empate inicial na Amadora e um triunfo renhido por 3-2 sobre o Vitória SC —, a formação verde e branca tenta alcançar a segunda vitória consecutiva no seu reduto, perante um adversário que ainda procura o primeiro triunfo na competição.
 
 ### Rui Borges exige melhorias e admite gestão de ataque

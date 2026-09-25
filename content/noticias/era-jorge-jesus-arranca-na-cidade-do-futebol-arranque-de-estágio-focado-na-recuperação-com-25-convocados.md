@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/rT3nDpjRJVNijxwBVePKDyChSU.jpeg?wid
 
 
 
+
 A Seleção Nacional iniciou esta segunda-feira, na Cidade do Futebol, em Oeiras, a preparação para o duelo frente ao País de Gales, num dia que assinalou o arranque oficial da era Jorge Jesus ao comando da Equipa das Quinas. O encontro de quinta-feira marca a estreia do novo selecionador e o pontapé de saída na defesa do título da Liga das Nações, conquistado por Portugal em 2025.
 
 ### **Primeira sessão à porta fechada e trabalho de ginásio**

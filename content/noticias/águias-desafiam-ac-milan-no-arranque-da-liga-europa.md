@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/G41vj15HIm28CsTGYzs2viKtSs.jpg?widt
 
 
 
+
 O Benfica abre esta quarta-feira, 16 de setembro, a sua caminhada na fase de liga da Liga Europa com um teste de fogo em Milão. Em solo sagrado de San Siro, as águias medem forças com o histórico AC Milan num duelo entre dois gigantes do futebol europeu que procuram impôr a sua lei na competição. Na conferência de imprensa de antevisão, o técnico Marco Silva e o central australiano Alessandro Circati projetaram um combate de exigência máxima, marcado pela necessidade de gestão física e pela procura contínua de evolução coletiva.
 
 ### **A gestão do xadrez, a versatilidade de Prestianni e o aviso de Marco Silva**

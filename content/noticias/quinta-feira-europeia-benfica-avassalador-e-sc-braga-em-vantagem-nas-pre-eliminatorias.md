@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 Os clubes portugueses entraram com o pé direito na primeira mão da terceira pré-eliminatória das competições europeias. Na Luz, o **SL Benfica** deu um passo gigante rumo à fase de liga da Liga Europa ao golear os escoceses do Hearts, enquanto o **SC Braga** garantiu uma vantagem mínima sobre o Dínamo Minsk no caminho da Liga Conferência.
 
 #### **Benfica cilindra Hearts (6-1) na Liga Europa**

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/QxpIPgWe8Psj0pkesHKDEWqWd0.jpg?widt
 
 
 
+
 O reencontro do AC Milan com os seus adeptos em San Siro não podia ter sido mais coroado de êxito para Ruben Amorim. No batismo de fogo do técnico português no mítico anfiteatro milanês, os _rossoneri_ rubricaram uma exibição de gala e bateram o Venezia por 2-0, numa demonstração de autoridade a contar para a segunda jornada da Serie A.
 
 Com Gonçalo Ramos a assumir a referência ofensiva no onze titular e Rafael Leão fora das opções numa altura em que a saída para o Galatasaray domina a atualidade do mercado, o Milan encostou o adversário à sua grande área desde o apito inicial. Apenas a inspiração do guardião Filip Stankovic, com um punhado de intervenções de alto nível, evitou a abertura do marcador antes do intervalo.

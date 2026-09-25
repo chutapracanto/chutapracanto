@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 A Roma está completamente obstinada na contratação de Rodrigo Mora e subiu drasticamente a parada para convencer a SAD do FC Porto a abrir mão de uma das suas maiores pérolas. Após ter visto uma primeira investida de 25 milhões de euros rejeitada pelos dragões, o emblema italiano recusou-se a baixar os braços e desenhou **três fórmulas financeiras distintas** para viabilizar a transferência, apresentando soluções que podem atingir um investimento global na ordem dos **50 milhões de euros**.
 
 Entre os cenários colocados em cima da mesa pelos _giallorossi_, a primeira opção passa por um empréstimo pago entre 5 a 8 milhões de euros com a Roma a assumir a totalidade do salário, associado a uma cláusula de compra futura fixada entre os 42 e os 45 milhões. A segunda alternativa prevê uma venda em definitivo pelo valor total de 50 milhões de euros, dividida em duas tranches iguais de 25 milhões, sendo a primeira liquidada no imediato e a segunda diferida para 2027. Por fim, o terceiro modelo sugere um encaixe direto de 25 milhões de euros, garantindo contudo ao FC Porto a retenção de 50% dos direitos económicos numa futura venda do atleta.

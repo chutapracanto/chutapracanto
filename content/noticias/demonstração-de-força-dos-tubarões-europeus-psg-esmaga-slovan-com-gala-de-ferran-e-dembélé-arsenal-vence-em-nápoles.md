@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/88H1AhDp48FllPHwpL43C3Nsjs.jpg?widt
 
 
 
+
 Os campeões europeus em título não deram a mínima margem para surpresas e construíram uma goleada avassaladora embalada pela inspiração de duas figuras de proa:
 
 - **Início vertiginoso de Dembélé:** O extremo francês abriu o ativo aos 17 minutos, aproveitando a recarga a um estrondoso remate de Nuno Mendes que embateu no poste. Apenas cinco minutos volvidos, Dembélé voltou a aparecer no sítio certo para bisar de cabeça.

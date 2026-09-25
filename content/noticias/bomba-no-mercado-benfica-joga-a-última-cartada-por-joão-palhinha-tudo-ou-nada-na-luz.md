@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/PrkICBC7QMFN9KrfmCmke2kVJo.jpg?widt
 
 
 
+
 ## O ultimato encarnado e a hipótese de rescisão
 
 O **SL Benfica** apresentou a sua proposta final por João Palhinha. Com as negociações a arrastarem-se e o fecho do mercado cada vez mais próximo, a estrutura encarnada decidiu fixar o seu limite e colocar todas as cartas na mesa.

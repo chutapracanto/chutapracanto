@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/2P8fYSMnyXXEcOG8Tr5It39VDw.webp?wid
 
 
 
+
 Na antecâmara de uma das deslocações mais traiçoeiras do calendário nacional, Rui Borges apresentou-se na sala de imprensa com o discurso afiado. Embalado pelo impacto europeu a meio da semana, o técnico do Sporting projetou o embate frente ao Famalicão de Carlos Carvalhal, lançando um forte alerta contra a descompressão pós-Champions e passando a pente fino o rendimento dos seus ativos.
 
 **O perigo famalicense e a armadilha do pós-Champions**

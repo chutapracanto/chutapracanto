@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/Q6AHJfNiAbC6XR1qcqnn8ZQ1kc.jpg?widt
 
 
 
+
 O Estádio da Luz foi palco de uma noite de gala com contornos de pura exigência futebolística, onde o Benfica deu provas de grande autoridade ao bater o Estoril Praia por 2-1. Em duelo a contar para a 4.ª jornada da Liga Portugal Betclic, a formação orientada por Marco Silva impôs a sua superioridade e carimbou o quarto triunfo consecutivo da época, confirmando a melhor sequência de resultados da temporada e reforçando o excelente momento de forma que atravessa.
 
 **Cerco sufocante, baixa de peso e a frieza de Pavlidis**

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/gLIrkmY0yUxjOg04XXRC7zE9qU.webp?wid
 
 
 
+
 Debaixo de um calor sufocante e perante uma Luz inicialmente adormecida, o SL Benfica superou um teste de fogo na receção ao Gil Vicente, carimbando um triunfo por 3-1 em duelo a contar para a 6.ª jornada da Liga Portugal. A turma de Marco Silva teve de descer à mina para desatar um nó cego forjado pelos barcelenses, encontrando em Vangelis Pavlidis a frieza de um matador e na irreverência da jovem guarda o combustível necessário para incendiar o marcador na reta final.
 
 **Susto madrugador em Barcelos e a fome insaciável de Pavlidis**

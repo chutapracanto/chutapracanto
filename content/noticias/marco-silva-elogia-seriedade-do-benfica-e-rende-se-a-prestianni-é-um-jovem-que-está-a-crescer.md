@@ -1,5 +1,5 @@
 ---
-title: "​Marco Silva elogia seriedade do Benfica e rende-se a Prestianni: «É um jovem que está a crescer»"
+title: "Marco Silva elogia seriedade do Benfica e rende-se a Prestianni: «É um jovem que está a crescer»"
 slug: "marco-silva-elogia-seriedade-do-benfica-e-rende-se-a-prestianni-é-um-jovem-que-está-a-crescer"
 subtitle: "Treinador do Benfica destaca a seriedade no triunfo frente ao AGF Aarhus, aborda o momento de forma do argentino e explica a gestão dos reforços."
 category: "SL Benfica"
@@ -8,6 +8,7 @@ author: "ChutaPraCanto"
 sourceUrl: "https://chutapracanto.framer.website/noticias/​marco-silva-elogia-seriedade-do-benfica-e-rende-se-a-prestianni-«é-um-jovem-que-está-a-crescer»"
 image: "https://framerusercontent.com/images/7eFYcxpozMprN90DHugz2bxng.webp?width=1920&height=1080"
 ---
+
 
 
 

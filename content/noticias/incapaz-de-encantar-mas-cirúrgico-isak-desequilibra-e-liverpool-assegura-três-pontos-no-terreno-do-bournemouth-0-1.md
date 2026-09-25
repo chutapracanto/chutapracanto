@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/L9AviMnzULpv1ZI1FlTq5377cbw.jpg?wid
 
 
 
+
 O Liverpool saiu vitorioso da visita ao Vitality Stadium ao bater o Bournemouth por 0-1, num duelo caraterizado pela rigidez tática e escassez de rasgos ofensivos. Num encontro em que a vertente estratégica se sobrepôs ao espetáculo, valeu a acuidade de Alexander Isak para desatar o nó e garantir o segundo triunfo da época para a formação forasteira.
 
 **Bloqueio mútuo no primeiro tempo e a estocada de Isak**

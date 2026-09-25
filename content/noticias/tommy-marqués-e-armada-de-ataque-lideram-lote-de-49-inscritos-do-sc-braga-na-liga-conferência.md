@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/6HdyDDJ26fxOyb0s3PStHvbWGA.webp?wid
 
 
 
+
 O SC Braga carimbou o envio da sua lista oficial à UEFA para a fase de liga da Liga Conferência 2026/27. No contingente de 49 futebolistas submetido pela estrutura arsenalista, a grande nota de destaque recai sobre o jovem médio espanhol Tommy Marqués pérola de 19 anos resgatada ao Barcelona, que assume a vaga de Lelo (cedido ao Almería) na Lista A.
 
 **Redesenho da Lista A, munições ofensivas e o trunfo da Lista B**

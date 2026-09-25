@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/28RPF2KFc234110HsF898g4kRI.jpg?widt
 
 
 
+
 O Manchester United voltou a viver uma tarde de amargura longe do relvado de Old Trafford, protagonizando um autêntico _thriller_ de emoções ao empatar 2-2 frente ao Everton, em duelo referente à 3.ª jornada da Premier League 2026/27. Num embate disputado este domingo à tarde no Hill Dickinson Stadium, a equipa de Michael Carrick reforçada com os portugueses Bruno Fernandes e Diogo Dalot no onze inicial esteve com os três pontos na mão até ao derradeiro suspiro, mas acabou por ser severamente punida por um momento de inspiração genial do conjunto forasteiro já no sexto minuto de descontos.
 
 **Tiro no travessão de Bruno, míssil de Mbeumo e a resposta da raça insular**

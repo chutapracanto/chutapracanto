@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 O Benfica afastou os dissabores do passado no Estádio Municipal de Rio Maior com uma exibição de gala. Depois de um nulo a abrir o campeonato, a formação orientada por Marco Silva assinou uma resposta demolidora na 2.ª jornada da Liga Portugal, vencendo o Casa Pia com um golo solitário na primeira parte e um festival ofensivo na segunda metade.
 
 ### Eficácia madrugadora abriu caminho à tranquilidade

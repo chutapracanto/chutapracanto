@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/VxtzHfubLWHh3Vxn3F0rsrnMA.jpg?width
 
 
 
+
 Sete meses após o deslize que marcou o campeonato transato, o FC Porto regressou ao Estádio Municipal de Rio Maior para estraçalhar velhos fantasmas. Nem o susto de ver o Casa Pia adiantar-se no marcador com o seu primeiro tento da temporada, que quebrou em simultâneo a virgindade defensiva dos dragões fora de portas travou a turma de Francesco Farioli. Demonstrando uma maturidade à prova de bala, inteligência tática e a riqueza de um banco de luxo, a formação azul e branca construiu uma reviravolta categórica por 1-4 para trancar a sete chaves a liderança isolada da Liga Portugal.
 
 **Do susto da grande penalidade à redenção de Rosario no suspiro da primeira parte**

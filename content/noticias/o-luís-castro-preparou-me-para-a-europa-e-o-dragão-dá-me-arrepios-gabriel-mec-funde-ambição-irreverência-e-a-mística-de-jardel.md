@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/B4VP5qaRfleODoHJP8ihRKTu8.jpg?width
 
 
 
+
 Gabriel Mec já veste oficialmente de azul e branco e a sua apresentação em discurso direto revelou a personalidade vincada de quem chega à Invicta para deixar marca. Em declarações exclusivas aos meios do clube, a joia brasileira de 18 anos blindada até 2031 com uma cláusula de rescisão fixada nos 80 milhões de euros confessou o fascínio pela dimensão do campeão nacional, detalhou os bastidores do seu crescimento no Grémio e prometeu um futebol de puro improviso e sem receio de arriscar.
 
 **A herança de Porto Alegre: Do legado de Jardel à tutoria determinante de Luís Castro**

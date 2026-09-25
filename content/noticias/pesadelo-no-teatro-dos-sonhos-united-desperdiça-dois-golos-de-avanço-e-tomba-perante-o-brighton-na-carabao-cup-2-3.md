@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/NDuQgBnvwrq700tQ64066JfZhU.jpg?widt
 
 
 
+
 Noite de autêntico pesadelo para o Manchester United na Carabao Cup. Perante os seus adeptos em Old Trafford, os _Red Devils_ assinaram uma entrada fulgurante na 3.ª eliminatória, mas permitiram uma reviravolta épica ao Brighton e acabaram eliminados com um desaire por 2-3, dizendo adeus prematuramente à competição.
 
 ### **Arranque de sonho com selo de Shea Lacey e resposta dos**_**Seagulls**_

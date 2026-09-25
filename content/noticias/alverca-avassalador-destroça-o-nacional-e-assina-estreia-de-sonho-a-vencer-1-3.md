@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/D6vx8dPc3y6VINERpEnG8B9fs.jpg?width
 
 
 
+
 Demorou o seu tempo, mas a justiça futebolística acabou por bater à porta do FC Alverca no nevoeiro da Choupana. Ao cabo de algumas jornadas a "morrer na praia", a turma ribatejana desbloqueou a primeira vitória da temporada na Liga Portugal com uma demonstração de força, inteligência tática e eficácia demolidora, vergando o Nacional por 1-3.
 
 **A teia tática de Sérgio Ferreira e o vendaval de Dawda Camara**

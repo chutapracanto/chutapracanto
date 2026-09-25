@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/XXVtU8uow3RvPToWRgY3Con1cpo.jpg?wid
 
 
 
+
 O Benfica deu um passo seguro rumo à fase de liga da Liga Europa ao vencer os dinamarqueses do AGF Aarhus por 3-1, na primeira mão do _playoff_. A formação encarnada assinou uma exibição dominadora perante os seus adeptos e leva dois golos de vantagem para o encontro decisivo na Dinamarca.
 
 ### Entrada fulgurante e pressão sufocante

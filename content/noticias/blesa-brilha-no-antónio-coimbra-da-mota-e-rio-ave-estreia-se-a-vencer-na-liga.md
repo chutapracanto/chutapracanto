@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/ktwGOQxtWtUWOKp3WR5BO7FUWX8.jpg?wid
 
 
 
+
 Uma exibição personalizada, madura e eficaz permitiu ao Rio Ave somar os primeiros três pontos na Liga Portugal, superando o Estoril Praia por 2-0 em pleno Estádio António Coimbra da Mota. O avançado espanhol Blesa assumiu o papel de grande figura do encontro, rubricando um golo e uma assistência no triunfo vilacondense.
 
 ### Eficiência no ar e vantagem ao intervalo

@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/m16e22Do9wFp7vlKibsWFvUYW28.jpg?wid
 
 
 
+
 O FC Porto oficializou a chegada de **Seko Fofana**, que regressa ao Estádio do Dragão a título de empréstimo concedido pelos franceses do Rennes. O médio internacional costa-marfinense, de 31 anos, volta assim a integrar o plantel orientado por Francesco Farioli para a época 2026/27.
 
 ### Detalhes do Negócio e Condições Financeiras

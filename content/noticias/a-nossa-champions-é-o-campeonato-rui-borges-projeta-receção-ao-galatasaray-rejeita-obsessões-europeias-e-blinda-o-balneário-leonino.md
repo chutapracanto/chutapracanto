@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/nijXfO5OXQQfWFXtz9nyrzk8Ysw.webp?wi
 
 
 
+
 Na antevisão à receção ao Galatasaray, a contar para a jornada de abertura da fase de liga da Liga dos Campeões, Rui Borges encarou os microfones com um discurso pautado pela maturidade, ambição q.b. e pés bem assentes na terra. O comandante verde e branco enalteceu a bagagem europeia do campeão turco, desdramatizou a juventude da sua equipa e frisou que a prioridade absoluta da temporada continua a morar nas provas domésticas, sem todavia abdicar de entrar a vencer em Alvalade.
 
 **Respeito ao campeão turco, prioridades bem assentes e o trunfo de Alvalade**

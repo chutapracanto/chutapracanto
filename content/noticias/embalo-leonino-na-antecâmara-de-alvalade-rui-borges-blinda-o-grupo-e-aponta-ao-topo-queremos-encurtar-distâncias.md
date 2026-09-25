@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/fA3EOw6HfGGRMxrFOe7PcGvk9Fk.webp?wi
 
 
 
+
 Na antevisão à receção ao FC Arouca, a contar para a 7.ª jornada da Liga Portugal, Rui Borges lançou as linhas mestras do embate em Alvalade. Numa intervenção personalizada e assertiva, o técnico dos leões elogiou a identidade do opositor, rebateu as críticas em torno da consistência da equipa, protegeu os seus ativos e perspetivou a margem de progressão dos jovens talentos de Alvalade.
 
 **Análise ao FC Arouca e resposta frontal às críticas sobre a consistência**

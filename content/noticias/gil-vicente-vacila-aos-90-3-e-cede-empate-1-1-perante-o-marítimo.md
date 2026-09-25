@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/LYVjLsiuwyEWs0kP0pe27CIW1Q.jpg?widt
 
 
 
+
 O regresso do Gil Vicente ao Estádio Cidade de Barcelos teve um sabor amargo e injusto. A equipa de Luís Pinto dominou, criou ocasiões soberbas e adiantou-se no marcador com justiça, mas pagou caro o desperdício ofensivo ao ver o Marítimo arrancar um empate (1-1) já em período de compensação, num golo de Israel Ayuma que gelou os mais de cinco mil adeptos nas bancadas.
 
 **Soberania gilista, o míssil de Murilo e a obra-prima falhada de Santi García**

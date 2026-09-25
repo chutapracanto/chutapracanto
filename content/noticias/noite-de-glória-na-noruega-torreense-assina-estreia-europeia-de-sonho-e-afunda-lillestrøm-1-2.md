@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/hXo30yC1ez3g3cWve86sssurqnY.webp?wi
 
 
 
+
 O Sport Clube União Torreense escreveu uma das páginas mais brilhantes da sua história ao vencer os noruegueses do Lillestrøm por 1-2, em pleno Åråsen Stadion, na jornada inaugural da fase de liga da Europa League. Naquela que marcava a estreia absoluta do emblema de Torres Vedras nas competições continentais, a turma de Luís Tralhão ignorou o estatuto de _underdog_, desafiou o frio nórdico e brindou a centena de adeptos viajantes com um triunfo assente em rigor tático, inteligência e eficácia brutal.
 
 ### **Lição estudada e o histórico voo de Alfaro no gelo nórdico**

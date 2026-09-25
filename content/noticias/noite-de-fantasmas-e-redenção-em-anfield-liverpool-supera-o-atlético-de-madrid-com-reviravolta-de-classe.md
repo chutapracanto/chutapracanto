@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/5KE2i38BlJwUUhgIaNxE9V13cyI.jpg?wid
 
 
 
+
 O duelo em solo inglês começou com o fantasma de Marcos Llorente a assombrar novamente os adeptos da casa:
 
 - **Llorente renasce em Anfield (17'):** O internacional espanhol voltou a fazer estragos no relvado dos _Reds_. Servido por Julián Alvarez, o lateral surgiu no coração da área para bater Alisson, somando o seu quinto golo em Anfield em jogos da Champions.

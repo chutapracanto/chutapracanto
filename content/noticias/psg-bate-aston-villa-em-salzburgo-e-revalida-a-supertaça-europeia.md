@@ -17,6 +17,7 @@ relatedSpotify: ""
 
 
 
+
 O Paris Saint-Germain voltou a erguer a Supertaça Europeia ao vencer o Aston Villa por 2-1, em Salzburgo, conquistando o troféu pela segunda temporada consecutiva. Meses após a conquista da Liga dos Campeões, a equipa parisiense somou o quarto título internacional em pouco mais de um ano.
 
 ### Domínio inicial e a força do jovem Madjo

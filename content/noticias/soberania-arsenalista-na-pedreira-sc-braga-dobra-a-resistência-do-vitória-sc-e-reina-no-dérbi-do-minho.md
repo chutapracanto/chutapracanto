@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/Qcy2cijbS479nvY45J4dvfkfq5s.webp?wi
 
 
 
+
 O Estádio Municipal de Braga vestiu-se a rigor para acolher mais um apaixonante capítulo do futebol minhoto, onde o SC Braga levou a melhor sobre o Vitória SC por 1-0, em duelo relativo à 4.ª jornada da Liga Portugal Betclic. A turma arsenalista assumiu o protagonismo da partida do primeiro ao último apito, impondo um futebol mais consistente e acabando premiada pela insaciável busca da vitória.
 
 **Cerco de luxo e a inspiração entre os postes a travar o nulo**

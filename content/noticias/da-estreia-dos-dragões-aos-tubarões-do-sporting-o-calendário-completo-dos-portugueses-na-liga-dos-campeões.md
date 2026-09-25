@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/SfhtMvnQXmXihe7qKnQqo2zNo.jpg?width
 
 
 
+
 O sorteio do calendário da fase regular da Liga dos Campeões ditou o rumo de FC Porto e Sporting na prova milionária. Os dragões começam o seu percurso no Estádio do Dragão perante um gigante europeu, enquanto os leões terão um início teoricamente mais acessível antes de um ciclo de elevado grau de exigência a fechar a fase de liga.
 
 **Porto abre diante do City e tem clássico no horizonte**

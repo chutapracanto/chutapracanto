@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/IYAjzZERAcybT2bvnlzmpNg7SgY.jpg?wid
 
 
 
+
 O antigo território de Viriato voltou a erguer as suas armas para acolher uma batalha colossal, recheada de coragem, resistência e drama até ao último suspiro. Num duelo vibrante e de parada e resposta, o Académico de Viseu vergou o Vitória SC por 2-1 com uma estocada mortal no período de compensação, festejando um triunfo memorável no escalão principal que os adeptos viseenses já não testemunhavam nas bancadas do Fontelo desde o distante ano de 1989.
 
 **Batalha campal no miolo e veneno na segunda metade**

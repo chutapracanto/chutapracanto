@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/RNe9k0ZC91uIB9IiHKnAwNOZ0.jpg?width
 
 
 
+
 O Benfica confirmou o apuramento para a fase de liga da Liga Europa ao vencer o AGF Aarhus por 3-1, na 2.ª mão do _play-off_. A equipa encarnada dominou a partida em solo dinamarquês e selou a passagem sem sobressaltos na eliminatória.
 
 ### Domínio encarnado e vantagem ao intervalo

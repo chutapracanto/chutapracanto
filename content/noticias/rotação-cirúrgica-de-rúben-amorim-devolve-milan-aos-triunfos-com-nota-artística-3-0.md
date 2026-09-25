@@ -11,6 +11,7 @@ image: "https://framerusercontent.com/images/yl3sqk5PJ42RKADY9oJqlWDx9xE.jpg?wid
 
 
 
+
 Página virada após a estreia europeia, o Milan regressou ao grande palco da Serie A com a lição devidamente estudada e assinou uma exibição de gala em San Siro. Perante um Lecce combativo mas sem argumentos para travar a torrente ofensiva _rossonera_, a equipa de Rúben Amorim respondeu à rotação massiva no onze com um triunfo categórico por 3-0 uma autêntica demonstração de profundidade de plantel, virtuosismo individual e maturidade tática antes da pausa para os compromissos das seleções.
 
 **Revolução calculada, contratempo visitante e a genialidade de Pulisic**
