@@ -1417,3 +1417,27 @@ evitar que uma IA reconstrua a rota a partir de memória de conversa, salte para
 Commit do Roadmap: `f65ce68fae6c9d07114672dd202efb891b3d2023`
 Commit das Rules: `fc7526797734cd7ad87ab2ad9796b33d0549a2fa`
 Commit da Bíblia Mestra: `c7432fe44fa5b18fb2ea02fa21a11da4fec1310b`
+
+
+## SISTEMA DE ARRANQUE DA IA — 2026-09-25
+
+Para reduzir perda de contexto e leitura desnecessária, foi criado:
+
+`.github/AI_START_HERE.md`
+
+Função:
+- fornecer o mapa mínimo de arranque;
+- indicar a hierarquia documental;
+- indicar a fase operacional atual;
+- impedir saltos de fase;
+- lembrar a existência da fase de API/dados de futebol;
+- separar lane técnica de lane criativa;
+- reforçar o ciclo executar -> validar -> corrigir -> documentar.
+
+As Rules foram atualizadas para exigir a leitura do Start Here antes de qualquer tarefa do projeto.
+
+Commit Start Here:
+`e4fc2f0715a4d2b7d66682db9ec0af4f4a6d5f3b`
+
+Commit Rules:
+`b5d0c3999f3dd3d51a2a8b30e8625e15623a06ff`
