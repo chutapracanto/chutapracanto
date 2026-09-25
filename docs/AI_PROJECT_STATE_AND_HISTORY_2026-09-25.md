@@ -1441,3 +1441,48 @@ Commit Start Here:
 
 Commit Rules:
 `b5d0c3999f3dd3d51a2a8b30e8625e15623a06ff`
+
+
+
+## 42. RECONFIRMAÇÃO OPERACIONAL DA FASE 1 — 2026-09-25 13:48
+
+Foi retomado o projeto exclusivamente a partir da hierarquia oficial atual:
+1. `.github/AI_START_HERE.md`;
+2. `.github/AI_PROJECT_RULES.md`;
+3. `.github/CODEX_RULES.md`;
+4. `docs/AI_PROJECT_ROADMAP.md`;
+5. este ledger;
+6. `bíblia mestra Chuta Pra Canto.md`.
+
+### Estado real confirmado no GitHub
+- `main` não tem PRs abertas.
+- O Roadmap mantém **FASE 1 — recuperação/consolidação do conteúdo histórico** como fase operacional atual.
+- A Fase 1 permanece **BLOQUEADA POR FONTE HISTÓRICA EXTERNA**.
+- O lote Framer de 24/09 continua limitado a 213 URLs únicas / 179 importadas / 34 duplicadas ou ignoradas / 0 falhas.
+- A migração total do conteúdo posterior a 22/08/2026 continua explicitamente não concluída.
+- A Fase 3 de dados/API de futebol e competições permanece registada no Roadmap e não foi perdida nem substituída por uma frente criativa.
+- Fase 5/performance não foi reaberta.
+
+### Nova validação autónoma
+Além da reconciliação anterior, foi novamente tentado acesso direto ao arquivo histórico público:
+- `https://chutapracanto.framer.website/news`;
+- `https://chutapracanto.framer.website/sitemap.xml`;
+- `https://chutapracanto.framer.website/robots.txt`.
+
+O acesso web disponível continua a devolver o domínio como inacessível nesta sessão. Pesquisas públicas por páginas `/noticias` do domínio e pelas datas 23/08, 16/09 e 17/09 também não devolveram resultados verificáveis.
+
+### Decisão
+Não existe neste momento uma nova ação autónoma que possa produzir a lista factual dos artigos Framer posteriores a 22/08 sem uma fonte histórica adicional.
+
+Não foi:
+- importado conteúdo;
+- alterado conteúdo editorial;
+- alterado índice;
+- alterado sitemap;
+- alterada a fase do Roadmap;
+- iniciado trabalho de podcast/distribuição/monetização;
+- reaberta a frente LCP/CLS.
+
+**Estado confirmado: FASE 1 BLOQUEADA; nenhuma inferência editorial autorizada.**
+
+A retomada técnica desta fase exige acesso a uma fonte histórica que contenha efetivamente as publicações posteriores a 22/08/2026 (projeto/CMS histórico do Framer ou export/backup equivalente). A partir dessa fonte, a comparação e a importação controlada podem ser executadas diretamente.
