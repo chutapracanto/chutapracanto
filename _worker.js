@@ -601,6 +601,79 @@ function construirUrlPublicaNoticia(origin, slug) {
   );
 }
 
+async function prepararShellNoticiasInicial(request, env, response) {
+  if (
+    !response ||
+    !response.ok ||
+    !response.headers.get("Content-Type")?.includes("text/html")
+  ) {
+    return response;
+  }
+
+  const url = new URL(request.url);
+  if (url.pathname !== "/noticias" && url.pathname !== "/noticias.html") {
+    return response;
+  }
+
+  try {
+    const indexResponse = await env.ASSETS.fetch(
+      new Request(new URL("/content/noticias-index.json", request.url))
+    );
+    if (!indexResponse.ok) return response;
+
+    const index = await indexResponse.json();
+    if (!Array.isArray(index)) return response;
+
+    const entry = index.find(item => (item?.type || "news") === "news" && item?.slug && item?.image);
+    if (!entry) return response;
+
+    const title = String(entry.title || "Sem título");
+    const category = String(entry.category || "Geral");
+    const subtitle = String(entry.subtitle || "");
+    const image = construirUrlImagem(entry.image, url.origin);
+    const href = "/noticia?slug=" + encodeURIComponent(String(entry.slug));
+
+    const preloadHtml =
+      '<link rel="preload" as="image" href="' + escaparHtml(image) + '" fetchpriority="high">';
+
+    const cardHtml = [
+      '<a class="news-list-card" href="' + escaparHtml(href) + '">',
+      '<div class="news-list-img">',
+      '<img src="' + escaparHtml(image) + '" alt="' + escaparHtml(title) + '" loading="eager" fetchpriority="high" decoding="async">',
+      '</div>',
+      '<div class="news-list-content">',
+      '<div class="news-list-meta"><span class="tag">' + escaparHtml(category.toUpperCase()) + '</span></div>',
+      '<h3>' + escaparHtml(title) + '</h3>',
+      subtitle ? '<p>' + escaparHtml(subtitle) + '</p>' : '',
+      '</div>',
+      '</a>'
+    ].join("");
+
+    const headers = new Headers(response.headers);
+    headers.delete("Content-Length");
+    const htmlResponse = new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers
+    });
+
+    return new HTMLRewriter()
+      .on("head", {
+        element(element) {
+          element.insert(preloadHtml, { html: true });
+        }
+      })
+      .on("#noticias-list", {
+        element(element) {
+          element.setInnerContent(cardHtml, { html: true });
+        }
+      })
+      .transform(htmlResponse);
+  } catch {
+    return response;
+  }
+}
+
 async function prepararShellArtigoInicial(request, env, response) {
   if (
     !response ||
