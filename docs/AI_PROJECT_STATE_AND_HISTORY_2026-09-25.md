@@ -1771,3 +1771,22 @@ Os três aparecem também no `content/noticias-index.json` com o mesmo carácter
 Não foram renomeados nesta operação. A alteração de slug/path canónico sem uma estratégia de compatibilidade poderia quebrar URLs históricas. O inventário fica como evidência para a frente de normalização de slugs e para o futuro mapeamento de redirects Framer → .com.
 
 **Estado:** identificado e documentado; nenhuma URL canónica alterada.
+
+## 52. INVENTÁRIO DE REDIRECTS FRAMER → .COM — 2026-09-25
+
+Foi construído e gravado o inventário canónico:
+`docs/framer/framer-url-redirect-inventory-2026-09-25.json`
+
+Resultado:
+- **213/213** URLs históricas do export têm destino atual identificado.
+- **179** foram mapeadas por `sourceUrl` existente no índice.
+- **34** foram mapeadas por slug.
+- **0** fontes duplicadas.
+- **0** destinos duplicados.
+- O inventário é apenas de preparação; **nenhum redirect foi implementado**.
+
+### Capacidade atual do Framer
+A documentação oficial atual do Framer confirma que Redirects funcionam para subpaths dentro do domínio atual e que redirecionamento de domínio inteiro/cross-domain deve ser feito pelo hosting provider do domínio antigo. A documentação também confirma que os Redirects são aplicados após publicação. Como a origem histórica é `chutapracanto.framer.website`, não existe no GitHub/Cloudflare atual uma configuração que permita assumir controlo desse host histórico.
+
+### Decisão
+O inventário está concluído. A execução dos redirects fica dependente de confirmar acesso/controlo do projeto Framer histórico ou de um mecanismo externo que possa emitir redirects para `chutapracanto.framer.website`. Não alterar DNS, conteúdo ou redirects por inferência.
