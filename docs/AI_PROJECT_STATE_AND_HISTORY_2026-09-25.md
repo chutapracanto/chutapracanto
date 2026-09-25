@@ -1860,7 +1860,7 @@ Pedidos da utilizadora reconciliados com o GitHub real:
 - Framer: encaminhar URLs históricas para o destino equivalente no .com; inventário 213/213 já concluído, execução ainda dependente de controlo verificável do host/projeto Framer antigo.
 
 Estado técnico:
-- PR #37 está aberta e contém a implementação D1 do coração + correção adicional do sticky/header.
+- PR #38 está aberta e contém a implementação D1 do coração + correção adicional do sticky/header.
 - A PR #35 ainda não foi mergeada; portanto estas alterações não são produção.
 - PR #33 continua classificada como implementação transitória/localStorage.
 - PR #34 está fechada sem merge.
@@ -1881,7 +1881,7 @@ Os cinco pedidos foram reconciliados com o estado GitHub e incorporados no backl
 1. sticky compacto/transparente persistente — implementado na branch final;
 2. navegação sem reflow de linha — implementado na branch final;
 3. navegação mobile mais acima — implementado na branch final;
-4. coração-only junto à partilha com persistência D1 — implementado na PR #37;
+4. coração-only junto à partilha com persistência D1 — implementado na PR #38;
 5. Framer → `.com` — inventário 213/213 concluído, execução bloqueada por controlo do host histórico.
 
 **Estado factual:** #36 aberta, código ainda fora de `main`/produção. A validação browser final é o único gate antes de merge/deployment desta frente.
