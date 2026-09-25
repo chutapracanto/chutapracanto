@@ -137,7 +137,7 @@ def html_node_to_markdown(node) -> str:
 
     def inline(n):
         if isinstance(n, NavigableString):
-            return re.sub(r"[ \t\r\n]+", " ", str(n))
+            return re.sub(r"[ \t\r\n]+", " ", repair_mojibake(str(n)))
         if not getattr(n, "name", None):
             return ""
         tag = n.name.lower()
