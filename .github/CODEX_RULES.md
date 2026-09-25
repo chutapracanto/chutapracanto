@@ -116,3 +116,19 @@ Quando o Codex for usado de forma legítima para uma validação ou tarefa exter
 A utilizadora não precisa de pedir essa atualização separadamente.
 
 Não criar documentação apenas porque o Codex foi executado: só registar o que muda a continuidade ou uma decisão futura.
+
+
+## 10. PROTOCOLO DE DELEGAÇÃO DO CODEX
+
+Quando a IA não conseguir executar uma operação porque depende de browser/local/Cloudflare/sessão/credencial ou outra capacidade externa que o Codex possui, não deve simplesmente informar que “é preciso usar o Codex”. Deve fornecer um prompt executável com:
+- repo/branch, quando aplicável;
+- tarefa concreta;
+- limites do que NÃO alterar;
+- passos de investigação/execução necessários;
+- validação obrigatória;
+- resultado esperado;
+- instrução para devolver evidência curta.
+
+Se a tarefa não for do Codex, não o usar apenas para evitar trabalho que a IA consegue fazer.
+
+Quando a operação exigir ação da Rute, o Assistente deve explicar à Rute exatamente os passos necessários e o recurso que deve devolver. O Codex não deve ser usado como substituto de uma ação que só a Rute pode executar.
