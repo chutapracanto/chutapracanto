@@ -531,3 +531,17 @@ A frente de UX editorial avançou após pesquisa de padrões de engagement em fu
 Foi identificado um conjunto residual de **3 slugs/paths com caracteres zero-width** no conteúdo histórico. Não foram alterados nesta fase porque a correção exige compatibilidade de URLs e deve ser integrada no plano de normalização/redirects.
 
 **Estado:** inventariado; não alterar URLs canónicas até existir estratégia de compatibilidade.
+
+## 21. ATUALIZAÇÃO OPERACIONAL — 2026-09-25 — INVENTÁRIO FRAMER → .COM
+
+O inventário de redirects históricos foi concluído em `docs/framer/framer-url-redirect-inventory-2026-09-25.json`.
+
+- 213/213 origens com destino atual identificado.
+- 179 por `sourceUrl`.
+- 34 por slug.
+- 0 duplicações de origem/destino.
+- Nenhum redirect executado.
+
+A documentação oficial do Framer confirma que redirects cross-domain/domain-level não são resolvidos pelo mecanismo normal de Redirects do projeto; essa parte depende do hosting provider do domínio antigo. Para `chutapracanto.framer.website`, a capacidade de controlar esse host histórico ainda não está disponível no ambiente atual.
+
+**Estado:** inventário concluído; execução dos redirects aguarda confirmação de controlo do host/projeto histórico.
