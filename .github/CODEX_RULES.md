@@ -57,3 +57,14 @@ Curta, factual e com resultados verificáveis. Se a investigação externa revel
 - Nunca devolver apenas "não consigo" ou um relatório inconclusivo quando ainda existir uma ação executável.
 - A resposta deve sempre terminar com resultado verificável ou com o bloqueio externo exato e a ação concreta necessária.
 FIM.
+
+
+## REGRA PERMANENTE — EXECUÇÃO ENXUTA E CRITÉRIO DE PARAGEM — 2026-09-25
+
+- O objetivo não é maximizar a quantidade de testes; é obter a evidência mínima suficiente para responder à pergunta técnica.
+- Assim que a hipótese principal estiver comprovada e os critérios de aceitação estiverem satisfeitos, **parar**. Não continuar com regressões redundantes, relatórios extensos, novas medições sem nova hipótese ou navegação adicional.
+- Priorizar nesta ordem: (1) reproduzir/confirmar o problema, (2) validar a correção específica, (3) executar apenas os regressões essenciais diretamente afetados, (4) terminar.
+- Se uma verificação adicional for opcional e não puder alterar a decisão, não a executar.
+- Se o pedido disser explicitamente para terminar após certos checks, respeitar esse limite.
+- Para tarefas de validação, o resultado deve ser curto: check -> PASS/FAIL -> evidência essencial.
+- Não permanecer numa tarefa apenas porque ainda existem possíveis testes. Depois de evidência suficiente, concluir imediatamente.
