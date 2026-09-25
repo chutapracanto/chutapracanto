@@ -1242,7 +1242,8 @@ async function prepararPaginaParaPartilha(
 
 // ============================================================
 // API ADMIN
-// ============================================================async function handleArticleLikeAPI(request, env) {
+// ============================================================
+async function handleArticleLikeAPI(request, env) {
   const url = new URL(request.url);
   const noindexHeaders = { "X-Robots-Tag": "noindex, nofollow, noarchive" };
   const respond = (data, status = 200, headers = {}) =>
