@@ -1,5 +1,5 @@
 name: Testar importação histórica do Framer
-# [IMPORT-FRAMER-FORMATTING-REPAIR] trigger
+# [IMPORT-FRAMER-FORMATTING-REPAIR] trigger\n# branch repair commits are pushed directly; no main rebase is needed
 
 on:
   push:
@@ -71,8 +71,6 @@ jobs:
             exit 0
           fi
           git commit -m "content: importar arquivo histórico do Framer"
-          git fetch origin main
-          git rebase origin/main
           git push origin HEAD:$GITHUB_REF_NAME
       - name: Mostrar diagnóstico do relatório
         if: always()
