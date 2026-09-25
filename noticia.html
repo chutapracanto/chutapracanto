@@ -371,7 +371,7 @@
 
   <div class="container" style="max-width: 800px; margin-top: 2rem; margin-bottom: 4rem;">
 
-    <a id="back-to-section" href="/noticias" class="see-more" style="display: inline-block; margin-bottom: 2rem;">← VOLTAR ÀS NOTÍCIAS</a>
+    <a id="back-to-section" href="/noticias" class="see-more article-back-link">← VOLTAR ÀS NOTÍCIAS</a>
 
     <div id="article-content">
 
@@ -780,39 +780,6 @@
         document.getElementById('twitter-url').content = currentShareUrl;
         document.getElementById('canonical-url').href = canonical;
 
-        let breadcrumb = container.querySelector('.article-breadcrumbs');
-        if (!breadcrumb) {
-          breadcrumb = document.createElement('nav');
-          breadcrumb.className = 'article-breadcrumbs';
-          breadcrumb.setAttribute('aria-label', 'Breadcrumb');
-          const crumbList = document.createElement('ol');
-          [['Home','/'],[sectionLabel,sectionPath]].forEach(([label, href]) => {
-            const li = document.createElement('li');
-            const link = document.createElement('a');
-            link.href = href;
-            link.textContent = label;
-            li.appendChild(link);
-            crumbList.appendChild(li);
-          });
-          const current = document.createElement('li');
-          current.textContent = title;
-          current.setAttribute('aria-current', 'page');
-          crumbList.appendChild(current);
-          breadcrumb.appendChild(crumbList);
-          container.insertBefore(breadcrumb, previewHeader);
-        } else {
-          const breadcrumbLinks = breadcrumb.querySelectorAll('a');
-          if (breadcrumbLinks[0]) {
-            breadcrumbLinks[0].href = '/';
-            breadcrumbLinks[0].textContent = 'Home';
-          }
-          if (breadcrumbLinks[1]) {
-            breadcrumbLinks[1].href = sectionPath;
-            breadcrumbLinks[1].textContent = sectionLabel;
-          }
-          const current = breadcrumb.querySelector('li[aria-current="page"]');
-          if (current) current.textContent = title;
-        }
         previewCategoryTag.textContent = category.toUpperCase();
         previewEditorialTag.textContent = editorialTypeLabel;
         previewH1.textContent = title;
@@ -843,6 +810,16 @@
         } else {
           previewByline?.remove();
         }
+        const headingVisual = previewHeader.querySelector('.article-heading-visual') || document.createElement('div');
+        headingVisual.className = 'article-heading-visual';
+        [previewCategoryTag, previewEditorialTag, previewH1, previewSummary, previewByline]
+          .filter(Boolean)
+          .forEach(element => {
+            if (element.parentElement !== headingVisual) headingVisual.appendChild(element);
+          });
+        if (!headingVisual.parentElement) previewHeader.appendChild(headingVisual);
+        previewHeader.style.setProperty('--article-heading-natural-height', previewHeader.scrollHeight + 'px');
+
         if (imageValue) {
           let figure = container.querySelector('.article-hero-image');
           if (!figure) {
@@ -1234,10 +1211,14 @@
         const headerProgress = Math.min(1, Math.max(0, window.scrollY / 220));
         const articleProgress = Math.min(1, Math.max(0, (window.scrollY - 24) / 320));
         const headerHeight = Math.max(48, siteHeader.getBoundingClientRect().height);
+        const backLink = document.getElementById('back-to-section');
 
         root.style.setProperty('--site-header-height', headerHeight + 'px');
+        root.style.setProperty('--article-progress', articleProgress.toFixed(3));
         siteHeader.style.setProperty('--header-progress', headerProgress.toFixed(3));
         articleHeading.style.setProperty('--article-progress', articleProgress.toFixed(3));
+        articleHeading.style.setProperty('--article-heading-natural-height', articleHeading.scrollHeight + 'px');
+        if (backLink) backLink.style.setProperty('--article-progress', articleProgress.toFixed(3));
         ticking = false;
       };
 
