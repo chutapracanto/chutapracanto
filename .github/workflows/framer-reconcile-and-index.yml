@@ -1,0 +1,648 @@
+# Pós-importação Framer: manter este workflow como fonte automática do índice e sitemap.
+name: Reconcile Framer dates and regenerate index
+
+on:
+  push:
+    paths:
+      - "content/noticias/**"
+      - "content/opiniao/**"
+      - "content/taxonomia.json"
+      - "content/authors.json"
+      - "content/editorial-types.json"
+      - ".github/workflows/gerar-indice-noticias.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  gerar-indice:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reconciliar datas históricas do Framer
+        shell: python
+        run: |
+          import json
+          import re
+          from pathlib import Path
+
+          inventory = json.loads(Path("docs/framer/framer-post-22-08-reconciliation-2026-09-25.json").read_text(encoding="utf-8"))
+          if len(inventory) != 163:
+              raise SystemExit(f"Unexpected reconciliation inventory size: {len(inventory)}")
+          updated = 0
+          unchanged = 0
+          for item in inventory:
+              path = Path(item["indexPath"])
+              if not path.exists():
+                  raise SystemExit(f"Missing reconciliation path: {path}")
+              text = path.read_text(encoding="utf-8-sig")
+              date = str(item["framerPublished"])[:10]
+              match = re.search(r'(?m)^((?:published|date|dataNoticia|data)\\s*:\\s*)\\S+\\s*        shell: python
+        run: |
+          import json
+          import re
+          import unicodedata
+          import subprocess
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          roots = [Path("content/noticias"), Path("content/opiniao")]
+          output = Path("content/noticias-index.json")
+          taxonomy = json.loads(Path("content/taxonomia.json").read_text(encoding="utf-8"))
+          authors = json.loads(Path("content/authors.json").read_text(encoding="utf-8"))
+          editorial_types = {
+              item["id"] for item in json.loads(
+                  Path("content/editorial-types.json").read_text(encoding="utf-8")
+              )
+          }
+
+          def normalize_key(value):
+              value = unicodedata.normalize("NFKD", str(value or ""))
+              value = "".join(char for char in value if not unicodedata.combining(char))
+              return "".join(char for char in value.casefold() if char.isalnum())
+
+          categories_by_alias = {}
+          taxonomy_changed = False
+          category_ids = {item["id"] for item in taxonomy["categories"]}
+
+          def category_id_for(label):
+              normalized = unicodedata.normalize("NFKD", str(label or ""))
+              normalized = "".join(char for char in normalized if not unicodedata.combining(char))
+              candidate = re.sub(r"[^a-z0-9]+", "-", normalized.casefold()).strip("-")
+              return candidate or "categoria"
+
+          for item in taxonomy["categories"]:
+              for alias in [item["label"], *item.get("aliases", [])]:
+                  categories_by_alias[normalize_key(alias)] = item
+
+          authors_by_alias = {}
+          for item in authors:
+              for alias in [item["name"], *item.get("aliases", [])]:
+                  authors_by_alias[normalize_key(alias)] = item
+
+          creation_time_cache = {}
+
+          def git_creation_time(path):
+              key = str(path)
+              if key not in creation_time_cache:
+                  result = subprocess.run(
+                      ["git", "log", "--follow", "--diff-filter=A", "--format=%cI", "--reverse", "--", key],
+                      check=False,
+                      capture_output=True,
+                      text=True
+                  )
+                  creation_time_cache[key] = result.stdout.splitlines()[0].strip() if result.returncode == 0 and result.stdout.splitlines() else ""
+              return creation_time_cache[key]
+
+          def publication_timestamp(value, path):
+              value = str(value or "").strip()
+              if not value:
+                  return ""
+              try:
+                  if re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+                      published_day = datetime.strptime(value, "%Y-%m-%d").date()
+                      created_raw = git_creation_time(path)
+                      created = datetime.fromisoformat(created_raw) if created_raw else datetime.combine(
+                          published_day, datetime.min.time(), tzinfo=timezone.utc
+                      )
+                      parsed = datetime(
+                          published_day.year, published_day.month, published_day.day,
+                          created.hour, created.minute, created.second, created.microsecond,
+                          tzinfo=created.tzinfo or timezone.utc
+                      )
+                  else:
+                      parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+                      if parsed.tzinfo is None:
+                          parsed = parsed.replace(tzinfo=timezone.utc)
+                  return parsed.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
+              except (ValueError, OverflowError):
+                  return ""
+
+          def sort_timestamp(item):
+              value = str(item.get("publishedAt") or item.get("published") or "")
+              try:
+                  parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+                  if parsed.tzinfo is None:
+                      parsed = parsed.replace(tzinfo=timezone.utc)
+                  return parsed.timestamp()
+              except (ValueError, OverflowError):
+                  return float("-inf")
+
+          def parse_scalar(value):
+              value = value.strip()
+              if not value:
+                  return ""
+              if value.startswith('"') and value.endswith('"'):
+                  try:
+                      return json.loads(value)
+                  except Exception:
+                      return value[1:-1]
+              if value.startswith("'") and value.endswith("'"):
+                  return value[1:-1].replace("''", "'")
+              return value
+
+          def field(frontmatter, names):
+              for name in names:
+                  match = re.search(
+                      rf"^\s*{re.escape(name)}\s*:\s*(.*?)\s*$",
+                      frontmatter,
+                      re.MULTILINE
+                  )
+                  if match:
+                      return parse_scalar(match.group(1))
+              return ""
+
+          noticias = []
+
+          for root in roots:
+              if not root.exists():
+                  continue
+              for path in sorted(root.glob("*.md")):
+                  text = path.read_text(encoding="utf-8-sig")
+                  match = re.match(
+                      r"^---\s*\n([\s\S]*?)\n---(?:\s*\n|$)",
+                      text
+                  )
+                  if not match:
+                      continue
+
+                  frontmatter = match.group(1)
+
+                  # Reparação de dados históricos importados do Framer:
+                  # alguns artigos tinham o corpo inteiro colado ao campo author.
+                  # O conteúdo correto já existe abaixo do frontmatter; aqui corrigimos
+                  # apenas o metadado, sem tocar no corpo editorial.
+                  author_match = re.search(
+                      r"^\s*author\s*:\s*(.*?)\s*$",
+                      frontmatter,
+                      re.MULTILINE
+                  )
+                  if author_match:
+                      author_value = parse_scalar(author_match.group(1))
+                      if (
+                          isinstance(author_value, str)
+                          and author_value.startswith("ChutaPraCanto ")
+                          and len(author_value) > 80
+                      ):
+                          repaired_frontmatter = frontmatter[:author_match.start(1)] + '"ChutaPraCanto"' + frontmatter[author_match.end(1):]
+                          if repaired_frontmatter != frontmatter:
+                              text = text.replace(frontmatter, repaired_frontmatter, 1)
+                              path.write_text(text, encoding="utf-8")
+                              frontmatter = repaired_frontmatter
+                              print(f"Author reparado: {path}")
+
+                  slug = field(frontmatter, ["slug"]) or path.stem
+                  title = field(frontmatter, ["title"]) or "Sem título"
+                  subtitle = field(
+                      frontmatter,
+                      ["subtitle", "subtitulo", "descricao", "resumo"]
+                  )
+                  category_raw = field(
+                      frontmatter,
+                      ["category", "categoria", "tag"]
+                  ) or "Geral"
+                  category_meta = categories_by_alias.get(normalize_key(category_raw))
+                  if category_meta is None and category_raw:
+                      category_id = category_id_for(category_raw)
+                      base_id = category_id
+                      suffix = 2
+                      while category_id in category_ids:
+                          category_id = f"{base_id}-{suffix}"
+                          suffix += 1
+                      category_meta = {
+                          "id": category_id,
+                          "label": category_raw,
+                          "kind": "mixed"
+                      }
+                      taxonomy["categories"].append(category_meta)
+                      category_ids.add(category_id)
+                      categories_by_alias[normalize_key(category_raw)] = category_meta
+                      taxonomy_changed = True
+                  category = category_meta["label"] if category_meta else category_raw
+                  editorial_type = field(frontmatter, ["type"]) or "news"
+                  if editorial_type not in editorial_types:
+                      raise ValueError(f"Tipo editorial não registado em {path}: {editorial_type}")
+                  author_raw = field(frontmatter, ["author", "autor"])
+                  author_meta = authors_by_alias.get(normalize_key(author_raw))
+                  author = author_meta["name"] if author_meta else author_raw
+                  published = field(
+                      frontmatter,
+                      ["published", "date", "dataNoticia", "data"]
+                  )
+                  modified = field(frontmatter, ["modified", "dateModified", "updated"])
+                  image = field(
+                      frontmatter,
+                      ["image", "imagem", "featured_image", "featuredImage"]
+                  )
+                  source_url = field(
+                      frontmatter,
+                      ["sourceUrl", "source_url", "urlOriginal", "url_original"]
+                  )
+
+                  published_at = publication_timestamp(published, path)
+                  noticia = {
+                      "slug": slug,
+                      "path": str(path).replace("\\", "/"),
+                      "type": editorial_type,
+                      "title": title,
+                      "subtitle": subtitle,
+                      "category": category,
+                      "categoryId": category_meta["id"] if category_meta else None,
+                      "categoryKind": category_meta["kind"] if category_meta else "unclassified",
+                      "author": author,
+                      "authorId": author_meta["id"] if author_meta else None,
+                      "authorType": author_meta["type"] if author_meta else None,
+                      "published": published,
+                      "publishedAt": published_at,
+                      "image": image
+                  }
+                  if source_url:
+                      noticia["sourceUrl"] = source_url
+                  if modified:
+                      noticia["modified"] = modified
+                  noticias.append(noticia)
+
+          noticias.sort(key=sort_timestamp, reverse=True)
+
+          invalid_authors = [
+              item for item in noticias
+              if isinstance(item.get("author"), str) and len(item["author"]) > 80
+          ]
+          if invalid_authors:
+              sample = ", ".join(item["slug"] for item in invalid_authors[:5])
+              raise ValueError(
+                  f"Metadados de autor inválidos ({len(invalid_authors)}). Exemplos: {sample}"
+              )
+
+          if taxonomy_changed:
+              Path("content/taxonomia.json").write_text(
+                  json.dumps(taxonomy, ensure_ascii=False, indent=2) + "\n",
+                  encoding="utf-8"
+              )
+
+          output.write_text(
+              json.dumps(
+                  noticias,
+                  ensure_ascii=False,
+                  indent=2
+              ) + "\n",
+              encoding="utf-8"
+          )
+
+          # Gera sitemap no mesmo passo a partir das páginas públicas e do índice derivado dos Markdown.
+          from datetime import date
+          from urllib.parse import quote
+          from html import escape
+
+          base_url = "https://chutapracanto.com"
+          pages = ["/", "/noticias", "/opiniao", "/sobre", "/contacto", "/privacidade", "/termos", "/politica-editorial"]
+          entries = [base_url + page for page in pages]
+          today = date.today().isoformat()
+          for noticia in noticias:
+              slug = noticia.get("slug")
+              path = noticia.get("path", "")
+              if not slug or not re.fullmatch(r"content/(?:noticias|opiniao)/[^/]+\.md", path) or ".." in path:
+                  continue
+              published = (noticia.get("published") or "")[:10]
+              if re.fullmatch(r"\d{4}-\d{2}-\d{2}", published) and published > today:
+                  continue
+              entries.append(base_url + "/noticia?slug=" + quote(slug, safe="~!*'()-._"))
+
+          sitemap_lines = [
+              '<?xml version="1.0" encoding="UTF-8"?>',
+              '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+          ]
+          for loc in dict.fromkeys(entries):
+              sitemap_lines.append("  <url><loc>" + escape(loc, quote=False) + "</loc></url>")
+          sitemap_lines.append("</urlset>")
+          Path("sitemap.xml").write_text(
+              "\n".join(sitemap_lines) + "\n",
+              encoding="utf-8"
+          )
+
+      - name: Commit índice atualizado
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/noticias content/opiniao content/noticias-index.json content/taxonomia.json sitemap.xml
+          if git diff --cached --quiet; then
+            echo "Índice já está atualizado."
+            exit 0
+          fi
+          git commit -m "Atualizar índice de notícias"
+          git push
+, text)
+              if not match:
+                  raise SystemExit(f"Publication metadata field missing: {path}")
+              new_text = text[:match.start()] + match.group(1) + f'"{date}"' + text[match.end():]
+              if new_text != text:
+                  path.write_text(new_text, encoding="utf-8")
+                  updated += 1
+              else:
+                  unchanged += 1
+          if updated + unchanged != 163:
+              raise SystemExit(f"Reconciliation count mismatch: updated={updated}, unchanged={unchanged}")
+          print(f"Framer reconciliation: {updated} updated, {unchanged} already correct, 163 total")
+
+      - name: Gerar índice
+        shell: python
+        run: |
+          import json
+          import re
+          import unicodedata
+          import subprocess
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          roots = [Path("content/noticias"), Path("content/opiniao")]
+          output = Path("content/noticias-index.json")
+          taxonomy = json.loads(Path("content/taxonomia.json").read_text(encoding="utf-8"))
+          authors = json.loads(Path("content/authors.json").read_text(encoding="utf-8"))
+          editorial_types = {
+              item["id"] for item in json.loads(
+                  Path("content/editorial-types.json").read_text(encoding="utf-8")
+              )
+          }
+
+          def normalize_key(value):
+              value = unicodedata.normalize("NFKD", str(value or ""))
+              value = "".join(char for char in value if not unicodedata.combining(char))
+              return "".join(char for char in value.casefold() if char.isalnum())
+
+          categories_by_alias = {}
+          taxonomy_changed = False
+          category_ids = {item["id"] for item in taxonomy["categories"]}
+
+          def category_id_for(label):
+              normalized = unicodedata.normalize("NFKD", str(label or ""))
+              normalized = "".join(char for char in normalized if not unicodedata.combining(char))
+              candidate = re.sub(r"[^a-z0-9]+", "-", normalized.casefold()).strip("-")
+              return candidate or "categoria"
+
+          for item in taxonomy["categories"]:
+              for alias in [item["label"], *item.get("aliases", [])]:
+                  categories_by_alias[normalize_key(alias)] = item
+
+          authors_by_alias = {}
+          for item in authors:
+              for alias in [item["name"], *item.get("aliases", [])]:
+                  authors_by_alias[normalize_key(alias)] = item
+
+          creation_time_cache = {}
+
+          def git_creation_time(path):
+              key = str(path)
+              if key not in creation_time_cache:
+                  result = subprocess.run(
+                      ["git", "log", "--follow", "--diff-filter=A", "--format=%cI", "--reverse", "--", key],
+                      check=False,
+                      capture_output=True,
+                      text=True
+                  )
+                  creation_time_cache[key] = result.stdout.splitlines()[0].strip() if result.returncode == 0 and result.stdout.splitlines() else ""
+              return creation_time_cache[key]
+
+          def publication_timestamp(value, path):
+              value = str(value or "").strip()
+              if not value:
+                  return ""
+              try:
+                  if re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+                      published_day = datetime.strptime(value, "%Y-%m-%d").date()
+                      created_raw = git_creation_time(path)
+                      created = datetime.fromisoformat(created_raw) if created_raw else datetime.combine(
+                          published_day, datetime.min.time(), tzinfo=timezone.utc
+                      )
+                      parsed = datetime(
+                          published_day.year, published_day.month, published_day.day,
+                          created.hour, created.minute, created.second, created.microsecond,
+                          tzinfo=created.tzinfo or timezone.utc
+                      )
+                  else:
+                      parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+                      if parsed.tzinfo is None:
+                          parsed = parsed.replace(tzinfo=timezone.utc)
+                  return parsed.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
+              except (ValueError, OverflowError):
+                  return ""
+
+          def sort_timestamp(item):
+              value = str(item.get("publishedAt") or item.get("published") or "")
+              try:
+                  parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+                  if parsed.tzinfo is None:
+                      parsed = parsed.replace(tzinfo=timezone.utc)
+                  return parsed.timestamp()
+              except (ValueError, OverflowError):
+                  return float("-inf")
+
+          def parse_scalar(value):
+              value = value.strip()
+              if not value:
+                  return ""
+              if value.startswith('"') and value.endswith('"'):
+                  try:
+                      return json.loads(value)
+                  except Exception:
+                      return value[1:-1]
+              if value.startswith("'") and value.endswith("'"):
+                  return value[1:-1].replace("''", "'")
+              return value
+
+          def field(frontmatter, names):
+              for name in names:
+                  match = re.search(
+                      rf"^\s*{re.escape(name)}\s*:\s*(.*?)\s*$",
+                      frontmatter,
+                      re.MULTILINE
+                  )
+                  if match:
+                      return parse_scalar(match.group(1))
+              return ""
+
+          noticias = []
+
+          for root in roots:
+              if not root.exists():
+                  continue
+              for path in sorted(root.glob("*.md")):
+                  text = path.read_text(encoding="utf-8-sig")
+                  match = re.match(
+                      r"^---\s*\n([\s\S]*?)\n---(?:\s*\n|$)",
+                      text
+                  )
+                  if not match:
+                      continue
+
+                  frontmatter = match.group(1)
+
+                  # Reparação de dados históricos importados do Framer:
+                  # alguns artigos tinham o corpo inteiro colado ao campo author.
+                  # O conteúdo correto já existe abaixo do frontmatter; aqui corrigimos
+                  # apenas o metadado, sem tocar no corpo editorial.
+                  author_match = re.search(
+                      r"^\s*author\s*:\s*(.*?)\s*$",
+                      frontmatter,
+                      re.MULTILINE
+                  )
+                  if author_match:
+                      author_value = parse_scalar(author_match.group(1))
+                      if (
+                          isinstance(author_value, str)
+                          and author_value.startswith("ChutaPraCanto ")
+                          and len(author_value) > 80
+                      ):
+                          repaired_frontmatter = frontmatter[:author_match.start(1)] + '"ChutaPraCanto"' + frontmatter[author_match.end(1):]
+                          if repaired_frontmatter != frontmatter:
+                              text = text.replace(frontmatter, repaired_frontmatter, 1)
+                              path.write_text(text, encoding="utf-8")
+                              frontmatter = repaired_frontmatter
+                              print(f"Author reparado: {path}")
+
+                  slug = field(frontmatter, ["slug"]) or path.stem
+                  title = field(frontmatter, ["title"]) or "Sem título"
+                  subtitle = field(
+                      frontmatter,
+                      ["subtitle", "subtitulo", "descricao", "resumo"]
+                  )
+                  category_raw = field(
+                      frontmatter,
+                      ["category", "categoria", "tag"]
+                  ) or "Geral"
+                  category_meta = categories_by_alias.get(normalize_key(category_raw))
+                  if category_meta is None and category_raw:
+                      category_id = category_id_for(category_raw)
+                      base_id = category_id
+                      suffix = 2
+                      while category_id in category_ids:
+                          category_id = f"{base_id}-{suffix}"
+                          suffix += 1
+                      category_meta = {
+                          "id": category_id,
+                          "label": category_raw,
+                          "kind": "mixed"
+                      }
+                      taxonomy["categories"].append(category_meta)
+                      category_ids.add(category_id)
+                      categories_by_alias[normalize_key(category_raw)] = category_meta
+                      taxonomy_changed = True
+                  category = category_meta["label"] if category_meta else category_raw
+                  editorial_type = field(frontmatter, ["type"]) or "news"
+                  if editorial_type not in editorial_types:
+                      raise ValueError(f"Tipo editorial não registado em {path}: {editorial_type}")
+                  author_raw = field(frontmatter, ["author", "autor"])
+                  author_meta = authors_by_alias.get(normalize_key(author_raw))
+                  author = author_meta["name"] if author_meta else author_raw
+                  published = field(
+                      frontmatter,
+                      ["published", "date", "dataNoticia", "data"]
+                  )
+                  modified = field(frontmatter, ["modified", "dateModified", "updated"])
+                  image = field(
+                      frontmatter,
+                      ["image", "imagem", "featured_image", "featuredImage"]
+                  )
+                  source_url = field(
+                      frontmatter,
+                      ["sourceUrl", "source_url", "urlOriginal", "url_original"]
+                  )
+
+                  published_at = publication_timestamp(published, path)
+                  noticia = {
+                      "slug": slug,
+                      "path": str(path).replace("\\", "/"),
+                      "type": editorial_type,
+                      "title": title,
+                      "subtitle": subtitle,
+                      "category": category,
+                      "categoryId": category_meta["id"] if category_meta else None,
+                      "categoryKind": category_meta["kind"] if category_meta else "unclassified",
+                      "author": author,
+                      "authorId": author_meta["id"] if author_meta else None,
+                      "authorType": author_meta["type"] if author_meta else None,
+                      "published": published,
+                      "publishedAt": published_at,
+                      "image": image
+                  }
+                  if source_url:
+                      noticia["sourceUrl"] = source_url
+                  if modified:
+                      noticia["modified"] = modified
+                  noticias.append(noticia)
+
+          noticias.sort(key=sort_timestamp, reverse=True)
+
+          invalid_authors = [
+              item for item in noticias
+              if isinstance(item.get("author"), str) and len(item["author"]) > 80
+          ]
+          if invalid_authors:
+              sample = ", ".join(item["slug"] for item in invalid_authors[:5])
+              raise ValueError(
+                  f"Metadados de autor inválidos ({len(invalid_authors)}). Exemplos: {sample}"
+              )
+
+          if taxonomy_changed:
+              Path("content/taxonomia.json").write_text(
+                  json.dumps(taxonomy, ensure_ascii=False, indent=2) + "\n",
+                  encoding="utf-8"
+              )
+
+          output.write_text(
+              json.dumps(
+                  noticias,
+                  ensure_ascii=False,
+                  indent=2
+              ) + "\n",
+              encoding="utf-8"
+          )
+
+          # Gera sitemap no mesmo passo a partir das páginas públicas e do índice derivado dos Markdown.
+          from datetime import date
+          from urllib.parse import quote
+          from html import escape
+
+          base_url = "https://chutapracanto.com"
+          pages = ["/", "/noticias", "/opiniao", "/sobre", "/contacto", "/privacidade", "/termos", "/politica-editorial"]
+          entries = [base_url + page for page in pages]
+          today = date.today().isoformat()
+          for noticia in noticias:
+              slug = noticia.get("slug")
+              path = noticia.get("path", "")
+              if not slug or not re.fullmatch(r"content/(?:noticias|opiniao)/[^/]+\.md", path) or ".." in path:
+                  continue
+              published = (noticia.get("published") or "")[:10]
+              if re.fullmatch(r"\d{4}-\d{2}-\d{2}", published) and published > today:
+                  continue
+              entries.append(base_url + "/noticia?slug=" + quote(slug, safe="~!*'()-._"))
+
+          sitemap_lines = [
+              '<?xml version="1.0" encoding="UTF-8"?>',
+              '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
+          ]
+          for loc in dict.fromkeys(entries):
+              sitemap_lines.append("  <url><loc>" + escape(loc, quote=False) + "</loc></url>")
+          sitemap_lines.append("</urlset>")
+          Path("sitemap.xml").write_text(
+              "\n".join(sitemap_lines) + "\n",
+              encoding="utf-8"
+          )
+
+      - name: Commit índice atualizado
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/noticias content/opiniao content/noticias-index.json content/taxonomia.json sitemap.xml
+          if git diff --cached --quiet; then
+            echo "Índice já está atualizado."
+            exit 0
+          fi
+          git commit -m "Atualizar índice de notícias"
+          git push
