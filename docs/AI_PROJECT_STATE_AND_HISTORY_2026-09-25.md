@@ -1290,3 +1290,104 @@ Nao executar uma importacao cega nem apagar o bloqueio/protecao existente sem um
 O erro anterior foi de **interpretacao do alcance da importacao**, nao prova de que os 179 ficheiros tenham desaparecido. O repositorio contem os ficheiros do lote historico; a questao em aberto e o conteudo posterior do Framer.
 
 Estado: **ESCOPO CORRIGIDO / RECUPERACAO POSTERIOR DO FRAMER PENDENTE**.
+
+
+
+## 41. RECONCILIAÇÃO DA FONTE HISTÓRICA POSTERIOR DO FRAMER — 2026-09-25
+
+A linha de trabalho foi parada antes de qualquer nova frente e foi feita uma reconciliação específica da lacuna posterior a 22/08/2026.
+
+### Documentação e estado GitHub revistos
+Foram relidos diretamente no estado atual do repositório:
+- `.github/AI_PROJECT_RULES.md`;
+- `bíblia mestra Chuta Pra Canto.md`;
+- `docs/AI_PROJECT_STATE_AND_HISTORY_2026-09-25.md`;
+- `.github/CODEX_RULES.md`;
+- `content/noticias-index.json`;
+- `scripts/import-framer-news.py`.
+
+O GitHub atual continua a ser a autoridade factual.
+
+### 1. Fonte histórica correta identificada
+
+O importer histórico existente documenta como fonte pública:
+`https://chutapracanto.framer.website/news`
+e as páginas individuais:
+`https://chutapracanto.framer.website/noticias/<slug>`.
+
+Essa foi a fonte real usada na execução de 24/09 que encontrou as 213 URLs únicas.
+
+Contudo, essa fonte pública **não é suficiente para provar a existência ou a lista das publicações posteriores a 22/08/2026**. A execução histórica só prova o conjunto que estava exposto naquele arquivo público no momento da execução.
+
+Para recuperar de forma exaustiva o conteúdo posterior, a fonte histórica necessária passa a ser o **estado histórico do projeto/arquivo CMS do Framer ou um export/backup desse conteúdo**, caso o arquivo público atual não contenha essas páginas.
+
+### 2. Verificação da lista real posterior
+
+Foram feitas verificações autónomas no GitHub:
+- pesquisa de referências Framer associadas a 23/08/2026;
+- 16/09/2026;
+- 17/09/2026;
+- 22/08/2026;
+- pesquisa de commits e documentação relacionados com o Framer.
+
+Resultado:
+- não existe no GitHub uma lista histórica adicional de URLs posteriores a 22/08;
+- não existe um artefacto versionado com o inventário dessas publicações;
+- `content/noticias-index.json` contém artigos datados de 23/08, 16/09 e 17/09, mas esses artigos pertencem ao conteúdo já publicado pelo sistema próprio e **não têm `sourceUrl` Framer**; portanto não podem ser usados como prova da lista posterior do Framer.
+
+### 3. Comparação com o conteúdo atual
+
+No estado atual do índice:
+- existem 238 entradas;
+- as entradas com `sourceUrl` Framer correspondem ao lote histórico importado;
+- as publicações posteriores encontradas no índice com datas de 23/08, 16/09 e 17/09 usam imagens locais e não são referências ao arquivo Framer.
+
+Conclusão: o GitHub **não contém atualmente uma representação factual da lista de artigos posteriores do Framer que permita calcular o conjunto ausente artigo a artigo**.
+
+### 4. Verificação direta da disponibilidade externa
+
+Foi tentado autonomamente aceder ao domínio histórico:
+- `https://chutapracanto.framer.website/news`;
+- `https://chutapracanto.framer.website/noticias`;
+- `https://chutapracanto.framer.website/sitemap.xml`;
+- `https://chutapracanto.framer.website/robots.txt`.
+
+O acesso externo disponível nesta sessão não conseguiu resolver/aceder ao domínio Framer. O ambiente de execução local também falhou a resolução DNS de `chutapracanto.framer.website`.
+
+Isto significa que **não é possível, nesta sessão, obter de forma verificável a lista posterior diretamente do site histórico**.
+
+### 5. Decisão de segurança
+
+Não foi feita qualquer importação.
+
+Não foram criados artigos com base em títulos presumidos, pesquisas incompletas ou memória.
+
+Não foi alterado `content/noticias`, `content/noticias-index.json` ou o sitemap para tentar preencher a lacuna por inferência.
+
+Isto é intencional: sem uma lista-fonte verificável, uma importação seria cega e violaria a regra de não inventar conteúdo editorial.
+
+### 6. Dependência externa real identificada
+
+A única dependência que impede a continuação autónoma é agora concreta:
+
+**é necessário acesso ao conteúdo histórico posterior do projeto Framer, através de uma fonte que contenha efetivamente essas publicações — idealmente o projeto/CMS histórico do Framer ou um export/backup/arquivo que preserve as páginas publicadas depois de 22/08/2026.**
+
+O GitHub atual não contém essa lista e o domínio público histórico não está acessível neste ambiente.
+
+Quando essa fonte estiver disponível, a operação correta já está definida:
+1. extrair a lista real de URLs/slugs;
+2. obter cada página/conteúdo;
+3. comparar por slug, `sourceUrl` e título+data com o GitHub;
+4. produzir lista de existentes vs ausentes;
+5. só então fazer uma importação controlada dos ausentes;
+6. regenerar e validar índice/sitemap/produção.
+
+### Estado final desta reconciliação
+
+**RECUPERAÇÃO POSTERIOR DO FRAMER: BLOQUEADA POR FONTE HISTÓRICA EXTERNA REAL.**
+
+**IMPORTAÇÃO CEGA: NÃO EXECUTADA.**
+
+**MIGRAÇÃO FRAMER TOTAL: NÃO CONCLUÍDA.**
+
+Nenhuma nova frente de conteúdo, podcast, distribuição, monetização ou performance foi iniciada nesta linha de trabalho.
