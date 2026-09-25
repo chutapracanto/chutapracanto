@@ -1,4 +1,4 @@
-# Pós-importação Framer: manter este workflow como fonte automática do índice e sitemap.\n# Reconciliação histórica temporária nesta branch.
+# Pós-importação Framer: manter este workflow como fonte automática do índice e sitemap.\n# Reconciliação histórica temporária nesta branch.\n# Regex/path validation corrected.
 name: Gerar índice de notícias
 
 on:
