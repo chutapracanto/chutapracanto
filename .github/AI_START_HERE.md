@@ -85,3 +85,11 @@ Podem coexistir na mesma conta, mas a lane criativa não altera o estado do Road
 Tornar o Chuta Pra Canto um sistema editorial de futebol sólido, recuperado, automatizado, indexável, monetizável e escalável, minimizando trabalho manual da utilizadora.
 
 FIM.
+
+
+## PROTOCOLO OBRIGATÓRIO DE EXECUÇÃO
+
+Para autonomia, bloqueios, pedidos à utilizadora e utilização do Codex, ler também:
+`docs/AI_EXECUTION_PROTOCOL.md`
+
+Regra crítica: **UM BLOQUEIO NÃO É UM RESULTADO.** Se a IA não conseguir executar uma ação, deve identificar exatamente a dependência e transformar essa dependência em passos concretos para Rute ou num prompt executável para o Codex, quando aplicável. É proibido parar com formulações vagas como “fonte externa bloqueada”, “preciso de acesso” ou “próximo passo é X” sem explicar como desbloquear e o que deve regressar.
