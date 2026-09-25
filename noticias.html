@@ -1111,6 +1111,12 @@
       timerAnuncioPesquisa = null;
       filtroAtual = categoria;
       paginaAtual = 1;
+
+      // Ao mudar de filtro, a pesquisa anterior deixa de ser parte do estado.
+      // Isto garante que "Todas" e qualquer categoria iniciam uma listagem limpa.
+      const campoPesquisa = document.getElementById('searchInput');
+      if (campoPesquisa) campoPesquisa.value = '';
+
       sincronizarBotoesCategoria(btnElement);
       const wrapper = document.getElementById('dropdownWrapper');
       if (wrapper) {
