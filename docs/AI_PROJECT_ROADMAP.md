@@ -674,3 +674,21 @@ A pesquisa recente sobre publishing desportivo aponta para maior valor de experi
 2. Validar browser/API/D1 do PR #36.
 3. Se a validação passar, mergear #36 e validar deployment de produção.
 4. Separadamente, resolver a dependência do host Framer histórico e então aplicar/testar os 213 redirects.
+
+
+## 24. FECHO DA FRENTE UX / ENGAGEMENT E TRANSIÇÃO — 2026-09-25
+
+### Pedidos 1–5 reconciliados
+- Sticky pequeno/transparente persistente: implementado na branch final, aguarda validação browser e produção.
+- Navegação sem mudança de linha: implementado na branch final, aguarda validação browser.
+- Navegação mobile mais acima: implementado na branch final, aguarda validação browser.
+- Coração-only persistente em D1: implementado na PR #36, aguarda validação browser/Preview e merge.
+- Framer → `.com`: inventário 213/213 concluído; redirects continuam bloqueados pela falta de controlo verificável do host histórico.
+
+### Estado da transição
+A frente de implementação está concluída no GitHub na PR #36, mas **não deve ser considerada concluída em produção** até browser validation + merge + deployment validation.
+
+### Próxima ação executiva
+A única ação pendente que não é executável integralmente pelo GitHub é a validação browser/Cloudflare do Preview. Depois dessa validação, o fluxo é: PASS → merge #36 → validar deployment → confirmar `main`/produção → fechar Fase 2 UX/engagement.
+
+**Não reabrir #33/#34 nem recomeçar D1/like. Não voltar ao Framer antes de resolver a dependência do host antigo.**
