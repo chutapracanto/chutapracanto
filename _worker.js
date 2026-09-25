@@ -633,9 +633,6 @@ async function prepararShellNoticiasInicial(request, env, response) {
     const image = construirUrlImagem(entry.image, url.origin);
     const href = "/noticia?slug=" + encodeURIComponent(String(entry.slug));
 
-    const preloadHtml =
-      '<link rel="preload" as="image" href="' + escaparHtml(image) + '" fetchpriority="high">';
-
     const cardHtml = [
       '<a class="news-list-card" href="' + escaparHtml(href) + '">',
       '<div class="news-list-img">',
@@ -651,6 +648,10 @@ async function prepararShellNoticiasInicial(request, env, response) {
 
     const headers = new Headers(response.headers);
     headers.delete("Content-Length");
+    headers.append(
+      "Link",
+      `<${image}>; rel="preload"; as="image"; fetchpriority="high"`
+    );
     const htmlResponse = new Response(response.body, {
       status: response.status,
       statusText: response.statusText,
@@ -658,11 +659,6 @@ async function prepararShellNoticiasInicial(request, env, response) {
     });
 
     return new HTMLRewriter()
-      .on("head", {
-        element(element) {
-          element.insert(preloadHtml, { html: true });
-        }
-      })
       .on("#noticias-list", {
         element(element) {
           element.setInnerContent(cardHtml, { html: true });
