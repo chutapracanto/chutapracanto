@@ -608,14 +608,7 @@ footer {
   min-height: 88px;
   height: max(88px, calc(var(--article-heading-natural-height, 210px) * var(--article-heading-scale)));
   overflow: hidden;
-  background: linear-gradient(
-    to bottom,
-    rgba(8, 8, 8, calc(.96 - (var(--article-visual-progress, var(--article-progress)) * .62))) 0%,
-    rgba(8, 8, 8, calc(.92 - (var(--article-visual-progress, var(--article-progress)) * .58))) 30%,
-    rgba(8, 8, 8, calc(.76 - (var(--article-visual-progress, var(--article-progress)) * .46))) 62%,
-    rgba(8, 8, 8, calc(.48 - (var(--article-visual-progress, var(--article-progress)) * .30))) 86%,
-    rgba(8, 8, 8, calc(.20 - (var(--article-visual-progress, var(--article-progress)) * .10))) 100%
-  );
+  background: rgba(8, 11, 17, calc(.96 - (var(--article-progress) * .64)));
   border-top-color: rgba(57, 255, 20, calc(.08 - (var(--article-progress) * .03)));
   border-bottom-color: rgba(57, 255, 20, calc(.14 - (var(--article-progress) * .08)));
   padding: .45rem 0 .65rem;
