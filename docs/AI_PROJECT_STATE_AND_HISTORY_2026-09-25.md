@@ -1887,3 +1887,19 @@ Os cinco pedidos foram reconciliados com o estado GitHub e incorporados no backl
 **Estado factual:** #36 aberta, código ainda fora de `main`/produção. A validação browser final é o único gate antes de merge/deployment desta frente.
 
 **Transição:** após PASS da validação externa, merge #36, validar deployment e só então marcar a frente UX/engagement como concluída. A frente Framer permanece separada.
+
+
+## 56. FECHO DA FRENTE UX E TRANSIÇÃO PARA FASE 3 — 2026-09-26
+
+A PR #42 foi mergeada em main (`e4dc204966902f0fc506d36ddef758c4a31b0f03`). O sticky editorial/contexto ficou em produção com a direção visual aprovada; o pequeno diferencial residual de blur entre header e contexto foi aceite como melhoria futura não bloqueante.
+
+A PR #40, que continha uma abordagem anterior de transformação/escala do título já rejeitada pela direção visual atual, foi fechada sem merge por estar supersedida.
+
+A implementação de engagement persistente encontra-se em main: `_worker.js` contém a rota de article-like e `migrations/0001_article_likes.sql` define a persistência D1. Não existe, portanto, uma frente técnica pendente de likes antes da próxima fase.
+
+**Transição:** FASE 2 encerrada para esta frente e FASE 3 iniciada.
+
+### Fase 3 — primeira ação
+Foi feita pesquisa atual de fornecedores. API-Football apresenta Free a $0 com 100 requests/dia e cobertura de Primeira Liga/Taça da Liga; football-data.org apresenta Free a €0 com 12 competições, incluindo Primeira Liga e Champions League, mas com dados atrasados no plano gratuito e exigência de atribuição. Nenhum foi aprovado ainda.
+
+**Próxima ação autónoma:** construir matriz de fornecedor/cobertura/limites/frescura/licença/custo para as sete competições previstas e escolher o fornecedor/adaptador principal antes de qualquer implementação.
