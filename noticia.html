@@ -1202,24 +1202,44 @@
     function configurarScrollEditorial() {
       const siteHeader = document.querySelector('.site-header');
       const articleHeading = document.querySelector('.article-heading');
-      if (!siteHeader || !articleHeading) return;
+      const container = document.getElementById('article-content');
+      if (!siteHeader || !articleHeading || !container) return;
 
       const root = document.documentElement;
       let ticking = false;
+      let contextBar = document.querySelector('.article-context-sticky');
+
+      if (!contextBar) {
+        contextBar = document.createElement('div');
+        contextBar.className = 'article-context-sticky';
+        contextBar.setAttribute('aria-hidden', 'true');
+        contextBar.innerHTML = `
+          <div class="article-context-sticky-inner">
+            <span class="context-category"></span>
+            <span class="context-divider" aria-hidden="true"></span>
+            <span class="context-title"></span>
+          </div>`;
+        document.body.appendChild(contextBar);
+      }
+
+      const category = contextBar.querySelector('.context-category');
+      const title = contextBar.querySelector('.context-title');
+      const categorySource = articleHeading.querySelector('.tag');
+      const titleSource = articleHeading.querySelector('h1');
+      if (category) category.textContent = categorySource?.textContent || 'ARTIGO';
+      if (title) title.textContent = titleSource?.textContent || '';
 
       const atualizar = () => {
-        const headerProgress = Math.min(1, Math.max(0, window.scrollY / 220));
-        const articleProgressRaw = Math.min(1, Math.max(0, (window.scrollY - 24) / 520));
-        const articleProgress = articleProgressRaw * articleProgressRaw * (3 - (2 * articleProgressRaw));
         const headerHeight = Math.max(48, siteHeader.getBoundingClientRect().height);
-        const backLink = document.getElementById('back-to-section');
+        const headingBottom = articleHeading.getBoundingClientRect().bottom;
+        const visible = headingBottom <= headerHeight + 18;
 
         root.style.setProperty('--site-header-height', headerHeight + 'px');
-        root.style.setProperty('--article-progress', articleProgress.toFixed(3));
-        siteHeader.style.setProperty('--header-progress', headerProgress.toFixed(3));
-        articleHeading.style.setProperty('--article-progress', articleProgress.toFixed(3));
-        articleHeading.style.setProperty('--article-visual-progress', articleProgress.toFixed(3));
-        if (backLink) backLink.style.setProperty('--article-progress', articleProgress.toFixed(3));
+        siteHeader.style.setProperty('--header-progress',
+          Math.min(1, Math.max(0, window.scrollY / 220)).toFixed(3)
+        );
+        contextBar.classList.toggle('is-visible', visible);
+        contextBar.setAttribute('aria-hidden', String(!visible));
         ticking = false;
       };
 
