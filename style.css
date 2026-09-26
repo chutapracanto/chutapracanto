@@ -591,7 +591,7 @@ footer {
 
 .article-back-link {
   display: inline-block;
-  margin-bottom: 1rem;
+  margin-bottom: .35rem;
   font-size: .68rem;
   line-height: 1.2;
   transform: translateY(calc(var(--article-progress, 0) * -10px));
@@ -608,10 +608,17 @@ footer {
   min-height: 88px;
   height: max(88px, calc(var(--article-heading-natural-height, 210px) * var(--article-heading-scale)));
   overflow: hidden;
-  background: rgba(8, 8, 8, calc(.96 - (var(--article-progress) * .88)));
-  border-top-color: rgba(57, 255, 20, calc(.08 - (var(--article-progress) * .07)));
-  border-bottom-color: rgba(57, 255, 20, calc(.14 - (var(--article-progress) * .12)));
-  padding: 1.05rem 0 .95rem;
+  background: linear-gradient(
+    to bottom,
+    rgba(8, 8, 8, .99) 0%,
+    rgba(8, 8, 8, .95) 30%,
+    rgba(8, 8, 8, .78) 62%,
+    rgba(8, 8, 8, .28) 86%,
+    rgba(8, 8, 8, .04) 100%
+  );
+  border-top-color: rgba(57, 255, 20, calc(.08 - (var(--article-progress) * .03)));
+  border-bottom-color: rgba(57, 255, 20, calc(.14 - (var(--article-progress) * .08)));
+  padding: .45rem 0 .65rem;
   backdrop-filter: blur(calc(12px * (1 - var(--article-progress))));
   transition: background-color .08s linear, border-color .08s linear, height .08s linear;
 }
@@ -625,17 +632,20 @@ footer {
 }
 
 .article-heading h1 {
-  margin: .6rem 0;
+  margin: .45rem 0;
   font-size: 2.6rem;
   line-height: 1.2;
   white-space: normal;
+  text-align: center;
   opacity: 1;
 }
 
 .article-summary {
   font-size: 1.1rem;
   line-height: 1.55;
-  margin-bottom: .35rem;
+  margin: 0 auto .3rem;
+  max-width: 100%;
+  text-align: center;
   max-height: none;
   overflow: visible;
   opacity: 1;
@@ -647,17 +657,18 @@ footer {
   margin: 0 .55rem .15rem 0;
   font-size: .62rem;
   line-height: 1.1;
-  color: rgba(255,255,255,.58);
+  color: rgba(255,255,255,.5);
   opacity: 1;
 }
 
 .article-heading > .article-heading-visual > .tag + .tag {
-  margin-left: .15rem;
+  margin-left: .25rem;
   color: rgba(255,255,255,.42);
 }
 
 .article-heading .article-byline {
   opacity: calc(1 - (var(--article-progress) * 1.15));
+  text-align: center;
   transition: opacity .08s linear;
 }
 
@@ -665,7 +676,7 @@ footer {
   .article-heading {
     min-height: 76px;
     height: max(76px, calc(var(--article-heading-natural-height, 170px) * var(--article-heading-scale)));
-    padding: .8rem 0 .75rem;
+    padding: .35rem 0 .55rem;
     --article-heading-scale: calc(1 - (var(--article-progress) * .58));
   }
 
@@ -679,7 +690,7 @@ footer {
 
   .article-heading > .article-heading-visual > .tag {
     font-size: .55rem;
-    margin-right: .4rem;
+    margin-right: .35rem;
   }
 }
 
