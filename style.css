@@ -794,7 +794,6 @@ footer {
 
 /* PR41 alternative: contextual article title lives inside the existing header. */
 .article-page-header .site-header { position:sticky; overflow:clip; }
-.article-page-header .article-context-sticky { display:none !important; }
 .article-page-header .article-header-context {
   min-width:0; flex:1 1 auto; display:flex; align-items:center; justify-content:center; gap:.65rem;
   opacity:0; visibility:hidden; transform:translateY(4px); pointer-events:none;
