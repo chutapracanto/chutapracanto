@@ -601,7 +601,7 @@ footer {
 
 .article-heading {
   --article-progress: 0;
-  --article-heading-scale: calc(1 - (var(--article-progress) * .62));
+  --article-heading-scale: calc(1 - (var(--article-progress) * .88));
   position: sticky;
   top: var(--site-header-height, 0px);
   z-index: 900;
@@ -625,7 +625,7 @@ footer {
 
 .article-heading-visual {
   width: 100%;
-  transform-origin: top left;
+  transform-origin: top center;
   transform: scale(var(--article-heading-scale));
   transition: transform .08s linear;
   will-change: transform;
@@ -677,7 +677,7 @@ footer {
     min-height: 76px;
     height: max(76px, calc(var(--article-heading-natural-height, 170px) * var(--article-heading-scale)));
     padding: .35rem 0 .55rem;
-    --article-heading-scale: calc(1 - (var(--article-progress) * .58));
+    --article-heading-scale: calc(1 - (var(--article-progress) * .86));
   }
 
   .article-heading h1 {
