@@ -795,7 +795,7 @@ footer {
 }
 
 /* PR41 alternative: contextual article title lives inside the existing header. */
-.article-page-header header { border-bottom-color: transparent; }
+.article-page-header header { border-bottom-color: transparent; box-shadow:none; }
 .article-page-header .site-header { position:sticky; overflow:clip; }
 .article-page-header .article-header-context {
   min-width:0; flex:1 1 auto; display:flex; align-items:center; justify-content:center; gap:.65rem;
@@ -848,7 +848,7 @@ footer {
   border-bottom:1px solid rgba(26,35,50,calc(.92 - (var(--header-progress,0) * .58)));
   backdrop-filter:blur(4px);
   -webkit-backdrop-filter:blur(4px);
-  box-shadow:0 4px 18px rgba(0,0,0,.14);
+  box-shadow:none;
   opacity:0;
   visibility:hidden;
   transform:translateY(-100%);
