@@ -828,3 +828,80 @@ footer {
   .article-page-header .article-header-context-title { max-width:62vw; font-size:.72rem; }
   .article-page-header .site-header.is-article-context nav { display:none; }
 }
+
+/* PR41 final visual direction: contextual title bar keeps the real header visible.
+   Its surface deliberately mirrors the header's transparency/blur formula. */
+.article-page-header .article-header-context { display:none !important; }
+.article-page-header .site-header.is-article-context nav { opacity:1; visibility:visible; pointer-events:auto; transform:none; position:static; width:auto; height:auto; overflow:visible; }
+.article-page-header .site-header::after { display:none; }
+
+.article-context-sticky {
+  position:fixed;
+  top:var(--site-header-height,72px);
+  left:0;
+  right:0;
+  z-index:899;
+  min-height:52px;
+  background:rgba(8,11,17,calc(.96 - (var(--header-progress,0) * .78)));
+  border-bottom:1px solid rgba(26,35,50,calc(.92 - (var(--header-progress,0) * .58)));
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+  box-shadow:0 4px 18px rgba(0,0,0,.14);
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-100%);
+  transition:opacity .22s ease,transform .28s cubic-bezier(.22,1,.36,1),visibility 0s linear .28s;
+  overflow:hidden;
+}
+.article-context-sticky.is-visible {
+  opacity:1;
+  visibility:visible;
+  transform:translateY(0);
+  transition-delay:0s;
+}
+.article-context-sticky-inner {
+  width:min(1200px,calc(100% - 3rem));
+  min-height:52px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  gap:.7rem;
+}
+.article-context-sticky .context-category {
+  flex:0 0 auto;
+  color:rgba(57,255,20,.74);
+  font:700 .55rem/1 var(--font-title);
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+.article-context-sticky .context-divider {
+  flex:0 0 auto;
+  width:1px;
+  height:14px;
+  background:rgba(255,255,255,.15);
+}
+.article-context-sticky .context-title {
+  min-width:0;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  color:rgba(255,255,255,.9);
+  font:600 .8rem/1.2 var(--font-body);
+  letter-spacing:-.01em;
+}
+.article-context-sticky::after {
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:calc(var(--article-reading-progress,0) * 100%);
+  height:1px;
+  background:rgba(57,255,20,.6);
+  transform-origin:left center;
+  pointer-events:none;
+}
+@media (max-width:768px) {
+  .article-context-sticky { min-height:44px; }
+  .article-context-sticky-inner { min-height:44px; width:calc(100% - 1.5rem); gap:.5rem; }
+  .article-context-sticky .context-title { font-size:.72rem; }
+}
