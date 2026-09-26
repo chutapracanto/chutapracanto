@@ -861,7 +861,7 @@ footer {
   transition-delay:0s;
 }
  .article-context-sticky-inner {
-  width:min(800px,calc(100% - 2rem));
+  width:min(768px,calc(100% - 2rem));
   min-height:52px;
   margin:0 auto;
   display:flex;
