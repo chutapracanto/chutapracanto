@@ -608,8 +608,10 @@ footer {
   overflow:visible;
   padding:.15rem 0 1.25rem;
   background:rgba(8,11,17,calc(.96 - (var(--header-progress,0) * .78)));
-  border-top-color:rgba(57,255,20,.06);
-  border-bottom-color:rgba(57,255,20,.10);
+  border-bottom:1px solid rgba(26,35,50,calc(.92 - (var(--header-progress,0) * .58)));
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+  box-shadow:0 4px 18px rgba(0,0,0,.14);
 }
 
 .article-heading-visual { width:100%; transform:none; transition:none; will-change:auto; }
@@ -684,7 +686,7 @@ footer {
 }
 
 .article-context-sticky-inner {
-  width:min(1200px,calc(100% - 2rem));
+  width:min(800px,calc(100% - 2rem));
   margin:0 auto;
   min-height:52px;
   display:flex;
