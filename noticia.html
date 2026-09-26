@@ -1201,29 +1201,29 @@
 
     function configurarScrollEditorial() {
       const siteHeader = document.querySelector('.site-header');
-      const headerContainer = siteHeader?.querySelector('.header-container');
-      const nav = siteHeader?.querySelector('nav');
       const articleHeading = document.querySelector('.article-heading');
       const container = document.getElementById('article-content');
-      if (!siteHeader || !headerContainer || !nav || !articleHeading || !container) return;
+      if (!siteHeader || !articleHeading || !container) return;
 
       const root = document.documentElement;
       let ticking = false;
-      let context = siteHeader.querySelector('.article-header-context');
+      let contextBar = document.querySelector('.article-context-sticky');
 
-      if (!context) {
-        context = document.createElement('div');
-        context.className = 'article-header-context';
-        context.setAttribute('aria-hidden', 'true');
-        context.innerHTML = `
-          <span class="article-header-context-category"></span>
-          <span class="article-header-context-divider" aria-hidden="true"></span>
-          <span class="article-header-context-title"></span>`;
-        headerContainer.insertBefore(context, nav);
+      if (!contextBar) {
+        contextBar = document.createElement('div');
+        contextBar.className = 'article-context-sticky';
+        contextBar.setAttribute('aria-hidden', 'true');
+        contextBar.innerHTML = `
+          <div class="article-context-sticky-inner">
+            <span class="context-category"></span>
+            <span class="context-divider" aria-hidden="true"></span>
+            <span class="context-title"></span>
+          </div>`;
+        document.body.appendChild(contextBar);
       }
 
-      const category = context.querySelector('.article-header-context-category');
-      const title = context.querySelector('.article-header-context-title');
+      const category = contextBar.querySelector('.context-category');
+      const title = contextBar.querySelector('.context-title');
       const categorySource = articleHeading.querySelector('.tag');
       const titleSource = articleHeading.querySelector('h1');
       if (category) category.textContent = categorySource?.textContent || 'ARTIGO';
@@ -1233,10 +1233,9 @@
         const headerHeight = Math.max(48, siteHeader.getBoundingClientRect().height);
         const headingRect = articleHeading.getBoundingClientRect();
         const documentTop = window.scrollY + headingRect.top;
-        const articleBottom = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
-        const progressStart = documentTop;
-        const progressEnd = Math.max(progressStart + 1, articleBottom - window.innerHeight);
-        const readingProgress = Math.min(1, Math.max(0, (window.scrollY - progressStart) / (progressEnd - progressStart)));
+        const pageBottom = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+        const progressEnd = Math.max(documentTop + 1, pageBottom - window.innerHeight);
+        const readingProgress = Math.min(1, Math.max(0, (window.scrollY - documentTop) / (progressEnd - documentTop)));
         const visible = headingRect.bottom <= headerHeight + 10;
 
         root.style.setProperty('--site-header-height', headerHeight + 'px');
@@ -1244,8 +1243,8 @@
         siteHeader.style.setProperty('--header-progress',
           Math.min(1, Math.max(0, window.scrollY / 220)).toFixed(3)
         );
-        siteHeader.classList.toggle('is-article-context', visible);
-        context.setAttribute('aria-hidden', String(!visible));
+        contextBar.classList.toggle('is-visible', visible);
+        contextBar.setAttribute('aria-hidden', String(!visible));
         ticking = false;
       };
 
