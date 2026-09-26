@@ -465,7 +465,7 @@ Antes de fazer trabalho no CPC:
 11. Atualizar documentação.
 12. Só depois responder.
 
-**Estado operacional neste momento: FASE 2 — SISTEMA EDITORIAL/PUBLICAÇÃO PRÓPRIA / UX DE NOTÍCIAS.**
+**Estado operacional neste momento: FASE 3 — DADOS DE FUTEBOL E API DE COMPETIÇÕES / seleção e validação do fornecedor.**
 
 FIM.
 
@@ -692,3 +692,19 @@ A frente de implementação está concluída no GitHub na PR #38, mas **não dev
 A única ação pendente que não é executável integralmente pelo GitHub é a validação browser/Cloudflare do Preview. Depois dessa validação, o fluxo é: PASS → merge #36 → validar deployment → confirmar `main`/produção → fechar Fase 2 UX/engagement.
 
 **Não reabrir #33/#34 nem recomeçar D1/like. Não voltar ao Framer antes de resolver a dependência do host antigo.**
+
+
+## 25. TRANSIÇÃO PARA FASE 3 — 2026-09-26
+
+A frente UX/editorial do artigo foi fechada operacionalmente com o merge da PR #42 (e4dc204966902f0fc506d36ddef758c4a31b0f03) em main. O pequeno diferencial visual de blur entre header e contexto sticky fica registado como melhoria futura não bloqueante.
+
+A implementação de engagement persistente já está presente em main, incluindo a rota de API de reação e a migração D1, pelo que não constitui uma frente aberta antes da Fase 3.
+
+### Fase 3 iniciada — ação autónoma executada
+Foi iniciada a pesquisa atual de fornecedores de dados de futebol. Evidência atual:
+- API-Football: plano Free de $0, 100 requests/dia, acesso aos endpoints e competições; a cobertura publicada em 2026-09-24 inclui Primeira Liga e Taça da Liga. A disponibilidade varia por competição/época e deve ser validada por coverage antes de cada integração.
+- football-data.org: plano Free €0, 12 competições, fixtures, resultados/tabelas com dados atrasados e 10 chamadas/minuto; a cobertura gratuita inclui Champions League e Primeira Liga. O serviço exige registo/token e pede atribuição visível; o uso comercial e direitos sobre assets/dados devem ser tratados conforme os termos.
+
+Nenhum fornecedor está ainda aprovado. A decisão final deve comparar cobertura de todas as competições prioritárias do CPC, frescura necessária, limites, termos/licença, estabilidade e custo. A próxima operação técnica é concluir essa matriz e escolher a fonte principal/adaptador antes de criar endpoints, secrets ou bindings.
+
+**Estado:** FASE 3 — seleção/validação de fornecedor em curso; sem implementação de API ainda.
