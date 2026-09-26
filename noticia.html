@@ -60,7 +60,7 @@
     .article-breadcrumbs a { color: var(--text-gray); }
     .article-heading {
       width: auto;
-      padding: 1.05rem 0 .95rem;
+      padding: .45rem 0 .65rem;
       border-top: 1px solid rgba(57, 255, 20, .08);
       border-bottom: 1px solid rgba(57, 255, 20, .14);
     }
@@ -69,7 +69,7 @@
       font-family: var(--font-title);
       line-height: 1.2;
       margin: .6rem 0;
-      font-size: calc(2.6rem - (var(--article-progress) * 1.45rem));
+      font-size: 2.6rem;
     }
     .article-summary {
       color: var(--text-gray);
@@ -105,20 +105,6 @@
       transition: width .2s ease, background-color .2s ease, border-color .2s ease, transform .2s ease;
       overflow: hidden;
     }
-    .like-button {
-      width: 42px;
-      height: 42px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid rgba(255, 255, 255, .22);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, .04);
-      color: #fff;
-      cursor: pointer;
-      font: 700 .8rem var(--font-body);
-      transition: width .2s ease, background-color .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
-    }
     .like-button:hover,
     .like-button:focus-visible {
       border-color: rgba(57, 255, 20, .7);
@@ -131,8 +117,21 @@
       background: rgba(57, 255, 20, .14);
       color: var(--neon-green);
     }
-    .like-button .like-button-label {
-      margin-left: .4rem;
+    .like-button:disabled {
+      cursor: wait;
+      opacity: .65;
+      transform: none;
+    }
+    .like-status {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
     .share-button-label {
       max-width: 0;
@@ -274,11 +273,11 @@
 
     @media (max-width: 768px) {
       .article-heading {
-        padding-top: .8rem;
-        padding-bottom: .75rem;
+        padding-top: .35rem;
+        padding-bottom: .55rem;
       }
       .article-heading h1 {
-        font-size: calc(1.9rem - (var(--article-progress) * .78rem));
+        font-size: 1.9rem;
       }
       .article-summary {
         font-size: 1rem;
@@ -287,9 +286,6 @@
       .share-button {
         width: 40px;
         height: 40px;
-      }
-      .like-button .like-button-label {
-        display: none;
       }
       .share-button:hover,
       .share-button:focus-visible,
@@ -373,9 +369,9 @@
   </div>
 </header>
 
-  <div class="container" style="max-width: 800px; margin-top: 2rem; margin-bottom: 4rem;">
+  <div class="container" style="max-width: 800px; margin-top: .5rem; margin-bottom: 4rem;">
 
-    <a id="back-to-section" href="/noticias" class="see-more" style="display: inline-block; margin-bottom: 2rem;">← VOLTAR ÀS NOTÍCIAS</a>
+    <a id="back-to-section" href="/noticias" class="see-more article-back-link">← VOLTAR ÀS NOTÍCIAS</a>
 
     <div id="article-content">
 
@@ -387,8 +383,10 @@
 
       <button class="like-button" id="like-trigger" type="button" aria-pressed="false" aria-label="Gostar desta notícia" title="Gostar desta notícia">
         <i class="fa-regular fa-heart" aria-hidden="true"></i>
-        <span class="like-button-label">Gostar</span>
+        
       </button>
+
+      <span class="like-status" id="like-status" role="status" aria-live="polite"></span>
 
       <button class="share-button" id="share-trigger" type="button" aria-expanded="false" aria-controls="share-menu" aria-label="Partilhar esta notícia" title="Partilhar esta notícia">
         <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
@@ -782,39 +780,6 @@
         document.getElementById('twitter-url').content = currentShareUrl;
         document.getElementById('canonical-url').href = canonical;
 
-        let breadcrumb = container.querySelector('.article-breadcrumbs');
-        if (!breadcrumb) {
-          breadcrumb = document.createElement('nav');
-          breadcrumb.className = 'article-breadcrumbs';
-          breadcrumb.setAttribute('aria-label', 'Breadcrumb');
-          const crumbList = document.createElement('ol');
-          [['Home','/'],[sectionLabel,sectionPath]].forEach(([label, href]) => {
-            const li = document.createElement('li');
-            const link = document.createElement('a');
-            link.href = href;
-            link.textContent = label;
-            li.appendChild(link);
-            crumbList.appendChild(li);
-          });
-          const current = document.createElement('li');
-          current.textContent = title;
-          current.setAttribute('aria-current', 'page');
-          crumbList.appendChild(current);
-          breadcrumb.appendChild(crumbList);
-          container.insertBefore(breadcrumb, previewHeader);
-        } else {
-          const breadcrumbLinks = breadcrumb.querySelectorAll('a');
-          if (breadcrumbLinks[0]) {
-            breadcrumbLinks[0].href = '/';
-            breadcrumbLinks[0].textContent = 'Home';
-          }
-          if (breadcrumbLinks[1]) {
-            breadcrumbLinks[1].href = sectionPath;
-            breadcrumbLinks[1].textContent = sectionLabel;
-          }
-          const current = breadcrumb.querySelector('li[aria-current="page"]');
-          if (current) current.textContent = title;
-        }
         previewCategoryTag.textContent = category.toUpperCase();
         previewEditorialTag.textContent = editorialTypeLabel;
         previewH1.textContent = title;
@@ -845,6 +810,16 @@
         } else {
           previewByline?.remove();
         }
+        const headingVisual = previewHeader.querySelector('.article-heading-visual') || document.createElement('div');
+        headingVisual.className = 'article-heading-visual';
+        [previewCategoryTag, previewEditorialTag, previewH1, previewSummary, previewByline]
+          .filter(Boolean)
+          .forEach(element => {
+            if (element.parentElement !== headingVisual) headingVisual.appendChild(element);
+          });
+        if (!headingVisual.parentElement) previewHeader.appendChild(headingVisual);
+        previewHeader.style.setProperty('--article-heading-natural-height', previewHeader.scrollHeight + 'px');
+
         if (imageValue) {
           let figure = container.querySelector('.article-hero-image');
           if (!figure) {
@@ -1040,20 +1015,56 @@
 
     }
 
-    function configurarGosto(articleSlug) {
-      const trigger = document.getElementById('like-trigger');
-      if (!trigger || !articleSlug) return;
-
-      const storageKey = 'cpc:article-like:' + articleSlug;
-      let liked = false;
+    function obterIdentificadorAnonimoVisitante() {
+      const storageKey = 'cpc:article-visitor:v1';
+      let visitorId = '';
       try {
-        liked = localStorage.getItem(storageKey) === '1';
+        visitorId = localStorage.getItem(storageKey) || '';
       } catch (error) {}
 
+      if (!visitorId && globalThis.crypto && typeof globalThis.crypto.randomUUID === 'function') {
+        visitorId = globalThis.crypto.randomUUID();
+      } else if (!visitorId && globalThis.crypto && typeof globalThis.crypto.getRandomValues === 'function') {
+        const bytes = globalThis.crypto.getRandomValues(new Uint8Array(16));
+        bytes[6] = (bytes[6] & 15) | 64;
+        bytes[8] = (bytes[8] & 63) | 128;
+        const hex = Array.from(bytes, byte => byte.toString(16).padStart(2, '0')).join('');
+        visitorId = [hex.slice(0, 8), hex.slice(8, 12), hex.slice(12, 16), hex.slice(16, 20), hex.slice(20)].join('-');
+      }
+
+      if (visitorId) {
+        try {
+          localStorage.setItem(storageKey, visitorId);
+        } catch (error) {}
+      }
+      return visitorId;
+    }
+
+
+    function configurarGosto(articleSlug) {
+      const trigger = document.getElementById('like-trigger');
+      const status = document.getElementById('like-status');
+      if (!trigger || !articleSlug) return;
+
+      const visitorId = obterIdentificadorAnonimoVisitante();
+      let liked = false;
+      let busy = false;
+
+      try {
+        localStorage.removeItem('cpc:article-like:' + articleSlug);
+      } catch (error) {}
+
+      if (!visitorId && status) {
+        status.textContent = 'Gosto indisponível neste navegador.';
+      }
+
       const atualizar = () => {
+        const label = liked ? 'Retirar gosto deste artigo' : 'Gostar deste artigo';
         trigger.setAttribute('aria-pressed', String(liked));
-        trigger.setAttribute('aria-label', liked ? 'Retirar gosto desta notícia' : 'Gostar desta notícia');
-        trigger.title = liked ? 'Retirar gosto desta notícia' : 'Gostar desta notícia';
+        trigger.setAttribute('aria-label', label);
+        trigger.setAttribute('aria-busy', String(busy));
+        trigger.title = label;
+        trigger.disabled = busy || !visitorId;
         const icon = trigger.querySelector('i');
         if (icon) {
           icon.classList.toggle('fa-solid', liked);
@@ -1061,27 +1072,58 @@
         }
       };
 
-      trigger.addEventListener('click', () => {
-        liked = !liked;
-        try {
-          localStorage.setItem(storageKey, liked ? '1' : '0');
-        } catch (error) {}
+      const enviar = async (action) => {
+        if (busy || !visitorId) return;
+        busy = true;
         atualizar();
+        if (status) status.textContent = '';
 
-        const eventData = {
-          content_type: 'article',
-          item_id: articleSlug,
-          value: liked ? 1 : 0
-        };
-        if (typeof window.gtag === 'function') {
-          window.gtag('event', liked ? 'article_like' : 'article_unlike', eventData);
-        } else if (Array.isArray(window.dataLayer)) {
-          window.dataLayer.push({ event: liked ? 'article_like' : 'article_unlike', ...eventData });
+        try {
+          const response = await fetch('/api/article-like', {
+            method: 'POST',
+            credentials: 'same-origin',
+            cache: 'no-store',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action, slug: articleSlug, visitorId })
+          });
+          const data = await response.json().catch(() => ({}));
+          if (!response.ok || !data.ok) {
+            throw new Error(data.message || 'Gosto temporariamente indisponível.');
+          }
+
+          liked = Boolean(data.liked);
+          if (action !== 'status' && status) {
+            status.textContent = action === 'like'
+              ? (data.created ? 'Gosto registado.' : 'Já tinhas gostado deste artigo.')
+              : (data.removed ? 'Gosto removido.' : 'Este artigo já não tinha gosto.');
+          }
+          if ((action === 'like' && data.created) || (action === 'unlike' && data.removed)) {
+            const eventData = { content_type: 'article', item_id: articleSlug, value: action === 'like' ? 1 : 0 };
+            if (typeof window.gtag === 'function') {
+              window.gtag('event', action === 'like' ? 'article_like' : 'article_unlike', eventData);
+            } else if (Array.isArray(window.dataLayer)) {
+              window.dataLayer.push({ event: action === 'like' ? 'article_like' : 'article_unlike', ...eventData });
+            }
+          }
+        } catch (error) {
+          if (status) {
+            status.textContent = action === 'like'
+              ? 'Não foi possível registar o gosto. Tenta novamente.'
+              : action === 'unlike' ? 'Não foi possível remover o gosto. Tenta novamente.' : 'Não foi possível verificar o gosto neste momento.';
+          }
+        } finally {
+          busy = false;
+          atualizar();
         }
-      });
+      };
 
+      trigger.addEventListener('click', () => {
+        void enviar(liked ? 'unlike' : 'like');
+      });
       atualizar();
+      void enviar('status');
     }
+
 
     function registarPartilha(plataforma) {
       if (typeof window.gtag === 'function') {
@@ -1160,19 +1202,52 @@
     function configurarScrollEditorial() {
       const siteHeader = document.querySelector('.site-header');
       const articleHeading = document.querySelector('.article-heading');
-      if (!siteHeader || !articleHeading) return;
+      const container = document.getElementById('article-content');
+      if (!siteHeader || !articleHeading || !container) return;
 
       const root = document.documentElement;
       let ticking = false;
+      let contextBar = document.querySelector('.article-context-sticky');
+
+      if (!contextBar) {
+        contextBar = document.createElement('div');
+        contextBar.className = 'article-context-sticky';
+        contextBar.setAttribute('aria-hidden', 'true');
+        contextBar.innerHTML = `
+          <div class="article-context-sticky-inner">
+            <span class="context-category"></span>
+            <span class="context-divider" aria-hidden="true"></span>
+            <span class="context-title"></span>
+          </div>`;
+        document.body.appendChild(contextBar);
+      }
+
+      const category = contextBar.querySelector('.context-category');
+      const title = contextBar.querySelector('.context-title');
+      const categorySource = articleHeading.querySelector('.tag');
+      const titleSource = articleHeading.querySelector('h1');
+      if (category) category.textContent = categorySource?.textContent || 'ARTIGO';
+      if (title) title.textContent = titleSource?.textContent || '';
 
       const atualizar = () => {
-        const headerProgress = Math.min(1, Math.max(0, window.scrollY / 220));
-        const articleProgress = Math.min(1, Math.max(0, (window.scrollY - 24) / 320));
         const headerHeight = Math.max(48, siteHeader.getBoundingClientRect().height);
+        const headingRect = articleHeading.getBoundingClientRect();
+        const documentTop = window.scrollY + headingRect.top;
+        const pageBottom = Math.max(document.body.scrollHeight, document.documentElement.scrollHeight);
+        const progressEnd = Math.max(documentTop + 1, pageBottom - window.innerHeight);
+        const readingProgress = Math.min(1, Math.max(0, (window.scrollY - documentTop) / (progressEnd - documentTop)));
+        const visible = headingRect.bottom <= headerHeight + 10;
 
         root.style.setProperty('--site-header-height', headerHeight + 'px');
-        siteHeader.style.setProperty('--header-progress', headerProgress.toFixed(3));
-        articleHeading.style.setProperty('--article-progress', articleProgress.toFixed(3));
+        root.style.setProperty('--article-reading-progress', readingProgress.toFixed(3));
+        root.style.setProperty('--header-progress',
+          Math.min(1, Math.max(0, window.scrollY / 220)).toFixed(3)
+        );
+        siteHeader.style.setProperty('--header-progress',
+          Math.min(1, Math.max(0, window.scrollY / 220)).toFixed(3)
+        );
+        contextBar.classList.toggle('is-visible', visible);
+        contextBar.setAttribute('aria-hidden', String(!visible));
         ticking = false;
       };
 
@@ -1183,8 +1258,8 @@
         }
       };
 
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', atualizar, { passive: true });
+      window.addEventListener('scroll', onScroll, { passive:true });
+      window.addEventListener('resize', atualizar, { passive:true });
       atualizar();
     }
 
