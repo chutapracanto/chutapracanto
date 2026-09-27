@@ -2844,6 +2844,11 @@ export default {
       new URL(request.url);
 
     try {
+      if (url.pathname === "/api/competicoes") {
+        const footballResponse = await handleFootballCompetitionAPI(request, env);
+        if (footballResponse) return footballResponse;
+      }
+
       if (
         url.pathname === "/api/article-like") {
         return handleArticleLikeAPI(request, env);
