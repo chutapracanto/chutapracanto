@@ -1934,6 +1934,110 @@ async function handleAdminAPI(request, env) {
 
 
   // ----------------------------------------------------------
+  // DIAGNÓSTICO TEMPORÁRIO BSD — RUNTIME PRODUCTION
+  // ----------------------------------------------------------
+
+  if (pathname === "/api/admin/football-provider-bsd-runtime-diagnostic") {
+    if (
+      env.CF_PAGES_BRANCH !== "main" ||
+      !["chutapracanto.com", "chutapracanto.pages.dev"].includes(url.hostname)
+    ) {
+      return json({ error: "Endpoint não encontrado." }, 404);
+    }
+
+    if (request.method !== "POST") {
+      return json({ error: "Método não permitido." }, 405, { Allow: "POST" });
+    }
+
+    const authError = await requireAuth(request, env);
+    if (authError) return authError;
+
+    if (request.headers.get("Origin") !== url.origin) {
+      return json({ error: "Origem não permitida." }, 403);
+    }
+
+    const apiKey = env.BSD_API_KEY;
+    if (typeof apiKey !== "string" || !apiKey.trim()) {
+      return json({
+        provider: "Bzzoiro Sports Data",
+        seasonTested: "2026/27",
+        requestCount: 0,
+        secretConfigured: false,
+        error: "BSD_API_KEY indisponível em Production."
+      }, 503);
+    }
+
+    const probes = [
+      {
+        name: "primeiraLigaEvents",
+        endpoint: "https://sports.bzzoiro.com/api/v2/events/?league_id=2&season_id=1310&stage=regular-season"
+      },
+      {
+        name: "primeiraLigaStandings",
+        endpoint: "https://sports.bzzoiro.com/api/v2/leagues/2/standings/?season_id=1310"
+      }
+    ];
+
+    async function probe(item) {
+      const startedAt = Date.now();
+      try {
+        const response = await fetch(item.endpoint, {
+          method: "GET",
+          headers: {
+            "Authorization": `Token ${apiKey.trim()}`,
+            "Accept": "application/json"
+          },
+          signal: AbortSignal.timeout(10000)
+        });
+
+        const text = await response.text();
+        let parsed = null;
+        let jsonValid = false;
+        try {
+          parsed = JSON.parse(text);
+          jsonValid = true;
+        } catch {}
+
+        return {
+          name: item.name,
+          httpStatus: response.status,
+          ok: response.ok,
+          elapsedMs: Date.now() - startedAt,
+          jsonValid,
+          topLevelKeys: parsed && typeof parsed === "object" && !Array.isArray(parsed)
+            ? Object.keys(parsed).slice(0, 20)
+            : [],
+          resultCount: Array.isArray(parsed?.results) ? parsed.results.length : null,
+          standingsCount: Array.isArray(parsed?.standings) ? parsed.standings.length : null,
+          error: response.ok ? null : `BSD HTTP ${response.status}`
+        };
+      } catch (error) {
+        return {
+          name: item.name,
+          httpStatus: null,
+          ok: false,
+          elapsedMs: Date.now() - startedAt,
+          jsonValid: false,
+          topLevelKeys: [],
+          resultCount: null,
+          standingsCount: null,
+          error: error instanceof Error ? error.message : "Erro de rede/execução."
+        };
+      }
+    }
+
+    const results = await Promise.all(probes.map(probe));
+
+    return json({
+      provider: "Bzzoiro Sports Data",
+      seasonTested: "2026/27",
+      requestCount: probes.length,
+      secretConfigured: true,
+      probes: results
+    });
+  }
+
+  // ----------------------------------------------------------
   // DIAGNÓSTICO TEMPORÁRIO BSD — DADOS OPERACIONAIS
   // ----------------------------------------------------------
 
