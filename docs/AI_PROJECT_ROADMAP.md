@@ -465,7 +465,7 @@ Antes de fazer trabalho no CPC:
 11. Atualizar documentação.
 12. Só depois responder.
 
-**Estado operacional neste momento: FASE 3 — DADOS DE FUTEBOL E API DE COMPETIÇÕES / seleção e validação do fornecedor.**
+**Estado operacional neste momento: FASE 3 — integração BSD em validação/correção de runtime.** O fornecedor BSD está tecnicamente validado; a produção ainda não tem PASS do endpoint `/api/competicoes`.
 
 FIM.
 
@@ -761,3 +761,53 @@ O gate de aprovação passa a exigir:
 7. decisão separada sobre live/events, que podem tornar o Free inadequado.
 
 **Estado:** API-Football continua candidato principal, não aprovado. A próxima dependência externa é a API key configurada diretamente como Cloudflare Pages Secret; depois disso, executar testes autenticados e continuar a medição sem pedir a chave no chat.
+
+
+## 26. AUDITORIA GLOBAL DE ESTADO — 2026-09-28
+
+Foi feita uma reconciliação do estado do projeto contra o GitHub atual, o ledger de decisão de fornecedor, a matriz de fornecedores, a arquitetura de competições e o histórico recente de commits.
+
+### Confirmado como bom / concluído
+- Repositório de verdade: `chutapracanto/chutapracanto`, branch `main`.
+- Redirecionamentos Framer → domínio oficial: **ENCERRADOS e validados** com URL real antiga.
+- Mapa de 213 redirects Framer criado e integrado no Worker.
+- Fase editorial/histórica já reconciliada nos lotes documentados; não reabrir sem nova evidência.
+- BSD: cobertura 2026/27 confirmada nas **7 competições**.
+- BSD: fixtures/events e standings reais da Primeira Liga confirmados.
+- BSD Production: `BSD_API_KEY` presente e funcional; chamadas diretas ao fornecedor responderam HTTP 200.
+- Arquitetura provider-agnostic e adapter server-side estão implementados.
+- Token BSD permanece server-side.
+- Consumo BSD acumulado registado: **14 requests**. O teste 404 do helper não consumiu request.
+- API-Football permanece fora de produção; não repetir os diagnósticos anteriores.
+
+### Erros/falhas já encontrados e encerrados
+- Diagnóstico BSD original com `date:null` e `rowCount:0`: **parser diagnóstico incorreto**, corrigido e validado.
+- Hipótese de descoberta automática da season: **eliminada** pelo teste explícito `seasonId=1310`.
+- Cache API raw BSD como causa do 503: **eliminada** pela remoção da camada `caches.default` do `bsdFetchJson()`; o 503 persistiu.
+- `response.json()` como causa do 503: **eliminada** pela passagem para `response.text()` + `JSON.parse()`; o 503 persistiu.
+- Problema de credencial/rede/fornecedor BSD em Production: **eliminado** pelos probes diretos HTTP 200.
+- O 503 do endpoint público foi isolado à etapa **`BSD_EVENTS`**.
+- Tentativas de acesso de rede bloqueadas por proxy/cliente foram registadas e não devem ser repetidas sem nova hipótese.
+
+### Problema atual, único foco técnico
+O adapter público `/api/competicoes` continua sem PASS operacional e a investigação criou um helper que chama o próprio `bsdFetchJson()`. O deployment Cloudflare `95dae374` foi confirmado pelo Dashboard como Production, alias `chutapracanto.com`, commit `452a5f7`. Apesar disso, o endpoint helper respondeu 404.
+
+Isto é uma **discrepância de routing/condição de runtime**, não evidência de falha do BSD.
+
+### Hipóteses que NÃO devem ser repetidas
+Não voltar a testar:
+- credencial BSD;
+- conectividade BSD;
+- seasons 2026/27;
+- parser `response.json()`;
+- Cache API raw;
+- descoberta automática da season;
+- deployment lookup no Cloudflare via Codex.
+
+Esses pontos já têm evidência suficiente.
+
+### Próxima ação autónoma
+Inspecionar o routing de `handleAdminAPI()`, as condições do helper no commit `452a5f7` e os valores/condições de ambiente que podem produzir o 404. Só depois corrigir o código, publicar e validar uma vez.
+
+**Estado da Fase 3:** `ATIVA — correção de integração BSD/runtime`.
+
