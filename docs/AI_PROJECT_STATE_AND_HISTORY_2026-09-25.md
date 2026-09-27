@@ -397,7 +397,6 @@ Foi comprovado:
 - navegação funcional.
 
 ---
-
 # 9. CLS 0,571 — NÃO RESOLVER POR PALPITE
 
 Foi observada uma medição válida de artigo desktop com:
@@ -797,7 +796,6 @@ Exemplos válidos:
 - sessão/cookies/credenciais locais.
 
 ### Não usar Codex para
-
 - editar GitHub;
 - editar Markdown;
 - editar HTML/CSS/JS;
@@ -1197,8 +1195,7 @@ Sempre que o índice for regenerado, validar pelo menos:
 ## 37. RECONCILIAÇÃO DO HEAD REAL — 2026-09-25
 
 - O HEAD real de `main` foi verificado diretamente no GitHub antes de continuar.
-- HEAD atual: `2192b856aecb679ba2d7e1bedeeab8fdd2ef248c`.
-- Commit: `docs: registar auditoria seo técnica`.
+- HEAD atual: `2192b856aecb679ba2d7e1bedeeab8fdd2ef248c`.- Commit: `docs: registar auditoria seo técnica`.
 - O HEAD atual está 1 commit à frente de `31f2bb3dd41c199b729cc2fe54f1eacff06f7e64`, sem divergência atrás.
 - A única alteração nesse avanço foi documentação do próprio ledger; não houve alteração de código, conteúdo editorial, workflow ou configuração de produção.
 - Não existem PRs abertas neste momento.
@@ -1597,7 +1594,6 @@ Importante: os 107 slugs coincidentes **não são classificados automaticamente 
 ## 45. CORREÇÃO DA RECONCILIAÇÃO FRAMER — 2026-09-25
 
 A análise anterior que classificava os 107 slugs coincidentes como possíveis duplicados estava incompleta e foi corrigida.
-
 ### Evidência atual
 - O índice atual tem **238 entradas**.
 - **180 entradas** do índice estão datadas de 05/08/2026 (incluindo a grande maioria do lote Framer histórico); este facto explica as 107 coincidências por slug.
@@ -1977,3 +1973,74 @@ A utilizadora confirmou que `API_FOOTBALL_KEY` foi configurada como Cloudflare P
 Foi preparado no runtime Pages (`_worker.js`) um endpoint temporário de diagnóstico, condicionado ao branch `main`, host oficial de Production, POST, sessão Admin válida e Origin same-origin. Cada execução faz uma única chamada server-side a `/status`, sem retries, frontend, logging ou devolução do corpo bruto do fornecedor. A resposta prevista contém apenas HTTP status, autenticação inferida de resposta válida sem erros, contagem/categorias sanitizadas de erros, resultados, paging e quatro headers numéricos de quota. Dados pessoais de conta e qualquer conteúdo do secret não são devolvidos.
 
 **Estado:** validação local com fetch simulado; chamada autenticada real ainda não executada, pois requer a publicação em Production. API-Football continua candidato não aprovado; nenhum adapter, D1/cache, polling ou chamadas às competições foi implementado.
+
+---
+
+# 31. LEDGER OPERACIONAL — REGRA DE CONTINUIDADE E FASE 3 — 2026-09-27
+
+Esta secção regista acontecimentos posteriores à última reconciliação do estado, incluindo operações concluídas, pendentes, bloqueadas, falhadas, abandonadas e mudanças de plano. O objetivo é impedir repetição de trabalho e preservar a razão de cada transição.
+
+## 31.1 Regras operacionais reforçadas
+
+A partir desta data, qualquer operação relevante deve atualizar este ledger quando o resultado for conhecido.
+
+Registar sempre:
+- concluído: ação, resultado e evidência;
+- pendente: ação restante, razão e dependência;
+- falhou/negativo: tentativa, resultado, causa conhecida ou ainda não determinada;
+- bloqueado: bloqueador e condição de desbloqueio;
+- mudança de plano: plano anterior, novo plano e razão;
+- abandonado: ação descartada e motivo;
+- correção/retrabalho: o que foi corrigido e porquê.
+
+Nada deve ser considerado “desaparecido” por ter ficado pelo caminho. O ledger deve permitir reconstruir o percurso operacional.
+
+## 31.2 Fase 3 — estado reconciliado
+
+### Já feito
+
+1. Matriz inicial de fornecedores: concluída e documentada. API-Football continua candidato principal, não aprovado.
+2. Modelo quantitativo de quota: documentado. Foram modelados cenários de aproximadamente 15, 36 e 92 requests/dia; 92/dia não é margem confortável e não constitui aprovação.
+3. Mecanismo seguro de secret: definido como Cloudflare Pages Secret, server-side.
+4. Secret de produção: API_FOOTBALL_KEY foi criado no Cloudflare Pages como Production Secret. O valor não foi enviado ao chat. Preview não foi configurado deliberadamente, porque não é necessário para a validação de produção neste momento.
+5. Diagnóstico temporário: implementado na branch feat/diagnostico-temporario-api-football, commit 20a62a2ffee47976a168733e35f1eeee67bfbf96. O endpoint é protegido, faz uma única chamada server-side a /status, não faz retries e devolve apenas dados sanitizados.
+6. Validação local do diagnóstico: node --check, git diff --check e testes mockados passaram; nenhum teste local chamou a API externa.
+7. Publicação da branch: a branch foi publicada no GitHub através do GitHub Desktop.
+8. PR #43: criada para levar o diagnóstico temporário a main. No momento desta reconciliação está aberta, não mergeada e mergeable.
+
+### O que ficou pelo caminho / pendente
+
+1. PR #43 ainda não foi mergeada. O merge commit apresentado pelo estado da PR não significa que o merge tenha ocorrido; os campos atuais confirmam merged=false e merged_at=null. Portanto, não considerar o diagnóstico como presente em main.
+2. Deployment Production do diagnóstico: pendente. Não há evidência no GitHub consultado de que o endpoint esteja já publicado em Production.
+3. Chamada real autenticada /status: pendente. Só deve ocorrer depois de o diagnóstico estar efetivamente em Production. Deve ser uma única chamada, sem retries.
+4. Medição real de quota/headers: pendente. Ainda não existe evidência autenticada para dailyLimit/dailyRemaining e limites por minuto.
+5. Validação autenticada 2026/27: pendente para as sete competições-alvo.
+6. Medição de fixtures/results/standings/events: pendente.
+7. Teste de 429 e comportamento de quota: pendente.
+8. Política final de atualização/cache: pendente de ser fechada com base nas medições reais.
+9. Aprovação do fornecedor: pendente. API-Football não está aprovada; o funcionamento de /status, isoladamente, nunca será suficiente para aprovação.
+10. Adapter de produção: deliberadamente não implementado ainda, porque a arquitetura exige a decisão do fornecedor depois dos gates de validação.
+
+### Operações/planos que não devem ser repetidos
+
+- Não pedir novamente a API key; ela já foi configurada diretamente no Cloudflare Pages.
+- Não criar Preview Secret sem uma necessidade nova e demonstrável.
+- Não criar Worker separado para o fornecedor.
+- Não implementar o adapter antes de fechar os gates de aprovação.
+- Não tratar a criação da PR como prova de deployment.
+- Não executar a chamada real antes de Production estar confirmada.
+- Não fazer chamadas alternativas/retries para “ver se funciona”; o diagnóstico foi desenhado para uma única chamada.
+- Não aprovar API-Football apenas porque a autenticação /status funcionar.
+
+### Mudanças de plano registadas
+
+Plano anterior: preparar um diagnóstico temporário e usar uma intervenção externa extensa para inspecionar, fazer merge, deployment e validar.
+
+Plano corrigido: usar primeiro as ferramentas GitHub diretamente, porque GitHub é responsabilidade do Assistente e essas operações estão disponíveis. Só recorrer a Codex quando existir uma capacidade realmente indisponível e essencial, por exemplo acesso ao Cloudflare Dashboard/browser real. Esta correção reduz consumo de créditos e evita duplicação de operações.
+
+### Estado de continuidade
+
+Estado atual: Fase 3 — validação real do candidato principal em curso; PR #43 aberta; secret de Production configurado; chamada autenticada ainda não executada.
+
+Próxima ação executável sem Codex: inspecionar PR #43 e, se estiver validada e sem bloqueios, fazer o merge diretamente pelo GitHub. Depois disso, a dependência que pode exigir acesso externo é confirmar deployment Production e executar a chamada real protegida uma única vez.
+
