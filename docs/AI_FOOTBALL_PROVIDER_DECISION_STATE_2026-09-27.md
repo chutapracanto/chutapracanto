@@ -119,7 +119,8 @@ Todos os sete endpoints de seasons responderam **HTTP 200 / ok:true**, sem erros
 - BSD antes dos diagnósticos: **0**
 - BSD seasons diagnostic: **7**
 - BSD operational diagnostic original: **3**
-- BSD total consumido nesta validação até agora: **10**
+- BSD operational diagnostic corrigido: **2**
+- BSD total consumido nesta validação até agora: **12**
 - API-Football: **0 novos** nesta fase
 - **Não repetir** o diagnóstico de seasons: já não acrescenta informação suficiente para justificar mais 7 requests.
 - O próximo gate operacional foi reduzido de 3 para **2 requests**, porque a Champions League já demonstrou a filtragem por stage e não precisa de ser repetida.
@@ -145,13 +146,16 @@ Foi corrigido o endpoint temporário /api/admin/football-provider-bsd-operationa
 
 **Commit da correção:** 2913e3cc434ad13b29e31bed50118b096994b778.
 
-**Próxima execução:** apenas o endpoint corrigido, uma vez. O objetivo é validar o schema real autenticado e obter rows de standings sem repetir chamadas já validadas.
+**Execução final do diagnóstico corrigido:** concluída uma vez, com 2 requests. Primeira Liga fixtures/results: HTTP 200, 50 itens, com eventDate/status/stage/round/homeTeamId/awayTeamId preenchidos. Primeira Liga standings: HTTP 200, 18 linhas, com position/teamId/teamName/played/points preenchidos. error:null em ambos.
 
-### Licença — gate ainda aberto
-A licença BSD v4.0, efetiva em 1 de outubro de 2026, permite armazenar e mostrar os dados em aplicações/sites próprios, mas proíbe redistribuir raw data em substancial parte como dataset/feed/API independente. Também permite Derived Outputs, desde que não permitam reconstruir parte substancial do raw data, e atribui ao utilizador a responsabilidade de conformidade legal e direitos de terceiros.
+**Gate operacional: PASS.** Não repetir este diagnóstico nem fazer novas chamadas BSD sem uma nova hipótese que altere a decisão.
 
-**Conclusão atual:** BSD passa o gate de **cobertura 2026/27**. Ainda não passa a aprovação final de fornecedor porque falta validar o schema/dados operacionais reais e fechar a revisão de licença/termos para o uso concreto do CPC.
+### Licença — gate em revisão final
+A licença BSD v4.0, efetiva em 1 de outubro de 2026, permite mostrar os dados dentro de aplicações, websites, dashboards e ferramentas próprias. Proíbe revender, sublicenciar, espelhar ou redistribuir raw data, no todo ou em parte substancial, como dataset/feed/database/API independente. Derived Outputs podem ser publicados, vendidos e distribuídos desde que não permitam reconstruir parte substancial do raw data. Os media assets têm regime separado.
 
+Para o CPC, isto é compatível com exibir dados de futebol dentro do próprio website, desde que não seja criado um produto/feed independente de redistribuição do raw data. A licença também atribui ao utilizador a responsabilidade por conformidade legal e direitos de terceiros.
+
+**Conclusão atual:** o gate operacional passa e a revisão documental da licença não encontrou uma proibição ao uso/display dos dados no próprio website. A integração deve respeitar as restrições de raw data e o regime separado dos media assets.
 ## 3. Arquitetura que continua válida independentemente do fornecedor
 
 A arquitetura-alvo mantém-se:
@@ -228,12 +232,11 @@ Este trabalho está **ENCERRADO**. A configuração Framer + Cloudflare foi publ
 
 **CONCLUÍDO:** diagnóstico BSD 2026/27, 7 chamadas, cobertura 7/7 confirmada.
 
-**AGORA:** está publicado um diagnóstico operacional mínimo de 3 chamadas, acrescentando informação nova sem repetir o diagnóstico de seasons:
-1. fixtures/resultados da Primeira Liga, season 1310;
-2. standings da Primeira Liga, season 1310;
-3. fixtures/resultados da league-phase da Champions League, season 1112.
+**CONCLUÍDO:** diagnóstico operacional corrigido, 2 chamadas, com fixtures/results e standings reais da Primeira Liga 2026/27 confirmados. A Champions League já tinha sido validada no diagnóstico anterior.
 
-**DEPOIS:** registar o resultado operacional, fechar revisão da licença/termos e decidir fornecedor.
+**CONCLUÍDO:** revisão documental da licença BSD v4.0. A licença permite mostrar os dados no próprio website/aplicação e proíbe redistribuição do raw data como feed/dataset/API independente; media assets têm regime separado.
+
+**AGORA:** decisão formal de aprovação do BSD como fornecedor principal e, se aprovada, desenho/implementação do adapter interno CPC.
 
 **SÓ DEPOIS DA APROVAÇÃO:** integração definitiva da API, cache/D1 e política de atualização.
 
