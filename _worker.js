@@ -2807,16 +2807,39 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
   if (stage) eventParams.set("stage", stage);
   if (options.round != null) eventParams.set("round", String(options.round));
 
-  const [eventsData, standingsData] = await Promise.all([
-    bsdFetchJson(
-      `https://sports.bzzoiro.com/api/v2/events/?${eventParams.toString()}`,
-      60
-    ),
-    bsdFetchJson(
-      `https://sports.bzzoiro.com/api/v2/leagues/${competition.leagueId}/standings/?season_id=${seasonId}`,
-      300
-    )
-  ]);
+  let eventsData;
+  let standingsData;
+
+  try {
+    eventsData = await bsdFetchJson(
+      `https://sports.bzzoiro.com/api/v2/events/?${eventParams.toString()}`
+    );
+  } catch (error) {
+    throw new Error("BSD_EVENTS:" + (error instanceof Error ? error.message : "unknown"));
+  }
+
+  try {
+    standingsData = await bsdFetchJson(
+      `https://sports.bzzoiro.com/api/v2/leagues/${competition.leagueId}/standings/?season_id=${seasonId}`
+    );
+  } catch (error) {
+    throw new Error("BSD_STANDINGS:" + (error instanceof Error ? error.message : "unknown"));
+  }
+
+  let fixtures;
+  let standings;
+
+  try {
+    fixtures = bsdExtractEvents(eventsData).map(cpcNormalizeEvent);
+  } catch (error) {
+    throw new Error("NORMALIZE_EVENTS:" + (error instanceof Error ? error.message : "unknown"));
+  }
+
+  try {
+    standings = bsdExtractStandings(standingsData).map(cpcNormalizeStanding);
+  } catch (error) {
+    throw new Error("NORMALIZE_STANDINGS:" + (error instanceof Error ? error.message : "unknown"));
+  }
 
   return {
     competition: {
@@ -2829,8 +2852,8 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
       id: seasonId,
       label: seasonLabel || (seasonId === 1310 ? "2026/27" : "")
     },
-    fixtures: bsdExtractEvents(eventsData).map(cpcNormalizeEvent),
-    standings: bsdExtractStandings(standingsData).map(cpcNormalizeStanding),
+    fixtures,
+    standings,
     updatedAt: new Date().toISOString(),
     source: "Bzzoiro Sports Data",
     updateStatus: "live"
