@@ -2727,25 +2727,18 @@ function cpcNormalizeStanding(row) {
   };
 }
 
-async function bsdFetchJson(env, endpoint, cacheSeconds = 60) {
+async function bsdFetchJson(env, endpoint) {
   const apiKey = env.BSD_API_KEY;
   if (typeof apiKey !== "string" || !apiKey.trim()) {
     throw new Error("BSD_API_KEY indisponível.");
   }
 
-  const request = new Request(endpoint, {
+  const response = await fetch(endpoint, {
     method: "GET",
     headers: {
       "Authorization": `Token ${apiKey.trim()}`,
       "Accept": "application/json"
-    }
-  });
-
-  const cache = caches.default;
-  const cached = await cache.match(request);
-  if (cached) return cached.json();
-
-  const response = await fetch(request, {
+    },
     signal: AbortSignal.timeout(10000)
   });
 
@@ -2753,18 +2746,7 @@ async function bsdFetchJson(env, endpoint, cacheSeconds = 60) {
     throw new Error(`BSD HTTP ${response.status}`);
   }
 
-  const data = await response.json();
-
-  const cachedResponse = new Response(JSON.stringify(data), {
-    status: 200,
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "Cache-Control": `public, max-age=${cacheSeconds}`
-    }
-  });
-
-  await cache.put(request, cachedResponse.clone());
-  return data;
+  return response.json();
 }
 
 function bsdExtractEvents(data) {
