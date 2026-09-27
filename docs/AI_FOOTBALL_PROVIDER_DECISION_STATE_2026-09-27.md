@@ -201,10 +201,17 @@ Este trabalho está **ENCERRADO**. A configuração Framer + Cloudflare foi publ
 
 ## 6. Ordem de execução atual
 
-**AGORA:** executar o diagnóstico BSD já publicado, com 7 chamadas autenticadas server-side, e registar o resultado sem repetir chamadas que não alterem a decisão.  
-**DEPOIS:** comparar a evidência com os critérios de aprovação e decidir o fornecedor.  
+**CONCLUÍDO:** diagnóstico BSD 2026/27, 7 chamadas, cobertura 7/7 confirmada.
+
+**AGORA:** está publicado um diagnóstico operacional mínimo de 3 chamadas, acrescentando informação nova sem repetir o diagnóstico de seasons:
+1. fixtures/resultados da Primeira Liga, season 1310;
+2. standings da Primeira Liga, season 1310;
+3. fixtures/resultados da league-phase da Champions League, season 1112.
+
+**DEPOIS:** registar o resultado operacional, fechar revisão da licença/termos e decidir fornecedor.
+
 **SÓ DEPOIS DA APROVAÇÃO:** integração definitiva da API, cache/D1 e política de atualização.
 
 ## 7. Regra de continuidade
 
-Nada do trabalho de APIs fica perdido: as decisões, evidências, exclusões e próximos gates ficam registados neste documento. Ao retomar, não repetir testes já executados sem nova hipótese ou evidência.
+Nada do trabalho de APIs fica perdido: decisões, evidências, exclusões, requests consumidos e próximos gates ficam registados neste documento. Ao retomar, não repetir testes já executados sem nova hipótese ou evidência.
