@@ -259,3 +259,13 @@ Foi implementado no `_worker.js` um adapter server-side provider-specific para B
 - endpoint de aplicação `/api/competicoes`, sem exposição da API key nem proxy genérico para a BSD.
 
 A implementação não criou ainda D1, Cron Trigger ou UI. Essas são as próximas fases e devem ser validadas após o deploy.
+
+## 9. Validação do deployment de produção — 27-09-2026
+
+A implementação do adapter BSD e o routing de `/api/competicoes` estão presentes no `_worker.js` do deployment Production atualmente ativo, cujo commit é `deb5b5cb7819d9068ece9c06cbd27964a2ad757b`. O deployment `1bdb2431-ad10-49ff-be12-cf22a0de77df`, baseado no commit `23752a3926e6ab4fb39c54798b11c0f3ce667836`, foi entretanto substituído por deployments posteriores de `main`.
+
+Cloudflare confirmou: `main` é a branch de produção; o deployment ativo `4f7e675f-1e39-470b-b4df-f03bf8dcd437` está em Production, com estado success e alias `chutapracanto.com`; o custom domain está Active e SSL enabled; o runtime é Pages Functions com catch-all `/*`.
+
+A validação HTTP funcional de `/api/competicoes?competition=liga-portugal` permanece **BLOQUEADA POR LIMITAÇÃO DA SESSÃO DE REDE**, não por erro demonstrado da aplicação: browser devolveu `net::ERR_BLOCKED_BY_CLIENT` e terminal devolveu erro de ligação ao proxy local `127.0.0.1:9`. Não houve resposta HTTP e não houve consumo BSD nessas tentativas. Portanto, o endpoint ainda não deve ser marcado como PASS operacional em produção até existir uma sessão com saída HTTPS funcional.
+
+**Regra de continuidade:** não repetir chamadas no ambiente bloqueado, não alterar o adapter e não consumir BSD adicionalmente. A próxima validação deve usar o deployment Production ativo ou `chutapracanto.com`, numa sessão com acesso HTTPS direto.
