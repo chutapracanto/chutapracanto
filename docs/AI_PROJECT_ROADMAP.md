@@ -716,3 +716,22 @@ Evidência atual:
 Não criar endpoints, secrets ou bindings do fornecedor antes dessa validação.
 
 **Estado:** FASE 3 — matriz concluída; validação real do candidato principal em curso.
+
+
+## 6A. FASE 3 — MECANISMO DE SECRET INJECTION VALIDADO
+
+A dependência de credencial da Fase 3 deixou de ser uma instrução vaga. O mecanismo seguro previsto para o runtime Pages é um **Cloudflare Pages Secret**.
+
+### Vias suportadas
+1. Dashboard Cloudflare: **Workers & Pages → projeto Pages → Settings → Variables and Secrets → Add → Encrypt → Save**.
+2. Wrangler autenticado: `npx wrangler pages secret put <KEY> --project-name <PROJECT>`.
+
+O segredo fica acessível server-side através de `context.env` e não deve ser colocado no repositório, `wrangler.toml`, frontend ou chat. Fontes oficiais atuais: https://developers.cloudflare.com/pages/functions/bindings/ e https://developers.cloudflare.com/workers/wrangler/commands/pages/.
+
+### Estado da Fase 3
+- fornecedor: **API-Football — candidato principal, não aprovado**;
+- integração: **não implementada**;
+- secret: **não configurado**;
+- validação autenticada 2026/27: **pendente**;
+- mecanismo seguro: **definido**;
+- próxima dependência: criar a conta/chave e configurar o secret diretamente no Cloudflare Pages, sem revelar a chave ao chat.
