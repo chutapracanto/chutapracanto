@@ -1917,3 +1917,36 @@ Resultado:
 Nenhum fornecedor foi ainda aprovado. A próxima dependência real é uma API key gratuita para validar por chamadas autenticadas a época 2026/27 nas sete competições e medir a quota. Não criar secrets/bindings/endpoints antes dessa validação.
 
 Framer redirects continuam independentes e não bloqueiam esta linha.
+
+
+# 58. MECANISMO CONCRETO DE SECRET INJECTION — 2026-09-27
+
+A auditoria da dependência da Fase 3 confirmou o mecanismo seguro que estava anteriormente descrito de forma vaga.
+
+## Evidência do projeto
+- `wrangler.toml` usa o runtime Pages existente e o binding D1 `ARTICLE_LIKES_DB`.
+- Não existe Worker Cloudflare separado para o CPC que deva receber a credencial.
+- A arquitetura de competições exige token server-side no runtime Pages/_worker.js.
+
+## Mecanismo Cloudflare validado
+A documentação oficial atual do Cloudflare Pages confirma que secrets são bindings encriptados, acessíveis programaticamente através de `context.env`, e que podem ser configurados:
+
+1. no Dashboard: **Workers & Pages → projeto Pages → Settings → Variables and Secrets → Add → Encrypt → Save**;
+2. via Wrangler: `npx wrangler pages secret put <KEY> --project-name <PROJECT>`.
+
+Fontes oficiais verificadas em 2026-09-27:
+- https://developers.cloudflare.com/pages/functions/bindings/
+- https://developers.cloudflare.com/workers/wrangler/commands/pages/
+
+## Estado operacional
+- API-Football: candidato principal, **não aprovado**;
+- API key: ainda não criada/configurada no ambiente do CPC;
+- secret: ainda não criado;
+- adapter/endpoints: não implementados;
+- validação 2026/27: ainda não executada.
+
+## Regra de segurança
+A API key **não deve ser enviada para o chat, GitHub, `wrangler.toml`, frontend ou qualquer ficheiro versionado**. A Rute pode criar a conta e obter a chave; a chave deve ser introduzida diretamente no Cloudflare Pages pelo Dashboard ou Wrangler autenticado.
+
+## Próxima dependência exata
+Depois de obter a API key, Rute configura-a diretamente no projeto Pages como Secret. Não é necessário entregar a chave ao Assistente. Quando o secret estiver configurado, a validação autenticada da API-Football pode começar.
