@@ -118,8 +118,8 @@ A próxima investigação de fornecedor deve começar pelo **Bzzoiro Sports Data
 
 Antes de qualquer aprovação:
 1. criar/usar conta Free e obter token sem o enviar para o chat;
-2. configurar secret server-side no Cloudflare Pages, se necessário;
-3. executar diagnóstico temporário com o token server-side;
+2. **CONCLUÍDO:** secret server-side `BSD_API_KEY` configurada em Production no Cloudflare Pages;
+3. **CONCLUÍDO:** diagnóstico temporário server-side criado no `_worker.js`, com 7 chamadas (uma por competição), sem expor o token;
 4. validar 2026/27 nas sete competições;
 5. medir quota/headers/rate limit com o mínimo de requests;
 6. validar pelo menos fixtures/resultados/standings e, se necessário, live/events de forma controlada;
@@ -158,18 +158,12 @@ O redirecionamento deve ser permanente (301) quando a configuração disponível
 - Estado técnico registado no inventário `docs/framer/framer-url-redirect-inventory-2026-09-25.json`.
 - Commits relevantes: mapa `4ec827a057fc906d695543f82e3d99825df54069`; Worker `382504c4b00431acd47d547c5be52d7298bee2e1`; estado `732ece9f10a4c23b57481ab1b8ee6d2def8580b4`.
 
-### Próximo passo
-Inspecionar no Framer a configuração de domínio/redirects disponível e determinar a forma correta de:
-1. redirecionar `chutapracanto.framer.website` → `chutapracanto.com`;
-2. preservar automaticamente todos os paths/slugs das notícias;
-3. evitar loops e evitar perder URLs existentes;
-4. publicar e validar HTTP/URL final.
-
-Se o Framer não suportar o redirecionamento wildcard/path-preserving diretamente, avaliar a alternativa tecnicamente correta no domínio/hosting que controla `chutapracanto.framer.website`, sem criar uma solução frágil.
+### Fecho
+Este trabalho está **ENCERRADO**. A configuração Framer + Cloudflare foi publicada e uma URL real antiga partilhada via Facebook foi validada ponta a ponta como PASS. Não reabrir sem nova evidência.
 
 ## 6. Ordem de execução atual
 
-**AGORA:** retomar BSD e concluir a validação do fornecedor, começando por cobertura real 2026/27 e quota/limites.  
+**AGORA:** executar o diagnóstico BSD já publicado, com 7 chamadas autenticadas server-side, e registar o resultado sem repetir chamadas que não alterem a decisão.  
 **DEPOIS:** comparar a evidência com os critérios de aprovação e decidir o fornecedor.  
 **SÓ DEPOIS DA APROVAÇÃO:** integração definitiva da API, cache/D1 e política de atualização.
 
