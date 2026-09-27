@@ -89,7 +89,45 @@ Foi feita uma pesquisa ampla sobre APIs comerciais gratuitas, APIs públicas, wr
 - Free demasiado limitado para servir como fonte única das sete competições.
 - **Estado:** excluído como solução principal.
 
-## 2. Arquitetura que continua válida independentemente do fornecedor
+
+## 2. Diagnóstico BSD 2026/27 — RESULTADO REAL
+
+**Execução:** 27-09-2026, uma única execução autenticada server-side.  
+**Requests consumidos:** 7.  
+**Estado:** **PASS — cobertura de temporada confirmada nas 7 competições.**
+
+Todos os sete endpoints de seasons responderam **HTTP 200 / ok:true**, sem erros de autenticação, quota ou endpoint. Foi identificada uma temporada 2026/27 válida em cada competição:
+
+| Competição | League ID | Season ID | Estrutura confirmada |
+|---|---:|---:|---|
+| Liga Portugal Betclic | 2 | 1310 | regular-season: 306 jogos / 34 jornadas |
+| Taça de Portugal | 92 | 1922 | rounds 1–3 publicados |
+| Taça da Liga | 93 | 1941 | quarterfinals: 4 jogos |
+| Champions League | 7 | 1112 | qualificação + playoff + league-phase: 144 jogos / 8 jornadas |
+| Europa League | 8 | 1269 | qualificação + playoff + league-phase: 144 jogos / 8 jornadas |
+| Conference League | 83 | 1606 | qualificação + playoff + league-phase: 108 jogos / 6 jornadas |
+| Nations League | 64 | 1430 | group-stage: 156 jogos / 6 jornadas |
+
+### Evidência e limites
+- A validação usou autenticação real através da secret server-side BSD_API_KEY.
+- Os IDs de liga assumidos foram aceites e devolveram temporadas 2026/27 válidas.
+- A estrutura multi-stage necessária para competições UEFA foi confirmada.
+- quota.limit e quota.remaining vieram null nas sete respostas. Isto significa apenas que a quota não foi observável nos headers capturados; não significa quota inexistente.
+- A documentação oficial confirma autenticação por Authorization: Token e a API Football v2.
+
+### Contagem de requests
+- BSD antes do diagnóstico: **0**
+- BSD neste diagnóstico: **7**
+- BSD total consumido nesta validação: **7**
+- API-Football: **0 novos** nesta fase
+- **Não repetir** o diagnóstico de seasons: já não acrescenta informação suficiente para justificar mais 7 requests.
+
+### Licença — gate ainda aberto
+A licença BSD v4.0, efetiva em 1 de outubro de 2026, permite armazenar e mostrar os dados em aplicações/sites próprios, mas proíbe redistribuir raw data em substancial parte como dataset/feed/API independente. Também permite Derived Outputs, desde que não permitam reconstruir parte substancial do raw data, e atribui ao utilizador a responsabilidade de conformidade legal e direitos de terceiros.
+
+**Conclusão atual:** BSD passa o gate de **cobertura 2026/27**. Ainda não passa a aprovação final de fornecedor porque falta validar dados operacionais reais (fixtures/resultados/standings) e fechar a revisão de licença/termos para o uso concreto do CPC.
+
+## 3. Arquitetura que continua válida independentemente do fornecedor
 
 A arquitetura-alvo mantém-se:
 
