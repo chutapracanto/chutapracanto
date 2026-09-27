@@ -397,8 +397,7 @@ Foi comprovado:
 - navegação funcional.
 
 ---
-# 9. CLS 0,571 — NÃO RESOLVER POR PALPITE
-Foi observada uma medição válida de artigo desktop com:
+# 9. CLS 0,571 — NÃO RESOLVER POR PALPITEFoi observada uma medição válida de artigo desktop com:
 
 - Performance: 74;
 - FCP: ~1,0 s;
@@ -797,8 +796,7 @@ Exemplos válidos:
 ### Não usar Codex para
 - editar GitHub;
 - editar Markdown;- editar HTML/CSS/JS;
-- criar commits;
-- criar branches;
+- criar commits;- criar branches;
 - criar/mergear PRs;
 - confirmar novamente factos já comprovados;
 - repetir testes sem nova hipótese;
@@ -1197,8 +1195,7 @@ Sempre que o índice for regenerado, validar pelo menos:
 - O HEAD atual está 1 commit à frente de `31f2bb3dd41c199b729cc2fe54f1eacff06f7e64`, sem divergência atrás.
 - A única alteração nesse avanço foi documentação do próprio ledger; não houve alteração de código, conteúdo editorial, workflow ou configuração de produção.- Não existem PRs abertas neste momento.
 - O HEAD `f7ef4d9...` anteriormente registado no início deste documento está desatualizado; o estado real do GitHub prevalece.
-- Consequência: a primeira passagem de LCP continua integrada em produção, mas este novo commit não altera a conclusão técnica sobre LCP/CLS.
-- Distinção operacional: LCP first pass = **implementada, sem melhoria quantitativa before/after comprovada**; CLS = **problema ainda aberto, sem causa causalmente comprovada**; SEO técnico básico = **implementado e auditado**; indexação real = **ainda não medida no Search Console**.
+- Consequência: a primeira passagem de LCP continua integrada em produção, mas este novo commit não altera a conclusão técnica sobre LCP/CLS.- Distinção operacional: LCP first pass = **implementada, sem melhoria quantitativa before/after comprovada**; CLS = **problema ainda aberto, sem causa causalmente comprovada**; SEO técnico básico = **implementado e auditado**; indexação real = **ainda não medida no Search Console**.
 - Próxima execução deve avançar a partir deste estado, sem criar uma nova fase de documentação por si só.
 
 
@@ -1598,7 +1595,6 @@ A análise anterior que classificava os 107 slugs coincidentes como possíveis d
   - **56** sem qualquer slug correspondente no índice.
 - Portanto, a coincidência de slug **não prova que os 107 artigos pós-22/08 estejam publicados no `.com`**.
 - A conclusão operacional correta é: **os 163 artigos pós-22/08 permanecem candidatos de recuperação/reconciliação**.
-
 ### Correção documental
 - O inventário anterior de apenas 56 candidatos foi removido por poder induzir a conclusão errada de que só 56 artigos precisavam de análise.
 - Foi criado o inventário canónico provisório:
@@ -1999,29 +1995,53 @@ Nada deve ser considerado “desaparecido” por ter ficado pelo caminho. O ledg
 
 # 32. LEDGER — ATUALIZAÇÃO APÓS RECONCILIAÇÃO DA PR #43 — 2026-09-27
 
-Durante a reconciliação anterior, a PR #43 estava aberta. A verificação seguinte encontrou uma mudança de estado entretanto ocorrida: a PR foi **mergeada**.
+---
 
-- PR: #43 — feat: add protected API-Football diagnostic
-- estado atual: fechada e mergeada;
-- merge commit: 94b7eaec13b5397a239f0cc105f534f7e8b9e292;
-- branch de origem: feat/diagnostico-temporario-api-football;
-- head da branch: 20a62a2ffee47976a168733e35f1eeee67bfbf96;
-- conclusão: o diagnóstico temporário passou a estar integrado em main.
+# 33. LEDGER — DEPLOYMENT PRODUCTION E DIAGNÓSTICO API-FOOTBALL — 2026-09-27
 
-A entrada anterior que dizia “PR #43 aberta, não mergeada” fica assim **ultrapassada pelo estado real posterior** e não deve ser usada como estado atual.
+### Operações concluídas
 
-## Consequência operacional
+- PR #43: **merged**, merge commit `94b7eaec13b5397a239f0cc105f534f7e8b9e292`.
+- `main` atual: `2636cd0e2087f42ec1d2c7054efce4d68e3fad99`.
+- Production: deployment `aa0d3a54-580c-40f7-b133-b7eb74f0d0a5`, estado **success**, publicado em `chutapracanto.com`.
+- Home de Production carregou corretamente.
+- Secret Production `API_FOOTBALL_KEY` confirmado como secret; o valor permaneceu oculto e não foi lido nem alterado.
 
-O próximo passo já não é fazer merge da PR #43.
+### Operação pendente / interrompida
 
-Permanece pendente:
-1. confirmar deployment Production contendo o merge;
-2. executar uma única chamada real ao endpoint protegido /api/admin/football-provider-diagnostic;
-3. registar a evidência sanitizada de autenticação e quota;
-4. só depois avançar para os testes autenticados 2026/27 das sete competições e restantes gates de aprovação.
+O diagnóstico API-Football **não foi executado**.
 
-A API-Football continua **não aprovada**.
+A abertura de `/admin/` em Production apresentou o ecrã de login, sem sessão Production autenticada. Como o endpoint diagnóstico exige sessão Admin válida, a operação foi interrompida **antes do POST**.
 
-## Regra de continuidade
+### Resultado negativo relevante
 
-Quando uma operação fica pendente enquanto outra intervenção externa altera o estado, a reconciliação seguinte deve sempre substituir o estado pendente pelo estado real observado e preservar a razão da mudança. Não repetir uma operação que entretanto já foi concluída.
+- não houve POST ao endpoint diagnóstico;
+- não houve pedido à API-Football;
+- não houve consumo de quota API-Football;
+- não existe ainda evidência autenticada de `/status`;
+- não existem ainda medições reais de quota/headers.
+
+A interrupção foi deliberada e correta: não contornar a autenticação nem executar uma chamada não autorizada.
+
+### Estado de aprovação
+
+API-Football continua **candidato principal, não validado/aprovado**.
+
+Continuam pendentes os gates:
+1. executar o diagnóstico uma única vez após existir sessão Production autenticada;
+2. registar evidência sanitizada de autenticação/quota;
+3. validar 2026/27 nas sete competições;
+4. medir fixtures/results/standings/events;
+5. testar 429 e limites;
+6. fechar política de atualização/cache e margem operacional;
+7. só então decidir a aprovação.
+
+### Não repetir
+
+Não voltar a tentar o POST enquanto não existir uma sessão Admin Production válida. Não fazer chamadas diretas à API-Football, retries ou bypass da proteção. Não alterar o secret.
+
+### Próximo desbloqueio
+
+**Dependência:** sessão Admin válida em Production.
+
+Quando essa dependência existir, executar **uma única** chamada ao diagnóstico protegido, validar a resposta sanitizada e atualizar imediatamente este ledger com o resultado.
