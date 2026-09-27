@@ -2196,6 +2196,50 @@ async function handleAdminAPI(request, env) {
 
 
 // ============================================================
+// REDIRECIONAMENTO DE URLs LEGADAS DO FRAMER
+// ============================================================
+
+async function redirecionarNoticiaFramer(request, env) {
+  const url = new URL(request.url);
+
+  if (!url.pathname.startsWith("/noticias/") || url.pathname === "/noticias/") {
+    return null;
+  }
+
+  let framerSlug;
+  try {
+    framerSlug = decodeURIComponent(url.pathname.slice("/noticias/".length));
+  } catch {
+    return null;
+  }
+
+  if (!framerSlug || framerSlug.includes("/") || framerSlug.includes("\\")) {
+    return null;
+  }
+
+  try {
+    const mapResponse = await env.ASSETS.fetch(
+      new Request(new URL("/content/framer-news-redirects.json", request.url))
+    );
+
+    if (!mapResponse.ok) return null;
+
+    const map = await mapResponse.json();
+    const destinationSlug = map?.redirects?.[framerSlug];
+
+    if (!destinationSlug) return null;
+
+    const destination = new URL("/noticia", url.origin);
+    destination.searchParams.set("slug", destinationSlug);
+
+    return Response.redirect(destination.toString(), 301);
+  } catch {
+    return null;
+  }
+}
+
+
+// ============================================================
 // WORKER PRINCIPAL
 // ============================================================
 
@@ -2225,6 +2269,16 @@ export default {
           headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
           return new Response(response.body, { status: response.status, statusText: response.statusText, headers });
         }
+      }
+
+      const legacyNewsRedirect =
+        await redirecionarNoticiaFramer(
+          request,
+          env
+        );
+
+      if (legacyNewsRedirect) {
+        return legacyNewsRedirect;
       }
 
       const assetResponse =
