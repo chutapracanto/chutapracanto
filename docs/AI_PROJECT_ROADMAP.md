@@ -1,6 +1,6 @@
 # CHUTA PRA CANTO — ROADMAP OPERACIONAL DO PROJETO
 
-Versão: 2026-09-25
+Versão: 2026-09-27
 Repo: `chutapracanto/chutapracanto`
 Produção: `https://chutapracanto.com`
 
@@ -47,15 +47,15 @@ Não responder apenas "o próximo passo é X" quando X estiver ao alcance da IA.
 |---|---|---|
 | 0 | Continuidade, regras e memória operacional | **CONSOLIDADA** |
 | 1 | Recuperação/consolidação do conteúdo histórico | **CONCLUÍDA — reconciliação de metadata dos 163 registos pós-22/08 validada** |
-| 2 | Sistema editorial e publicação própria | **PARCIAL / CONSOLIDAR** |
-| 3 | Dados de futebol e API de competições | **PENDENTE** |
+| 2 | Sistema editorial e publicação própria | **CONCLUÍDA — frente UX/editorial fechada operacionalmente; melhorias residuais não bloqueantes** |
+| 3 | Dados de futebol e API de competições | **ATIVA — seleção/validação de fornecedor em curso** |
 | 4 | SEO técnico + indexação real | **PARCIAL / CONTINUAR APÓS BASE ESTÁVEL** |
 | 5 | Performance mensurável | **PRIMEIRA PASSAGEM IMPLEMENTADA / VALIDAR RESIDUAL** |
 | 6 | Monetização | **PENDENTE** |
 | 7 | Distribuição e crescimento | **PENDENTE / FRENTE CRIATIVA SEPARADA** |
 | 8 | Automação e escala | **PENDENTE** |
 
-**Fase operacional atual:** **FASE 2 — consolidação do sistema editorial/publicação própria**, após conclusão da reconciliação de metadata dos 163 registos Framer e merge em produção.
+**Fase operacional atual:** **FASE 3 — dados de futebol e API de competições / seleção e validação de fornecedor.** A Fase 2 UX/editorial foi encerrada operacionalmente com a PR #42 mergeada; engagement persistente em D1 já está em `main`.
 
 ---
 
@@ -524,7 +524,7 @@ A frente de UX editorial avançou após pesquisa de padrões de engagement em fu
 - 0 PRs abertas após o merge.
 - Produção ainda não foi validada por HTTP nesta sessão porque o domínio externo não está acessível ao ambiente atual.
 
-**Estado:** FASE 2 — UX editorial em execução; validação externa de produção permanece pendente.
+**Estado histórico — supersedido pela secção 25:** FASE 2 estava em execução nesta data. A frente foi posteriormente fechada com a PR #42 e a Fase 3 foi iniciada.
 
 ## 20. ATUALIZAÇÃO OPERACIONAL — 2026-09-25 — INVENTÁRIO DE SLUGS
 
@@ -619,7 +619,7 @@ A documentação oficial Cloudflare atual indica D1 no Workers Free com 5M rows 
 
 **Fase 8 — Automação/escala:** publicação, validações, dados, distribuição, workflows, integrações e alertas; automatizar primeiro tarefas repetitivas, previsíveis e validáveis.
 
-**Estado operacional:** FASE 2 continua ativa, mas a próxima operação técnica é a inspeção Cloudflare necessária para substituir o like local por engagement persistente.
+**Estado histórico — supersedido pela secção 25:** FASE 2 estava ativa nesta atualização. A implementação persistente em D1 foi posteriormente integrada em `main` e a Fase 3 foi iniciada.
 
 
 ## 23. ATUALIZAÇÃO OPERACIONAL — 2026-09-25 — RECONCILIAÇÃO DOS PEDIDOS UX / LIKE / FRAMER
@@ -676,7 +676,7 @@ A pesquisa recente sobre publishing desportivo aponta para maior valor de experi
 4. Separadamente, resolver a dependência do host Framer histórico e então aplicar/testar os 213 redirects.
 
 
-## 24. FECHO DA FRENTE UX / ENGAGEMENT E TRANSIÇÃO — 2026-09-25
+## 24. FECHO DA FRENTE UX / ENGAGEMENT E TRANSIÇÃO — HISTÓRICO SUPERSEDIDO PELA SECÇÃO 25
 
 ### Pedidos 1–5 reconciliados
 - Sticky pequeno/transparente persistente: implementado na branch final, aguarda validação browser e produção.
