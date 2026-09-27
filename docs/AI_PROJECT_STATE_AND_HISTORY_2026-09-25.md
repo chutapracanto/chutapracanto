@@ -1,9 +1,12 @@
 # CHUTA PRA CANTO — REGISTO DE ESTADO, HISTÓRICO, TESTES E DECISÕES
 ## Documento de continuidade operacional para futuras IAs / agentes
-**Data:** 2026-09-25
+**Data de criação:** 2026-09-25
+**Última reconciliação operacional:** 2026-09-27
 **Repositório:** `chutapracanto/chutapracanto`
 **Produção:** `main` → `https://chutapracanto.com`
-**HEAD de main verificado nesta atualização:** `f7ef4d9a4a020dfad3cd59169aee3017774227b6`
+**HEAD de main verificado no início da auditoria de 2026-09-27:** `a191449d074f993f2de89137d883a8ce6d2ac257`.
+
+Este SHA já incluía o merge da PR #42 e o commit automático posterior de atualização do índice. Alterações documentais desta auditoria avançam o HEAD de `main`; antes de qualquer nova implementação, o HEAD deve ser novamente lido diretamente do GitHub.
 
 > Este documento é um **registo de execução e memória técnica**, não substitui `.github/AI_PROJECT_RULES.md`.
 > A ordem obrigatória continua a ser: **Rules → este registo → Bíblia Mestra → GitHub/produção real → histórico específico quando necessário**.
@@ -13,6 +16,8 @@
 ---
 
 # 1. ESTADO EXECUTIVO ATUAL
+
+> **SNAPSHOT OPERACIONAL — 2026-09-27:** FASE 3 ativa. A Fase 2 UX/editorial está encerrada operacionalmente; o engagement persistente em D1 está em `main`; a frente Framer/redirects permanece independente e não bloqueia a Fase 3. A próxima ação autónoma é concluir a matriz de fornecedores de dados para as sete competições prioritárias.
 
 ## 1.1 O projeto está funcional e em produção
 
@@ -34,17 +39,11 @@ O Chuta Pra Canto é um projeto editorial profissional de futebol em português,
 
 **Não tratar o projeto como uma prova de conceito.** A infraestrutura principal já foi construída e várias fases foram fechadas em produção.
 
-## 1.2 HEAD atual
+## 1.2 HEAD / histórico de referência
 
-`main` foi verificada diretamente no GitHub e está em:
+A referência `f7ef4d9...` pertence ao estado histórico da PR #26 e **não é o HEAD atual**. O HEAD verificado no início da auditoria de 2026-09-27 era `a191449d074f993f2de89137d883a8ce6d2ac257`, mensagem `Atualizar índice de notícias`, descendente do commit `a8f0a2e...` de conteúdo e posterior ao merge da PR #42.
 
-`f7ef4d9a4a020dfad3cd59169aee3017774227b6`
-
-Mensagem:
-
-`perf: primeira passagem de LCP mobile`
-
-Isto confirma que a primeira passagem de LCP foi efetivamente integrada em produção através da PR #26.
+A primeira passagem de LCP continua integrada em produção através da PR #26; esta secção não deve voltar a usar o SHA da #26 como se fosse o HEAD atual.
 
 ## 1.3 PRs de LCP
 
@@ -722,12 +721,12 @@ Não executar novamente a importação histórica sem uma necessidade explicitam
 
 # 21. CLOUDflare / WORKER
 
-Existe:
+Estado histórico:
 
 - `_worker.js` no repositório;
-- um Cloudflare Worker separado chamado `chutapracanto`.
+- existiu/referiu-se historicamente um Cloudflare Worker separado chamado `chutapracanto`.
 
-**Não confundir os dois.**
+**Estado atual:** o Worker separado foi apagado/confirmado como inexistente; não é infraestrutura ativa.
 
 O Worker do projeto trata, entre outras coisas:
 
@@ -1793,7 +1792,7 @@ O inventário está concluído. A execução dos redirects fica dependente de co
 
 
 
-## 53. RECONCILIAÇÃO DO ESTADO CLOUDFLARE E NOVA ORDEM DA FASE 2 — 2026-09-25
+## 53. RECONCILIAÇÃO DO ESTADO CLOUDFLARE E NOVA ORDEM DA FASE 2 — HISTÓRICO SUPERSEDIDO PELA SECÇÃO 56
 
 ### Correção factual importante
 A documentação histórica referia a existência de um Cloudflare Worker separado chamado `chutapracanto`. Essa referência está agora **desatualizada**.
@@ -1851,7 +1850,7 @@ A única dependência que precisa do Codex neste momento é a inspeção da sess
 **Estado:** FASE 2 — infraestrutura de engagement em preparação; PR #33 é provisória, não final. Worker separado antigo: confirmado como inexistente. D1: ainda não verificado. Supabase: não ligado.
 
 
-## 54. RECONCILIAÇÃO DOS PEDIDOS UX / LIKE / FRAMER — 2026-09-25
+## 54. RECONCILIAÇÃO DOS PEDIDOS UX / LIKE / FRAMER — HISTÓRICO SUPERSEDIDO PELA SECÇÃO 56
 
 Pedidos da utilizadora reconciliados com o GitHub real:
 
@@ -1874,7 +1873,7 @@ Próximas validações:
 4. resolver separadamente a dependência do host Framer histórico e testar os redirects.
 
 
-## 55. FECHO OPERACIONAL DOS PEDIDOS 1–5 — 2026-09-25
+## 55. FECHO OPERACIONAL DOS PEDIDOS 1–5 — HISTÓRICO SUPERSEDIDO PELA SECÇÃO 56
 
 Os cinco pedidos foram reconciliados com o estado GitHub e incorporados no backlog/roadmap:
 
