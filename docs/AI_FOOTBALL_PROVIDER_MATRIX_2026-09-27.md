@@ -80,7 +80,7 @@ Antes de aprovação:
 3. testar 429 e headers de quota;
 4. definir política de atualização que caiba no Free sem sacrificar a arquitetura.
 
-**Não criar endpoints, secrets ou bindings de fornecedor antes destes testes.**
+Não criar adapter, endpoints de produto, cache ou bindings definitivos antes destes testes. Em 2026-09-27 foi autorizada uma exceção estrita: um endpoint temporário, protegido por sessão Admin, POST same-origin e limitado ao branch `main` e aos hosts oficiais de Production, para uma única chamada manual de diagnóstico `/status` por execução. Esta exceção não aprova o fornecedor nem constitui integração de produto.
 
 ## Arquitetura obrigatória
 
@@ -110,9 +110,9 @@ O Cloudflare documenta duas vias para Pages:
 
 O runtime Pages lê secrets através de `context.env`. O segredo não é exposto para leitura posterior no dashboard. Fontes oficiais: https://developers.cloudflare.com/pages/functions/bindings/ e https://developers.cloudflare.com/workers/wrangler/commands/pages/.
 
-Para o CPC, usa-se o runtime Pages existente; não criar Worker separado. A chave concreta do fornecedor ainda não deve ser criada/configurada antes da decisão de fornecedor. Quando a validação estiver autorizada, o nome da variável será definido pela integração.
+Para o CPC, usa-se o runtime Pages existente; não criar Worker separado. A utilizadora configurou `API_FOOTBALL_KEY` como secret apenas em Production. A configuração foi confirmada pela API do Cloudflare através de presença/tipo, sem ler nem devolver o valor; Preview não contém esse secret.
 
-**Dependência operacional atual:** Rute pode criar a conta/API-Football e obter a chave, mas não deve enviar a chave para o chat. A ação seguinte será configurar essa chave diretamente no Cloudflare Pages pelo Dashboard ou Wrangler autenticado. Só depois disso o teste autenticado pode começar.
+**Dependência operacional atual:** o diagnóstico temporário ainda precisa de ser integrado e publicado em Production. Só então pode ser feita manualmente uma chamada autenticada a `/status`; não enviar a chave para o chat. Cada POST executa uma única chamada, sem retries nem chamadas automáticas. O resultado dessa chamada não aprova o fornecedor nem autoriza a integração definitiva.
 
 
 ## 2026-09-27 — modelo preliminar de consumo para o CPC

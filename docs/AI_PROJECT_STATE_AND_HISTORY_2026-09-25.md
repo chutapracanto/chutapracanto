@@ -1968,3 +1968,12 @@ Estes valores não são medição real da conta e não aprovam o fornecedor. O c
 A documentação também indica atualização de fixtures/events live a cada 15 segundos no fornecedor. O CPC não deve reproduzir essa frequência indiscriminadamente no Free; live contínuo nas 7 competições deve ser tratado como cenário separado e validado antes de ser prometido no produto. citeturn0search6
 
 **Estado:** API-Football continua candidato principal, não aprovado. Próxima dependência: API key configurada diretamente no Cloudflare Pages Secret para testes autenticados 2026/27 e medição real.
+
+
+## 60. DIAGNÓSTICO TEMPORÁRIO API-FOOTBALL — 2026-09-27
+
+A utilizadora confirmou que `API_FOOTBALL_KEY` foi configurada como Cloudflare Pages Secret apenas em Production. A presença e o tipo `secret_text` foram verificados por API sem ler, imprimir ou transportar o valor; Preview não contém este secret. Nenhuma alteração Cloudflare foi feita.
+
+Foi preparado no runtime Pages (`_worker.js`) um endpoint temporário de diagnóstico, condicionado ao branch `main`, host oficial de Production, POST, sessão Admin válida e Origin same-origin. Cada execução faz uma única chamada server-side a `/status`, sem retries, frontend, logging ou devolução do corpo bruto do fornecedor. A resposta prevista contém apenas HTTP status, autenticação inferida de resposta válida sem erros, contagem/categorias sanitizadas de erros, resultados, paging e quatro headers numéricos de quota. Dados pessoais de conta e qualquer conteúdo do secret não são devolvidos.
+
+**Estado:** validação local com fetch simulado; chamada autenticada real ainda não executada, pois requer a publicação em Production. API-Football continua candidato não aprovado; nenhum adapter, D1/cache, polling ou chamadas às competições foi implementado.

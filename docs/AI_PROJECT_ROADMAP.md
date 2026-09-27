@@ -713,7 +713,7 @@ Evidência atual:
 
 **Resultado:** API-Football é o candidato principal, mas **ainda não aprovado**. Antes da aprovação são obrigatórios testes autenticados de 2026/27 nas 7 competições e medição do consumo de quota, sobretudo para eventos/live.
 
-Não criar endpoints, secrets ou bindings do fornecedor antes dessa validação.
+Não criar adapter, endpoints de produto, cache ou bindings definitivos antes dessa validação. Exceção estrita autorizada em 2026-09-27: endpoint temporário, protegido pela sessão Admin, POST same-origin e limitado ao branch `main` e aos hosts oficiais de Production para uma única chamada manual `/status` por execução; não aprova o fornecedor nem constitui integração de produto.
 
 **Estado:** FASE 3 — matriz concluída; validação real do candidato principal em curso.
 
@@ -731,10 +731,11 @@ O segredo fica acessível server-side através de `context.env` e não deve ser 
 ### Estado da Fase 3
 - fornecedor: **API-Football — candidato principal, não aprovado**;
 - integração: **não implementada**;
-- secret: **não configurado**;
+- secret `API_FOOTBALL_KEY`: **configurado apenas em Production**; Preview não tem este secret. Presença/tipo confirmados por API sem aceder ao valor;
+- diagnóstico autenticado: **endpoint temporário em preparação; ainda não publicado nem executado**;
 - validação autenticada 2026/27: **pendente**;
 - mecanismo seguro: **definido**;
-- próxima dependência: criar a conta/chave e configurar o secret diretamente no Cloudflare Pages, sem revelar a chave ao chat.
+- próxima dependência: integrar/publicar o diagnóstico temporário em Production e executar uma chamada manual `/status`; manter a chave apenas no Cloudflare Pages e não revelar o valor.
 
 
 ## 25.1. MODELO QUANTITATIVO DE QUOTA — 2026-09-27
