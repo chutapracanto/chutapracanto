@@ -2195,3 +2195,14 @@ Plano operacional:
 - Acesso efetivo aos dados da season 2026 no Free: ainda não confirmado.
 - Diagnóstico de 7 competições: não repetir.
 - Próxima operação de quota, se necessária: uma única chamada representativa, com resultado sanitizado e através do runtime server-side.
+
+
+# 37. LEDGER — DIAGNÓSTICO TEMPORÁRIO DE UMA ÚNICA CHAMADA PARA PRIMEIRA LIGA 2026 PREPARADO — 2026-09-27
+
+- Bloqueio reportado pelo Codex: o workspace não disponibilizou o repositório, pelo que não executou qualquer chamada; consumo nesta tentativa: 0 pedidos.
+- Verificação direta pelo assistente confirmou que o repositório correto é `chutapracanto/chutapracanto`, branch `main`, e que o endpoint 2026/27 existente executa obrigatoriamente as sete competições em sequência; não é seguro reutilizá-lo para o teste representativo porque repetiria as sete chamadas.
+- Foi criado o branch `feat/diagnostico-api-football-primeira-liga-2026` e um endpoint temporário dedicado `/api/admin/football-provider-primeira-liga-2026-diagnostic`.
+- O endpoint executa exatamente uma chamada server-side: `GET /leagues?season=2026&search=Primeira%20Liga`; não aceita parâmetros de consulta controlados pelo utilizador, exige Production/main, host oficial, sessão Admin válida e Origin same-origin, usa `API_FOOTBALL_KEY` apenas no servidor e devolve resposta sanitizada sem chave nem mensagem bruta do fornecedor.
+- A alteração foi validada por diff e integrada via PR #45, squash merge `aab39f32c2de70e659a4bc69d777218e2e6e0ada`.
+- O endpoint está agora em `main` e pode ser executado uma única vez em Production. Não executar novamente o diagnóstico das sete competições.
+- Próximo passo: executar apenas esta chamada representativa no site autenticado. Depois da evidência, remover o endpoint temporário e registar o resultado; a chave atual continua a ser tratada como temporária/potencialmente exposta e será rodada no fim da validação.
