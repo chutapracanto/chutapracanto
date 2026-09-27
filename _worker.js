@@ -1624,6 +1624,151 @@ async function handleAdminAPI(request, env) {
 
 
   // ----------------------------------------------------------
+  // DIAGNÓSTICO TEMPORÁRIO API-FOOTBALL — COBERTURA 2026/27
+  // ----------------------------------------------------------
+
+  if (pathname === "/api/admin/football-provider-2026-27-diagnostic") {
+    if (
+      env.CF_PAGES_BRANCH !== "main" ||
+      !["chutapracanto.com", "chutapracanto.pages.dev"].includes(url.hostname)
+    ) {
+      return json({ error: "Endpoint não encontrado." }, 404);
+    }
+
+    if (request.method !== "POST") {
+      return json(
+        { error: "Método não permitido." },
+        405,
+        { Allow: "POST" }
+      );
+    }
+
+    const authError = await requireAuth(request, env);
+    if (authError) {
+      return authError;
+    }
+
+    if (request.headers.get("Origin") !== url.origin) {
+      return json({ error: "Origem não permitida." }, 403);
+    }
+
+    const apiKey = env.API_FOOTBALL_KEY;
+    if (typeof apiKey !== "string" || !apiKey.trim()) {
+      return json(
+        { error: "Secret API-Football indisponível em Production." },
+        503
+      );
+    }
+
+    const targets = [
+      { key: "primeiraLiga", search: "Primeira Liga" },
+      { key: "tacaPortugal", search: "Taça de Portugal" },
+      { key: "tacaLiga", search: "Taça da Liga" },
+      { key: "championsLeague", search: "UEFA Champions League" },
+      { key: "europaLeague", search: "UEFA Europa League" },
+      { key: "conferenceLeague", search: "UEFA Europa Conference League" },
+      { key: "nationsLeague", search: "UEFA Nations League" }
+    ];
+
+    const safeInteger = value => {
+      if (value === null || value === undefined || value === "") return null;
+      const number = Number(value);
+      return Number.isSafeInteger(number) && number >= 0 ? number : null;
+    };
+
+    const safeString = value =>
+      typeof value === "string" && value.length <= 160 ? value : null;
+
+    const results = {};
+
+    for (const target of targets) {
+      let providerResponse;
+      let providerData = null;
+
+      try {
+        const endpoint =
+          "https://v3.football.api-sports.io/leagues?season=2026&search=" +
+          encodeURIComponent(target.search);
+
+        providerResponse = await fetch(endpoint, {
+          method: "GET",
+          headers: { "x-apisports-key": apiKey.trim() },
+          signal: AbortSignal.timeout(10000)
+        });
+        providerData = await providerResponse.json();
+      } catch {
+        results[target.key] = {
+          httpStatus: null,
+          ok: false,
+          results: null,
+          matches: [],
+          errorCategory: "request_failed"
+        };
+        continue;
+      }
+
+      const rawErrors = providerData?.errors;
+      const errorItems = Array.isArray(rawErrors)
+        ? rawErrors
+        : rawErrors && typeof rawErrors === "object"
+          ? Object.keys(rawErrors)
+          : rawErrors
+            ? [rawErrors]
+            : [];
+
+      const categories = new Set();
+      for (const item of errorItems) {
+        const label = String(item).toLowerCase();
+        if (/token|key|auth/.test(label)) categories.add("authentication");
+        else if (/rate|request|limit|quota/.test(label)) categories.add("quota");
+        else if (/plan|subscription/.test(label)) categories.add("subscription");
+        else categories.add("provider");
+      }
+
+      const responseItems = Array.isArray(providerData?.response)
+        ? providerData.response
+        : [];
+
+      results[target.key] = {
+        httpStatus: providerResponse.status,
+        ok: providerResponse.ok && errorItems.length === 0,
+        results: safeInteger(providerData?.results),
+        matches: responseItems.slice(0, 5).map(item => ({
+          id: safeInteger(item?.league?.id),
+          name: safeString(item?.league?.name),
+          country: safeString(item?.country?.name),
+          seasons: Array.isArray(item?.seasons)
+            ? item.seasons
+                .filter(season => Number(season?.year) === 2026)
+                .map(season => ({
+                  year: safeInteger(season?.year),
+                  start: safeString(season?.start),
+                  end: safeString(season?.end),
+                  current: season?.current === true,
+                  coverage: {
+                    fixtures: season?.coverage?.fixtures === true,
+                    events: season?.coverage?.fixtures?.events === true,
+                    lineups: season?.coverage?.fixtures?.lineups === true,
+                    statistics: season?.coverage?.fixtures?.statistics_fixtures === true,
+                    standings: season?.coverage?.standings === true
+                  }
+                }))
+            : []
+        })),
+        errorCategories: [...categories]
+      };
+    }
+
+    return json({
+      provider: "API-Football",
+      seasonTested: 2026,
+      seasonLabel: "2026/27",
+      competitions: results
+    });
+  }
+
+
+  // ----------------------------------------------------------
   // RESTANTES ROTAS ADMIN
   // ----------------------------------------------------------
 
