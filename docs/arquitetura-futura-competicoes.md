@@ -1,6 +1,6 @@
 # Especificação futura: área de competições
 
-**Estado:** desenho técnico; matriz de fornecedores concluída em 2026-09-27; API-Football é candidato principal, mas fornecedor ainda não aprovado para produção. Testes autenticados 2026/27 e quota pendentes.
+**Estado:** desenho técnico; BSD validado como fornecedor principal em 2026-09-27; adapter server-side inicial implementado no Worker. Cache/D1, atualização agendada e UI de competições permanecem como fases seguintes.
 
 ## Modelo editorial e de dados
 
@@ -35,8 +35,8 @@ As respostas devem incluir `updatedAt`, origem dos dados e estado de atualizaç�
 
 A primeira matriz documental está em `docs/AI_FOOTBALL_PROVIDER_MATRIX_2026-09-27.md`.
 
-O candidato principal é API-Football porque declara cobertura das sete competições prioritárias e disponibiliza no Free os endpoints necessários para a arquitetura. O limite Free é 100 requests/dia e 10/minuto.
+O fornecedor principal validado é o Bzzoiro Sports Data (BSD). A validação autenticada confirmou as sete competições prioritárias em 2026/27 e fixtures/results + standings da Primeira Liga. A secret `BSD_API_KEY` permanece exclusivamente server-side.
 
-A seleção ainda não está aprovada. Antes de criar secrets, bindings ou endpoints, é obrigatório validar com uma API key real a época 2026/27 das sete competições e medir a quota necessária para fixtures, resultados, standings e events/live.
+O adapter é a única camada dependente do fornecedor. A implementação inicial descobre a época ativa com cache, normaliza fixtures/results e standings e expõe apenas o endpoint de aplicação `/api/competicoes`, sem encaminhar a API BSD diretamente para o frontend.
 
 A arquitetura continua provider-agnostic e o adapter deve ser a única camada dependente do fornecedor.
