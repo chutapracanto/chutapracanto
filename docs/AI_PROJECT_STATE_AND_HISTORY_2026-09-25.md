@@ -2045,3 +2045,53 @@ Não voltar a tentar o POST enquanto não existir uma sessão Admin Production v
 **Dependência:** sessão Admin válida em Production.
 
 Quando essa dependência existir, executar **uma única** chamada ao diagnóstico protegido, validar a resposta sanitizada e atualizar imediatamente este ledger com o resultado.
+
+
+## 34. LEDGER — DIAGNÓSTICO AUTENTICADO API-FOOTBALL EXECUTADO — 2026-09-27
+
+### Operação concluída
+
+A sessão Admin Production foi utilizada para executar uma única chamada POST ao endpoint temporário protegido:
+`/api/admin/football-provider-diagnostic`.
+
+O endpoint executou a chamada server-side prevista a `GET /status` da API-Football, sem retries.
+
+### Evidência sanitizada devolvida pelo Production
+
+- provider: `API-Football`
+- HTTP status: **200**
+- authenticated: **true**
+- results: **0**
+- errors.present: **false**
+- errors.count: **0**
+- paging: current 1 / total 1
+- dailyLimit: **100**
+- dailyRemaining: **100**
+- minuteLimit: **10**
+- minuteRemaining: **9**
+
+Nenhuma API key, cookie, credencial, corpo bruto da API ou dado pessoal foi exposto no resultado.
+
+### Interpretação operacional
+
+O primeiro gate de autenticação está **PASS**: a credencial configurada no secret Production é aceite pela API-Football e o endpoint `/status` respondeu sem erros.
+
+A chamada consumiu uma request no limite por minuto (10 → 9), enquanto o diagnóstico reportou 100/100 no limite diário. A quota diária não deve, contudo, ser tratada como garantia de margem para produção; a validação real das sete competições e dos recursos necessários ainda é obrigatória.
+
+### Gates ainda pendentes
+
+1. autenticar e testar a época **2026/27** nas sete competições prioritárias;
+2. medir fixtures/resultados/standings/events conforme o uso previsto;
+3. verificar comportamento e headers perante limites/429 de forma controlada, sem desperdiçar quota;
+4. fechar política de cache, deduplicação, stale-if-error e frequência de atualização com margem operacional suficiente;
+5. só depois decidir aprovação do API-Football como fornecedor de produção.
+
+### Estado atual
+
+**API-Football continua candidato principal, mas ainda NÃO aprovado para produção.**
+
+O diagnóstico `/status` foi concluído com sucesso. O próximo passo técnico é a validação autenticada de cobertura e comportamento real para 2026/27 nas sete competições, não repetir o diagnóstico `/status`.
+
+### Nota sobre consola do Admin
+
+A consola também mostrou avisos de Tracking Prevention relativos aos CDNs do Quill/Turndown, 404 de `favicon.ico` e uma chamada `/api/admin/session` com 401. Estes sinais não invalidaram a chamada diagnóstica, que respondeu 200 com `authenticated: true`. Não abrir investigação separada destes avisos nesta fase sem evidência de impacto funcional.
