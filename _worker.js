@@ -1769,6 +1769,170 @@ async function handleAdminAPI(request, env) {
 
 
   // ----------------------------------------------------------
+  // DIAGNÓSTICO TEMPORÁRIO BSD — COBERTURA 2026/27
+  // ----------------------------------------------------------
+
+  if (pathname === "/api/admin/football-provider-bsd-2026-27-diagnostic") {
+    if (
+      env.CF_PAGES_BRANCH !== "main" ||
+      !["chutapracanto.com", "chutapracanto.pages.dev"].includes(url.hostname)
+    ) {
+      return json({ error: "Endpoint não encontrado." }, 404);
+    }
+
+    if (request.method !== "POST") {
+      return json(
+        { error: "Método não permitido." },
+        405,
+        { Allow: "POST" }
+      );
+    }
+
+    const authError = await requireAuth(request, env);
+    if (authError) {
+      return authError;
+    }
+
+    if (request.headers.get("Origin") !== url.origin) {
+      return json({ error: "Origem não permitida." }, 403);
+    }
+
+    const apiKey = env.BSD_API_KEY;
+    if (typeof apiKey !== "string" || !apiKey.trim()) {
+      return json(
+        { error: "Secret BSD_API_KEY indisponível em Production." },
+        503
+      );
+    }
+
+    const targets = [
+      { key: "primeiraLiga", leagueId: 2, name: "Liga Portugal Betclic" },
+      { key: "tacaPortugal", leagueId: 92, name: "Taça de Portugal" },
+      { key: "tacaLiga", leagueId: 93, name: "Taça da Liga" },
+      { key: "championsLeague", leagueId: 7, name: "Champions League" },
+      { key: "europaLeague", leagueId: 8, name: "Europa League" },
+      { key: "conferenceLeague", leagueId: 83, name: "Conference League" },
+      { key: "nationsLeague", leagueId: 64, name: "UEFA Nations League" }
+    ];
+
+    const safeInteger = value => {
+      if (value === null || value === undefined || value === "") return null;
+      const number = Number(value);
+      return Number.isSafeInteger(number) && number >= 0 ? number : null;
+    };
+
+    const safeString = value =>
+      typeof value === "string" && value.length <= 160 ? value : null;
+
+    const extractSeasons = data => {
+      if (Array.isArray(data)) return data;
+      if (Array.isArray(data?.seasons)) return data.seasons;
+      if (Array.isArray(data?.results)) return data.results;
+      if (Array.isArray(data?.data)) return data.data;
+      return [];
+    };
+
+    const results = {};
+
+    for (const target of targets) {
+      let providerResponse = null;
+      let providerData = null;
+
+      try {
+        providerResponse = await fetch(
+          `https://sports.bzzoiro.com/api/v2/leagues/${target.leagueId}/seasons/`,
+          {
+            method: "GET",
+            headers: {
+              "Authorization": `Token ${apiKey.trim()}`,
+              "Accept": "application/json"
+            },
+            signal: AbortSignal.timeout(10000)
+          }
+        );
+        providerData = await providerResponse.json();
+      } catch {
+        results[target.key] = {
+          leagueId: target.leagueId,
+          name: target.name,
+          httpStatus: null,
+          ok: false,
+          season2026_27: null,
+          errorCategory: "request_failed"
+        };
+        continue;
+      }
+
+      const seasons = extractSeasons(providerData);
+      const season2026 = seasons.find(season => {
+        const label = String(
+          season?.name ||
+          season?.label ||
+          season?.season ||
+          ""
+        ).toLowerCase();
+        return (
+          Number(season?.year) === 2026 ||
+          /2026.?27|26.?27/.test(label)
+        );
+      });
+
+      const quota = {
+        limit: safeInteger(
+          providerResponse.headers.get("X-RateLimit-Limit") ||
+          providerResponse.headers.get("X-Rate-Limit-Limit") ||
+          providerResponse.headers.get("RateLimit-Limit")
+        ),
+        remaining: safeInteger(
+          providerResponse.headers.get("X-RateLimit-Remaining") ||
+          providerResponse.headers.get("X-Rate-Limit-Remaining") ||
+          providerResponse.headers.get("RateLimit-Remaining")
+        )
+      };
+
+      results[target.key] = {
+        leagueId: target.leagueId,
+        name: target.name,
+        httpStatus: providerResponse.status,
+        ok: providerResponse.ok,
+        seasonCount: seasons.length,
+        season2026_27: season2026
+          ? {
+              id: safeInteger(season2026.id),
+              year: safeInteger(season2026.year),
+              name: safeString(season2026.name),
+              startDate: safeString(season2026.start_date || season2026.start),
+              endDate: safeString(season2026.end_date || season2026.end),
+              current: season2026.current === true,
+              stages: Array.isArray(season2026.stages)
+                ? season2026.stages.slice(0, 20).map(stage => ({
+                    stage: safeString(stage?.stage),
+                    stageName: safeString(stage?.stage_name),
+                    matches: safeInteger(stage?.matches),
+                    rounds: safeInteger(stage?.rounds)
+                  }))
+                : []
+            }
+          : null,
+        quota,
+        error: providerData?.detail
+          ? safeString(providerData.detail)
+          : providerData?.error
+            ? safeString(providerData.error)
+            : null
+      };
+    }
+
+    return json({
+      provider: "Bzzoiro Sports Data",
+      seasonTested: 2026,
+      seasonLabel: "2026/27",
+      requestCount: targets.length,
+      competitions: results
+    });
+  }
+
+  // ----------------------------------------------------------
   // RESTANTES ROTAS ADMIN
   // ----------------------------------------------------------
 
