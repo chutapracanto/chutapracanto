@@ -238,8 +238,24 @@ Este trabalho está **ENCERRADO**. A configuração Framer + Cloudflare foi publ
 
 **AGORA:** fechar os dois pontos documentais restantes (Terms of Service gerais + versão aplicável antes de 1-10-2026). Não é necessário consumir requests BSD para isso.
 
-**DEPOIS:** se não surgir restrição material nesses documentos, BSD fica fechado como fornecedor principal e avança-se para o adapter interno CPC, cache/D1 e política de atualização.
+**CONCLUÍDO:** BSD fechado como fornecedor principal para o caso de uso CPC e adapter server-side inicial implementado no Worker. **PRÓXIMO:** validar deploy/sintaxe e, sem repetir diagnósticos de provider, integrar cache/D1, atualização agendada e UI de `/competicoes`.
 
 ## 7. Regra de continuidade
 
 Nada do trabalho de APIs fica perdido: decisões, evidências, exclusões, requests consumidos e próximos gates ficam registados neste documento. Ao retomar, não repetir testes já executados sem nova hipótese ou evidência.
+
+
+## 8. Implementação BSD — adapter inicial
+
+**Commit:** `c300ca0e362516e15845a9af34bfb371b2a55bf0`
+
+Foi implementado no `_worker.js` um adapter server-side provider-specific para BSD, com:
+- mapa interno das sete competições prioritárias;
+- descoberta da época ativa via endpoint de seasons, com cache de 6 horas;
+- normalização de fixtures/results e standings para o modelo CPC;
+- `updatedAt`, `source` e `updateStatus` nas respostas;
+- cache de 60 s para eventos e 300 s para standings;
+- token `BSD_API_KEY` exclusivamente server-side;
+- endpoint de aplicação `/api/competicoes`, sem exposição da API key nem proxy genérico para a BSD.
+
+A implementação não criou ainda D1, Cron Trigger ou UI. Essas são as próximas fases e devem ser validadas após o deploy.
