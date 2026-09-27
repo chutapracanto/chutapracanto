@@ -548,7 +548,7 @@ A documentação oficial do Framer confirma que redirects cross-domain/domain-le
 
 
 
-## 22. ATUALIZAÇÃO OPERACIONAL — 2026-09-25 — CLOUDFLARE / ENGAGEMENT / REORDENAÇÃO DA FASE 2
+## 22. ATUALIZAÇÃO OPERACIONAL — 2026-09-25 — CLOUDFLARE / ENGAGEMENT / REORDENAÇÃO DA FASE 2 — HISTÓRICO SUPERSEDIDO PELA SECÇÃO 25
 
 ### Correção do estado Cloudflare
 A referência histórica a um Worker separado chamado `chutapracanto` está desatualizada.
@@ -677,6 +677,8 @@ A pesquisa recente sobre publishing desportivo aponta para maior valor de experi
 
 
 ## 24. FECHO DA FRENTE UX / ENGAGEMENT E TRANSIÇÃO — HISTÓRICO SUPERSEDIDO PELA SECÇÃO 25
+
+> **Nota de leitura:** esta secção foi ultrapassada pelos eventos de 26/09. Não usar os estados de PR #38/#36 abaixo como estado atual.
 
 ### Pedidos 1–5 reconciliados
 - Sticky pequeno/transparente persistente: implementado na branch final, aguarda validação browser e produção.
