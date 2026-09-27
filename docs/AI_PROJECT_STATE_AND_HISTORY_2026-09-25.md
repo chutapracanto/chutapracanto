@@ -1902,3 +1902,18 @@ A implementação de engagement persistente encontra-se em main: `_worker.js` co
 Foi feita pesquisa atual de fornecedores. API-Football apresenta Free a $0 com 100 requests/dia e cobertura de Primeira Liga/Taça da Liga; football-data.org apresenta Free a €0 com 12 competições, incluindo Primeira Liga e Champions League, mas com dados atrasados no plano gratuito e exigência de atribuição. Nenhum foi aprovado ainda.
 
 **Próxima ação autónoma:** construir matriz de fornecedor/cobertura/limites/frescura/licença/custo para as sete competições previstas e escolher o fornecedor/adaptador principal antes de qualquer implementação.
+
+
+## 57. MATRIZ DE FORNECEDORES FASE 3 — 2026-09-27
+
+A primeira matriz documental de fornecedores foi concluída em `docs/AI_FOOTBALL_PROVIDER_MATRIX_2026-09-27.md`.
+
+Resultado:
+- API-Football é o candidato principal: declara as sete competições prioritárias e oferece no Free os endpoints necessários, com 100 requests/dia e 10/minuto.
+- football-data.org é fallback parcial: Free cobre Primeira Liga/Champions, mas não há evidência suficiente de que as sete competições estejam simultaneamente no Free e os scores são atrasados.
+- Sportmonks é fallback técnico pago.
+- Sportradar não apresentou, na pesquisa pública realizada, uma modalidade Free de produção comparável.
+
+Nenhum fornecedor foi ainda aprovado. A próxima dependência real é uma API key gratuita para validar por chamadas autenticadas a época 2026/27 nas sete competições e medir a quota. Não criar secrets/bindings/endpoints antes dessa validação.
+
+Framer redirects continuam independentes e não bloqueiam esta linha.
