@@ -1934,6 +1934,55 @@ async function handleAdminAPI(request, env) {
 
 
   // ----------------------------------------------------------
+  // DIAGNÓSTICO TEMPORÁRIO BSD — BSD_FETCH_JSON DIRECT
+  // ----------------------------------------------------------
+
+  if (pathname === "/api/admin/football-provider-bsd-helper-diagnostic") {
+    if (
+      env.CF_PAGES_BRANCH !== "main" ||
+      !["chutapracanto.com", "chutapracanto.pages.dev"].includes(url.hostname)
+    ) {
+      return json({ error: "Endpoint não encontrado." }, 404);
+    }
+
+    if (request.method !== "POST") {
+      return json({ error: "Método não permitido." }, 405, { Allow: "POST" });
+    }
+
+    const authError = await requireAuth(request, env);
+    if (authError) return authError;
+
+    if (request.headers.get("Origin") !== url.origin) {
+      return json({ error: "Origem não permitida." }, 403);
+    }
+
+    const endpoint = "https://sports.bzzoiro.com/api/v2/events/?league_id=2&season_id=1310&stage=regular-season";
+    const startedAt = Date.now();
+
+    try {
+      const data = await bsdFetchJson(env, endpoint);
+      return json({
+        provider: "Bzzoiro Sports Data",
+        helper: "bsdFetchJson",
+        httpStatus: 200,
+        elapsedMs: Date.now() - startedAt,
+        resultCount: Array.isArray(data?.results) ? data.results.length : null,
+        topLevelKeys: data && typeof data === "object" && !Array.isArray(data)
+          ? Object.keys(data).slice(0, 20)
+          : []
+      });
+    } catch (error) {
+      return json({
+        provider: "Bzzoiro Sports Data",
+        helper: "bsdFetchJson",
+        httpStatus: null,
+        elapsedMs: Date.now() - startedAt,
+        error: error instanceof Error ? error.message : "Erro desconhecido."
+      }, 503);
+    }
+  }
+
+  // ----------------------------------------------------------
   // DIAGNÓSTICO TEMPORÁRIO BSD — RUNTIME PRODUCTION
   // ----------------------------------------------------------
 
