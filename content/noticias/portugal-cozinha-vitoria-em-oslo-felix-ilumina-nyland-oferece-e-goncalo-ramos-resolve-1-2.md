@@ -5,7 +5,7 @@ categoria: "Seleção Nacional"
 type: "news"
 date: "2026-09-27T20:57:30.549Z"
 author: "ChutaPraCanto"
-imagem: "/images/uploads/1000135384-20260927205730674-19ivc.jpg"
+imagem: "/images/uploads/1000135387-20260927210818254-gb03i.jpg"
 ---
 
 Portugal continua com aproveitamento 100% vitorioso na Liga das Nações 2026/27. Num teste de elevada exigência física em solo nórdico, a Seleção das Quinas superou a Noruega por 1-2, tirando partido da inspiração de João Félix, do oportunismo de Gonçalo Ramos e da coesão do seu bloco recuado para resistir à pressão avassaladora de Erling Haaland e companhia.
