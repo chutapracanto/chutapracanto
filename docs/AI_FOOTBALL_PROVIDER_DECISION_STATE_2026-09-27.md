@@ -116,16 +116,41 @@ Todos os sete endpoints de seasons responderam **HTTP 200 / ok:true**, sem erros
 - A documentação oficial confirma autenticação por Authorization: Token e a API Football v2.
 
 ### Contagem de requests
-- BSD antes do diagnóstico: **0**
-- BSD neste diagnóstico: **7**
-- BSD total consumido nesta validação: **7**
+- BSD antes dos diagnósticos: **0**
+- BSD seasons diagnostic: **7**
+- BSD operational diagnostic original: **3**
+- BSD total consumido nesta validação até agora: **10**
 - API-Football: **0 novos** nesta fase
 - **Não repetir** o diagnóstico de seasons: já não acrescenta informação suficiente para justificar mais 7 requests.
+- O próximo gate operacional foi reduzido de 3 para **2 requests**, porque a Champions League já demonstrou a filtragem por stage e não precisa de ser repetida.
+
+### Gate operacional — correção de schema antes da execução final
+O diagnóstico original devolveu:
+- eventos Primeira Liga: HTTP 200 e 50 itens, mas date:null;
+- standings Primeira Liga: HTTP 200, mas rowCount:0;
+- Champions League: HTTP 200 e 50 itens, com stage:league-phase.
+
+A documentação oficial BSD esclarece que:
+- a lista de eventos usa resposta paginada results[] e o campo de data/horário do jogo é **event_date**; os filtros aceites incluem league_id, season_id e stage;
+- standings usam **standings[]** numa tabela plana e **groups[]** para competições agrupadas;
+- cada row de standings contém position, team_id, team_name, jogos e pontos. citeturn2view0turn4view0
+
+Logo, os dois sinais problemáticos do diagnóstico original (date:null e rowCount:0) foram classificados como **falha do parser diagnóstico**, não como falha comprovada do fornecedor.
+
+Foi corrigido o endpoint temporário /api/admin/football-provider-bsd-operational-diagnostic para:
+1. extrair event_date e manter status/stage;
+2. interpretar standings[] diretamente;
+3. suportar groups[] quando aplicável;
+4. executar apenas **2 chamadas**: Primeira Liga fixtures/results + Primeira Liga standings.
+
+**Commit da correção:** 2913e3cc434ad13b29e31bed50118b096994b778.
+
+**Próxima execução:** apenas o endpoint corrigido, uma vez. O objetivo é validar o schema real autenticado e obter rows de standings sem repetir chamadas já validadas.
 
 ### Licença — gate ainda aberto
 A licença BSD v4.0, efetiva em 1 de outubro de 2026, permite armazenar e mostrar os dados em aplicações/sites próprios, mas proíbe redistribuir raw data em substancial parte como dataset/feed/API independente. Também permite Derived Outputs, desde que não permitam reconstruir parte substancial do raw data, e atribui ao utilizador a responsabilidade de conformidade legal e direitos de terceiros.
 
-**Conclusão atual:** BSD passa o gate de **cobertura 2026/27**. Ainda não passa a aprovação final de fornecedor porque falta validar dados operacionais reais (fixtures/resultados/standings) e fechar a revisão de licença/termos para o uso concreto do CPC.
+**Conclusão atual:** BSD passa o gate de **cobertura 2026/27**. Ainda não passa a aprovação final de fornecedor porque falta validar o schema/dados operacionais reais e fechar a revisão de licença/termos para o uso concreto do CPC.
 
 ## 3. Arquitetura que continua válida independentemente do fornecedor
 
