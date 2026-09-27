@@ -735,3 +735,28 @@ O segredo fica acessível server-side através de `context.env` e não deve ser 
 - validação autenticada 2026/27: **pendente**;
 - mecanismo seguro: **definido**;
 - próxima dependência: criar a conta/chave e configurar o secret diretamente no Cloudflare Pages, sem revelar a chave ao chat.
+
+
+## 25.1. MODELO QUANTITATIVO DE QUOTA — 2026-09-27
+
+A análise da Fase 3 avançou do critério qualitativo (“API-Football cobre as sete competições”) para um modelo quantitativo de consumo.
+
+A documentação oficial confirma que `/fixtures?league=&season=` pode devolver a época completa e que filtros por data/período/round permitem reduzir o volume; também permite agrupar detalhes de até 20 fixtures por chamada. Portanto, o modelo CPC não deve assumir uma chamada por jogo. citeturn0search1turn0search3turn0search6
+
+Modelos preliminares:
+- 1 fixtures + 1 standings por competição/dia + metadata: ~15 requests/dia;
+- 4 atualizações de fixtures/dia + 1 standings/dia por competição + metadata: ~36/dia;
+- 12 atualizações de fixtures/dia + 1 standings/dia por competição + metadata: ~92/dia.
+
+São modelos de arquitetura, não medições autenticadas. O cenário de ~92/dia não constitui margem confortável.
+
+O gate de aprovação passa a exigir:
+1. cobertura autenticada 2026/27 das 7 competições;
+2. medição real de quota/headers;
+3. modelo por tipo de dia da época;
+4. política de cache/deduplicação/stale-if-error;
+5. validação de 10 requests/minuto;
+6. margem operacional real, e não apenas consumo <=100;
+7. decisão separada sobre live/events, que podem tornar o Free inadequado.
+
+**Estado:** API-Football continua candidato principal, não aprovado. A próxima dependência externa é a API key configurada diretamente como Cloudflare Pages Secret; depois disso, executar testes autenticados e continuar a medição sem pedir a chave no chat.
