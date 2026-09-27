@@ -3,7 +3,7 @@
 **Data:** 2026-09-27  
 **Projeto:** Chuta Pra Canto  
 **Repositório:** `chutapracanto/chutapracanto`  
-**Estado:** decisão de fornecedor ainda em análise; trabalho prioritário temporariamente mudou para redirecionamentos Framer → domínio oficial.
+**Estado:** redirecionamentos Framer → domínio oficial concluídos e validados; retoma da validação do fornecedor de dados de futebol pelo BSD.
 
 ## 1. O que ficou concluído na análise de fornecedores
 
@@ -128,7 +128,7 @@ Antes de qualquer aprovação:
 
 **Não consumir créditos do Codex com testes repetidos que não alterem a decisão.**
 
-## 5. Trabalho prioritário agora — Framer / redirecionamentos
+## 5. Trabalho concluído — Framer / redirecionamentos
 
 Foi identificado um trabalho anterior que deve ser tratado antes de retomar as APIs:
 
@@ -149,10 +149,14 @@ deve redirecionar para:
 O redirecionamento deve ser permanente (301) quando a configuração disponível no Framer o permitir e deve preservar o path/slug. O comportamento deve ser validado com pelo menos o domínio raiz e uma notícia real.
 
 ### Estado
-- **Ainda não executado.**
-- O utilizador tem acesso ao Framer.
-- A execução deve ser feita agora, antes de retomar a decisão da API.
-- Não alterar o domínio oficial `chutapracanto.com` nem a estrutura de URLs sem validação.
+- **CONCLUÍDO e VALIDADO.**
+- O Framer foi configurado com redirect em todas as páginas para preservar path, query e hash até `chutapracanto.com`.
+- O domínio raiz foi testado e redirecionou corretamente.
+- Para as notícias antigas, o Cloudflare Worker passou a reconhecer o formato legado `/noticias/<slug>` e a redirecionar por 301 para `/noticia?slug=<slug-atual>`.
+- Foi criado `content/framer-news-redirects.json` com 213 correspondências provenientes do inventário existente.
+- Uma URL real antiga partilhada via Facebook foi testada ponta a ponta e abriu corretamente a notícia atual.
+- Estado técnico registado no inventário `docs/framer/framer-url-redirect-inventory-2026-09-25.json`.
+- Commits relevantes: mapa `4ec827a057fc906d695543f82e3d99825df54069`; Worker `382504c4b00431acd47d547c5be52d7298bee2e1`; estado `732ece9f10a4c23b57481ab1b8ee6d2def8580b4`.
 
 ### Próximo passo
 Inspecionar no Framer a configuração de domínio/redirects disponível e determinar a forma correta de:
@@ -165,8 +169,8 @@ Se o Framer não suportar o redirecionamento wildcard/path-preserving diretament
 
 ## 6. Ordem de execução atual
 
-**AGORA:** redirecionamentos Framer → domínio oficial.  
-**DEPOIS:** retomar BSD e concluir validação do fornecedor.  
+**AGORA:** retomar BSD e concluir a validação do fornecedor, começando por cobertura real 2026/27 e quota/limites.  
+**DEPOIS:** comparar a evidência com os critérios de aprovação e decidir o fornecedor.  
 **SÓ DEPOIS DA APROVAÇÃO:** integração definitiva da API, cache/D1 e política de atualização.
 
 ## 7. Regra de continuidade
