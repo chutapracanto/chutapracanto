@@ -398,7 +398,6 @@ Foi comprovado:
 
 ---
 # 9. CLS 0,571 — NÃO RESOLVER POR PALPITE
-
 Foi observada uma medição válida de artigo desktop com:
 
 - Performance: 74;
@@ -797,8 +796,7 @@ Exemplos válidos:
 
 ### Não usar Codex para
 - editar GitHub;
-- editar Markdown;
-- editar HTML/CSS/JS;
+- editar Markdown;- editar HTML/CSS/JS;
 - criar commits;
 - criar branches;
 - criar/mergear PRs;
@@ -1197,8 +1195,7 @@ Sempre que o índice for regenerado, validar pelo menos:
 - O HEAD real de `main` foi verificado diretamente no GitHub antes de continuar.
 - HEAD atual: `2192b856aecb679ba2d7e1bedeeab8fdd2ef248c`.- Commit: `docs: registar auditoria seo técnica`.
 - O HEAD atual está 1 commit à frente de `31f2bb3dd41c199b729cc2fe54f1eacff06f7e64`, sem divergência atrás.
-- A única alteração nesse avanço foi documentação do próprio ledger; não houve alteração de código, conteúdo editorial, workflow ou configuração de produção.
-- Não existem PRs abertas neste momento.
+- A única alteração nesse avanço foi documentação do próprio ledger; não houve alteração de código, conteúdo editorial, workflow ou configuração de produção.- Não existem PRs abertas neste momento.
 - O HEAD `f7ef4d9...` anteriormente registado no início deste documento está desatualizado; o estado real do GitHub prevalece.
 - Consequência: a primeira passagem de LCP continua integrada em produção, mas este novo commit não altera a conclusão técnica sobre LCP/CLS.
 - Distinção operacional: LCP first pass = **implementada, sem melhoria quantitativa before/after comprovada**; CLS = **problema ainda aberto, sem causa causalmente comprovada**; SEO técnico básico = **implementado e auditado**; indexação real = **ainda não medida no Search Console**.
@@ -1597,8 +1594,7 @@ A análise anterior que classificava os 107 slugs coincidentes como possíveis d
 ### Evidência atual
 - O índice atual tem **238 entradas**.
 - **180 entradas** do índice estão datadas de 05/08/2026 (incluindo a grande maioria do lote Framer histórico); este facto explica as 107 coincidências por slug.
-- Entre os **163 artigos Framer publicados depois de 22/08**, existem:
-  - **107** com o mesmo slug de uma entrada antiga do índice, mas essa entrada está em **05/08/2026**;
+- Entre os **163 artigos Framer publicados depois de 22/08**, existem:  - **107** com o mesmo slug de uma entrada antiga do índice, mas essa entrada está em **05/08/2026**;
   - **56** sem qualquer slug correspondente no índice.
 - Portanto, a coincidência de slug **não prova que os 107 artigos pós-22/08 estejam publicados no `.com`**.
 - A conclusão operacional correta é: **os 163 artigos pós-22/08 permanecem candidatos de recuperação/reconciliação**.
@@ -1999,48 +1995,33 @@ Nada deve ser considerado “desaparecido” por ter ficado pelo caminho. O ledg
 
 ### Já feito
 
-1. Matriz inicial de fornecedores: concluída e documentada. API-Football continua candidato principal, não aprovado.
-2. Modelo quantitativo de quota: documentado. Foram modelados cenários de aproximadamente 15, 36 e 92 requests/dia; 92/dia não é margem confortável e não constitui aprovação.
-3. Mecanismo seguro de secret: definido como Cloudflare Pages Secret, server-side.
-4. Secret de produção: API_FOOTBALL_KEY foi criado no Cloudflare Pages como Production Secret. O valor não foi enviado ao chat. Preview não foi configurado deliberadamente, porque não é necessário para a validação de produção neste momento.
-5. Diagnóstico temporário: implementado na branch feat/diagnostico-temporario-api-football, commit 20a62a2ffee47976a168733e35f1eeee67bfbf96. O endpoint é protegido, faz uma única chamada server-side a /status, não faz retries e devolve apenas dados sanitizados.
-6. Validação local do diagnóstico: node --check, git diff --check e testes mockados passaram; nenhum teste local chamou a API externa.
-7. Publicação da branch: a branch foi publicada no GitHub através do GitHub Desktop.
-8. PR #43: criada para levar o diagnóstico temporário a main. No momento desta reconciliação está aberta, não mergeada e mergeable.
+---
 
-### O que ficou pelo caminho / pendente
+# 32. LEDGER — ATUALIZAÇÃO APÓS RECONCILIAÇÃO DA PR #43 — 2026-09-27
 
-1. PR #43 ainda não foi mergeada. O merge commit apresentado pelo estado da PR não significa que o merge tenha ocorrido; os campos atuais confirmam merged=false e merged_at=null. Portanto, não considerar o diagnóstico como presente em main.
-2. Deployment Production do diagnóstico: pendente. Não há evidência no GitHub consultado de que o endpoint esteja já publicado em Production.
-3. Chamada real autenticada /status: pendente. Só deve ocorrer depois de o diagnóstico estar efetivamente em Production. Deve ser uma única chamada, sem retries.
-4. Medição real de quota/headers: pendente. Ainda não existe evidência autenticada para dailyLimit/dailyRemaining e limites por minuto.
-5. Validação autenticada 2026/27: pendente para as sete competições-alvo.
-6. Medição de fixtures/results/standings/events: pendente.
-7. Teste de 429 e comportamento de quota: pendente.
-8. Política final de atualização/cache: pendente de ser fechada com base nas medições reais.
-9. Aprovação do fornecedor: pendente. API-Football não está aprovada; o funcionamento de /status, isoladamente, nunca será suficiente para aprovação.
-10. Adapter de produção: deliberadamente não implementado ainda, porque a arquitetura exige a decisão do fornecedor depois dos gates de validação.
+Durante a reconciliação anterior, a PR #43 estava aberta. A verificação seguinte encontrou uma mudança de estado entretanto ocorrida: a PR foi **mergeada**.
 
-### Operações/planos que não devem ser repetidos
+- PR: #43 — feat: add protected API-Football diagnostic
+- estado atual: fechada e mergeada;
+- merge commit: 94b7eaec13b5397a239f0cc105f534f7e8b9e292;
+- branch de origem: feat/diagnostico-temporario-api-football;
+- head da branch: 20a62a2ffee47976a168733e35f1eeee67bfbf96;
+- conclusão: o diagnóstico temporário passou a estar integrado em main.
 
-- Não pedir novamente a API key; ela já foi configurada diretamente no Cloudflare Pages.
-- Não criar Preview Secret sem uma necessidade nova e demonstrável.
-- Não criar Worker separado para o fornecedor.
-- Não implementar o adapter antes de fechar os gates de aprovação.
-- Não tratar a criação da PR como prova de deployment.
-- Não executar a chamada real antes de Production estar confirmada.
-- Não fazer chamadas alternativas/retries para “ver se funciona”; o diagnóstico foi desenhado para uma única chamada.
-- Não aprovar API-Football apenas porque a autenticação /status funcionar.
+A entrada anterior que dizia “PR #43 aberta, não mergeada” fica assim **ultrapassada pelo estado real posterior** e não deve ser usada como estado atual.
 
-### Mudanças de plano registadas
+## Consequência operacional
 
-Plano anterior: preparar um diagnóstico temporário e usar uma intervenção externa extensa para inspecionar, fazer merge, deployment e validar.
+O próximo passo já não é fazer merge da PR #43.
 
-Plano corrigido: usar primeiro as ferramentas GitHub diretamente, porque GitHub é responsabilidade do Assistente e essas operações estão disponíveis. Só recorrer a Codex quando existir uma capacidade realmente indisponível e essencial, por exemplo acesso ao Cloudflare Dashboard/browser real. Esta correção reduz consumo de créditos e evita duplicação de operações.
+Permanece pendente:
+1. confirmar deployment Production contendo o merge;
+2. executar uma única chamada real ao endpoint protegido /api/admin/football-provider-diagnostic;
+3. registar a evidência sanitizada de autenticação e quota;
+4. só depois avançar para os testes autenticados 2026/27 das sete competições e restantes gates de aprovação.
 
-### Estado de continuidade
+A API-Football continua **não aprovada**.
 
-Estado atual: Fase 3 — validação real do candidato principal em curso; PR #43 aberta; secret de Production configurado; chamada autenticada ainda não executada.
+## Regra de continuidade
 
-Próxima ação executável sem Codex: inspecionar PR #43 e, se estiver validada e sem bloqueios, fazer o merge diretamente pelo GitHub. Depois disso, a dependência que pode exigir acesso externo é confirmar deployment Production e executar a chamada real protegida uma única vez.
-
+Quando uma operação fica pendente enquanto outra intervenção externa altera o estado, a reconciliação seguinte deve sempre substituir o estado pendente pelo estado real observado e preservar a razão da mudança. Não repetir uma operação que entretanto já foi concluída.
