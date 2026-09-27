@@ -2145,3 +2145,53 @@ A documentação oficial atual do API-Football afirma que o Free tem 100 request
 
 O gasto adicional de quota foi acidental e não representa uma decisão de produto. A partir deste ponto, qualquer teste que possa consumir quota deve ser tratado como **operação única** e o resultado existente deve ser usado como evidência, sem repetição para mera visualização.
 
+
+
+# 36. LEDGER — CONFIRMAÇÃO DO DASHBOARD API-FOOTBALL E CONTINUAÇÃO DO TESTE REPRESENTATIVO — 2026-09-27
+
+### Evidência nova, sem consumo de quota
+
+A sessão autenticada do dashboard API-Football foi concluída. Durante a autenticação, o site apresentou o comportamento já observado de sessão/login expirada; a utilizadora conseguiu prosseguir e concluir a autenticação.
+
+No dashboard foi confirmado:
+- plano FREE PLAN;
+- limite de 100 requests/dia;
+- 100 requests restantes / 0% usado no momento da consulta;
+- catálogo oficial com Primeira Liga, season 2026, de 07/08/2026 a 16/05/2027;
+- página de subscrição indicando limite de 10 requests/minuto.
+
+A área Generated Code foi inspecionada. Trata-se de um gerador de ficheiros/exemplo genérico e não fornece, por si só, prova de que a season 2026 esteja acessível através do plano Free.
+
+Nenhuma chamada API foi executada nesta sessão do dashboard. Portanto, esta operação consumiu 0 requests.
+
+### Limitação identificada
+
+A existência da season 2026 no catálogo está confirmada, mas isto não prova que o plano Free permita obter os seus dados. Também não foi encontrada, na página de subscrição consultada, uma restrição explícita que permita concluir diretamente que a season 2026 é bloqueada no Free.
+
+Assim, a causa dos resultados anteriores subscription para algumas competições permanece tecnicamente não fechada.
+
+### Decisão operacional
+
+Não repetir o diagnóstico das sete competições.
+
+Foi definido um único teste representativo, caso necessário, para Primeira Liga season 2026, utilizando o mecanismo server-side já existente no Chuta Pra Canto e sem expor a API key no browser. O API Tester do dashboard não deve ser usado para este teste, porque a navegação expôs visualmente o campo da API key.
+
+### Segurança da credencial
+
+Durante uma tentativa do CODEX de navegar para o API Tester, o campo da API key apareceu visualmente numa captura da sessão. O CODEX declarou que não copiou, alterou, regenerou nem utilizou a chave e que não executou chamadas API nessa sessão. Como precaução, a chave atual é tratada como credencial temporária de teste/potencialmente exposta.
+
+Plano operacional:
+1. continuar apenas com testes estritamente necessários, sem revelar/copiar a chave;
+2. não usar o API Tester do dashboard;
+3. concluir a validação técnica;
+4. no final, gerar nova API key e substituir o secret API_FOOTBALL_KEY no Cloudflare Pages;
+5. deixar a chave atual inutilizada.
+
+### Estado atual
+
+- API-Football: candidato principal, não aprovado.
+- Quota dashboard observada: 100/100 disponíveis no momento da consulta.
+- Primeira Liga season 2026 no catálogo: confirmada.
+- Acesso efetivo aos dados da season 2026 no Free: ainda não confirmado.
+- Diagnóstico de 7 competições: não repetir.
+- Próxima operação de quota, se necessária: uma única chamada representativa, com resultado sanitizado e através do runtime server-side.
