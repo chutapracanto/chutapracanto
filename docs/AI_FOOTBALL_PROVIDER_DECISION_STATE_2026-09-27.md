@@ -269,3 +269,21 @@ Cloudflare confirmou: `main` é a branch de produção; o deployment ativo `4f7e
 A validação HTTP funcional de `/api/competicoes?competition=liga-portugal` permanece **BLOQUEADA POR LIMITAÇÃO DA SESSÃO DE REDE**, não por erro demonstrado da aplicação: browser devolveu `net::ERR_BLOCKED_BY_CLIENT` e terminal devolveu erro de ligação ao proxy local `127.0.0.1:9`. Não houve resposta HTTP e não houve consumo BSD nessas tentativas. Portanto, o endpoint ainda não deve ser marcado como PASS operacional em produção até existir uma sessão com saída HTTPS funcional.
 
 **Regra de continuidade:** não repetir chamadas no ambiente bloqueado, não alterar o adapter e não consumir BSD adicionalmente. A próxima validação deve usar o deployment Production ativo ou `chutapracanto.com`, numa sessão com acesso HTTPS direto.
+
+
+## 10. Runtime BSD em produção — diagnóstico bloqueado por falta de logs — 27-09-2026
+
+O endpoint público `/api/competicoes?competition=liga-portugal` já foi executado numa sessão real e devolveu **HTTP 503** com a mensagem genérica de indisponibilidade. Isto confirma que o routing chega ao handler do adapter, mas não identifica a exceção interna.
+
+A investigação no Cloudflare não encontrou histórico útil: Real-time Logs não têm histórico disponível antes de iniciar o stream; Observability não mostrou eventos no intervalo consultado; Log Explorer requer aquisição do produto de retenção/consulta de logs. Não houve consumo BSD nessa investigação.
+
+**Nova ação executada:** foi criado no `main` o endpoint temporário protegido `/api/admin/football-provider-bsd-runtime-diagnostic`, commit `05ee82a36f7d03a492c828a8faac2aae0ed13ec1`. O endpoint faz exatamente **2 requests BSD**, ambos para Primeira Liga 2026/27 já validada anteriormente:
+1. eventos: `league_id=2&season_id=1310&stage=regular-season`;
+2. standings: `league_id=2&season_id=1310`.
+
+O diagnóstico devolve apenas estado técnico sanitizado (HTTP status, validade JSON, chaves de topo e contagens), nunca a API key nem payload bruto. Está protegido por branch `main`, hostname CPC, POST, sessão de admin e Origin same-origin.
+
+**Consumo BSD:** continua em **12 requests antes da execução deste novo endpoint**; o novo diagnóstico está criado mas **ainda não foi executado**. Não repetir os diagnósticos anteriores: este teste existe por uma hipótese nova — distinguir configuração/credencial/rede/resposta BSD em Production do restante adapter.
+
+**Próximo passo imediato:** fazer **uma única execução** do endpoint temporário acima na sessão Admin autenticada e devolver apenas o JSON sanitizado. Depois interpretar e, conforme o resultado, corrigir o adapter/configuração ou passar temporariamente ao API-Football autorizado pela utilizadora para teste. O endpoint temporário deve ser removido após a investigação.
+
