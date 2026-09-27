@@ -702,11 +702,17 @@ A frente UX/editorial do artigo foi fechada operacionalmente com o merge da PR #
 
 A implementação de engagement persistente já está presente em main, incluindo a rota de API de reação e a migração D1, pelo que não constitui uma frente aberta antes da Fase 3.
 
-### Fase 3 iniciada — ação autónoma executada
-Foi iniciada a pesquisa atual de fornecedores de dados de futebol. Evidência atual:
-- API-Football: plano Free de $0, 100 requests/dia, acesso aos endpoints e competições; a cobertura publicada em 2026-09-24 inclui Primeira Liga e Taça da Liga. A disponibilidade varia por competição/época e deve ser validada por coverage antes de cada integração.
-- football-data.org: plano Free €0, 12 competições, fixtures, resultados/tabelas com dados atrasados e 10 chamadas/minuto; a cobertura gratuita inclui Champions League e Primeira Liga. O serviço exige registo/token e pede atribuição visível; o uso comercial e direitos sobre assets/dados devem ser tratados conforme os termos.
+### Fase 3 — matriz de fornecedores executada — 2026-09-27
+Foi concluída a primeira matriz documental de fornecedores em `docs/AI_FOOTBALL_PROVIDER_MATRIX_2026-09-27.md`.
 
-Nenhum fornecedor está ainda aprovado. A decisão final deve comparar cobertura de todas as competições prioritárias do CPC, frescura necessária, limites, termos/licença, estabilidade e custo. A próxima operação técnica é concluir essa matriz e escolher a fonte principal/adaptador antes de criar endpoints, secrets ou bindings.
+Evidência atual:
+- **API-Football:** cobertura oficial lista as 7 competições prioritárias; Free $0, 100 requests/dia e 10/minuto; endpoints necessários incluem seasons, fixtures, standings, teams, livescore e events. A cobertura pode variar por época/jogo e as épocas disponíveis no Free são limitadas.
+- **football-data.org:** Free €0, 12 competições, 10/minuto, mas scores/schedules são atrasados; a cobertura Free não comprova as 7 competições simultaneamente. Exige atribuição visível.
+- **Sportmonks:** cobertura ampla e live, mas produção começa em plano pago; fica como fallback técnico.
+- **Sportradar:** cobertura global, mas não foi estabelecido um plano Free de produção comparável.
 
-**Estado:** FASE 3 — seleção/validação de fornecedor em curso; sem implementação de API ainda.
+**Resultado:** API-Football é o candidato principal, mas **ainda não aprovado**. Antes da aprovação são obrigatórios testes autenticados de 2026/27 nas 7 competições e medição do consumo de quota, sobretudo para eventos/live.
+
+Não criar endpoints, secrets ou bindings do fornecedor antes dessa validação.
+
+**Estado:** FASE 3 — matriz concluída; validação real do candidato principal em curso.
