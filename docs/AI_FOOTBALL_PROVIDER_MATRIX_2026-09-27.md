@@ -98,3 +98,18 @@ UI → Pages runtime/_worker.js → adapter interno → provider → cache D1/Cl
 ## Próxima operação
 
 Obter uma API key gratuita do candidato principal e validar a disponibilidade real de 2026/27 e o consumo de quota nas sete competições. Só depois aprovar o adapter.
+
+
+## Secret injection — mecanismo concreto validado em 2026-09-27
+
+A credencial do fornecedor, quando houver validação autenticada, deve ser armazenada como **Cloudflare Pages Secret**, nunca em GitHub, `wrangler.toml`, frontend ou chat.
+
+O Cloudflare documenta duas vias para Pages:
+1. **Dashboard:** Workers & Pages → projeto Pages → Settings → Variables and Secrets → Add → nome/valor → **Encrypt** → Save.
+2. **Wrangler:** `npx wrangler pages secret put <KEY> --project-name <PROJECT>`.
+
+O runtime Pages lê secrets através de `context.env`. O segredo não é exposto para leitura posterior no dashboard. Fontes oficiais: https://developers.cloudflare.com/pages/functions/bindings/ e https://developers.cloudflare.com/workers/wrangler/commands/pages/.
+
+Para o CPC, usa-se o runtime Pages existente; não criar Worker separado. A chave concreta do fornecedor ainda não deve ser criada/configurada antes da decisão de fornecedor. Quando a validação estiver autorizada, o nome da variável será definido pela integração.
+
+**Dependência operacional atual:** Rute pode criar a conta/API-Football e obter a chave, mas não deve enviar a chave para o chat. A ação seguinte será configurar essa chave diretamente no Cloudflare Pages pelo Dashboard ou Wrangler autenticado. Só depois disso o teste autenticado pode começar.
