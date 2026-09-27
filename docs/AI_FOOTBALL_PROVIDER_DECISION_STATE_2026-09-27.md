@@ -317,3 +317,16 @@ Inspeção do adapter identificou a diferença relevante entre o probe que passo
 O cache da resposta normalizada do endpoint público permanece separado no handler.
 
 **Próximo gate:** validar o deployment Production com `/api/competicoes?competition=liga-portugal&seasonId=1310`. Se PASS, remover o endpoint temporário de diagnóstico BSD e fechar a investigação runtime.
+
+
+### Instrumentação cirúrgica do adapter — 27-09-2026
+
+A validação externa confirmou HTTP 503 também no deployment `pages.dev`. Pesquisa oficial BSD/Cloudflare não encontrou incompatibilidade conhecida: a BSD documenta os endpoints e autenticação usados, e Cloudflare documenta `fetch()`/Promise e runtime como suportados.
+
+Sem consumir chamadas BSD adicionais, o adapter foi instrumentado para classificar a etapa exata da exceção: `BSD_EVENTS`, `BSD_STANDINGS`, `NORMALIZE_EVENTS` ou `NORMALIZE_STANDINGS`. O endpoint 503 expõe temporariamente apenas o prefixo sanitizado `debugStage`, sem mensagem, URL ou credencial.
+
+Commits:
+- `ba8829a18ea856e66e5c6a13011f198ae05882f1`
+- `99b0cdb57d04594d4ddfc0371dccfe0a66487ddd`
+
+**Próximo gate:** uma única validação do endpoint público após o deployment. Usar `seasonId=1310`. Depois da identificação, remover imediatamente o `debugStage` e corrigir a causa.
