@@ -2095,3 +2095,53 @@ O diagnóstico `/status` foi concluído com sucesso. O próximo passo técnico �
 ### Nota sobre consola do Admin
 
 A consola também mostrou avisos de Tracking Prevention relativos aos CDNs do Quill/Turndown, 404 de `favicon.ico` e uma chamada `/api/admin/session` com 401. Estes sinais não invalidaram a chamada diagnóstica, que respondeu 200 com `authenticated: true`. Não abrir investigação separada destes avisos nesta fase sem evidência de impacto funcional.
+
+
+## 35. LEDGER — DIAGNÓSTICO 2026/27 REPETIDO INVOLUNTARIAMENTE — 2026-09-27
+
+### Operação concluída
+
+A utilizadora executou novamente, de forma involuntária, o endpoint temporário:
+`/api/admin/football-provider-2026-27-diagnostic`.
+
+Esta segunda execução fez novamente **7 chamadas server-side** ao endpoint `/leagues`, uma por competição-alvo. Não deve ser repetida.
+
+### Resultado factual da segunda execução
+
+- provider: `API-Football`
+- seasonTested: `2026`
+- seasonLabel: `2026/27`
+- HTTP status de todas as 7 chamadas: **200**
+- `primeiraLiga`: `subscription`, results 0, matches 0
+- `tacaPortugal`: `subscription`, results 0, matches 0
+- `tacaLiga`: `quota`, results 0, matches 0
+- `championsLeague`: `subscription`, results 0, matches 0
+- `europaLeague`: `subscription`, results 0, matches 0
+- `conferenceLeague`: `subscription`, results 0, matches 0
+- `nationsLeague`: `quota`, results 0, matches 0
+
+O endpoint classifica estes erros a partir do campo `errors` devolvido pela API; `subscription` significa que a resposta indicou plan/subscription, enquanto `quota` significa que indicou rate/request/limit/quota. Isto não deve ser reinterpretado como prova isolada de que a competição não existe ou de que o Free nunca a suporta.
+
+### Recurso/quota
+
+A primeira execução do diagnóstico 2026/27 também já tinha realizado 7 chamadas. Assim, existem **14 chamadas ao endpoint 2026/27** realizadas no total, distribuídas por duas execuções.
+
+Não inferir o saldo diário exato a partir deste número: os headers de quota não foram devolvidos por este endpoint. O diagnóstico `/status` anterior reportou 100/100 diários e 9/10 por minuto imediatamente após a sua chamada, mas não serve para calcular retroativamente o saldo após estes testes.
+
+### Relevância externa verificada
+
+A documentação oficial atual do API-Football afirma que o Free tem 100 requests/dia e 10/minuto e que todas as competições/endpoints estão incluídos, mas o Free é limitado em épocas/dados disponíveis. A documentação também diz que a disponibilidade pode variar por competição/época e recomenda validar a cobertura através de `/leagues`. Portanto, os erros agora observados são evidência relevante de restrição de acesso/dados nesta chamada, mas **não fecham ainda a causa final sem distinguir restrição de época, quota e comportamento do endpoint**. citeturn0search0turn0search4turn0search9
+
+### Decisão operacional
+
+- **Não repetir** o diagnóstico de 7 chamadas.
+- **Não executar novas chamadas de `/leagues` para estas sete competições.**
+- Preservar a quota restante para testes que alterem materialmente a decisão.
+- API-Football continua **não aprovado**.
+- A próxima investigação deve ser desenhada para obter informação nova com o mínimo de requests possível, começando por distinguir se os erros `subscription` são restrição de dados/época do Free ou efeito de quota/estado da conta.
+- Não criar ainda adapter, polling, cache definitivo ou integração de produto.
+
+### Correção de processo
+
+O gasto adicional de quota foi acidental e não representa uma decisão de produto. A partir deste ponto, qualquer teste que possa consumir quota deve ser tratado como **operação única** e o resultado existente deve ser usado como evidência, sem repetição para mera visualização.
+
