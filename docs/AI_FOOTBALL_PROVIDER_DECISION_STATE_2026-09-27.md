@@ -238,7 +238,7 @@ Este trabalho está **ENCERRADO**. A configuração Framer + Cloudflare foi publ
 
 **AGORA:** fechar os dois pontos documentais restantes (Terms of Service gerais + versão aplicável antes de 1-10-2026). Não é necessário consumir requests BSD para isso.
 
-**CONCLUÍDO:** BSD fechado como fornecedor principal para o caso de uso CPC e adapter server-side inicial implementado no Worker. **PRÓXIMO:** validar deploy/sintaxe e, sem repetir diagnósticos de provider, integrar cache/D1, atualização agendada e UI de `/competicoes`.
+**CONCLUÍDO:** BSD **tecnicamente validado como fornecedor principal** para o caso de uso CPC e adapter server-side inicial implementado no Worker. **NÃO CONCLUÍDO:** PASS operacional do endpoint público `/api/competicoes`. Cache/D1, atualização agendada e UI de `/competicoes` ficam depois da correção/validação do runtime.
 
 ## 7. Regra de continuidade
 
@@ -352,3 +352,59 @@ O teste já executado anteriormente nessa URL `95dae374.chutapracanto.pages.dev`
 A confirmação posterior do Cloudflare cria uma discrepância que deve ser investigada: o deployment declara conter o commit que adiciona o endpoint, mas o runtime respondeu 404. Não repetir o teste neste momento nem enviar nova investigação ao Codex para localizar a deployment: a deployment já está documentalmente identificada. O próximo passo é inspecionar diretamente o routing do `_worker.js`/ordem dos handlers no commit `452a5f7` e determinar por que o endpoint não é alcançável em runtime.
 
 **Consumo BSD permanece em 14 requests.** Nenhuma chamada BSD foi feita no teste 404.
+
+
+## 12. AUDITORIA GLOBAL RECONCILIADA — 2026-09-28
+
+Foi feita revisão do estado real contra o código `main`, histórico recente de commits, matriz de fornecedores, roadmap e arquitetura.
+
+### O que está sólido
+- Repositório/source of truth confirmado: `chutapracanto/chutapracanto`, branch `main`.
+- Framer → `.com`: trabalho encerrado e validado; não reabrir.
+- Inventário Framer: 213 origens mapeadas; redirect real validado.
+- BSD: sete temporadas 2026/27 confirmadas.
+- BSD: Primeira Liga fixtures/events + standings confirmados operacionalmente.
+- Production → BSD direto: credencial, rede e fornecedor funcionais.
+- Adapter server-side existe e mantém a API key fora do frontend.
+- Arquitetura provider-agnostic preservada.
+- BSD acumulado: **14 requests**; não aumentar sem hipótese nova que altere a decisão.
+
+### Erros encontrados e estado
+| Problema | Resultado |
+|---|---|
+| Parser BSD inicial não lia `event_date` / `standings[]` corretamente | **CORRIGIDO + validado** |
+| Season discovery suspeita | **ELIMINADA** por `seasonId=1310` |
+| Cache API raw BSD | **ELIMINADA**; removida |
+| `response.json()` no fetch BSD | **ELIMINADA**; substituída por texto + JSON.parse |
+| Credencial/rede BSD Production | **ELIMINADA**; probes HTTP 200 |
+| Adapter público | **AINDA COM 503**, isolado em `BSD_EVENTS` |
+| Helper `bsdFetchJson` | **TESTE 404** apesar de deployment confirmado; investigação de routing/condição pendente |
+| API-Football | **NÃO APROVADA**; não repetir diagnósticos anteriores |
+| Tentativas de rede bloqueadas | **REGISTADAS; não repetir sem hipótese nova** |
+
+### O que NÃO deve voltar a ser investigado
+Não repetir, sem evidência nova:
+- seasons BSD;
+- standings/events BSD já validados;
+- credencial BSD;
+- conectividade BSD;
+- Cache API raw;
+- parsing `response.json()`;
+- season discovery;
+- procura da deployment `452a5f7` no Cloudflare via Codex.
+
+### Estado atual
+**FASE 3 — ATIVA / CORREÇÃO DE INTEGRAÇÃO BSD-RUNTIME.**
+
+O problema atual está reduzido à camada de aplicação/routing. O fornecedor não está em dúvida neste momento.
+
+### Próximo ciclo obrigatório
+1. Inspecionar `handleAdminAPI()` e o bloco do helper no commit `452a5f7`.
+2. Determinar objetivamente por que o runtime devolveu 404.
+3. Corrigir apenas a causa identificada.
+4. Publicar.
+5. Validar o endpoint público `/api/competicoes?competition=liga-portugal&seasonId=1310` uma vez.
+6. Se PASS: remover diagnósticos temporários e validar novamente apenas o fluxo final necessário.
+7. Só então avançar para D1/cache, atualização agendada e UI.
+
+**Regra:** nenhum novo teste BSD direto enquanto a causa atual for resolvível no código/routing.
