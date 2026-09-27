@@ -1,0 +1,174 @@
+# Estado de decisão — API de dados de futebol e trabalho prioritário Framer
+
+**Data:** 2026-09-27  
+**Projeto:** Chuta Pra Canto  
+**Repositório:** `chutapracanto/chutapracanto`  
+**Estado:** decisão de fornecedor ainda em análise; trabalho prioritário temporariamente mudou para redirecionamentos Framer → domínio oficial.
+
+## 1. O que ficou concluído na análise de fornecedores
+
+Foi feita uma pesquisa ampla sobre APIs comerciais gratuitas, APIs públicas, wrappers/open source e datasets reutilizáveis para alimentar as sete competições prioritárias do CPC:
+
+1. Liga Portugal / Primeira Liga
+2. Taça de Portugal
+3. Taça da Liga
+4. UEFA Champions League
+5. UEFA Europa League
+6. UEFA Conference League
+7. UEFA Nations League
+
+### Candidato inicialmente testado: API-Football
+- Declara cobertura das sete competições.
+- Free: 100 requests/dia e 10/minuto.
+- Disponibiliza seasons, fixtures, standings, teams, livescore, events e lineups.
+- Foi criada infraestrutura diagnóstica temporária server-side e executada autenticação real.
+- O `/status` respondeu HTTP 200 e confirmou autenticação; quota observada nesse momento: 100/dia e 10/minuto.
+- O diagnóstico 2026/27 foi executado duas vezes por engano (7 chamadas por execução, 14 chamadas no total). **Não repetir.**
+- Nas sete competições, as respostas HTTP foram 200 mas sem resultados; os erros sanitizados foram classificados como `subscription` ou `quota`.
+- Foi feito um teste representativo adicional da Primeira Liga 2026/27: HTTP 200, mas `ok:false`, resultados 0 e erro sanitizado `quota`. O dashboard mostrava 99 requests/dia restantes nesse período.
+- A evidência não permite afirmar a causa exata porque o endpoint sanitizado não expõe a mensagem original do fornecedor nem os headers de quota dessa chamada.
+- **Conclusão:** API-Football não está aprovada para produção. A hipótese de Free suficiente para o CPC ficou sem validação e não deve consumir mais chamadas nesta fase.
+- Os endpoints diagnósticos temporários já foram removidos do `_worker.js`.
+
+### Outras opções pesquisadas
+
+**Bzzoiro Sports Data (BSD)** — novo candidato prioritário para validação:
+- Free anunciado como gratuito sem cartão e sem trial.
+- 7.500 requests/dia, reset à meia-noite UTC.
+- 60+ competições na oferta Free; páginas públicas mostram as competições portuguesas relevantes e Champions League, Europa League, Conference League e Nations League.
+- REST v2 + MCP; scores, fixtures, lineups e stats; inclui dados adicionais como xG/forecasts/odds em determinadas áreas.
+- Há evidência pública de dados 2026/27, incluindo Champions League.
+- Licença BSD v4.0: permite uso/display dos dados em aplicações/sites próprios, mas proíbe redistribuição do raw data como dataset/feed/API independente e contém limitações e responsabilidades que devem ser revistas para o uso editorial/monetizável do CPC.
+- O fornecedor declara que os dados podem ser compilados de fontes públicas, terceiros e cálculos próprios e não oferece garantia de exatidão/completude/timeliness.
+- **Estado:** candidato forte, ainda NÃO aprovado. Próximo passo é validação autenticada real, começando por cobertura 2026/27 e quota/limites, com o mínimo de requests necessário.
+
+**football-data.org**
+- Free maduro, 12 competições, 10/minuto.
+- Bom candidato de fallback para dados básicos.
+- Scores/schedules no Free têm atraso e não foi demonstrada cobertura Free simultânea das sete competições prioritárias.
+- Exige atribuição visível.
+- **Estado:** fallback, não aprovado como fornecedor único.
+
+**Sportmonks**
+- Cobertura ampla/live, mas produção começa em plano pago.
+- **Estado:** fallback técnico, não solução Free principal.
+
+**Sportradar**
+- Cobertura ampla, mas sem modalidade Free de produção comparável.
+- **Estado:** fora do caminho Free atual.
+
+**ESPN public API**
+- Ampla cobertura e sem autenticação em vários endpoints observados.
+- API pública/não-oficial, sem contrato de limites estáveis comparável a uma API comercial.
+- **Estado:** fallback experimental, não fornecedor principal.
+
+**FotMob / SofaScore**
+- Existem wrappers/open source e endpoints internos com live, detalhes, lineups e stats.
+- São dependências não-oficiais e podem mudar sem compromisso de compatibilidade.
+- **Estado:** contingência técnica, não fornecedor principal.
+
+**TheSportsDB**
+- Opção gratuita com cobertura ampla e limites do Free, mas com limitações e V2/premium para determinadas necessidades.
+- **Estado:** reserva, não aprovado para as sete competições como fonte única.
+
+**OpenFootball / football.db**
+- Datasets públicos/open source úteis para histórico, seeds e fallback.
+- Não substituem uma fonte live/2026-27 completa para o produto.
+- **Estado:** complemento/fallback histórico.
+
+**SoccerData / scrapers agregadores**
+- Interessantes para pipeline próprio e investigação.
+- Mais frágeis por dependência de sites, anti-bot e alterações de estrutura.
+- **Estado:** investigação técnica, não fonte de produção neste momento.
+
+**SportScore**
+- Tecnicamente interessante, mas termos restringem uso comercial sem acordo.
+- **Estado:** excluído para o objetivo atual do CPC.
+
+**FootyStats**
+- Free demasiado limitado para servir como fonte única das sete competições.
+- **Estado:** excluído como solução principal.
+
+## 2. Arquitetura que continua válida independentemente do fornecedor
+
+A arquitetura-alvo mantém-se:
+
+**UI → Pages runtime `_worker.js` → adapter interno CPC → provider → D1/cache → UI**
+
+Regras:
+- frontend nunca chama diretamente o fornecedor;
+- token exclusivamente server-side;
+- IDs internos CPC;
+- cache e deduplicação;
+- stale-if-error quando aplicável;
+- respostas com `updatedAt`, `source` e `updateStatus`;
+- fornecedor substituível sem reescrever a UI.
+
+Não criar ainda o adapter definitivo nem bindings/cache de produção específicos de um fornecedor antes da aprovação.
+
+## 3. Segurança / API-Football key
+
+A secret de produção `API_FOOTBALL_KEY` foi configurada no Cloudflare Pages e nunca deve ser exposta em GitHub, frontend, chat ou ficheiros.
+
+Como a key foi potencialmente exposta visualmente durante a utilização do API Tester, o plano é **continuar apenas o mínimo indispensável e depois gerar uma nova key e substituir a secret de produção**. Não voltar a usar o API Tester para novas chamadas.
+
+## 4. Ponto exato onde a análise de APIs fica pausada
+
+A próxima investigação de fornecedor deve começar pelo **Bzzoiro Sports Data (BSD)**.
+
+Antes de qualquer aprovação:
+1. criar/usar conta Free e obter token sem o enviar para o chat;
+2. configurar secret server-side no Cloudflare Pages, se necessário;
+3. executar diagnóstico temporário com o token server-side;
+4. validar 2026/27 nas sete competições;
+5. medir quota/headers/rate limit com o mínimo de requests;
+6. validar pelo menos fixtures/resultados/standings e, se necessário, live/events de forma controlada;
+7. verificar se os termos/licença permitem o uso editorial e potencialmente monetizado do CPC;
+8. só depois decidir fornecedor e construir integração definitiva.
+
+**Não consumir créditos do Codex com testes repetidos que não alterem a decisão.**
+
+## 5. Trabalho prioritário agora — Framer / redirecionamentos
+
+Foi identificado um trabalho anterior que deve ser tratado antes de retomar as APIs:
+
+### Objetivo
+Sempre que existir um URL em:
+- `chutapracanto.framer.website`
+
+deve existir redirecionamento para:
+- `chutapracanto.com`
+
+E as páginas de notícias devem preservar o slug, isto é, uma URL do tipo:
+- `https://chutapracanto.framer.website/<slug-da-notícia>`
+
+deve redirecionar para:
+- `https://chutapracanto.com/<slug-da-notícia>`
+
+### Requisito operacional
+O redirecionamento deve ser permanente (301) quando a configuração disponível no Framer o permitir e deve preservar o path/slug. O comportamento deve ser validado com pelo menos o domínio raiz e uma notícia real.
+
+### Estado
+- **Ainda não executado.**
+- O utilizador tem acesso ao Framer.
+- A execução deve ser feita agora, antes de retomar a decisão da API.
+- Não alterar o domínio oficial `chutapracanto.com` nem a estrutura de URLs sem validação.
+
+### Próximo passo
+Inspecionar no Framer a configuração de domínio/redirects disponível e determinar a forma correta de:
+1. redirecionar `chutapracanto.framer.website` → `chutapracanto.com`;
+2. preservar automaticamente todos os paths/slugs das notícias;
+3. evitar loops e evitar perder URLs existentes;
+4. publicar e validar HTTP/URL final.
+
+Se o Framer não suportar o redirecionamento wildcard/path-preserving diretamente, avaliar a alternativa tecnicamente correta no domínio/hosting que controla `chutapracanto.framer.website`, sem criar uma solução frágil.
+
+## 6. Ordem de execução atual
+
+**AGORA:** redirecionamentos Framer → domínio oficial.  
+**DEPOIS:** retomar BSD e concluir validação do fornecedor.  
+**SÓ DEPOIS DA APROVAÇÃO:** integração definitiva da API, cache/D1 e política de atualização.
+
+## 7. Regra de continuidade
+
+Nada do trabalho de APIs fica perdido: as decisões, evidências, exclusões e próximos gates ficam registados neste documento. Ao retomar, não repetir testes já executados sem nova hipótese ou evidência.
