@@ -2890,9 +2890,11 @@ async function handleFootballCompetitionAPI(request, env) {
     });
   } catch (error) {
     console.error("Football adapter error:", error);
+    const detail = error instanceof Error ? error.message : "Erro desconhecido.";
     return json({
       error: "Dados de futebol temporariamente indisponíveis.",
-      message: "Não foi possível obter os dados da competição."
+      message: "Não foi possível obter os dados da competição.",
+      debugStage: detail.split(":")[0] || "UNKNOWN"
     }, 503, {
       "Retry-After": "60"
     });
