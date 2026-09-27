@@ -40,7 +40,7 @@ Foi feita uma pesquisa ampla sobre APIs comerciais gratuitas, APIs públicas, wr
 - Há evidência pública de dados 2026/27, incluindo Champions League.
 - Licença BSD v4.0: permite uso/display dos dados em aplicações/sites próprios, mas proíbe redistribuição do raw data como dataset/feed/API independente e contém limitações e responsabilidades que devem ser revistas para o uso editorial/monetizável do CPC.
 - O fornecedor declara que os dados podem ser compilados de fontes públicas, terceiros e cálculos próprios e não oferece garantia de exatidão/completude/timeliness.
-- **Estado:** candidato forte, ainda NÃO aprovado. Próximo passo é validação autenticada real, começando por cobertura 2026/27 e quota/limites, com o mínimo de requests necessário.
+- **Estado:** tecnicamente validado e compatível com o caso de uso CPC no gate específico da licença de dados. A validação autenticada e operacional já foi concluída; não repetir chamadas sem nova hipótese.
 
 **football-data.org**
 - Free maduro, 12 competições, 10/minuto.
@@ -151,11 +151,11 @@ Foi corrigido o endpoint temporário /api/admin/football-provider-bsd-operationa
 **Gate operacional: PASS.** Não repetir este diagnóstico nem fazer novas chamadas BSD sem uma nova hipótese que altere a decisão.
 
 ### Licença — gate em revisão final
-A licença BSD v4.0, efetiva em 1 de outubro de 2026, permite mostrar os dados dentro de aplicações, websites, dashboards e ferramentas próprias. Proíbe revender, sublicenciar, espelhar ou redistribuir raw data, no todo ou em parte substancial, como dataset/feed/database/API independente. Derived Outputs podem ser publicados, vendidos e distribuídos desde que não permitam reconstruir parte substancial do raw data. Os media assets têm regime separado.
+A página oficial publica a licença BSD v4.0 com eficácia indicada para 1 de outubro de 2026. O texto diz que o acesso aos dados constitui aceitação da licença e dos Terms of Service gerais; não identifica qualquer assinatura ou clique separado. Como hoje é 27-09-2026, a v4.0 ainda não deve ser tratada como a versão já eficaz para os dados recolhidos hoje sem consultar a versão anterior. Proíbe revender, sublicenciar, espelhar ou redistribuir raw data, no todo ou em parte substancial, como dataset/feed/database/API independente. Derived Outputs podem ser publicados, vendidos e distribuídos desde que não permitam reconstruir parte substancial do raw data. Os media assets têm regime separado.
 
 Para o CPC, isto é compatível com exibir dados de futebol dentro do próprio website, desde que não seja criado um produto/feed independente de redistribuição do raw data. A licença também atribui ao utilizador a responsabilidade por conformidade legal e direitos de terceiros.
 
-**Conclusão atual:** o gate operacional passa e a revisão documental da licença não encontrou uma proibição ao uso/display dos dados no próprio website. A integração deve respeitar as restrições de raw data e o regime separado dos media assets.
+**Conclusão atual:** o gate operacional passa e a revisão da licença publicada não encontrou uma proibição ao uso/display dos dados no próprio website. Não é necessária uma assinatura separada identificada no texto. Permanecem dois pontos documentais antes do fecho contratual absoluto: (1) rever os Terms of Service gerais, que a licença incorpora por referência; (2) confirmar a versão de licença aplicável aos dados recolhidos antes de 1-10-2026, porque a página atual apresenta a v4.0 como eficaz a partir dessa data.
 ## 3. Arquitetura que continua válida independentemente do fornecedor
 
 A arquitetura-alvo mantém-se:
@@ -234,11 +234,11 @@ Este trabalho está **ENCERRADO**. A configuração Framer + Cloudflare foi publ
 
 **CONCLUÍDO:** diagnóstico operacional corrigido, 2 chamadas, com fixtures/results e standings reais da Primeira Liga 2026/27 confirmados. A Champions League já tinha sido validada no diagnóstico anterior.
 
-**CONCLUÍDO:** revisão documental da licença BSD v4.0. A licença permite mostrar os dados no próprio website/aplicação e proíbe redistribuição do raw data como feed/dataset/API independente; media assets têm regime separado.
+**CONCLUÍDO:** revisão documental da licença BSD publicada. O uso/display no próprio website é permitido; a redistribuição do raw data como feed/dataset/API independente é proibida; media assets têm regime separado. A v4.0 está indicada como eficaz em 1-10-2026 e declara que o acesso aos dados constitui aceitação, sem assinatura separada identificada. Falta apenas rever os Terms of Service gerais e fechar a questão da versão aplicável aos dados recolhidos antes de 1-10-2026.
 
-**AGORA:** decisão formal de aprovação do BSD como fornecedor principal e, se aprovada, desenho/implementação do adapter interno CPC.
+**AGORA:** fechar os dois pontos documentais restantes (Terms of Service gerais + versão aplicável antes de 1-10-2026). Não é necessário consumir requests BSD para isso.
 
-**SÓ DEPOIS DA APROVAÇÃO:** integração definitiva da API, cache/D1 e política de atualização.
+**DEPOIS:** se não surgir restrição material nesses documentos, BSD fica fechado como fornecedor principal e avança-se para o adapter interno CPC, cache/D1 e política de atualização.
 
 ## 7. Regra de continuidade
 
