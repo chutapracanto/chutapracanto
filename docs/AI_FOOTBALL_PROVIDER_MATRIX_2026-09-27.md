@@ -113,3 +113,74 @@ O runtime Pages lê secrets através de `context.env`. O segredo não é exposto
 Para o CPC, usa-se o runtime Pages existente; não criar Worker separado. A chave concreta do fornecedor ainda não deve ser criada/configurada antes da decisão de fornecedor. Quando a validação estiver autorizada, o nome da variável será definido pela integração.
 
 **Dependência operacional atual:** Rute pode criar a conta/API-Football e obter a chave, mas não deve enviar a chave para o chat. A ação seguinte será configurar essa chave diretamente no Cloudflare Pages pelo Dashboard ou Wrangler autenticado. Só depois disso o teste autenticado pode começar.
+
+
+## 2026-09-27 — modelo preliminar de consumo para o CPC
+
+A documentação oficial do API-Football confirma que uma chamada de `/fixtures?league=...&season=...` pode devolver o calendário completo de uma competição/época; a própria API recomenda filtros por data/período/round quando só é necessária uma janela menor. Também confirma que uma chamada por `ids` pode agrupar até 20 fixtures e devolver detalhes embutidos como events, lineups, statistics e players. Isto significa que o custo não deve ser modelado como “1 request por jogo”. citeturn0search1turn0search3turn0search6
+
+### Unidade mínima de atualização
+
+Para o primeiro modelo CPC, considerar por competição/época:
+- 1 request para fixtures/calendário de uma janela;
+- 1 request para standings quando a competição tiver classificação;
+- detalhes/events apenas para jogos que o produto realmente precise de acompanhar;
+- metadata/coverage em frequência baixa e cacheada;
+- resultados tratados como parte dos fixtures, evitando um endpoint separado quando a resposta já contém o necessário.
+
+A documentação oficial mostra que fixtures, events e dados live têm uma cadência de atualização de 15 segundos no fornecedor. Isso **não significa** que o CPC deva fazer polling a cada 15 segundos; com 100 requests/dia, essa estratégia seria incompatível com o Free. citeturn0search6
+
+### Cenários de quota — cálculo de arquitetura, não medição autenticada
+
+Com 7 competições, se cada uma exigir 1 atualização de fixtures + 1 atualização de standings por dia, a base é aproximadamente:
+
+`7 × 2 = 14 requests/dia`
+
+Acrescentando 1 request diário de metadata/coordenação, cerca de **15/dia**.
+
+Se fixtures forem atualizados 4 vezes/dia por competição e standings 1 vez/dia:
+
+`7 × 4 + 7 + 1 = 36 requests/dia`
+
+Se fixtures forem atualizados 12 vezes/dia por competição e standings 1 vez/dia:
+
+`7 × 12 + 7 + 1 = 92 requests/dia`
+
+O último cenário já deixa apenas **8 requests/dia de margem**, portanto não deve ser considerado uma aprovação confortável.
+
+Estes números são **modelos de arquitetura**, não consumo medido. O consumo real ainda depende da cobertura 2026/27, do formato das respostas, das competições ativas em cada dia, da necessidade de events/live e da política final de cache.
+
+### Consequência importante
+
+O teste não deve perguntar apenas:
+
+> “Consigo obter os dados das 7 competições?”
+
+Deve responder:
+
+> “Qual é o número mínimo e máximo plausível de requests/dia para manter as 7 competições atualizadas segundo a experiência que queremos oferecer ao utilizador?”
+
+E deve separar três produtos possíveis:
+1. **dados editoriais/cacheados** — atualização periódica, baixo consumo;
+2. **resultados próximos do tempo real** — consumo maior, mas potencialmente controlável com janelas e cache;
+3. **live/eventos em tempo real contínuo** — potencialmente incompatível com o Free se aplicado às 7 competições em simultâneo.
+
+Não assumir que o terceiro cenário cabe nos 100/dia sem medição.
+
+### Critério quantitativo de aprovação
+
+A API-Football só passa o gate se a política escolhida:
+- ficar abaixo de 100 requests/dia;
+- mantiver margem operacional suficiente para retries/falhas/picos;
+- respeitar 10 requests/minuto;
+- não depender de polling contínuo agressivo;
+- continuar funcional com cache/stale-if-error;
+- atravessar os diferentes tipos de dia da época sem intervenção manual.
+
+A margem exata será definida depois da medição autenticada; **não será considerado suficiente ficar simplesmente em 99/100**.
+
+### Evidência externa ainda necessária
+
+A única lacuna que não pode ser fechada sem credencial é a validação autenticada da época **2026/27** e a medição dos headers/quota reais para as sete competições. A API-Football exige API key válida para os testes de endpoints descritos na documentação. citeturn0search1turn0search4
+
+**Estado após esta análise:** modelo preliminar de consumo definido; API-Football continua **não aprovada**. Próximo gate: chave configurada diretamente no Cloudflare Pages Secret → testes autenticados → medição → decisão.
