@@ -1,6 +1,6 @@
 # Especificação futura: área de competições
 
-**Estado:** desenho técnico; BSD validado como fornecedor principal em 2026-09-27; adapter server-side inicial implementado no Worker. Cache/D1, atualização agendada e UI de competições permanecem como fases seguintes.
+**Estado:** arquitetura definida; BSD tecnicamente validado como fornecedor principal em 2026-09-27; adapter server-side inicial implementado. A integração pública `/api/competicoes` ainda está em correção/validação de runtime. Cache/D1, atualização agendada e UI de competições só avançam após PASS operacional.
 
 ## Modelo editorial e de dados
 
@@ -35,8 +35,24 @@ As respostas devem incluir `updatedAt`, origem dos dados e estado de atualizaç�
 
 A primeira matriz documental está em `docs/AI_FOOTBALL_PROVIDER_MATRIX_2026-09-27.md`.
 
-O fornecedor principal validado é o Bzzoiro Sports Data (BSD). A validação autenticada confirmou as sete competições prioritárias em 2026/27 e fixtures/results + standings da Primeira Liga. A secret `BSD_API_KEY` permanece exclusivamente server-side.
+O fornecedor principal **tecnicamente validado** é o Bzzoiro Sports Data (BSD). A validação autenticada confirmou as sete competições prioritárias em 2026/27 e fixtures/results + standings da Primeira Liga. A secret `BSD_API_KEY` permanece exclusivamente server-side.
 
 O adapter é a única camada dependente do fornecedor. A implementação inicial descobre a época ativa com cache, normaliza fixtures/results e standings e expõe apenas o endpoint de aplicação `/api/competicoes`, sem encaminhar a API BSD diretamente para o frontend.
 
 A arquitetura continua provider-agnostic e o adapter deve ser a única camada dependente do fornecedor.
+
+
+## Auditoria de estado — 2026-09-28
+
+A arquitetura base está coerente com a implementação atual: frontend → Pages runtime → adapter BSD → fornecedor. A investigação de runtime, contudo, encontrou uma falha no caminho público `/api/competicoes`: o fornecedor e a credencial funcionam diretamente em Production, mas o adapter falha em `BSD_EVENTS`.
+
+Correções já testadas sem resolver o problema:
+- remoção da Cache API raw do `bsdFetchJson()`;
+- leitura explícita por `response.text()` + `JSON.parse()`;
+- eliminação da hipótese de season discovery através de `seasonId=1310`;
+- probes diretos Production → BSD com HTTP 200.
+
+O helper criado para testar o próprio `bsdFetchJson()` está no commit `452a5f7`, deployment Production `95dae374`; a chamada feita anteriormente nessa deployment respondeu 404. Este 404 deve ser tratado como problema de routing/condição do endpoint temporário, não como falha do BSD.
+
+**Não considerar ainda a integração de produção como PASS.** Cache/D1, Cron e UI de competições permanecem bloqueados por dependência interna: primeiro obter uma resposta válida do endpoint público e remover os diagnósticos temporários.
+
