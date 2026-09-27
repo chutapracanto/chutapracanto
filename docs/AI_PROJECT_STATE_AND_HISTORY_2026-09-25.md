@@ -2206,3 +2206,60 @@ Plano operacional:
 - A alteração foi validada por diff e integrada via PR #45, squash merge `aab39f32c2de70e659a4bc69d777218e2e6e0ada`.
 - O endpoint está agora em `main` e pode ser executado uma única vez em Production. Não executar novamente o diagnóstico das sete competições.
 - Próximo passo: executar apenas esta chamada representativa no site autenticado. Depois da evidência, remover o endpoint temporário e registar o resultado; a chave atual continua a ser tratada como temporária/potencialmente exposta e será rodada no fim da validação.
+
+
+## 38. LEDGER — TESTE REPRESENTATIVO PRIMEIRA LIGA 2026 CONCLUÍDO E DIAGNÓSTICO TEMPORÁRIO REMOVIDO — 2026-09-27
+
+### Operação concluída
+
+Foi executada **uma única** chamada ao endpoint temporário de teste representativo para a Primeira Liga 2026/27, através da sessão Admin Production autenticada e do runtime server-side do Chuta Pra Canto.
+
+Resultado sanitizado:
+- HTTP status: **200**
+- provider: **API-Football**
+- competition: **Primeira Liga**
+- season tested: **2026/27**
+- results: **0**
+- matches: **0**
+- ok: **false**
+- error category: **quota**
+- quota headers devolvidos pelo provider nesta chamada: todos **null**
+
+### Interpretação
+
+O teste confirma que:
+1. a chamada chegou ao API-Football e a API respondeu HTTP 200;
+2. a credencial continuou aceite ao nível do endpoint;
+3. a resposta **não disponibilizou dados da Primeira Liga 2026/27**;
+4. a causa devolvida pelo provider foi classificada como **quota**.
+
+Este resultado **não prova isoladamente** que a season 2026/27 esteja indisponível por regra estrutural do plano Free, porque o endpoint sanitizado não devolveu a mensagem bruta nem headers de quota nesta resposta. Também não é legítimo reinterpretar quota como subscription.
+
+A documentação oficial confirma que o Free tem 100 requests/dia e 10/minuto e que, quando a quota é atingida, a API deixa de processar pedidos; a documentação também confirma que o Free tem limitações quanto às seasons disponíveis. citeturn0search0turn0search3turn0search6
+
+### Decisão operacional
+
+- O API-Football **não fica aprovado para produção**.
+- Não serão feitas novas chamadas à API-Football apenas para repetir este teste ou tentar obter a mensagem bruta.
+- Não repetir o diagnóstico das sete competições.
+- Não criar adapter definitivo, polling, cache de produção ou integração de produto com base neste estado.
+- O endpoint temporário `/api/admin/football-provider-primeira-liga-2026-diagnostic` foi removido de `_worker.js` em `main`.
+- Commit de remoção: `e2f51c8c24ed5ba5815269bc0d795c3982bf5d03`.
+
+### Estado da investigação
+
+A evidência disponível fica registada como **inconclusiva quanto à causa exata do bloqueio 2026/27**, mas suficiente para impedir a aprovação do fornecedor neste momento:
+- catálogo/dashboard mostrou Primeira Liga season 2026;
+- os testes 2026/27 anteriores produziram `subscription` ou `quota` conforme a competição;
+- o teste representativo único produziu `quota` e zero dados;
+- não existe, neste momento, evidência autenticada de que o plano Free consiga fornecer os dados necessários para o Chuta Pra Canto em 2026/27.
+
+### Próxima operação
+
+Antes de qualquer nova chamada, verificar **sem consumir quota** o estado atual de consumo/quota no dashboard API-Football. Esta verificação serve apenas para fechar a distinção entre quota efetivamente esgotada e restrição específica da resposta; não deve abrir o API Tester nem expor/copiar a API key.
+
+Depois dessa verificação, encerrar a avaliação do API-Football como fornecedor Free se não surgir evidência nova que altere materialmente a decisão.
+
+### Segurança da credencial
+
+A API key atual continua tratada como temporária/potencialmente exposta. Após encerrada a validação, deve ser regenerada no dashboard e o secret Production `API_FOOTBALL_KEY` substituído, sem colocar a nova chave no GitHub, frontend, chat ou ficheiros.
