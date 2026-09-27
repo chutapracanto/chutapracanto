@@ -1950,3 +1950,21 @@ A API key **não deve ser enviada para o chat, GitHub, `wrangler.toml`, frontend
 
 ## Próxima dependência exata
 Depois de obter a API key, Rute configura-a diretamente no projeto Pages como Secret. Não é necessário entregar a chave ao Assistente. Quando o secret estiver configurado, a validação autenticada da API-Football pode começar.
+
+
+## 59. MODELO QUANTITATIVO DE QUOTA API-FOOTBALL — 2026-09-27
+
+A validação da Fase 3 foi aprofundada para medir o fornecedor contra o uso real do CPC, e não apenas contra a existência de cobertura.
+
+A documentação oficial do API-Football confirma que uma chamada de fixtures pode devolver uma época/competição inteira e que filtros por data/período/round permitem reduzir o volume; detalhes de fixtures podem ser agrupados por até 20 IDs. citeturn0search1turn0search3turn0search6
+
+Modelos preliminares de arquitetura para as 7 competições:
+- 1 fixtures + 1 standings por competição/dia + metadata: ~15 requests/dia;
+- 4 atualizações de fixtures/dia + 1 standings/dia por competição + metadata: ~36/dia;
+- 12 atualizações de fixtures/dia + 1 standings/dia por competição + metadata: ~92/dia.
+
+Estes valores não são medição real da conta e não aprovam o fornecedor. O cenário de ~92/dia é considerado sem margem confortável. O gate final exige margem operacional suficiente, respeito do limite de 10/minuto, cache/deduplicação/stale-if-error, retries controlados e modelação de dias de maior atividade.
+
+A documentação também indica atualização de fixtures/events live a cada 15 segundos no fornecedor. O CPC não deve reproduzir essa frequência indiscriminadamente no Free; live contínuo nas 7 competições deve ser tratado como cenário separado e validado antes de ser prometido no produto. citeturn0search6
+
+**Estado:** API-Football continua candidato principal, não aprovado. Próxima dependência: API key configurada diretamente no Cloudflare Pages Secret para testes autenticados 2026/27 e medição real.
