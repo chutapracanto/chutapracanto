@@ -330,3 +330,12 @@ Commits:
 - `99b0cdb57d04594d4ddfc0371dccfe0a66487ddd`
 
 **Próximo gate:** uma única validação do endpoint público após o deployment. Usar `seasonId=1310`. Depois da identificação, remover imediatamente o `debugStage` e corrigir a causa.
+
+
+### Isolamento BSD_EVENTS — 27-09-2026
+
+O endpoint público respondeu `debugStage: BSD_EVENTS`. Os probes anteriores provaram que o mesmo endpoint BSD responde HTTP 200 e que o corpo pode ser lido com `response.text()` e `JSON.parse()`. A diferença restante no fluxo era o uso de `response.json()` dentro de `bsdFetchJson()`.
+
+Sem novo diagnóstico BSD, o adapter foi alterado no commit `da9478109643d1b870b3a34124d195754863029c` para ler explicitamente `response.text()` e fazer `JSON.parse()`, mantendo a mesma autenticação, URL e timeout. O erro de parsing é agora classificado como `BSD_JSON_PARSE`.
+
+**Próximo gate:** após deployment, uma única validação do endpoint público. Se PASS, remover instrumentação `debugStage`; se continuar `BSD_EVENTS`, investigar a próxima diferença sem repetir probes BSD.
