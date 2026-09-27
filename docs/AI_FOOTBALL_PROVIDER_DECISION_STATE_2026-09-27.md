@@ -287,3 +287,22 @@ O diagnóstico devolve apenas estado técnico sanitizado (HTTP status, validade 
 
 **Próximo passo imediato:** fazer **uma única execução** do endpoint temporário acima na sessão Admin autenticada e devolver apenas o JSON sanitizado. Depois interpretar e, conforme o resultado, corrigir o adapter/configuração ou passar temporariamente ao API-Football autorizado pela utilizadora para teste. O endpoint temporário deve ser removido após a investigação.
 
+
+
+### Resultado do diagnóstico BSD runtime — 27-09-2026
+
+Execução única do endpoint temporário `/api/admin/football-provider-bsd-runtime-diagnostic`: **PASS**.
+- Production tem `BSD_API_KEY` configurada.
+- Events BSD: HTTP 200, JSON válido, 50 resultados, 362 ms.
+- Standings BSD: HTTP 200, JSON válido, 18 standings, 147 ms.
+- Total deste diagnóstico: 2 requests.
+- Consumo BSD acumulado passa de 12 para **14 requests**.
+
+Conclusão: **não há evidência de problema de credencial, conectividade ou disponibilidade do BSD em Production**. O 503 do endpoint público está dentro da implementação `bsdFetchJson/bsdFootballAdapter` e deve ser isolado sem trocar de fornecedor.
+
+Hipóteses técnicas prioritárias:
+1. descoberta automática da season quando `seasonId` não é fornecido;
+2. comportamento da Cache API `caches.default` / `cache.put` no runtime de Pages Functions;
+3. outra diferença entre o fluxo do adapter e o probe direto.
+
+Próximo teste mínimo: executar o endpoint público com `seasonId=1310`, evitando a descoberta automática da época. Se continuar 503, a próxima correção deve isolar/remover temporariamente a Cache API do adapter, porque os requests BSD diretos já estão comprovadamente funcionais.
