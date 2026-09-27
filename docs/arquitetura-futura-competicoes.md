@@ -1,6 +1,6 @@
 # Especificação futura: área de competições
 
-**Estado:** desenho técnico; sem implementação, fornecedor ou custo aprovado.
+**Estado:** desenho técnico; matriz de fornecedores concluída em 2026-09-27; API-Football é candidato principal, mas fornecedor ainda não aprovado para produção. Testes autenticados 2026/27 e quota pendentes.
 
 ## Modelo editorial e de dados
 
@@ -29,3 +29,14 @@ Lista inicial prevista: Liga Portugal, Taça de Portugal, Taça da Liga, UEFA Ch
 O frontend nunca chama diretamente o fornecedor com credenciais. Uma camada server-side no runtime Cloudflare Pages/Worker normaliza dados através de um adaptador de fornecedor; um Cron Trigger atualiza as competições e épocas ativas, com cache por competição/época/recurso, limite de chamadas, deduplicação e política de stale-if-error.
 
 As respostas devem incluir `updatedAt`, origem dos dados e estado de atualização. A camada guarda o token apenas como secret server-side quando um fornecedor for escolhido e aprovado. Fornecedor, preço e limites ficam em aberto; esta especificação não cria bindings, secrets, endpoints nem chamadas API.
+
+
+## Estado de seleção de fornecedor — 2026-09-27
+
+A primeira matriz documental está em `docs/AI_FOOTBALL_PROVIDER_MATRIX_2026-09-27.md`.
+
+O candidato principal é API-Football porque declara cobertura das sete competições prioritárias e disponibiliza no Free os endpoints necessários para a arquitetura. O limite Free é 100 requests/dia e 10/minuto.
+
+A seleção ainda não está aprovada. Antes de criar secrets, bindings ou endpoints, é obrigatório validar com uma API key real a época 2026/27 das sete competições e medir a quota necessária para fixtures, resultados, standings e events/live.
+
+A arquitetura continua provider-agnostic e o adapter deve ser a única camada dependente do fornecedor.
