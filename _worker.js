@@ -2556,6 +2556,217 @@ async function handleAdminAPI(request, env) {
 }
 
 
+
+// ============================================================
+// ADAPTER INTERNO — BZZOIRO SPORTS DATA (BSD)
+// ============================================================
+
+const CPC_FOOTBALL_COMPETITIONS = {
+  "liga-portugal": { leagueId: 2, name: "Liga Portugal", seasonId: 1310 },
+  "taca-portugal": { leagueId: 92, name: "Taça de Portugal", seasonId: 1922 },
+  "taca-liga": { leagueId: 93, name: "Taça da Liga", seasonId: 1941 },
+  "champions-league": { leagueId: 7, name: "UEFA Champions League", seasonId: 1112 },
+  "europa-league": { leagueId: 8, name: "UEFA Europa League", seasonId: 1269 },
+  "conference-league": { leagueId: 83, name: "UEFA Conference League", seasonId: 1606 },
+  "nations-league": { leagueId: 64, name: "UEFA Nations League", seasonId: 1430 }
+};
+
+function cpcSafeNumber(value) {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : null;
+}
+
+function cpcSafeString(value) {
+  return typeof value === "string" ? value : value == null ? "" : String(value);
+}
+
+function cpcTeam(team, fallbackId = null) {
+  return {
+    id: cpcSafeNumber(team?.id ?? fallbackId),
+    name: cpcSafeString(team?.name ?? team?.team_name)
+  };
+}
+
+function cpcNormalizeEvent(event) {
+  const home = cpcTeam(event?.home_team, event?.home_team_id ?? event?.home?.id);
+  const away = cpcTeam(event?.away_team, event?.away_team_id ?? event?.away?.id);
+
+  return {
+    id: cpcSafeNumber(event?.id ?? event?.event_id),
+    kickoff: event?.event_date ?? event?.date ?? event?.start_date ?? null,
+    status: cpcSafeString(event?.status),
+    stage: cpcSafeString(event?.stage),
+    stageName: cpcSafeString(event?.stage_name),
+    round: cpcSafeNumber(event?.round_number ?? event?.round),
+    roundLabel: cpcSafeString(event?.round_label),
+    homeTeam: home,
+    awayTeam: away,
+    score: {
+      home: cpcSafeNumber(event?.home_score ?? event?.home?.score ?? event?.score?.home),
+      away: cpcSafeNumber(event?.away_score ?? event?.away?.score ?? event?.score?.away)
+    }
+  };
+}
+
+function cpcNormalizeStanding(row) {
+  return {
+    position: cpcSafeNumber(row?.position ?? row?.rank),
+    team: cpcTeam(row?.team, row?.team_id),
+    played: cpcSafeNumber(row?.played ?? row?.matches_played),
+    wins: cpcSafeNumber(row?.wins ?? row?.won),
+    draws: cpcSafeNumber(row?.draws),
+    losses: cpcSafeNumber(row?.losses ?? row?.lost),
+    goalsFor: cpcSafeNumber(row?.goals_for ?? row?.goals_scored),
+    goalsAgainst: cpcSafeNumber(row?.goals_against ?? row?.goals_conceded),
+    goalDifference: cpcSafeNumber(row?.goal_difference ?? row?.goal_diff),
+    points: cpcSafeNumber(row?.points ?? row?.pts)
+  };
+}
+
+async function bsdFetchJson(env, endpoint, cacheSeconds = 60) {
+  const apiKey = env.BSD_API_KEY;
+  if (typeof apiKey !== "string" || !apiKey.trim()) {
+    throw new Error("BSD_API_KEY indisponível.");
+  }
+
+  const request = new Request(endpoint, {
+    method: "GET",
+    headers: {
+      "Authorization": `Token ${apiKey.trim()}`,
+      "Accept": "application/json"
+    }
+  });
+
+  const cache = caches.default;
+  const cached = await cache.match(request);
+  if (cached) return cached.json();
+
+  const response = await fetch(request, {
+    signal: AbortSignal.timeout(10000)
+  });
+
+  if (!response.ok) {
+    throw new Error(`BSD HTTP ${response.status}`);
+  }
+
+  const data = await response.json();
+
+  const cachedResponse = new Response(JSON.stringify(data), {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "Cache-Control": `public, max-age=${cacheSeconds}`
+    }
+  });
+
+  await cache.put(request, cachedResponse.clone());
+  return data;
+}
+
+function bsdExtractEvents(data) {
+  if (Array.isArray(data?.results)) return data.results;
+  if (Array.isArray(data?.events)) return data.events;
+  if (Array.isArray(data?.data)) return data.data;
+  return Array.isArray(data) ? data : [];
+}
+
+function bsdExtractStandings(data) {
+  const rows = Array.isArray(data?.standings) ? [...data.standings] : [];
+  if (Array.isArray(data?.groups)) {
+    for (const group of data.groups) {
+      if (Array.isArray(group?.standings)) rows.push(...group.standings);
+      else if (Array.isArray(group?.table)) rows.push(...group.table);
+    }
+  }
+  return rows;
+}
+
+async function bsdFootballAdapter(env, competitionKey, options = {}) {
+  const competition = CPC_FOOTBALL_COMPETITIONS[competitionKey];
+  if (!competition) throw new Error("Competição não suportada.");
+
+  const seasonId = Number(options.seasonId || competition.seasonId);
+  if (!Number.isSafeInteger(seasonId) || seasonId <= 0) {
+    throw new Error("Época inválida.");
+  }
+
+  const stage = options.stage ? String(options.stage) : "";
+  const eventParams = new URLSearchParams({
+    league_id: String(competition.leagueId),
+    season_id: String(seasonId)
+  });
+  if (stage) eventParams.set("stage", stage);
+  if (options.round != null) eventParams.set("round", String(options.round));
+
+  const [eventsData, standingsData] = await Promise.all([
+    bsdFetchJson(
+      `https://sports.bzzoiro.com/api/v2/events/?${eventParams.toString()}`,
+      60
+    ),
+    bsdFetchJson(
+      `https://sports.bzzoiro.com/api/v2/leagues/${competition.leagueId}/standings/?season_id=${seasonId}`,
+      300
+    )
+  ]);
+
+  return {
+    competition: {
+      key: competitionKey,
+      name: competition.name,
+      provider: "bsd",
+      providerLeagueId: competition.leagueId
+    },
+    season: {
+      id: seasonId,
+      label: "2026/27"
+    },
+    fixtures: bsdExtractEvents(eventsData).map(cpcNormalizeEvent),
+    standings: bsdExtractStandings(standingsData).map(cpcNormalizeStanding),
+    updatedAt: new Date().toISOString(),
+    source: "Bzzoiro Sports Data",
+    updateStatus: "live"
+  };
+}
+
+async function handleFootballCompetitionAPI(request, env) {
+  const url = new URL(request.url);
+  if (url.pathname !== "/api/competicoes") return null;
+
+  if (request.method !== "GET") {
+    return json({ error: "Método não permitido." }, 405, { Allow: "GET" });
+  }
+
+  const competitionKey = url.searchParams.get("competition") || "";
+  const competition = CPC_FOOTBALL_COMPETITIONS[competitionKey];
+
+  if (!competition) {
+    return json({
+      error: "Competição não suportada.",
+      available: Object.keys(CPC_FOOTBALL_COMPETITIONS)
+    }, 400);
+  }
+
+  try {
+    const data = await bsdFootballAdapter(env, competitionKey, {
+      seasonId: url.searchParams.get("seasonId") || competition.seasonId,
+      stage: url.searchParams.get("stage") || "",
+      round: url.searchParams.get("round")
+    });
+
+    return json(data, 200, {
+      "Cache-Control": "public, max-age=60, stale-while-revalidate=300"
+    });
+  } catch (error) {
+    console.error("Football adapter error:", error);
+    return json({
+      error: "Dados de futebol temporariamente indisponíveis.",
+      message: "Não foi possível obter os dados da competição."
+    }, 503, {
+      "Retry-After": "60"
+    });
+  }
+}
+
 // ============================================================
 // REDIRECIONAMENTO DE URLs LEGADAS DO FRAMER
 // ============================================================
