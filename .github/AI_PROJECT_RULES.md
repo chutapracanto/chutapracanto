@@ -1,5 +1,5 @@
 # CHUTA PRA CANTO — MANUAL OPERACIONAL / FONTE DE VERDADE
-Versão: 2026-09-25
+Versão: 2026-09-27
 Repo: chutapracanto/chutapracanto
 Produção: main
 Domínio: https://chutapracanto.com
@@ -116,6 +116,10 @@ https://newsinitiative.withgoogle.com/resources/trainings/start-building-your-au
 
 ## 0A-1. ROADMAP — ORDEM DAS FASES DO PROJETO
 
+**Estado operacional atual (2026-09-27): FASE 3 — Dados de futebol e API de competições / seleção e validação de fornecedor.**
+
+A Fase 2 UX/editorial foi encerrada operacionalmente com a PR #42 mergeada. O engagement persistente em D1 já está em `main`; não reabrir essa frente sem nova evidência.
+
 O roadmap oficial do projeto é:
 
 `docs/AI_PROJECT_ROADMAP.md`
@@ -202,10 +206,11 @@ Pages:
 - verificar commit + deployment + URL;
 - depois do merge verificar produção.
 
-Worker:
-- existe Worker separado chamado "chutapracanto";
-- NÃO confundir com _worker.js;
-- erro do Worker deve ser investigado separadamente.
+Runtime Cloudflare:
+- **não existe atualmente um Worker Cloudflare separado chamado `chutapracanto`**;
+- `_worker.js` é o runtime da aplicação Pages e contém as rotas `/api/*`, incluindo `article-like`;
+- não criar nem ressuscitar um Worker separado para resolver funcionalidades do CPC;
+- qualquer referência histórica a esse Worker deve ser tratada como arquivo histórico, não como infraestrutura ativa.
 
 Nunca considerar "deploy successful" como prova de que toda a UX está correta. Deployment prova publicação, não substitui testes funcionais/visuais.
 
