@@ -2562,13 +2562,13 @@ async function handleAdminAPI(request, env) {
 // ============================================================
 
 const CPC_FOOTBALL_COMPETITIONS = {
-  "liga-portugal": { leagueId: 2, name: "Liga Portugal", seasonId: 1310 },
-  "taca-portugal": { leagueId: 92, name: "Taça de Portugal", seasonId: 1922 },
-  "taca-liga": { leagueId: 93, name: "Taça da Liga", seasonId: 1941 },
-  "champions-league": { leagueId: 7, name: "UEFA Champions League", seasonId: 1112 },
-  "europa-league": { leagueId: 8, name: "UEFA Europa League", seasonId: 1269 },
-  "conference-league": { leagueId: 83, name: "UEFA Conference League", seasonId: 1606 },
-  "nations-league": { leagueId: 64, name: "UEFA Nations League", seasonId: 1430 }
+  "liga-portugal": { leagueId: 2, name: "Liga Portugal" },
+  "taca-portugal": { leagueId: 92, name: "Taça de Portugal" },
+  "taca-liga": { leagueId: 93, name: "Taça da Liga" },
+  "champions-league": { leagueId: 7, name: "UEFA Champions League" },
+  "europa-league": { leagueId: 8, name: "UEFA Europa League" },
+  "conference-league": { leagueId: 83, name: "UEFA Conference League" },
+  "nations-league": { leagueId: 64, name: "UEFA Nations League" }
 };
 
 function cpcSafeNumber(value) {
@@ -2685,9 +2685,32 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
   const competition = CPC_FOOTBALL_COMPETITIONS[competitionKey];
   if (!competition) throw new Error("Competição não suportada.");
 
-  const seasonId = Number(options.seasonId || competition.seasonId);
+  let seasonId = Number(options.seasonId || 0);
+  let seasonLabel = "";
+
   if (!Number.isSafeInteger(seasonId) || seasonId <= 0) {
-    throw new Error("Época inválida.");
+    const seasonsData = await bsdFetchJson(
+      `https://sports.bzzoiro.com/api/v2/leagues/${competition.leagueId}/seasons/`,
+      21600
+    );
+    const seasons = Array.isArray(seasonsData)
+      ? seasonsData
+      : Array.isArray(seasonsData?.seasons)
+        ? seasonsData.seasons
+        : Array.isArray(seasonsData?.results)
+          ? seasonsData.results
+          : [];
+
+    const current = seasons.find(item => item?.current === true)
+      || seasons.find(item => String(item?.year || "") === "2026")
+      || seasons[0];
+
+    seasonId = Number(current?.id);
+    seasonLabel = cpcSafeString(current?.name || current?.label || current?.year);
+  }
+
+  if (!Number.isSafeInteger(seasonId) || seasonId <= 0) {
+    throw new Error("Época não encontrada.");
   }
 
   const stage = options.stage ? String(options.stage) : "";
@@ -2718,7 +2741,7 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
     },
     season: {
       id: seasonId,
-      label: "2026/27"
+      label: seasonLabel || (seasonId === 1310 ? "2026/27" : "")
     },
     fixtures: bsdExtractEvents(eventsData).map(cpcNormalizeEvent),
     standings: bsdExtractStandings(standingsData).map(cpcNormalizeStanding),
@@ -2748,7 +2771,7 @@ async function handleFootballCompetitionAPI(request, env) {
 
   try {
     const data = await bsdFootballAdapter(env, competitionKey, {
-      seasonId: url.searchParams.get("seasonId") || competition.seasonId,
+      seasonId: url.searchParams.get("seasonId") || "",
       stage: url.searchParams.get("stage") || "",
       round: url.searchParams.get("round")
     });
