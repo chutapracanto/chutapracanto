@@ -1,7 +1,7 @@
 # Matriz de fornecedores de dados de futebol — Fase 3
 
 **Data:** 2026-09-27  
-**Estado:** pesquisa em curso; nenhum fornecedor aprovado para produção.
+**Estado:** BSD tecnicamente validado como fornecedor principal; integração de produção ainda não está aprovada operacionalmente.
 
 ## Competições-alvo
 1. Liga Portugal
@@ -14,13 +14,9 @@
 
 ## API-Football
 
-A cobertura oficial, atualizada em 2026-09-25, lista explicitamente as sete competições-alvo: Primeira Liga, Taça de Portugal, Taça da Liga, UEFA Champions League, UEFA Europa League, UEFA Conference League e UEFA Nations League. A própria página avisa que a cobertura pode variar por época/jogo. citeturn1search3turn2search5
+A cobertura oficial analisada inclui as sete competições-alvo e o Free disponibiliza os endpoints necessários, mas a validação autenticada 2026/27 não produziu dados utilizáveis: as chamadas responderam HTTP 200 sem resultados e os erros sanitizados variaram entre `subscription` e `quota`. O diagnóstico foi executado duas vezes por engano, totalizando 14 chamadas, e não deve ser repetido nesta fase.
 
-O Free é $0/mês, 100 requests/dia, 10 requests/minuto e sem cartão. Inclui Seasons, Standings, Teams, Livescore, Fixtures, Events, Lineups e outros endpoints. As épocas disponíveis no Free são limitadas relativamente aos planos pagos. citeturn0search0turn0search4
-
-Os termos permitem websites/aplicações, mas proíbem revenda direta dos dados e contas múltiplas para aumentar a quota. O token deve permanecer server-side. citeturn0search7
-
-**Risco principal:** 100 requests/dia não permite polling agressivo de vários jogos. O CPC terá de usar cache, deduplicação, atualização por prioridade e stale-if-error. Antes de produção, é obrigatório testar com uma API key real a disponibilidade da época 2026/27 e o consumo efetivo.
+**Estado:** candidato de fallback/teste, **não aprovado para produção**. A limitação observada não permite concluir com segurança se é quota, cobertura da época ou outra restrição do plano Free.
 
 ## football-data.org
 
@@ -68,19 +64,20 @@ A documentação pública confirma Soccer API v4, cobertura global e profundidad
 | Atribuição | Não identificada como requisito geral | **Obrigatória** | Não validada | Não validada |
 | Fit CPC atual | **Candidato principal** | Fallback parcial | Fallback pago | Fora da 1.ª linha |
 
-## Decisão provisória
+## Decisão atual
 
-**API-Football é o candidato principal, mas ainda não está aprovado para produção.**
+**Bzzoiro Sports Data (BSD) é o fornecedor principal tecnicamente validado para o CPC.**
 
-É o único candidato analisado que declara as sete competições na cobertura e disponibiliza os endpoints necessários no Free sem cartão. citeturn1search3turn0search0
+A validação autenticada confirmou:
+- temporadas 2026/27 nas sete competições prioritárias;
+- estrutura multi-stage nas competições UEFA;
+- fixtures/events e standings reais da Primeira Liga;
+- credencial server-side funcional em Production;
+- conectividade Production → BSD funcional.
 
-Antes de aprovação:
-1. confirmar com chamadas autenticadas a época **2026/27** nas sete competições;
-2. medir quota para fixtures/results/standings/events;
-3. testar 429 e headers de quota;
-4. definir política de atualização que caiba no Free sem sacrificar a arquitetura.
+A licença analisada permite display dos dados dentro do próprio website, mas proíbe redistribuição do raw data como feed/dataset/API independente. Permanecem pontos documentais sobre Terms of Service gerais e a versão da licença aplicável aos dados recolhidos antes de 1-10-2026.
 
-Não criar adapter, endpoints de produto, cache ou bindings definitivos antes destes testes. Em 2026-09-27 foi autorizada uma exceção estrita: um endpoint temporário, protegido por sessão Admin, POST same-origin e limitado ao branch `main` e aos hosts oficiais de Production, para uma única chamada manual de diagnóstico `/status` por execução. Esta exceção não aprova o fornecedor nem constitui integração de produto.
+**Importante:** isto não equivale ainda a PASS de produção do endpoint `/api/competicoes`. O adapter existe e está implementado, mas a chamada pública continua a devolver HTTP 503 na investigação atual. O próximo trabalho é corrigir a integração/routing do runtime sem repetir diagnósticos BSD já concluídos.
 
 ## Arquitetura obrigatória
 
@@ -100,20 +97,11 @@ UI → Pages runtime/_worker.js → adapter interno → provider → cache D1/Cl
 Obter uma API key gratuita do candidato principal e validar a disponibilidade real de 2026/27 e o consumo de quota nas sete competições. Só depois aprovar o adapter.
 
 
-## Secret injection — mecanismo concreto validado em 2026-09-27
+## Secret injection — estado atual
 
-A credencial do fornecedor, quando houver validação autenticada, deve ser armazenada como **Cloudflare Pages Secret**, nunca em GitHub, `wrangler.toml`, frontend ou chat.
+A credencial BSD está configurada como **Cloudflare Pages Secret `BSD_API_KEY` em Production**, exclusivamente server-side. O valor nunca foi colocado no GitHub, frontend ou chat.
 
-O Cloudflare documenta duas vias para Pages:
-1. **Dashboard:** Workers & Pages → projeto Pages → Settings → Variables and Secrets → Add → nome/valor → **Encrypt** → Save.
-2. **Wrangler:** `npx wrangler pages secret put <KEY> --project-name <PROJECT>`.
-
-O runtime Pages lê secrets através de `context.env`. O segredo não é exposto para leitura posterior no dashboard. Fontes oficiais: https://developers.cloudflare.com/pages/functions/bindings/ e https://developers.cloudflare.com/workers/wrangler/commands/pages/.
-
-Para o CPC, usa-se o runtime Pages existente; não criar Worker separado. A utilizadora configurou `API_FOOTBALL_KEY` como secret apenas em Production. A configuração foi confirmada pela API do Cloudflare através de presença/tipo, sem ler nem devolver o valor; Preview não contém esse secret.
-
-**Dependência operacional atual:** o diagnóstico temporário ainda precisa de ser integrado e publicado em Production. Só então pode ser feita manualmente uma chamada autenticada a `/status`; não enviar a chave para o chat. Cada POST executa uma única chamada, sem retries nem chamadas automáticas. O resultado dessa chamada não aprova o fornecedor nem autoriza a integração definitiva.
-
+A credencial API-Football permanece separada como `API_FOOTBALL_KEY`; não deve ser usada novamente sem hipótese explícita. Como houve risco de exposição durante testes anteriores, a rotação dessa chave continua recomendada depois de concluída a investigação indispensável.
 
 ## 2026-09-27 — modelo preliminar de consumo para o CPC
 
