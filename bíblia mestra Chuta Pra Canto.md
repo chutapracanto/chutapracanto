@@ -1,6 +1,7 @@
 # CHUTA PRA CANTO — BÍBLIA MESTRA DO PROJETO
 ## Documento de continuidade IA → IA
 **Data de consolidação/reconciliação:** 2026-09-25  
+**Última reconciliação operacional:** 2026-09-27  
 **Repositório:** `chutapracanto/chutapracanto`  
 **Produção:** `main` → `https://chutapracanto.com`
 
@@ -41,11 +42,13 @@
 O **Chuta Pra Canto (CPC)** é um projeto editorial de futebol em português, com foco em notícias, opinião/análise, vídeo e futuro enriquecimento com dados estruturados de futebol.
 
 Arquitetura atual:
-`GitHub` → `Cloudflare Pages` / `Worker` → produção `chutapracanto.com`.
+`GitHub` → `Cloudflare Pages` / runtime `_worker.js` → produção `chutapracanto.com`.
 
-Existe um Cloudflare Worker separado chamado **`chutapracanto`**. Não confundir com o ficheiro `_worker.js` do repositório.
+**Estado Cloudflare atual:** não existe atualmente um Worker separado chamado `chutapracanto`. Qualquer referência histórica a esse Worker nas secções arquivadas abaixo não representa infraestrutura ativa.
 
 ## 1.2 Estado atual, sem ambiguidades
+
+> **SNAPSHOT 2026-09-27:** FASE 3 ativa — seleção/validação de fornecedor de dados de futebol. Fase 2 UX/editorial encerrada com PR #42. Engagement persistente em D1 presente em `main`. Framer redirects permanecem uma pendência independente e não bloqueiam Fase 3.
 
 ### JÁ IMPLEMENTADO / FECHADO
 Estas áreas não precisam de ser reabertas ou refeitas sem nova necessidade concreta:
@@ -86,16 +89,7 @@ Estado técnico:
 Não reabrir automaticamente a performance. Qualquer nova investigação deve nascer de uma hipótese concreta e de uma decisão que dependa dessa evidência.
 
 ### ÚLTIMO PONTO DE CONTINUIDADE
-A última ação desta linha de trabalho foi enviar ao Codex um prompt para:
-- ler as Rules;
-- investigar o CLS com Chrome Performance;
-- identificar timestamp, elemento afetado e causa;
-- repetir a medição para confirmar;
-- investigar `--article-progress`;
-- testar a anomalia da opinião no Lighthouse;
-- não alterar código/commit/merge durante o diagnóstico.
-
-Se a resposta do Codex ainda não estiver registada, **continuar a partir daí**.
+A frente UX/editorial do artigo foi fechada operacionalmente com a PR #42. O engagement persistente em D1 já está em `main`. A Fase 3 está ativa e a linha de continuidade atual é a **seleção/validação do fornecedor de dados de futebol**; não voltar ao diagnóstico antigo de CLS/LCP sem nova hipótese/evidência.
 
 ---
 
@@ -777,15 +771,15 @@ Após workflows que escrevem conteúdo:
 
 ---
 
-# 21. CLOUDFLARE
+# 21. CLOUDFLARE — ESTADO ATUAL
 
-Dois componentes:
+Existe:
 1. Cloudflare Pages;
-2. Worker separado `chutapracanto`.
+2. `_worker.js` como runtime da aplicação Pages.
 
-Não confundir:
-- `_worker.js` é código do repositório;
-- Worker Cloudflare "chutapracanto" é serviço separado.
+**Não existe atualmente um Worker Cloudflare separado `chutapracanto`.** Referências históricas ao serviço separado nas bíblias arquivadas não devem ser tratadas como infraestrutura ativa.
+
+A rota de engagement persistente `article-like` está no `_worker.js` e usa o binding D1 configurado no repositório.
 
 Não migrar arquitetura para Workers só porque documentação atual recomenda Workers para novos projetos. A arquitetura CPC existente deve ser preservada até haver razão concreta.
 
@@ -807,7 +801,9 @@ Não usar por disponibilidade apenas.
 
 ---
 
-# 23. ROADMAP MESTRE
+# 23. ROADMAP MESTRE — ARQUIVO LEGACY / NÃO OPERACIONAL
+
+> **ATENÇÃO:** esta secção preserva a numeração de fases de uma arquitetura histórica. **Não é o roadmap operacional atual.** Para estado e sequência atuais, usar exclusivamente `docs/AI_PROJECT_ROADMAP.md`, cuja Fase operacional atual é a **FASE 3 — Dados de futebol e API de competições**.
 
 ## FASE 0
 Fundação técnica/SEO/segurança — CONCLUÍDA.
