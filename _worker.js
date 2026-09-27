@@ -1932,6 +1932,165 @@ async function handleAdminAPI(request, env) {
     });
   }
 
+
+  // ----------------------------------------------------------
+  // DIAGNÓSTICO TEMPORÁRIO BSD — DADOS OPERACIONAIS
+  // ----------------------------------------------------------
+
+  if (pathname === "/api/admin/football-provider-bsd-operational-diagnostic") {
+    if (
+      env.CF_PAGES_BRANCH !== "main" ||
+      !["chutapracanto.com", "chutapracanto.pages.dev"].includes(url.hostname)
+    ) {
+      return json({ error: "Endpoint não encontrado." }, 404);
+    }
+
+    if (request.method !== "POST") {
+      return json({ error: "Método não permitido." }, 405, { Allow: "POST" });
+    }
+
+    const authError = await requireAuth(request, env);
+    if (authError) return authError;
+
+    if (request.headers.get("Origin") !== url.origin) {
+      return json({ error: "Origem não permitida." }, 403);
+    }
+
+    const apiKey = env.BSD_API_KEY;
+    if (typeof apiKey !== "string" || !apiKey.trim()) {
+      return json({ error: "Secret BSD_API_KEY indisponível em Production." }, 503);
+    }
+
+    const headers = {
+      "Authorization": `Token ${apiKey.trim()}`,
+      "Accept": "application/json"
+    };
+
+    const safeInteger = value => {
+      if (value === null || value === undefined || value === "") return null;
+      const number = Number(value);
+      return Number.isSafeInteger(number) && number >= 0 ? number : null;
+    };
+
+    const safeString = value =>
+      typeof value === "string" && value.length <= 160 ? value : null;
+
+    const summarizeEvents = data => {
+      const items = Array.isArray(data)
+        ? data
+        : Array.isArray(data?.events)
+          ? data.events
+          : Array.isArray(data?.results)
+            ? data.results
+            : Array.isArray(data?.data)
+              ? data.data
+              : [];
+
+      return {
+        itemCount: items.length,
+        sample: items.slice(0, 3).map(item => ({
+          id: safeInteger(item?.id || item?.event_id),
+          date: safeString(item?.date || item?.start_date),
+          status: safeString(item?.status),
+          stage: safeString(item?.stage),
+          round: safeInteger(item?.round_number || item?.round)
+        }))
+      };
+    };
+
+    const summarizeStandings = data => {
+      const groups = Array.isArray(data)
+        ? data
+        : Array.isArray(data?.standings)
+          ? data.standings
+          : Array.isArray(data?.results)
+            ? data.results
+            : Array.isArray(data?.data)
+              ? data.data
+              : [];
+
+      const rows = [];
+      for (const group of groups) {
+        if (Array.isArray(group?.table)) rows.push(...group.table);
+        else if (Array.isArray(group?.standings)) rows.push(...group.standings);
+        else if (group?.team) rows.push(group);
+      }
+
+      return {
+        groupCount: groups.length,
+        rowCount: rows.length,
+        sample: rows.slice(0, 3).map(row => ({
+          position: safeInteger(row?.position || row?.rank),
+          teamId: safeInteger(row?.team?.id || row?.team_id),
+          teamName: safeString(row?.team?.name || row?.team_name)
+        }))
+      };
+    };
+
+    const tests = [
+      {
+        key: "primeiraLigaEvents",
+        label: "Primeira Liga fixtures/results",
+        endpoint:
+          "https://sports.bzzoiro.com/api/v2/events/?league_id=2&season_id=1310&stage=regular-season"
+      },
+      {
+        key: "primeiraLigaStandings",
+        label: "Primeira Liga standings",
+        endpoint:
+          "https://sports.bzzoiro.com/api/v2/leagues/2/standings/?season_id=1310"
+      },
+      {
+        key: "championsLeagueEvents",
+        label: "Champions League league-phase fixtures/results",
+        endpoint:
+          "https://sports.bzzoiro.com/api/v2/events/?league_id=7&season_id=1112&stage=league-phase"
+      }
+    ];
+
+    const results = {};
+
+    for (const test of tests) {
+      try {
+        const response = await fetch(test.endpoint, {
+          method: "GET",
+          headers,
+          signal: AbortSignal.timeout(10000)
+        });
+        const data = await response.json();
+
+        results[test.key] = {
+          label: test.label,
+          httpStatus: response.status,
+          ok: response.ok,
+          dataShape:
+            test.key === "primeiraLigaStandings"
+              ? summarizeStandings(data)
+              : summarizeEvents(data),
+          error: response.ok
+            ? null
+            : safeString(data?.detail || data?.error || "provider_error")
+        };
+      } catch {
+        results[test.key] = {
+          label: test.label,
+          httpStatus: null,
+          ok: false,
+          dataShape: null,
+          error: "request_failed"
+        };
+      }
+    }
+
+    return json({
+      provider: "Bzzoiro Sports Data",
+      seasonTested: "2026/27",
+      requestCount: tests.length,
+      results
+    });
+  }
+
+
   // ----------------------------------------------------------
   // RESTANTES ROTAS ADMIN
   // ----------------------------------------------------------
