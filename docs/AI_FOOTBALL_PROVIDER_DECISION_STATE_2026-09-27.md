@@ -306,3 +306,14 @@ Hipóteses técnicas prioritárias:
 3. outra diferença entre o fluxo do adapter e o probe direto.
 
 Próximo teste mínimo: executar o endpoint público com `seasonId=1310`, evitando a descoberta automática da época. Se continuar 503, a próxima correção deve isolar/remover temporariamente a Cache API do adapter, porque os requests BSD diretos já estão comprovadamente funcionais.
+
+
+### Correção do runtime BSD — 27-09-2026
+
+O teste com `seasonId=1310` continuou a devolver HTTP 503, eliminando a hipótese de descoberta automática da época.
+
+Inspeção do adapter identificou a diferença relevante entre o probe que passou e o fluxo público: `bsdFetchJson()` usava `caches.default.match()` e `cache.put()`. O probe direto não passa por essa camada. A implementação foi corrigida no commit `161f7ce17ae804f16135796bd579f8f30d8cd3a3`: `bsdFetchJson()` agora faz apenas fetch autenticado, valida HTTP e lê JSON; o cache de resposta raw BSD foi removido para eliminar a falha de runtime e evitar retenção/exposição desnecessária do raw data.
+
+O cache da resposta normalizada do endpoint público permanece separado no handler.
+
+**Próximo gate:** validar o deployment Production com `/api/competicoes?competition=liga-portugal&seasonId=1310`. Se PASS, remover o endpoint temporário de diagnóstico BSD e fechar a investigação runtime.
