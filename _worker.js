@@ -2746,7 +2746,12 @@ async function bsdFetchJson(env, endpoint) {
     throw new Error(`BSD HTTP ${response.status}`);
   }
 
-  return response.json();
+  const body = await response.text();
+  try {
+    return JSON.parse(body);
+  } catch {
+    throw new Error("BSD_JSON_PARSE");
+  }
 }
 
 function bsdExtractEvents(data) {
