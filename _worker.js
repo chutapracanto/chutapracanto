@@ -1990,39 +1990,72 @@ async function handleAdminAPI(request, env) {
         itemCount: items.length,
         sample: items.slice(0, 3).map(item => ({
           id: safeInteger(item?.id || item?.event_id),
-          date: safeString(item?.date || item?.start_date),
+          eventDate: safeString(
+            item?.event_date ||
+            item?.date ||
+            item?.start_date ||
+            item?.kickoff
+          ),
           status: safeString(item?.status),
           stage: safeString(item?.stage),
-          round: safeInteger(item?.round_number || item?.round)
+          round: safeInteger(
+            item?.round_number ||
+            item?.round
+          ),
+          homeTeamId: safeInteger(
+            item?.home_team?.id ||
+            item?.home_team_id ||
+            item?.home?.id
+          ),
+          awayTeamId: safeInteger(
+            item?.away_team?.id ||
+            item?.away_team_id ||
+            item?.away?.id
+          )
         }))
       };
     };
 
     const summarizeStandings = data => {
-      const groups = Array.isArray(data)
-        ? data
-        : Array.isArray(data?.standings)
-          ? data.standings
-          : Array.isArray(data?.results)
-            ? data.results
-            : Array.isArray(data?.data)
-              ? data.data
-              : [];
+      const directRows = Array.isArray(data?.standings)
+        ? data.standings
+        : Array.isArray(data?.results)
+          ? data.results
+          : [];
 
-      const rows = [];
+      const groups = Array.isArray(data?.groups)
+        ? data.groups
+        : [];
+
+      const rows = [...directRows];
+
       for (const group of groups) {
-        if (Array.isArray(group?.table)) rows.push(...group.table);
-        else if (Array.isArray(group?.standings)) rows.push(...group.standings);
-        else if (group?.team) rows.push(group);
+        if (Array.isArray(group?.standings)) rows.push(...group.standings);
+        else if (Array.isArray(group?.table)) rows.push(...group.table);
       }
 
       return {
+        standingsArrayCount: directRows.length,
         groupCount: groups.length,
         rowCount: rows.length,
         sample: rows.slice(0, 3).map(row => ({
           position: safeInteger(row?.position || row?.rank),
-          teamId: safeInteger(row?.team?.id || row?.team_id),
-          teamName: safeString(row?.team?.name || row?.team_name)
+          teamId: safeInteger(
+            row?.team_id ||
+            row?.team?.id
+          ),
+          teamName: safeString(
+            row?.team_name ||
+            row?.team?.name
+          ),
+          played: safeInteger(
+            row?.played ||
+            row?.matches_played
+          ),
+          points: safeInteger(
+            row?.points ||
+            row?.pts
+          )
         }))
       };
     };
@@ -2030,21 +2063,15 @@ async function handleAdminAPI(request, env) {
     const tests = [
       {
         key: "primeiraLigaEvents",
-        label: "Primeira Liga fixtures/results",
+        label: "Primeira Liga fixtures/results — schema",
         endpoint:
           "https://sports.bzzoiro.com/api/v2/events/?league_id=2&season_id=1310&stage=regular-season"
       },
       {
         key: "primeiraLigaStandings",
-        label: "Primeira Liga standings",
+        label: "Primeira Liga standings — schema",
         endpoint:
           "https://sports.bzzoiro.com/api/v2/leagues/2/standings/?season_id=1310"
-      },
-      {
-        key: "championsLeagueEvents",
-        label: "Champions League league-phase fixtures/results",
-        endpoint:
-          "https://sports.bzzoiro.com/api/v2/events/?league_id=7&season_id=1112&stage=league-phase"
       }
     ];
 
@@ -2069,7 +2096,11 @@ async function handleAdminAPI(request, env) {
               : summarizeEvents(data),
           error: response.ok
             ? null
-            : safeString(data?.detail || data?.error || "provider_error")
+            : safeString(
+                data?.detail ||
+                data?.error ||
+                "provider_error"
+              )
         };
       } catch {
         results[test.key] = {
@@ -2086,6 +2117,13 @@ async function handleAdminAPI(request, env) {
       provider: "Bzzoiro Sports Data",
       seasonTested: "2026/27",
       requestCount: tests.length,
+      schemaBasis: {
+        eventsDateField: "event_date",
+        eventsStatusField: "status",
+        eventsStageField: "stage",
+        standingsRows: "standings[]",
+        groupedStandings: "groups[]"
+      },
       results
     });
   }
