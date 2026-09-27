@@ -2,7 +2,7 @@
   "generatedAt": "2026-09-25",
   "source": "docs/framer/framer-news-export-2026-09-25.json",
   "destinationIndex": "content/noticias-index.json",
-  "status": "inventory-only",
+  "status": "implemented-in-worker",
   "note": "No redirects implemented. Each source URL is mapped only to an existing repository destination. Validate HTTP behavior and redirect capability before execution.",
   "counts": {
     "total": 213,
@@ -1716,5 +1716,19 @@
       "destinationSlug": "benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe",
       "matchType": "slug"
     }
-  ]
+  ],
+  "implementation": {
+    "redirectMap": "content/framer-news-redirects.json",
+    "worker": "_worker.js",
+    "workerCommit": "382504c4b00431acd47d547c5be52d7298bee2e1",
+    "redirectMapCommit": "4ec827a057fc906d695543f82e3d99825df54069",
+    "behavior": "GET /noticias/<legacy-framer-slug> -> 301 /noticia?slug=<current-slug>",
+    "queryPolicy": "legacy query parameters are not copied; canonical article URL contains only slug"
+  },
+  "validation": {
+    "repository": "PASS",
+    "mapEntries": 213,
+    "deployment": "PENDING_EXTERNAL_VALIDATION",
+    "exactBrowserTest": "PENDING"
+  }
 }
