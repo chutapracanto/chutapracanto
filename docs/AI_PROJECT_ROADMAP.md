@@ -876,3 +876,21 @@ A parte de **indexação real** exige evidência de Google Search Console (propr
 ### Próxima ação executável
 Obter/validar o estado do Search Console da propriedade `chutapracanto.com`. Depois disso, atuar apenas sobre problemas efetivamente encontrados.
 
+
+## 32. SEARCH CONSOLE — SITEMAP SUBMETIDO — 2026-09-28
+
+### Operação concluída
+- Propriedade utilizada: `chutapracanto.com`.
+- Sitemap submetido à Google Search Console: `https://chutapracanto.com/sitemap.xml`.
+- A Search Console aceitou a submissão e informou que o processará periodicamente e notificará problemas futuros.
+
+### Estado
+**SUBMETIDO — processamento/indexação ainda pendente.**
+
+A Search Console está ainda a processar os dados de indexação e indicou que a informação poderá demorar cerca de um dia. Não existe neste momento evidência de erro de sitemap ou de exclusão que justifique intervenção técnica.
+
+### Regra operacional
+Não repetir submissão nem executar diagnósticos artificiais enquanto os dados não estiverem disponíveis. Quando a Search Console apresentar resultados, verificar primeiro o estado do sitemap e os motivos reais de não indexação; corrigir apenas problemas concretamente identificados.
+
+### Próximo passo
+Aguardar processamento da Google e, quando houver dados, validar **Sitemaps + Indexação de páginas**. A Fase 4 permanece ativa.
