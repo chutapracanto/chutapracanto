@@ -766,6 +766,13 @@ async function prepararShellArtigoInicial(request, env, response) {
       ? '<figure class="article-hero-image"><img src="' + escaparHtml(image) + '" alt="' + escaparHtml(title) + '" loading="eager" fetchpriority="high" decoding="async"></figure>'
       : "";
 
+    const canonicalSlug = encodeURIComponent(String(entry.slug || slug));
+    const publicArticlePath = entry.legacyUrl
+      ? "/noticia?slug=" + canonicalSlug
+      : "/noticia/" + canonicalSlug;
+    const canonicalUrl = "https://chutapracanto.com" + publicArticlePath;
+    const shareUrl = url.origin + publicArticlePath;
+
     const headers = new Headers(response.headers);
     headers.delete("Content-Length");
     const htmlResponse = new Response(response.body, {
@@ -775,6 +782,73 @@ async function prepararShellArtigoInicial(request, env, response) {
     });
 
     return new HTMLRewriter()
+      .on("title#page-title", {
+        element(element) {
+          element.setInnerContent(title);
+        }
+      })
+      .on("#meta-description", {
+        element(element) {
+          element.setAttribute("content", subtitle || "Notícias e opinião sobre futebol.");
+        }
+      })
+      .on("#meta-title", {
+        element(element) {
+          element.setAttribute("content", title);
+        }
+      })
+      .on("#meta-desc", {
+        element(element) {
+          element.setAttribute("content", subtitle || "Notícias e opinião sobre futebol.");
+        }
+      })
+      .on("#meta-image", {
+        element(element) {
+          element.setAttribute("content", image || "https://chutapracanto.com/images/logo.png");
+        }
+      })
+      .on("#meta-url", {
+        element(element) {
+          element.setAttribute("content", shareUrl);
+        }
+      })
+      .on("#twitter-title", {
+        element(element) {
+          element.setAttribute("content", title);
+        }
+      })
+      .on("#twitter-description", {
+        element(element) {
+          element.setAttribute("content", subtitle || "Notícias e opinião sobre futebol.");
+        }
+      })
+      .on("#twitter-image", {
+        element(element) {
+          element.setAttribute("content", image || "https://chutapracanto.com/images/logo.png");
+        }
+      })
+      .on("#twitter-url", {
+        element(element) {
+          element.setAttribute("content", shareUrl);
+        }
+      })
+      .on("#meta-published", {
+        element(element) {
+          if (entry.published) element.setAttribute("content", String(entry.published));
+        }
+      })
+      .on("#meta-modified", {
+        element(element) {
+          if (entry.modified || entry.updatedAt || entry.publishedAt) {
+            element.setAttribute("content", String(entry.modified || entry.updatedAt || entry.publishedAt));
+          }
+        }
+      })
+      .on("#canonical-url", {
+        element(element) {
+          element.setAttribute("href", canonicalUrl);
+        }
+      })
       .on("#article-content", {
         element(element) {
           element.setInnerContent(headerHtml + imageHtml, { html: true });
