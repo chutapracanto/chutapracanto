@@ -2557,3 +2557,23 @@ A implementação foi validada estruturalmente no GitHub contra o contrato atual
 
 ### Próximo passo
 Validar o deployment/produção da nova página quando a evidência estiver disponível e, se necessário, corrigir apenas problemas reais de UI/contrato. Depois integrar o acesso a Competições nas restantes páginas com navegação principal, se ainda necessário.
+
+
+# 53. VALIDAÇÃO DE PRODUÇÃO DA UI /COMPETICOES — 2026-09-28
+
+### Operação executada
+- Confirmado no GitHub que `main` contém a implementação da UI de `/competicoes` e a documentação correspondente.
+- Inspecionados `competicoes.html` e o contrato server-side de `/api/competicoes`; os nomes normalizados usados pela UI (`competition`, `season`, `fixtures`, `standings`, `updatedAt`, `updateStatus`) correspondem ao adapter atual.
+- Tentada validação direta dos URLs públicos `/competicoes` e `/api/competicoes?competition=liga-portugal`; o ambiente disponível não conseguiu aceder ao domínio público.
+- Confirmado também que o conector GitHub não apresenta workflow/deployment CI associado ao commit da UI que permita substituir essa verificação de produção.
+
+### Resultado
+**VALIDAÇÃO DE PRODUÇÃO — PENDENTE POR ACESSO**, não por evidência de falha da implementação.
+
+Não foram feitos novos calls BSD, novos testes D1, novo deployment artificial ou alterações de código sem evidência de problema.
+
+### Dependência exata
+A confirmação final exige acesso ao deployment/runtime Cloudflare Pages atualmente indisponível neste ambiente, ou uma verificação pública do domínio quando acessível.
+
+### Próximo passo automático após desbloqueio
+Verificar `/competicoes` em produção e pelo menos o carregamento de `/api/competicoes?competition=liga-portugal`; corrigir apenas problemas reais encontrados e registar a validação.
