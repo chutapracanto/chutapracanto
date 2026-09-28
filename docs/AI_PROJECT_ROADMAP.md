@@ -843,3 +843,17 @@ Não repetir os diagnósticos BSD encerrados.
 - UI `/competicoes`: posterior à validação do ciclo automático.
 
 Não reabrir diagnósticos BSD ou validações já encerradas sem nova evidência objetiva.
+
+
+## 28. CRON TRIGGER — IMPLEMENTADO / VALIDAÇÃO PENDENTE — 2026-09-28
+
+A atualização automática foi implementada no Worker e configurada em Wrangler com */5 * * * *.
+
+- uma competição por execução, em rotação pelas 7 competições;
+- D1 é consultada antes de qualquer chamada ao fornecedor;
+- entradas frescas não geram chamadas BSD;
+- entradas expiradas são atualizadas pelo adapter;
+- falhas não provocam retry imediato;
+- a chave de cache do Cron é compatível com a chave pública.
+
+ESTADO DA FASE 3: ATIVA — Cron implementado; validação runtime pendente. A UI /competicoes continua bloqueada até o ciclo automático ficar validado.
