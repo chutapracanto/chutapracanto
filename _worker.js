@@ -2690,6 +2690,60 @@ async function redirecionarNoticiaFramer(request, env) {
 }
 
 
+const FOOTBALL_CRON = "*/5 * * * *";
+
+async function atualizarCompeticaoAgendada(env, competitionKey) {
+  const competition = CPC_FOOTBALL_COMPETITIONS[competitionKey];
+  if (!competition) throw new Error("Competição não suportada.");
+
+  const cacheKeyPrefix = `bsd|${competitionKey}|`;
+  let cacheKey = null;
+  let cached = null;
+
+  if (env.FOOTBALL_CACHE_DB) {
+    const row = await env.FOOTBALL_CACHE_DB
+      .prepare(
+        "SELECT cache_key, season_id, fetched_at, expires_at FROM football_cache WHERE cache_key LIKE ?1 ORDER BY fetched_at DESC LIMIT 1"
+      )
+      .bind(`${cacheKeyPrefix}%`)
+      .first();
+    if (row) {
+      cacheKey = row.cache_key;
+      cached = row;
+    }
+  }
+
+  if (cached && Date.parse(cached.expires_at) > Date.now()) {
+    return { competitionKey, status: "cache-fresh", cacheKey };
+  }
+
+  const seasonId = cached?.season_id ? String(cached.season_id) : "";
+  const stage = competitionKey === "liga-portugal" ? "regular-season" : "";
+  cacheKey = footballCacheKey(competitionKey, seasonId, stage, null);
+  await refreshFootballCache(env, cacheKey, competitionKey, { seasonId, stage });
+  return { competitionKey, status: "refreshed", cacheKey };
+}
+
+async function handleFootballCron(controller, env) {
+  const competitionKeys = Object.keys(CPC_FOOTBALL_COMPETITIONS);
+  const slot = Math.floor(controller.scheduledTime / (5 * 60 * 1000));
+  const competitionKey = competitionKeys[((slot % competitionKeys.length) + competitionKeys.length) % competitionKeys.length];
+
+  try {
+    const result = await atualizarCompeticaoAgendada(env, competitionKey);
+    console.log("Football cron:", JSON.stringify({ cron: controller.cron, ...result }));
+    return result;
+  } catch (error) {
+    console.error("Football cron error:", competitionKey, error);
+    controller.noRetry();
+    return {
+      competitionKey,
+      status: "error",
+      message: error instanceof Error ? error.message : "Erro desconhecido."
+    };
+  }
+}
+
 // ============================================================
 // WORKER PRINCIPAL
 // ============================================================
