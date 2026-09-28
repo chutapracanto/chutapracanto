@@ -830,3 +830,16 @@ Inspecionar o routing de `handleAdminAPI()`, as condições do helper no commit 
 Implementar persistência/cache D1 por competição/época/recurso, seguida de Cron Trigger para atualização controlada e só depois UI `/competicoes`.
 
 Não repetir os diagnósticos BSD encerrados.
+
+
+## 27. FASE 3 — ATUALIZAÇÃO AUTOMÁTICA — 2026-09-28
+
+**Estado: ATIVA.**
+
+- Adapter BSD: PASS operacional.
+- Cache D1: PASS operacional, incluindo escrita e leitura de cache fresco.
+- Stale-if-error e deduplicação: implementados na camada de cache.
+- Próxima implementação: **Cron Trigger** para atualização automática e controlada das competições/épocas ativas.
+- UI `/competicoes`: posterior à validação do ciclo automático.
+
+Não reabrir diagnósticos BSD ou validações já encerradas sem nova evidência objetiva.
