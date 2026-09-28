@@ -48,7 +48,7 @@ Arquitetura atual:
 
 ## 1.2 Estado atual, sem ambiguidades
 
-> **SNAPSHOT 2026-09-27:** FASE 3 ativa — seleção/validação de fornecedor de dados de futebol. Fase 2 UX/editorial encerrada com PR #42. Engagement persistente em D1 presente em `main`. Framer redirects permanecem uma pendência independente e não bloqueiam Fase 3.
+> **SNAPSHOT 2026-09-28:** FASE 4 ativa — SEO técnico + indexação real. Fase 3 de dados/API de futebol e competições foi encerrada após PASS de fornecedor BSD, cache D1, atualização automática, UI `/competicoes` e validação em produção. Engagement persistente em D1 permanece em `main`. Framer redirects continuam como frente independente e não bloqueiam a Fase 4.
 
 ### JÁ IMPLEMENTADO / FECHADO
 Estas áreas não precisam de ser reabertas ou refeitas sem nova necessidade concreta:
