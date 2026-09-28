@@ -2263,3 +2263,27 @@ Depois dessa verificação, encerrar a avaliação do API-Football como forneced
 ### Segurança da credencial
 
 A API key atual continua tratada como temporária/potencialmente exposta. Após encerrada a validação, deve ser regenerada no dashboard e o secret Production `API_FOOTBALL_KEY` substituído, sem colocar a nova chave no GitHub, frontend, chat ou ficheiros.
+
+
+# 42. PASS OPERACIONAL — ADAPTER BSD E ENDPOINT `/api/competicoes` — 2026-09-28
+
+A integração pública de futebol atingiu **PASS operacional** após correção do adapter BSD.
+
+## Validação final
+- produção respondeu HTTP 200 para `/api/competicoes?competition=liga-portugal&seasonId=1310`;
+- fixture validado com `Vitória SC` vs `Famalicão`;
+- standing validado com `FC Porto`;
+- a causa final da falha de nomes nos standings foi o âmbito incorreto de `teamNamesById`; corrigido no commit `98e7e2c5f4e571a977b641dfd420ba61842c3574`;
+- não foram feitas chamadas BSD adicionais para esta correção final.
+
+## Limpeza concluída
+Os quatro endpoints de diagnóstico temporário BSD foram removidos no commit `09c13664ae14b40993b7a95572905e9c5a28b6d4`:
+- `football-provider-bsd-2026-27-diagnostic`;
+- `football-provider-bsd-helper-diagnostic`;
+- `football-provider-bsd-runtime-diagnostic`;
+- `football-provider-bsd-operational-diagnostic`.
+
+## Decisão de continuidade
+O adapter server-side e o endpoint público deixam de estar bloqueados. Cache/D1, atualização por Cron Trigger e UI de competições podem avançar.
+
+**Próxima ação:** desenhar e implementar a persistência/cache D1 por competição/época/recurso, preservando a arquitetura provider-agnostic e a política de stale-if-error.
