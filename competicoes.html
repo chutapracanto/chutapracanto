@@ -228,10 +228,10 @@ function renderHighlight(){
   const hs=item.score?.home,as=item.score?.away;
   const live=fixtureStatus(item)==="live";
   const score=hs!=null||as!=null?esc(hs??"—")+" – "+esc(as??"—"):"VS";
-  highlightEl.innerHTML=\`
+  highlightEl.innerHTML=`
     <div class="highlight-team"><img src="${teamLogo(item.homeTeam)}" alt=""><span>${home}</span></div>
     <div class="highlight-score">${live?'<span class="highlight-live">● AO VIVO</span>':''}<strong>${score}</strong><small>${dateLabel(dateValue(item))}</small></div>
-    <div class="highlight-team"><img src="${teamLogo(item.awayTeam)}" alt=""><span>${away}</span></div>\`;
+    <div class="highlight-team"><img src="${teamLogo(item.awayTeam)}" alt=""><span>${away}</span></div>`;
 }
 function renderRounds(){
   const rounds=[...new Set(allFixtures.map(item=>translateRound(item.roundLabel||item.round||"")).filter(Boolean))];
@@ -248,12 +248,12 @@ function renderFixtures(){
     const status=fixtureStatus(item);
     const hs=item.score?.home,as=item.score?.away;
     const score=hs!=null||as!=null?esc(hs??"—")+" – "+esc(as??"—"):"—";
-    return \`<div class="fixture">
+    return `<div class="fixture">
       <div class="fixture-time">${status==="live"?'<span class="fixture-live">● AO VIVO</span><br>':''}${dateLabel(dateValue(item))}<br><span>${esc(translateRound(item.roundLabel||item.round||""))}</span></div>
       <div class="fixture-team"><span>${esc(item.homeTeam?.name||"Casa")}</span><img src="${teamLogo(item.homeTeam)}" alt=""></div>
       <div class="fixture-score" title="${status==="upcoming"?"Próximo jogo":status==="live"?"Em jogo":"Resultado"}">${score}</div>
       <div class="fixture-team away"><img src="${teamLogo(item.awayTeam)}" alt=""><span>${esc(item.awayTeam?.name||"Fora")}</span></div>
-    </div>\`;
+    </div>`;
   }).join("");
 }
 function renderStandings(rows){
