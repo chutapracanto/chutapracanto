@@ -229,24 +229,17 @@
         <h2 class="section-title">COMPETIÇÕES</h2>
         <a href="/competicoes" class="see-more">VER TODAS →</a>
       </div>
-      <div class="home-competition-layout">
-        <a id="home-competition-feature" class="home-competition-feature" href="/competicoes?competition=liga-portugal">
-          <div class="home-competition-feature-head">
-            <span class="home-competition-kicker">PRÓXIMO JOGO EM DESTAQUE</span>
-            <span class="home-competition-arrow" aria-hidden="true">→</span>
-          </div>
-          <div class="home-competition-feature-main">
-            <img id="home-feature-logo" class="home-competition-league-logo" src="/images/logo.png" alt="" width="58" height="58">
-            <div>
-              <h3 id="home-feature-name">A carregar…</h3>
-              <p id="home-feature-match">A procurar o próximo jogo…</p>
-            </div>
-          </div>
-          <div id="home-feature-teams" class="home-competition-teams"></div>
-        </a>
-        <div id="home-competition-shortcuts" class="home-competition-shortcuts" aria-label="Próximos jogos por competição">
-          <span class="home-competition-loading">A carregar competições…</span>
+      <div class="home-competition-feature-strip">
+        <div class="home-competition-feature-copy">
+          <span class="home-competition-kicker">PRÓXIMO JOGO DE INTERESSE</span>
+          <h3 id="home-feature-name">A carregar…</h3>
+          <p id="home-feature-match">A procurar Porto, Benfica, Sporting, Braga ou Portugal…</p>
         </div>
+        <div id="home-feature-teams" class="home-competition-teams"></div>
+        <a id="home-competition-feature" class="home-competition-feature-link" href="/competicoes?competition=liga-portugal">VER COMPETIÇÃO →</a>
+      </div>
+      <div id="home-competition-shortcuts" class="home-competition-shortcuts" aria-label="Competições com próximos jogos de interesse">
+        <span class="home-competition-loading">A carregar competições…</span>
       </div>
     </section>
 
@@ -595,7 +588,6 @@
       ];
       const priorityNames = ['porto','benfica','sporting','braga','portugal'];
       const featureEl=document.getElementById('home-competition-feature');
-      const featureLogo=document.getElementById('home-feature-logo');
       const featureName=document.getElementById('home-feature-name');
       const featureMatch=document.getElementById('home-feature-match');
       const featureTeams=document.getElementById('home-feature-teams');
@@ -611,9 +603,18 @@
         const n=String(name||'').toLocaleLowerCase('pt-PT');
         return priorityNames.some(value=>n.includes(value));
       };
-      const isLive=item=>['live','in_progress','in-play'].includes(String(item?.status||'').toLowerCase());
+      const isLive=item=>['live','in_progress','inprogress','in-play','ongoing'].includes(String(item?.status||'').toLowerCase());
+      const teamRowName=row=>String(row?.team?.name||row?.team_name||'').toLocaleLowerCase('pt-PT');
+      const bestRelevantStanding=data=>{
+        const groups=Array.isArray(data?.standingGroups)?data.standingGroups:[];
+        const rows=groups.flatMap(group=>Array.isArray(group.standings)?group.standings:[]);
+        const fallback=Array.isArray(data?.standings)?data.standings:[];
+        const pool=rows.length?rows:fallback;
+        const relevant=pool.filter(row=>priorityTeam(teamRowName(row)));
+        return relevant.sort((a,b)=>(Number(a.position)||999)-(Number(b.position)||999))[0]||null;
+      };
 
-      const results=await Promise.all(competitions.map(async meta=>{
+      const results=(await Promise.all(competitions.map(async meta=>{
         try{
           const response=await fetch('/api/competicoes?competition='+encodeURIComponent(meta[0])+'&status=upcoming',{cache:'no-store'});
           if(!response.ok)throw new Error('indisponível');
@@ -621,45 +622,40 @@
           const fixtures=Array.isArray(data.fixtures)?data.fixtures:[];
           fixtures.sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity));
           const priorityFixture=fixtures.find(item=>priorityTeam(item.homeTeam?.name)||priorityTeam(item.awayTeam?.name));
-          return {meta,data,fixture:priorityFixture||fixtures[0]||null,priority:Boolean(priorityFixture)};
-        }catch{return {meta,data:null,fixture:null,priority:false}}
-      }));
+          if(!priorityFixture)return null;
+          return {meta,data,fixture:priorityFixture,standing:bestRelevantStanding(data)};
+        }catch{return null}
+      }))).filter(Boolean);
 
-      results.sort((a,b)=>{
-        if(a.fixture&&!b.fixture)return -1;if(!a.fixture&&b.fixture)return 1;
-        if(a.priority!==b.priority)return a.priority?-1:1;
-        return (dateValue(a.fixture)?.getTime()||Infinity)-(dateValue(b.fixture)?.getTime()||Infinity);
-      });
+      results.sort((a,b)=>(dateValue(a.fixture)?.getTime()||Infinity)-(dateValue(b.fixture)?.getTime()||Infinity));
 
-      const featured=results.find(item=>item.fixture)||results[0];
+      const featured=results[0];
       if(featured){
-        featureEl.href='/competicoes?competition='+encodeURIComponent(featured.meta[0]);
-        featureLogo.src=leagueLogo(featured.meta[2]);
-        featureName.textContent=featured.meta[1];
         const item=featured.fixture;
-        if(item){
-          const live=isLive(item);
-          featureMatch.textContent=(live?'AO VIVO · ':'Próximo jogo · ')+dateLabel(dateValue(item));
-          featureMatch.classList.toggle('home-competition-feature-live',live);
-          featureTeams.innerHTML=
-            '<span class="home-competition-team"><img src="'+logo(item.homeTeam?.logo)+'" alt=""><strong>'+String(item.homeTeam?.name||'Casa')+'</strong><em>'+(item.score?.home??'—')+'</em></span>'+
-            '<span class="home-competition-team"><img src="'+logo(item.awayTeam?.logo)+'" alt=""><strong>'+String(item.awayTeam?.name||'Fora')+'</strong><em>'+(item.score?.away??'—')+'</em></span>';
-        }else{
-          featureMatch.textContent='Sem próximo jogo disponível.';
-          featureTeams.replaceChildren();
-        }
+        featureEl.href='/competicoes?competition='+encodeURIComponent(featured.meta[0]);
+        featureName.textContent=featured.meta[1];
+        featureMatch.textContent=(isLive(item)?'AO VIVO · ':'Próximo · ')+dateLabel(dateValue(item));
+        featureMatch.classList.toggle('home-competition-feature-live',isLive(item));
+        featureTeams.innerHTML=
+          '<span class="home-competition-team"><img src="'+logo(item.homeTeam?.logo)+'" alt=""><strong>'+String(item.homeTeam?.name||'Casa')+'</strong></span>'+
+          '<span class="home-competition-vs">VS</span>'+
+          '<span class="home-competition-team"><img src="'+logo(item.awayTeam?.logo)+'" alt=""><strong>'+String(item.awayTeam?.name||'Fora')+'</strong></span>';
+      }else{
+        featureName.textContent='Sem jogo de interesse próximo';
+        featureMatch.textContent='Nenhum próximo jogo de Porto, Benfica, Sporting, Braga ou Portugal foi encontrado.';
+        featureTeams.replaceChildren();
       }
 
       shortcutsEl.innerHTML=results.map(item=>{
-        const meta=item.meta, fixture=item.fixture;
-        const match=fixture
-          ? String(fixture.homeTeam?.name||'Casa')+' · '+dateLabel(dateValue(fixture))+' · '+String(fixture.awayTeam?.name||'Fora')
-          : 'Calendário indisponível';
-        const live=fixture&&isLive(fixture);
+        const meta=item.meta, fixture=item.fixture, standing=item.standing;
+        const live=isLive(fixture);
+        const standingText=standing
+          ? '<span class="home-competition-standing"><b>'+String(standing.position??'—')+'º</b> '+String(standing.team?.name||standing.team_name||'Equipa')+' · '+String(standing.points??'—')+' pts</span>'
+          : '<span class="home-competition-standing">Classificação disponível na página</span>';
         return '<a class="home-competition-shortcut" href="/competicoes?competition='+encodeURIComponent(meta[0])+'">'+
-          '<img src="'+leagueLogo(meta[2])+'" alt="" loading="lazy" decoding="async">'+
-          '<span>'+meta[1]+'</span><b aria-hidden="true">→</b>'+
-          '<small>'+match+'</small>'+
+          '<div class="home-competition-shortcut-head"><img src="'+leagueLogo(meta[2])+'" alt="" loading="lazy" decoding="async"><span>'+meta[1]+'</span><b aria-hidden="true">→</b></div>'+
+          '<small>'+String(fixture.homeTeam?.name||'Casa')+' <strong>vs</strong> '+String(fixture.awayTeam?.name||'Fora')+' · '+dateLabel(dateValue(fixture))+'</small>'+
+          standingText+
           (live?'<span class="home-competition-status home-competition-feature-live"><i></i>AO VIVO</span>':'')+
           '</a>';
       }).join('');
