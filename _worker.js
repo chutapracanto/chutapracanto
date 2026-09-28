@@ -2266,7 +2266,7 @@ function cpcTeam(team, fallbackId = null, fallbackName = "") {
     id,
     name,
     logo: explicitLogo || (id != null
-      ? `https://sports.bzzoiro.com/img/team/${id}/?bg=transparent`
+      ? `/api/football-image?type=team&id=${id}`
       : "")
   };
 }
@@ -2603,6 +2603,33 @@ async function refreshFootballCache(env, cacheKey, competitionKey, options) {
   }
 }
 
+async function handleFootballImageAPI(request, env) {
+  const url = new URL(request.url);
+  if (url.pathname !== "/api/football-image") return null;
+  if (request.method !== "GET") return json({ error: "Método não permitido." }, 405, { Allow: "GET" });
+
+  const type = url.searchParams.get("type") || "";
+  const id = url.searchParams.get("id") || "";
+  if (!["team", "league"].includes(type) || !/^\d+$/.test(id)) {
+    return json({ error: "Imagem inválida." }, 400);
+  }
+
+  const upstream = `https://sports.bzzoiro.com/img/${type}/${id}/`;
+  try {
+    const response = await fetch(upstream, {
+      headers: { Accept: "image/avif,image/webp,image/png,image/*;q=0.8" },
+      cf: { cacheTtl: 86400, cacheEverything: true }
+    });
+    if (!response.ok) return new Response(null, { status: response.status });
+    const headers = new Headers(response.headers);
+    headers.set("Cache-Control", "public, max-age=86400, stale-while-revalidate=604800");
+    headers.delete("set-cookie");
+    return new Response(response.body, { status: response.status, headers });
+  } catch {
+    return new Response(null, { status: 502 });
+  }
+}
+
 async function handleFootballCompetitionAPI(request, env) {
   const url = new URL(request.url);
   if (url.pathname !== "/api/competicoes") return null;
@@ -2732,6 +2759,11 @@ export default {
       new URL(request.url);
 
     try {
+      if (url.pathname === "/api/football-image") {
+        const imageResponse = await handleFootballImageAPI(request, env);
+        if (imageResponse) return imageResponse;
+      }
+
       if (url.pathname === "/api/competicoes") {
         const footballResponse = await handleFootballCompetitionAPI(request, env);
         if (footballResponse) return footballResponse;
