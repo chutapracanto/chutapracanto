@@ -305,10 +305,7 @@ jobs:
               published = (noticia.get("published") or "")[:10]
               if re.fullmatch(r"\d{4}-\d{2}-\d{2}", published) and published > today:
                   continue
-              if noticia.get("legacyUrl"):
-                  entries.append(base_url + "/noticia?slug=" + quote(slug, safe="~!*'()-._"))
-              else:
-                  entries.append(base_url + "/noticia/" + quote(slug, safe="~!*'()-._"))
+              entries.append(base_url + "/noticia?slug=" + quote(slug, safe="~!*'()-._"))
 
           sitemap_lines = [
               '<?xml version="1.0" encoding="UTF-8"?>',

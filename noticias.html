@@ -996,7 +996,7 @@
 
     function articleHref(item) {
       const slug = encodeURIComponent(String(item?.slug || ''));
-      return item?.legacyUrl ? '/noticia?slug=' + slug : '/noticia/' + slug;
+      return '/noticia?slug=' + slug;
     }
 
     function renderizarPagina(anunciarResultados = true) {
