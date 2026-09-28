@@ -953,3 +953,26 @@ A regra de URLs permanece: notícias antigas mantêm URLs antigas; só notícias
 
 ### Validação
 Sintaxe de _worker.js, index.html, competicoes.html e style.css: PASS. O preview específico a91d477c.chutapracanto.pages.dev não foi acessível pelo fetch disponível nesta sessão (cache miss); a correção foi feita diretamente sobre o código de main e validada estruturalmente. A validação visual final depende do deployment do commit mergeado.
+
+## 36. REGRA CANÓNICA DE NOTÍCIAS — FREEZE DE URLS E SLUGS — 2026-09-28
+
+### Decisão definitiva para o estado atual
+A camada de notícias fica **ESTABILIZADA** no formato atualmente funcional. Esta decisão **sobrepõe qualquer referência anterior desta roadmap a migração de URLs limpas**.
+
+- **Não alterar os slugs existentes.**
+- **Não renomear ficheiros Markdown de notícias.**
+- **Não migrar notícias existentes para `/noticia/<slug>`.**
+- **Não voltar a introduzir uma distinção entre URL limpa para notícias novas e URL query para notícias antigas.**
+- A URL pública canónica das notícias é **`/noticia?slug=<slug>`**.
+- Links de Notícias, Opinião, partilhas, canonical, OG/Twitter, JSON-LD e sitemap devem permanecer coerentes com esse formato.
+- Qualquer URL `/noticia/<slug>` que exista por partilha anterior deve apenas redirecionar **301** para `/noticia?slug=<slug>`.
+- O conteúdo editorial e as imagens existentes não devem ser substituídos, renomeados ou reconstruídos como parte de alterações de URL.
+
+### Regra de não regressão
+**Não reabrir nem alterar esta camada de URLs/slugs das notícias.** Qualquer futura alteração nesta área exige nova evidência objetiva de problema e deve ser tratada como intervenção independente, nunca como continuação automática da PR #46.
+
+### Estado
+**FREEZE — notícias estabilizadas e mantidas como estão por agora.**
+
+### Prioridade operacional
+O trabalho futuro deve concentrar-se nas frentes ainda abertas da roadmap, sem voltar a mexer em URLs, slugs ou estrutura dos artigos por iniciativa própria.
