@@ -2404,6 +2404,10 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
   });
   if (stage) eventParams.set("stage", stage);
   if (options.round != null) eventParams.set("round", String(options.round));
+  if (options.status) {
+    const providerStatus = options.status === "upcoming" ? "notstarted" : options.status;
+    if (["notstarted", "finished", "live"].includes(providerStatus)) eventParams.set("status", providerStatus);
+  }
 
   let eventsData;
   let standingsData;
@@ -2502,13 +2506,14 @@ const FOOTBALL_CACHE_FRESH_MS = 15 * 60 * 1000;
 const FOOTBALL_CACHE_STALE_MS = 24 * 60 * 60 * 1000;
 const footballCacheRefreshes = new Map();
 
-function footballCacheKey(competitionKey, seasonId, stage, round) {
+function footballCacheKey(competitionKey, seasonId, stage, round, status) {
   return [
     "bsd",
     competitionKey,
     seasonId || "auto",
     stage || "",
-    round == null ? "" : String(round)
+    round == null ? "" : String(round),
+    status || "upcoming"
   ].join("|");
 }
 
@@ -2651,7 +2656,9 @@ async function handleFootballCompetitionAPI(request, env) {
   const seasonId = url.searchParams.get("seasonId") || "";
   const stage = url.searchParams.get("stage") || "";
   const round = url.searchParams.get("round");
-  const cacheKey = footballCacheKey(competitionKey, seasonId, stage, round);
+  const status = url.searchParams.get("status") || "upcoming";
+  if (!["upcoming", "finished", "live", "all"].includes(status)) return json({ error: "Status inválido." }, 400);
+  const cacheKey = footballCacheKey(competitionKey, seasonId, stage, round, status);
 
   try {
     const cached = await getFootballCache(env, cacheKey);
@@ -2667,7 +2674,8 @@ async function handleFootballCompetitionAPI(request, env) {
     const data = await refreshFootballCache(env, cacheKey, competitionKey, {
       seasonId,
       stage,
-      round
+      round,
+      status
     });
 
     return json(
