@@ -106,7 +106,7 @@ function safeUrl(value) {
 }
 function articleHref(item) {
   const slug = encodeURIComponent(String(item?.slug || ''));
-  return item?.legacyUrl ? '/noticia?slug=' + slug : '/noticia/' + slug;
+  return '/noticia?slug=' + slug;
 }
 async function carregarOpinioes() {
   const list = document.getElementById("opinion-list");
