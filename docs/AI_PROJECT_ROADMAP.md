@@ -955,3 +955,15 @@ O código do Worker separado já está no repositório. O próximo passo é **de
 - Homepage já inclui o acesso à nova área no menu principal.
 
 **Estado da Fase 3:** dados/API, cache e atualização automática implementados; primeira UI pública criada. A próxima ação é validar a renderização/contrato em produção e corrigir apenas problemas reais encontrados.
+
+
+## 31. VALIDAÇÃO DE PRODUÇÃO DA UI /COMPETICOES — 2026-09-28
+
+- Implementação da UI confirmada em `main`.
+- Contrato da UI com `/api/competicoes` revisto estruturalmente e coerente com o adapter atual.
+- Verificação direta do domínio público tentada, mas o ambiente atual não conseguiu aceder ao domínio.
+- Não reabrir testes BSD, D1/cache ou deployment apenas para fabricar evidência.
+
+**Estado da Fase 3:** implementação pública criada; validação visual/runtime de produção pendente exclusivamente por acesso/evidência de produção.
+
+**Próxima ação após desbloqueio:** validar `/competicoes` e um carregamento de `/api/competicoes` em produção; corrigir somente problemas reais.
