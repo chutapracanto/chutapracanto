@@ -629,7 +629,7 @@
     }
 
     function addArticleJsonLd(data) {
-      const canonical = SITE_CANONICAL_ORIGIN + '/noticia/' + encodeURIComponent(data.slug);
+      const canonical = SITE_CANONICAL_ORIGIN + (data.legacyUrl ? '/noticia?slug=' : '/noticia/') + encodeURIComponent(data.slug);
       const schema = {
         '@context': 'https://schema.org',
         '@type': data.editorialType === 'news' ? 'NewsArticle' : 'Article',
@@ -851,7 +851,7 @@
         bodyElement.innerHTML = sanitizeArticleHtml(marked.parse(body));
         container.appendChild(bodyElement);
 
-        addArticleJsonLd({ slug: entry.slug, title, description, image, datePublished: published, dateModified: modified, author, authorType, authorUrl, editorialType, editorialTypeLabel });
+        addArticleJsonLd({ slug: entry.slug, legacyUrl: entry.legacyUrl === true, title, description, image, datePublished: published, dateModified: modified, author, authorType, authorUrl, editorialType, editorialTypeLabel });
         await mostrarNoticiasRelacionadas(entry.slug, index);
         configurarGosto(entry.slug);
         configurarPartilha();
