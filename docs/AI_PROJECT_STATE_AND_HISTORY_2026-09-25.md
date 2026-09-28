@@ -2719,3 +2719,28 @@ PR #46 — MERGED em `main` no commit `2a0e4ededb660d8ba07db84199b1d4711816384b`
 
 ### Próximo passo automático
 PR #46 já foi validada estruturalmente e mergeada. Próximo passo automático: confirmar o deployment de `main` e repetir a inspeção pública do Home e `/competicoes`. Se a versão publicada divergir do `main`, diagnosticar o deployment antes de alterar código.
+
+# 60. CORREÇÃO DE ÉPOCA + PRIORIDADE DE CLUBES — PR #47 — 2026-09-28
+
+### Problemas confirmados
+- Home estava a escolher jogos não relevantes para o CPC e os atalhos não respeitavam a prioridade Porto/Benfica/Sporting/Braga/Portugal.
+- Hero da Home ocupava demasiado espaço.
+- A UI de Competições podia iniciar com dataset inadequado para o estado atual.
+- A seleção automática de época dependia demasiado do campo current/primeiro resultado e podia reutilizar cache legado.
+- A classificação ainda não tinha foco automático no clube/seleção de interesse nem suporte visual para grupos devolvidos pelo fornecedor.
+
+### Correções aplicadas
+- Home agora filtra competições para as que têm próximo jogo de interesse e ordena pela data desse jogo.
+- Home mostra mini-classificação com o clube/seleção de interesse mais bem colocado.
+- Hero da Home foi reduzido para uma primeira viewport mais compacta.
+- /competicoes inicia em Próximos.
+- Adapter BSD escolhe a época por janela/calendário e ano corrente, com fallback robusto.
+- Cache de futebol foi versionado para invalidar a chave antiga da época errada.
+- API passa a expor standingGroups quando BSD os devolve.
+- UI apresenta grupos separadamente e usa scroll vertical interno; centra o primeiro clube/seleção prioritário mais bem colocado.
+
+### Estado
+PR #47 — MERGED. Commit de merge: 171957c4b8ed99475f720084a5f4765cba1cbf38.
+
+### Validação
+Sintaxe dos ficheiros alterados: PASS. O preview a91d477c.chutapracanto.pages.dev não foi acessível pelo fetch desta sessão por cache miss; não foi feita afirmação de validação visual. O próximo passo é validar o deployment público do merge e corrigir qualquer divergência real.
