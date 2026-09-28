@@ -400,3 +400,8 @@ O problema atual está reduzido à camada de aplicação/routing. O fornecedor n
 7. Só então avançar para D1/cache, atualização agendada e UI.
 
 **Regra:** nenhum novo teste BSD direto enquanto a causa atual for resolvível no código/routing.
+
+
+### Helper browser constraint — 28-09-2026
+
+Browser automation could not send the authenticated HTTP POST (`fetch is not a function`). No provider request was made and usage remains 14. The temporary helper was minimally changed in commit `59dd7612035902a977e33be12f46028182786630` to accept GET as well as POST; authentication remains required, and POST Origin validation remains unchanged. After deployment, one authenticated GET navigation to the helper is the next and only runtime test.
