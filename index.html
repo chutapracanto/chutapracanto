@@ -276,7 +276,7 @@
     <div class="footer-links">
       <h4>Navegação</h4>
       <a href="/">Home</a>
-      <a href="/noticias">Notícias</a><a href="/opiniao">Opinião</a>
+      <a href="/noticias">Notícias</a><a href="/opiniao">Opinião</a><a href="/competicoes">Competições</a>
       <a href="/sobre">Sobre Nós</a>
       <a href="/contacto">Contacto</a>
     </div>
@@ -338,6 +338,11 @@
       if (className) el.className = className;
       el.textContent = typeof value === 'string' ? value : '';
       return el;
+    }
+
+    function articleHref(item) {
+      const slug = encodeURIComponent(String(item?.slug || ''));
+      return item?.legacyUrl ? '/noticia?slug=' + slug : '/noticia/' + slug;
     }
 
     function timestampPublicacao(item) {
@@ -479,7 +484,7 @@
         }
         const principal = destaques[0];
         const mainCard = document.createElement('a');
-        mainCard.href = `/noticia?slug=${encodeURIComponent(principal.slug)}`;
+        mainCard.href = articleHref(principal);
         mainCard.className = 'main-featured-card';
         mainCard.appendChild(createNewsImage(principal.image, principal.title, 'main-featured-img', true));
         const mainContent = document.createElement('div');
@@ -496,7 +501,7 @@
           list.className = 'secondary-featured-list';
           destaques.slice(1, 4).forEach(item => {
             const card = document.createElement('a');
-            card.href = `/noticia?slug=${encodeURIComponent(item.slug)}`;
+            card.href = articleHref(item);
             card.className = 'sub-featured-card';
             card.appendChild(createNewsImage(item.image, item.title, 'sub-featured-img'));
             const content = document.createElement('div');
@@ -584,6 +589,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       carregarNoticias();
       carregarPapeisEquipa();
+      carregarCompeticoesHome();
       iniciarFeedsAdiados();
     });
   </script>
