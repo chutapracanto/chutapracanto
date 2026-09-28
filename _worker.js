@@ -2908,7 +2908,34 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
   let standings;
 
   try {
-    fixtures = bsdExtractEvents(eventsData).map(cpcNormalizeEvent);
+    const rawStandings = bsdExtractStandings(standingsData);
+    const teamNamesById = new Map();
+
+    for (const row of rawStandings) {
+      const team = row?.team;
+      const teamId = cpcSafeNumber(team?.id ?? row?.team_id);
+      const teamName = cpcSafeString(
+        team?.name ??
+        team?.team_name ??
+        row?.team_name
+      );
+      if (teamId != null && teamName) {
+        teamNamesById.set(teamId, teamName);
+      }
+    }
+
+    fixtures = bsdExtractEvents(eventsData).map(event => {
+      const normalized = cpcNormalizeEvent(event);
+
+      if (!normalized.homeTeam.name && normalized.homeTeam.id != null) {
+        normalized.homeTeam.name = teamNamesById.get(normalized.homeTeam.id) || "";
+      }
+      if (!normalized.awayTeam.name && normalized.awayTeam.id != null) {
+        normalized.awayTeam.name = teamNamesById.get(normalized.awayTeam.id) || "";
+      }
+
+      return normalized;
+    });
   } catch (error) {
     throw new Error("NORMALIZE_EVENTS:" + (error instanceof Error ? error.message : "unknown"));
   }
