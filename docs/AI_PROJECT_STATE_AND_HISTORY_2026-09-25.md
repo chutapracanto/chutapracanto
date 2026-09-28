@@ -2334,3 +2334,32 @@ Implementar no `_worker.js` a camada de cache provider-agnostic sobre `FOOTBALL_
 6. sem chamadas BSD desnecessárias quando existir cache fresco.
 
 A validação do cache deve ocorrer depois da implementação, sem repetir os diagnósticos BSD já encerrados.
+
+# 45. CACHE D1 NO WORKER — IMPLEMENTAÇÃO — 2026-09-28
+
+### Operação concluída
+
+O endpoint público `/api/competicoes` passou a usar a D1 `FOOTBALL_CACHE_DB` antes de recorrer ao adapter BSD.
+
+Implementado em `_worker.js`:
+- chave provider-agnostic por provider/competição/época/stage/round;
+- leitura de cache fresco;
+- TTL fresco de 15 minutos;
+- janela stale de 24 horas;
+- persistência do payload normalizado em `football_cache`;
+- atualização por UPSERT;
+- stale-if-error quando o fornecedor falhar;
+- deduplicação de refresh concorrente por isolate através de Promise em memória;
+- contrato público de `/api/competicoes` preservado;
+- `updateStatus: cache` para resposta servida de cache fresco;
+- `updateStatus: stale` e `cacheStale: true` quando é necessário servir uma entrada expirada dentro da janela stale.
+
+Commit: `9c50eae23712f76b1f812236e392a74ac38392c0`.
+
+### Política operacional
+
+O primeiro pedido de uma combinação ainda sem cache continua a obter dados do BSD e grava a resposta na D1. Pedidos seguintes dentro do TTL não devem chamar o BSD. Após expiração, o Worker tenta atualizar; se o fornecedor falhar e existir uma entrada dentro da janela stale, essa entrada é devolvida em vez de produzir erro 503.
+
+### Validação pendente
+
+A implementação foi revista diretamente no código, mas a validação runtime do fluxo cacheado ainda falta após o deployment. Deve ser feita uma sequência mínima: primeiro pedido para uma chave sem cache, confirmação da linha D1, segundo pedido para a mesma chave e confirmação de que é servido de cache sem nova chamada BSD. Não repetir diagnósticos do fornecedor.
