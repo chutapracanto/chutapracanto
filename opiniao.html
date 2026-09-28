@@ -104,6 +104,10 @@
 function safeUrl(value) {
   try { const u = new URL(value || "", window.location.origin); return (u.protocol === "https:" || u.origin === window.location.origin) && !u.username && !u.password ? u.href : ""; } catch { return ""; }
 }
+function articleHref(item) {
+  const slug = encodeURIComponent(String(item?.slug || ''));
+  return item?.legacyUrl ? '/noticia?slug=' + slug : '/noticia/' + slug;
+}
 async function carregarOpinioes() {
   const list = document.getElementById("opinion-list");
   try {
