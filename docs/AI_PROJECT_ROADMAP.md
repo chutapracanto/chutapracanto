@@ -930,3 +930,17 @@ O código do Worker separado já está no repositório. O próximo passo é **de
 
 ### Gate encerrado
 **Fornecedor → quota/licença → frequência → DEPLOYMENT DO WORKER.**
+
+
+## 29. WORKER CRON — DEPLOYMENT CONFIRMADO / OBSERVABILIDADE PARCIAL — 2026-09-28
+
+- Worker separado `cpc-football-cron`: **deploy confirmado**.
+- Cron Trigger: `*/5 * * * *`, confirmado no Cloudflare Dashboard.
+- Binding: `FOOTBALL_CACHE_DB` → `cpc-football-cache`, confirmado.
+- Métricas: 1 invocation, 100% sucesso, 0% erro, CPU mediano 1,27 ms.
+- Logs do Worker permanecem desativados; portanto o status HTTP da chamada interna a `/api/competicoes` e uma escrita D1 atribuível especificamente à invocation não estão independentemente observados.
+- Codex tentou validar o runtime, mas o ambiente atual não tem acesso Cloudflare/Wrangler/sessão; resultado PARTIAL por limitação de acesso, sem evidência de falha do Worker.
+
+**Estado da Fase 3:** Worker Cron operacionalmente instalado; observabilidade detalhada do ciclo Cron → API → D1 fica pendente apenas se vier a ser necessária. Não reabrir testes já concluídos nem fazer novo deploy apenas para produzir logs.
+
+**Próxima direção:** avançar para a camada seguinte da Fase 3/UI de competições, mantendo a validação runtime detalhada como observabilidade complementar.
