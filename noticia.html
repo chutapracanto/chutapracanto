@@ -629,7 +629,7 @@
     }
 
     function addArticleJsonLd(data) {
-      const canonical = SITE_CANONICAL_ORIGIN + (data.legacyUrl ? '/noticia?slug=' : '/noticia/') + encodeURIComponent(data.slug);
+      const canonical = SITE_CANONICAL_ORIGIN + '/noticia?slug=' + encodeURIComponent(data.slug);
       const schema = {
         '@context': 'https://schema.org',
         '@type': data.editorialType === 'news' ? 'NewsArticle' : 'Article',
@@ -768,9 +768,7 @@
         const modified = modifiedCandidate && modifiedCandidate !== published ? modifiedCandidate : '';
         const imageValue = frontmatter.image || frontmatter.imagem || frontmatter.featured_image || frontmatter.featuredImage || entry.image || '';
         const image = imageValue ? safeArticleImage(imageValue) : SITE_CANONICAL_ORIGIN + '/images/logo.png';
-        const articlePath = entry.legacyUrl
-          ? '/noticia?slug=' + encodeURIComponent(entry.slug)
-          : '/noticia/' + encodeURIComponent(entry.slug);
+        const articlePath = '/noticia?slug=' + encodeURIComponent(entry.slug);
         const canonical = SITE_CANONICAL_ORIGIN + articlePath;
         const currentShareUrl = window.location.origin + articlePath;
         document.title = title + ' | Chuta Pra Canto';
@@ -954,7 +952,7 @@
 
           card.className = 'sub-featured-card related-news-card';
 
-          card.href = 'noticia.html?slug=' + encodeURIComponent(noticia.slug);
+          card.href = '/noticia?slug=' + encodeURIComponent(noticia.slug);
 
           const imagem = noticia.image ? document.createElement('div') : null;
 
