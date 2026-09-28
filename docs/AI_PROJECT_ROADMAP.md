@@ -55,7 +55,7 @@ Não responder apenas "o próximo passo é X" quando X estiver ao alcance da IA.
 | 7 | Distribuição e crescimento | **PENDENTE / FRENTE CRIATIVA SEPARADA** |
 | 8 | Automação e escala | **PENDENTE** |
 
-**Fase operacional atual:** **FASE 3 — dados de futebol e API de competições / seleção e validação de fornecedor.** A Fase 2 UX/editorial foi encerrada operacionalmente com a PR #42 mergeada; engagement persistente em D1 já está em `main`.
+**Fase operacional atual:** **FASE 3 — dados de futebol e API de competições / cache, atualização e UI.** A Fase 2 UX/editorial foi encerrada operacionalmente com a PR #42 mergeada; engagement persistente em D1 já está em `main`.
 
 ---
 
@@ -465,7 +465,7 @@ Antes de fazer trabalho no CPC:
 11. Atualizar documentação.
 12. Só depois responder.
 
-**Estado operacional neste momento: FASE 3 — integração BSD em validação/correção de runtime.** O fornecedor BSD está tecnicamente validado; a produção ainda não tem PASS do endpoint `/api/competicoes`.
+**Estado operacional atualizado em 2026-09-28: FASE 3 — adapter BSD PASS em produção.** O fornecedor BSD está tecnicamente validado, o endpoint `/api/competicoes` está operacional e os diagnósticos temporários foram removidos. A próxima subfase é cache/D1 → Cron → UI.
 
 FIM.
 
@@ -811,3 +811,22 @@ Inspecionar o routing de `handleAdminAPI()`, as condições do helper no commit 
 
 **Estado da Fase 3:** `ATIVA — correção de integração BSD/runtime`.
 
+
+
+## 26. ATUALIZAÇÃO OPERACIONAL — 2026-09-28 — PASS DO ADAPTER BSD
+
+### Fechado
+- `/api/competicoes` validado em produção com HTTP 200;
+- fixtures com nomes de equipas validados;
+- standings com nome de equipa validado (`FC Porto`);
+- correção final de escopo do mapa `teamNamesById` aplicada no commit `98e7e2c5f4e571a977b641dfd420ba61842c3574`;
+- quatro endpoints de diagnóstico BSD removidos no commit `09c13664ae14b40993b7a95572905e9c5a28b6d4`;
+- nenhum novo diagnóstico BSD executado para esta passagem final.
+
+### Estado
+**FASE 3 — ADAPTER BSD: PASS OPERACIONAL.**
+
+### Próxima subfase
+Implementar persistência/cache D1 por competição/época/recurso, seguida de Cron Trigger para atualização controlada e só depois UI `/competicoes`.
+
+Não repetir os diagnósticos BSD encerrados.
