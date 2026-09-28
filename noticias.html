@@ -993,6 +993,11 @@
       resultsStatus.textContent = `${quantidade} ${substantivo} nesta página. Página ${pagina} de ${totalPaginas}.`;
     }
 
+    function articleHref(item) {
+      const slug = encodeURIComponent(String(item?.slug || ''));
+      return item?.legacyUrl ? '/noticia?slug=' + slug : '/noticia/' + slug;
+    }
+
     function renderizarPagina(anunciarResultados = true) {
 
       const container = document.getElementById('noticias-list');
