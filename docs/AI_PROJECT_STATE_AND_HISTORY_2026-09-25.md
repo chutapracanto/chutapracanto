@@ -2677,3 +2677,13 @@ A auditoria após a recuperação da main confirmou que a documentação anterio
 
 ### Estado
 IMPLEMENTADO — validação runtime pendente. Não declarar PASS do Cron até existir evidência de uma execução automática e atualização efetiva da D1.
+
+
+# 34. REFINAMENTO UX — HOME + COMPETIÇÕES — 2026-09-28
+
+- A área de competições continua em `main`, sem alteração da arquitetura de URLs de notícias.
+- Refinada a área compacta de competições da Home: cartões com hierarquia mais clara, melhor leitura em mobile, sem perder acesso à página completa.
+- Refinada `competicoes.html`: resultados ordenados do mais recente para o mais antigo; próximos jogos mantêm ordem cronológica; jornada selecionada é preservada durante atualizações; mudança de competição atualiza o query state e suporta navegação pelo histórico.
+- Melhorada a semântica de acessibilidade dos atalhos de competições da Home.
+- Validação GitHub: HEAD contém as alterações; não foram alterados dados editoriais nem a arquitetura de URLs de notícias.
+- Bloqueio externo mantido: Cloudflare Pages deixou de criar deployments automáticos depois de `1e12fb3`; os commits posteriores aparecem como `No deployment available`. Não há check/status Cloudflare associado aos commits afetados. O código permanece em `main` aguardando resolução da integração GitHub → Cloudflare.
