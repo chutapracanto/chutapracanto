@@ -465,7 +465,7 @@ Antes de fazer trabalho no CPC:
 11. Atualizar documentação.
 12. Só depois responder.
 
-**Estado operacional atualizado em 2026-09-28: FASE 3 — fornecedor ainda em validação; infraestrutura de cache PASS; automação Cron preparada mas NÃO DEPLOYADA.**
+**Estado operacional atualizado em 2026-09-28: FASE 4 — SEO técnico + indexação real.** A Fase 3 foi encerrada após PASS de fornecedor BSD, cache D1, Cron, UI `/competicoes` e validação de produção. O sitemap já foi submetido ao Search Console; a indexação real permanece dependente do processamento externo da Google.
 
 O adapter BSD e o endpoint `/api/competicoes` estão tecnicamente validados em produção, mas **BSD não está aprovado como fornecedor definitivo**. API-Football também permanece **não aprovado** após os testes 2026/27. A arquitetura deve permanecer provider-agnostic até a decisão final.
 
