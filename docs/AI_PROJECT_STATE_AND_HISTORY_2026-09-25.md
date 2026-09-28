@@ -2660,3 +2660,20 @@ Não duplicar schema de artigos nem introduzir markup sem finalidade concreta.
 
 ### Próximo passo
 Aguardar deployment automático e continuar a Fase 4 com validações externas apenas quando produzirem evidência nova. A Search Console continua a processar o sitemap.
+
+
+# 49. CRON DE COMPETIÇÕES — IMPLEMENTAÇÃO REAL — 2026-09-28
+
+### Correção de estado
+A auditoria após a recuperação da main confirmou que a documentação anterior dizia que o Cron Trigger estava implementado, mas o código de produção em main não exportava scheduled() e wrangler.toml não continha o trigger.
+
+### Implementação
+- _worker.js passou a exportar scheduled(controller, env).
+- Uma competição é selecionada por execução de 5 minutos, usando scheduledTime e rotação pelas 7 chaves.
+- A execução consulta primeiro a D1 e não chama o BSD quando a entrada está fresca.
+- Quando necessário, reutiliza o adapter BSD e grava na mesma chave de cache do endpoint /api/competicoes.
+- Falhas são registadas e usam controller.noRetry() quando disponível.
+- wrangler.toml passou a configurar */5 * * * *.
+
+### Estado
+IMPLEMENTADO — validação runtime pendente. Não declarar PASS do Cron até existir evidência de uma execução automática e atualização efetiva da D1.
