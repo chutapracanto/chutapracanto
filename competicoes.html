@@ -75,7 +75,7 @@ function renderFixtures(items){
   const home=esc(item.homeTeam?.name||"Casa"),away=esc(item.awayTeam?.name||"Fora");
   const hs=item.score?.home??item.homeScore??null, as=item.score?.away??item.awayScore??null;
   const score=hs!=null||as!=null?`${esc(hs??"—")}–${esc(as??"—")}`:"—";
-  return `<div class="fixture"><div class="fixture-time">${dateLabel(item.startAt||item.date||item.kickoff)}</div><div class="fixture-team">${home}</div><div class="fixture-team away"><span class="fixture-score">${score}</span> ${away}</div></div>`;
+  return `<div class="fixture"><div class="fixture-time">${dateLabel(item.kickoff||item.startAt||item.date)}</div><div class="fixture-team">${home}</div><div class="fixture-team away"><span class="fixture-score">${score}</span> ${away}</div></div>`;
  }).join("");
 }
 function renderStandings(rows){
