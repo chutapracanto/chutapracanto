@@ -600,10 +600,10 @@ function obterSlugDaNoticia(url) {
 }
 
 function construirUrlPublicaNoticia(origin, slug) {
-  return origin + "/noticia/" + encodeURIComponent(slug);
+  return origin + "/noticia?slug=" + encodeURIComponent(slug);
 }
 
-function reescreverArtigoLimpo(request) {
+function redirecionarArtigoLimpo(request) {
   const url = new URL(request.url);
 
   if (
@@ -617,10 +617,10 @@ function reescreverArtigoLimpo(request) {
   const slug = obterSlugDaNoticia(url);
   if (!slug) return null;
 
-  const target = new URL("/noticia.html", url.origin);
+  const target = new URL("/noticia", url.origin);
   target.searchParams.set("slug", slug);
 
-  return new Request(target.toString(), request);
+  return Response.redirect(target.toString(), 301);
 }
 
 async function prepararShellNoticiasInicial(request, env, response) {
@@ -653,9 +653,7 @@ async function prepararShellNoticiasInicial(request, env, response) {
     const category = String(entry.category || "Geral");
     const subtitle = String(entry.subtitle || "");
     const image = construirUrlImagem(entry.image, url.origin);
-    const href = entry.legacyUrl
-      ? "/noticia?slug=" + encodeURIComponent(String(entry.slug))
-      : "/noticia/" + encodeURIComponent(String(entry.slug));
+    const href = "/noticia?slug=" + encodeURIComponent(String(entry.slug));
 
     const cardHtml = [
       '<a class="news-list-card" href="' + escaparHtml(href) + '">',
@@ -767,9 +765,7 @@ async function prepararShellArtigoInicial(request, env, response) {
       : "";
 
     const canonicalSlug = encodeURIComponent(String(entry.slug || slug));
-    const publicArticlePath = entry.legacyUrl
-      ? "/noticia?slug=" + canonicalSlug
-      : "/noticia/" + canonicalSlug;
+    const publicArticlePath = "/noticia?slug=" + canonicalSlug;
     const canonicalUrl = "https://chutapracanto.com" + publicArticlePath;
     const shareUrl = url.origin + publicArticlePath;
 
@@ -2883,11 +2879,15 @@ export default {
         return legacyNewsRedirect;
       }
 
-      const cleanArticleRequest =
-        reescreverArtigoLimpo(request);
+      const cleanArticleRedirect =
+        redirecionarArtigoLimpo(request);
+
+      if (cleanArticleRedirect) {
+        return cleanArticleRedirect;
+      }
 
       const assetResponse =
-        await env.ASSETS.fetch(cleanArticleRequest || request);
+        await env.ASSETS.fetch(request);
 
       const responseNoticiasInicial =
         await prepararShellNoticiasInicial(
