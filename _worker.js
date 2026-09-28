@@ -2304,13 +2304,13 @@ function cpcNormalizeStanding(row) {
   return {
     position: cpcSafeNumber(row?.position ?? row?.rank),
     team: cpcTeam(row?.team, row?.team_id),
-    played: cpcSafeNumber(row?.played ?? row?.matches_played),
-    wins: cpcSafeNumber(row?.wins ?? row?.won),
-    draws: cpcSafeNumber(row?.draws),
-    losses: cpcSafeNumber(row?.losses ?? row?.lost),
-    goalsFor: cpcSafeNumber(row?.goals_for ?? row?.goals_scored),
-    goalsAgainst: cpcSafeNumber(row?.goals_against ?? row?.goals_conceded),
-    goalDifference: cpcSafeNumber(row?.goal_difference ?? row?.goal_diff),
+    played: cpcSafeNumber(row?.played ?? row?.matches_played ?? row?.p),
+    wins: cpcSafeNumber(row?.wins ?? row?.won ?? row?.w),
+    draws: cpcSafeNumber(row?.draws ?? row?.d),
+    losses: cpcSafeNumber(row?.losses ?? row?.lost ?? row?.l),
+    goalsFor: cpcSafeNumber(row?.goals_for ?? row?.goals_scored ?? row?.gf),
+    goalsAgainst: cpcSafeNumber(row?.goals_against ?? row?.goals_conceded ?? row?.ga),
+    goalDifference: cpcSafeNumber(row?.goal_difference ?? row?.goal_diff ?? row?.gd),
     points: cpcSafeNumber(row?.points ?? row?.pts)
   };
 }
