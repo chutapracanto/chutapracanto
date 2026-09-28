@@ -2718,7 +2718,7 @@ async function atualizarCompeticaoAgendada(env, competitionKey) {
   }
 
   const seasonId = cached?.season_id ? String(cached.season_id) : "";
-  const stage = competitionKey === "liga-portugal" ? "regular-season" : "";
+  const stage = "";
   cacheKey = footballCacheKey(competitionKey, seasonId, stage, null);
   await refreshFootballCache(env, cacheKey, competitionKey, { seasonId, stage });
   return { competitionKey, status: "refreshed", cacheKey };
