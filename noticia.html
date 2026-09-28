@@ -768,8 +768,11 @@
         const modified = modifiedCandidate && modifiedCandidate !== published ? modifiedCandidate : '';
         const imageValue = frontmatter.image || frontmatter.imagem || frontmatter.featured_image || frontmatter.featuredImage || entry.image || '';
         const image = imageValue ? safeArticleImage(imageValue) : SITE_CANONICAL_ORIGIN + '/images/logo.png';
-        const canonical = SITE_CANONICAL_ORIGIN + '/noticia/' + encodeURIComponent(entry.slug);
-        const currentShareUrl = window.location.origin + '/noticia/' + encodeURIComponent(entry.slug);
+        const articlePath = entry.legacyUrl
+          ? '/noticia?slug=' + encodeURIComponent(entry.slug)
+          : '/noticia/' + encodeURIComponent(entry.slug);
+        const canonical = SITE_CANONICAL_ORIGIN + articlePath;
+        const currentShareUrl = window.location.origin + articlePath;
         document.title = title + ' | Chuta Pra Canto';
         document.getElementById('meta-title').content = title;
         document.getElementById('meta-description').content = description;
