@@ -2363,3 +2363,19 @@ O primeiro pedido de uma combinação ainda sem cache continua a obter dados do 
 ### Validação pendente
 
 A implementação foi revista diretamente no código, mas a validação runtime do fluxo cacheado ainda falta após o deployment. Deve ser feita uma sequência mínima: primeiro pedido para uma chave sem cache, confirmação da linha D1, segundo pedido para a mesma chave e confirmação de que é servido de cache sem nova chamada BSD. Não repetir diagnósticos do fornecedor.
+
+
+# 46. VALIDAÇÃO DO CACHE D1 — PASS — 2026-09-28
+
+### Validação runtime concluída
+- Primeiro pedido a `/api/competicoes?competition=liga-portugal&seasonId=1310`: HTTP 200, dados BSD válidos, `updateStatus: live`.
+- Consulta D1 confirmou a entrada `bsd|liga-portugal|1310||` em `football_cache`.
+- Entrada D1: provider `bsd`, competição `liga-portugal`, época `1310`, recurso `competition`.
+- `fetched_at`: 2026-09-28T16:28:08.561Z; `expires_at`: 2026-09-28T16:43:08.561Z; `stale_until`: 2026-09-29T16:28:08.561Z.
+- Segundo pedido ao mesmo URL, dentro do TTL, devolveu HTTP 200 e `updateStatus: cache`, com o mesmo payload normalizado.
+
+### Decisão
+**PASS — cache fresco D1 operacional.** A camada de cache está a persistir e a servir a resposta sem novo refresh durante o TTL.
+
+### Próxima ação
+Avançar para a camada de atualização automática por Cron Trigger, mantendo stale-if-error e deduplicação. Não repetir diagnósticos BSD nem a validação já concluída.
