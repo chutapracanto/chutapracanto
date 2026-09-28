@@ -2687,3 +2687,41 @@ IMPLEMENTADO — validação runtime pendente. Não declarar PASS do Cron até e
 - Melhorada a semântica de acessibilidade dos atalhos de competições da Home.
 - Validação GitHub: HEAD contém as alterações; não foram alterados dados editoriais nem a arquitetura de URLs de notícias.
 - Bloqueio externo mantido: Cloudflare Pages deixou de criar deployments automáticos depois de `1e12fb3`; os commits posteriores aparecem como `No deployment available`. Não há check/status Cloudflare associado aos commits afetados. O código permanece em `main` aguardando resolução da integração GitHub → Cloudflare.
+
+
+# 58. CORREÇÃO — CLOUDFLARE PAGES BUILD + CRON INVALIDADO — 2026-09-28
+
+### Evidência real
+Acesso direto ao Cloudflare Pages confirmou que os deployments posteriores a `1e12fb3` não estavam ausentes: estavam a ser criados e a **falhar na fase Build**.
+
+O log do deployment de `5d920b2` identificou a causa exata:
+`Configuration file for Pages projects does not support "triggers"`.
+
+### Causa
+`wrangler.toml` continha:
+`[triggers]`
+`crons = ["*/5 * * * *"]`
+
+Essa configuração é incompatível com o projeto Cloudflare Pages atual e impede o build.
+
+### Correção executada
+- Removido o bloco `[triggers]` de `wrangler.toml`.
+- Removido o handler `scheduled()` e a função de refresh agendado de `_worker.js`, porque o runtime atual é Cloudflare Pages e não existe um Worker separado ativo autorizado para receber esse Cron.
+- Mantida a arquitetura Pages existente; não foi criado nem ressuscitado Worker separado.
+- Commits:
+  - `84a6b095` — remove configuração Cron incompatível do Pages.
+  - `4d447aa7` — remove handler scheduled incompatível com a arquitetura Pages.
+
+### Validação
+- Deployment `84a6b095`: **PASS**, build e deploy concluídos.
+- Deployment `4d447aa7`: **PASS**, build e deploy concluídos.
+- Preview/produção de deployment mais recente: `https://f7b8e38a.chutapracanto.pages.dev`
+- O gatilho GitHub → Cloudflare está funcional; a falha anterior não era de autorização, mas de configuração Wrangler incompatível com Pages.
+
+### Decisão
+A abordagem de Cron Trigger diretamente em `wrangler.toml` do Pages fica **invalidada** e não deve ser reintroduzida.
+
+A atualização automática das competições deverá ser tratada posteriormente por uma solução compatível com a arquitetura atual, se houver necessidade concreta. Não criar um Worker separado apenas para repetir a abordagem invalidada.
+
+### Correção do estado anterior
+A anotação anterior que classificava os deployments posteriores a `1e12fb3` como "No deployment available" fica corrigida: o Cloudflare estava a receber os pushes, criar deployments e falhar no build devido ao bloco `triggers`.
