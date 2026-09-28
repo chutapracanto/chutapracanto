@@ -80,3 +80,10 @@ A ordem passa a ser:
 3. atualização agendada por Cron Trigger;
 4. validação operacional da camada de cache/atualização;
 5. UI `/competicoes`.
+
+
+## Atualização automática — Cron Trigger — 2026-09-28
+
+ESTADO: IMPLEMENTADO; validação runtime pendente. O Worker usa um Cron Trigger */5 * * * * e roda uma competição por execução, distribuindo as sete competições ao longo de aproximadamente 35 minutos por ciclo. Antes do refresh consulta D1 e evita chamadas BSD quando a entrada está fresca. Quando a entrada está expirada ou ausente, usa o adapter server-side e persiste o resultado no mesmo esquema de cache público. A chave de cache do Cron permanece alinhada com a chave do endpoint /api/competicoes.
+
+Após o PASS do Cron, a próxima etapa é validar o ciclo automático completo e só depois iniciar a UI /competicoes.
