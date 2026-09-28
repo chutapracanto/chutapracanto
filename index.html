@@ -639,7 +639,7 @@
           const meta=item.meta,fixture=item.fixture;
           const match=fixture?String(fixture.homeTeam?.name||'Casa')+' · '+dateLabel(dateValue(fixture))+' · '+String(fixture.awayTeam?.name||'Fora'):'Calendário indisponível';
           const live=fixture&&isLive(fixture);
-          return '<a class="home-competition-shortcut" href="/competicoes?competition='+encodeURIComponent(meta[0])+'"><img src="'+leagueLogo(meta[2])+'" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/logo.png\'"><span>'+meta[1]+'<small>'+match+'</small></span><b aria-hidden="true">→</b>'+(live?'<span class="home-competition-status home-competition-feature-live"><i></i>AO VIVO</span>':'')+'</a>';
+          return '<a class="home-competition-shortcut" role="listitem" href="/competicoes?competition='+encodeURIComponent(meta[0])+'"><img src="'+leagueLogo(meta[2])+'" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/logo.png\'"><span class="home-competition-shortcut-copy"><strong>'+meta[1]+'</strong><small>'+match+'</small></span><b class="home-competition-shortcut-arrow" aria-hidden="true">→</b>'+(live?'<span class="home-competition-status home-competition-feature-live"><i></i>AO VIVO</span>':'')+'</a>';
         }).join('');
       }catch(error){
         shortcutsEl.innerHTML='<span class="home-competition-loading">Competições temporariamente indisponíveis.</span>';
