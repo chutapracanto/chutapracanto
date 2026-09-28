@@ -220,16 +220,17 @@ function renderTabs(){
   tabs.querySelectorAll("button").forEach(button=>button.addEventListener("click",()=>loadCompetition(button.dataset.key)));
 }
 function renderHighlight(){
-  const candidates=allFixtures.filter(item=>fixtureStatus(item)==="upcoming").sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity));
+  const candidates=allFixtures.filter(item=>fixtureStatus(item)==="upcoming"||fixtureStatus(item)==="live").sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity));
   const item=candidates[0]||allFixtures[0];
   if(!item){highlightEl.innerHTML='<span class="empty">Sem jogo disponível.</span>';return}
   const home=esc(item.homeTeam?.name||"Casa"),away=esc(item.awayTeam?.name||"Fora");
   const hs=item.score?.home,as=item.score?.away;
+  const live=fixtureStatus(item)==="live";
   const score=hs!=null||as!=null?esc(hs??"—")+" – "+esc(as??"—"):"VS";
-  highlightEl.innerHTML=`
+  highlightEl.innerHTML=\`
     <div class="highlight-team"><img src="${teamLogo(item.homeTeam)}" alt=""><span>${home}</span></div>
-    <div class="highlight-score"><strong>${score}</strong><small>${dateLabel(dateValue(item))}</small></div>
-    <div class="highlight-team"><img src="${teamLogo(item.awayTeam)}" alt=""><span>${away}</span></div>`;
+    <div class="highlight-score">${live?'<span class="highlight-live">● AO VIVO</span>':''}<strong>${score}</strong><small>${dateLabel(dateValue(item))}</small></div>
+    <div class="highlight-team"><img src="${teamLogo(item.awayTeam)}" alt=""><span>${away}</span></div>\`;
 }
 function renderRounds(){
   const rounds=[...new Set(allFixtures.map(item=>translateRound(item.roundLabel||item.round||"")).filter(Boolean))];
@@ -246,50 +247,55 @@ function renderFixtures(){
     const status=fixtureStatus(item);
     const hs=item.score?.home,as=item.score?.away;
     const score=hs!=null||as!=null?esc(hs??"—")+" – "+esc(as??"—"):"—";
-    return `<div class="fixture">
-      <div class="fixture-time">${dateLabel(dateValue(item))}<br><span>${esc(translateRound(item.roundLabel||item.round||""))}</span></div>
+    return \`<div class="fixture">
+      <div class="fixture-time">${status==="live"?'<span class="fixture-live">● AO VIVO</span><br>':''}${dateLabel(dateValue(item))}<br><span>${esc(translateRound(item.roundLabel||item.round||""))}</span></div>
       <div class="fixture-team"><span>${esc(item.homeTeam?.name||"Casa")}</span><img src="${teamLogo(item.homeTeam)}" alt=""></div>
       <div class="fixture-score" title="${status==="upcoming"?"Próximo jogo":status==="live"?"Em jogo":"Resultado"}">${score}</div>
       <div class="fixture-team away"><img src="${teamLogo(item.awayTeam)}" alt=""><span>${esc(item.awayTeam?.name||"Fora")}</span></div>
-    </div>`;
+    </div>\`;
   }).join("");
 }
-function renderStandings(rows){
-  if(!rows.length){standingsEl.innerHTML='<div class="empty">Esta competição não disponibiliza uma classificação neste formato.</div>';return}
-  standingsEl.innerHTML='<div class="table-wrap"><table class="standings"><thead><tr><th>#</th><th>Equipa</th><th><abbr title="Jogos">J</abbr></th><th><abbr title="Vitórias">V</abbr></th><th><abbr title="Empates">E</abbr></th><th><abbr title="Derrotas">D</abbr></th><th><abbr title="Golos marcados">GM</abbr></th><th><abbr title="Golos sofridos">GS</abbr></th><th><abbr title="Diferença de golos">DG</abbr></th><th><abbr title="Pontos">Pts</abbr></th></tr></thead><tbody>'+rows.map((row,i)=>`
-    <tr><td>${esc(row.position??i+1)}</td><td><div class="standing-team"><img src="${teamLogo(row.team)}" alt=""><span>${esc(row.team?.name||"—")}</span></div></td><td>${esc(row.played??row.games??"—")}</td><td>${esc(row.wins??"—")}</td><td>${esc(row.draws??"—")}</td><td>${esc(row.losses??"—")}</td><td>${esc(row.goalsFor??"—")}</td><td>${esc(row.goalsAgainst??"—")}</td><td>${esc(row.goalDifference??row.gd??"—")}</td><td><strong>${esc(row.points??"—")}</strong></td></tr>`).join("")+'</tbody></table></div>';
-}
-async function loadCompetition(key){
-  active=key;renderTabs();
+async function loadCompetition(key,status=fixtureFilter){
+  active=key;loadingStatus=status;renderTabs();
   const meta=competitions.find(item=>item[0]===key);
   nameEl.textContent=meta?.[1]||key;
   logoEl.src=leagueLogo(meta?.[2]||0);
   fixturesEl.innerHTML='<div class="empty">A carregar jogos…</div>';
   standingsEl.innerHTML='<div class="empty">A carregar classificação…</div>';
   try{
-    const response=await fetch("/api/competicoes?competition="+encodeURIComponent(key),{cache:"no-store"});
+    const params=new URLSearchParams({competition:key});
+    if(status==="upcoming")params.set("status","upcoming");
+    if(status==="finished")params.set("status","finished");
+    const response=await fetch("/api/competicoes?"+params.toString(),{cache:"no-store"});
     const data=await response.json();
     if(!response.ok)throw new Error(data?.message||"Não foi possível obter os dados.");
     seasonEl.textContent=data.season?.label||"Época atual";
-    const updateStatus=data.updateStatus==="stale"?"dados em cache de segurança":data.updateStatus==="cache"?"dados em cache":"dados atualizados";
-    statusEl.textContent=updateStatus;
+    const stale=data.updateStatus==="stale";
+    statusEl.textContent=stale?"dados antigos de segurança":"dados atualizados";
     globalStatusEl.textContent=data.updatedAt?"Atualizado "+dateLabel(data.updatedAt):"Dados atualizados";
+    const live=Array.isArray(data.fixtures)&&data.fixtures.some(item=>fixtureStatus(item)==="live");
+    const liveEl=document.getElementById("competition-live-status");
+    liveEl.classList.toggle("live",live);
+    liveEl.querySelector("b").textContent=live?"AO VIVO":"ONLINE";
     allFixtures=Array.isArray(data.fixtures)?data.fixtures:[];
     renderRounds();renderFixtures();renderHighlight();renderStandings(Array.isArray(data.standings)?data.standings:[]);
   }catch(error){
     seasonEl.textContent="Indisponível";statusEl.textContent="temporariamente indisponível";globalStatusEl.textContent="";
+    const liveEl=document.getElementById("competition-live-status");liveEl.classList.remove("live");liveEl.querySelector("b").textContent="OFFLINE";
     allFixtures=[];renderHighlight();fixturesEl.innerHTML='<div class="error">'+esc(error.message)+'</div>';standingsEl.innerHTML='<div class="empty">Sem dados.</div>';
   }
 }
 document.querySelectorAll(".competition-filter").forEach(button=>button.addEventListener("click",()=>{
   fixtureFilter=button.dataset.filter;
   document.querySelectorAll(".competition-filter").forEach(item=>item.classList.toggle("active",item===button));
-  renderFixtures();
+  roundEl.value="all";
+  loadCompetition(active,fixtureFilter);
 }));
 roundEl.addEventListener("change",renderFixtures);
 active=new URLSearchParams(location.search).get("competition")||"liga-portugal";
 if(!competitions.some(item=>item[0]===active))active="liga-portugal";
-loadCompetition(active);
+loadCompetition(active,"upcoming");
+setInterval(()=>{ if(document.visibilityState==="visible" && active) loadCompetition(active,fixtureFilter); },60000);
 </script>
 <footer>
   <div class="footer-container">
