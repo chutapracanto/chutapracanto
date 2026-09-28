@@ -343,21 +343,13 @@ Sem novo diagnóstico BSD, o adapter foi alterado no commit `da9478109643d1b870b
 
 ### Diagnóstico do helper BSD — 28-09-2026
 
-Foi criado o endpoint temporário protegido `/api/admin/football-provider-bsd-helper-diagnostic` no commit `452a5f778ca3b7c23ad90b17302ec6540995f79f`. Objetivo: testar **o próprio helper `bsdFetchJson()` usado pelo adapter**, sem duplicar a lógica de fetch do diagnóstico runtime. O endpoint usa a mesma chamada BSD de eventos Primeira Liga 2026/27 com `stage=regular-season`.
+A inspeção direta do `_worker.js` no commit `452a5f778ca3b7c23ad90b17302ec6540995f79f` identificou objetivamente a causa do HTTP 404 observado no teste do deployment `95dae374.chutapracanto.pages.dev`: o guard do endpoint aceitava apenas o hostname exato `chutapracanto.com` ou `chutapracanto.pages.dev`, mas o URL de deployment tem o hostname específico `95dae374.chutapracanto.pages.dev`. O endpoint estava portanto presente no código, mas rejeitava corretamente o hostname de deployment antes de chegar à autenticação ou ao helper.
 
-A deployment Cloudflare `95dae374-53ff-49b9-85f6-58b656090cc1` foi posteriormente confirmada pela própria página de Deployment Details como Production, status success, alias `chutapracanto.com`, e exatamente o commit `452a5f7`.
+Correção mínima aplicada diretamente em `main`, commit `9326a6f2ff49a74f5dab6908edc5382104cdc406`: o helper passa a aceitar `chutapracanto.com` e subdomínios de deployment `*.chutapracanto.pages.dev`, mantendo obrigatoriamente `CF_PAGES_BRANCH === "main"`, POST, autenticação de admin e Origin same-origin. Não foram alteradas as chamadas BSD nem o adapter.
 
-O teste já executado anteriormente nessa URL `95dae374.chutapracanto.pages.dev` devolveu HTTP 404 com `Endpoint não encontrado.`. **Não houve consumo BSD nessa execução.**
+**Consumo BSD:** permanece em **14 requests**. A inspeção e a correção não fizeram qualquer chamada BSD.
 
-A confirmação posterior do Cloudflare cria uma discrepância que deve ser investigada: o deployment declara conter o commit que adiciona o endpoint, mas o runtime respondeu 404. Não repetir o teste neste momento nem enviar nova investigação ao Codex para localizar a deployment: a deployment já está documentalmente identificada. O próximo passo é inspecionar diretamente o routing do `_worker.js`/ordem dos handlers no commit `452a5f7` e determinar por que o endpoint não é alcançável em runtime.
-
-**Consumo BSD permanece em 14 requests.** Nenhuma chamada BSD foi feita no teste 404.
-
-
-## 12. AUDITORIA GLOBAL RECONCILIADA — 2026-09-28
-
-Foi feita revisão do estado real contra o código `main`, histórico recente de commits, matriz de fornecedores, roadmap e arquitetura.
-
+**Próximo gate:** após o deployment de `9326a6f`, validar uma única vez o helper no deployment ou domínio permitido. Se o helper passar, não criar novos diagnósticos; avançar para a validação pública de `/api/competicoes?competition=liga-portugal&seasonId=1310`.
 ### O que está sólido
 - Repositório/source of truth confirmado: `chutapracanto/chutapracanto`, branch `main`.
 - Framer → `.com`: trabalho encerrado e validado; não reabrir.
