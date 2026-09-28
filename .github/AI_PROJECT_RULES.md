@@ -116,7 +116,7 @@ https://newsinitiative.withgoogle.com/resources/trainings/start-building-your-au
 
 ## 0A-1. ROADMAP — ORDEM DAS FASES DO PROJETO
 
-**Estado operacional atual (2026-09-27): FASE 3 — Dados de futebol e API de competições / seleção e validação de fornecedor.**
+**Estado operacional atual (2026-09-28): FASE 4 — SEO técnico + indexação real.** A Fase 3 de dados de futebol/competições foi concluída e validada em produção para as 7 competições; não reabrir sem nova evidência.
 
 A Fase 2 UX/editorial foi encerrada operacionalmente com a PR #42 mergeada. O engagement persistente em D1 já está em `main`; não reabrir essa frente sem nova evidência.
 
