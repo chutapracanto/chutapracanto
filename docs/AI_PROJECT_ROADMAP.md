@@ -129,10 +129,9 @@ Resultado: 163/163 reconciliados; 0 mismatches/0 ausências no índice; conteúd
 
 A migração/encerramento do domínio histórico Framer continua como etapa futura separada e só deve ser executada depois de inventário de URLs, mapeamento e validação de redirects.
 
-Bloqueio atual:
-A fonte histórica foi disponibilizada via export CMS em `docs/framer/framer-news-export-2026-09-25.json`.
-
-A reconciliação dos 163 registos pós-22/08 está agora em execução; só depois será feita qualquer importação.
+Estado encerrado:
+A reconciliação dos 163 registos pós-22/08 foi concluída e validada. Não reabrir esta frente sem nova evidência histórica objetiva.
+A migração/redirects do Framer permanece como contexto de compatibilidade, não como tarefa editorial pendente.
 
 ---
 
