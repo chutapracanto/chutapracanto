@@ -2725,3 +2725,31 @@ A atualização automática das competições deverá ser tratada posteriormente
 
 ### Correção do estado anterior
 A anotação anterior que classificava os deployments posteriores a `1e12fb3` como "No deployment available" fica corrigida: o Cloudflare estava a receber os pushes, criar deployments e falhar no build devido ao bloco `triggers`.
+
+
+# 59. CORREÇÃO DE ARQUITETURA — WORKER DE CRON REAL CONFIRMADO — 2026-09-28
+
+### Evidência adicional obtida diretamente no Cloudflare
+A auditoria do account confirmou que existe um Worker separado ativo:
+- nome: `cpc-football-cron`;
+- handler: `scheduled`;
+- Cron Trigger real: `*/5 * * * *`;
+- binding D1: `FOOTBALL_CACHE_DB` -> `cpc-football-cache`;
+- deployment ativo com 100% de tráfego numa versão do Worker.
+
+O Worker executa a rotação pelas 7 competições e chama o endpoint público `/api/competicoes`, usando a época disponível na D1 quando existente.
+
+### Correção do diagnóstico anterior
+O diagnóstico anterior que dizia que "não existe Worker separado" estava incorreto e fica invalidado.
+
+A razão pela qual `[triggers]` não deve voltar ao `wrangler.toml` do Pages permanece válida: o Cron pertence ao Worker separado `cpc-football-cron`, não ao projeto Pages.
+
+### Estado correto da arquitetura
+`GitHub -> Cloudflare Pages` publica a aplicação CPC.
+`cpc-football-cron -> /api/competicoes -> Pages Worker -> D1/BSD` trata a atualização agendada das competições.
+
+### Decisão
+- Manter o `wrangler.toml` do Pages sem `[triggers]`.
+- Manter o Worker separado `cpc-football-cron` com o Cron Trigger real.
+- Não duplicar o scheduled handler no `_worker.js` do Pages.
+- Não criar outro Worker.
