@@ -2853,7 +2853,12 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
     throw new Error("Época não encontrada.");
   }
 
-  const stage = options.stage ? String(options.stage) : "";
+  const defaultStageByCompetition = {
+    "liga-portugal": "regular-season"
+  };
+  const stage = options.stage
+    ? String(options.stage)
+    : (defaultStageByCompetition[competitionKey] || "");
   const eventParams = new URLSearchParams({
     league_id: String(competition.leagueId),
     season_id: String(seasonId)
