@@ -2691,3 +2691,31 @@ A inspeção visual pública do domínio não está acessível no ambiente atual
 
 ### Próximo passo
 Validar visualmente `/`, `/competicoes`, `/noticias` e uma notícia antiga + uma nova URL quando o browser/runtime estiver acessível. Só depois decidir o merge da PR #46.
+
+
+# 59. UX DE COMPETIÇÕES — CORREÇÕES PÓS-INSPEÇÃO E HOME DINÂMICA — 2026-09-28
+
+### Evidência nova
+A abertura pública de https://chutapracanto.pages.dev/ está acessível ao ambiente de inspeção, mas devolve a versão antiga do Home: não contém o módulo Competições e ainda mostra o header/footer anterior. Isto confirma que a PR #46 ainda não estava nesse deployment no momento da inspeção.
+
+### Operação executada na PR #46
+- Mantida a regra: URLs antigas não mudam; apenas novas notícias usam /noticia/<slug>.
+- Adicionado proxy server-side /api/football-image para logos de clubes/competições, evitando dependência direta do browser no endpoint externo de imagens.
+- Home passou a ter um módulo real de Competições, com um destaque para o próximo jogo relevante e atalhos para as 7 competições.
+- A ordenação do Home prioriza próximos jogos envolvendo FC Porto, Benfica, Sporting, Braga ou Portugal; as restantes competições seguem por proximidade do próximo jogo.
+- /competicoes passou a iniciar em Próximos, mantendo Resultados como filtro separado.
+- Jornadas/fases passam por tradução para português (ex.: regular-season · matchday → Época regular · Jornada).
+- Classificação passou a mostrar J, V, E, D, GM, GS, DG e Pts; deixou de truncar a tabela aos primeiros 30 clubes, evitando ocultar o FC Porto na Champions League.
+- Adicionado indicador verde pulsante ONLINE; quando os dados identificam uma partida live, o estado passa para AO VIVO.
+- O jogo em destaque separa visualmente VS/resultado da data/hora.
+- A indicação de cache deixa de ser apresentada como texto principal por baixo do nome da competição; a interface privilegia estado ONLINE/AO VIVO e hora da última atualização.
+- A API pública de competições passou a aceitar consultas por status (upcoming, finished, live, all), com cache separado por estado.
+
+### Fonte factual adicional
+A documentação pública do BSD confirma que os dados de futebol usam estados como upcoming, live e finished, que as datas são ISO 8601/UTC, e que o fornecedor dispõe de endpoint de eventos live. A utilização na CPC continua server-side; a API key não vai para o browser.
+
+### Estado
+PR #46 — EM IMPLEMENTAÇÃO / VALIDAÇÃO ESTRUTURAL. O deployment público atual ainda é anterior às alterações desta PR.
+
+### Próximo passo automático
+Validar o código final da PR #46, fazer merge se não houver erro estrutural/contratual, aguardar o novo deployment e repetir a inspeção pública do Home e /competicoes. Se a versão publicada divergir do branch, diagnosticar o deployment antes de alterar código.
