@@ -48,14 +48,14 @@ Não responder apenas "o próximo passo é X" quando X estiver ao alcance da IA.
 | 0 | Continuidade, regras e memória operacional | **CONSOLIDADA** |
 | 1 | Recuperação/consolidação do conteúdo histórico | **CONCLUÍDA — reconciliação de metadata dos 163 registos pós-22/08 validada** |
 | 2 | Sistema editorial e publicação própria | **CONCLUÍDA — frente UX/editorial fechada operacionalmente; melhorias residuais não bloqueantes** |
-| 3 | Dados de futebol e API de competições | **ATIVA — seleção/validação de fornecedor em curso** |
-| 4 | SEO técnico + indexação real | **PARCIAL / CONTINUAR APÓS BASE ESTÁVEL** |
+| 3 | Dados de futebol e API de competições | **CONCLUÍDA — implementação e validação de produção das 7 competições PASS** |
+| 4 | SEO técnico + indexação real | **ATIVA — auditoria técnica base concluída; indexação real pendente de Search Console** |
 | 5 | Performance mensurável | **PRIMEIRA PASSAGEM IMPLEMENTADA / VALIDAR RESIDUAL** |
 | 6 | Monetização | **PENDENTE** |
 | 7 | Distribuição e crescimento | **PENDENTE / FRENTE CRIATIVA SEPARADA** |
 | 8 | Automação e escala | **PENDENTE** |
 
-**Fase operacional atual:** **FASE 3 — dados de futebol e API de competições / cache, atualização e UI.** A Fase 2 UX/editorial foi encerrada operacionalmente com a PR #42 mergeada; engagement persistente em D1 já está em `main`.
+**Fase operacional atual:** **FASE 4 — SEO técnico + indexação real.** A Fase 3 de dados de futebol/competições foi concluída e validada em produção para as 7 competições; não reabrir sem nova evidência.
 
 ---
 
@@ -854,9 +854,25 @@ O gate **fornecedor → quota/licença → frequência → deployment → UI →
 
 Não reabrir estes pontos sem nova evidência objetiva.
 
-## 31. PRÓXIMA FRENTE DA FASE 3 — 2026-09-28
+## 31. TRANSIÇÃO PARA FASE 4 — SEO TÉCNICO + INDEXAÇÃO — 2026-09-28
 
-A implementação de Competições deixa de ser bloqueio.
+### Fase 3 encerrada
+A implementação de Competições foi concluída e validada em produção para as 7 competições. O gate fornecedor → quota/licença → frequência → deployment → UI → validação está encerrado.
 
-**Próxima ação:** avançar para a próxima tarefa definida na roadmap da Fase 3, sem repetir a bateria de validações já encerrada.
+### Fase 4 iniciada
+A próxima frente autónoma é **SEO técnico + indexação real**.
+
+### Auditoria técnica já possível sem acesso externo
+- `robots.txt` presente e permite crawling;
+- `robots.txt` aponta para `https://chutapracanto.com/sitemap.xml`;
+- `sitemap.xml` presente no repositório e inclui `/competicoes`;
+- homepage tem canonical para `https://chutapracanto.com/`;
+- `/competicoes` tem canonical para `https://chutapracanto.com/competicoes`;
+- páginas analisadas usam `index,follow,max-image-preview:large`.
+
+### Dependência externa real
+A parte de **indexação real** exige evidência de Google Search Console (propriedade, sitemap processado, cobertura/indexação e eventuais exclusões). Essa evidência não pode ser inferida do código.
+
+### Próxima ação executável
+Obter/validar o estado do Search Console da propriedade `chutapracanto.com`. Depois disso, atuar apenas sobre problemas efetivamente encontrados.
 
