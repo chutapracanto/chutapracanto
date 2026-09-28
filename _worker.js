@@ -653,7 +653,9 @@ async function prepararShellNoticiasInicial(request, env, response) {
     const category = String(entry.category || "Geral");
     const subtitle = String(entry.subtitle || "");
     const image = construirUrlImagem(entry.image, url.origin);
-    const href = "/noticia?slug=" + encodeURIComponent(String(entry.slug));
+    const href = entry.legacyUrl
+      ? "/noticia?slug=" + encodeURIComponent(String(entry.slug))
+      : "/noticia/" + encodeURIComponent(String(entry.slug));
 
     const cardHtml = [
       '<a class="news-list-card" href="' + escaparHtml(href) + '">',
