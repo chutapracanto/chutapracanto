@@ -17,7 +17,7 @@ Este SHA já incluía o merge da PR #42 e o commit automático posterior de atua
 
 # 1. ESTADO EXECUTIVO ATUAL
 
-> **SNAPSHOT OPERACIONAL — 2026-09-27:** FASE 3 ativa. A Fase 2 UX/editorial está encerrada operacionalmente; o engagement persistente em D1 está em `main`; a frente Framer/redirects permanece independente e não bloqueia a Fase 3. A próxima ação autónoma é concluir a matriz de fornecedores de dados para as sete competições prioritárias.
+> **SNAPSHOT OPERACIONAL — 2026-09-28:** FASE 4 ativa. A Fase 3 de dados/API de futebol e competições foi encerrada após PASS de fornecedor BSD, cache D1, atualização automática, UI `/competicoes` e validação em produção. O engagement persistente em D1 está em `main`; a frente Framer/redirects permanece independente. A próxima linha autónoma é SEO técnico + indexação real, com sitemap já submetido ao Search Console e processamento externo pendente.
 
 ## 1.1 O projeto está funcional e em produção
 
