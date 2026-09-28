@@ -2600,3 +2600,25 @@ Ainda não há evidência manual equivalente nesta sessão para as outras 6 comp
 
 ### Próximo passo
 Validar as 6 restantes diretamente através do seletor da própria página; se alguma falhar, corrigir apenas o caso concreto.
+
+
+# 55. VALIDAÇÃO MANUAL COMPLETA DA UI DE COMPETIÇÕES — 2026-09-28
+
+### Evidência
+Validação manual realizada na página pública `/competicoes` para as 7 competições previstas. A utilizadora confirmou que todas aparecem e carregam conteúdo:
+- Liga Portugal
+- Taça de Portugal
+- Taça da Liga
+- UEFA Champions League
+- UEFA Europa League
+- UEFA Conference League
+- UEFA Nations League
+
+### Resultado
+**PASS — UI de Competições validada em produção para as 7 competições.**
+
+### Estado
+A implementação pública da Fase 3 para Competições está funcional e validada. Não são necessários novos testes repetitivos de BSD, D1, cache ou API neste ponto.
+
+### Próximo passo
+Avançar para a próxima tarefa da roadmap da Fase 3, sem reabrir validações já concluídas.
