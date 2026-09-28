@@ -294,7 +294,7 @@ jobs:
           from html import escape
 
           base_url = "https://chutapracanto.com"
-          pages = ["/", "/noticias", "/opiniao", "/sobre", "/contacto", "/privacidade", "/termos", "/politica-editorial"]
+          pages = ["/", "/noticias", "/opiniao", "/competicoes", "/sobre", "/contacto", "/privacidade", "/termos", "/politica-editorial"]
           entries = [base_url + page for page in pages]
           today = date.today().isoformat()
           for noticia in noticias:
