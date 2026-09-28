@@ -2287,3 +2287,17 @@ Os quatro endpoints de diagnóstico temporário BSD foram removidos no commit `0
 O adapter server-side e o endpoint público deixam de estar bloqueados. Cache/D1, atualização por Cron Trigger e UI de competições podem avançar.
 
 **Próxima ação:** desenhar e implementar a persistência/cache D1 por competição/época/recurso, preservando a arquitetura provider-agnostic e a política de stale-if-error.
+
+
+# 43. INÍCIO DO CACHE D1 DE COMPETIÇÕES — 2026-09-28
+
+Após o PASS operacional do adapter BSD, foi criada a primeira peça da subfase de persistência/cache:
+- migration `migrations/0002_football_cache.sql`;
+- tabela `football_cache` provider-agnostic;
+- chave de cache por provider/competição/época/recurso/variante;
+- timestamps `fetched_at`, `expires_at` e `stale_until` para suportar TTL e stale-if-error;
+- índices de lookup e expiração.
+
+Commit: `b201f745622eb0e2d1f975b1821f0424182ebfc4`.
+
+A migration está no GitHub, mas a execução do D1 ainda depende da criação/configuração da base Cloudflare e do binding server-side correspondente. Não foi feita qualquer chamada BSD adicional.
