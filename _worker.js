@@ -573,20 +573,25 @@ function construirUrlImagem(imagem, origin) {
 }
 
 function obterSlugDaNoticia(url) {
-  if (
-    url.pathname !== "/noticia" &&
-    url.pathname !== "/noticia.html"
-  ) {
-    return "";
-  }
+  let slug = "";
 
-  const slug = url.searchParams.get("slug");
+  if (url.pathname === "/noticia" || url.pathname === "/noticia.html") {
+    slug = url.searchParams.get("slug") || "";
+  } else if (url.pathname.startsWith("/noticia/")) {
+    slug = url.pathname.slice("/noticia/".length);
+    try {
+      slug = decodeURIComponent(slug);
+    } catch {
+      return "";
+    }
+  }
 
   if (
     !slug ||
     slug.includes("/") ||
     slug.includes("\\") ||
-    slug.includes("..")
+    slug.includes("..") ||
+    /[\\u0000-\\u001f]/.test(slug)
   ) {
     return "";
   }
@@ -595,10 +600,27 @@ function obterSlugDaNoticia(url) {
 }
 
 function construirUrlPublicaNoticia(origin, slug) {
-  return (
-    `${origin}/noticia?slug=` +
-    encodeURIComponent(slug)
-  );
+  return origin + "/noticia/" + encodeURIComponent(slug);
+}
+
+function reescreverArtigoLimpo(request) {
+  const url = new URL(request.url);
+
+  if (
+    request.method !== "GET" ||
+    !url.pathname.startsWith("/noticia/") ||
+    url.pathname === "/noticia/"
+  ) {
+    return null;
+  }
+
+  const slug = obterSlugDaNoticia(url);
+  if (!slug) return null;
+
+  const target = new URL("/noticia.html", url.origin);
+  target.searchParams.set("slug", slug);
+
+  return new Request(target.toString(), request);
 }
 
 async function prepararShellNoticiasInicial(request, env, response) {
@@ -2737,8 +2759,11 @@ export default {
         return legacyNewsRedirect;
       }
 
+      const cleanArticleRequest =
+        reescreverArtigoLimpo(request);
+
       const assetResponse =
-        await env.ASSETS.fetch(request);
+        await env.ASSETS.fetch(cleanArticleRequest || request);
 
       const responseNoticiasInicial =
         await prepararShellNoticiasInicial(
