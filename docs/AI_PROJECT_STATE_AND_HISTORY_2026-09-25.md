@@ -2642,3 +2642,21 @@ Não repetir submissão, não forçar inspeções em massa e não alterar códig
 
 ### Próximo passo automático após disponibilidade dos dados
 Consultar Sitemaps e Indexação de páginas; se surgirem erros/exclusões concretos, investigar e corrigir apenas esses casos. Caso contrário, fechar esta verificação como PASS e avançar para a próxima frente SEO da Fase 4.
+
+
+# 57. SEO TÉCNICO — DADOS ESTRUTURADOS BASE — 2026-09-28
+
+### Operação executada
+- Auditoria de metadata SEO das páginas principais: title, description, canonical, robots e Open Graph presentes.
+- `noticia.html` já contém JSON-LD dinâmico para artigos.
+- Adicionado JSON-LD à homepage com `Organization` + `WebSite`, incluindo URL, logo, perfis sociais e idioma `pt-PT`.
+- Commit: `fc0cd2bb64a621de1dd79b90c1266c682a5e2b7c`.
+
+### Resultado
+**IMPLEMENTADO — base de dados estruturados SEO.**
+
+### Não reabrir
+Não duplicar schema de artigos nem introduzir markup sem finalidade concreta.
+
+### Próximo passo
+Aguardar deployment automático e continuar a Fase 4 com validações externas apenas quando produzirem evidência nova. A Search Console continua a processar o sitemap.
