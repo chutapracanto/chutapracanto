@@ -109,7 +109,7 @@
     <div class="competitions-updated" id="global-status">A obter dados…</div>
   </section>
 
-  <div class="competition-tabs" id="competition-tabs" role="tablist" aria-label="Competições"></div>
+  <div class="competition-tabs" id="competition-tabs" role="group" aria-label="Escolher competição"></div>
 
   <section class="competition-hero">
     <article class="competition-hero-card">
@@ -194,7 +194,7 @@ function fixtureStatus(item){
 }
 function renderTabs(){
   tabs.innerHTML=competitions.map(([key,label,id])=>`
-    <button type="button" role="tab" aria-selected="${key===active}" class="${key===active?"active":""}" data-key="${key}">
+    <button type="button" class="${key===active?"active":""}" data-key="${key}">
       <img src="https://sports.bzzoiro.com/img/league/${id}/?bg=transparent" alt="" loading="lazy" decoding="async">
       <span>${label}</span>
     </button>`).join("");
