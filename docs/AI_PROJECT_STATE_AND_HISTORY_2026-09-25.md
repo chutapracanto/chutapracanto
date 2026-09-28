@@ -2577,3 +2577,26 @@ A confirmação final exige acesso ao deployment/runtime Cloudflare Pages atualm
 
 ### Próximo passo automático após desbloqueio
 Verificar `/competicoes` em produção e pelo menos o carregamento de `/api/competicoes?competition=liga-portugal`; corrigir apenas problemas reais encontrados e registar a validação.
+
+
+# 54. VALIDAÇÃO MANUAL DE PRODUÇÃO — /COMPETICOES — 2026-09-28
+
+### Evidência fornecida pelo acesso real ao site
+A página pública `https://chutapracanto.com/competicoes` foi aberta e devolveu conteúdo real da aplicação:
+- menu principal inclui `Competições`;
+- página `Competições` carrega corretamente;
+- seletor apresenta as 7 competições previstas;
+- `Liga Portugal 26/27` é carregada com estado `dados atuais`;
+- jogos/resultados são apresentados;
+- classificação é apresentada com 18 equipas;
+- atualização apresentada: `28/09, 19:06`;
+- nomes de equipas e estrutura do contrato normalizado aparecem corretamente.
+
+### Resultado
+**PASS — validação manual de produção da UI /competicoes para Liga Portugal.**
+
+### Limite
+Ainda não há evidência manual equivalente nesta sessão para as outras 6 competições. Não serão feitos novos calls ao fornecedor apenas para produzir essa evidência.
+
+### Próximo passo
+Validar as 6 restantes diretamente através do seletor da própria página; se alguma falhar, corrigir apenas o caso concreto.
