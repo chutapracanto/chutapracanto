@@ -2888,7 +2888,7 @@ export default {
 
       const assetRequest =
         (url.pathname === "/noticia" && url.searchParams.has("slug"))
-          ? new Request(new URL("/noticia.html" + url.search, request.url), request)
+          ? new Request(new URL("/noticia.html", request.url), request)
           : request;
 
       const assetResponse =
