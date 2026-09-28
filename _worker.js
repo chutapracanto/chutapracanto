@@ -2886,8 +2886,13 @@ export default {
         return cleanArticleRedirect;
       }
 
+      const assetRequest =
+        (url.pathname === "/noticia" && url.searchParams.has("slug"))
+          ? new Request(new URL("/noticia.html" + url.search, request.url), request)
+          : request;
+
       const assetResponse =
-        await env.ASSETS.fetch(request);
+        await env.ASSETS.fetch(assetRequest);
 
       const responseNoticiasInicial =
         await prepararShellNoticiasInicial(
