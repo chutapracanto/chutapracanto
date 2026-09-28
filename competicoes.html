@@ -270,7 +270,7 @@ async function loadCompetition(key,status=fixtureFilter){
   standingsEl.innerHTML='<div class="empty">A carregar classificação…</div>';
   try{
     const params=new URLSearchParams({competition:key});
-    if(status==="finished")params.set("status","finished");
+    if(status==="finished" || status==="all") params.set("status",status);
     const response=await fetch("/api/competicoes?"+params.toString(),{cache:"no-store"});
     const data=await response.json();
     if(!response.ok)throw new Error(data?.message||"Não foi possível obter os dados.");
