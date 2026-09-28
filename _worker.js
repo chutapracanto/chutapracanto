@@ -2380,12 +2380,22 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
           ? seasonsData.results
           : [];
 
-    const current = seasons.find(item => item?.current === true)
-      || seasons.find(item => String(item?.year || "") === "2026")
-      || seasons[0];
+    const now = new Date();
+    const currentYear = String(now.getUTCFullYear());
+    const nextYear = String(now.getUTCFullYear() + 1);
+    const seasonScore = item => {
+      const text = cpcSafeString(item?.name || item?.label || item?.year);
+      const start = Date.parse(item?.start_date || item?.start || item?.from || '');
+      const end = Date.parse(item?.end_date || item?.end || item?.to || '');
+      const inWindow = Number.isFinite(start) && Number.isFinite(end) && now.getTime() >= start && now.getTime() <= end;
+      const labelCurrent = text.includes(currentYear) && text.includes(nextYear);
+      const yearCurrent = String(item?.year || '') === currentYear;
+      return (inWindow ? 100 : 0) + (labelCurrent ? 80 : 0) + (yearCurrent ? 60 : 0) + (item?.current === true ? 40 : 0);
+    };
+    const current = [...seasons].sort((a,b)=>seasonScore(b)-seasonScore(a))[0] || seasons[0];
 
     seasonId = Number(current?.id);
-    seasonLabel = cpcSafeString(current?.name || current?.label || current?.year);
+    seasonLabel = cpcSafeString(current?.name || current?.label || (current?.year ? String(current.year) + '/' + String(Number(current.year) + 1).slice(-2) : ''));
   }
 
   if (!Number.isSafeInteger(seasonId) || seasonId <= 0) {
@@ -2496,6 +2506,13 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
     },
     fixtures,
     standings,
+    standingGroups: Array.isArray(standingsData?.groups)
+      ? standingsData.groups.map((group, index) => ({
+          key: cpcSafeString(group?.id ?? group?.name ?? group?.label ?? ('group-' + (index + 1))),
+          name: cpcSafeString(group?.name ?? group?.label ?? ('Grupo ' + String.fromCharCode(65 + index))),
+          standings: Array.isArray(group?.standings) ? group.standings.map(cpcNormalizeStanding) : (Array.isArray(group?.table) ? group.table.map(cpcNormalizeStanding) : [])
+        })).filter(group => group.standings.length)
+      : [],
     updatedAt: new Date().toISOString(),
     source: "Bzzoiro Sports Data",
     updateStatus: "live"
