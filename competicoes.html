@@ -208,7 +208,7 @@ function dateLabel(value){const d=value instanceof Date?value:new Date(value);if
 function fixtureStatus(item){
   const raw=String(item?.status||"").toLowerCase();
   if(["finished","ended","ft","completed"].includes(raw))return "finished";
-  if(["live","in_progress","in-play"].includes(raw))return "live";
+  if(["live","in_progress","inprogress","in-play","ongoing"].includes(raw))return "live";
   const d=dateValue(item); return d&&d.getTime()>Date.now()?"upcoming":"finished";
 }
 function renderTabs(){
@@ -269,7 +269,6 @@ async function loadCompetition(key,status=fixtureFilter){
   standingsEl.innerHTML='<div class="empty">A carregar classificação…</div>';
   try{
     const params=new URLSearchParams({competition:key});
-    if(status==="upcoming")params.set("status","upcoming");
     if(status==="finished")params.set("status","finished");
     const response=await fetch("/api/competicoes?"+params.toString(),{cache:"no-store"});
     const data=await response.json();
@@ -299,7 +298,7 @@ document.querySelectorAll(".competition-filter").forEach(button=>button.addEvent
 roundEl.addEventListener("change",renderFixtures);
 active=new URLSearchParams(location.search).get("competition")||"liga-portugal";
 if(!competitions.some(item=>item[0]===active))active="liga-portugal";
-loadCompetition(active,"upcoming");
+loadCompetition(active,"all");
 setInterval(()=>{ if(document.visibilityState==="visible" && active) loadCompetition(active,fixtureFilter); },60000);
 </script>
 <footer>
