@@ -2396,3 +2396,24 @@ Não repetir diagnósticos BSD, testes de credencial/conectividade, season disco
 
 ### Próximo passo automático
 Inspecionar o estado atual do Worker/Wrangler e implementar o mecanismo de Cron Trigger provider-agnostic sobre o cache existente; depois validar a execução e atualizar novamente este ledger e o roadmap.
+
+
+# 48. CRON TRIGGER — IMPLEMENTAÇÃO — 2026-09-28
+
+### Operação concluída
+- _worker.js passou a exportar scheduled(controller, env) para atualização automática.
+- Foi implementada rotação de uma competição por execução, em intervalos de 5 minutos, usando controller.scheduledTime para distribuir as 7 competições.
+- Cada execução consulta primeiro a D1; se a entrada estiver fresca, não chama o BSD.
+- Quando expirada/inexistente, reutiliza o season_id guardado e atualiza o cache através do adapter BSD; para competições sem cache, o adapter pode descobrir a época ativa.
+- Falhas do fornecedor são registadas e não provocam retry automático da mesma execução (controller.noRetry()), deixando a próxima janela tentar novamente.
+- wrangler.toml passou a configurar */5 * * * *.
+- A chave usada pelo Cron foi alinhada com a chave pública do cache para evitar duplicação de entradas.
+
+### Consumo previsto
+Com 7 competições e uma execução a cada 5 minutos, cada competição é selecionada aproximadamente uma vez a cada 35 minutos. Cada refresh normal usa 2 chamadas BSD (events + standings) quando a época já está conhecida; a descoberta inicial da época pode acrescentar 1 chamada. O desenho mantém cada execução muito abaixo do limite de 10 requests/minuto e o volume teórico máximo continua muito abaixo dos 7.500 requests/dia documentados pelo BSD.
+
+### Estado
+IMPLEMENTAÇÃO CONCLUÍDA — validação runtime do Cron ainda pendente. O trigger pode demorar alguns minutos a propagar após a alteração de configuração.
+
+### Próximo passo automático
+Validar a execução do Cron e confirmar que uma linha D1 é atualizada automaticamente sem intervenção manual. Depois atualizar o ledger para PASS ou corrigir apenas se houver evidência de falha.
