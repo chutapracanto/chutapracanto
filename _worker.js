@@ -573,20 +573,25 @@ function construirUrlImagem(imagem, origin) {
 }
 
 function obterSlugDaNoticia(url) {
-  if (
-    url.pathname !== "/noticia" &&
-    url.pathname !== "/noticia.html"
-  ) {
-    return "";
-  }
+  let slug = "";
 
-  const slug = url.searchParams.get("slug");
+  if (url.pathname === "/noticia" || url.pathname === "/noticia.html") {
+    slug = url.searchParams.get("slug") || "";
+  } else if (url.pathname.startsWith("/noticia/")) {
+    slug = url.pathname.slice("/noticia/".length);
+    try {
+      slug = decodeURIComponent(slug);
+    } catch {
+      return "";
+    }
+  }
 
   if (
     !slug ||
     slug.includes("/") ||
     slug.includes("\\") ||
-    slug.includes("..")
+    slug.includes("..") ||
+    /[\\u0000-\\u001f]/.test(slug)
   ) {
     return "";
   }
@@ -595,10 +600,27 @@ function obterSlugDaNoticia(url) {
 }
 
 function construirUrlPublicaNoticia(origin, slug) {
-  return (
-    `${origin}/noticia?slug=` +
-    encodeURIComponent(slug)
-  );
+  return origin + "/noticia/" + encodeURIComponent(slug);
+}
+
+function reescreverArtigoLimpo(request) {
+  const url = new URL(request.url);
+
+  if (
+    request.method !== "GET" ||
+    !url.pathname.startsWith("/noticia/") ||
+    url.pathname === "/noticia/"
+  ) {
+    return null;
+  }
+
+  const slug = obterSlugDaNoticia(url);
+  if (!slug) return null;
+
+  const target = new URL("/noticia.html", url.origin);
+  target.searchParams.set("slug", slug);
+
+  return new Request(target.toString(), request);
 }
 
 async function prepararShellNoticiasInicial(request, env, response) {
@@ -631,7 +653,9 @@ async function prepararShellNoticiasInicial(request, env, response) {
     const category = String(entry.category || "Geral");
     const subtitle = String(entry.subtitle || "");
     const image = construirUrlImagem(entry.image, url.origin);
-    const href = "/noticia?slug=" + encodeURIComponent(String(entry.slug));
+    const href = entry.legacyUrl
+      ? "/noticia?slug=" + encodeURIComponent(String(entry.slug))
+      : "/noticia/" + encodeURIComponent(String(entry.slug));
 
     const cardHtml = [
       '<a class="news-list-card" href="' + escaparHtml(href) + '">',
@@ -2222,20 +2246,28 @@ function cpcSafeString(value) {
 }
 
 function cpcTeam(team, fallbackId = null, fallbackName = "") {
-  if (typeof team === "string") {
-    return {
-      id: cpcSafeNumber(fallbackId),
-      name: team
-    };
-  }
+  const id = cpcSafeNumber(
+    typeof team === "string"
+      ? fallbackId
+      : team?.id ?? fallbackId
+  );
+  const name = cpcSafeString(
+    typeof team === "string"
+      ? team
+      : team?.name ??
+        team?.team_name ??
+        fallbackName
+  );
+  const explicitLogo = typeof team === "object" && team
+    ? cpcSafeString(team.logo ?? team.logo_url ?? team.image)
+    : "";
 
   return {
-    id: cpcSafeNumber(team?.id ?? fallbackId),
-    name: cpcSafeString(
-      team?.name ??
-      team?.team_name ??
-      fallbackName
-    )
+    id,
+    name,
+    logo: explicitLogo || (id != null
+      ? `/api/football-image?type=team&id=${id}`
+      : "")
   };
 }
 
@@ -2272,13 +2304,13 @@ function cpcNormalizeStanding(row) {
   return {
     position: cpcSafeNumber(row?.position ?? row?.rank),
     team: cpcTeam(row?.team, row?.team_id),
-    played: cpcSafeNumber(row?.played ?? row?.matches_played),
-    wins: cpcSafeNumber(row?.wins ?? row?.won),
-    draws: cpcSafeNumber(row?.draws),
-    losses: cpcSafeNumber(row?.losses ?? row?.lost),
-    goalsFor: cpcSafeNumber(row?.goals_for ?? row?.goals_scored),
-    goalsAgainst: cpcSafeNumber(row?.goals_against ?? row?.goals_conceded),
-    goalDifference: cpcSafeNumber(row?.goal_difference ?? row?.goal_diff),
+    played: cpcSafeNumber(row?.played ?? row?.matches_played ?? row?.p),
+    wins: cpcSafeNumber(row?.wins ?? row?.won ?? row?.w),
+    draws: cpcSafeNumber(row?.draws ?? row?.d),
+    losses: cpcSafeNumber(row?.losses ?? row?.lost ?? row?.l),
+    goalsFor: cpcSafeNumber(row?.goals_for ?? row?.goals_scored ?? row?.gf),
+    goalsAgainst: cpcSafeNumber(row?.goals_against ?? row?.goals_conceded ?? row?.ga),
+    goalDifference: cpcSafeNumber(row?.goal_difference ?? row?.goal_diff ?? row?.gd),
     points: cpcSafeNumber(row?.points ?? row?.pts)
   };
 }
@@ -2372,6 +2404,10 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
   });
   if (stage) eventParams.set("stage", stage);
   if (options.round != null) eventParams.set("round", String(options.round));
+  if (options.status) {
+    const providerStatus = options.status === "upcoming" ? "notstarted" : options.status;
+    if (["notstarted", "finished", "live"].includes(providerStatus)) eventParams.set("status", providerStatus);
+  }
 
   let eventsData;
   let standingsData;
@@ -2470,13 +2506,14 @@ const FOOTBALL_CACHE_FRESH_MS = 15 * 60 * 1000;
 const FOOTBALL_CACHE_STALE_MS = 24 * 60 * 60 * 1000;
 const footballCacheRefreshes = new Map();
 
-function footballCacheKey(competitionKey, seasonId, stage, round) {
+function footballCacheKey(competitionKey, seasonId, stage, round, status) {
   return [
     "bsd",
     competitionKey,
     seasonId || "auto",
     stage || "",
-    round == null ? "" : String(round)
+    round == null ? "" : String(round),
+    status || "upcoming"
   ].join("|");
 }
 
@@ -2571,6 +2608,33 @@ async function refreshFootballCache(env, cacheKey, competitionKey, options) {
   }
 }
 
+async function handleFootballImageAPI(request, env) {
+  const url = new URL(request.url);
+  if (url.pathname !== "/api/football-image") return null;
+  if (request.method !== "GET") return json({ error: "Método não permitido." }, 405, { Allow: "GET" });
+
+  const type = url.searchParams.get("type") || "";
+  const id = url.searchParams.get("id") || "";
+  if (!["team", "league"].includes(type) || !/^\d+$/.test(id)) {
+    return json({ error: "Imagem inválida." }, 400);
+  }
+
+  const upstream = `https://sports.bzzoiro.com/img/${type}/${id}/`;
+  try {
+    const response = await fetch(upstream, {
+      headers: { Accept: "image/avif,image/webp,image/png,image/*;q=0.8" },
+      cf: { cacheTtl: 86400, cacheEverything: true }
+    });
+    if (!response.ok) return new Response(null, { status: response.status });
+    const headers = new Headers(response.headers);
+    headers.set("Cache-Control", "public, max-age=86400, stale-while-revalidate=604800");
+    headers.delete("set-cookie");
+    return new Response(response.body, { status: response.status, headers });
+  } catch {
+    return new Response(null, { status: 502 });
+  }
+}
+
 async function handleFootballCompetitionAPI(request, env) {
   const url = new URL(request.url);
   if (url.pathname !== "/api/competicoes") return null;
@@ -2592,7 +2656,9 @@ async function handleFootballCompetitionAPI(request, env) {
   const seasonId = url.searchParams.get("seasonId") || "";
   const stage = url.searchParams.get("stage") || "";
   const round = url.searchParams.get("round");
-  const cacheKey = footballCacheKey(competitionKey, seasonId, stage, round);
+  const status = url.searchParams.get("status") || "upcoming";
+  if (!["upcoming", "finished", "live", "all"].includes(status)) return json({ error: "Status inválido." }, 400);
+  const cacheKey = footballCacheKey(competitionKey, seasonId, stage, round, status);
 
   try {
     const cached = await getFootballCache(env, cacheKey);
@@ -2608,7 +2674,8 @@ async function handleFootballCompetitionAPI(request, env) {
     const data = await refreshFootballCache(env, cacheKey, competitionKey, {
       seasonId,
       stage,
-      round
+      round,
+      status
     });
 
     return json(
@@ -2700,6 +2767,11 @@ export default {
       new URL(request.url);
 
     try {
+      if (url.pathname === "/api/football-image") {
+        const imageResponse = await handleFootballImageAPI(request, env);
+        if (imageResponse) return imageResponse;
+      }
+
       if (url.pathname === "/api/competicoes") {
         const footballResponse = await handleFootballCompetitionAPI(request, env);
         if (footballResponse) return footballResponse;
@@ -2737,8 +2809,11 @@ export default {
         return legacyNewsRedirect;
       }
 
+      const cleanArticleRequest =
+        reescreverArtigoLimpo(request);
+
       const assetResponse =
-        await env.ASSETS.fetch(request);
+        await env.ASSETS.fetch(cleanArticleRequest || request);
 
       const responseNoticiasInicial =
         await prepararShellNoticiasInicial(

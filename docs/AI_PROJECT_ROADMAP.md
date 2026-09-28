@@ -129,10 +129,9 @@ Resultado: 163/163 reconciliados; 0 mismatches/0 ausências no índice; conteúd
 
 A migração/encerramento do domínio histórico Framer continua como etapa futura separada e só deve ser executada depois de inventário de URLs, mapeamento e validação de redirects.
 
-Bloqueio atual:
-A fonte histórica foi disponibilizada via export CMS em `docs/framer/framer-news-export-2026-09-25.json`.
-
-A reconciliação dos 163 registos pós-22/08 está agora em execução; só depois será feita qualquer importação.
+Estado encerrado:
+A reconciliação dos 163 registos pós-22/08 foi concluída e validada. Não reabrir esta frente sem nova evidência histórica objetiva.
+A migração/redirects do Framer permanece como contexto de compatibilidade, não como tarefa editorial pendente.
 
 ---
 
@@ -741,14 +740,16 @@ A dependência de credencial da Fase 3 deixou de ser uma instrução vaga. O mec
 O segredo fica acessível server-side através de `context.env` e não deve ser colocado no repositório, `wrangler.toml`, frontend ou chat. Fontes oficiais atuais: https://developers.cloudflare.com/pages/functions/bindings/ e https://developers.cloudflare.com/workers/wrangler/commands/pages/.
 
 ### Estado da Fase 3
-- fornecedor: **API-Football — candidato principal, não aprovado**;
-- integração: **não implementada**;
-- secret `API_FOOTBALL_KEY`: **configurado apenas em Production**; Preview não tem este secret. Presença/tipo confirmados por API sem aceder ao valor;
-- diagnóstico autenticado: **endpoint temporário em preparação; ainda não publicado nem executado**;
-- validação autenticada 2026/27: **pendente**;
-- mecanismo seguro: **definido**;
-- próxima dependência: integrar/publicar o diagnóstico temporário em Production e executar uma chamada manual `/status`; manter a chave apenas no Cloudflare Pages e não revelar o valor.
+- fornecedor de produção: **BSD — selecionado**;
+- API-Football: **NÃO APROVADO / fora da integração de produção atual**;
+- adapter server-side: **PASS**;
+- endpoint público `/api/competicoes`: **PASS**;
+- D1/cache: **PASS**;
+- Worker `cpc-football-cron`: **deployed**, Cron `*/5 * * * *`, binding D1 confirmado;
+- UI pública `/competicoes`: **PASS para as 7 competições**;
+- fase 3: **ENCERRADA**.
 
+Não reabrir diagnósticos de fornecedor, credenciais, cache, D1 ou Cron já validados sem nova hipótese/evidência.
 
 ## 25.1. MODELO QUANTITATIVO DE QUOTA — 2026-09-27
 
@@ -912,3 +913,22 @@ Não adicionar schema artificial ou duplicado às páginas de artigos/listagens 
 
 ### Próximo passo
 Aguardar o deployment automático desta alteração e, sem gastar créditos em testes repetitivos, fazer a próxima verificação SEO externa apenas quando houver ferramenta/evidência apropriada (Search Console ou validação pública).
+
+
+## 34. UX DE COMPETIÇÕES + HOME — 2026-09-28
+
+### Estado canónico
+A intervenção de UX iniciada na PR #46 mantém a regra de compatibilidade de URLs: **artigos antigos não mudam de URL**; apenas artigos novos usam `/noticia/<slug>`. URLs antigas `/noticia?slug=...` e redirects Framer permanecem compatíveis.
+
+### Implementação em curso
+- Home: módulo dinâmico de Competições com atalhos visuais, emblemas e ordenação pelo próximo jogo relevante; Porto, Benfica, Sporting, Braga e Portugal têm prioridade na ordenação.
+- Competições: próximo jogo por defeito; filtro de resultados separado; jornadas traduzidas para português; classificação com J/V/E/D/GM/GS/DG/Pts; tooltips nas siglas; FC Porto não é limitado por uma tranche artificial de 30 equipas.
+- Estado visual: indicador verde pulsante **ONLINE**; quando houver jogo identificado como live, passa para **AO VIVO**.
+- Imagens: logos de clubes/competições passam pelo Worker do CPC em vez de depender diretamente do URL externo no browser.
+- Filtros e atualização: a página pode renovar os dados periodicamente enquanto estiver visível.
+
+### Validação
+A versão anterior da Home em `chutapracanto.pages.dev` ainda corresponde a um deployment antigo e não contém estas alterações. A validação pública da nova versão só pode ser feita depois do deployment da PR #46. A ferramenta disponível permite inspeção do HTML/texto público, mas não uma inspeção visual pixel-a-pixel/screenshot.
+
+### Próxima operação
+Concluir validação estrutural da PR #46, fazer merge se não houver falhas de código/contrato, aguardar deployment e validar novamente `chutapracanto.pages.dev`/produção. Corrigir qualquer problema real antes de fechar a intervenção.

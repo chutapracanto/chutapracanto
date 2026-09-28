@@ -4364,13 +4364,9 @@ function construirUrlPublicaNoticia(
 
     const url =
         new URL(
-            "https://chutapracanto.com/noticia"
+            "https://chutapracanto.com/noticia/" +
+            encodeURIComponent(filename)
         );
-
-    url.searchParams.set(
-        "slug",
-        filename
-    );
 
     return url.toString();
 }

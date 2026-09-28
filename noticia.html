@@ -351,15 +351,14 @@
     <a href="/" class="logo-link" aria-label="Chuta Pra Canto — início">
       <img src="/images/logo.png" alt="Chuta Pra Canto" class="site-logo" decoding="async" fetchpriority="low">
     </a>
-    <nav aria-label="Navegação principal">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a id="nav-noticias" href="/noticias" class="active" aria-current="page">Notícias</a></li>
-        <li><a id="nav-opiniao" href="/opiniao">Opinião</a></li>
-        <li><a href="/sobre">Sobre Nós</a></li>
-        <li><a href="/contacto">Contacto</a></li>
-      </ul>
-    </nav>
+    <nav aria-label="Navegação principal"><ul>
+<li><a href="/">Home</a></li>
+<li><a href="/noticias" class="active" aria-current="page">Notícias</a></li>
+<li><a href="/opiniao">Opinião</a></li>
+<li><a href="/competicoes">Competições</a></li>
+<li><a href="/sobre">Sobre Nós</a></li>
+<li><a href="/contacto">Contacto</a></li>
+</ul></nav>
     <div class="header-socials">
       <a href="https://youtube.com/@chutapracanto" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
       <a href="https://open.spotify.com/show/0340sfCl6p2dYzSyU7J3Tv" target="_blank" rel="noopener noreferrer" aria-label="Spotify"><i class="fa-brands fa-spotify"></i></a>
@@ -409,7 +408,9 @@
 
   <script>
     (() => {
-      const slug = new URLSearchParams(window.location.search).get('slug');
+      const slug = window.location.pathname.startsWith('/noticia/')
+        ? decodeURIComponent(window.location.pathname.slice('/noticia/'.length))
+        : new URLSearchParams(window.location.search).get('slug');
       const container = document.getElementById('article-content');
       if (!slug || !container || slug.includes('/') || slug.includes('\\') || slug.includes('..') || /[\\u0000-\\u001f]/.test(slug)) return;
 
@@ -548,6 +549,7 @@
       <a href="/">Home</a>
       <a href="/noticias">Notícias</a>
       <a href="/opiniao">Opinião</a>
+      <a href="/competicoes">Competições</a>
       <a href="/sobre">Sobre Nós</a>
       <a href="/contacto">Contacto</a>
     </div>
@@ -627,7 +629,7 @@
     }
 
     function addArticleJsonLd(data) {
-      const canonical = SITE_CANONICAL_ORIGIN + '/noticia?slug=' + encodeURIComponent(data.slug);
+      const canonical = SITE_CANONICAL_ORIGIN + '/noticia/' + encodeURIComponent(data.slug);
       const schema = {
         '@context': 'https://schema.org',
         '@type': data.editorialType === 'news' ? 'NewsArticle' : 'Article',
@@ -659,7 +661,9 @@
     }
 
     async function loadArticle() {
-      const slug = new URLSearchParams(window.location.search).get('slug');
+      const slug = window.location.pathname.startsWith('/noticia/')
+        ? decodeURIComponent(window.location.pathname.slice('/noticia/'.length))
+        : new URLSearchParams(window.location.search).get('slug');
       const container = document.getElementById('article-content');
       if (!slug || slug.includes('/') || slug.includes('\\') || slug.includes('..') || /[\u0000-\u001f]/.test(slug)) {
         container.textContent = 'Notícia não encontrada. O endereço parece estar incompleto.';
@@ -764,8 +768,8 @@
         const modified = modifiedCandidate && modifiedCandidate !== published ? modifiedCandidate : '';
         const imageValue = frontmatter.image || frontmatter.imagem || frontmatter.featured_image || frontmatter.featuredImage || entry.image || '';
         const image = imageValue ? safeArticleImage(imageValue) : SITE_CANONICAL_ORIGIN + '/images/logo.png';
-        const canonical = SITE_CANONICAL_ORIGIN + '/noticia?slug=' + encodeURIComponent(entry.slug);
-        const currentShareUrl = window.location.origin + '/noticia?slug=' + encodeURIComponent(entry.slug);
+        const canonical = SITE_CANONICAL_ORIGIN + '/noticia/' + encodeURIComponent(entry.slug);
+        const currentShareUrl = window.location.origin + '/noticia/' + encodeURIComponent(entry.slug);
         document.title = title + ' | Chuta Pra Canto';
         document.getElementById('meta-title').content = title;
         document.getElementById('meta-description').content = description;
