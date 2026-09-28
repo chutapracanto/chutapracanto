@@ -932,3 +932,24 @@ A versão anterior da Home em `chutapracanto.pages.dev` ainda corresponde a um d
 
 ### Próxima operação
 PR #46 foi mergeada em `main` no commit `2a0e4ededb660d8ba07db84199b1d4711816384b`. Aguardamos/validamos o deployment automático e, quando a versão pública atualizada estiver acessível, repetir a inspeção do Home e `/competicoes`. Corrigir qualquer problema real antes de fechar a intervenção.
+
+
+## 35. HOME + COMPETIÇÕES — CORREÇÃO DE PRIORIDADE E ÉPOCA — 2026-09-28
+
+### Estado
+PR #47 foi mergeada em main. A intervenção corrige uma falha funcional identificada na primeira versão da UX de Competições.
+
+### Regras canónicas agora implementadas
+- Home: só entram como destaque/atalho competições cujo próximo jogo identificado envolva FC Porto, Benfica, Sporting, Sporting Braga ou Portugal.
+- Home: as competições são ordenadas pela data do próximo jogo relevante; o destaque é sempre o primeiro dessa ordenação.
+- Home: cada shortcut inclui um resumo rápido da classificação, focado no clube/seleção de interesse mais bem colocado disponível.
+- Home: hero editorial inicial foi reduzido drasticamente para não ocupar a primeira viewport.
+- /competicoes: estado inicial é Próximos.
+- Época: a seleção deixa de confiar apenas em current=true/primeira época devolvida. O adapter calcula a época atual a partir do calendário/ano e o cache foi versionado para impedir reutilização do cache legado da época errada.
+- Classificação: se o fornecedor devolver grupos, estes são apresentados separadamente; a tabela tem scroll vertical interno e o primeiro enquadramento é centrado no clube/seleção prioritário mais bem colocado.
+
+### Não alterar
+A regra de URLs permanece: notícias antigas mantêm URLs antigas; só notícias novas usam /noticia/<slug>.
+
+### Validação
+Sintaxe de _worker.js, index.html, competicoes.html e style.css: PASS. O preview específico a91d477c.chutapracanto.pages.dev não foi acessível pelo fetch disponível nesta sessão (cache miss); a correção foi feita diretamente sobre o código de main e validada estruturalmente. A validação visual final depende do deployment do commit mergeado.
