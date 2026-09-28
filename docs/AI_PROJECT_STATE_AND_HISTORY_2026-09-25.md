@@ -2512,3 +2512,26 @@ A diferença de 35m > 15m é deliberada: o Cron pode encontrar a entrada expirad
 ### Estado
 
 **Gate fechado. Próxima operação: deployment do Worker separado e validação runtime do Cron.**
+
+
+# 51. DEPLOYMENT DO WORKER CRON — VALIDAÇÃO OPERACIONAL — 2026-09-28
+
+### Operação concluída
+- Worker separado `cpc-football-cron` publicado no Cloudflare com sucesso.
+- Cron Trigger configurado para `*/5 * * * *` e visível no Dashboard como execução a cada 5 minutos.
+- Binding `FOOTBALL_CACHE_DB` confirmado no Worker, apontando para `cpc-football-cache`.
+- Métricas do Worker mostraram 1 invocation, 100% de sucesso, 0% de erro e CPU mediano de 1,27 ms.
+- O Worker mantém a rotação de uma competição por execução entre as 7 competições.
+
+### Limite da evidência
+Os Logs do Worker estão desativados. Por isso, a invocation e as métricas não permitem provar de forma independente o HTTP status da chamada a `/api/competicoes` nem atribuir uma escrita específica no D1 àquela invocation.
+
+Uma tentativa de validação adicional através do Codex devolveu PARTIAL porque o ambiente atual do Codex não tem `wrangler`, credenciais/variáveis Cloudflare nem sessão Cloudflare disponível. Isto é uma limitação de acesso do ambiente do Codex, não evidência de falha do Worker.
+
+Não será feito novo deploy, ativação de Logs ou teste artificial apenas para obter esta confirmação enquanto não houver necessidade operacional.
+
+### Estado
+**PASS — deployment e configuração operacional do Worker confirmados.** Runtime detalhado do ciclo Cron → API → D1 permanece como evidência parcial por ausência de Logs/acesso Cloudflare no Codex.
+
+### Próximo passo
+Avançar com a Fase 3 sem reabrir diagnósticos BSD, API-Football, cache ou deployment. Quando houver acesso Cloudflare disponível no ambiente do Codex, essa ferramenta poderá ser usada para observabilidade/runtime se tal validação passar a ser necessária.
