@@ -45,6 +45,13 @@
 .competition-hero h2{font:700 clamp(1.45rem,3vw,2.2rem) var(--font-title);margin:.25rem 0}
 .competition-meta{display:flex;gap:.55rem;flex-wrap:wrap;color:var(--text-gray);font-size:.78rem}
 .competition-meta span{padding:.3rem .55rem;border:1px solid var(--border-color);border-radius:999px}
+.competition-live-status{display:inline-flex;align-items:center;gap:.45rem;font:700 .7rem var(--font-title);letter-spacing:.08em;color:var(--neon-green);margin-top:.55rem}
+.competition-live-status i{width:8px;height:8px;border-radius:50%;background:var(--neon-green);box-shadow:0 0 0 0 rgba(157,255,0,.55);animation:cpcPulse 2.2s infinite}
+.competition-live-status.live{color:#fff}.competition-live-status.live i{background:#ff4d6d;box-shadow:0 0 0 0 rgba(255,77,109,.55)}
+@keyframes cpcPulse{0%,100%{box-shadow:0 0 0 0 rgba(157,255,0,.45)}50%{box-shadow:0 0 0 7px rgba(157,255,0,0)}}
+.highlight-score small{display:block;margin-top:.38rem;color:var(--text-gray);font:600 .68rem var(--font-body)}
+.highlight-live{display:block;margin-bottom:.25rem;color:#ff6b84;font:700 .66rem var(--font-title);letter-spacing:.08em}
+.fixture-live{color:#ff6b84;font-weight:700}
 .competition-highlight-card h3{font:700 .8rem var(--font-title);text-transform:uppercase;letter-spacing:.08em;color:var(--text-gray);margin:0 0 .75rem}
 .competition-highlight-main{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.6rem}
 .highlight-team{text-align:center;font-weight:700;font-size:.82rem}
@@ -120,6 +127,7 @@
         <div class="competition-meta">
           <span id="competition-season">Época —</span>
           <span id="competition-data-status">A atualizar</span>
+          <span id="competition-live-status" class="competition-live-status"><i aria-hidden="true"></i><b>ONLINE</b></span>
         </div>
       </div>
     </article>
@@ -131,8 +139,8 @@
 
   <div class="competition-controls">
     <div class="competition-filters" id="fixture-filters" role="group" aria-label="Filtrar jogos">
-      <button class="competition-filter active" type="button" data-filter="all">Todos</button>
-      <button class="competition-filter" type="button" data-filter="upcoming">Próximos</button>
+      <button class="competition-filter" type="button" data-filter="all">Todos</button>
+      <button class="competition-filter active" type="button" data-filter="upcoming">Próximos</button>
       <button class="competition-filter" type="button" data-filter="finished">Resultados</button>
     </div>
     <label>
@@ -179,11 +187,22 @@ const countEl=document.getElementById("fixtures-count");
 const roundEl=document.getElementById("round-filter");
 let active="";
 let allFixtures=[];
-let fixtureFilter="all";
+let fixtureFilter="upcoming";
 
 function esc(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));}
-function safeUrl(value){try{const u=new URL(String(value||""),location.origin);return u.protocol==="https:"?u.href:""}catch{return""}}
+function safeUrl(value){try{const u=new URL(String(value||""),location.origin);return u.protocol==="https:"||u.origin===location.origin?u.href:""}catch{return""}}
 function teamLogo(team){return safeUrl(team?.logo)||"/images/logo.png"}
+function leagueLogo(id){return "/api/football-image?type=league&id="+encodeURIComponent(id)}
+function translateRound(value){
+  let text=String(value||"").trim();
+  if(!text)return "";
+  const replacements=[
+    [/regular-season/gi,"Época regular"],[/regular season/gi,"Época regular"],[/league-phase/gi,"Fase de liga"],[/league phase/gi,"Fase de liga"],[/group-stage/gi,"Fase de grupos"],[/group stage/gi,"Fase de grupos"],[/matchday/gi,"Jornada"],[/qualification-round/gi,"Ronda de qualificação"],[/playoff-round/gi,"Play-off"],[/round of 16/gi,"Oitavos de final"],[/quarterfinals?/gi,"Quartos de final"],[/semifinals?/gi,"Meias-finais"],[/final/gi,"Final"]
+  ];
+  replacements.forEach(([pattern,replacement])=>{text=text.replace(pattern,replacement)});
+  text=text.replace(/\s*[-·]\s*/g," · ");
+  return text;
+}
 function dateValue(item){const value=item?.kickoff||item?.startAt||item?.date;const d=new Date(value);return Number.isNaN(d.getTime())?null:d}
 function dateLabel(value){const d=value instanceof Date?value:new Date(value);if(Number.isNaN(d.getTime()))return "—";return new Intl.DateTimeFormat("pt-PT",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}).format(d)}
 function fixtureStatus(item){
@@ -195,7 +214,7 @@ function fixtureStatus(item){
 function renderTabs(){
   tabs.innerHTML=competitions.map(([key,label,id])=>`
     <button type="button" class="${key===active?"active":""}" data-key="${key}">
-      <img src="https://sports.bzzoiro.com/img/league/${id}/?bg=transparent" alt="" loading="lazy" decoding="async">
+      <img src="${leagueLogo(id)}" alt="" loading="lazy" decoding="async">
       <span>${label}</span>
     </button>`).join("");
   tabs.querySelectorAll("button").forEach(button=>button.addEventListener("click",()=>loadCompetition(button.dataset.key)));
@@ -213,13 +232,13 @@ function renderHighlight(){
     <div class="highlight-team"><img src="${teamLogo(item.awayTeam)}" alt=""><span>${away}</span></div>`;
 }
 function renderRounds(){
-  const rounds=[...new Set(allFixtures.map(item=>String(item.roundLabel||item.round||"").trim()).filter(Boolean))];
+  const rounds=[...new Set(allFixtures.map(item=>translateRound(item.roundLabel||item.round||"")).filter(Boolean))];
   roundEl.innerHTML='<option value="all">Todas as jornadas</option>'+rounds.map(round=>'<option value="'+esc(round)+'">'+esc(round)+'</option>').join("");
 }
 function renderFixtures(){
   let rows=allFixtures.filter(item=>fixtureFilter==="all"||fixtureStatus(item)===fixtureFilter);
   const selectedRound=roundEl.value;
-  if(selectedRound!=="all")rows=rows.filter(item=>String(item.roundLabel||item.round||"").trim()===selectedRound);
+  if(selectedRound!=="all")rows=rows.filter(item=>translateRound(item.roundLabel||item.round||"").trim()===selectedRound);
   rows.sort((a,b)=>(dateValue(a)?.getTime()||0)-(dateValue(b)?.getTime()||0));
   countEl.textContent=rows.length+" jogo"+(rows.length===1?"":"s");
   if(!rows.length){fixturesEl.innerHTML='<div class="empty">Não há jogos para este filtro.</div>';return}
@@ -228,7 +247,7 @@ function renderFixtures(){
     const hs=item.score?.home,as=item.score?.away;
     const score=hs!=null||as!=null?esc(hs??"—")+" – "+esc(as??"—"):"—";
     return `<div class="fixture">
-      <div class="fixture-time">${dateLabel(dateValue(item))}<br><span>${esc(item.roundLabel||"")}</span></div>
+      <div class="fixture-time">${dateLabel(dateValue(item))}<br><span>${esc(translateRound(item.roundLabel||item.round||""))}</span></div>
       <div class="fixture-team"><span>${esc(item.homeTeam?.name||"Casa")}</span><img src="${teamLogo(item.homeTeam)}" alt=""></div>
       <div class="fixture-score" title="${status==="upcoming"?"Próximo jogo":status==="live"?"Em jogo":"Resultado"}">${score}</div>
       <div class="fixture-team away"><img src="${teamLogo(item.awayTeam)}" alt=""><span>${esc(item.awayTeam?.name||"Fora")}</span></div>
@@ -237,14 +256,14 @@ function renderFixtures(){
 }
 function renderStandings(rows){
   if(!rows.length){standingsEl.innerHTML='<div class="empty">Esta competição não disponibiliza uma classificação neste formato.</div>';return}
-  standingsEl.innerHTML='<div class="table-wrap"><table class="standings"><thead><tr><th>#</th><th>Equipa</th><th><abbr title="Jogos">J</abbr></th><th><abbr title="Vitórias">V</abbr></th><th><abbr title="Empates">E</abbr></th><th><abbr title="Derrotas">D</abbr></th><th><abbr title="Diferença de golos">DG</abbr></th><th><abbr title="Pontos">Pts</abbr></th></tr></thead><tbody>'+rows.slice(0,30).map((row,i)=>`
-    <tr><td>${esc(row.position??i+1)}</td><td><div class="standing-team"><img src="${teamLogo(row.team)}" alt=""><span>${esc(row.team?.name||"—")}</span></div></td><td>${esc(row.played??row.games??"—")}</td><td>${esc(row.wins??"—")}</td><td>${esc(row.draws??"—")}</td><td>${esc(row.losses??"—")}</td><td>${esc(row.goalDifference??row.gd??"—")}</td><td><strong>${esc(row.points??"—")}</strong></td></tr>`).join("")+'</tbody></table></div>';
+  standingsEl.innerHTML='<div class="table-wrap"><table class="standings"><thead><tr><th>#</th><th>Equipa</th><th><abbr title="Jogos">J</abbr></th><th><abbr title="Vitórias">V</abbr></th><th><abbr title="Empates">E</abbr></th><th><abbr title="Derrotas">D</abbr></th><th><abbr title="Golos marcados">GM</abbr></th><th><abbr title="Golos sofridos">GS</abbr></th><th><abbr title="Diferença de golos">DG</abbr></th><th><abbr title="Pontos">Pts</abbr></th></tr></thead><tbody>'+rows.map((row,i)=>`
+    <tr><td>${esc(row.position??i+1)}</td><td><div class="standing-team"><img src="${teamLogo(row.team)}" alt=""><span>${esc(row.team?.name||"—")}</span></div></td><td>${esc(row.played??row.games??"—")}</td><td>${esc(row.wins??"—")}</td><td>${esc(row.draws??"—")}</td><td>${esc(row.losses??"—")}</td><td>${esc(row.goalsFor??"—")}</td><td>${esc(row.goalsAgainst??"—")}</td><td>${esc(row.goalDifference??row.gd??"—")}</td><td><strong>${esc(row.points??"—")}</strong></td></tr>`).join("")+'</tbody></table></div>';
 }
 async function loadCompetition(key){
   active=key;renderTabs();
   const meta=competitions.find(item=>item[0]===key);
   nameEl.textContent=meta?.[1]||key;
-  logoEl.src=`https://sports.bzzoiro.com/img/league/${meta?.[2]||0}/?bg=transparent`;
+  logoEl.src=leagueLogo(meta?.[2]||0);
   fixturesEl.innerHTML='<div class="empty">A carregar jogos…</div>';
   standingsEl.innerHTML='<div class="empty">A carregar classificação…</div>';
   try{
