@@ -1,6 +1,6 @@
 # CHUTA PRA CANTO — ROADMAP OPERACIONAL DO PROJETO
 
-Versão: 2026-09-27
+Versão: 2026-09-28
 Repo: `chutapracanto/chutapracanto`
 Produção: `https://chutapracanto.com`
 
