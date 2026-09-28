@@ -48,14 +48,14 @@ Não responder apenas "o próximo passo é X" quando X estiver ao alcance da IA.
 | 0 | Continuidade, regras e memória operacional | **CONSOLIDADA** |
 | 1 | Recuperação/consolidação do conteúdo histórico | **CONCLUÍDA — reconciliação de metadata dos 163 registos pós-22/08 validada** |
 | 2 | Sistema editorial e publicação própria | **CONCLUÍDA — frente UX/editorial fechada operacionalmente; melhorias residuais não bloqueantes** |
-| 3 | Dados de futebol e API de competições | **CONCLUÍDA — implementação e validação de produção das 7 competições PASS** |
+| 3 | Dados de futebol e API de competições | **IMPLEMENTAÇÃO CONCLUÍDA — validação runtime final do Cron pendente** |
 | 4 | SEO técnico + indexação real | **ATIVA — auditoria técnica base concluída; indexação real pendente de Search Console** |
 | 5 | Performance mensurável | **PRIMEIRA PASSAGEM IMPLEMENTADA / VALIDAR RESIDUAL** |
 | 6 | Monetização | **PENDENTE** |
 | 7 | Distribuição e crescimento | **PENDENTE / FRENTE CRIATIVA SEPARADA** |
 | 8 | Automação e escala | **PENDENTE** |
 
-**Fase operacional atual:** **FASE 4 — SEO técnico + indexação real.** A Fase 3 de dados de futebol/competições foi concluída e validada em produção para as 7 competições; não reabrir sem nova evidência.
+**Fase operacional atual:** **FASE 3 — validação final do Cron de competições.** A Fase 4 só deve reassumir como frente técnica ativa depois de existir evidência do ciclo automático do Cron.
 
 ---
 
