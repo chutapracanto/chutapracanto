@@ -1945,14 +1945,14 @@ async function handleAdminAPI(request, env) {
       return json({ error: "Endpoint não encontrado." }, 404);
     }
 
-    if (request.method !== "POST") {
-      return json({ error: "Método não permitido." }, 405, { Allow: "POST" });
+    if (request.method !== "GET" && request.method !== "POST") {
+      return json({ error: "Método não permitido." }, 405, { Allow: "GET, POST" });
     }
 
     const authError = await requireAuth(request, env);
     if (authError) return authError;
 
-    if (request.headers.get("Origin") !== url.origin) {
+    if (request.method === "POST" && request.headers.get("Origin") !== url.origin) {
       return json({ error: "Origem não permitida." }, 403);
     }
 
