@@ -218,7 +218,7 @@ function renderTabs(){
       <img src="${leagueLogo(id)}" alt="" loading="lazy" decoding="async">
       <span>${label}</span>
     </button>`).join("");
-  tabs.querySelectorAll("button").forEach(button=>button.addEventListener("click",()=>loadCompetition(button.dataset.key)));
+  tabs.querySelectorAll("button").forEach(button=>button.addEventListener("click",()=>{const key=button.dataset.key;history.replaceState(null,"","/competicoes?competition="+encodeURIComponent(key));loadCompetition(key,"all")}));
 }
 function renderHighlight(){
   const candidates=allFixtures.filter(item=>fixtureStatus(item)==="upcoming"||fixtureStatus(item)==="live").sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity));
@@ -235,13 +235,15 @@ function renderHighlight(){
 }
 function renderRounds(){
   const rounds=[...new Set(allFixtures.map(item=>translateRound(item.roundLabel||item.round||"")).filter(Boolean))];
+  const previous=roundEl.value;
   roundEl.innerHTML='<option value="all">Todas as jornadas</option>'+rounds.map(round=>'<option value="'+esc(round)+'">'+esc(round)+'</option>').join("");
+  if(rounds.includes(previous)) roundEl.value=previous;
 }
 function renderFixtures(){
   let rows=allFixtures.filter(item=>fixtureFilter==="all"||fixtureStatus(item)===fixtureFilter);
   const selectedRound=roundEl.value;
   if(selectedRound!=="all")rows=rows.filter(item=>translateRound(item.roundLabel||item.round||"").trim()===selectedRound);
-  rows.sort((a,b)=>(dateValue(a)?.getTime()||0)-(dateValue(b)?.getTime()||0));
+  rows.sort((a,b)=>{const ad=dateValue(a)?.getTime()||0,bd=dateValue(b)?.getTime()||0;return fixtureFilter==="finished"?bd-ad:ad-bd;});
   countEl.textContent=rows.length+" jogo"+(rows.length===1?"":"s");
   if(!rows.length){fixturesEl.innerHTML='<div class="empty">Não há jogos para este filtro.</div>';return}
   fixturesEl.innerHTML=rows.slice(0,40).map(item=>{
@@ -297,6 +299,7 @@ document.querySelectorAll(".competition-filter").forEach(button=>button.addEvent
   loadCompetition(active,fixtureFilter);
 }));
 roundEl.addEventListener("change",renderFixtures);
+window.addEventListener("popstate",()=>{const key=new URLSearchParams(location.search).get("competition")||"liga-portugal";if(competitions.some(item=>item[0]===key)&&key!==active)loadCompetition(key,"all")});
 active=new URLSearchParams(location.search).get("competition")||"liga-portugal";
 if(!competitions.some(item=>item[0]===active))active="liga-portugal";
 loadCompetition(active,"all");
