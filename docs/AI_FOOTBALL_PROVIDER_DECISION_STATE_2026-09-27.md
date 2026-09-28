@@ -345,7 +345,7 @@ Sem novo diagnóstico BSD, o adapter foi alterado no commit `da9478109643d1b870b
 
 A inspeção direta do `_worker.js` no commit `452a5f778ca3b7c23ad90b17302ec6540995f79f` identificou objetivamente a causa do HTTP 404 observado no teste do deployment `95dae374.chutapracanto.pages.dev`: o guard do endpoint aceitava apenas o hostname exato `chutapracanto.com` ou `chutapracanto.pages.dev`, mas o URL de deployment tem o hostname específico `95dae374.chutapracanto.pages.dev`. O endpoint estava portanto presente no código, mas rejeitava corretamente o hostname de deployment antes de chegar à autenticação ou ao helper.
 
-Correção mínima aplicada diretamente em `main`, commit `9326a6f2ff49a74f5dab6908edc5382104cdc406`: o helper passa a aceitar `chutapracanto.com` e subdomínios de deployment `*.chutapracanto.pages.dev`, mantendo obrigatoriamente `CF_PAGES_BRANCH === "main"`, POST, autenticação de admin e Origin same-origin. Não foram alteradas as chamadas BSD nem o adapter.
+Correção mínima aplicada diretamente em `main`: commit `9326a6f2ff49a74f5dab6908edc5382104cdc406` introduziu a alteração do guard para aceitar `chutapracanto.com` e subdomínios de deployment `*.chutapracanto.pages.dev`, mantendo obrigatoriamente `CF_PAGES_BRANCH === "main"`, POST, autenticação de admin e Origin same-origin. Durante a validação estática do commit, foi detetado e corrigido imediatamente um erro de escrita introduzido nessa alteração (sequências literais `\\n` no bloco JS); a correção final está no commit `c55048b50f30e0d7d8d1b4f3f21f54f6ce4c07c6`. Não foram alteradas as chamadas BSD nem o adapter.
 
 **Consumo BSD:** permanece em **14 requests**. A inspeção e a correção não fizeram qualquer chamada BSD.
 
