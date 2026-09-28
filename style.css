@@ -173,12 +173,24 @@ nav a:hover, nav a.active {
    HERO
    ========================================== */
 .hero {
-  text-align: center;
-  padding: 4rem 1rem;
-  background: radial-gradient(circle at center, #152512 0%, var(--bg-dark) 70%);
-  border-radius: 16px;
-  margin-bottom: 3rem;
+  text-align: left;
+  padding: 1.35rem 1.5rem;
+  background: linear-gradient(135deg, rgba(21,37,18,.72), rgba(10,14,20,.96));
+  border-radius: 12px;
+  margin-bottom: 1.75rem;
   border: 1px solid #1e3318;
+  display: grid;
+  grid-template-columns: minmax(0,1fr) auto;
+  align-items: center;
+  gap: .8rem 1.5rem;
+}
+.hero-tag { grid-column: 1 / -1; margin-bottom: -.35rem; font-size: .68rem; letter-spacing: 1.2px; }
+.hero h1 { margin: 0; font-size: clamp(1.35rem,2.5vw,1.9rem); line-height: 1.12; }
+.hero p { margin: .3rem 0 0; max-width: 680px; font-size: .82rem; line-height: 1.45; }
+.hero .btn-neon { grid-column: 2; grid-row: 2; white-space: nowrap; padding: .62rem .8rem; font-size: .68rem; }
+@media(max-width:680px){
+  .hero{grid-template-columns:1fr;padding:1rem;margin-bottom:1.35rem}
+  .hero .btn-neon{grid-column:1;grid-row:auto;justify-self:start}
 }
 
 .hero-tag {

@@ -142,36 +142,35 @@
     .episode-title { font-size: 0.95rem; font-weight: 600; color: #fff; margin: 0; }
     .episode-date { font-size: 0.75rem; color: var(--text-gray); }
     .audio-player { height: 32px; max-width: 220px; }
-    .home-competitions-section{margin-bottom:3.5rem}.home-competition-loading{display:block;grid-column:1/-1;padding:1rem;color:var(--text-gray)}
-.home-competition-shortcut{position:relative}
-.home-competition-shortcut small{display:block;margin-top:.22rem;color:var(--text-gray);font:500 .68rem var(--font-body);line-height:1.35}
-.home-competition-shortcut .home-competition-status{display:inline-flex;align-items:center;gap:.35rem;margin-top:.35rem;color:var(--neon-green);font:700 .6rem var(--font-title);letter-spacing:.05em}
-.home-competition-status i{width:6px;height:6px;border-radius:50%;background:var(--neon-green)}
-.home-competition-feature-live{color:#ff6b84!important}
-
-    .home-competition-layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:1rem}
-    .home-competition-feature,.home-competition-shortcut{background:var(--card-bg);border:1px solid var(--border-color);border-radius:14px;text-decoration:none;color:inherit}
-    .home-competition-feature{padding:1.2rem;display:block;overflow:hidden;position:relative}
-    .home-competition-feature:hover,.home-competition-shortcut:hover{border-color:var(--neon-green);transform:translateY(-2px)}
-    .home-competition-feature-head{display:flex;justify-content:space-between;align-items:center}
-    .home-competition-kicker{font:700 .68rem var(--font-title);letter-spacing:.12em;color:var(--neon-green)}
-    .home-competition-arrow{font-size:1.4rem;color:var(--neon-green)}
-    .home-competition-feature-main{display:flex;align-items:center;gap:1rem;margin:1rem 0}
-    .home-competition-league-logo{width:58px;height:58px;object-fit:contain;flex:0 0 auto}
-    .home-competition-feature h3{margin:0;font:700 1.45rem var(--font-title)}
-    .home-competition-feature p{margin:.25rem 0 0;color:var(--text-gray);font-size:.85rem}
-    .home-competition-teams{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem;padding-top:.9rem;border-top:1px solid var(--border-color)}
-    .home-competition-team{display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:.45rem;min-width:0;font-size:.75rem}
-    .home-competition-team img{width:26px;height:26px;object-fit:contain}
+    .home-competitions-section{margin-bottom:3rem}
+    .home-competition-feature-strip{display:grid;grid-template-columns:minmax(0,1fr) minmax(250px,.9fr) auto;align-items:center;gap:1rem;padding:.9rem 1rem;background:linear-gradient(135deg,var(--card-bg),#0d121b);border:1px solid var(--border-color);border-radius:12px;margin-bottom:.75rem}
+    .home-competition-feature-copy{min-width:0}
+    .home-competition-kicker{font:700 .58rem var(--font-title);letter-spacing:.11em;color:var(--neon-green)}
+    .home-competition-feature-copy h3{margin:.22rem 0 .1rem;font:700 1rem var(--font-title)}
+    .home-competition-feature-copy p{margin:0;color:var(--text-gray);font-size:.72rem}
+    .home-competition-feature-link{font:700 .63rem var(--font-title);color:var(--neon-green);text-decoration:none;white-space:nowrap}
+    .home-competition-teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.5rem}
+    .home-competition-team{display:flex;align-items:center;gap:.35rem;min-width:0;font-size:.7rem}
+    .home-competition-team img{width:24px;height:24px;object-fit:contain;flex:0 0 auto}
     .home-competition-team strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-    .home-competition-team em{font-style:normal;color:var(--neon-green);font-weight:700}
-    .home-competition-shortcuts{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-    .home-competition-shortcut{padding:1rem;display:grid;grid-template-columns:42px 1fr 20px;align-items:center;gap:.75rem;min-height:90px;transition:.2s}
-    .home-competition-shortcut img{width:42px;height:42px;object-fit:contain}
-    .home-competition-shortcut span{font:700 .9rem var(--font-title);line-height:1.15}
-    .home-competition-shortcut b{color:var(--neon-green)}
-    @media(max-width:800px){.home-competition-layout{grid-template-columns:1fr}.home-competition-shortcuts{grid-template-columns:1fr 1fr}}
-    @media(max-width:520px){.home-competition-shortcuts{grid-template-columns:1fr}.home-competition-teams{grid-template-columns:1fr 1fr}}
+    .home-competition-vs{font:700 .62rem var(--font-title);color:var(--text-gray)}
+    .home-competition-shortcuts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.65rem}
+    .home-competition-shortcut{background:var(--card-bg);border:1px solid var(--border-color);border-radius:10px;padding:.7rem;text-decoration:none;color:inherit;min-width:0;transition:.18s}
+    .home-competition-shortcut:hover{border-color:var(--neon-green);transform:translateY(-1px)}
+    .home-competition-shortcut-head{display:grid;grid-template-columns:28px 1fr 14px;align-items:center;gap:.45rem}
+    .home-competition-shortcut-head img{width:28px;height:28px;object-fit:contain}
+    .home-competition-shortcut-head span{font:700 .7rem var(--font-title);line-height:1.1}
+    .home-competition-shortcut-head b{color:var(--neon-green);font-size:.75rem}
+    .home-competition-shortcut small{display:block;margin-top:.5rem;color:var(--text-gray);font:500 .64rem var(--font-body);line-height:1.35}
+    .home-competition-shortcut small strong{color:var(--text-color);font-weight:700}
+    .home-competition-standing{display:block;margin-top:.38rem;font-size:.63rem;color:var(--text-gray)}
+    .home-competition-standing b{color:var(--neon-green)}
+    .home-competition-status{display:inline-flex;align-items:center;gap:.3rem;margin-top:.3rem;color:var(--neon-green);font:700 .58rem var(--font-title)}
+    .home-competition-status i{width:5px;height:5px;border-radius:50%;background:currentColor}
+    .home-competition-feature-live{color:#ff6b84!important}
+    .home-competition-loading{display:block;grid-column:1/-1;padding:1rem;color:var(--text-gray)}
+    @media(max-width:900px){.home-competition-shortcuts{grid-template-columns:repeat(2,minmax(0,1fr))}.home-competition-feature-strip{grid-template-columns:1fr 1fr}.home-competition-feature-link{grid-column:1/-1}}
+    @media(max-width:520px){.home-competition-shortcuts{grid-template-columns:1fr}.home-competition-feature-strip{grid-template-columns:1fr}.home-competition-teams{grid-template-columns:1fr auto 1fr}}
   </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1556367149800029" crossorigin="anonymous"></script>
 </head>
@@ -229,24 +228,17 @@
         <h2 class="section-title">COMPETIÇÕES</h2>
         <a href="/competicoes" class="see-more">VER TODAS →</a>
       </div>
-      <div class="home-competition-layout">
-        <a id="home-competition-feature" class="home-competition-feature" href="/competicoes?competition=liga-portugal">
-          <div class="home-competition-feature-head">
-            <span class="home-competition-kicker">PRÓXIMO JOGO EM DESTAQUE</span>
-            <span class="home-competition-arrow" aria-hidden="true">→</span>
-          </div>
-          <div class="home-competition-feature-main">
-            <img id="home-feature-logo" class="home-competition-league-logo" src="/images/logo.png" alt="" width="58" height="58">
-            <div>
-              <h3 id="home-feature-name">A carregar…</h3>
-              <p id="home-feature-match">A procurar o próximo jogo…</p>
-            </div>
-          </div>
-          <div id="home-feature-teams" class="home-competition-teams"></div>
-        </a>
-        <div id="home-competition-shortcuts" class="home-competition-shortcuts" aria-label="Próximos jogos por competição">
-          <span class="home-competition-loading">A carregar competições…</span>
+      <div class="home-competition-feature-strip">
+        <div class="home-competition-feature-copy">
+          <span class="home-competition-kicker">PRÓXIMO JOGO DE INTERESSE</span>
+          <h3 id="home-feature-name">A carregar…</h3>
+          <p id="home-feature-match">A procurar Porto, Benfica, Sporting, Braga ou Portugal…</p>
         </div>
+        <div id="home-feature-teams" class="home-competition-teams"></div>
+        <a id="home-competition-feature" class="home-competition-feature-link" href="/competicoes?competition=liga-portugal">VER COMPETIÇÃO →</a>
+      </div>
+      <div id="home-competition-shortcuts" class="home-competition-shortcuts" aria-label="Competições com próximos jogos de interesse">
+        <span class="home-competition-loading">A carregar competições…</span>
       </div>
     </section>
 
@@ -595,7 +587,6 @@
       ];
       const priorityNames = ['porto','benfica','sporting','braga','portugal'];
       const featureEl=document.getElementById('home-competition-feature');
-      const featureLogo=document.getElementById('home-feature-logo');
       const featureName=document.getElementById('home-feature-name');
       const featureMatch=document.getElementById('home-feature-match');
       const featureTeams=document.getElementById('home-feature-teams');
@@ -611,9 +602,18 @@
         const n=String(name||'').toLocaleLowerCase('pt-PT');
         return priorityNames.some(value=>n.includes(value));
       };
-      const isLive=item=>['live','in_progress','in-play'].includes(String(item?.status||'').toLowerCase());
+      const isLive=item=>['live','in_progress','inprogress','in-play','ongoing'].includes(String(item?.status||'').toLowerCase());
+      const teamRowName=row=>String(row?.team?.name||row?.team_name||'').toLocaleLowerCase('pt-PT');
+      const bestRelevantStanding=data=>{
+        const groups=Array.isArray(data?.standingGroups)?data.standingGroups:[];
+        const rows=groups.flatMap(group=>Array.isArray(group.standings)?group.standings:[]);
+        const fallback=Array.isArray(data?.standings)?data.standings:[];
+        const pool=rows.length?rows:fallback;
+        const relevant=pool.filter(row=>priorityTeam(teamRowName(row)));
+        return relevant.sort((a,b)=>(Number(a.position)||999)-(Number(b.position)||999))[0]||null;
+      };
 
-      const results=await Promise.all(competitions.map(async meta=>{
+      const results=(await Promise.all(competitions.map(async meta=>{
         try{
           const response=await fetch('/api/competicoes?competition='+encodeURIComponent(meta[0])+'&status=upcoming',{cache:'no-store'});
           if(!response.ok)throw new Error('indisponível');
@@ -621,45 +621,40 @@
           const fixtures=Array.isArray(data.fixtures)?data.fixtures:[];
           fixtures.sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity));
           const priorityFixture=fixtures.find(item=>priorityTeam(item.homeTeam?.name)||priorityTeam(item.awayTeam?.name));
-          return {meta,data,fixture:priorityFixture||fixtures[0]||null,priority:Boolean(priorityFixture)};
-        }catch{return {meta,data:null,fixture:null,priority:false}}
-      }));
+          if(!priorityFixture)return null;
+          return {meta,data,fixture:priorityFixture,standing:bestRelevantStanding(data)};
+        }catch{return null}
+      }))).filter(Boolean);
 
-      results.sort((a,b)=>{
-        if(a.fixture&&!b.fixture)return -1;if(!a.fixture&&b.fixture)return 1;
-        if(a.priority!==b.priority)return a.priority?-1:1;
-        return (dateValue(a.fixture)?.getTime()||Infinity)-(dateValue(b.fixture)?.getTime()||Infinity);
-      });
+      results.sort((a,b)=>(dateValue(a.fixture)?.getTime()||Infinity)-(dateValue(b.fixture)?.getTime()||Infinity));
 
-      const featured=results.find(item=>item.fixture)||results[0];
+      const featured=results[0];
       if(featured){
-        featureEl.href='/competicoes?competition='+encodeURIComponent(featured.meta[0]);
-        featureLogo.src=leagueLogo(featured.meta[2]);
-        featureName.textContent=featured.meta[1];
         const item=featured.fixture;
-        if(item){
-          const live=isLive(item);
-          featureMatch.textContent=(live?'AO VIVO · ':'Próximo jogo · ')+dateLabel(dateValue(item));
-          featureMatch.classList.toggle('home-competition-feature-live',live);
-          featureTeams.innerHTML=
-            '<span class="home-competition-team"><img src="'+logo(item.homeTeam?.logo)+'" alt=""><strong>'+String(item.homeTeam?.name||'Casa')+'</strong><em>'+(item.score?.home??'—')+'</em></span>'+
-            '<span class="home-competition-team"><img src="'+logo(item.awayTeam?.logo)+'" alt=""><strong>'+String(item.awayTeam?.name||'Fora')+'</strong><em>'+(item.score?.away??'—')+'</em></span>';
-        }else{
-          featureMatch.textContent='Sem próximo jogo disponível.';
-          featureTeams.replaceChildren();
-        }
+        featureEl.href='/competicoes?competition='+encodeURIComponent(featured.meta[0]);
+        featureName.textContent=featured.meta[1];
+        featureMatch.textContent=(isLive(item)?'AO VIVO · ':'Próximo · ')+dateLabel(dateValue(item));
+        featureMatch.classList.toggle('home-competition-feature-live',isLive(item));
+        featureTeams.innerHTML=
+          '<span class="home-competition-team"><img src="'+logo(item.homeTeam?.logo)+'" alt=""><strong>'+String(item.homeTeam?.name||'Casa')+'</strong></span>'+
+          '<span class="home-competition-vs">VS</span>'+
+          '<span class="home-competition-team"><img src="'+logo(item.awayTeam?.logo)+'" alt=""><strong>'+String(item.awayTeam?.name||'Fora')+'</strong></span>';
+      }else{
+        featureName.textContent='Sem jogo de interesse próximo';
+        featureMatch.textContent='Nenhum próximo jogo de Porto, Benfica, Sporting, Braga ou Portugal foi encontrado.';
+        featureTeams.replaceChildren();
       }
 
       shortcutsEl.innerHTML=results.map(item=>{
-        const meta=item.meta, fixture=item.fixture;
-        const match=fixture
-          ? String(fixture.homeTeam?.name||'Casa')+' · '+dateLabel(dateValue(fixture))+' · '+String(fixture.awayTeam?.name||'Fora')
-          : 'Calendário indisponível';
-        const live=fixture&&isLive(fixture);
+        const meta=item.meta, fixture=item.fixture, standing=item.standing;
+        const live=isLive(fixture);
+        const standingText=standing
+          ? '<span class="home-competition-standing"><b>'+String(standing.position??'—')+'º</b> '+String(standing.team?.name||standing.team_name||'Equipa')+' · '+String(standing.points??'—')+' pts</span>'
+          : '<span class="home-competition-standing">Classificação disponível na página</span>';
         return '<a class="home-competition-shortcut" href="/competicoes?competition='+encodeURIComponent(meta[0])+'">'+
-          '<img src="'+leagueLogo(meta[2])+'" alt="" loading="lazy" decoding="async">'+
-          '<span>'+meta[1]+'</span><b aria-hidden="true">→</b>'+
-          '<small>'+match+'</small>'+
+          '<div class="home-competition-shortcut-head"><img src="'+leagueLogo(meta[2])+'" alt="" loading="lazy" decoding="async"><span>'+meta[1]+'</span><b aria-hidden="true">→</b></div>'+
+          '<small>'+String(fixture.homeTeam?.name||'Casa')+' <strong>vs</strong> '+String(fixture.awayTeam?.name||'Fora')+' · '+dateLabel(dateValue(fixture))+'</small>'+
+          standingText+
           (live?'<span class="home-competition-status home-competition-feature-live"><i></i>AO VIVO</span>':'')+
           '</a>';
       }).join('');
