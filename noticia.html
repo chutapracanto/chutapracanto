@@ -627,7 +627,7 @@
     }
 
     function addArticleJsonLd(data) {
-      const canonical = SITE_CANONICAL_ORIGIN + '/noticia?slug=' + encodeURIComponent(data.slug);
+      const canonical = SITE_CANONICAL_ORIGIN + '/noticia/' + encodeURIComponent(data.slug);
       const schema = {
         '@context': 'https://schema.org',
         '@type': data.editorialType === 'news' ? 'NewsArticle' : 'Article',
@@ -764,8 +764,8 @@
         const modified = modifiedCandidate && modifiedCandidate !== published ? modifiedCandidate : '';
         const imageValue = frontmatter.image || frontmatter.imagem || frontmatter.featured_image || frontmatter.featuredImage || entry.image || '';
         const image = imageValue ? safeArticleImage(imageValue) : SITE_CANONICAL_ORIGIN + '/images/logo.png';
-        const canonical = SITE_CANONICAL_ORIGIN + '/noticia?slug=' + encodeURIComponent(entry.slug);
-        const currentShareUrl = window.location.origin + '/noticia?slug=' + encodeURIComponent(entry.slug);
+        const canonical = SITE_CANONICAL_ORIGIN + '/noticia/' + encodeURIComponent(entry.slug);
+        const currentShareUrl = window.location.origin + '/noticia/' + encodeURIComponent(entry.slug);
         document.title = title + ' | Chuta Pra Canto';
         document.getElementById('meta-title').content = title;
         document.getElementById('meta-description').content = description;
