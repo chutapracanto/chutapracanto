@@ -465,8 +465,20 @@ Antes de fazer trabalho no CPC:
 11. Atualizar documentação.
 12. Só depois responder.
 
-**Estado operacional atualizado em 2026-09-28: FASE 3 — adapter BSD PASS em produção.** O fornecedor BSD está tecnicamente validado, o endpoint `/api/competicoes` está operacional e os diagnósticos temporários foram removidos. A próxima subfase é cache/D1 → Cron → UI.
+**Estado operacional atualizado em 2026-09-28: FASE 3 — fornecedor ainda em validação; infraestrutura de cache PASS; automação Cron preparada mas NÃO DEPLOYADA.**
 
+O adapter BSD e o endpoint `/api/competicoes` estão tecnicamente validados em produção, mas **BSD não está aprovado como fornecedor definitivo**. API-Football também permanece **não aprovado** após os testes 2026/27. A arquitetura deve permanecer provider-agnostic até a decisão final.
+
+A camada D1/cache está **PASS** em runtime. O mecanismo de Cron foi separado do Pages porque o projeto Pages rejeitou `[triggers]` no `wrangler.toml`; existe código para um Worker separado em `workers/football-cron`, mas **não deve ser criado/deployado ainda**.
+
+Antes do deployment do Worker, a próxima ordem é:
+1. validar a estratégia de atualização e consumo real de requests para cada fornecedor candidato;
+2. definir a frequência final de atualização por competição sem a fixar prematuramente em `*/5`;
+3. concluir a decisão de fornecedor;
+4. só então configurar/deployar o Worker Cron separado;
+5. validar execução automática e atualizar ledger/roadmap.
+
+**Regra operacional nova:** não transformar uma validação técnica de fornecedor em aprovação de fornecedor; não transformar uma implementação de Cron em configuração final até a frequência e o consumo estarem justificados.
 FIM.
 
 
@@ -857,3 +869,36 @@ A atualização automática foi implementada no Worker e configurada em Wrangler
 - a chave de cache do Cron é compatível com a chave pública.
 
 ESTADO DA FASE 3: ATIVA — Cron implementado; validação runtime pendente. A UI /competicoes continua bloqueada até o ciclo automático ficar validado.
+
+
+## 26. ATUALIZAÇÃO OPERACIONAL — 2026-09-28 — CORREÇÃO DA DECISÃO DE FORNECEDOR E DO CRON
+
+A revisão do estado operacional identificou que o PASS técnico do adapter BSD **não equivale a aprovação definitiva do fornecedor**.
+
+### Estado de fornecedores
+- **BSD:** tecnicamente validado para 2026/27 nas 7 competições e integrado no adapter; **não aprovado definitivamente**.
+- **API-Football:** continua **não aprovado** após os testes 2026/27 com zero resultados e classificação de quota/subscription; não repetir chamadas sem nova hipótese que altere materialmente a decisão.
+- A arquitetura permanece **provider-agnostic**.
+
+### Estado do Cron
+O Pages Project não aceita `[triggers]` no `wrangler.toml`; essa configuração causou falha de deployment e foi removida do Pages.
+
+Existe código preparado para um Worker separado em:
+- `workers/football-cron/index.js`
+- `workers/football-cron/wrangler.toml`
+
+O código está **preparado, mas não deployado**.
+
+### Frequência
+O desenho preparado usa `*/5`, escolhendo uma das 7 competições por execução, o que resulta em aproximadamente 35 minutos entre atualizações da mesma competição.
+
+Esta frequência **não é ainda a frequência final aprovada**. O TTL de cache fresco de 15 minutos e a rotação de 35 minutos implicam que uma execução normal pode encontrar a entrada expirada e provocar novo refresh do fornecedor.
+
+Antes do deployment, deve ser calculado o consumo efetivo de requests por estratégia e fornecedor e definida a frequência que cumpre o requisito de atualização sem consumo desnecessário.
+
+### Próximo gate
+**Fornecedor → quota/consumo → frequência de atualização → deployment do Worker → validação runtime.**
+
+Nenhuma IA deve saltar diretamente para a criação/deployment do Worker enquanto este gate não estiver fechado.
+
+FIM.
