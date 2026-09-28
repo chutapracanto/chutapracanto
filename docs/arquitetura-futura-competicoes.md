@@ -1,6 +1,6 @@
 # Especificação futura: área de competições
 
-**Estado:** arquitetura definida; BSD tecnicamente validado como fornecedor principal em 2026-09-27; adapter server-side inicial implementado. A integração pública `/api/competicoes` ainda está em correção/validação de runtime. Cache/D1, atualização agendada e UI de competições só avançam após PASS operacional.
+**Estado:** arquitetura definida; BSD tecnicamente validado como fornecedor principal em 2026-09-27; adapter server-side inicial implementado e **PASS operacional validado em produção em 2026-09-28**. Os diagnósticos temporários foram removidos. Próxima etapa: cache/D1, atualização agendada e depois UI.
 
 ## Modelo editorial e de dados
 
@@ -56,3 +56,27 @@ O helper criado para testar o próprio `bsdFetchJson()` está no commit `452a5f7
 
 **Não considerar ainda a integração de produção como PASS.** Cache/D1, Cron e UI de competições permanecem bloqueados por dependência interna: primeiro obter uma resposta válida do endpoint público e remover os diagnósticos temporários.
 
+
+
+## PASS operacional — 2026-09-28
+
+A rota pública `/api/competicoes` foi validada em produção com `competition=liga-portugal&seasonId=1310`.
+
+Validações finais:
+- HTTP 200;
+- fixtures com nomes normalizados (`Vitória SC`, `Famalicão`);
+- standings com nome normalizado (`FC Porto`);
+- credencial BSD permanece server-side;
+- nenhum endpoint BSD é exposto ao frontend;
+- os quatro endpoints de diagnóstico temporário BSD foram removidos após a validação.
+
+O adapter público fica aprovado como **PASS operacional**. Não repetir diagnósticos BSD já encerrados.
+
+## Próxima implementação
+
+A ordem passa a ser:
+1. persistência/cache D1 por competição/época/recurso;
+2. política de stale-if-error e deduplicação;
+3. atualização agendada por Cron Trigger;
+4. validação operacional da camada de cache/atualização;
+5. UI `/competicoes`.
