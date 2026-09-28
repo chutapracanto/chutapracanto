@@ -894,3 +894,21 @@ Não repetir submissão nem executar diagnósticos artificiais enquanto os dados
 
 ### Próximo passo
 Aguardar processamento da Google e, quando houver dados, validar **Sitemaps + Indexação de páginas**. A Fase 4 permanece ativa.
+
+## 33. SEO TÉCNICO — DADOS ESTRUTURADOS BASE — 2026-09-28
+
+### Auditoria executada
+Foi revisto o markup SEO das páginas públicas principais. A base de metadata já estava consistente: title, description, canonical, robots e Open Graph nas páginas principais; `noticia.html` já possui JSON-LD dinâmico para artigos.
+
+### Operação executada
+A homepage passou a incluir JSON-LD válido em formato `@graph` com:
+- `Organization` para o Chuta Pra Canto, incluindo URL, logo e perfis sociais;
+- `WebSite` associado à organização e ao idioma `pt-PT`.
+
+Commit: `fc0cd2bb64a621de1dd79b90c1266c682a5e2b7c`.
+
+### Regra
+Não adicionar schema artificial ou duplicado às páginas de artigos/listagens sem necessidade. O JSON-LD de artigos existente continua a ser a fonte para `noticia.html`.
+
+### Próximo passo
+Aguardar o deployment automático desta alteração e, sem gastar créditos em testes repetitivos, fazer a próxima verificação SEO externa apenas quando houver ferramenta/evidência apropriada (Search Console ou validação pública).
