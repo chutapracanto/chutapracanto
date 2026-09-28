@@ -72,14 +72,12 @@ Validações finais:
 
 O adapter público fica aprovado como **PASS operacional**. Não repetir diagnósticos BSD já encerrados.
 
-## Próxima implementação
+## Estado após implementação da UI e Cron — 2026-09-28
 
-A ordem passa a ser:
-1. persistência/cache D1 por competição/época/recurso;
-2. política de stale-if-error e deduplicação;
-3. atualização agendada por Cron Trigger;
-4. validação operacional da camada de cache/atualização;
-5. UI `/competicoes`.
+A persistência/cache D1 e a UI `/competicoes` estão presentes em `main`. O Cron Trigger foi agora implementado no Worker e configurado em `wrangler.toml` para `*/5 * * * *`, distribuindo uma competição por execução e reutilizando a mesma chave de cache do endpoint público.
+
+### Próximo passo
+Validar em runtime a execução automática do Cron e confirmar que uma entrada `football_cache` é atualizada sem intervenção manual. Se a validação passar, encerrar a Fase 3; se falhar, corrigir apenas a evidência concreta.
 
 
 ## Atualização automática — Cron Trigger — 2026-09-28
