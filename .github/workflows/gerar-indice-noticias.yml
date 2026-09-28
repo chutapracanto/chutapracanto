@@ -44,6 +44,16 @@ jobs:
               )
           }
 
+          redirect_map_path = Path("content/framer-news-redirects.json")
+          legacy_slugs = set()
+          if redirect_map_path.exists():
+              redirect_map = json.loads(redirect_map_path.read_text(encoding="utf-8"))
+              legacy_slugs = {
+                  str(slug).strip()
+                  for slug in (redirect_map.get("redirects") or {}).values()
+                  if str(slug).strip()
+              }
+
           def normalize_key(value):
               value = unicodedata.normalize("NFKD", str(value or ""))
               value = "".join(char for char in value if not unicodedata.combining(char))
@@ -242,7 +252,8 @@ jobs:
                       "authorType": author_meta["type"] if author_meta else None,
                       "published": published,
                       "publishedAt": published_at,
-                      "image": image
+                      "image": image,
+                      "legacyUrl": slug in legacy_slugs
                   }
                   if source_url:
                       noticia["sourceUrl"] = source_url
@@ -294,7 +305,10 @@ jobs:
               published = (noticia.get("published") or "")[:10]
               if re.fullmatch(r"\d{4}-\d{2}-\d{2}", published) and published > today:
                   continue
-              entries.append(base_url + "/noticia?slug=" + quote(slug, safe="~!*'()-._"))
+              if noticia.get("legacyUrl"):
+                  entries.append(base_url + "/noticia?slug=" + quote(slug, safe="~!*'()-._"))
+              else:
+                  entries.append(base_url + "/noticia/" + quote(slug, safe="~!*'()-._"))
 
           sitemap_lines = [
               '<?xml version="1.0" encoding="UTF-8"?>',
