@@ -2829,7 +2829,7 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
   let seasonLabel = "";
 
   if (!Number.isSafeInteger(seasonId) || seasonId <= 0) {
-    const seasonsData = await bsdFetchJson(
+    const seasonsData = await bsdFetchJson(env,
       `https://sports.bzzoiro.com/api/v2/leagues/${competition.leagueId}/seasons/`,
       21600
     );
@@ -2870,7 +2870,7 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
   let standingsData;
 
   try {
-    eventsData = await bsdFetchJson(
+    eventsData = await bsdFetchJson(env,
       `https://sports.bzzoiro.com/api/v2/events/?${eventParams.toString()}`
     );
   } catch (error) {
@@ -2878,7 +2878,7 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
   }
 
   try {
-    standingsData = await bsdFetchJson(
+    standingsData = await bsdFetchJson(env,
       `https://sports.bzzoiro.com/api/v2/leagues/${competition.leagueId}/standings/?season_id=${seasonId}`
     );
   } catch (error) {
