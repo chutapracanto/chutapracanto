@@ -255,6 +255,11 @@ function renderFixtures(){
     </div>\`;
   }).join("");
 }
+function renderStandings(rows){
+  if(!rows.length){standingsEl.innerHTML='<div class="empty">Esta competição não disponibiliza uma classificação neste formato.</div>';return}
+  standingsEl.innerHTML='<div class="table-wrap"><table class="standings"><thead><tr><th>#</th><th>Equipa</th><th><abbr title="Jogos">J</abbr></th><th><abbr title="Vitórias">V</abbr></th><th><abbr title="Empates">E</abbr></th><th><abbr title="Derrotas">D</abbr></th><th><abbr title="Golos marcados">GM</abbr></th><th><abbr title="Golos sofridos">GS</abbr></th><th><abbr title="Diferença de golos">DG</abbr></th><th><abbr title="Pontos">Pts</abbr></th></tr></thead><tbody>'+rows.map((row,i)=>`
+    <tr><td>${esc(row.position??i+1)}</td><td><div class="standing-team"><img src="${teamLogo(row.team)}" alt=""><span>${esc(row.team?.name||"—")}</span></div></td><td>${esc(row.played??row.games??"—")}</td><td>${esc(row.wins??"—")}</td><td>${esc(row.draws??"—")}</td><td>${esc(row.losses??"—")}</td><td>${esc(row.goalsFor??"—")}</td><td>${esc(row.goalsAgainst??"—")}</td><td>${esc(row.goalDifference??row.gd??"—")}</td><td><strong>${esc(row.points??"—")}</strong></td></tr>`).join("")+'</tbody></table></div>';
+}
 async function loadCompetition(key,status=fixtureFilter){
   active=key;loadingStatus=status;renderTabs();
   const meta=competitions.find(item=>item[0]===key);
