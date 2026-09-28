@@ -30,7 +30,7 @@ Não fazer importação por inferência.
 
 ## Próxima operação
 
-Concluir a matriz de fornecedores para as sete competições prioritárias e escolher a fonte principal/adaptador antes de criar endpoints, secrets ou bindings.
+Acompanhar o processamento do sitemap no Google Search Console e validar indexação real, cobertura, exclusões e problemas de canonical/dados estruturados quando os dados estiverem disponíveis. Corrigir apenas problemas comprovados.
 
 ## Não saltar de fase
 
