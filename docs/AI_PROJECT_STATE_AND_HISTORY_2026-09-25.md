@@ -2715,7 +2715,7 @@ A abertura pública de https://chutapracanto.pages.dev/ está acessível ao ambi
 A documentação pública do BSD confirma que os dados de futebol usam estados como upcoming, live e finished, que as datas são ISO 8601/UTC, e que o fornecedor dispõe de endpoint de eventos live. A utilização na CPC continua server-side; a API key não vai para o browser.
 
 ### Estado
-PR #46 — EM IMPLEMENTAÇÃO / VALIDAÇÃO ESTRUTURAL. O deployment público atual ainda é anterior às alterações desta PR.
+PR #46 — MERGED em `main` no commit `2a0e4ededb660d8ba07db84199b1d4711816384b`. A versão pública consultada nesta sessão ainda devolve um crawl antigo do Pages, portanto o deployment/runtime atualizado permanece por confirmar.
 
 ### Próximo passo automático
-Validar o código final da PR #46, fazer merge se não houver erro estrutural/contratual, aguardar o novo deployment e repetir a inspeção pública do Home e /competicoes. Se a versão publicada divergir do branch, diagnosticar o deployment antes de alterar código.
+PR #46 já foi validada estruturalmente e mergeada. Próximo passo automático: confirmar o deployment de `main` e repetir a inspeção pública do Home e `/competicoes`. Se a versão publicada divergir do `main`, diagnosticar o deployment antes de alterar código.
