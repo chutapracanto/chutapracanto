@@ -944,3 +944,14 @@ O código do Worker separado já está no repositório. O próximo passo é **de
 **Estado da Fase 3:** Worker Cron operacionalmente instalado; observabilidade detalhada do ciclo Cron → API → D1 fica pendente apenas se vier a ser necessária. Não reabrir testes já concluídos nem fazer novo deploy apenas para produzir logs.
 
 **Próxima direção:** avançar para a camada seguinte da Fase 3/UI de competições, mantendo a validação runtime detalhada como observabilidade complementar.
+
+
+## 30. UI /COMPETICOES — PRIMEIRA IMPLEMENTAÇÃO — 2026-09-28
+
+- Criada a página pública `/competicoes`.
+- Consome exclusivamente `/api/competicoes`.
+- Inclui seletor das 7 competições, jogos/resultados, classificação quando disponível e estado de atualização/cache.
+- Sitemap atualizado com `/competicoes`.
+- Homepage já inclui o acesso à nova área no menu principal.
+
+**Estado da Fase 3:** dados/API, cache e atualização automática implementados; primeira UI pública criada. A próxima ação é validar a renderização/contrato em produção e corrigir apenas problemas reais encontrados.
