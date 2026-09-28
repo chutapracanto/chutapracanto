@@ -198,7 +198,7 @@ A arquitetura prevê:
 - deduplicação;
 - rate limits;
 - stale-if-error;
-- atualização automática por Cron Trigger.
+- atualização automática por Worker separado com Cron Trigger.
 
 ## Competições inicialmente previstas
 - Liga Portugal;
