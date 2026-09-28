@@ -2573,29 +2573,6 @@ async function refreshFootballCache(env, cacheKey, competitionKey, options) {
   }
 }
 
-async function refreshScheduledFootballCompetition(controller, env) {
-  const keys = Object.keys(CPC_FOOTBALL_COMPETITIONS);
-  if (!keys.length) return;
-
-  const scheduledAt = Number(controller?.scheduledTime);
-  const timestamp = Number.isFinite(scheduledAt) ? scheduledAt : Date.now();
-  const slot = Math.floor(timestamp / (5 * 60 * 1000));
-  const competitionKey = keys[slot % keys.length];
-  const cacheKey = footballCacheKey(competitionKey, "", "", "", "upcoming");
-
-  try {
-    const cached = await getFootballCache(env, cacheKey);
-    if (cached?.state === "fresh") return;
-
-    await refreshFootballCache(env, cacheKey, competitionKey, { status: "upcoming" });
-  } catch (error) {
-    console.error("Scheduled football refresh failed:", competitionKey, error);
-    if (typeof controller?.noRetry === "function") {
-      controller.noRetry();
-    }
-  }
-}
-
 async function handleFootballImageAPI(request, env) {
   const url = new URL(request.url);
   if (url.pathname !== "/api/football-image") return null;
@@ -2750,10 +2727,6 @@ async function redirecionarNoticiaFramer(request, env) {
 // ============================================================
 
 export default {
-  async scheduled(controller, env) {
-    await refreshScheduledFootballCompetition(controller, env);
-  },
-
   async fetch(request, env) {
     const url =
       new URL(request.url);
