@@ -78,7 +78,7 @@
 .fixture-score{font:700 .88rem var(--font-title);text-align:center;color:var(--text-color)}
 .table-wrap{overflow-x:auto}
 .standings{width:100%;border-collapse:collapse;font-size:.78rem}
-.standings th,.standings td{padding:.62rem .5rem;border-bottom:1px solid var(--border-color);text-align:right}
+.standings th,.standings td{padding:.62rem .5rem;border-bottom:1px solid var(--border-color);text-align:right} .standing-group{padding:0 .8rem .8rem}.standing-group h3{margin:.8rem .2rem .45rem;font:700 .72rem var(--font-title);color:var(--text-gray);text-transform:uppercase;letter-spacing:.08em}.standing-scroll{max-height:360px;overflow-y:auto;overscroll-behavior:contain}.standings tr.is-interest{background:rgba(157,255,0,.07);box-shadow:inset 3px 0 0 var(--neon-green)}
 .standings th:first-child,.standings td:first-child,.standings th:nth-child(2),.standings td:nth-child(2){text-align:left}
 .standings th{color:var(--text-gray);font:700 .67rem var(--font-title);text-transform:uppercase}
 .standings th abbr{border:0;text-decoration:none;cursor:help}
@@ -256,10 +256,21 @@ function renderFixtures(){
     </div>`;
   }).join("");
 }
-function renderStandings(rows){
-  if(!rows.length){standingsEl.innerHTML='<div class="empty">Esta competição não disponibiliza uma classificação neste formato.</div>';return}
-  standingsEl.innerHTML='<div class="table-wrap"><table class="standings"><thead><tr><th>#</th><th>Equipa</th><th><abbr title="Jogos">J</abbr></th><th><abbr title="Vitórias">V</abbr></th><th><abbr title="Empates">E</abbr></th><th><abbr title="Derrotas">D</abbr></th><th><abbr title="Golos marcados">GM</abbr></th><th><abbr title="Golos sofridos">GS</abbr></th><th><abbr title="Diferença de golos">DG</abbr></th><th><abbr title="Pontos">Pts</abbr></th></tr></thead><tbody>'+rows.map((row,i)=>`
-    <tr><td>${esc(row.position??i+1)}</td><td><div class="standing-team"><img src="${teamLogo(row.team)}" alt=""><span>${esc(row.team?.name||"—")}</span></div></td><td>${esc(row.played??row.games??"—")}</td><td>${esc(row.wins??"—")}</td><td>${esc(row.draws??"—")}</td><td>${esc(row.losses??"—")}</td><td>${esc(row.goalsFor??"—")}</td><td>${esc(row.goalsAgainst??"—")}</td><td>${esc(row.goalDifference??row.gd??"—")}</td><td><strong>${esc(row.points??"—")}</strong></td></tr>`).join("")+'</tbody></table></div>';
+function priorityTeam(name){
+  const n=String(name||"").toLocaleLowerCase("pt-PT");
+  return ["porto","benfica","sporting","braga","portugal"].some(value=>n.includes(value));
+}
+function renderStandings(rows,groups=[]){
+  const sections=Array.isArray(groups)&&groups.length?groups:[{name:"Classificação",standings:rows}];
+  const relevantRows=sections.flatMap(group=>Array.isArray(group.standings)?group.standings:[]).filter(row=>priorityTeam(row?.team?.name||row?.team_name));
+  const target=relevantRows.sort((a,b)=>(Number(a.position)||999)-(Number(b.position)||999))[0]||null;
+  if(!sections.some(group=>group.standings?.length)){standingsEl.innerHTML='<div class="empty">Esta competição não disponibiliza uma classificação neste formato.</div>';return}
+  standingsEl.innerHTML=sections.map((group,index)=>'<section class="standing-group"><h3>'+esc(group.name||("Grupo "+String.fromCharCode(65+index)))+'</h3><div class="standing-scroll"><table class="standings"><thead><tr><th>#</th><th>Equipa</th><th><abbr title="Jogos">J</abbr></th><th><abbr title="Vitórias">V</abbr></th><th><abbr title="Empates">E</abbr></th><th><abbr title="Derrotas">D</abbr></th><th><abbr title="Golos marcados">GM</abbr></th><th><abbr title="Golos sofridos">GS</abbr></th><th><abbr title="Diferença de golos">DG</abbr></th><th><abbr title="Pontos">Pts</abbr></th></tr></thead><tbody>'+group.standings.map((row,i)=>{
+    const relevant=target&&((row.team?.id!=null&&target.team?.id!=null&&String(row.team.id)===String(target.team.id))||String(row.team?.name||row.team_name||"")===String(target.team?.name||target.team_name||""));
+    return '<tr class="'+(relevant?'is-interest':'')+'" data-interest="'+(relevant?'true':'false')+'"><td>'+esc(row.position??i+1)+'</td><td><div class="standing-team"><img src="'+teamLogo(row.team)+'" alt=""><span>'+esc(row.team?.name||row.team_name||"—")+'</span></div></td><td>'+esc(row.played??row.games??"—")+'</td><td>'+esc(row.wins??"—")+'</td><td>'+esc(row.draws??"—")+'</td><td>'+esc(row.losses??"—")+'</td><td>'+esc(row.goalsFor??"—")+'</td><td>'+esc(row.goalsAgainst??"—")+'</td><td>'+esc(row.goalDifference??row.gd??"—")+'</td><td><strong>'+esc(row.points??"—")+'</strong></td></tr>';
+  }).join("")+'</tbody></table></div></section>').join("");
+  const row=standingsEl.querySelector('tr[data-interest="true"]');
+  if(row)requestAnimationFrame(()=>row.scrollIntoView({block:"center",behavior:"auto"}));
 }
 async function loadCompetition(key,status=fixtureFilter){
   active=key;loadingStatus=status;renderTabs();
@@ -283,7 +294,7 @@ async function loadCompetition(key,status=fixtureFilter){
     liveEl.classList.toggle("live",live);
     liveEl.querySelector("b").textContent=live?"AO VIVO":"ONLINE";
     allFixtures=Array.isArray(data.fixtures)?data.fixtures:[];
-    renderRounds();renderFixtures();renderHighlight();renderStandings(Array.isArray(data.standings)?data.standings:[]);
+    renderRounds();renderFixtures();renderHighlight();renderStandings(Array.isArray(data.standings)?data.standings:[],Array.isArray(data.standingGroups)?data.standingGroups:[]);
   }catch(error){
     seasonEl.textContent="Indisponível";statusEl.textContent="temporariamente indisponível";globalStatusEl.textContent="";
     const liveEl=document.getElementById("competition-live-status");liveEl.classList.remove("live");liveEl.querySelector("b").textContent="OFFLINE";
@@ -299,7 +310,7 @@ document.querySelectorAll(".competition-filter").forEach(button=>button.addEvent
 roundEl.addEventListener("change",renderFixtures);
 active=new URLSearchParams(location.search).get("competition")||"liga-portugal";
 if(!competitions.some(item=>item[0]===active))active="liga-portugal";
-loadCompetition(active,"all");
+loadCompetition(active,"upcoming");
 setInterval(()=>{ if(document.visibilityState==="visible" && active) loadCompetition(active,fixtureFilter); },60000);
 </script>
 <footer>
