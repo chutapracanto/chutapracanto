@@ -119,7 +119,7 @@ async function carregarOpinioes() {
     opinions.forEach(item => {
       const card = document.createElement("a");
       card.className = "opinion-card";
-      card.href = "/noticia?slug=" + encodeURIComponent(item.slug || "");
+      card.href = articleHref(item);
       const image = document.createElement("div"); image.className = "opinion-image";
       const img = document.createElement("img"); img.src = safeUrl(item.image) || "/images/logo.png"; img.alt = item.title || "Opinião"; img.loading = "lazy"; img.decoding = "async"; img.onerror = () => { img.onerror = null; img.src = "/images/logo.png"; };
       image.appendChild(img);
