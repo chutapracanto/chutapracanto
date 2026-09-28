@@ -1938,7 +1938,25 @@ async function handleAdminAPI(request, env) {
   // ----------------------------------------------------------
 
   if (pathname === "/api/admin/football-provider-bsd-helper-diagnostic") {
-    if (\n      env.CF_PAGES_BRANCH !== "main" ||\n      !(url.hostname === "chutapracanto.com" || url.hostname.endsWith(".chutapracanto.pages.dev"))\n    ) {\n      return json({ error: "Endpoint não encontrado." }, 404);\n    }\n\n    if (request.method !== "POST") {\n      return json({ error: "Método não permitido." }, 405, { Allow: "POST" });\n    }\n\n    const authError = await requireAuth(request, env);\n    if (authError) return authError;\n\n    if (request.headers.get("Origin") !== url.origin) {\n      return json({ error: "Origem não permitida." }, 403);\n    }\n\n    const endpoint = "https://sports.bzzoiro.com/api/v2/events/?league_id=2&season_id=1310&stage=regular-season";
+    if (
+      env.CF_PAGES_BRANCH !== "main" ||
+      !(url.hostname === "chutapracanto.com" || url.hostname.endsWith(".chutapracanto.pages.dev"))
+    ) {
+      return json({ error: "Endpoint não encontrado." }, 404);
+    }
+
+    if (request.method !== "POST") {
+      return json({ error: "Método não permitido." }, 405, { Allow: "POST" });
+    }
+
+    const authError = await requireAuth(request, env);
+    if (authError) return authError;
+
+    if (request.headers.get("Origin") !== url.origin) {
+      return json({ error: "Origem não permitida." }, 403);
+    }
+
+    const endpoint = "https://sports.bzzoiro.com/api/v2/events/?league_id=2&season_id=1310&stage=regular-season";
     const startedAt = Date.now();
 
     try {
