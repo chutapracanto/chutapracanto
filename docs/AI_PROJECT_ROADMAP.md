@@ -775,195 +775,88 @@ O gate de aprovação passa a exigir:
 **Estado:** API-Football continua candidato principal, não aprovado. A próxima dependência externa é a API key configurada diretamente como Cloudflare Pages Secret; depois disso, executar testes autenticados e continuar a medição sem pedir a chave no chat.
 
 
-## 26. AUDITORIA GLOBAL DE ESTADO — 2026-09-28
+## 26. RECONCILIAÇÃO OPERACIONAL — 2026-09-28
 
-Foi feita uma reconciliação do estado do projeto contra o GitHub atual, o ledger de decisão de fornecedor, a matriz de fornecedores, a arquitetura de competições e o histórico recente de commits.
-
-### Confirmado como bom / concluído
+### Estado atual confirmado
 - Repositório de verdade: `chutapracanto/chutapracanto`, branch `main`.
-- Redirecionamentos Framer → domínio oficial: **ENCERRADOS e validados** com URL real antiga.
-- Mapa de 213 redirects Framer criado e integrado no Worker.
-- Fase editorial/histórica já reconciliada nos lotes documentados; não reabrir sem nova evidência.
-- BSD: cobertura 2026/27 confirmada nas **7 competições**.
-- BSD: fixtures/events e standings reais da Primeira Liga confirmados.
-- BSD Production: `BSD_API_KEY` presente e funcional; chamadas diretas ao fornecedor responderam HTTP 200.
-- Arquitetura provider-agnostic e adapter server-side estão implementados.
-- Token BSD permanece server-side.
-- Consumo BSD acumulado registado: **14 requests**. O teste 404 do helper não consumiu request.
-- API-Football permanece fora de produção; não repetir os diagnósticos anteriores.
+- Migração/redirecionamentos Framer: **ENCERRADOS**; não reabrir sem nova evidência.
+- BSD: cobertura 2026/27 confirmada nas 7 competições-alvo.
+- BSD: adapter server-side e endpoint público `/api/competicoes`: **PASS**.
+- D1/cache de futebol: **PASS**.
+- Worker separado `cpc-football-cron`: **DEPLOY CONFIRMADO**, Cron `*/5`, binding D1 confirmado.
+- BSD selecionado para a implementação de produção da Fase 3, sujeito a revisão apenas se cobertura, quota, licença ou disponibilidade mudarem.
+- API-Football permanece **NÃO APROVADO** e não é fornecedor da integração de produção atual.
+- Não repetir diagnósticos BSD, API-Football, D1 ou cache já encerrados sem nova hipótese/evidência.
 
-### Erros/falhas já encontrados e encerrados
-- Diagnóstico BSD original com `date:null` e `rowCount:0`: **parser diagnóstico incorreto**, corrigido e validado.
-- Hipótese de descoberta automática da season: **eliminada** pelo teste explícito `seasonId=1310`.
-- Cache API raw BSD como causa do 503: **eliminada** pela remoção da camada `caches.default` do `bsdFetchJson()`; o 503 persistiu.
-- `response.json()` como causa do 503: **eliminada** pela passagem para `response.text()` + `JSON.parse()`; o 503 persistiu.
-- Problema de credencial/rede/fornecedor BSD em Production: **eliminado** pelos probes diretos HTTP 200.
-- O 503 do endpoint público foi isolado à etapa **`BSD_EVENTS`**.
-- Tentativas de acesso de rede bloqueadas por proxy/cliente foram registadas e não devem ser repetidas sem nova hipótese.
+### UI de Competições
+A página pública `/competicoes` está implementada e foi validada manualmente em produção para **todas as 7 competições**:
+1. Liga Portugal
+2. Taça de Portugal
+3. Taça da Liga
+4. UEFA Champions League
+5. UEFA Europa League
+6. UEFA Conference League
+7. UEFA Nations League
 
-### Problema atual, único foco técnico
-O adapter público `/api/competicoes` continua sem PASS operacional e a investigação criou um helper que chama o próprio `bsdFetchJson()`. O deployment Cloudflare `95dae374` foi confirmado pelo Dashboard como Production, alias `chutapracanto.com`, commit `452a5f7`. Apesar disso, o endpoint helper respondeu 404.
+A validação confirmou que todas aparecem no seletor e carregam conteúdo real.
 
-Isto é uma **discrepância de routing/condição de runtime**, não evidência de falha do BSD.
+**Estado: PASS — UI de Competições em produção.**
 
-### Hipóteses que NÃO devem ser repetidas
-Não voltar a testar:
-- credencial BSD;
-- conectividade BSD;
-- seasons 2026/27;
-- parser `response.json()`;
-- Cache API raw;
-- descoberta automática da season;
-- deployment lookup no Cloudflare via Codex.
+### Fase 3 — estado
+**ATIVA — implementação de Competições concluída e validada em produção.**
 
-Esses pontos já têm evidência suficiente.
+A camada de dados, adapter, cache, atualização automática e UI estão implementados. A observabilidade detalhada do ciclo Cron → API → D1 permanece apenas como observabilidade complementar e não constitui bloqueio.
 
-### Próxima ação autónoma
-Inspecionar o routing de `handleAdminAPI()`, as condições do helper no commit `452a5f7` e os valores/condições de ambiente que podem produzir o 404. Só depois corrigir o código, publicar e validar uma vez.
+## 27. DECISÃO DE FORNECEDOR — BSD SELECIONADO — 2026-09-28
 
-**Estado da Fase 3:** `ATIVA — correção de integração BSD/runtime`.
+A decisão de fornecedor foi fechada com base em:
+- cobertura 2026/27 das 7 competições;
+- adapter provider-agnostic;
+- endpoint público validado;
+- cache D1;
+- quota BSD Free de 7.500 requests/dia;
+- estratégia normal de 2 requests por competição/refresh;
+- consumo teórico confortável face à quota;
+- licença BSD v4.0 compatível com exibição em website próprio, mantendo raw data e API key atrás da camada server-side.
 
+**Decisão:** BSD é o fornecedor da implementação de produção atual da Fase 3.
 
+API-Football permanece fora da produção.
 
-## 26. ATUALIZAÇÃO OPERACIONAL — 2026-09-28 — PASS DO ADAPTER BSD
+## 28. ATUALIZAÇÃO AUTOMÁTICA — WORKER CRON — 2026-09-28
 
-### Fechado
-- `/api/competicoes` validado em produção com HTTP 200;
-- fixtures com nomes de equipas validados;
-- standings com nome de equipa validado (`FC Porto`);
-- correção final de escopo do mapa `teamNamesById` aplicada no commit `98e7e2c5f4e571a977b641dfd420ba61842c3574`;
-- quatro endpoints de diagnóstico BSD removidos no commit `09c13664ae14b40993b7a95572905e9c5a28b6d4`;
-- nenhum novo diagnóstico BSD executado para esta passagem final.
+- Worker: `cpc-football-cron`.
+- Cron: `*/5 * * * *`.
+- Rotação: uma competição por execução, aproximadamente 35 minutos entre processamentos da mesma competição.
+- D1: `FOOTBALL_CACHE_DB`.
+- Falhas: sem retry imediato.
+- Deployment: confirmado no Cloudflare Dashboard.
 
-### Estado
-**FASE 3 — ADAPTER BSD: PASS OPERACIONAL.**
+**Estado: OPERACIONALMENTE INSTALADO.**
 
-### Próxima subfase
-Implementar persistência/cache D1 por competição/época/recurso, seguida de Cron Trigger para atualização controlada e só depois UI `/competicoes`.
+Não fazer novo deployment apenas para obter logs adicionais.
 
-Não repetir os diagnósticos BSD encerrados.
+## 29. UI /COMPETICOES — 2026-09-28
 
-
-## 27. FASE 3 — ATUALIZAÇÃO AUTOMÁTICA — 2026-09-28
-
-**Estado: ATIVA.**
-
-- Adapter BSD: PASS operacional.
-- Cache D1: PASS operacional, incluindo escrita e leitura de cache fresco.
-- Stale-if-error e deduplicação: implementados na camada de cache.
-- Próxima implementação: **Cron Trigger** para atualização automática e controlada das competições/épocas ativas.
-- UI `/competicoes`: posterior à validação do ciclo automático.
-
-Não reabrir diagnósticos BSD ou validações já encerradas sem nova evidência objetiva.
-
-
-## 28. CRON TRIGGER — IMPLEMENTADO / VALIDAÇÃO PENDENTE — 2026-09-28
-
-A atualização automática foi implementada no Worker e configurada em Wrangler com */5 * * * *.
-
-- uma competição por execução, em rotação pelas 7 competições;
-- D1 é consultada antes de qualquer chamada ao fornecedor;
-- entradas frescas não geram chamadas BSD;
-- entradas expiradas são atualizadas pelo adapter;
-- falhas não provocam retry imediato;
-- a chave de cache do Cron é compatível com a chave pública.
-
-ESTADO DA FASE 3: ATIVA — Cron implementado; validação runtime pendente. A UI /competicoes continua bloqueada até o ciclo automático ficar validado.
-
-
-## 26. ATUALIZAÇÃO OPERACIONAL — 2026-09-28 — CORREÇÃO DA DECISÃO DE FORNECEDOR E DO CRON
-
-A revisão do estado operacional identificou que o PASS técnico do adapter BSD **não equivale a aprovação definitiva do fornecedor**.
-
-### Estado de fornecedores
-- **BSD:** tecnicamente validado para 2026/27 nas 7 competições e integrado no adapter; **não aprovado definitivamente**.
-- **API-Football:** continua **não aprovado** após os testes 2026/27 com zero resultados e classificação de quota/subscription; não repetir chamadas sem nova hipótese que altere materialmente a decisão.
-- A arquitetura permanece **provider-agnostic**.
-
-### Estado do Cron
-O Pages Project não aceita `[triggers]` no `wrangler.toml`; essa configuração causou falha de deployment e foi removida do Pages.
-
-Existe código preparado para um Worker separado em:
-- `workers/football-cron/index.js`
-- `workers/football-cron/wrangler.toml`
-
-O código está **preparado, mas não deployado**.
-
-### Frequência
-O desenho preparado usa `*/5`, escolhendo uma das 7 competições por execução, o que resulta em aproximadamente 35 minutos entre atualizações da mesma competição.
-
-Esta frequência **não é ainda a frequência final aprovada**. O TTL de cache fresco de 15 minutos e a rotação de 35 minutos implicam que uma execução normal pode encontrar a entrada expirada e provocar novo refresh do fornecedor.
-
-Antes do deployment, deve ser calculado o consumo efetivo de requests por estratégia e fornecedor e definida a frequência que cumpre o requisito de atualização sem consumo desnecessário.
-
-### Próximo gate
-**Fornecedor → quota/consumo → frequência de atualização → deployment do Worker → validação runtime.**
-
-Nenhuma IA deve saltar diretamente para a criação/deployment do Worker enquanto este gate não estiver fechado.
-
-FIM.
-
-
-## 27. DECISÃO OPERACIONAL — 2026-09-28 — BSD SELECIONADO / CRON PRONTO PARA DEPLOY
-
-A validação deixou de ser apenas “BSD funciona”.
-
-### Evidência considerada
-- As 7 competições-alvo 2026/27 foram validadas no BSD.
-- Adapter server-side e endpoint `/api/competicoes` estão PASS.
-- D1/cache está PASS em runtime.
-- BSD Football Free publica atualmente 7.500 requests/dia e 60+ competições; o limite é suficiente para a estratégia CPC.
-- O refresh normal atual usa 2 chamadas BSD (events + standings) por competição.
-- Com 7 competições e uma rotação a cada 35 minutos, o consumo teórico de refresh é aproximadamente **576 requests/dia** (7 × 41,14 refreshes × 2), cerca de 7,7% de 7.500.
-- Mesmo numa estratégia de refresh de 15 em 15 minutos para as 7 competições, seriam aproximadamente **1.344 requests/dia**, ainda dentro da quota.
-- A licença BSD v4.0, efetiva em 1/10/2026, permite exibir os dados em websites próprios e proíbe redistribuir o raw data como API/feed/dataset independente; a arquitetura CPC mantém o provider atrás do adapter e não expõe a API key.
-
-### Decisão
-**BSD fica selecionado como fornecedor da implementação de produção da Fase 3**, sujeito a revisão se a cobertura, quota, licença ou disponibilidade mudarem.
-
-API-Football permanece **não aprovado** e não será usado na integração de produção atual.
-
-### Cron
-A frequência de referência fica em `*/5` no Worker, com uma competição por execução, resultando em aproximadamente 35 minutos entre processamentos da mesma competição. Esta frequência é aceitável face à quota BSD e evita uma carga desnecessária.
-
-O código do Worker separado já está no repositório. O próximo passo é **deployar o Worker**, não redesenhar novamente o provider.
-
-### Gate encerrado
-**Fornecedor → quota/licença → frequência → DEPLOYMENT DO WORKER.**
-
-
-## 29. WORKER CRON — DEPLOYMENT CONFIRMADO / OBSERVABILIDADE PARCIAL — 2026-09-28
-
-- Worker separado `cpc-football-cron`: **deploy confirmado**.
-- Cron Trigger: `*/5 * * * *`, confirmado no Cloudflare Dashboard.
-- Binding: `FOOTBALL_CACHE_DB` → `cpc-football-cache`, confirmado.
-- Métricas: 1 invocation, 100% sucesso, 0% erro, CPU mediano 1,27 ms.
-- Logs do Worker permanecem desativados; portanto o status HTTP da chamada interna a `/api/competicoes` e uma escrita D1 atribuível especificamente à invocation não estão independentemente observados.
-- Codex tentou validar o runtime, mas o ambiente atual não tem acesso Cloudflare/Wrangler/sessão; resultado PARTIAL por limitação de acesso, sem evidência de falha do Worker.
-
-**Estado da Fase 3:** Worker Cron operacionalmente instalado; observabilidade detalhada do ciclo Cron → API → D1 fica pendente apenas se vier a ser necessária. Não reabrir testes já concluídos nem fazer novo deploy apenas para produzir logs.
-
-**Próxima direção:** avançar para a camada seguinte da Fase 3/UI de competições, mantendo a validação runtime detalhada como observabilidade complementar.
-
-
-## 30. UI /COMPETICOES — PRIMEIRA IMPLEMENTAÇÃO — 2026-09-28
-
-- Criada a página pública `/competicoes`.
+- Página pública criada.
 - Consome exclusivamente `/api/competicoes`.
-- Inclui seletor das 7 competições, jogos/resultados, classificação quando disponível e estado de atualização/cache.
-- Sitemap atualizado com `/competicoes`.
-- Homepage já inclui o acesso à nova área no menu principal.
+- Inclui as 7 competições.
+- Inclui jogos/resultados e classificações quando disponíveis.
+- Sitemap inclui `/competicoes`.
+- Homepage inclui acesso à área.
+- Validação manual em produção: **PASS para as 7 competições**.
 
-**Estado da Fase 3:** dados/API, cache e atualização automática implementados; primeira UI pública criada. A próxima ação é validar a renderização/contrato em produção e corrigir apenas problemas reais encontrados.
+**Estado: CONCLUÍDO.**
 
+## 30. GATE DE IMPLEMENTAÇÃO DE COMPETIÇÕES — ENCERRADO — 2026-09-28
 
-## 31. VALIDAÇÃO DE PRODUÇÃO DA UI /COMPETICOES — 2026-09-28
+O gate **fornecedor → quota/licença → frequência → deployment → UI → validação de produção** está encerrado.
 
-- Implementação da UI confirmada em `main`.
-- Contrato da UI com `/api/competicoes` revisto estruturalmente e coerente com o adapter atual.
-- Verificação direta do domínio público tentada, mas o ambiente atual não conseguiu aceder ao domínio.
-- Não reabrir testes BSD, D1/cache ou deployment apenas para fabricar evidência.
+Não reabrir estes pontos sem nova evidência objetiva.
 
-**Estado da Fase 3:** implementação pública criada; validação visual/runtime de produção pendente exclusivamente por acesso/evidência de produção.
+## 31. PRÓXIMA FRENTE DA FASE 3 — 2026-09-28
 
-**Próxima ação após desbloqueio:** validar `/competicoes` e um carregamento de `/api/competicoes` em produção; corrigir somente problemas reais.
+A implementação de Competições deixa de ser bloqueio.
+
+**Próxima ação:** avançar para a próxima tarefa definida na roadmap da Fase 3, sem repetir a bateria de validações já encerrada.
+
