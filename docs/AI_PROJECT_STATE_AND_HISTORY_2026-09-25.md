@@ -2744,3 +2744,32 @@ PR #47 — MERGED. Commit de merge: 171957c4b8ed99475f720084a5f4765cba1cbf38.
 
 ### Validação
 Sintaxe dos ficheiros alterados: PASS. O preview a91d477c.chutapracanto.pages.dev não foi acessível pelo fetch desta sessão por cache miss; não foi feita afirmação de validação visual. O próximo passo é validar o deployment público do merge e corrigir qualquer divergência real.
+
+# 61. REGRESSÃO DE URLS DE NOTÍCIAS — CORREÇÃO URGENTE — 2026-09-28
+
+### Problema confirmado
+A implementação de URLs limpas introduzida na PR #46 passou a gerar e usar `/noticia/<slug>` para parte das notícias, em vez do formato estável `/noticia?slug=...`. Isto criou uma regressão no fluxo público das notícias e também afetou canonical/OG/Twitter/JSON-LD e sitemap.
+
+### Correção aplicada
+- restaurados os links públicos de todas as notícias para `/noticia?slug=...`;
+- restaurados canonical, OG, Twitter e JSON-LD para o formato estável;
+- sitemap restaurado para query URLs;
+- qualquer URL limpa já existente recebe 301 para a URL estável;
+- os ficheiros Markdown e os slugs das notícias não foram renomeados;
+- alterações de Competições/BSD mantidas intactas.
+
+### Implementação
+PR #48 merged em `8c886e0028db4245be7adb32b421c204375faea4`.
+
+### Validação estrutural
+- `sitemap.xml`: 251 URLs em formato `/noticia?slug=...`;
+- listagens Notícias/Opinião: links restaurados para query URLs;
+- metadata de artigo: canonical/share/JSON-LD restaurados;
+- Worker: URL limpa apenas redireciona para a URL estável;
+- nenhuma alteração aos nomes dos ficheiros de conteúdo.
+
+### Limite de validação
+O acesso HTTP público ao domínio não está disponível neste ambiente, pelo que a confirmação final de produção depende do deployment automático do Cloudflare Pages.
+
+### Estado
+**CORREÇÃO IMPLEMENTADA E MERGED — DEPLOYMENT PÚBLICO PENDENTE DE CONFIRMAÇÃO.**
