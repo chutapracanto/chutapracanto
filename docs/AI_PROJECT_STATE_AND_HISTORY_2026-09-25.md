@@ -2379,3 +2379,20 @@ A implementação foi revista diretamente no código, mas a validação runtime 
 
 ### Próxima ação
 Avançar para a camada de atualização automática por Cron Trigger, mantendo stale-if-error e deduplicação. Não repetir diagnósticos BSD nem a validação já concluída.
+
+
+# 47. TRANSIÇÃO DE FASE — CACHE D1 VALIDADO / CRON TRIGGER — 2026-09-28
+
+### Fecho da subfase de cache
+**PASS.** A persistência D1 e a leitura de cache fresco foram validadas em runtime no endpoint público `/api/competicoes`.
+
+### Fase atual
+**FASE 3 — ATUALIZAÇÃO AUTOMÁTICA DE COMPETIÇÕES: ATIVA.**
+
+A validação do cache permite encerrar a subfase de persistência/cache. A próxima intervenção técnica é implementar o Cron Trigger, com atualização controlada das competições/épocas ativas, sem chamadas redundantes e respeitando o limite operacional do fornecedor.
+
+### Não reabrir
+Não repetir diagnósticos BSD, testes de credencial/conectividade, season discovery, parser, Cache API raw, helper temporário ou a validação já concluída do adapter/cache, salvo nova evidência objetiva.
+
+### Próximo passo automático
+Inspecionar o estado atual do Worker/Wrangler e implementar o mecanismo de Cron Trigger provider-agnostic sobre o cache existente; depois validar a execução e atualizar novamente este ledger e o roadmap.
