@@ -26,7 +26,7 @@ Lista inicial prevista: Liga Portugal, Taça de Portugal, Taça da Liga, UEFA Ch
 
 ## Integração e atualização
 
-O frontend nunca chama diretamente o fornecedor com credenciais. Uma camada server-side no runtime Cloudflare Pages/Worker normaliza dados através de um adaptador de fornecedor; um Cron Trigger atualiza as competições e épocas ativas, com cache por competição/época/recurso, limite de chamadas, deduplicação e política de stale-if-error.
+O frontend nunca chama diretamente o fornecedor com credenciais. Uma camada server-side no runtime Cloudflare Pages/Worker normaliza dados através de um adaptador de fornecedor; um Worker Cloudflare separado, com Cron Trigger, atualiza as competições e épocas ativas, com cache por competição/época/recurso, limite de chamadas, deduplicação e política de stale-if-error.
 
 As respostas devem incluir `updatedAt`, origem dos dados e estado de atualização. A camada guarda o token apenas como secret server-side quando um fornecedor for escolhido e aprovado. Fornecedor, preço e limites ficam em aberto; esta especificação não cria bindings, secrets, endpoints nem chamadas API.
 
