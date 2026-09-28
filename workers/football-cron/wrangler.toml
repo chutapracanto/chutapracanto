@@ -1,0 +1,11 @@
+name = "cpc-football-cron"
+main = "index.js"
+compatibility_date = "2026-09-16"
+
+[triggers]
+crons = ["*/5 * * * *"]
+
+[[d1_databases]]
+binding = "FOOTBALL_CACHE_DB"
+database_name = "cpc-football-cache"
+database_id = "92e3ef93-4c44-46c8-a1a4-ff5c09f4b49f"
