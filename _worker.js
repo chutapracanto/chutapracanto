@@ -2466,6 +2466,111 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
   };
 }
 
+const FOOTBALL_CACHE_FRESH_MS = 15 * 60 * 1000;
+const FOOTBALL_CACHE_STALE_MS = 24 * 60 * 60 * 1000;
+const footballCacheRefreshes = new Map();
+
+function footballCacheKey(competitionKey, seasonId, stage, round) {
+  return [
+    "bsd",
+    competitionKey,
+    seasonId || "auto",
+    stage || "",
+    round == null ? "" : String(round)
+  ].join("|");
+}
+
+async function getFootballCache(env, cacheKey) {
+  if (!env.FOOTBALL_CACHE_DB) return null;
+
+  const row = await env.FOOTBALL_CACHE_DB
+    .prepare(
+      "SELECT payload_json, fetched_at, expires_at, stale_until FROM football_cache WHERE cache_key = ?1"
+    )
+    .bind(cacheKey)
+    .first();
+
+  if (!row?.payload_json) return null;
+
+  try {
+    const payload = JSON.parse(row.payload_json);
+    const now = Date.now();
+    const expiresAt = Date.parse(row.expires_at);
+    const staleUntil = Date.parse(row.stale_until);
+
+    if (!Number.isFinite(expiresAt) || !Number.isFinite(staleUntil)) {
+      return null;
+    }
+
+    if (now <= expiresAt) {
+      return { payload, state: "fresh" };
+    }
+
+    if (now <= staleUntil) {
+      return { payload, state: "stale" };
+    }
+  } catch {
+    return null;
+  }
+
+  return null;
+}
+
+async function putFootballCache(env, cacheKey, data) {
+  if (!env.FOOTBALL_CACHE_DB) return;
+
+  const fetchedAt = new Date();
+  const expiresAt = new Date(fetchedAt.getTime() + FOOTBALL_CACHE_FRESH_MS);
+  const staleUntil = new Date(fetchedAt.getTime() + FOOTBALL_CACHE_STALE_MS);
+
+  await env.FOOTBALL_CACHE_DB
+    .prepare(
+      `INSERT INTO football_cache
+        (cache_key, provider, competition_key, season_id, resource, payload_json, fetched_at, expires_at, stale_until)
+       VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)
+       ON CONFLICT(cache_key) DO UPDATE SET
+         provider = excluded.provider,
+         competition_key = excluded.competition_key,
+         season_id = excluded.season_id,
+         resource = excluded.resource,
+         payload_json = excluded.payload_json,
+         fetched_at = excluded.fetched_at,
+         expires_at = excluded.expires_at,
+         stale_until = excluded.stale_until`
+    )
+    .bind(
+      cacheKey,
+      "bsd",
+      data.competition.key,
+      Number(data.season.id),
+      "competition",
+      JSON.stringify(data),
+      fetchedAt.toISOString(),
+      expiresAt.toISOString(),
+      staleUntil.toISOString()
+    )
+    .run();
+}
+
+async function refreshFootballCache(env, cacheKey, competitionKey, options) {
+  const existing = footballCacheRefreshes.get(cacheKey);
+  if (existing) return existing;
+
+  const promise = (async () => {
+    const data = await bsdFootballAdapter(env, competitionKey, options);
+    await putFootballCache(env, cacheKey, data);
+    return data;
+  })();
+
+  footballCacheRefreshes.set(cacheKey, promise);
+
+  try {
+    return await promise;
+  } finally {
+    footballCacheRefreshes.delete(cacheKey);
+  }
+}
+
 async function handleFootballCompetitionAPI(request, env) {
   const url = new URL(request.url);
   if (url.pathname !== "/api/competicoes") return null;
@@ -2484,18 +2589,52 @@ async function handleFootballCompetitionAPI(request, env) {
     }, 400);
   }
 
+  const seasonId = url.searchParams.get("seasonId") || "";
+  const stage = url.searchParams.get("stage") || "";
+  const round = url.searchParams.get("round");
+  const cacheKey = footballCacheKey(competitionKey, seasonId, stage, round);
+
   try {
-    const data = await bsdFootballAdapter(env, competitionKey, {
-      seasonId: url.searchParams.get("seasonId") || "",
-      stage: url.searchParams.get("stage") || "",
-      round: url.searchParams.get("round")
+    const cached = await getFootballCache(env, cacheKey);
+
+    if (cached?.state === "fresh") {
+      return json(
+        { ...cached.payload, updateStatus: "cache" },
+        200,
+        { "Cache-Control": "public, max-age=60, stale-while-revalidate=300" }
+      );
+    }
+
+    const data = await refreshFootballCache(env, cacheKey, competitionKey, {
+      seasonId,
+      stage,
+      round
     });
 
-    return json(data, 200, {
-      "Cache-Control": "public, max-age=60, stale-while-revalidate=300"
-    });
+    return json(
+      data,
+      200,
+      { "Cache-Control": "public, max-age=60, stale-while-revalidate=300" }
+    );
   } catch (error) {
-    console.error("Football adapter error:", error);
+    console.error("Football cache/provider error:", error);
+
+    const cached = await getFootballCache(env, cacheKey);
+    if (cached) {
+      return json(
+        {
+          ...cached.payload,
+          updateStatus: "stale",
+          cacheStale: true
+        },
+        200,
+        {
+          "Cache-Control": "public, max-age=60, stale-while-revalidate=300",
+          "Warning": '110 - "Response is stale"'
+        }
+      );
+    }
+
     const detail = error instanceof Error ? error.message : "Erro desconhecido.";
     return json({
       error: "Dados de futebol temporariamente indisponíveis.",
