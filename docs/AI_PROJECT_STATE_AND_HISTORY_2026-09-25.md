@@ -2477,3 +2477,38 @@ Não repetir diagnósticos BSD/API-Football já concluídos apenas para confirma
 - Worker Cron: código preparado; deployment pendente por decisão deliberada.
 - BSD: candidato técnico, não aprovado.
 - API-Football: não aprovado.
+
+
+# 50. DECISÃO DE FORNECEDOR E FECHO DO GATE — 2026-09-28
+
+### Validação concluída
+
+A decisão de fornecedor foi revista com evidência técnica, operacional e documental atualizada.
+
+**BSD — selecionado para produção**, não apenas porque “funciona”, mas porque:
+- as 7 competições CPC 2026/27 foram validadas;
+- o adapter e endpoint server-side estão PASS;
+- D1/cache está PASS;
+- o plano Football Free indica 7.500 requests/dia;
+- o refresh normal do CPC usa 2 requests por competição;
+- a rotação de 35 minutos implica aproximadamente 576 requests/dia de refresh;
+- mesmo uma atualização a cada 15 minutos das 7 competições ficaria em aproximadamente 1.344 requests/dia;
+- a licença BSD v4.0, efetiva em 1/10/2026, permite display nos próprios websites e proíbe redistribuição do raw data como API/feed/dataset;
+- a API key permanece apenas no backend/secret do Pages.
+
+API-Football permanece **não aprovado** após a evidência 2026/27 já registada. Não repetir testes sem nova hipótese.
+
+### Decisão de frequência
+
+Mantém-se a implementação de referência:
+- Worker Cron: `*/5 * * * *`;
+- 1 competição por execução;
+- cada competição aproximadamente a cada 35 minutos;
+- cache fresco: 15 minutos;
+- stale-if-error: 24 horas.
+
+A diferença de 35m > 15m é deliberada: o Cron pode encontrar a entrada expirada e provocar refresh. O consumo resultante continua amplamente dentro da quota BSD. Não há necessidade de complicar o desenho com um novo mecanismo de sincronização antes do deployment.
+
+### Estado
+
+**Gate fechado. Próxima operação: deployment do Worker separado e validação runtime do Cron.**
