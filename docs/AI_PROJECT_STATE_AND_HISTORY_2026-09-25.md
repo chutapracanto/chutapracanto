@@ -2535,3 +2535,25 @@ Não será feito novo deploy, ativação de Logs ou teste artificial apenas para
 
 ### Próximo passo
 Avançar com a Fase 3 sem reabrir diagnósticos BSD, API-Football, cache ou deployment. Quando houver acesso Cloudflare disponível no ambiente do Codex, essa ferramenta poderá ser usada para observabilidade/runtime se tal validação passar a ser necessária.
+
+
+# 52. ÁREA PÚBLICA DE COMPETIÇÕES — PRIMEIRA IMPLEMENTAÇÃO — 2026-09-28
+
+### Operação concluída
+- Criada a página pública `/competicoes` em `competicoes.html`.
+- A página usa exclusivamente o endpoint server-side `/api/competicoes`; não expõe nem chama diretamente o fornecedor BSD.
+- Implementado seletor das 7 competições prioritárias.
+- Implementadas vistas de jogos/resultados e classificação quando os dados existirem.
+- Incluído estado de atualização/cache e tratamento de indisponibilidade.
+- Adicionado `/competicoes` ao sitemap.
+- Adicionado o acesso a Competições ao menu principal da homepage.
+- Corrigida a leitura do campo normalizado `kickoff` na listagem de jogos.
+
+### Limite da validação
+A implementação foi validada estruturalmente no GitHub contra o contrato atual de `/api/competicoes`. A validação visual/runtime da página em produção fica para o deployment automático do Pages e para a verificação de produção quando houver evidência disponível; não foi feita uma chamada extra ao fornecedor apenas para testar a UI.
+
+### Estado
+**IMPLEMENTAÇÃO CONCLUÍDA — UI /competicoes criada.**
+
+### Próximo passo
+Validar o deployment/produção da nova página quando a evidência estiver disponível e, se necessário, corrigir apenas problemas reais de UI/contrato. Depois integrar o acesso a Competições nas restantes páginas com navegação principal, se ainda necessário.
