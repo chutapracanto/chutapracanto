@@ -2934,6 +2934,13 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
         normalized.awayTeam.name = teamNamesById.get(normalized.awayTeam.id) || "";
       }
 
+      if (normalized.homeTeam.id != null && normalized.homeTeam.name) {
+        teamNamesById.set(normalized.homeTeam.id, normalized.homeTeam.name);
+      }
+      if (normalized.awayTeam.id != null && normalized.awayTeam.name) {
+        teamNamesById.set(normalized.awayTeam.id, normalized.awayTeam.name);
+      }
+
       return normalized;
     });
   } catch (error) {
@@ -2941,7 +2948,13 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
   }
 
   try {
-    standings = bsdExtractStandings(standingsData).map(cpcNormalizeStanding);
+    standings = bsdExtractStandings(standingsData).map(row => {
+      const normalized = cpcNormalizeStanding(row);
+      if (!normalized.team.name && normalized.team.id != null) {
+        normalized.team.name = teamNamesById.get(normalized.team.id) || "";
+      }
+      return normalized;
+    });
   } catch (error) {
     throw new Error("NORMALIZE_STANDINGS:" + (error instanceof Error ? error.message : "unknown"));
   }
