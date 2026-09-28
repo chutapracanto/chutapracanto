@@ -2524,10 +2524,11 @@ const FOOTBALL_CACHE_STALE_MS = 24 * 60 * 60 * 1000;
 const footballCacheRefreshes = new Map();
 
 function footballCacheKey(competitionKey, seasonId, stage, round, status) {
+  const seasonToken = seasonId || ("current-" + new Date().getUTCFullYear());
   return [
-    "bsd",
+    "bsd-v2",
     competitionKey,
-    seasonId || "auto",
+    seasonToken,
     stage || "",
     round == null ? "" : String(round),
     status || "upcoming"
