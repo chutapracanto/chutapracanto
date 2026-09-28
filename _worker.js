@@ -2587,7 +2587,7 @@ async function refreshScheduledFootballCompetition(controller, env) {
     const cached = await getFootballCache(env, cacheKey);
     if (cached?.state === "fresh") return;
 
-    await refreshFootballCache(env, cacheKey, competitionKey, {});
+    await refreshFootballCache(env, cacheKey, competitionKey, { status: "upcoming" });
   } catch (error) {
     console.error("Scheduled football refresh failed:", competitionKey, error);
     if (typeof controller?.noRetry === "function") {
