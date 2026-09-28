@@ -918,7 +918,7 @@ Aguardar o deployment automático desta alteração e, sem gastar créditos em t
 ## 34. UX DE COMPETIÇÕES + HOME — 2026-09-28
 
 ### Estado canónico
-A intervenção de UX iniciada na PR #46 mantém a regra de compatibilidade de URLs: **artigos antigos não mudam de URL**; apenas artigos novos usam `/noticia/<slug>`. URLs antigas `/noticia?slug=...` e redirects Framer permanecem compatíveis.
+A intervenção de UX da PR #46 introduziu URLs limpas, mas essa estratégia foi revertida. A regra atual é única: artigos antigos e novos usam `/noticia?slug=...`; URLs limpas apenas redirecionam para esse formato.
 
 ### Implementação em curso
 - Home: módulo dinâmico de Competições com atalhos visuais, emblemas e ordenação pelo próximo jogo relevante; Porto, Benfica, Sporting, Braga e Portugal têm prioridade na ordenação.
@@ -949,7 +949,7 @@ PR #47 foi mergeada em main. A intervenção corrige uma falha funcional identif
 - Classificação: se o fornecedor devolver grupos, estes são apresentados separadamente; a tabela tem scroll vertical interno e o primeiro enquadramento é centrado no clube/seleção prioritário mais bem colocado.
 
 ### Não alterar
-A regra de URLs permanece: notícias antigas mantêm URLs antigas; só notícias novas usam /noticia/<slug>.
+A regra de URLs permanece congelada: notícias antigas e novas usam `/noticia?slug=<slug>`. URLs limpas não são geradas internamente.
 
 ### Validação
 Sintaxe de _worker.js, index.html, competicoes.html e style.css: PASS. O preview específico a91d477c.chutapracanto.pages.dev não foi acessível pelo fetch disponível nesta sessão (cache miss); a correção foi feita diretamente sobre o código de main e validada estruturalmente. A validação visual final depende do deployment do commit mergeado.
