@@ -2244,20 +2244,28 @@ function cpcSafeString(value) {
 }
 
 function cpcTeam(team, fallbackId = null, fallbackName = "") {
-  if (typeof team === "string") {
-    return {
-      id: cpcSafeNumber(fallbackId),
-      name: team
-    };
-  }
+  const id = cpcSafeNumber(
+    typeof team === "string"
+      ? fallbackId
+      : team?.id ?? fallbackId
+  );
+  const name = cpcSafeString(
+    typeof team === "string"
+      ? team
+      : team?.name ??
+        team?.team_name ??
+        fallbackName
+  );
+  const explicitLogo = typeof team === "object" && team
+    ? cpcSafeString(team.logo ?? team.logo_url ?? team.image)
+    : "";
 
   return {
-    id: cpcSafeNumber(team?.id ?? fallbackId),
-    name: cpcSafeString(
-      team?.name ??
-      team?.team_name ??
-      fallbackName
-    )
+    id,
+    name,
+    logo: explicitLogo || (id != null
+      ? `https://sports.bzzoiro.com/img/team/${id}/?bg=transparent`
+      : "")
   };
 }
 
