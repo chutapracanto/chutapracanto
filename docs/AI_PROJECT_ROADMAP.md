@@ -902,3 +902,31 @@ Antes do deployment, deve ser calculado o consumo efetivo de requests por estrat
 Nenhuma IA deve saltar diretamente para a criação/deployment do Worker enquanto este gate não estiver fechado.
 
 FIM.
+
+
+## 27. DECISÃO OPERACIONAL — 2026-09-28 — BSD SELECIONADO / CRON PRONTO PARA DEPLOY
+
+A validação deixou de ser apenas “BSD funciona”.
+
+### Evidência considerada
+- As 7 competições-alvo 2026/27 foram validadas no BSD.
+- Adapter server-side e endpoint `/api/competicoes` estão PASS.
+- D1/cache está PASS em runtime.
+- BSD Football Free publica atualmente 7.500 requests/dia e 60+ competições; o limite é suficiente para a estratégia CPC.
+- O refresh normal atual usa 2 chamadas BSD (events + standings) por competição.
+- Com 7 competições e uma rotação a cada 35 minutos, o consumo teórico de refresh é aproximadamente **576 requests/dia** (7 × 41,14 refreshes × 2), cerca de 7,7% de 7.500.
+- Mesmo numa estratégia de refresh de 15 em 15 minutos para as 7 competições, seriam aproximadamente **1.344 requests/dia**, ainda dentro da quota.
+- A licença BSD v4.0, efetiva em 1/10/2026, permite exibir os dados em websites próprios e proíbe redistribuir o raw data como API/feed/dataset independente; a arquitetura CPC mantém o provider atrás do adapter e não expõe a API key.
+
+### Decisão
+**BSD fica selecionado como fornecedor da implementação de produção da Fase 3**, sujeito a revisão se a cobertura, quota, licença ou disponibilidade mudarem.
+
+API-Football permanece **não aprovado** e não será usado na integração de produção atual.
+
+### Cron
+A frequência de referência fica em `*/5` no Worker, com uma competição por execução, resultando em aproximadamente 35 minutos entre processamentos da mesma competição. Esta frequência é aceitável face à quota BSD e evita uma carga desnecessária.
+
+O código do Worker separado já está no repositório. O próximo passo é **deployar o Worker**, não redesenhar novamente o provider.
+
+### Gate encerrado
+**Fornecedor → quota/licença → frequência → DEPLOYMENT DO WORKER.**
