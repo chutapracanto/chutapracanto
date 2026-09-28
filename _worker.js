@@ -2733,16 +2733,35 @@ function cpcSafeString(value) {
   return typeof value === "string" ? value : value == null ? "" : String(value);
 }
 
-function cpcTeam(team, fallbackId = null) {
+function cpcTeam(team, fallbackId = null, fallbackName = "") {
+  if (typeof team === "string") {
+    return {
+      id: cpcSafeNumber(fallbackId),
+      name: team
+    };
+  }
+
   return {
     id: cpcSafeNumber(team?.id ?? fallbackId),
-    name: cpcSafeString(team?.name ?? team?.team_name)
+    name: cpcSafeString(
+      team?.name ??
+      team?.team_name ??
+      fallbackName
+    )
   };
 }
 
 function cpcNormalizeEvent(event) {
-  const home = cpcTeam(event?.home_team, event?.home_team_id ?? event?.home?.id);
-  const away = cpcTeam(event?.away_team, event?.away_team_id ?? event?.away?.id);
+  const home = cpcTeam(
+    event?.home_team,
+    event?.home_team_id ?? event?.home?.id,
+    event?.home_team_name ?? event?.home?.name
+  );
+  const away = cpcTeam(
+    event?.away_team,
+    event?.away_team_id ?? event?.away?.id,
+    event?.away_team_name ?? event?.away?.name
+  );
 
   return {
     id: cpcSafeNumber(event?.id ?? event?.event_id),
