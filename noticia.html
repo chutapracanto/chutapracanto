@@ -408,7 +408,9 @@
 
   <script>
     (() => {
-      const slug = new URLSearchParams(window.location.search).get('slug');
+      const slug = window.location.pathname.startsWith('/noticia/')
+        ? decodeURIComponent(window.location.pathname.slice('/noticia/'.length))
+        : new URLSearchParams(window.location.search).get('slug');
       const container = document.getElementById('article-content');
       if (!slug || !container || slug.includes('/') || slug.includes('\\') || slug.includes('..') || /[\\u0000-\\u001f]/.test(slug)) return;
 
@@ -659,7 +661,9 @@
     }
 
     async function loadArticle() {
-      const slug = new URLSearchParams(window.location.search).get('slug');
+      const slug = window.location.pathname.startsWith('/noticia/')
+        ? decodeURIComponent(window.location.pathname.slice('/noticia/'.length))
+        : new URLSearchParams(window.location.search).get('slug');
       const container = document.getElementById('article-content');
       if (!slug || slug.includes('/') || slug.includes('\\') || slug.includes('..') || /[\u0000-\u001f]/.test(slug)) {
         container.textContent = 'Notícia não encontrada. O endereço parece estar incompleto.';
