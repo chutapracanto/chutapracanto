@@ -2798,3 +2798,35 @@ A correção mantém intactas as alterações de Competições/BSD e não altera
 **FREEZE / ESTÁVEL — NÃO REABRIR.**
 
 Qualquer futura intervenção nesta camada exige evidência nova e específica de uma falha real. Não fazer migrações, renomeações ou “melhorias” de URL por iniciativa própria.
+
+
+# 63. AUDITORIA FINAL DA REGRESSÃO DE URLS — 2026-09-28
+
+### Estado real encontrado na main
+A main estava em `34b1a58ae61b3408299fa188d2ed07ce16db1c0e`, que já continha a correção do Worker para servir explicitamente `noticia.html` quando a URL estável `/noticia?slug=...` é pedida. A PR #48 já tinha restaurado canonical/OG/Twitter/JSON-LD/sitemap para o formato query.
+
+A auditoria encontrou, porém, dois pontos residuais que ainda geravam URLs limpas internamente:
+- `index.html` ainda usava `/noticia/<slug>` para entradas com `legacyUrl=false`;
+- `admin/index.html` ainda gerava preview em `/noticia/<slug>`.
+
+### Correção
+PR #49 — `fix: restore stable article URLs after clean URL regression` — alterou apenas esses dois links para `/noticia?slug=<slug>`.
+
+Merge: `3ac456c289191df2880f5dd03dc85f26b91c1ef9`.
+
+Não foram alterados slugs, nomes de Markdown, conteúdo editorial, sitemap, canonical, OG/Twitter ou JSON-LD.
+
+### Validação
+- main comparada com o commit anterior: apenas `index.html` e `admin/index.html` foram alterados;
+- Home: `articleHref()` confirmado como query URL;
+- Admin: preview confirmado como query URL;
+- cinco notícias de épocas/formatos diferentes tiveram o slug/path do índice comparados com o Markdown correspondente;
+- Worker continua a converter `/noticia/<slug>` em 301 para `/noticia?slug=<slug>`;
+- sitemap existente contém query URLs;
+- main permanece sem alteração dos slugs dos artigos.
+
+### Limitação externa
+O acesso HTTP direto a `https://chutapracanto.com` não está disponível neste ambiente, pelo que não foi possível confirmar visualmente produção nem executar o crawler Meta contra o domínio. O deployment é feito automaticamente pelo Cloudflare Pages após alterações na main.
+
+### Estado
+**CORREÇÃO DE CÓDIGO CONCLUÍDA E MERGED. VALIDAÇÃO PÚBLICA EXTERNA PENDENTE.**
