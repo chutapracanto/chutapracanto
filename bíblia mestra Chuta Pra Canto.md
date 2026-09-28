@@ -72,7 +72,7 @@ Estas áreas não precisam de ser reabertas ou refeitas sem nova necessidade con
 - `sitemap.xml`: 241 URLs, 233 artigos + 8 páginas públicas.
 - Workflow temporário de importação Framer removido.
 - AdSense técnico preparado, mas aprovação/operação ainda não concluídas.
-- Search Console/Google News ainda são fases futuras.
+- Search Console está na Fase 4 ativa; o sitemap já foi submetido e a indexação real aguarda processamento externo. Google News/Publisher Center permanece uma frente posterior, quando fizer sentido.
 
 ### ESTADO ATUAL / ÚLTIMA FASE CONCLUÍDA
 
@@ -89,7 +89,7 @@ Estado técnico:
 Não reabrir automaticamente a performance. Qualquer nova investigação deve nascer de uma hipótese concreta e de uma decisão que dependa dessa evidência.
 
 ### ÚLTIMO PONTO DE CONTINUIDADE
-A frente UX/editorial do artigo foi fechada operacionalmente com a PR #42. O engagement persistente em D1 já está em `main`. A Fase 3 está ativa e a linha de continuidade atual é a **seleção/validação do fornecedor de dados de futebol**; não voltar ao diagnóstico antigo de CLS/LCP sem nova hipótese/evidência.
+A frente UX/editorial do artigo foi fechada operacionalmente com a PR #42. O engagement persistente em D1 está em `main`. A Fase 3 foi encerrada após PASS de fornecedor BSD, cache D1, Cron, UI `/competicoes` e validação de produção. A Fase 4 está ativa: SEO técnico + indexação real; não voltar ao diagnóstico antigo de CLS/LCP sem nova hipótese/evidência.
 
 ---
 
