@@ -2906,10 +2906,10 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
 
   let fixtures;
   let standings;
+  const teamNamesById = new Map();
 
   try {
     const rawStandings = bsdExtractStandings(standingsData);
-    const teamNamesById = new Map();
 
     for (const row of rawStandings) {
       const team = row?.team;
