@@ -14,7 +14,7 @@
 
 ## Fase operacional atual
 
-**FASE 3 — dados de futebol e API de competições / seleção e validação de fornecedor.**
+**FASE 4 — SEO técnico + indexação real.** A Fase 3 de dados de futebol/competições foi concluída e validada em produção para as 7 competições; não reabrir sem nova evidência.
 
 A Fase 1 de reconciliação do conteúdo Framer posterior a 22/08/2026 foi concluída quanto à metadata: 163/163 reconciliados, 0 mismatches/0 ausências no índice e PR #27 mergeada em main.
 
@@ -95,9 +95,10 @@ Para autonomia, bloqueios, pedidos à utilizadora e utilização do Codex, ler t
 Regra crítica: **UM BLOQUEIO NÃO É UM RESULTADO.** Se a IA não conseguir executar uma ação, deve identificar exatamente a dependência e transformar essa dependência em passos concretos para Rute ou num prompt executável para o Codex, quando aplicável. É proibido parar com formulações vagas como “fonte externa bloqueada”, “preciso de acesso” ou “próximo passo é X” sem explicar como desbloquear e o que deve regressar.
 
 
-## Estado operacional 2026-09-27
+## Estado operacional 2026-09-28
 - Fase 1: reconciliação de metadata dos 163 registos pós-22/08 concluída; o inventário/arquivo Framer de 213 URLs permanece separado e os redirects continuam dependentes do host histórico.
 - Fase 2: frente UX/editorial encerrada operacionalmente com PR #42 mergeada; engagement persistente em D1 já está em `main`.
-- Fase 3: ativa; fornecedor de dados de futebol ainda não escolhido.
-- Próxima ação: matriz de cobertura/frescura/limites/licença/termos/estabilidade/custo para as sete competições, seguida da escolha do fornecedor/adaptador.
-- Fase 4 SEO/indexação, Fase 5 performance, Fase 6 monetização, Fase 7 distribuição e Fase 8 automação permanecem futuras.
+- Fase 3: concluída e validada em produção para as 7 competições; fornecedor BSD selecionado para produção.
+- Fase 4: ativa — SEO técnico + indexação real; sitemap submetido ao Search Console e processamento externo pendente.
+- Próxima ação autónoma: acompanhar/validar Search Console e corrigir apenas problemas de indexação/SEO comprovados.
+- Fase 5 performance, Fase 6 monetização, Fase 7 distribuição e Fase 8 automação permanecem futuras.
