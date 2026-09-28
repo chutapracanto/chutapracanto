@@ -142,7 +142,13 @@
     .episode-title { font-size: 0.95rem; font-weight: 600; color: #fff; margin: 0; }
     .episode-date { font-size: 0.75rem; color: var(--text-gray); }
     .audio-player { height: 32px; max-width: 220px; }
-    .home-competitions-section{margin-bottom:3.5rem}
+    .home-competitions-section{margin-bottom:3.5rem}.home-competition-loading{display:block;grid-column:1/-1;padding:1rem;color:var(--text-gray)}
+.home-competition-shortcut{position:relative}
+.home-competition-shortcut small{display:block;margin-top:.22rem;color:var(--text-gray);font:500 .68rem var(--font-body);line-height:1.35}
+.home-competition-shortcut .home-competition-status{display:inline-flex;align-items:center;gap:.35rem;margin-top:.35rem;color:var(--neon-green);font:700 .6rem var(--font-title);letter-spacing:.05em}
+.home-competition-status i{width:6px;height:6px;border-radius:50%;background:var(--neon-green)}
+.home-competition-feature-live{color:#ff6b84!important}
+
     .home-competition-layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:1rem}
     .home-competition-feature,.home-competition-shortcut{background:var(--card-bg);border:1px solid var(--border-color);border-radius:14px;text-decoration:none;color:inherit}
     .home-competition-feature{padding:1.2rem;display:block;overflow:hidden;position:relative}
@@ -214,6 +220,33 @@
       
       <div class="featured-wrapper" id="noticias-container">
         <p style="color: var(--text-gray);">A carregar notícias...</p>
+      </div>
+    </section>
+
+    <!-- COMPETIÇÕES -->
+    <section class="home-competitions-section" id="competicoes-home">
+      <div class="section-header">
+        <h2 class="section-title">COMPETIÇÕES</h2>
+        <a href="/competicoes" class="see-more">VER TODAS →</a>
+      </div>
+      <div class="home-competition-layout">
+        <a id="home-competition-feature" class="home-competition-feature" href="/competicoes?competition=liga-portugal">
+          <div class="home-competition-feature-head">
+            <span class="home-competition-kicker">PRÓXIMO JOGO EM DESTAQUE</span>
+            <span class="home-competition-arrow" aria-hidden="true">→</span>
+          </div>
+          <div class="home-competition-feature-main">
+            <img id="home-feature-logo" class="home-competition-league-logo" src="/images/logo.png" alt="" width="58" height="58">
+            <div>
+              <h3 id="home-feature-name">A carregar…</h3>
+              <p id="home-feature-match">A procurar o próximo jogo…</p>
+            </div>
+          </div>
+          <div id="home-feature-teams" class="home-competition-teams"></div>
+        </a>
+        <div id="home-competition-shortcuts" class="home-competition-shortcuts" aria-label="Próximos jogos por competição">
+          <span class="home-competition-loading">A carregar competições…</span>
+        </div>
       </div>
     </section>
 
@@ -551,41 +584,85 @@
     }
 
     async function carregarCompeticoesHome() {
-      const shortcuts = [
-        ['champions-league', 'UEFA Champions League', 7],
-        ['europa-league', 'UEFA Europa League', 8],
-        ['conference-league', 'UEFA Conference League', 83],
-        ['nations-league', 'UEFA Nations League', 64]
+      const competitions = [
+        ['liga-portugal','Liga Portugal',2],
+        ['taca-portugal','Taça de Portugal',92],
+        ['taca-liga','Taça da Liga',93],
+        ['champions-league','UEFA Champions League',7],
+        ['europa-league','UEFA Europa League',8],
+        ['conference-league','UEFA Conference League',83],
+        ['nations-league','UEFA Nations League',64]
       ];
-      const shortcutsEl = document.getElementById('home-competition-shortcuts');
-      const teamsEl = document.getElementById('home-competition-teams');
-      if (!shortcutsEl || !teamsEl) return;
+      const priorityNames = ['porto','benfica','sporting','braga','portugal'];
+      const featureEl=document.getElementById('home-competition-feature');
+      const featureLogo=document.getElementById('home-feature-logo');
+      const featureName=document.getElementById('home-feature-name');
+      const featureMatch=document.getElementById('home-feature-match');
+      const featureTeams=document.getElementById('home-feature-teams');
+      const shortcutsEl=document.getElementById('home-competition-shortcuts');
+      if(!shortcutsEl||!featureEl)return;
 
-      shortcutsEl.innerHTML = shortcuts.map(([key, label, leagueId]) => `
-        <a class="home-competition-shortcut" href="/competicoes?competition=${key}">
-          <img src="https://sports.bzzoiro.com/img/league/${leagueId}/?bg=transparent" alt="" loading="lazy" decoding="async">
-          <span>${label}</span>
-          <b aria-hidden="true">→</b>
-        </a>`).join('');
+      const safeUrl=value=>{try{const u=new URL(String(value||''),location.origin);return u.protocol==='https:'||u.origin===location.origin?u.href:''}catch{return ''}};
+      const logo=value=>safeUrl(value)||'/images/logo.png';
+      const leagueLogo=id=>'/api/football-image?type=league&id='+encodeURIComponent(id);
+      const dateValue=item=>{const d=new Date(item?.kickoff||item?.startAt||item?.date);return Number.isNaN(d.getTime())?null:d};
+      const dateLabel=d=>d?new Intl.DateTimeFormat('pt-PT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}).format(d):'—';
+      const priorityTeam=name=>{
+        const n=String(name||'').toLocaleLowerCase('pt-PT');
+        return priorityNames.some(value=>n.includes(value));
+      };
+      const isLive=item=>['live','in_progress','in-play'].includes(String(item?.status||'').toLowerCase());
 
-      try {
-        const response = await fetch('/api/competicoes?competition=liga-portugal', { cache: 'no-store' });
-        if (!response.ok) throw new Error('Dados indisponíveis');
-        const data = await response.json();
-        const rows = Array.isArray(data.standings) ? data.standings.slice(0, 4) : [];
-        if (!rows.length) {
-          teamsEl.innerHTML = '<span>Classificação disponível em Competições →</span>';
-          return;
+      const results=await Promise.all(competitions.map(async meta=>{
+        try{
+          const response=await fetch('/api/competicoes?competition='+encodeURIComponent(meta[0])+'&status=upcoming',{cache:'no-store'});
+          if(!response.ok)throw new Error('indisponível');
+          const data=await response.json();
+          const fixtures=Array.isArray(data.fixtures)?data.fixtures:[];
+          fixtures.sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity));
+          const priorityFixture=fixtures.find(item=>priorityTeam(item.homeTeam?.name)||priorityTeam(item.awayTeam?.name));
+          return {meta,data,fixture:priorityFixture||fixtures[0]||null,priority:Boolean(priorityFixture)};
+        }catch{return {meta,data:null,fixture:null,priority:false}}
+      }));
+
+      results.sort((a,b)=>{
+        if(a.fixture&&!b.fixture)return -1;if(!a.fixture&&b.fixture)return 1;
+        if(a.priority!==b.priority)return a.priority?-1:1;
+        return (dateValue(a.fixture)?.getTime()||Infinity)-(dateValue(b.fixture)?.getTime()||Infinity);
+      });
+
+      const featured=results.find(item=>item.fixture)||results[0];
+      if(featured){
+        featureEl.href='/competicoes?competition='+encodeURIComponent(featured.meta[0]);
+        featureLogo.src=leagueLogo(featured.meta[2]);
+        featureName.textContent=featured.meta[1];
+        const item=featured.fixture;
+        if(item){
+          const live=isLive(item);
+          featureMatch.textContent=(live?'AO VIVO · ':'Próximo jogo · ')+dateLabel(dateValue(item));
+          featureMatch.classList.toggle('home-competition-feature-live',live);
+          featureTeams.innerHTML=
+            '<span class="home-competition-team"><img src="'+logo(item.homeTeam?.logo)+'" alt=""><strong>'+String(item.homeTeam?.name||'Casa')+'</strong><em>'+(item.score?.home??'—')+'</em></span>'+
+            '<span class="home-competition-team"><img src="'+logo(item.awayTeam?.logo)+'" alt=""><strong>'+String(item.awayTeam?.name||'Fora')+'</strong><em>'+(item.score?.away??'—')+'</em></span>';
+        }else{
+          featureMatch.textContent='Sem próximo jogo disponível.';
+          featureTeams.replaceChildren();
         }
-        teamsEl.innerHTML = rows.map(row => `
-          <span class="home-competition-team">
-            <img src="${safePublicUrl(row.team?.logo) || '/images/logo.png'}" alt="" loading="lazy" decoding="async">
-            <strong>${String(row.team?.name || 'Equipa')}</strong>
-            <em>${row.points ?? '—'} pts</em>
-          </span>`).join('');
-      } catch {
-        teamsEl.innerHTML = '<span>Ver classificação atual →</span>';
       }
+
+      shortcutsEl.innerHTML=results.map(item=>{
+        const meta=item.meta, fixture=item.fixture;
+        const match=fixture
+          ? String(fixture.homeTeam?.name||'Casa')+' · '+dateLabel(dateValue(fixture))+' · '+String(fixture.awayTeam?.name||'Fora')
+          : 'Calendário indisponível';
+        const live=fixture&&isLive(fixture);
+        return '<a class="home-competition-shortcut" href="/competicoes?competition='+encodeURIComponent(meta[0])+'">'+
+          '<img src="'+leagueLogo(meta[2])+'" alt="" loading="lazy" decoding="async">'+
+          '<span>'+meta[1]+'</span><b aria-hidden="true">→</b>'+
+          '<small>'+match+'</small>'+
+          (live?'<span class="home-competition-status home-competition-feature-live"><i></i>AO VIVO</span>':'')+
+          '</a>';
+      }).join('');
     }
 
     function iniciarFeedsAdiados() {
