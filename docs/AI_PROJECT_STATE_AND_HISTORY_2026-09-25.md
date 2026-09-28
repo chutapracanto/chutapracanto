@@ -2301,3 +2301,36 @@ Após o PASS operacional do adapter BSD, foi criada a primeira peça da subfase 
 Commit: `b201f745622eb0e2d1f975b1821f0424182ebfc4`.
 
 A migration está no GitHub, mas a execução do D1 ainda depende da criação/configuração da base Cloudflare e do binding server-side correspondente. Não foi feita qualquer chamada BSD adicional.
+
+# 44. D1 FOOTBALL CACHE — MIGRATION EXECUTADA EM REMOTO — 2026-09-28
+
+### Operação concluída
+
+A base Cloudflare D1 `cpc-football-cache` foi criada e o binding `FOOTBALL_CACHE_DB` foi adicionado ao `wrangler.toml` com o database ID `92e3ef93-4c44-46c8-a1a4-ff5c09f4b49f`.
+
+A migration `migrations/0002_football_cache.sql` foi então executada diretamente na **Cloudflare D1 Console**, sem depender de checkout local, CMD ou Wrangler no PC.
+
+### Resultado
+
+- query executada com sucesso;
+- tabela `football_cache` criada;
+- índice `idx_football_cache_lookup` criado;
+- índice `idx_football_cache_expiry` criado;
+- resposta da Cloudflare: **This query successfully executed**;
+- não houve chamada BSD associada a esta operação.
+
+### Estado
+
+**D1 schema PASS.** A persistência remota está pronta para a implementação do cache no Worker.
+
+### Próxima ação autorizada
+
+Implementar no `_worker.js` a camada de cache provider-agnostic sobre `FOOTBALL_CACHE_DB`, com:
+1. leitura de entrada fresca;
+2. refresh através do adapter BSD em cache miss/expiração;
+3. persistência de `payload_json` e timestamps;
+4. stale-if-error até `stale_until`;
+5. resposta pública preservando o contrato atual de `/api/competicoes`;
+6. sem chamadas BSD desnecessárias quando existir cache fresco.
+
+A validação do cache deve ocorrer depois da implementação, sem repetir os diagnósticos BSD já encerrados.
