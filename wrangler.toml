@@ -9,3 +9,9 @@ binding = "ARTICLE_LIKES_DB"
 database_name = "cpc-article-likes"
 database_id = "ba093005-9101-43f4-98fa-69d913edb09c"
 migrations_dir = "migrations"
+
+[[d1_databases]]
+binding = "FOOTBALL_CACHE_DB"
+database_name = "cpc-football-cache"
+database_id = "92e3ef93-4c44-46c8-a1a4-ff5c09f4b49f"
+migrations_dir = "migrations"
