@@ -161,11 +161,15 @@
     .home-competition-team strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
     .home-competition-team em{font-style:normal;color:var(--neon-green);font-weight:700}
     .home-competition-shortcuts{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
-    .home-competition-shortcut{padding:.75rem;display:grid;grid-template-columns:34px minmax(0,1fr) 16px;align-items:center;gap:.55rem;min-height:72px;transition:.2s}
-    .home-competition-shortcut img{width:34px;height:34px;object-fit:contain}
-    .home-competition-shortcut span{font:700 .78rem var(--font-title);line-height:1.12}
-    .home-competition-shortcut small{display:block;margin-top:.18rem;color:var(--text-gray);font:500 .62rem var(--font-body);line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .home-competition-shortcut b{color:var(--neon-green)}
+    .home-competition-shortcut{padding:.8rem;display:grid;grid-template-columns:36px minmax(0,1fr) auto;align-items:center;gap:.65rem;min-height:76px;transition:transform .2s ease,border-color .2s ease,background .2s ease;position:relative}
+    .home-competition-shortcut:hover{background:rgba(157,255,0,.035)}
+    .home-competition-shortcut img{width:36px;height:36px;object-fit:contain}
+    .home-competition-shortcut-copy{min-width:0}
+    .home-competition-shortcut-copy strong{display:block;font:700 .78rem/1.12 var(--font-title);color:var(--text-color)}
+    .home-competition-shortcut small{display:block;margin-top:.22rem;color:var(--text-gray);font:500 .62rem/1.25 var(--font-body);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .home-competition-shortcut-arrow{color:var(--neon-green);font-size:1rem}
+    .home-competition-status{position:absolute;right:.65rem;bottom:.5rem;display:inline-flex;align-items:center;gap:.25rem;font:700 .52rem var(--font-title);letter-spacing:.05em}
+    .home-competition-status i{width:5px;height:5px;border-radius:50%;background:#ff4d6d;display:inline-block;box-shadow:0 0 0 3px rgba(255,77,109,.08)}
     .home-competition-feature-live{color:#ff6b84!important}
     @media(max-width:800px){.home-competition-layout{grid-template-columns:1fr}.home-competition-shortcuts{display:flex;overflow-x:auto;gap:.7rem;padding-bottom:.25rem;scroll-snap-type:x proximity;scrollbar-width:none}.home-competition-shortcuts::-webkit-scrollbar{display:none}.home-competition-shortcut{flex:0 0 190px;scroll-snap-align:start}}
     @media(max-width:520px){.home-competition-feature{padding:1rem}.home-competition-feature h3{font-size:1.12rem}.home-competition-shortcut{flex-basis:175px}.home-competition-teams{grid-template-columns:1fr 1fr}}
