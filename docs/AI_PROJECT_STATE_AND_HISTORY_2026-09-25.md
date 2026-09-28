@@ -2773,3 +2773,28 @@ O acesso HTTP público ao domínio não está disponível neste ambiente, pelo q
 
 ### Estado
 **CORREÇÃO IMPLEMENTADA E MERGED — DEPLOYMENT PÚBLICO PENDENTE DE CONFIRMAÇÃO.**
+
+
+# 62. FREEZE DE NOTÍCIAS — URLS E SLUGS ESTABILIZADOS — 2026-09-28
+
+### Decisão operacional
+Após a regressão introduzida pela migração de URLs da PR #46 e a correção posterior, fica registada a decisão de **não mexer mais na camada de URLs/slugs das notícias neste estado do projeto**.
+
+### Regra canónica
+- URL pública das notícias: **`/noticia?slug=<slug>`**.
+- Slugs existentes: **não alterar**.
+- Ficheiros Markdown existentes: **não renomear**.
+- Notícias novas e antigas: **não voltar a separar formatos de URL**; o formato estável query é o padrão atual.
+- `/noticia/<slug>` apenas pode funcionar como compatibilidade histórica através de **301 → `/noticia?slug=<slug>`**.
+- Canonical, OG/Twitter, JSON-LD, links de listagens e sitemap devem permanecer alinhados com a URL query.
+- Não alterar imagens ou conteúdo editorial das notícias como efeito colateral de alterações técnicas de URL.
+
+### Correção consolidada
+Commit de correção: `8c886e0028db4245be7adb32b421c204375faea4` — **restore stable article URLs and social metadata**.
+
+A correção mantém intactas as alterações de Competições/BSD e não altera nomes de ficheiros ou slugs das notícias.
+
+### Estado
+**FREEZE / ESTÁVEL — NÃO REABRIR.**
+
+Qualquer futura intervenção nesta camada exige evidência nova e específica de uma falha real. Não fazer migrações, renomeações ou “melhorias” de URL por iniciativa própria.
