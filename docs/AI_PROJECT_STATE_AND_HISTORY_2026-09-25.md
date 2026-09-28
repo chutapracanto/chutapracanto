@@ -2660,3 +2660,34 @@ Não duplicar schema de artigos nem introduzir markup sem finalidade concreta.
 
 ### Próximo passo
 Aguardar deployment automático e continuar a Fase 4 com validações externas apenas quando produzirem evidência nova. A Search Console continua a processar o sitemap.
+
+
+# 58. SEO/UX — URLS LIMPAS NOVAS + REFORMULAÇÃO DE COMPETIÇÕES — 2026-09-28
+
+### Operação executada
+- Criada a PR #46 em branch isolada para introduzir URLs limpas `/noticia/<slug>` para novos artigos.
+- URLs antigas `/noticia?slug=...` continuam suportadas.
+- URLs legadas do Framer `/noticias/<slug>` continuam a usar o redirect 301 existente.
+- O workflow de índice passou a marcar os 213 slugs legados e a gerar sitemap misto: URLs antigas em query e URLs novas em path limpo.
+- A homepage, Notícias, Opinião, Worker shell e Admin passaram a respeitar esta distinção.
+- Header e footer foram uniformizados nas páginas públicas com a entrada Competições.
+- A Home recebeu um módulo dinâmico de Competições com atalhos visuais, emblemas das competições e os 4 primeiros clubes da Liga Portugal.
+- A área `/competicoes` foi reformulada com identidade visual, emblemas, jogo em destaque, filtros de jogos, filtro por jornada, classificação com tooltips nas abreviaturas e footer completo.
+- O adapter BSD passou a expor URL de logo dos clubes a partir do ID normalizado.
+
+### Compatibilidade e licença
+Os slugs antigos não são renomeados. As imagens de clubes são usadas apenas para identificação visual dentro da aplicação, conforme a documentação de imagens/licença do BSD.
+
+### Validação estrutural
+- `content/noticias-index.json`: 213 entradas legadas + 36 entradas novas.
+- `sitemap.xml`: 213 URLs legadas + 36 URLs novas limpas.
+- `/competicoes` permanece alimentada pelo endpoint server-side existente; não há chamada direta do browser à API autenticada BSD.
+
+### Estado
+**PR #46 ABERTA — implementação pronta para validação visual/runtime antes do merge.**
+
+### Bloqueio atual
+A inspeção visual pública do domínio não está acessível no ambiente atual; a abertura direta do domínio devolve erro interno da ferramenta de navegação.
+
+### Próximo passo
+Validar visualmente `/`, `/competicoes`, `/noticias` e uma notícia antiga + uma nova URL quando o browser/runtime estiver acessível. Só depois decidir o merge da PR #46.
