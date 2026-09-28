@@ -142,6 +142,30 @@
     .episode-title { font-size: 0.95rem; font-weight: 600; color: #fff; margin: 0; }
     .episode-date { font-size: 0.75rem; color: var(--text-gray); }
     .audio-player { height: 32px; max-width: 220px; }
+    .home-competitions-section{margin-bottom:3.5rem}
+    .home-competition-layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:1rem}
+    .home-competition-feature,.home-competition-shortcut{background:var(--card-bg);border:1px solid var(--border-color);border-radius:14px;text-decoration:none;color:inherit}
+    .home-competition-feature{padding:1.2rem;display:block;overflow:hidden;position:relative}
+    .home-competition-feature:hover,.home-competition-shortcut:hover{border-color:var(--neon-green);transform:translateY(-2px)}
+    .home-competition-feature-head{display:flex;justify-content:space-between;align-items:center}
+    .home-competition-kicker{font:700 .68rem var(--font-title);letter-spacing:.12em;color:var(--neon-green)}
+    .home-competition-arrow{font-size:1.4rem;color:var(--neon-green)}
+    .home-competition-feature-main{display:flex;align-items:center;gap:1rem;margin:1rem 0}
+    .home-competition-league-logo{width:58px;height:58px;object-fit:contain;flex:0 0 auto}
+    .home-competition-feature h3{margin:0;font:700 1.45rem var(--font-title)}
+    .home-competition-feature p{margin:.25rem 0 0;color:var(--text-gray);font-size:.85rem}
+    .home-competition-teams{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem;padding-top:.9rem;border-top:1px solid var(--border-color)}
+    .home-competition-team{display:grid;grid-template-columns:28px 1fr auto;align-items:center;gap:.45rem;min-width:0;font-size:.75rem}
+    .home-competition-team img{width:26px;height:26px;object-fit:contain}
+    .home-competition-team strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .home-competition-team em{font-style:normal;color:var(--neon-green);font-weight:700}
+    .home-competition-shortcuts{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .home-competition-shortcut{padding:1rem;display:grid;grid-template-columns:42px 1fr 20px;align-items:center;gap:.75rem;min-height:90px;transition:.2s}
+    .home-competition-shortcut img{width:42px;height:42px;object-fit:contain}
+    .home-competition-shortcut span{font:700 .9rem var(--font-title);line-height:1.15}
+    .home-competition-shortcut b{color:var(--neon-green)}
+    @media(max-width:800px){.home-competition-layout{grid-template-columns:1fr}.home-competition-shortcuts{grid-template-columns:1fr 1fr}}
+    @media(max-width:520px){.home-competition-shortcuts{grid-template-columns:1fr}.home-competition-teams{grid-template-columns:1fr 1fr}}
   </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1556367149800029" crossorigin="anonymous"></script>
 </head>
@@ -523,6 +547,44 @@
           message.setAttribute('aria-live', 'polite');
           container.replaceChildren(message);
         }
+      }
+    }
+
+    async function carregarCompeticoesHome() {
+      const shortcuts = [
+        ['champions-league', 'UEFA Champions League', 7],
+        ['europa-league', 'UEFA Europa League', 8],
+        ['conference-league', 'UEFA Conference League', 83],
+        ['nations-league', 'UEFA Nations League', 64]
+      ];
+      const shortcutsEl = document.getElementById('home-competition-shortcuts');
+      const teamsEl = document.getElementById('home-competition-teams');
+      if (!shortcutsEl || !teamsEl) return;
+
+      shortcutsEl.innerHTML = shortcuts.map(([key, label, leagueId]) => `
+        <a class="home-competition-shortcut" href="/competicoes?competition=${key}">
+          <img src="https://sports.bzzoiro.com/img/league/${leagueId}/?bg=transparent" alt="" loading="lazy" decoding="async">
+          <span>${label}</span>
+          <b aria-hidden="true">→</b>
+        </a>`).join('');
+
+      try {
+        const response = await fetch('/api/competicoes?competition=liga-portugal', { cache: 'no-store' });
+        if (!response.ok) throw new Error('Dados indisponíveis');
+        const data = await response.json();
+        const rows = Array.isArray(data.standings) ? data.standings.slice(0, 4) : [];
+        if (!rows.length) {
+          teamsEl.innerHTML = '<span>Classificação disponível em Competições →</span>';
+          return;
+        }
+        teamsEl.innerHTML = rows.map(row => `
+          <span class="home-competition-team">
+            <img src="${safePublicUrl(row.team?.logo) || '/images/logo.png'}" alt="" loading="lazy" decoding="async">
+            <strong>${String(row.team?.name || 'Equipa')}</strong>
+            <em>${row.points ?? '—'} pts</em>
+          </span>`).join('');
+      } catch {
+        teamsEl.innerHTML = '<span>Ver classificação atual →</span>';
       }
     }
 
