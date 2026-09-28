@@ -98,7 +98,7 @@ Regra crítica: **UM BLOQUEIO NÃO É UM RESULTADO.** Se a IA não conseguir exe
 ## Estado operacional 2026-09-28
 - Fase 1: reconciliação de metadata dos 163 registos pós-22/08 concluída; o inventário/arquivo Framer de 213 URLs permanece separado e os redirects continuam dependentes do host histórico.
 - Fase 2: frente UX/editorial encerrada operacionalmente com PR #42 mergeada; engagement persistente em D1 já está em `main`.
-- Fase 3: concluída e validada em produção para as 7 competições; fornecedor BSD selecionado para produção.
+- Fase 3: implementação da área de competições, adapter BSD, cache D1 e UI concluída; Cron Trigger implementado em `main`, com validação runtime ainda pendente.
 - Fase 4: ativa — SEO técnico + indexação real; sitemap submetido ao Search Console e processamento externo pendente.
 - Próxima ação autónoma: acompanhar/validar Search Console e corrigir apenas problemas de indexação/SEO comprovados.
 - Fase 5 performance, Fase 6 monetização, Fase 7 distribuição e Fase 8 automação permanecem futuras.
