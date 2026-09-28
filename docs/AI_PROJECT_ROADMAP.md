@@ -931,4 +931,4 @@ A intervenção de UX iniciada na PR #46 mantém a regra de compatibilidade de U
 A versão anterior da Home em `chutapracanto.pages.dev` ainda corresponde a um deployment antigo e não contém estas alterações. A validação pública da nova versão só pode ser feita depois do deployment da PR #46. A ferramenta disponível permite inspeção do HTML/texto público, mas não uma inspeção visual pixel-a-pixel/screenshot.
 
 ### Próxima operação
-Concluir validação estrutural da PR #46, fazer merge se não houver falhas de código/contrato, aguardar deployment e validar novamente `chutapracanto.pages.dev`/produção. Corrigir qualquer problema real antes de fechar a intervenção.
+PR #46 foi mergeada em `main` no commit `2a0e4ededb660d8ba07db84199b1d4711816384b`. Aguardamos/validamos o deployment automático e, quando a versão pública atualizada estiver acessível, repetir a inspeção do Home e `/competicoes`. Corrigir qualquer problema real antes de fechar a intervenção.
