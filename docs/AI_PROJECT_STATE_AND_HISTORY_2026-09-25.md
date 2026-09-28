@@ -2417,3 +2417,63 @@ IMPLEMENTAÇÃO CONCLUÍDA — validação runtime do Cron ainda pendente. O tri
 
 ### Próximo passo automático
 Validar a execução do Cron e confirmar que uma linha D1 é atualizada automaticamente sem intervenção manual. Depois atualizar o ledger para PASS ou corrigir apenas se houver evidência de falha.
+
+
+# 49. DECISÃO CORRIGIDA — FORNECEDOR AINDA NÃO APROVADO / CRON NÃO DEPLOYAR AINDA — 2026-09-28
+
+### Correção de estado
+
+A revisão da arquitetura após a implementação do Cron identificou uma distinção obrigatória:
+
+- **BSD está tecnicamente validado, mas não está aprovado como fornecedor definitivo.**
+- **API-Football continua não aprovado.**
+- O adapter e a API pública devem permanecer provider-agnostic.
+- O código do Worker Cron separado existe, mas **não deve ser criado/deployado ainda**.
+- A frequência `*/5` é uma implementação de referência, não uma decisão final.
+
+### Razão técnica para separar o Cron do Pages
+
+O projeto é Cloudflare Pages e a tentativa de colocar `[triggers]` no `wrangler.toml` do Pages falhou no deployment com a mensagem:
+
+`Configuration file for Pages projects does not support "triggers"`.
+
+A configuração de Cron deve, portanto, viver num Worker separado. Isto não substitui o Pages: o Pages continua responsável pelo site e por `/api/competicoes`; o Worker será apenas o scheduler quando o gate estiver fechado.
+
+### Problema de frequência identificado
+
+Com:
+- Cron de 5 em 5 minutos;
+- 7 competições;
+- uma competição por execução;
+
+cada competição é processada aproximadamente a cada 35 minutos.
+
+Como o cache fresco atual é de 15 minutos, a rotação normal encontra a entrada fora do TTL e pode provocar novo refresh do fornecedor.
+
+As 288 execuções/dia do Cron **não equivalem automaticamente a 288 chamadas ao fornecedor**, mas também não podem ser tratadas como chamadas zero. O consumo real depende do TTL, recursos atualizados, falhas e estratégia de rotação.
+
+### Decisão
+
+Não criar/deployar o Worker ainda.
+
+Antes do deployment:
+1. calcular o consumo efetivo de requests para as estratégias possíveis;
+2. comparar esse consumo com os limites dos fornecedores ainda candidatos;
+3. definir a frequência final por competição;
+4. concluir a decisão de fornecedor;
+5. só então configurar/deployar o Worker;
+6. validar runtime e registar o resultado.
+
+### Não reabrir
+Não repetir diagnósticos BSD/API-Football já concluídos apenas para confirmar informação existente. Qualquer novo teste de fornecedor deve produzir evidência nova e alterar materialmente a decisão.
+
+### Estado atual
+
+**FASE 3 — validação de fornecedor + estratégia de atualização.**
+
+- Adapter BSD: PASS técnico.
+- Endpoint `/api/competicoes`: PASS.
+- D1/cache: PASS.
+- Worker Cron: código preparado; deployment pendente por decisão deliberada.
+- BSD: candidato técnico, não aprovado.
+- API-Football: não aprovado.
