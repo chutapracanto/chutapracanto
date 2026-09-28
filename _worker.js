@@ -2222,20 +2222,15 @@ function cpcSafeString(value) {
 }
 
 function cpcTeam(team, fallbackId = null, fallbackName = "") {
-  if (typeof team === "string") {
-    return {
-      id: cpcSafeNumber(fallbackId),
-      name: team
-    };
-  }
-
+  const id = cpcSafeNumber(typeof team === "string" ? fallbackId : team?.id ?? fallbackId);
+  const name = cpcSafeString(typeof team === "string" ? team : team?.name ?? team?.team_name ?? fallbackName);
+  const explicitLogo = typeof team === "object" && team
+    ? cpcSafeString(team.logo ?? team.logo_url ?? team.image)
+    : "";
   return {
-    id: cpcSafeNumber(team?.id ?? fallbackId),
-    name: cpcSafeString(
-      team?.name ??
-      team?.team_name ??
-      fallbackName
-    )
+    id,
+    name,
+    logo: explicitLogo || (id != null ? `/api/football-image?type=team&id=${id}` : "")
   };
 }
 
@@ -2372,6 +2367,12 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
   });
   if (stage) eventParams.set("stage", stage);
   if (options.round != null) eventParams.set("round", String(options.round));
+  if (options.status) {
+    const providerStatus = options.status === "upcoming" ? "notstarted" : options.status;
+    if (["notstarted", "finished", "live"].includes(providerStatus)) {
+      eventParams.set("status", providerStatus);
+    }
+  }
 
   let eventsData;
   let standingsData;
@@ -2470,13 +2471,14 @@ const FOOTBALL_CACHE_FRESH_MS = 15 * 60 * 1000;
 const FOOTBALL_CACHE_STALE_MS = 24 * 60 * 60 * 1000;
 const footballCacheRefreshes = new Map();
 
-function footballCacheKey(competitionKey, seasonId, stage, round) {
+function footballCacheKey(competitionKey, seasonId, stage, round, status = "upcoming") {
   return [
     "bsd",
     competitionKey,
     seasonId || "auto",
     stage || "",
-    round == null ? "" : String(round)
+    round == null ? "" : String(round),
+    status || "upcoming"
   ].join("|");
 }
 
@@ -2579,7 +2581,7 @@ async function refreshScheduledFootballCompetition(controller, env) {
   const timestamp = Number.isFinite(scheduledAt) ? scheduledAt : Date.now();
   const slot = Math.floor(timestamp / (5 * 60 * 1000));
   const competitionKey = keys[slot % keys.length];
-  const cacheKey = footballCacheKey(competitionKey, "", "", "");
+  const cacheKey = footballCacheKey(competitionKey, "", "", "", "upcoming");
 
   try {
     const cached = await getFootballCache(env, cacheKey);
@@ -2591,6 +2593,31 @@ async function refreshScheduledFootballCompetition(controller, env) {
     if (typeof controller?.noRetry === "function") {
       controller.noRetry();
     }
+  }
+}
+
+async function handleFootballImageAPI(request, env) {
+  const url = new URL(request.url);
+  if (url.pathname !== "/api/football-image") return null;
+  if (request.method !== "GET") return json({ error: "Método não permitido." }, 405, { Allow: "GET" });
+  const type = url.searchParams.get("type") || "";
+  const id = url.searchParams.get("id") || "";
+  if (!["team", "league"].includes(type) || !/^\d+$/.test(id)) {
+    return json({ error: "Imagem inválida." }, 400);
+  }
+  const upstream = `https://sports.bzzoiro.com/img/${type}/${id}/`;
+  try {
+    const response = await fetch(upstream, {
+      headers: { Accept: "image/avif,image/webp,image/png,image/*;q=0.8" },
+      cf: { cacheTtl: 86400, cacheEverything: true }
+    });
+    if (!response.ok) return new Response(null, { status: response.status });
+    const headers = new Headers(response.headers);
+    headers.set("Cache-Control", "public, max-age=86400, stale-while-revalidate=604800");
+    headers.delete("set-cookie");
+    return new Response(response.body, { status: response.status, headers });
+  } catch {
+    return new Response(null, { status: 502 });
   }
 }
 
@@ -2615,7 +2642,11 @@ async function handleFootballCompetitionAPI(request, env) {
   const seasonId = url.searchParams.get("seasonId") || "";
   const stage = url.searchParams.get("stage") || "";
   const round = url.searchParams.get("round");
-  const cacheKey = footballCacheKey(competitionKey, seasonId, stage, round);
+  const status = url.searchParams.get("status") || "upcoming";
+  if (!["upcoming", "finished", "live", "all"].includes(status)) {
+    return json({ error: "Status inválido." }, 400);
+  }
+  const cacheKey = footballCacheKey(competitionKey, seasonId, stage, round, status);
 
   try {
     const cached = await getFootballCache(env, cacheKey);
@@ -2631,7 +2662,8 @@ async function handleFootballCompetitionAPI(request, env) {
     const data = await refreshFootballCache(env, cacheKey, competitionKey, {
       seasonId,
       stage,
-      round
+      round,
+      status
     });
 
     return json(
@@ -2727,6 +2759,11 @@ export default {
       new URL(request.url);
 
     try {
+      if (url.pathname === "/api/football-image") {
+        const imageResponse = await handleFootballImageAPI(request, env);
+        if (imageResponse) return imageResponse;
+      }
+
       if (url.pathname === "/api/competicoes") {
         const footballResponse = await handleFootballCompetitionAPI(request, env);
         if (footballResponse) return footballResponse;
