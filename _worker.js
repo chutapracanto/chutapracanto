@@ -2259,7 +2259,14 @@ function cpcNormalizeEvent(event) {
     score: {
       home: cpcSafeNumber(event?.home_score ?? event?.home?.score ?? event?.score?.home),
       away: cpcSafeNumber(event?.away_score ?? event?.away?.score ?? event?.score?.away)
-    }
+    },
+    liveMinute: cpcSafeNumber(event?.current_minute ?? event?.minute ?? event?.live_minute),
+    livePeriod: cpcSafeString(event?.period ?? event?.current_period ?? event?.live_period),
+    liveAddedTime: cpcSafeNumber(event?.added_time ?? event?.stoppage_time ?? event?.live_added_time),
+    halfTimeScore: event?.half_time_score ?? event?.ht_score ?? null,
+    extraTimeScore: event?.extra_time_score ?? null,
+    penaltyShootout: event?.penalty_shootout ?? null,
+    goals: Array.isArray(event?.goals) ? event.goals : []
   };
 }
 
@@ -2269,11 +2276,24 @@ function cpcNormalizeStanding(row) {
     team: cpcTeam(row?.team, row?.team_id),
     played: cpcSafeNumber(row?.played ?? row?.matches_played),
     wins: cpcSafeNumber(row?.wins ?? row?.won),
-    draws: cpcSafeNumber(row?.draws),
-    losses: cpcSafeNumber(row?.losses ?? row?.lost),
-    goalsFor: cpcSafeNumber(row?.goals_for ?? row?.goals_scored),
-    goalsAgainst: cpcSafeNumber(row?.goals_against ?? row?.goals_conceded),
-    goalDifference: cpcSafeNumber(row?.goal_difference ?? row?.goal_diff),
+    draws: cpcSafeNumber(
+      row?.draws ??
+      row?.drawn ??
+      row?.draw ??
+      row?.ties ??
+      row?.tied ??
+      ((cpcSafeNumber(row?.played ?? row?.matches_played) != null &&
+        cpcSafeNumber(row?.wins ?? row?.won) != null &&
+        cpcSafeNumber(row?.losses ?? row?.lost) != null)
+        ? cpcSafeNumber(row?.played ?? row?.matches_played) -
+          cpcSafeNumber(row?.wins ?? row?.won) -
+          cpcSafeNumber(row?.losses ?? row?.lost)
+        : null)
+    ),
+    losses: cpcSafeNumber(row?.losses ?? row?.lost ?? row?.lost_matches),
+    goalsFor: cpcSafeNumber(row?.goals_for ?? row?.goals_scored ?? row?.gf ?? row?.goalsFor),
+    goalsAgainst: cpcSafeNumber(row?.goals_against ?? row?.goals_conceded ?? row?.ga ?? row?.goalsAgainst),
+    goalDifference: cpcSafeNumber(row?.goal_difference ?? row?.goal_diff ?? row?.gd),
     points: cpcSafeNumber(row?.points ?? row?.pts)
   };
 }
@@ -2323,6 +2343,82 @@ function bsdExtractStandings(data) {
   return rows;
 }
 
+async function bsdFetchEventsForSeason(env, leagueId, seasonId, status, seasonStart, seasonEnd) {
+  const today = new Date();
+  const todayIso = today.toISOString().slice(0, 10);
+  const start = seasonStart || todayIso;
+  const end = seasonEnd || todayIso;
+  const dateFrom = status === "finished"
+    ? start
+    : status === "upcoming"
+      ? (todayIso > start ? todayIso : start)
+      : start;
+  const dateTo = status === "finished"
+    ? (todayIso < end ? todayIso : end)
+    : end;
+
+  const results = [];
+  let offset = 0;
+  const limit = 200;
+
+  for (;;) {
+    const params = new URLSearchParams({
+      league_id: String(leagueId),
+      season_id: String(seasonId),
+      date_from: dateFrom,
+      date_to: dateTo,
+      limit: String(limit),
+      offset: String(offset)
+    });
+    if (status === "upcoming") params.set("status", "notstarted");
+    if (status === "finished") params.set("status", "finished");
+
+    const data = await bsdFetchJson(
+      env,
+      `https://sports.bzzoiro.com/api/v2/events/?${params.toString()}`
+    );
+    const page = bsdExtractEvents(data);
+    results.push(...page);
+
+    const total = cpcSafeNumber(data?.count);
+    if (!page.length || page.length < limit || (total != null && results.length >= total)) break;
+    offset += limit;
+    if (offset > 2000) break;
+  }
+
+  return results;
+}
+
+async function bsdFetchLiveEvents(env, leagueId, seasonId) {
+  const params = new URLSearchParams({
+    league_id: String(leagueId),
+    season_id: String(seasonId)
+  });
+  const data = await bsdFetchJson(
+    env,
+    `https://sports.bzzoiro.com/api/v2/events/live/?${params.toString()}`
+  );
+  return bsdExtractEvents(data);
+}
+
+async function bsdFetchLiveIncidents(env, eventId) {
+  try {
+    const data = await bsdFetchJson(
+      env,
+      `https://sports.bzzoiro.com/api/v2/events/${eventId}/incidents/`
+    );
+    return Array.isArray(data?.incidents)
+      ? data.incidents
+      : Array.isArray(data?.results)
+        ? data.results
+        : Array.isArray(data)
+          ? data
+          : [];
+  } catch {
+    return [];
+  }
+}
+
 async function bsdFootballAdapter(env, competitionKey, options = {}) {
   const competition = CPC_FOOTBALL_COMPETITIONS[competitionKey];
   if (!competition) throw new Error("Competição não suportada.");
@@ -2330,25 +2426,55 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
   let seasonId = Number(options.seasonId || 0);
   let seasonLabel = "";
 
-  if (!Number.isSafeInteger(seasonId) || seasonId <= 0) {
-    const seasonsData = await bsdFetchJson(env,
-      `https://sports.bzzoiro.com/api/v2/leagues/${competition.leagueId}/seasons/`,
-      21600
-    );
-    const seasons = Array.isArray(seasonsData)
-      ? seasonsData
-      : Array.isArray(seasonsData?.seasons)
-        ? seasonsData.seasons
-        : Array.isArray(seasonsData?.results)
-          ? seasonsData.results
-          : [];
+  let seasonStart = "";
+  let seasonEnd = "";
 
-    const current = seasons.find(item => item?.current === true)
-      || seasons.find(item => String(item?.year || "") === "2026")
-      || seasons[0];
+  if (!Number.isSafeInteger(seasonId) || seasonId <= 0) {
+    let current;
+    try {
+      current = await bsdFetchJson(
+        env,
+        `https://sports.bzzoiro.com/api/v2/leagues/${competition.leagueId}/season/`
+      );
+    } catch {
+      const seasonsData = await bsdFetchJson(
+        env,
+        `https://sports.bzzoiro.com/api/v2/leagues/${competition.leagueId}/seasons/`
+      );
+      const seasons = Array.isArray(seasonsData)
+        ? seasonsData
+        : Array.isArray(seasonsData?.seasons)
+          ? seasonsData.seasons
+          : Array.isArray(seasonsData?.results)
+            ? seasonsData.results
+            : [];
+      current = seasons.find(item => item?.is_current === true || item?.current === true)
+        || seasons.find(item => String(item?.year || "") === "2026")
+        || seasons[0];
+    }
 
     seasonId = Number(current?.id);
     seasonLabel = cpcSafeString(current?.name || current?.label || current?.year);
+    seasonStart = cpcSafeString(current?.start_date);
+    seasonEnd = cpcSafeString(current?.end_date);
+  } else {
+    try {
+      const seasonData = await bsdFetchJson(
+        env,
+        `https://sports.bzzoiro.com/api/v2/leagues/${competition.leagueId}/seasons/`
+      );
+      const seasons = Array.isArray(seasonData)
+        ? seasonData
+        : Array.isArray(seasonData?.seasons)
+          ? seasonData.seasons
+          : Array.isArray(seasonData?.results)
+            ? seasonData.results
+            : [];
+      const selected = seasons.find(item => Number(item?.id) === seasonId);
+      seasonLabel = cpcSafeString(selected?.name || selected?.label || selected?.year);
+      seasonStart = cpcSafeString(selected?.start_date);
+      seasonEnd = cpcSafeString(selected?.end_date);
+    } catch {}
   }
 
   if (!Number.isSafeInteger(seasonId) || seasonId <= 0) {
@@ -2361,26 +2487,34 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
   const stage = options.stage
     ? String(options.stage)
     : (defaultStageByCompetition[competitionKey] || "");
-  const eventParams = new URLSearchParams({
-    league_id: String(competition.leagueId),
-    season_id: String(seasonId)
-  });
-  if (stage) eventParams.set("stage", stage);
-  if (options.round != null) eventParams.set("round", String(options.round));
-  if (options.status) {
-    const providerStatus = options.status === "upcoming" ? "notstarted" : options.status;
-    if (["notstarted", "finished", "live"].includes(providerStatus)) {
-      eventParams.set("status", providerStatus);
-    }
-  }
-
   let eventsData;
   let standingsData;
 
   try {
-    eventsData = await bsdFetchJson(env,
-      `https://sports.bzzoiro.com/api/v2/events/?${eventParams.toString()}`
-    );
+    if (status === "all") {
+      const [finished, upcoming] = await Promise.all([
+        bsdFetchEventsForSeason(env, competition.leagueId, seasonId, "finished", seasonStart, seasonEnd),
+        bsdFetchEventsForSeason(env, competition.leagueId, seasonId, "upcoming", seasonStart, seasonEnd)
+      ]);
+      const byId = new Map();
+      [...finished, ...upcoming].forEach(item => {
+        const id = cpcSafeNumber(item?.id ?? item?.event_id);
+        if (id != null) byId.set(id, item);
+      });
+      eventsData = [...byId.values()];
+    } else if (status === "live") {
+      eventsData = await bsdFetchLiveEvents(env, competition.leagueId, seasonId);
+    } else {
+      const providerStatus = status === "upcoming" ? "upcoming" : "finished";
+      eventsData = await bsdFetchEventsForSeason(
+        env,
+        competition.leagueId,
+        seasonId,
+        providerStatus,
+        seasonStart,
+        seasonEnd
+      );
+    }
   } catch (error) {
     throw new Error("BSD_EVENTS:" + (error instanceof Error ? error.message : "unknown"));
   }
@@ -2432,6 +2566,63 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
 
       return normalized;
     });
+
+    const liveRaw = status === "all" || status === "upcoming"
+      ? await bsdFetchLiveEvents(env, competition.leagueId, seasonId).catch(() => [])
+      : [];
+    if (liveRaw.length) {
+      const liveById = new Map(liveRaw.map(item => [
+        cpcSafeNumber(item?.id ?? item?.event_id),
+        item
+      ]));
+      const liveIds = [...liveById.keys()].filter(id => id != null);
+      const incidentsById = new Map();
+      await Promise.all(liveIds.map(async id => {
+        incidentsById.set(id, await bsdFetchLiveIncidents(env, id));
+      }));
+
+      fixtures = fixtures.map(item => {
+        const live = liveById.get(item.id);
+        if (!live) return item;
+        const liveScoreHome = cpcSafeNumber(live?.home_score ?? live?.score?.home);
+        const liveScoreAway = cpcSafeNumber(live?.away_score ?? live?.score?.away);
+        const incidents = incidentsById.get(item.id) || [];
+        const goals = incidents
+          .filter(incident => {
+            const type = String(
+              incident?.type ??
+              incident?.event_type ??
+              incident?.incident_type ??
+              incident?.kind ??
+              ""
+            ).toLowerCase();
+            return type.includes("goal") && !incident?.rescinded;
+          })
+          .map(incident => ({
+            teamId: cpcSafeNumber(incident?.team_id ?? incident?.team?.id),
+            player: cpcSafeString(incident?.player_name ?? incident?.player?.name ?? incident?.player),
+            minute: cpcSafeNumber(incident?.minute ?? incident?.min),
+            addedTime: cpcSafeNumber(incident?.added_time ?? incident?.added),
+            periodSecond: cpcSafeNumber(incident?.period_second)
+          }));
+
+        return {
+          ...item,
+          status: "live",
+          score: {
+            home: liveScoreHome ?? item.score.home,
+            away: liveScoreAway ?? item.score.away
+          },
+          liveMinute: cpcSafeNumber(live?.current_minute ?? live?.minute),
+          livePeriod: cpcSafeString(live?.period ?? live?.current_period),
+          liveAddedTime: cpcSafeNumber(live?.added_time ?? live?.stoppage_time),
+          halfTimeScore: live?.half_time_score ?? live?.ht_score ?? null,
+          extraTimeScore: live?.extra_time_score ?? null,
+          penaltyShootout: live?.penalty_shootout ?? null,
+          goals
+        };
+      });
+    }
   } catch (error) {
     throw new Error("NORMALIZE_EVENTS:" + (error instanceof Error ? error.message : "unknown"));
   }
@@ -2457,7 +2648,9 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
     },
     season: {
       id: seasonId,
-      label: seasonLabel || (seasonId === 1310 ? "2026/27" : "")
+      label: seasonLabel || (seasonId === 1310 ? "2026/27" : ""),
+      startDate: seasonStart || null,
+      endDate: seasonEnd || null
     },
     fixtures,
     standings,
