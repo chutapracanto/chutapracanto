@@ -72,12 +72,13 @@
 .competition-filter{border:1px solid var(--border-color);background:transparent;color:var(--text-gray);border-radius:8px;padding:.5rem .7rem;font:600 .74rem var(--font-title);cursor:pointer}
 .competition-filter.active{color:var(--text-color);border-color:var(--neon-green);background:rgba(157,255,0,.07)}
 .competition-round-select{border:1px solid var(--border-color);background:var(--card-bg);color:var(--text-color);border-radius:8px;padding:.5rem .65rem;font:600 .74rem var(--font-title)}
-.competition-grid{display:grid;grid-template-columns:minmax(280px,.82fr) minmax(0,1.38fr);gap:1rem}
+.competition-grid{display:grid;grid-template-columns:minmax(300px,.95fr) minmax(0,1.25fr);gap:1rem}
 .competition-panel{background:var(--card-bg);border:1px solid var(--border-color);border-radius:14px;overflow:hidden}
 .competition-panel-header{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.1rem;border-bottom:1px solid var(--border-color)}
 .competition-panel h2{font:700 1rem var(--font-title);margin:0}
 .competition-panel-header span{font-size:.72rem;color:var(--text-gray)}
 .fixtures{padding:.45rem 1rem}
+.fixture-group-title,.standing-group-title{margin:.85rem 0 .45rem;font:700 .75rem var(--font-title);letter-spacing:.08em;text-transform:uppercase;color:var(--text-gray)}
 .fixture{display:grid;grid-template-columns:5.3rem minmax(0,1fr) 2.4rem minmax(0,1fr);gap:.55rem;align-items:center;padding:.75rem 0;border-bottom:1px solid var(--border-color)}
 .fixture:last-child{border-bottom:0}
 .fixture-time{color:var(--text-gray);font-size:.7rem;line-height:1.35}
@@ -271,35 +272,36 @@ function renderFixtures(){
   let rows=allFixtures.filter(item=>{const status=fixtureStatus(item);return fixtureFilter==="all"||(fixtureFilter==="upcoming"?(status==="upcoming"||status==="live"):status===fixtureFilter)});
   const selectedRound=roundEl.value;
   if(selectedRound!=="all")rows=rows.filter(item=>translateRound(item.roundLabel||item.round||"").trim()===selectedRound);
-  rows.sort((a,b)=>{const as=fixtureStatus(a),bs=fixtureStatus(b);const ad=dateValue(a)?.getTime()||0,bd=dateValue(b)?.getTime()||0;if(fixtureFilter==="finished")return bd-ad;if(fixtureFilter==="all"){if(as==="live"&&bs!=="live")return -1;if(bs==="live"&&as!=="live")return 1;if(as==="upcoming"&&bs==="finished")return -1;if(bs==="upcoming"&&as==="finished")return 1;if(as==="upcoming"&&bs==="upcoming")return ad-bd;return bd-ad}return ad-bd;});
+  rows.sort((a,b)=>{const as=fixtureStatus(a),bs=fixtureStatus(b),ad=dateValue(a)?.getTime()||0,bd=dateValue(b)?.getTime()||0;if(fixtureFilter==="finished")return bd-ad;if(fixtureFilter==="all"){if(as==="live"&&bs!=="live")return -1;if(bs==="live"&&as!=="live")return 1;if(as==="upcoming"&&bs==="finished")return -1;if(bs==="upcoming"&&as==="finished")return 1;if(as==="upcoming"&&bs==="upcoming")return ad-bd;return bd-ad}return ad-bd});
   countEl.textContent=rows.length+" jogo"+(rows.length===1?"":"s");
   if(!rows.length){fixturesEl.innerHTML='<div class="empty">Não há jogos para este filtro.</div>';return}
-  fixturesEl.innerHTML=rows.slice(0,40).map(item=>{
-    const status=fixtureStatus(item);
-    const hs=item.score?.home,as=item.score?.away;
-    const score=hs!=null||as!=null?esc(hs??"—")+" – "+esc(as??"—"):"—";
-    const minute=liveMinuteLabel(item);
-    const goals=goalsLabel(item);
-    return `<div class="fixture">
-      <div class="fixture-time">${status==="live"?'<span class="fixture-live">LIVE</span>':''}${status==="live"&&minute?'<span class="fixture-live-detail">'+esc(minute)+'</span>':''}${status!=="live"?dateLabel(dateValue(item))+"<br>":""}<span>${esc(translateRound(item.roundLabel||item.round||""))}</span></div>
-      <div class="fixture-team"><span>${esc(item.homeTeam?.name||"Casa")}</span><img src="${teamLogo(item.homeTeam)}" alt=""></div>
-      <div class="fixture-score" title="${status==="upcoming"?"Próximo jogo":status==="live"?"Em jogo":"Resultado"}">${score}</div>
-      <div class="fixture-team away"><img src="${teamLogo(item.awayTeam)}" alt=""><span>${esc(item.awayTeam?.name||"Fora")}</span></div>
-    </div>`;
+  const groups=new Map();
+  rows.slice(0,40).forEach(item=>{const key=String(item.groupName||"").trim()||"__single__";if(!groups.has(key))groups.set(key,[]);groups.get(key).push(item)});
+  fixturesEl.innerHTML=[...groups.entries()].map(([group,items])=>{
+    const label=group==="__single__"?"":'<h4 class="fixture-group-title">'+esc(group)+'</h4>';
+    const markup=items.map(item=>{
+      const status=fixtureStatus(item),hs=item.score?.home,as=item.score?.away;
+      const score=hs!=null||as!=null?esc(hs??"—")+" – "+esc(as??"—"):"—",minute=liveMinuteLabel(item),goals=goalsLabel(item);
+      return '<div class="fixture">' +
+        '<div class="fixture-time">' + (status==="live"?'<span class="fixture-live">LIVE</span>':"") + (status==="live"&&minute?'<span class="fixture-live-detail">'+esc(minute)+'</span>':"") + (status!=="live"?dateLabel(dateValue(item))+"<br>":"") + '<span>'+esc(translateRound(item.roundLabel||item.round||""))+'</span></div>' +
+        '<div class="fixture-team"><span>'+esc(item.homeTeam?.name||"Casa")+'</span><img src="'+teamLogo(item.homeTeam)+'" alt=""></div>' +
+        '<div class="fixture-score" title="'+(status==="upcoming"?"Próximo jogo":status==="live"?"Em jogo":"Resultado")+'">'+score+(goals?'<div class="highlight-goals">'+goals+"</div>":"")+"</div>" +
+        '<div class="fixture-team away"><img src="'+teamLogo(item.awayTeam)+'" alt=""><span>'+esc(item.awayTeam?.name||"Fora")+'</span></div></div>';
+    }).join("");
+    return label+markup;
   }).join("");
 }
 function renderStandings(rows){
   if(!rows.length){standingsEl.innerHTML='<div class="empty">Esta competição não disponibiliza uma classificação neste formato.</div>';return}
-  standingsEl.innerHTML='<div class="table-wrap"><table class="standings"><thead><tr><th>#</th><th>Equipa</th><th><abbr title="Jogos">J</abbr></th><th><abbr title="Vitórias">V</abbr></th><th><abbr title="Empates">E</abbr></th><th><abbr title="Derrotas">D</abbr></th><th><abbr title="Golos marcados">GM</abbr></th><th><abbr title="Golos sofridos">GS</abbr></th><th><abbr title="Diferença de golos">DG</abbr></th><th><abbr title="Pontos">Pts</abbr></th></tr></thead><tbody>'+rows.map((row,i)=>`
-    <tr><td>${esc(row.position??i+1)}</td><td><div class="standing-team"><img src="${teamLogo(row.team)}" alt=""><span>${esc(row.team?.name||"—")}</span></div></td><td>${esc(row.played??row.games??"—")}</td><td>${esc(row.wins??"—")}</td><td>${esc(row.draws??"—")}</td><td>${esc(row.losses??"—")}</td><td>${esc(row.goalsFor??"—")}</td><td>${esc(row.goalsAgainst??"—")}</td><td>${esc(row.goalDifference??row.gd??"—")}</td><td><strong>${esc(row.points??"—")}</strong></td></tr>`).join("")+'</tbody></table></div>';
+  const grouped=new Map();rows.forEach(row=>{const key=String(row.groupName||"").trim()||"__single__";if(!grouped.has(key))grouped.set(key,[]);grouped.get(key).push(row)});
+  const table=items=>'<div class="table-wrap"><table class="standings"><thead><tr><th>#</th><th>Equipa</th><th><abbr title="Jogos">J</abbr></th><th><abbr title="Vitórias">V</abbr></th><th><abbr title="Empates">E</abbr></th><th><abbr title="Derrotas">D</abbr></th><th><abbr title="Golos marcados">GM</abbr></th><th><abbr title="Golos sofridos">GS</abbr></th><th><abbr title="Diferença de golos">DG</abbr></th><th><abbr title="Pontos">Pts</abbr></th></tr></thead><tbody>'+items.map((row,i)=>'<tr><td>'+esc(row.position??i+1)+'</td><td><div class="standing-team"><img src="'+teamLogo(row.team)+'" alt=""><span>'+esc(row.team?.name||"—")+'</span></div></td><td>'+esc(row.played??"—")+'</td><td>'+esc(row.wins??"—")+'</td><td>'+esc(row.draws??"—")+'</td><td>'+esc(row.losses??"—")+'</td><td>'+esc(row.goalsFor??"—")+'</td><td>'+esc(row.goalsAgainst??"—")+'</td><td>'+esc(row.goalDifference??"—")+'</td><td><strong>'+esc(row.points??"—")+'</strong></td></tr>').join("")+"</tbody></table></div>";
+  standingsEl.innerHTML=[...grouped.entries()].map(([group,items])=>group==="__single__"?table(items):'<section class="standing-group"><h4 class="standing-group-title">'+esc(group)+'</h4>'+table(items)+'</section>').join("");
 }
 async function loadCompetition(key,status=fixtureFilter){
   active=key;loadingStatus=status;renderTabs();
   const meta=competitions.find(item=>item[0]===key);
   nameEl.textContent=meta?.[1]||key;
   logoEl.src=leagueLogo(meta?.[2]||0);
-  fixturesEl.innerHTML='<div class="empty">A carregar jogos…</div>';
-  standingsEl.innerHTML='<div class="empty">A carregar classificação…</div>';
   try{
     const params=new URLSearchParams({competition:key});
     if(status==="finished" || status==="all") params.set("status",status);
