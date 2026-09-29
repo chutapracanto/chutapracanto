@@ -2753,3 +2753,27 @@ A razão pela qual `[triggers]` não deve voltar ao `wrangler.toml` do Pages per
 - Manter o Worker separado `cpc-football-cron` com o Cron Trigger real.
 - Não duplicar o scheduled handler no `_worker.js` do Pages.
 - Não criar outro Worker.
+
+
+## 2026-09-29 — Correção estrutural da área Competições
+
+### Evidência
+- D1 mostrou que as respostas status=all estavam a guardar apenas 50 fixtures por competição.
+- Na Liga Portugal 26/27, esses 50 eram os jogos mais distantes da época, terminando em 10/04/2027, o que fazia a UI mostrar a jornada 34 em 29/09/2026.
+- A documentação atual do BSD confirma paginação de até 200 itens e filtros date_from/date_to; a fonte também recomenda resolver a época atual pelo endpoint singular /leagues/{id}/season/.
+
+### Correção implementada
+- _worker.js passou a resolver a época atual pelo endpoint current-season, com fallback para a lista de épocas.
+- Fixtures passaram a ser obtidos por janela temporal da época e com paginação, em vez da primeira página de 50 itens.
+- status=all combina resultados + próximos jogos da época atual e incorpora jogos live.
+- A resposta normalizada passou a transportar minuto live, período, compensação e estrutura de golos quando fornecidos pelo BSD.
+- A classificação passou a recuperar empates também por aliases BSD e, quando necessário, por J - V - D, evitando empates nulos apesar de pontos/record indicarem a existência deles.
+- competicoes.html passou a manter jogos live dentro de “Próximos”, ordenar “Todos” em torno da data atual, dar mais largura à classificação e refrescar o estado live a cada 15 segundos.
+- Os separadores de competições passaram a ordenar-se pelo próximo jogo das equipas prioritárias (Porto, Sporting, Benfica, Portugal), usando o próximo jogo geral como desempate/fallback.
+- Indicador live visual em vermelho, pulsação lenta, minuto e tempos dos golos quando disponíveis.
+
+### Validação
+- Sintaxe de competicoes.html: PASS.
+- Sintaxe de _worker.js: PASS através de compilação JS com o export default substituído apenas para o teste.
+- Cloudflare Pages production deployment do commit final 998bbbcbd595736456382b3a27beccf0b3168fcb: concluído com sucesso.
+- URL do deployment: https://d567e600.chutapracanto.pages.dev
