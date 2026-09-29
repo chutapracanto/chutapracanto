@@ -3128,6 +3128,10 @@ async function handleFootballCompetitionAPI(request, env) {
             merged.push({
               ...cachedFixture,
               ...normalized,
+              stageKey: cachedFixture?.stageKey || normalized?.stageKey || "",
+              stageName: cachedFixture?.stageName || normalized?.stageName || "",
+              roundKey: cachedFixture?.roundKey || normalized?.roundKey || "",
+              roundLabel: cachedFixture?.roundLabel || normalized?.roundLabel || "",
               status: "live",
               groupName: cachedFixture?.groupName || normalized?.groupName || "",
               score: normalized.score?.home != null || normalized.score?.away != null ? normalized.score : cachedFixture.score
