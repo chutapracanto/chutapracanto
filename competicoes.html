@@ -543,13 +543,20 @@ function patchHighlight(){
 function updateLiveSnapshot(data){
   const previous=new Map(allFixtures.map(item=>[fixtureDomKey(item),item]));
   const incoming=Array.isArray(data.fixtures)?data.fixtures:[];
+  const previousKeys=new Set(previous.keys());
+  const incomingKeys=new Set(incoming.map(fixtureDomKey));
+  const membershipChanged=previousKeys.size!==incomingKeys.size||[...previousKeys].some(key=>!incomingKeys.has(key));
   allFixtures=incoming;
-  incoming.forEach(item=>{
-    const old=previous.get(fixtureDomKey(item));
-    if(!old||JSON.stringify([old.status,old.liveMinute,old.livePeriod,old.score,old.goals])!==JSON.stringify([item.status,item.liveMinute,item.livePeriod,item.score,item.goals])){
-      patchFixtureRow(item);
-    }
-  });
+  if(membershipChanged){
+    renderFixtures();
+  }else{
+    incoming.forEach(item=>{
+      const old=previous.get(fixtureDomKey(item));
+      if(!old||JSON.stringify([old.status,old.liveMinute,old.livePeriod,old.score,old.goals,old.roundKey,old.roundLabel])!==JSON.stringify([item.status,item.liveMinute,item.livePeriod,item.score,item.goals,item.roundKey,item.roundLabel])){
+        patchFixtureRow(item);
+      }
+    });
+  }
   countEl.textContent=visibleFixtures().length+" jogo"+(visibleFixtures().length===1?"":"s");
   patchHighlight();
   updateCompetitionLiveState();
