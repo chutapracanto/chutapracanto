@@ -2328,14 +2328,30 @@ function cpcNormalizeEvent(event, defaultStage = "") {
       home: cpcSafeNumber(event?.home_score ?? event?.home?.score ?? event?.score?.home),
       away: cpcSafeNumber(event?.away_score ?? event?.away?.score ?? event?.score?.away)
     },
-    liveMinute: cpcSafeNumber(event?.current_minute ?? event?.minute ?? event?.live_minute),
-    livePeriod: cpcSafeString(event?.period ?? event?.current_period ?? event?.live_period),
-    liveAddedTime: cpcSafeNumber(event?.added_time ?? event?.stoppage_time ?? event?.live_added_time),
+    liveMinute: cpcSafeNumber(event?.current_minute ?? event?.minute ?? event?.live_minute ?? event?.time?.minute),
+    livePeriod: cpcSafeString(event?.period ?? event?.current_period ?? event?.live_period ?? event?.time?.status),
+    liveAddedTime: cpcSafeNumber(event?.added_time ?? event?.stoppage_time ?? event?.live_added_time ?? event?.time?.injury_time),
     halfTimeScore: event?.half_time_score ?? event?.ht_score ?? null,
     extraTimeScore: event?.extra_time_score ?? null,
     penaltyShootout: event?.penalty_shootout ?? null,
     goals: Array.isArray(event?.goals) ? event.goals : []
   };
+}
+
+function cpcInferCompetitionPhase(competitionKey, fixtures, standings) {
+  const groupNames = new Set((standings || [])
+    .map(row => cpcSafeString(row?.groupName || row?.group_name || (typeof row?.group === "string" ? row.group : row?.group?.name)))
+    .filter(Boolean).map(value => value.toLowerCase()));
+  const stageTexts = (fixtures || [])
+    .map(item => cpcSafeString(item?.stageName || item?.stage || item?.stageKey))
+    .filter(Boolean).join(" ").toLowerCase();
+  if (groupNames.size > 1 || /group[- _]?stage|group stage|fase de grupos|grupo/.test(stageTexts)) {
+    return { type: "group-stage", grouped: true, label: "Fase de grupos" };
+  }
+  if (/league[- _]?phase|league phase|fase de liga/.test(stageTexts)) {
+    return { type: "league-phase", grouped: false, label: "Fase de liga" };
+  }
+  return { type: "single-table", grouped: false, label: "Classificação" };
 }
 
 function cpcNormalizeStanding(row) {
@@ -2766,15 +2782,18 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
               incident?.event_type ??
               incident?.incident_type ??
               incident?.kind ??
+              incident?.action_type ??
               ""
             ).toLowerCase();
             return type.includes("goal") && !incident?.rescinded;
           })
           .map(incident => ({
-            teamId: cpcSafeNumber(incident?.team_id ?? incident?.team?.id),
+            teamId: cpcSafeNumber(incident?.team_id ??
+              incident?.team?.id ??
+              (String(incident?.team ?? incident?.side ?? "").toLowerCase()==="home" ? item.homeTeam?.id : String(incident?.team ?? incident?.side ?? "").toLowerCase()==="away" ? item.awayTeam?.id : null)),
             player: cpcSafeString(incident?.player_name ?? incident?.player?.name ?? incident?.player),
-            minute: cpcSafeNumber(incident?.minute ?? incident?.min),
-            addedTime: cpcSafeNumber(incident?.added_time ?? incident?.added),
+            minute: cpcSafeNumber(incident?.minute ?? incident?.min ?? incident?.time?.minute),
+            addedTime: cpcSafeNumber(incident?.added_time ?? incident?.added ?? incident?.time?.injury_time),
             periodSecond: cpcSafeNumber(incident?.period_second)
           }));
 
@@ -2785,9 +2804,9 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
             home: liveScoreHome ?? item.score.home,
             away: liveScoreAway ?? item.score.away
           },
-          liveMinute: cpcSafeNumber(live?.current_minute ?? live?.minute),
-          livePeriod: cpcSafeString(live?.period ?? live?.current_period),
-          liveAddedTime: cpcSafeNumber(live?.added_time ?? live?.stoppage_time),
+          liveMinute: cpcSafeNumber(live?.current_minute ?? live?.minute ?? live?.time?.minute),
+          livePeriod: cpcSafeString(live?.period ?? live?.current_period ?? live?.time?.status),
+          liveAddedTime: cpcSafeNumber(live?.added_time ?? live?.stoppage_time ?? live?.time?.injury_time),
           halfTimeScore: live?.half_time_score ?? live?.ht_score ?? item.halfTimeScore ?? null,
           extraTimeScore: live?.extra_time_score ?? item.extraTimeScore ?? null,
           penaltyShootout: live?.penalty_shootout ?? item.penaltyShootout ?? null,
@@ -2816,6 +2835,8 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
     throw new Error("NORMALIZE_STANDINGS:" + (error instanceof Error ? error.message : "unknown"));
   }
 
+  const phase = cpcInferCompetitionPhase(competitionKey, fixtures, standings);
+
   return {
     competition: {
       key: competitionKey,
@@ -2823,6 +2844,7 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
       provider: "bsd",
       providerLeagueId: competition.leagueId
     },
+    phase,
     season: {
       id: seasonId,
       label: seasonLabel || bsdSeasonLabel({ start_date: seasonStart, end_date: seasonEnd }) || "Época atual",
