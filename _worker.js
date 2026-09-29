@@ -2416,16 +2416,45 @@ function bsdExtractEvents(data) {
 
 function bsdExtractStandings(data) {
   // A BSD pode devolver standings como array direto, em data, standings,
-  // table, groups ou results. Normalizamos todas essas formas aqui.
+  // table, results ou grupos. Normalizamos todas essas formas aqui.
   let payload = data;
-  if (Array.isArray(data)) payload = data;
-  else if (Array.isArray(data?.data)) payload = data.data;
-  else if (data?.data && typeof data.data === "object") payload = data.data;
+  if (Array.isArray(data)) {
+    payload = data;
+  } else if (Array.isArray(data?.data)) {
+    payload = data.data;
+  } else if (data?.data && typeof data.data === "object") {
+    payload = data.data;
+  }
 
   const addGroupRows = (rows, groupName) => {
     if (!Array.isArray(rows)) return [];
-    return rows.map(row => ({ ...row, groupName: row?.groupName || row?.group_name || row?.group?.name || row?.group?.label || groupName }));
+    return rows.map(row => ({
+      ...row,
+      groupName:
+        row?.groupName ||
+        row?.group_name ||
+        row?.group?.name ||
+        row?.group?.label ||
+        groupName
+    }));
   };
+
+  // O endpoint de standings do BSD para Nations League devolve:
+  // groups: { "League A, Group 4": [...], ... }
+  // Cada chave identifica directamente o grupo e cada array contém as equipas.
+  // Não tratar este objecto como uma lista de grupos, porque Object.entries()
+  // é a estrutura real desta resposta.
+  if (
+    payload &&
+    typeof payload === "object" &&
+    payload.groups &&
+    typeof payload.groups === "object" &&
+    !Array.isArray(payload.groups)
+  ) {
+    return Object.entries(payload.groups).flatMap(([groupName, rows]) =>
+      addGroupRows(rows, groupName)
+    );
+  }
 
   const groups = Array.isArray(payload?.groups)
     ? payload.groups
@@ -2435,7 +2464,15 @@ function bsdExtractStandings(data) {
 
   if (groups.length) {
     return groups.flatMap((group, index) => {
-      const groupName = cpcSafeString(group?.name ?? group?.group_name ?? group?.label ?? group?.group) || "Grupo " + String.fromCharCode(65 + index);
+      const groupName =
+        cpcSafeString(
+          group?.name ??
+          group?.group_name ??
+          group?.label ??
+          group?.group
+        ) ||
+        "Grupo " + String.fromCharCode(65 + index);
+
       const source = Array.isArray(group)
         ? group
         : Array.isArray(group?.standings)
@@ -2447,6 +2484,7 @@ function bsdExtractStandings(data) {
               : Array.isArray(group?.rows)
                 ? group.rows
                 : [];
+
       return addGroupRows(source, groupName);
     });
   }
@@ -2465,7 +2503,15 @@ function bsdExtractStandings(data) {
 
   if (standings.some(Array.isArray)) {
     return standings.flatMap((group, index) => {
-      const groupName = cpcSafeString(group?.name ?? group?.group_name ?? group?.label ?? group?.group) || "Grupo " + String.fromCharCode(65 + index);
+      const groupName =
+        cpcSafeString(
+          group?.name ??
+          group?.group_name ??
+          group?.label ??
+          group?.group
+        ) ||
+        "Grupo " + String.fromCharCode(65 + index);
+
       const rows = Array.isArray(group)
         ? group
         : Array.isArray(group?.standings)
@@ -2475,101 +2521,13 @@ function bsdExtractStandings(data) {
             : Array.isArray(group?.rows)
               ? group.rows
               : [];
+
       return addGroupRows(rows, groupName);
     });
   }
 
   return standings;
 }
-
-async function bsdFetchEventsForSeason(env, leagueId, seasonId, status, seasonStart, seasonEnd, stage = "", round = null) {
-  const todayIso = new Date().toISOString().slice(0, 10);
-  const start = String(seasonStart || todayIso).slice(0, 10);
-  const end = String(seasonEnd || todayIso).slice(0, 10);
-  const dateFrom = status === "upcoming" ? todayIso : start;
-  const dateTo = status === "finished" ? (todayIso < end ? todayIso : end) : end;
-
-  const results = [];
-  let offset = 0;
-  const limit = 200;
-
-  for (;;) {
-    const params = new URLSearchParams({
-      league_id: String(leagueId),
-      season_id: String(seasonId),
-      date_from: dateFrom,
-      date_to: dateTo,
-      limit: String(limit),
-      offset: String(offset)
-    });
-    if (stage) params.set("stage", String(stage));
-    if (round != null && String(round) !== "") params.set("round", String(round));
-    if (status === "upcoming" || status === "finished") params.set("status", status);
-
-    const data = await bsdFetchJson(
-      env,
-      "https://sports.bzzoiro.com/api/v2/events/?" + params.toString()
-    );
-    const page = bsdExtractEvents(data);
-    results.push(...page);
-
-    const total = cpcSafeNumber(data?.count);
-    if (!page.length || page.length < limit || (total != null && results.length >= total)) break;
-    offset += limit;
-    if (offset > 2000) break;
-  }
-
-  if (status === "upcoming") {
-    const now = Date.now();
-    return results.filter(event => {
-      const eventStatus = String(event?.status ?? event?.event_status ?? "").toLowerCase().replace(/[ -]+/g, "_");
-      if (["live", "in_progress", "in_play", "inplay", "ongoing"].includes(eventStatus)) return true;
-      const kickoff = Date.parse(event?.event_date ?? event?.date ?? event?.start_date ?? "");
-      return Number.isFinite(kickoff) && kickoff >= now;
-    });
-  }
-
-  if (status === "finished") {
-    return results.filter(event => ["finished", "ended", "ft", "full_time", "completed", "aet", "penalties"].includes(
-      String(event?.status ?? event?.event_status ?? "").toLowerCase().replace(/[ -]+/g, "_")
-    ));
-  }
-
-  return results;
-}
-
-async function bsdFetchLiveEvents(env, leagueId, seasonId, stage = "", round = null) {
-  const params = new URLSearchParams({
-    league_id: String(leagueId),
-    season_id: String(seasonId)
-  });
-  if (stage) params.set("stage", String(stage));
-  if (round != null && String(round) !== "") params.set("round", String(round));
-  const data = await bsdFetchJson(
-    env,
-    "https://sports.bzzoiro.com/api/v2/events/live/?" + params.toString()
-  );
-  return bsdExtractEvents(data);
-}
-
-async function bsdFetchLiveIncidents(env, eventId) {
-  try {
-    const data = await bsdFetchJson(
-      env,
-      `https://sports.bzzoiro.com/api/v2/events/${eventId}/incidents/`
-    );
-    return Array.isArray(data?.incidents)
-      ? data.incidents
-      : Array.isArray(data?.results)
-        ? data.results
-        : Array.isArray(data)
-          ? data
-          : [];
-  } catch {
-    return [];
-  }
-}
-
 function bsdUnwrapSeason(data) {
   return data?.season || data?.data || data?.result || data || null;
 }
@@ -3035,34 +2993,6 @@ async function handleFootballCompetitionAPI(request, env) {
 
   const competitionKey = url.searchParams.get("competition") || "";
   const competition = CPC_FOOTBALL_COMPETITIONS[competitionKey];
-
-  // DIAGNÓSTICO TEMPORÁRIO: inspecciona apenas a estrutura da resposta BSD de standings.
-  if (competitionKey === "nations-league" && url.searchParams.get("debug") === "nations-standings") {
-    try {
-      const currentSeason = await bsdResolveCurrentSeason(env, competition.leagueId);
-      const seasonId = Number(currentSeason?.id ?? currentSeason?.season_id);
-      const endpoint = "https://sports.bzzoiro.com/api/v2/leagues/" + competition.leagueId + "/standings/?season_id=" + seasonId;
-      const standingsData = await bsdFetchJson(env, endpoint);
-      const describe = value => {
-        if (Array.isArray(value)) return { type: "array", length: value.length, first: value[0] && typeof value[0] === "object" ? Object.keys(value[0]) : typeof value[0] };
-        if (value && typeof value === "object") {
-          const out = { type: "object", keys: Object.keys(value) };
-          for (const key of out.keys) if (Array.isArray(value[key])) out[key + "_length"] = value[key].length;
-          return out;
-        }
-        return { type: typeof value, value: value == null ? null : String(value).slice(0, 100) };
-      };
-      return json({
-        competition: competitionKey,
-        leagueId: competition.leagueId,
-        season: { id: seasonId, label: bsdSeasonLabel(currentSeason) },
-        response: describe(standingsData),
-        nested: standingsData && typeof standingsData === "object" ? Object.fromEntries(Object.entries(standingsData).filter(([, value]) => value && typeof value === "object").map(([key, value]) => [key, describe(value)])) : null
-      }, 200, { "Cache-Control": "no-store" });
-    } catch (error) {
-      return json({ error: error instanceof Error ? error.message : String(error) }, 502, { "Cache-Control": "no-store" });
-    }
-  }
 
   if (!competition) {
     return json({
