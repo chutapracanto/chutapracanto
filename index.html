@@ -142,37 +142,72 @@
     .episode-title { font-size: 0.95rem; font-weight: 600; color: #fff; margin: 0; }
     .episode-date { font-size: 0.75rem; color: var(--text-gray); }
     .audio-player { height: 32px; max-width: 220px; }
-    .home-competitions-section{margin-bottom:3.5rem}
-    .home-competition-loading{display:block;grid-column:1/-1;padding:1rem;color:var(--text-gray)}
-    .home-competition-layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:1rem}
-    .home-competition-feature,.home-competition-shortcut{background:var(--card-bg);border:1px solid var(--border-color);border-radius:14px;text-decoration:none;color:inherit}
-    .home-competition-feature{padding:1.1rem;display:block;overflow:hidden;position:relative}
-    .home-competition-feature:hover,.home-competition-shortcut:hover{border-color:var(--neon-green);transform:translateY(-2px)}
-    .home-competition-feature-head{display:flex;justify-content:space-between;align-items:center}
-    .home-competition-kicker{font:700 .66rem var(--font-title);letter-spacing:.12em;color:var(--neon-green)}
-    .home-competition-arrow{font-size:1.35rem;color:var(--neon-green)}
-    .home-competition-feature-main{display:flex;align-items:center;gap:.85rem;margin:.8rem 0}
-    .home-competition-league-logo{width:52px;height:52px;object-fit:contain;flex:0 0 auto}
-    .home-competition-feature h3{margin:0;font:700 1.25rem var(--font-title)}
-    .home-competition-feature p{margin:.2rem 0 0;color:var(--text-gray);font-size:.8rem}
-    .home-competition-teams{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.5rem;padding-top:.75rem;border-top:1px solid var(--border-color)}
-    .home-competition-team{display:grid;grid-template-columns:27px 1fr auto;align-items:center;gap:.4rem;min-width:0;font-size:.72rem}
-    .home-competition-team img{width:25px;height:25px;object-fit:contain}
-    .home-competition-team strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-    .home-competition-team em{font-style:normal;color:var(--neon-green);font-weight:700}
-    .home-competition-shortcuts{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
-    .home-competition-shortcut{padding:.8rem;display:grid;grid-template-columns:36px minmax(0,1fr) auto;align-items:center;gap:.65rem;min-height:76px;transition:transform .2s ease,border-color .2s ease,background .2s ease;position:relative}
-    .home-competition-shortcut:hover{background:rgba(157,255,0,.035)}
-    .home-competition-shortcut img{width:36px;height:36px;object-fit:contain}
-    .home-competition-shortcut-copy{min-width:0}
-    .home-competition-shortcut-copy strong{display:block;font:700 .78rem/1.12 var(--font-title);color:var(--text-color)}
-    .home-competition-shortcut small{display:block;margin-top:.22rem;color:var(--text-gray);font:500 .62rem/1.25 var(--font-body);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .home-competition-shortcut-arrow{color:var(--neon-green);font-size:1rem}
-    .home-competition-status{position:absolute;right:.65rem;bottom:.5rem;display:inline-flex;align-items:center;gap:.25rem;font:700 .52rem var(--font-title);letter-spacing:.05em}
-    .home-competition-status i{width:5px;height:5px;border-radius:50%;background:#ff4d6d;display:inline-block;box-shadow:0 0 0 3px rgba(255,77,109,.08)}
-    .home-competition-feature-live{color:#ff6b84!important}
-    @media(max-width:800px){.home-competition-layout{grid-template-columns:1fr}.home-competition-shortcuts{display:flex;overflow-x:auto;gap:.7rem;padding-bottom:.25rem;scroll-snap-type:x proximity;scrollbar-width:none}.home-competition-shortcuts::-webkit-scrollbar{display:none}.home-competition-shortcut{flex:0 0 190px;scroll-snap-align:start}}
-    @media(max-width:520px){.home-competition-feature{padding:1rem}.home-competition-feature h3{font-size:1.12rem}.home-competition-shortcut{flex-basis:175px}.home-competition-teams{grid-template-columns:1fr 1fr}}
+
+    /* HOME 2026 — hierarquia editorial compacta */
+    .hero{
+      display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:1rem;
+      text-align:left;padding:1.35rem 1.5rem;margin-bottom:2.2rem;border-radius:14px;
+      background:linear-gradient(110deg,#101a12,var(--bg-dark));border:1px solid #1e3318;
+    }
+    .hero-tag{font-size:.65rem;letter-spacing:.12em;margin:0 0 .35rem}
+    .hero h1{font-size:clamp(1.45rem,2.6vw,2rem);margin:0 0 .3rem;line-height:1.1}
+    .hero p{max-width:680px;margin:0;color:var(--text-gray);font-size:.82rem;line-height:1.45}
+    .hero .btn-neon{margin:0;white-space:nowrap;padding:.65rem 1rem;font-size:.7rem}
+    .featured-wrapper{gap:.85rem;margin-bottom:2.8rem}
+    @media(min-width:769px){.featured-wrapper{min-height:0}}
+    .main-featured-card{grid-template-columns:minmax(0,1fr) minmax(0,.85fr)}
+    .main-featured-img{aspect-ratio:16/8}
+    .main-featured-content{padding:1.15rem}
+    .main-featured-content h2{font-size:1.18rem;margin:.45rem 0}
+    .main-featured-content p{font-size:.8rem;line-height:1.45}
+    .sub-featured-card{grid-template-columns:150px 1fr}
+    .sub-featured-content{padding:.8rem}
+    .sub-featured-content h3{font-size:.9rem}
+    .sub-featured-content p{font-size:.72rem}
+    .home-competitions-section{margin-bottom:3rem}
+    .home-standings-card{background:var(--card-bg);border:1px solid var(--border-color);border-radius:14px;overflow:hidden}
+    .home-standings-head{display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.8rem 1rem;border-bottom:1px solid var(--border-color)}
+    .home-standings-head h3{margin:0;font:700 .95rem var(--font-title)}
+    .home-standings-head small{color:var(--text-gray);font-size:.65rem}
+    .home-standings-tabs{display:flex;gap:.4rem;overflow-x:auto;padding:.65rem 1rem;scrollbar-width:none;border-bottom:1px solid var(--border-color)}
+    .home-standings-tabs::-webkit-scrollbar{display:none}
+    .home-standings-tab{flex:0 0 auto;border:1px solid var(--border-color);background:transparent;color:var(--text-gray);border-radius:999px;padding:.4rem .65rem;font:700 .62rem var(--font-title);cursor:pointer}
+    .home-standings-tab.active{background:var(--neon-green);border-color:var(--neon-green);color:#07100a}
+    .home-standings-scroll{max-height:285px;overflow-y:auto}
+    .home-standings-table{width:100%;border-collapse:collapse;font-size:.7rem}
+    .home-standings-table th,.home-standings-table td{padding:.48rem .5rem;border-bottom:1px solid var(--border-color);text-align:right}
+    .home-standings-table th:first-child,.home-standings-table td:first-child,.home-standings-table th:nth-child(2),.home-standings-table td:nth-child(2){text-align:left}
+    .home-standings-table th{color:var(--text-gray);font:700 .6rem var(--font-title);text-transform:uppercase;position:sticky;top:0;background:var(--card-bg);z-index:1}
+    .home-standing-team{display:flex;align-items:center;gap:.4rem;min-width:130px;font-weight:600}
+    .home-standing-team img{width:21px;height:21px;object-fit:contain}
+    .home-standing-team span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .home-standings-table td:first-child{color:var(--neon-green);font-weight:700}
+    .home-standings-empty{padding:1rem;color:var(--text-gray);font-size:.75rem}
+    .home-important-games{margin-top:1rem}
+    .home-important-games-head{display:flex;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:.7rem}
+    .home-important-games-head h3{margin:0;font:700 .95rem var(--font-title)}
+    .home-important-games-head p{margin:0;color:var(--text-gray);font-size:.65rem}
+    .home-important-games-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
+    .home-important-card{display:block;background:var(--card-bg);border:1px solid var(--border-color);border-radius:13px;padding:.85rem;text-decoration:none;color:inherit;min-width:0;transition:.2s}
+    .home-important-card:hover{border-color:var(--neon-green);transform:translateY(-2px)}
+    .home-important-card-top{display:flex;align-items:center;gap:.55rem;margin-bottom:.7rem}
+    .home-important-card-top img{width:30px;height:30px;object-fit:contain}
+    .home-important-card-top strong{font:700 .72rem/1.15 var(--font-title);min-width:0}
+    .home-important-card-top span{margin-left:auto;color:var(--neon-green);font-size:.9rem}
+    .home-important-label{font:700 .55rem var(--font-title);letter-spacing:.06em;color:var(--neon-green);text-transform:uppercase}
+    .home-important-match{font-size:.72rem;font-weight:700;line-height:1.35;margin:.2rem 0 .55rem}
+    .home-important-next{font-size:.61rem;color:var(--text-gray);line-height:1.35;border-top:1px solid var(--border-color);padding-top:.5rem}
+    .home-important-next b{color:var(--text-color)}
+    @media(max-width:800px){
+      .hero{grid-template-columns:1fr;padding:1.1rem 1.15rem}.hero .btn-neon{justify-self:start}
+      .home-important-games-grid{display:flex;overflow-x:auto;gap:.7rem;padding-bottom:.25rem;scrollbar-width:none}
+      .home-important-games-grid::-webkit-scrollbar{display:none}
+      .home-important-card{flex:0 0 220px}
+    }
+    @media(max-width:520px){
+      .main-featured-card{grid-template-columns:1fr}.sub-featured-card{grid-template-columns:110px 1fr}
+      .home-standings-scroll{max-height:260px}.home-standing-team{min-width:115px}
+    }
 
   </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1556367149800029" crossorigin="anonymous"></script>
@@ -204,13 +239,14 @@
 
   <!-- CONTEÚDO PRINCIPAL -->
   <div class="container">
-
-    <!-- HERO -->
+    <!-- HERO COMPACTO -->
     <section class="hero">
-      <div class="hero-tag">AO VIVO · FUTEBOL SEM FILTRO</div>
-      <h1>Análise Tática, Debate Pós-Jogo e Opinião</h1>
-      <p>O jogo não acaba aos 90. Acompanhamos cada detalhe, cada transferência e cada decisão que muda a época.</p>
-      <a href="https://youtube.com/@chutapracanto" target="_blank" class="btn-neon">VER CANAL NO YOUTUBE</a>
+      <div>
+        <div class="hero-tag">AO VIVO · FUTEBOL SEM FILTRO</div>
+        <h1>O futebol visto por dentro do jogo.</h1>
+        <p>Notícias, análise tática, opinião e dados das competições, num só lugar.</p>
+      </div>
+      <a href="https://youtube.com/@chutapracanto" target="_blank" rel="noopener noreferrer" class="btn-neon">VER NO YOUTUBE</a>
     </section>
 
     <!-- NOTÍCIAS EM DESTAQUE -->
@@ -224,30 +260,33 @@
         <p style="color: var(--text-gray);">A carregar notícias...</p>
       </div>
     </section>
-
     <!-- COMPETIÇÕES -->
     <section class="home-competitions-section" id="competicoes-home">
       <div class="section-header">
         <h2 class="section-title">COMPETIÇÕES</h2>
         <a href="/competicoes" class="see-more">VER TODAS →</a>
       </div>
-      <div class="home-competition-layout">
-        <a id="home-competition-feature" class="home-competition-feature" href="/competicoes?competition=liga-portugal">
-          <div class="home-competition-feature-head">
-            <span class="home-competition-kicker">PRÓXIMO JOGO EM DESTAQUE</span>
-            <span class="home-competition-arrow" aria-hidden="true">→</span>
+
+      <div class="home-standings-card">
+        <div class="home-standings-head">
+          <h3>CLASSIFICAÇÕES</h3>
+          <small>Época atual</small>
+        </div>
+        <div id="home-standings-tabs" class="home-standings-tabs" role="tablist" aria-label="Escolher classificação"></div>
+        <div id="home-standings-content" class="home-standings-scroll">
+          <div class="home-standings-empty">A carregar classificações…</div>
+        </div>
+      </div>
+
+      <div class="home-important-games">
+        <div class="home-important-games-head">
+          <div>
+            <h3>PRÓXIMOS JOGOS IMPORTANTES</h3>
+            <p>Porto, Sporting, Benfica e Portugal · próximos 30 dias</p>
           </div>
-          <div class="home-competition-feature-main">
-            <img id="home-feature-logo" class="home-competition-league-logo" src="/images/logo.png" alt="" width="52" height="52">
-            <div>
-              <h3 id="home-feature-name">A carregar…</h3>
-              <p id="home-feature-match">A procurar o próximo jogo…</p>
-            </div>
-          </div>
-          <div id="home-feature-teams" class="home-competition-teams"></div>
-        </a>
-        <div id="home-competition-shortcuts" class="home-competition-shortcuts" aria-label="Próximos jogos por competição" role="list">
-          <span class="home-competition-loading">A carregar competições…</span>
+        </div>
+        <div id="home-important-games-grid" class="home-important-games-grid">
+          <div class="home-standings-empty">A procurar jogos…</div>
         </div>
       </div>
     </section>
@@ -579,7 +618,6 @@
         }
       }
     }
-
     async function carregarCompeticoesHome() {
       const competitions = [
         ['liga-portugal','Liga Portugal',2],
@@ -590,64 +628,73 @@
         ['conference-league','UEFA Conference League',83],
         ['nations-league','UEFA Nations League',64]
       ];
-      const priorityNames=['porto','benfica','sporting','braga','portugal'];
-      const featureEl=document.getElementById('home-competition-feature');
-      const featureLogo=document.getElementById('home-feature-logo');
-      const featureName=document.getElementById('home-feature-name');
-      const featureMatch=document.getElementById('home-feature-match');
-      const featureTeams=document.getElementById('home-feature-teams');
-      const shortcutsEl=document.getElementById('home-competition-shortcuts');
-      if(!shortcutsEl||!featureEl)return;
+      const standingsTabs=document.getElementById('home-standings-tabs');
+      const standingsContent=document.getElementById('home-standings-content');
+      const gamesGrid=document.getElementById('home-important-games-grid');
+      const priorityNames=['porto','benfica','sporting','portugal'];
+      const now=Date.now();
+      const limit=now+(30*24*60*60*1000);
+      const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
       const safeUrl=value=>{try{const u=new URL(String(value||''),location.origin);return u.protocol==='https:'||u.origin===location.origin?u.href:''}catch{return ''}};
-      const logo=value=>safeUrl(value)||'/images/logo.png';
+      const teamLogo=team=>safeUrl(team?.logo)||'/images/logo.png';
       const leagueLogo=id=>'/api/football-image?type=league&id='+encodeURIComponent(id);
       const dateValue=item=>{const d=new Date(item?.kickoff||item?.startAt||item?.date);return Number.isNaN(d.getTime())?null:d};
       const dateLabel=d=>d?new Intl.DateTimeFormat('pt-PT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}).format(d):'—';
-      const priorityTeam=name=>priorityNames.some(value=>String(name||'').toLocaleLowerCase('pt-PT').includes(value));
-      const isLive=item=>['live','in_progress','in-play','ongoing'].includes(String(item?.status||'').toLowerCase());
-      try{
-        const results=await Promise.all(competitions.map(async meta=>{
-          try{
-            const response=await fetch('/api/competicoes?competition='+encodeURIComponent(meta[0])+'&status=upcoming',{cache:'no-store'});
-            if(!response.ok)throw new Error('indisponível');
-            const data=await response.json();
-            const fixtures=Array.isArray(data.fixtures)?data.fixtures:[];
-            fixtures.sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity));
-            const priorityFixture=fixtures.find(item=>priorityTeam(item.homeTeam?.name)||priorityTeam(item.awayTeam?.name));
-            return {meta,data,fixture:priorityFixture||fixtures[0]||null,priority:Boolean(priorityFixture)};
-          }catch{return {meta,data:null,fixture:null,priority:false}}
-        }));
-        results.sort((a,b)=>{
-          if(a.fixture&&!b.fixture)return -1;if(!a.fixture&&b.fixture)return 1;
-          if(a.priority!==b.priority)return a.priority?-1:1;
-          return (dateValue(a.fixture)?.getTime()||Infinity)-(dateValue(b.fixture)?.getTime()||Infinity);
+      const isPriority=item=>priorityNames.some(name=>[item?.homeTeam?.name,item?.awayTeam?.name].some(team=>String(team||'').toLocaleLowerCase('pt-PT').includes(name)));
+      const competitionResults=await Promise.all(competitions.map(async meta=>{
+        try{
+          const response=await fetch('/api/competicoes?competition='+encodeURIComponent(meta[0])+'&status=upcoming',{cache:'no-store'});
+          if(!response.ok)throw new Error('indisponível');
+          const data=await response.json();
+          const fixtures=Array.isArray(data.fixtures)?data.fixtures:[]; 
+          const upcoming=fixtures.filter(item=>{const t=dateValue(item)?.getTime();return Number.isFinite(t)&&t>=now});
+          upcoming.sort((a,b)=>dateValue(a).getTime()-dateValue(b).getTime());
+          const priority=upcoming.filter(isPriority);
+          const priority30=priority.find(item=>dateValue(item).getTime()<=limit)||null;
+          return {meta,data,upcoming,priority30};
+        }catch{return {meta,data:null,upcoming:[],priority30:null}}
+      }));
+
+      const withStandings=competitionResults.filter(item=>Array.isArray(item.data?.standings)&&item.data.standings.length);
+      standingsTabs.replaceChildren();
+      if(!withStandings.length){
+        standingsTabs.innerHTML='<span class="home-standings-empty">Sem classificações disponíveis.</span>';
+        standingsContent.innerHTML='';
+      }else{
+        withStandings.forEach((item,index)=>{
+          const button=document.createElement('button');
+          button.type='button';button.className='home-standings-tab'+(index===0?' active':'');
+          button.setAttribute('role','tab');button.textContent=item.meta[1];
+          button.addEventListener('click',()=>{
+            standingsTabs.querySelectorAll('.home-standings-tab').forEach(tab=>tab.classList.remove('active'));
+            button.classList.add('active');
+            renderStandings(item.data.standings);
+          });
+          standingsTabs.appendChild(button);
         });
-        const featured=results.find(item=>item.fixture)||results[0];
-        if(featured){
-          featureEl.href='/competicoes?competition='+encodeURIComponent(featured.meta[0]);
-          featureLogo.src=leagueLogo(featured.meta[2]);
-          featureLogo.onerror=()=>{featureLogo.onerror=null;featureLogo.src='/images/logo.png'};
-          featureName.textContent=featured.meta[1];
-          const item=featured.fixture;
-          if(item){
-            const live=isLive(item);
-            featureMatch.textContent=(live?'AO VIVO · ':'Próximo jogo · ')+dateLabel(dateValue(item));
-            featureMatch.classList.toggle('home-competition-feature-live',live);
-            featureTeams.innerHTML='<span class="home-competition-team"><img src="'+logo(item.homeTeam?.logo)+'" alt=""><strong>'+String(item.homeTeam?.name||'Casa')+'</strong><em>'+(item.score?.home??'—')+'</em></span><span class="home-competition-team"><img src="'+logo(item.awayTeam?.logo)+'" alt=""><strong>'+String(item.awayTeam?.name||'Fora')+'</strong><em>'+(item.score?.away??'—')+'</em></span>';
-          }else{
-            featureMatch.textContent='Sem próximo jogo disponível.';
-            featureTeams.replaceChildren();
-          }
-        }
-        shortcutsEl.innerHTML=results.map(item=>{
-          const meta=item.meta,fixture=item.fixture;
-          const match=fixture?String(fixture.homeTeam?.name||'Casa')+' · '+dateLabel(dateValue(fixture))+' · '+String(fixture.awayTeam?.name||'Fora'):'Calendário indisponível';
-          const live=fixture&&isLive(fixture);
-          return '<a class="home-competition-shortcut" role="listitem" href="/competicoes?competition='+encodeURIComponent(meta[0])+'"><img src="'+leagueLogo(meta[2])+'" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/logo.png\'"><span class="home-competition-shortcut-copy"><strong>'+meta[1]+'</strong><small>'+match+'</small></span><b class="home-competition-shortcut-arrow" aria-hidden="true">→</b>'+(live?'<span class="home-competition-status home-competition-feature-live"><i></i>AO VIVO</span>':'')+'</a>';
-        }).join('');
-      }catch(error){
-        shortcutsEl.innerHTML='<span class="home-competition-loading">Competições temporariamente indisponíveis.</span>';
+        const renderStandings=rows=>{
+          const sorted=rows.slice().sort((a,b)=>(Number(a.position??999)-Number(b.position??999)));
+          standingsContent.innerHTML='<table class="home-standings-table"><thead><tr><th>#</th><th>Equipa</th><th>J</th><th>DG</th><th>Pts</th></tr></thead><tbody>'+
+            sorted.map((row,i)=>'<tr><td>'+esc(row.position??i+1)+'</td><td><div class="home-standing-team"><img src="'+teamLogo(row.team)+'" alt=""><span>'+esc(row.team?.name||'—')+'</span></div></td><td>'+esc(row.played??row.games??'—')+'</td><td>'+esc(row.goalDifference??row.gd??'—')+'</td><td><strong>'+esc(row.points??'—')+'</strong></td></tr>').join('')+
+            '</tbody></table>';
+        };
+        renderStandings(withStandings[0].data.standings);
       }
+
+      const priorityCompetitions=competitionResults.filter(item=>item.priority30);
+      priorityCompetitions.sort((a,b)=>dateValue(a.priority30).getTime()-dateValue(b.priority30).getTime());
+      if(!priorityCompetitions.length){
+        gamesGrid.innerHTML='<div class="home-standings-empty">Não há jogos importantes das equipas prioritárias nos próximos 30 dias.</div>';
+        return;
+      }
+      gamesGrid.innerHTML=priorityCompetitions.map(item=>{
+        const meta=item.meta, important=item.priority30;
+        const overall=item.upcoming[0];
+        const same=overall===important || (dateValue(overall)?.getTime()===dateValue(important)?.getTime() && overall?.homeTeam?.name===important?.homeTeam?.name && overall?.awayTeam?.name===important?.awayTeam?.name);
+        const importantMatch=esc(important.homeTeam?.name||'Casa')+' vs '+esc(important.awayTeam?.name||'Fora')+' · '+dateLabel(dateValue(important));
+        const nextMatch=same?'É também o próximo jogo da competição.':'<b>PRÓXIMO JOGO:</b> '+esc(overall?.homeTeam?.name||'Casa')+' vs '+esc(overall?.awayTeam?.name||'Fora')+' · '+dateLabel(dateValue(overall));
+        return '<a class="home-important-card" href="/competicoes?competition='+encodeURIComponent(meta[0])+'"><div class="home-important-card-top"><img src="'+leagueLogo(meta[2])+'" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/logo.png\'"><strong>'+esc(meta[1])+'</strong><span aria-hidden="true">→</span></div><div class="home-important-label">PRÓXIMO JOGO IMPORTANTE</div><div class="home-important-match">'+importantMatch+'</div><div class="home-important-next">'+nextMatch+'</div></a>';
+      }).join('');
     }
 
     function iniciarFeedsAdiados() {
