@@ -2213,6 +2213,7 @@ const CPC_FOOTBALL_COMPETITIONS = {
 };
 
 function cpcSafeNumber(value) {
+  if (value == null || (typeof value === "string" && !value.trim()) || typeof value === "boolean") return null;
   const n = Number(value);
   return Number.isFinite(n) ? n : null;
 }
@@ -2234,7 +2235,7 @@ function cpcTeam(team, fallbackId = null, fallbackName = "") {
   };
 }
 
-function cpcNormalizeEvent(event) {
+function cpcNormalizeEvent(event, defaultStage = "") {
   const home = cpcTeam(
     event?.home_team,
     event?.home_team_id ?? event?.home?.id,
@@ -2245,16 +2246,48 @@ function cpcNormalizeEvent(event) {
     event?.away_team_id ?? event?.away?.id,
     event?.away_team_name ?? event?.away?.name
   );
+  const rawStage = event?.stage ?? event?.stage_name ?? defaultStage;
+  const stageKey = cpcSafeString(
+    event?.stage_key ??
+    event?.stage_slug ??
+    (typeof rawStage === "object" && rawStage
+      ? rawStage.slug ?? rawStage.key ?? rawStage.id ?? rawStage.code ?? rawStage.name
+      : rawStage)
+  ) || defaultStage;
+  const stageName = cpcSafeString(
+    event?.stage_name ??
+    (typeof rawStage === "object" && rawStage
+      ? rawStage.name ?? rawStage.label ?? rawStage.title
+      : rawStage)
+  );
+  const rawRound = event?.round_number ?? event?.round ?? event?.round_label ?? event?.round_name;
+  const roundKey = cpcSafeString(
+    event?.round_key ??
+    event?.round_id ??
+    (typeof rawRound === "object" && rawRound
+      ? rawRound.key ?? rawRound.id ?? rawRound.number ?? rawRound.name ?? rawRound.label
+      : rawRound)
+  );
+  const roundNumeric = cpcSafeNumber(
+    event?.round_number ??
+    (typeof rawRound === "object" && rawRound ? rawRound.number ?? rawRound.id : rawRound)
+  );
 
   return {
     id: cpcSafeNumber(event?.id ?? event?.event_id),
     kickoff: event?.event_date ?? event?.date ?? event?.start_date ?? null,
-    status: cpcSafeString(event?.status),
-    stage: cpcSafeString(event?.stage),
-    stageName: cpcSafeString(event?.stage_name),
+    status: cpcSafeString(event?.status ?? event?.event_status),
+    stage: stageKey,
+    stageKey,
+    stageName: stageName || stageKey,
     groupName: cpcSafeString(event?.group_name ?? event?.group?.name ?? event?.group),
-    round: cpcSafeNumber(event?.round_number ?? event?.round),
-    roundLabel: cpcSafeString(event?.round_label),
+    round: roundNumeric ?? roundKey,
+    roundKey,
+    roundLabel: cpcSafeString(
+      event?.round_label ??
+      event?.round_name ??
+      (typeof rawRound === "object" && rawRound ? rawRound.label ?? rawRound.name : "")
+    ),
     homeTeam: home,
     awayTeam: away,
     score: {
@@ -2273,25 +2306,49 @@ function cpcNormalizeEvent(event) {
 
 function cpcNormalizeStanding(row) {
   const stats = row?.stats || row?.record || row?.statistics || {};
-  const played = cpcSafeNumber(row?.played ?? row?.matches_played ?? row?.games ?? row?.p ?? stats?.played ?? stats?.matches_played ?? stats?.games ?? stats?.p);
-  const wins = cpcSafeNumber(row?.wins ?? row?.won ?? row?.victories ?? row?.w ?? stats?.wins ?? stats?.won ?? stats?.victories ?? stats?.w);
-  const losses = cpcSafeNumber(row?.losses ?? row?.lost ?? row?.lost_matches ?? row?.defeats ?? row?.l ?? stats?.losses ?? stats?.lost ?? stats?.defeats ?? stats?.l);
+  const first = (...values) => values.find(value =>
+    value != null && !(typeof value === "string" && !value.trim())
+  );
+  const played = cpcSafeNumber(first(
+    row?.played, row?.matches_played, row?.matchesPlayed, row?.games_played, row?.games, row?.p,
+    stats?.played, stats?.matches_played, stats?.matchesPlayed, stats?.games_played, stats?.games, stats?.p
+  ));
+  const wins = cpcSafeNumber(first(
+    row?.wins, row?.won, row?.victories, row?.w,
+    stats?.wins, stats?.won, stats?.victories, stats?.w
+  ));
+  const losses = cpcSafeNumber(first(
+    row?.losses, row?.lost, row?.lost_matches, row?.defeats, row?.l,
+    stats?.losses, stats?.lost, stats?.lost_matches, stats?.defeats, stats?.l
+  ));
+  const draws = cpcSafeNumber(first(
+    row?.draws, row?.drawn, row?.draw, row?.ties, row?.tied, row?.d,
+    stats?.draws, stats?.drawn, stats?.draw, stats?.ties, stats?.tied, stats?.d
+  ));
+  const goalsFor = cpcSafeNumber(first(
+    row?.goals_for, row?.goals_scored, row?.gf, row?.goalsFor,
+    stats?.goals_for, stats?.goals_scored, stats?.gf, stats?.goalsFor
+  ));
+  const goalsAgainst = cpcSafeNumber(first(
+    row?.goals_against, row?.goals_conceded, row?.ga, row?.goalsAgainst,
+    stats?.goals_against, stats?.goals_conceded, stats?.ga, stats?.goalsAgainst
+  ));
+  const goalDifference = cpcSafeNumber(first(
+    row?.goal_difference, row?.goal_diff, row?.gd, row?.goalDifference,
+    stats?.goal_difference, stats?.goal_diff, stats?.gd, stats?.goalDifference
+  ));
   return {
-    position: cpcSafeNumber(row?.position ?? row?.rank),
+    position: cpcSafeNumber(first(row?.position, row?.rank, stats?.position, stats?.rank)),
     groupName: cpcSafeString(row?.groupName ?? row?.group_name ?? row?.group?.name ?? row?.group?.label),
     team: cpcTeam(row?.team, row?.team_id, row?.team_name),
     played,
     wins,
-    draws: cpcSafeNumber(
-      row?.draws ?? row?.drawn ?? row?.draw ?? row?.ties ?? row?.tied ?? row?.d ??
-      stats?.draws ?? stats?.drawn ?? stats?.draw ?? stats?.d ??
-      (played != null && wins != null && losses != null ? played - wins - losses : null)
-    ),
+    draws: draws ?? (played != null && wins != null && losses != null ? played - wins - losses : null),
     losses,
-    goalsFor: cpcSafeNumber(row?.goals_for ?? row?.goals_scored ?? row?.gf ?? row?.goalsFor ?? stats?.goals_for ?? stats?.goals_scored ?? stats?.gf),
-    goalsAgainst: cpcSafeNumber(row?.goals_against ?? row?.goals_conceded ?? row?.ga ?? row?.goalsAgainst ?? stats?.goals_against ?? stats?.goals_conceded ?? stats?.ga),
-    goalDifference: cpcSafeNumber(row?.goal_difference ?? row?.goal_diff ?? row?.gd ?? stats?.goal_difference ?? stats?.goal_diff ?? stats?.gd),
-    points: cpcSafeNumber(row?.points ?? row?.pts ?? row?.pontos ?? stats?.points ?? stats?.pts ?? stats?.pontos)
+    goalsFor,
+    goalsAgainst,
+    goalDifference: goalDifference ?? (goalsFor != null && goalsAgainst != null ? goalsFor - goalsAgainst : null),
+    points: cpcSafeNumber(first(row?.points, row?.pts, row?.pontos, stats?.points, stats?.pts, stats?.pontos))
   };
 }
 
@@ -2330,30 +2387,54 @@ function bsdExtractEvents(data) {
 }
 
 function bsdExtractStandings(data) {
-  const rows = Array.isArray(data?.standings) ? [...data.standings] : [];
-  if (Array.isArray(data?.groups)) {
-    for (const group of data.groups) {
-      const groupName = cpcSafeString(group?.name ?? group?.group_name ?? group?.label ?? group?.group);
-      const source = Array.isArray(group?.standings) ? group.standings : Array.isArray(group?.table) ? group.table : [];
-      for (const row of source) rows.push({ ...row, groupName: row?.groupName || groupName });
-    }
+  const payload = data?.data && typeof data.data === "object" ? data.data : data;
+  const groups = Array.isArray(payload?.groups)
+    ? payload.groups
+    : Array.isArray(payload?.standings?.groups)
+      ? payload.standings.groups
+      : [];
+  const addGroupRows = (rows, groupName) => {
+    if (!Array.isArray(rows)) return [];
+    return rows.map(row => ({ ...row, groupName: row?.groupName || row?.group_name || groupName }));
+  };
+
+  if (groups.length) {
+    return groups.flatMap((group, index) => {
+      const groupName = cpcSafeString(group?.name ?? group?.group_name ?? group?.label ?? group?.group) || "Grupo " + String.fromCharCode(65 + index);
+      const source = Array.isArray(group)
+        ? group
+        : Array.isArray(group?.standings)
+          ? group.standings
+          : Array.isArray(group?.table)
+            ? group.table
+            : Array.isArray(group?.teams)
+              ? group.teams
+              : [];
+      return addGroupRows(source, groupName);
+    });
   }
-  return rows;
+
+  const standings = Array.isArray(payload?.standings)
+    ? payload.standings
+    : Array.isArray(payload?.table)
+      ? payload.table
+      : [];
+  if (standings.some(Array.isArray)) {
+    return standings.flatMap((group, index) => {
+      const groupName = cpcSafeString(group?.name ?? group?.group_name ?? group?.label) || "Grupo " + String.fromCharCode(65 + index);
+      return addGroupRows(Array.isArray(group) ? group : group?.standings, groupName);
+    });
+  }
+
+  return standings;
 }
 
 async function bsdFetchEventsForSeason(env, leagueId, seasonId, status, seasonStart, seasonEnd, stage = "", round = null) {
-  const today = new Date();
-  const todayIso = today.toISOString().slice(0, 10);
-  const start = seasonStart || todayIso;
-  const end = seasonEnd || todayIso;
-  const dateFrom = status === "finished"
-    ? start
-    : status === "upcoming"
-      ? (todayIso > start ? todayIso : start)
-      : start;
-  const dateTo = status === "finished"
-    ? (todayIso < end ? todayIso : end)
-    : end;
+  const todayIso = new Date().toISOString().slice(0, 10);
+  const start = String(seasonStart || todayIso).slice(0, 10);
+  const end = String(seasonEnd || todayIso).slice(0, 10);
+  const dateFrom = status === "upcoming" ? todayIso : start;
+  const dateTo = status === "finished" ? (todayIso < end ? todayIso : end) : end;
 
   const results = [];
   let offset = 0;
@@ -2370,12 +2451,11 @@ async function bsdFetchEventsForSeason(env, leagueId, seasonId, status, seasonSt
     });
     if (stage) params.set("stage", String(stage));
     if (round != null && String(round) !== "") params.set("round", String(round));
-    if (status === "upcoming") params.set("status", "upcoming");
-    if (status === "finished") params.set("status", "finished");
+    if (status === "upcoming" || status === "finished") params.set("status", status);
 
     const data = await bsdFetchJson(
       env,
-      `https://sports.bzzoiro.com/api/v2/events/?${params.toString()}`
+      "https://sports.bzzoiro.com/api/v2/events/?" + params.toString()
     );
     const page = bsdExtractEvents(data);
     results.push(...page);
@@ -2386,17 +2466,35 @@ async function bsdFetchEventsForSeason(env, leagueId, seasonId, status, seasonSt
     if (offset > 2000) break;
   }
 
+  if (status === "upcoming") {
+    const now = Date.now();
+    return results.filter(event => {
+      const eventStatus = String(event?.status ?? event?.event_status ?? "").toLowerCase().replace(/[ -]+/g, "_");
+      if (["live", "in_progress", "in_play", "inplay", "ongoing"].includes(eventStatus)) return true;
+      const kickoff = Date.parse(event?.event_date ?? event?.date ?? event?.start_date ?? "");
+      return Number.isFinite(kickoff) && kickoff >= now;
+    });
+  }
+
+  if (status === "finished") {
+    return results.filter(event => ["finished", "ended", "ft", "full_time", "completed", "aet", "penalties"].includes(
+      String(event?.status ?? event?.event_status ?? "").toLowerCase().replace(/[ -]+/g, "_")
+    ));
+  }
+
   return results;
 }
 
-async function bsdFetchLiveEvents(env, leagueId, seasonId) {
+async function bsdFetchLiveEvents(env, leagueId, seasonId, stage = "", round = null) {
   const params = new URLSearchParams({
     league_id: String(leagueId),
     season_id: String(seasonId)
   });
+  if (stage) params.set("stage", String(stage));
+  if (round != null && String(round) !== "") params.set("round", String(round));
   const data = await bsdFetchJson(
     env,
-    `https://sports.bzzoiro.com/api/v2/events/live/?${params.toString()}`
+    "https://sports.bzzoiro.com/api/v2/events/live/?" + params.toString()
   );
   return bsdExtractEvents(data);
 }
@@ -2419,91 +2517,91 @@ async function bsdFetchLiveIncidents(env, eventId) {
   }
 }
 
+function bsdUnwrapSeason(data) {
+  return data?.season || data?.data || data?.result || data || null;
+}
+
+function bsdGetSeasonList(data) {
+  if (Array.isArray(data)) return data;
+  if (Array.isArray(data?.seasons)) return data.seasons;
+  if (Array.isArray(data?.results)) return data.results;
+  return [];
+}
+
+function bsdSeasonLabel(season) {
+  const explicit = cpcSafeString(season?.name || season?.label);
+  if (explicit && !/^\d{4}$/.test(explicit)) return explicit;
+  const year = cpcSafeString(season?.year || explicit);
+  if (year.includes("/")) return year;
+  const startYear = String(season?.start_date || "").slice(0, 4);
+  const endYear = String(season?.end_date || "").slice(0, 4);
+  if (startYear && endYear) return startYear + "/" + endYear.slice(-2);
+  return year || startYear || endYear;
+}
+
+function bsdSeasonCoversToday(season, today) {
+  const start = cpcSafeString(season?.start_date).slice(0, 10);
+  const end = cpcSafeString(season?.end_date).slice(0, 10);
+  return (!start || today >= start) && (!end || today <= end);
+}
+
+async function bsdResolveCurrentSeason(env, leagueId) {
+  const today = new Date().toISOString().slice(0, 10);
+  let endpointSeason = null;
+  try {
+    endpointSeason = bsdUnwrapSeason(
+      await bsdFetchJson(env, "https://sports.bzzoiro.com/api/v2/leagues/" + leagueId + "/season/")
+    );
+  } catch {}
+
+  const endpointId = Number(endpointSeason?.id ?? endpointSeason?.season_id);
+  if (Number.isSafeInteger(endpointId) && endpointId > 0) {
+    const end = cpcSafeString(endpointSeason?.end_date).slice(0, 10);
+    const hasDates = Boolean(endpointSeason?.start_date || endpointSeason?.end_date);
+    if (bsdSeasonCoversToday(endpointSeason, today) || (!hasDates && endpointSeason?.is_current !== false && endpointSeason?.current !== false)) {
+      return endpointSeason;
+    }
+    if ((endpointSeason?.is_current === true || endpointSeason?.current === true) && (!end || end >= today)) {
+      return endpointSeason;
+    }
+  }
+
+  const seasonsData = await bsdFetchJson(
+    env,
+    "https://sports.bzzoiro.com/api/v2/leagues/" + leagueId + "/seasons/"
+  );
+  const seasons = bsdGetSeasonList(seasonsData);
+  const currentFlagged = seasons.find(item =>
+    (item?.is_current === true || item?.current === true) &&
+    (!item?.end_date || String(item.end_date).slice(0, 10) >= today)
+  );
+  const coveringToday = seasons
+    .filter(item => item?.start_date && item?.end_date && bsdSeasonCoversToday(item, today))
+    .sort((a, b) => String(b?.start_date || "").localeCompare(String(a?.start_date || "")))[0];
+  const selected = currentFlagged || coveringToday;
+  const selectedId = Number(selected?.id ?? selected?.season_id);
+  if (!Number.isSafeInteger(selectedId) || selectedId <= 0) {
+    throw new Error("Época atual não encontrada na BSD.");
+  }
+  return selected;
+}
+
 async function bsdFootballAdapter(env, competitionKey, options = {}) {
   const competition = CPC_FOOTBALL_COMPETITIONS[competitionKey];
   if (!competition) throw new Error("Competição não suportada.");
 
-  let seasonId = Number(options.seasonId || 0);
-  let seasonLabel = "";
-
-  let seasonStart = "";
-  let seasonEnd = "";
-
+  const status = options.status || "upcoming";
+  const requestedSeasonId = Number(options.seasonId || 0);
+  const currentSeason = await bsdResolveCurrentSeason(env, competition.leagueId);
+  const seasonId = Number(currentSeason?.id ?? currentSeason?.season_id);
+  const seasonLabel = bsdSeasonLabel(currentSeason);
+  const seasonStart = cpcSafeString(currentSeason?.start_date);
+  const seasonEnd = cpcSafeString(currentSeason?.end_date);
   if (!Number.isSafeInteger(seasonId) || seasonId <= 0) {
-    let current;
-    try {
-      current = await bsdFetchJson(
-        env,
-        `https://sports.bzzoiro.com/api/v2/leagues/${competition.leagueId}/season/`
-      );
-    } catch {
-      const seasonsData = await bsdFetchJson(
-        env,
-        `https://sports.bzzoiro.com/api/v2/leagues/${competition.leagueId}/seasons/`
-      );
-      const seasons = Array.isArray(seasonsData)
-        ? seasonsData
-        : Array.isArray(seasonsData?.seasons)
-          ? seasonsData.seasons
-          : Array.isArray(seasonsData?.results)
-            ? seasonsData.results
-            : [];
-      current = seasons.find(item => item?.is_current === true || item?.current === true)
-        || seasons.find(item => String(item?.year || "") === "2026")
-        || seasons[0];
-    }
-
-    current = current?.season || current?.data || current?.result || current;
-    const today = new Date().toISOString().slice(0, 10);
-    const currentStart = cpcSafeString(current?.start_date);
-    const currentEnd = cpcSafeString(current?.end_date);
-    const currentContainsToday = (!currentStart || today >= currentStart) && (!currentEnd || today <= currentEnd);
-    if (!currentContainsToday) {
-      try {
-        const seasonsData = await bsdFetchJson(env, `https://sports.bzzoiro.com/api/v2/leagues/${competition.leagueId}/seasons/`);
-        const seasons = Array.isArray(seasonsData)
-          ? seasonsData
-          : Array.isArray(seasonsData?.seasons)
-            ? seasonsData.seasons
-            : Array.isArray(seasonsData?.results)
-              ? seasonsData.results
-              : [];
-        const matching = seasons
-          .filter(item => {
-            const start = cpcSafeString(item?.start_date);
-            const end = cpcSafeString(item?.end_date);
-            return start && end && today >= start && today <= end;
-          })
-          .sort((a,b) => String(b?.start_date||"").localeCompare(String(a?.start_date||"")))[0];
-        if (matching) current = matching;
-      } catch {}
-    }
-    seasonId = Number(current?.id);
-    seasonLabel = cpcSafeString(current?.name || current?.label || current?.year);
-    seasonStart = cpcSafeString(current?.start_date);
-    seasonEnd = cpcSafeString(current?.end_date);
-  } else {
-    try {
-      const seasonData = await bsdFetchJson(
-        env,
-        `https://sports.bzzoiro.com/api/v2/leagues/${competition.leagueId}/seasons/`
-      );
-      const seasons = Array.isArray(seasonData)
-        ? seasonData
-        : Array.isArray(seasonData?.seasons)
-          ? seasonData.seasons
-          : Array.isArray(seasonData?.results)
-            ? seasonData.results
-            : [];
-      const selected = seasons.find(item => Number(item?.id) === seasonId);
-      seasonLabel = cpcSafeString(selected?.name || selected?.label || selected?.year);
-      seasonStart = cpcSafeString(selected?.start_date);
-      seasonEnd = cpcSafeString(selected?.end_date);
-    } catch {}
+    throw new Error("Época atual não encontrada.");
   }
-
-  if (!Number.isSafeInteger(seasonId) || seasonId <= 0) {
-    throw new Error("Época não encontrada.");
+  if (Number.isSafeInteger(requestedSeasonId) && requestedSeasonId > 0 && requestedSeasonId !== seasonId) {
+    throw new Error("Apenas a época atual está disponível.");
   }
 
   const defaultStageByCompetition = {
@@ -2516,30 +2614,18 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
   let standingsData;
 
   try {
-    if (status === "all") {
-      const [finished, upcoming] = await Promise.all([
-        bsdFetchEventsForSeason(env, competition.leagueId, seasonId, "finished", seasonStart, seasonEnd, stage, null),
-        bsdFetchEventsForSeason(env, competition.leagueId, seasonId, "upcoming", seasonStart, seasonEnd, stage, null)
-      ]);
-      const byId = new Map();
-      [...finished, ...upcoming].forEach(item => {
-        const id = cpcSafeNumber(item?.id ?? item?.event_id);
-        if (id != null) byId.set(id, item);
-      });
-      eventsData = [...byId.values()];
-    } else if (status === "live") {
-      eventsData = await bsdFetchLiveEvents(env, competition.leagueId, seasonId);
+    if (status === "live") {
+      eventsData = await bsdFetchLiveEvents(env, competition.leagueId, seasonId, stage, options.round);
     } else {
-      const providerStatus = status === "upcoming" ? "upcoming" : "finished";
       eventsData = await bsdFetchEventsForSeason(
         env,
         competition.leagueId,
         seasonId,
-        providerStatus,
+        status,
         seasonStart,
         seasonEnd,
         stage,
-        options.round || null
+        options.round
       );
     }
   } catch (error) {
@@ -2575,7 +2661,7 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
     }
 
     fixtures = bsdExtractEvents(eventsData).map(event => {
-      const normalized = cpcNormalizeEvent(event);
+      const normalized = cpcNormalizeEvent(event, stage);
 
       if (!normalized.homeTeam.name && normalized.homeTeam.id != null) {
         normalized.homeTeam.name = teamNamesById.get(normalized.homeTeam.id) || "";
@@ -2595,25 +2681,35 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
     });
 
     const liveRaw = status === "all" || status === "upcoming"
-      ? await bsdFetchLiveEvents(env, competition.leagueId, seasonId).catch(() => [])
+      ? await bsdFetchLiveEvents(env, competition.leagueId, seasonId, stage, options.round).catch(() => [])
       : [];
     if (liveRaw.length) {
       const liveById = new Map(liveRaw.map(item => [
         cpcSafeNumber(item?.id ?? item?.event_id),
         item
-      ]));
+      ]).filter(([id]) => id != null));
       const liveIds = [...liveById.keys()].filter(id => id != null);
       const incidentsById = new Map();
       await Promise.all(liveIds.map(async id => {
         incidentsById.set(id, await bsdFetchLiveIncidents(env, id));
       }));
 
-      fixtures = fixtures.map(item => {
-        const live = liveById.get(item.id);
-        if (!live) return item;
+      const fixturesById = new Map(fixtures.map(item => [item.id, item]));
+      liveById.forEach((live, id) => {
+        let item = fixturesById.get(id);
+        if (!item) {
+          item = cpcNormalizeEvent(live, stage);
+          if (!item.homeTeam.name && item.homeTeam.id != null) {
+            item.homeTeam.name = teamNamesById.get(item.homeTeam.id) || "";
+          }
+          if (!item.awayTeam.name && item.awayTeam.id != null) {
+            item.awayTeam.name = teamNamesById.get(item.awayTeam.id) || "";
+          }
+        }
+
         const liveScoreHome = cpcSafeNumber(live?.home_score ?? live?.score?.home);
         const liveScoreAway = cpcSafeNumber(live?.away_score ?? live?.score?.away);
-        const incidents = incidentsById.get(item.id) || [];
+        const incidents = incidentsById.get(id) || [];
         const goals = incidents
           .filter(incident => {
             const type = String(
@@ -2633,7 +2729,7 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
             periodSecond: cpcSafeNumber(incident?.period_second)
           }));
 
-        return {
+        fixturesById.set(id, {
           ...item,
           status: "live",
           score: {
@@ -2643,12 +2739,13 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
           liveMinute: cpcSafeNumber(live?.current_minute ?? live?.minute),
           livePeriod: cpcSafeString(live?.period ?? live?.current_period),
           liveAddedTime: cpcSafeNumber(live?.added_time ?? live?.stoppage_time),
-          halfTimeScore: live?.half_time_score ?? live?.ht_score ?? null,
-          extraTimeScore: live?.extra_time_score ?? null,
-          penaltyShootout: live?.penalty_shootout ?? null,
+          halfTimeScore: live?.half_time_score ?? live?.ht_score ?? item.halfTimeScore ?? null,
+          extraTimeScore: live?.extra_time_score ?? item.extraTimeScore ?? null,
+          penaltyShootout: live?.penalty_shootout ?? item.penaltyShootout ?? null,
           goals
-        };
+        });
       });
+      fixtures = [...fixturesById.values()];
     }
   } catch (error) {
     throw new Error("NORMALIZE_EVENTS:" + (error instanceof Error ? error.message : "unknown"));
@@ -2675,7 +2772,7 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
     },
     season: {
       id: seasonId,
-      label: seasonLabel || (seasonId === 1310 ? "2026/27" : ""),
+      label: seasonLabel || bsdSeasonLabel({ start_date: seasonStart, end_date: seasonEnd }) || "Época atual",
       startDate: seasonStart || null,
       endDate: seasonEnd || null
     },
@@ -2824,6 +2921,13 @@ async function handleFootballImageAPI(request, env) {
   }
 }
 
+function footballCacheSeasonIsCurrent(payload) {
+  const today = new Date().toISOString().slice(0, 10);
+  const start = String(payload?.season?.startDate || "").slice(0, 10);
+  const end = String(payload?.season?.endDate || "").slice(0, 10);
+  return Boolean(start && end && today >= start && today <= end);
+}
+
 async function handleFootballCompetitionAPI(request, env) {
   const url = new URL(request.url);
   if (url.pathname !== "/api/competicoes") return null;
@@ -2854,7 +2958,7 @@ async function handleFootballCompetitionAPI(request, env) {
   try {
     const cached = await getFootballCache(env, cacheKey);
 
-    if (cached?.state === "fresh") {
+    if (cached?.state === "fresh" && footballCacheSeasonIsCurrent(cached.payload)) {
       return json(
         { ...cached.payload, updateStatus: "cache" },
         200,
@@ -2878,7 +2982,7 @@ async function handleFootballCompetitionAPI(request, env) {
     console.error("Football cache/provider error:", error);
 
     const cached = await getFootballCache(env, cacheKey);
-    if (cached) {
+    if (cached && footballCacheSeasonIsCurrent(cached.payload)) {
       return json(
         {
           ...cached.payload,
