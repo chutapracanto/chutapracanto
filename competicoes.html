@@ -48,11 +48,20 @@
 .competition-meta #competition-data-status{display:none}
 .competition-live-status{display:inline-flex;align-items:center;gap:.45rem;font:700 .7rem var(--font-title);letter-spacing:.08em;color:var(--neon-green);margin-top:.55rem}
 .competition-live-status i{width:8px;height:8px;border-radius:50%;background:var(--neon-green);box-shadow:0 0 0 0 rgba(157,255,0,.55);animation:cpcPulse 2.2s infinite}
-.competition-live-status.live{color:#fff}.competition-live-status.live i{background:#ff4d6d;box-shadow:0 0 0 0 rgba(255,77,109,.55)}
+.competition-live-status.live{color:#fff}.competition-live-status.live i{background:#ff334f;box-shadow:0 0 0 0 rgba(255,51,79,.55);animation:cpcLivePulse 2.8s ease-in-out infinite}
 @keyframes cpcPulse{0%,100%{box-shadow:0 0 0 0 rgba(157,255,0,.45)}50%{box-shadow:0 0 0 7px rgba(157,255,0,0)}}
+@keyframes cpcLivePulse{0%,100%{box-shadow:0 0 0 0 rgba(255,51,79,.5)}50%{box-shadow:0 0 0 7px rgba(255,51,79,0)}}
+.fixture-live{display:inline-flex;align-items:center;gap:.28rem;color:#fff;background:#d7193f;border-radius:999px;padding:.16rem .38rem;font:700 .62rem var(--font-title);letter-spacing:.07em;line-height:1;margin-bottom:.18rem}
+.fixture-live::before{content:"";width:5px;height:5px;border-radius:50%;background:#fff;animation:cpcLiveDot 2.8s ease-in-out infinite}
+@keyframes cpcLiveDot{0%,100%{opacity:.55}50%{opacity:1}}
+.highlight-live{display:inline-flex;align-items:center;gap:.28rem;margin-bottom:.25rem;color:#fff;background:#d7193f;border-radius:999px;padding:.18rem .42rem;font:700 .64rem var(--font-title);letter-spacing:.06em}
+.highlight-live::before{content:"";width:5px;height:5px;border-radius:50%;background:#fff;animation:cpcLiveDot 2.8s ease-in-out infinite}
+.highlight-goals{display:block;margin-top:.28rem;color:var(--text-gray);font-size:.66rem;line-height:1.35}
+.highlight-goal{display:block}
+.fixture-live-detail{display:block;color:var(--text-gray);font-size:.64rem;line-height:1.25;margin-top:.15rem}
 .highlight-score small{display:block;margin-top:.38rem;color:var(--text-gray);font:600 .68rem var(--font-body)}
 .highlight-live{display:block;margin-bottom:.25rem;color:#ff6b84;font:700 .66rem var(--font-title);letter-spacing:.08em}
-.fixture-live{color:#ff6b84;font-weight:700}
+
 .competition-highlight-card h3{font:700 .8rem var(--font-title);text-transform:uppercase;letter-spacing:.08em;color:var(--text-gray);margin:0 0 .75rem}
 .competition-highlight-main{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.6rem}
 .highlight-team{text-align:center;font-weight:700;font-size:.82rem}
