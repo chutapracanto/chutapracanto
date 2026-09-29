@@ -2812,6 +2812,33 @@ function footballCacheKey(competitionKey, seasonId, stage, round, status = "upco
   ].join("|");
 }
 
+async function getLatestFootballCache(env, competitionKey, status) {
+  if (!env.FOOTBALL_CACHE_DB) return null;
+  const prefix = "bsd|v3-" + competitionKey + "|";
+  const suffix = "|" + status;
+  const row = await env.FOOTBALL_CACHE_DB
+    .prepare(
+      "SELECT payload_json, fetched_at, expires_at, stale_until FROM football_cache WHERE competition_key = ?1 AND cache_key LIKE ?2 ORDER BY fetched_at DESC LIMIT 1"
+    )
+    .bind(competitionKey, prefix + "%" + suffix)
+    .first();
+  if (!row?.payload_json) return null;
+  try {
+    const payload = JSON.parse(row.payload_json);
+    const now = Date.now();
+    const expiresAt = Date.parse(row.expires_at);
+    const staleUntil = Date.parse(row.stale_until);
+    const fetchedAt = Date.parse(row.fetched_at);
+    const effectiveExpiresAt = Number.isFinite(fetchedAt)
+      ? fetchedAt + FOOTBALL_CACHE_FRESH_MS
+      : expiresAt;
+    if (!Number.isFinite(staleUntil) || !Number.isFinite(effectiveExpiresAt)) return null;
+    if (now <= effectiveExpiresAt) return { payload, state: "fresh" };
+    if (now <= staleUntil) return { payload, state: "stale" };
+  } catch {}
+  return null;
+}
+
 async function getFootballCache(env, cacheKey) {
   if (!env.FOOTBALL_CACHE_DB) return null;
 
@@ -2975,6 +3002,17 @@ async function handleFootballCompetitionAPI(request, env) {
         { ...cached.payload, updateStatus: "cache" },
         200,
         { "Cache-Control": "public, max-age=60, stale-while-revalidate=300" }
+      );
+    }
+
+    // O cron aquece a competição sem saber previamente o seasonId. Reutilizamos
+    // o snapshot mais recente desse status antes de consultar novamente o BSD.
+    const latestCached = await getLatestFootballCache(env, competitionKey, status);
+    if (latestCached?.payload && footballCacheSeasonIsCurrent(latestCached.payload)) {
+      return json(
+        { ...latestCached.payload, updateStatus: latestCached.state === "fresh" ? "cache" : "stale", cacheStale: latestCached.state !== "fresh" },
+        200,
+        { "Cache-Control": "public, max-age": 60, stale-while-revalidate: 300 }
       );
     }
 
