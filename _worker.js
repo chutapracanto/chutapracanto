@@ -2237,11 +2237,17 @@ function cpcNormalizeNationName(value) {
 }
 
 function cpcNationsGroupForNames(...values) {
-  const names = new Set(values.map(cpcNormalizeNationName).filter(Boolean));
-  for (const [group, teams] of Object.entries(CPC_NATIONS_GROUPS)) {
-    if (teams.some(team => names.has(cpcNormalizeNationName(team)))) {
-      return "Liga " + group.charAt(0) + " · Grupo " + group;
+  const rawValues = values.map(value => cpcSafeString(value).trim()).filter(Boolean);
+  for (const value of rawValues) {
+    const match = value.match(/(?:league|liga)\\s+([A-D])\\s*[,·-]\\s*(?:group|grupo)\\s*([1-4])/i);
+    if (match) {
+      const group = match[1].toUpperCase() + match[2];
+      if (Object.prototype.hasOwnProperty.call(CPC_NATIONS_GROUPS, group)) return "Liga " + group.charAt(0) + " · Grupo " + group;
     }
+  }
+  const names = new Set(rawValues.map(cpcNormalizeNationName).filter(Boolean));
+  for (const [group, teams] of Object.entries(CPC_NATIONS_GROUPS)) {
+    if (teams.some(team => names.has(cpcNormalizeNationName(team)))) return "Liga " + group.charAt(0) + " · Grupo " + group;
   }
   return "";
 }
@@ -2334,49 +2340,29 @@ function cpcNormalizeEvent(event, defaultStage = "") {
 
 function cpcNormalizeStanding(row) {
   const stats = row?.stats || row?.record || row?.statistics || {};
-  const first = (...values) => values.find(value =>
-    value != null && !(typeof value === "string" && !value.trim())
-  );
-  const played = cpcSafeNumber(first(
-    row?.played, row?.matches_played, row?.matchesPlayed, row?.games_played, row?.games, row?.p,
-    stats?.played, stats?.matches_played, stats?.matchesPlayed, stats?.games_played, stats?.games, stats?.p
-  ));
-  const wins = cpcSafeNumber(first(
-    row?.wins, row?.won, row?.victories, row?.w,
-    stats?.wins, stats?.won, stats?.victories, stats?.w
-  ));
-  const losses = cpcSafeNumber(first(
-    row?.losses, row?.lost, row?.lost_matches, row?.defeats, row?.l,
-    stats?.losses, stats?.lost, stats?.lost_matches, stats?.defeats, stats?.l
-  ));
-  const draws = cpcSafeNumber(first(
-    row?.draws, row?.drawn, row?.draw, row?.ties, row?.tied, row?.d,
-    stats?.draws, stats?.drawn, stats?.draw, stats?.ties, stats?.tied, stats?.d
-  ));
-  const goalsFor = cpcSafeNumber(first(
-    row?.goals_for, row?.goals_scored, row?.gf, row?.goalsFor,
-    stats?.goals_for, stats?.goals_scored, stats?.gf, stats?.goalsFor
-  ));
-  const goalsAgainst = cpcSafeNumber(first(
-    row?.goals_against, row?.goals_conceded, row?.ga, row?.goalsAgainst,
-    stats?.goals_against, stats?.goals_conceded, stats?.ga, stats?.goalsAgainst
-  ));
-  const goalDifference = cpcSafeNumber(first(
-    row?.goal_difference, row?.goal_diff, row?.gd, row?.goalDifference,
-    stats?.goal_difference, stats?.goal_diff, stats?.gd, stats?.goalDifference
-  ));
+  const first = (...values) => values.find(value => value != null && !(typeof value === "string" && !value.trim()));
+  const teamSource = row?.team && typeof row.team === "object"
+    ? row.team
+    : { id: row?.team_id ?? row?.id, name: row?.team_name ?? row?.name ?? row?.short_name };
+
+  const played = cpcSafeNumber(first(row?.played,row?.matches_played,row?.matchesPlayed,row?.games_played,row?.games,row?.p,stats?.played,stats?.matches_played,stats?.matchesPlayed,stats?.games_played,stats?.games,stats?.p));
+  const wins = cpcSafeNumber(first(row?.wins,row?.won,row?.victories,row?.w,stats?.wins,stats?.won,stats?.victories,stats?.w));
+  const losses = cpcSafeNumber(first(row?.losses,row?.lost,row?.lost_matches,row?.defeats,row?.l,stats?.losses,stats?.lost,stats?.lost_matches,stats?.defeats,stats?.l));
+  const draws = cpcSafeNumber(first(row?.draws,row?.drawn,row?.draw,row?.ties,row?.tied,row?.d,stats?.draws,stats?.drawn,stats?.draw,stats?.ties,stats?.tied,stats?.d));
+  const goalsFor = cpcSafeNumber(first(row?.goals_for,row?.goals_scored,row?.gf,row?.goalsFor,stats?.goals_for,stats?.goals_scored,stats?.gf,stats?.goalsFor));
+  const goalsAgainst = cpcSafeNumber(first(row?.goals_against,row?.goals_conceded,row?.ga,row?.goalsAgainst,stats?.goals_against,stats?.goals_conceded,stats?.ga,stats?.goalsAgainst));
+  const goalDifference = cpcSafeNumber(first(row?.goal_difference,row?.goal_diff,row?.gd,row?.goalDifference,stats?.goal_difference,stats?.goal_diff,stats?.gd,stats?.goalDifference));
+  const team = cpcTeam(teamSource,row?.team_id ?? row?.id,row?.team_name ?? row?.name);
+  const rawGroup = cpcSafeString(first(row?.groupName,row?.group_name,typeof row?.group === "string" ? row.group : row?.group?.name,row?.group?.label));
   return {
-    position: cpcSafeNumber(first(row?.position, row?.rank, stats?.position, stats?.rank)),
-    groupName: cpcSafeString(first(row?.groupName, row?.group_name, typeof row?.group === "string" ? row.group : row?.group?.name, row?.group?.label)),
-    team: cpcTeam(row?.team, row?.team_id, row?.team_name),
-    played,
-    wins,
-    draws: draws ?? (played != null && wins != null && losses != null ? played - wins - losses : null),
-    losses,
-    goalsFor,
-    goalsAgainst,
-    goalDifference: goalDifference ?? (goalsFor != null && goalsAgainst != null ? goalsFor - goalsAgainst : null),
-    points: cpcSafeNumber(first(row?.points, row?.pts, row?.pontos, stats?.points, stats?.pts, stats?.pontos))
+    position:cpcSafeNumber(first(row?.position,row?.rank,stats?.position,stats?.rank)),
+    groupName:cpcNationsGroupForNames(rawGroup,team?.name)||rawGroup,
+    team,
+    played,wins,
+    draws:draws ?? (played!=null&&wins!=null&&losses!=null ? played-wins-losses : null),
+    losses,goalsFor,goalsAgainst,
+    goalDifference:goalDifference ?? (goalsFor!=null&&goalsAgainst!=null ? goalsFor-goalsAgainst : null),
+    points:cpcSafeNumber(first(row?.points,row?.pts,row?.pontos,stats?.points,stats?.pts,stats?.pontos))
   };
 }
 
@@ -2593,6 +2579,51 @@ async function bsdResolveCurrentSeason(env, leagueId) {
     throw new Error("Época atual não encontrada na BSD.");
   }
   return selected;
+}
+
+async function bsdFetchEventsForSeason(env, leagueId, seasonId, status, seasonStart, seasonEnd, stage = "", round = null) {
+  const todayIso = new Date().toISOString().slice(0, 10);
+  const start = seasonStart || todayIso;
+  const end = seasonEnd || todayIso;
+  const dateFrom = status === "finished" ? start : status === "upcoming" ? (todayIso > start ? todayIso : start) : start;
+  const dateTo = status === "finished" ? (todayIso < end ? todayIso : end) : end;
+  const results = [];
+  let offset = 0;
+  const limit = 200;
+  for (;;) {
+    const params = new URLSearchParams({
+      league_id: String(leagueId), season_id: String(seasonId),
+      date_from: dateFrom, date_to: dateTo, limit: String(limit), offset: String(offset)
+    });
+    if (status === "upcoming") params.set("status", "notstarted");
+    if (status === "finished") params.set("status", "finished");
+    if (stage) params.set("stage", String(stage));
+    if (round != null && String(round).trim()) params.set("round_number", String(round));
+    const data = await bsdFetchJson(env, `https://sports.bzzoiro.com/api/v2/events/?${params.toString()}`);
+    const page = bsdExtractEvents(data);
+    results.push(...page);
+    const total = cpcSafeNumber(data?.count);
+    if (!page.length || page.length < limit || (total != null && results.length >= total)) break;
+    offset += limit;
+    if (offset > 5000) break;
+  }
+  return results;
+}
+
+async function bsdFetchLiveEvents(env, leagueId, seasonId, stage = "", round = null) {
+  const params = new URLSearchParams({ league_id: String(leagueId), season_id: String(seasonId) });
+  if (stage) params.set("stage", String(stage));
+  if (round != null && String(round).trim()) params.set("round_number", String(round));
+  return bsdExtractEvents(await bsdFetchJson(env, `https://sports.bzzoiro.com/api/v2/events/live/?${params.toString()}`));
+}
+
+async function bsdFetchLiveIncidents(env, eventId) {
+  try {
+    const data = await bsdFetchJson(env, `https://sports.bzzoiro.com/api/v2/events/${eventId}/incidents/`);
+    return Array.isArray(data?.incidents) ? data.incidents : Array.isArray(data?.results) ? data.results : Array.isArray(data) ? data : [];
+  } catch {
+    return [];
+  }
 }
 
 async function bsdFootballAdapter(env, competitionKey, options = {}) {
@@ -2813,7 +2844,7 @@ const footballCacheRefreshes = new Map();
 
 function footballCacheIdentity(competitionKey) {
   return competitionKey === "nations-league"
-    ? "v5-nations|nations-league"
+    ? "v6-nations|nations-league"
     : "v3-" + competitionKey;
 }
 
