@@ -335,6 +335,16 @@ function renderRounds(selectUpcoming=false){
     const label=labels[index]+(labelCounts.get(labels[index])>1?" · "+round.stageKey:"");
     return '<option value="'+esc(round.key)+'">'+esc(label)+'</option>';
   }).join("");
+  const knownRoundCounts={"liga-portugal":34,"champions-league":8,"europa-league":8,"conference-league":8,"nations-league":6};
+  const knownCount=knownRoundCounts[active]||0;
+  if(knownCount){
+    const stageKey=active==="liga-portugal"?"regular-season":active==="nations-league"||active==="champions-league"||active==="europa-league"||active==="conference-league"?"league-phase":"";
+    for(let number=1;number<=knownCount;number++){
+      const key=JSON.stringify([stageKey,String(number)]);
+      if(!options.some(round=>round.key===key)) options.push({key,stageKey,stageLabel:stageKey==="regular-season"?"Época regular":"Fase de liga",roundKey:String(number),displayRound:(active==="liga-portugal"?"Jornada ":"Jornada ")+number,firstKickoff:Infinity});
+    }
+    options.sort((a,b)=>a.firstKickoff-b.firstKickoff||Number(a.roundKey)-Number(b.roundKey));
+  }
   if(!selectUpcoming&&options.some(round=>round.key===previous))roundEl.value=previous;
   else if(selectUpcoming){
     const next=allFixtures.filter(item=>fixtureStatus(item)==="upcoming")
@@ -525,8 +535,12 @@ async function loadCompetition(key,status="all",resetRound=true){
   seasonEl.textContent="A carregar…";
   clearCompetitionRefresh();
   try{
-    const effectiveStatus=status==="all" ? (fixtureFilter==="finished"?"finished":fixtureFilter==="upcoming"?"upcoming":"all") : status;
+    const effectiveStatus=status || (fixtureFilter==="finished"?"finished":fixtureFilter==="upcoming"?"upcoming":"all");
+    const selectedRound=roundEl.value;
     const params=new URLSearchParams({competition:key,status:effectiveStatus});
+    if(selectedRound && selectedRound!=="all"){
+      try{ const parsed=JSON.parse(selectedRound); if(Array.isArray(parsed)&&parsed[1]!=null) params.set("round",String(parsed[1])); if(Array.isArray(parsed)&&parsed[0]) params.set("stage",String(parsed[0])); }catch{}
+    }
     const response=await fetch("/api/competicoes?"+params.toString(),{cache:"no-store"});
     const data=await response.json();
     if(!response.ok)throw new Error(data?.message||"Não foi possível obter os dados.");
@@ -562,7 +576,7 @@ document.querySelectorAll(".competition-filter").forEach(button=>button.addEvent
   renderFixtures();
   scheduleCompetitionRefresh();
 }));
-roundEl.addEventListener("change",()=>{ renderFixtures(); });
+roundEl.addEventListener("change",()=>{ if(roundEl.value==="all"){ renderFixtures(); scheduleCompetitionRefresh(); return; } loadCompetition(active,"all",false); });
 window.addEventListener("popstate",()=>{
   const key=new URLSearchParams(location.search).get("competition")||"liga-portugal";
   if(competitions.some(item=>item[0]===key)&&key!==active)loadCompetition(key,fixtureFilter==="finished"?"finished":fixtureFilter==="upcoming"?"upcoming":"all",true);
