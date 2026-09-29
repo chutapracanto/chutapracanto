@@ -199,6 +199,7 @@
     .home-important-next{font-size:.61rem;color:var(--text-gray);line-height:1.35;border-top:1px solid var(--border-color);padding-top:.5rem}
     .home-important-next b{color:var(--text-color)}
     .home-important-match{min-height:3.1rem}
+    .home-important-match{min-height:3.1rem}
     @media(max-width:800px){
       .hero{grid-template-columns:1fr;padding:1.1rem 1.15rem}.hero .btn-neon{justify-self:start}
       .home-important-games-grid{display:flex;overflow-x:auto;gap:.7rem;padding-bottom:.25rem;scrollbar-width:none}
@@ -717,15 +718,6 @@
             : '<b>PRÓXIMO JOGO:</b> '+matchLabel(overall))
           : '<b>PRÓXIMO JOGO:</b> —';
         return '<a class="home-important-card" href="/competicoes?competition='+encodeURIComponent(meta[0])+'"><div class="home-important-card-top"><img src="'+leagueLogo(meta[2])+'" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/logo.png\'"><strong>'+esc(meta[1])+'</strong><span aria-hidden="true">→</span></div><div class="home-important-label">JOGOS IMPORTANTES</div><div class="home-important-match">'+importantMatches+'</div><div class="home-important-next">'+nextMatch+'</div></a>';
-      }).join('');
-    }
-      gamesGrid.innerHTML=priorityCompetitions.map(item=>{
-        const meta=item.meta, important=item.priority30[0];
-        const overall=item.upcoming[0];
-        const same=overall===important || (dateValue(overall)?.getTime()===dateValue(important)?.getTime() && overall?.homeTeam?.name===important?.homeTeam?.name && overall?.awayTeam?.name===important?.awayTeam?.name);
-        const importantMatch=priorityList(item);
-        const nextMatch=same?'É também o próximo jogo da competição.':'<b>PRÓXIMO JOGO:</b> '+esc(overall?.homeTeam?.name||'Casa')+' vs '+esc(overall?.awayTeam?.name||'Fora')+' · '+dateLabel(dateValue(overall));
-        return '<a class="home-important-card" href="/competicoes?competition='+encodeURIComponent(meta[0])+'"><div class="home-important-card-top"><img src="'+leagueLogo(meta[2])+'" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/logo.png\'"><strong>'+esc(meta[1])+'</strong><span aria-hidden="true">→</span></div><div class="home-important-label">PRÓXIMO JOGO IMPORTANTE</div><div class="home-important-match">'+importantMatch+'</div><div class="home-important-next">'+nextMatch+'</div></a>';
       }).join('');
     }
 
