@@ -654,8 +654,8 @@ async function loadCompetition(key,status="all",resetRound=true){
     globalStatusEl.textContent=data.updatedAt?"Atualizado "+dateLabel(data.updatedAt):"Dados atualizados";
     allFixtures=Array.isArray(data.fixtures)?data.fixtures:[];
     allStandings=Array.isArray(data.standings)?data.standings:[];
-    renderGroupFilter();
     competitionPhase=data.phase||{type:"single-table",grouped:false,label:"Classificação"};
+    renderGroupFilter();
     if(resetRound)renderRounds(true);
     renderFixtures();
     renderHighlight();
