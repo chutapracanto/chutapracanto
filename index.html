@@ -633,13 +633,13 @@
       const gamesGrid=document.getElementById('home-important-games-grid');
       const priorityNames=['porto','benfica','sporting','portugal'];
       const now=Date.now();
-      const limit=now+(30*24*60*60*1000);
+      const limit=now+(31*24*60*60*1000);
       const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
       const safeUrl=value=>{try{const u=new URL(String(value||''),location.origin);return u.protocol==='https:'||u.origin===location.origin?u.href:''}catch{return ''}};
       const teamLogo=team=>safeUrl(team?.logo)||'/images/logo.png';
       const leagueLogo=id=>'/api/football-image?type=league&id='+encodeURIComponent(id);
       const dateValue=item=>{const d=new Date(item?.kickoff||item?.startAt||item?.date);return Number.isNaN(d.getTime())?null:d};
-      const dateLabel=d=>d?new Intl.DateTimeFormat('pt-PT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}).format(d):'—';
+      const dateLabel=d=>d?new Intl.DateTimeFormat('pt-PT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}).format(d):'—';\n      const priorityList=item=>item.priority30.map(game=>esc(game.homeTeam?.name||'Casa')+' vs '+esc(game.awayTeam?.name||'Fora')+' · '+dateLabel(dateValue(game))).join('<br>');
       const isPriority=item=>priorityNames.some(name=>[item?.homeTeam?.name,item?.awayTeam?.name].some(team=>String(team||'').toLocaleLowerCase('pt-PT').includes(name)));
       const competitionResults=await Promise.all(competitions.map(async meta=>{
         try{
@@ -650,7 +650,7 @@
           const upcoming=fixtures.filter(item=>{const t=dateValue(item)?.getTime();return Number.isFinite(t)&&t>=now});
           upcoming.sort((a,b)=>dateValue(a).getTime()-dateValue(b).getTime());
           const priority=upcoming.filter(isPriority);
-          const priority30=priority.find(item=>dateValue(item).getTime()<=limit)||null;
+          const priority30=priority.filter(item=>dateValue(item).getTime()<=limit);
           return {meta,data,upcoming,priority30};
         }catch{return {meta,data:null,upcoming:[],priority30:null}}
       }));
@@ -674,24 +674,24 @@
         });
         const renderStandings=rows=>{
           const sorted=rows.slice().sort((a,b)=>(Number(a.position??999)-Number(b.position??999)));
-          standingsContent.innerHTML='<table class="home-standings-table"><thead><tr><th>#</th><th>Equipa</th><th>J</th><th>DG</th><th>Pts</th></tr></thead><tbody>'+
+          standingsContent.innerHTML='<table class="home-standings-table"><thead><tr><th>#</th><th>Equipa</th><th title="J = Jogos">J</th><th title="DG = Diferença de Golos">DG</th><th title="Pts = Pontos">Pts</th></tr></thead><tbody>'+
             sorted.map((row,i)=>'<tr><td>'+esc(row.position??i+1)+'</td><td><div class="home-standing-team"><img src="'+teamLogo(row.team)+'" alt=""><span>'+esc(row.team?.name||'—')+'</span></div></td><td>'+esc(row.played??row.games??'—')+'</td><td>'+esc(row.goalDifference??row.gd??'—')+'</td><td><strong>'+esc(row.points??'—')+'</strong></td></tr>').join('')+
             '</tbody></table>';
         };
         renderStandings(withStandings[0].data.standings);
       }
 
-      const priorityCompetitions=competitionResults.filter(item=>item.priority30);
-      priorityCompetitions.sort((a,b)=>dateValue(a.priority30).getTime()-dateValue(b.priority30).getTime());
+      const priorityCompetitions=competitionResults.filter(item=>item.priority30?.length);
+      priorityCompetitions.sort((a,b)=>dateValue(a.priority30[0]).getTime()-dateValue(b.priority30[0]).getTime());
       if(!priorityCompetitions.length){
         gamesGrid.innerHTML='<div class="home-standings-empty">Não há jogos importantes das equipas prioritárias nos próximos 30 dias.</div>';
         return;
       }
       gamesGrid.innerHTML=priorityCompetitions.map(item=>{
-        const meta=item.meta, important=item.priority30;
+        const meta=item.meta, important=item.priority30[0];
         const overall=item.upcoming[0];
         const same=overall===important || (dateValue(overall)?.getTime()===dateValue(important)?.getTime() && overall?.homeTeam?.name===important?.homeTeam?.name && overall?.awayTeam?.name===important?.awayTeam?.name);
-        const importantMatch=esc(important.homeTeam?.name||'Casa')+' vs '+esc(important.awayTeam?.name||'Fora')+' · '+dateLabel(dateValue(important));
+        const importantMatch=priorityList(item);
         const nextMatch=same?'É também o próximo jogo da competição.':'<b>PRÓXIMO JOGO:</b> '+esc(overall?.homeTeam?.name||'Casa')+' vs '+esc(overall?.awayTeam?.name||'Fora')+' · '+dateLabel(dateValue(overall));
         return '<a class="home-important-card" href="/competicoes?competition='+encodeURIComponent(meta[0])+'"><div class="home-important-card-top"><img src="'+leagueLogo(meta[2])+'" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/logo.png\'"><strong>'+esc(meta[1])+'</strong><span aria-hidden="true">→</span></div><div class="home-important-label">PRÓXIMO JOGO IMPORTANTE</div><div class="home-important-match">'+importantMatch+'</div><div class="home-important-next">'+nextMatch+'</div></a>';
       }).join('');
