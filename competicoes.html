@@ -268,10 +268,10 @@ function renderRounds(){
   if(rounds.includes(previous)) roundEl.value=previous;
 }
 function renderFixtures(){
-  let rows=allFixtures.filter(item=>fixtureFilter==="all"||fixtureStatus(item)===fixtureFilter);
+  let rows=allFixtures.filter(item=>{const status=fixtureStatus(item);return fixtureFilter==="all"||(fixtureFilter==="upcoming"?(status==="upcoming"||status==="live"):status===fixtureFilter)});
   const selectedRound=roundEl.value;
   if(selectedRound!=="all")rows=rows.filter(item=>translateRound(item.roundLabel||item.round||"").trim()===selectedRound);
-  rows.sort((a,b)=>{const ad=dateValue(a)?.getTime()||0,bd=dateValue(b)?.getTime()||0;return fixtureFilter==="finished"?bd-ad:ad-bd;});
+  rows.sort((a,b)=>{const as=fixtureStatus(a),bs=fixtureStatus(b);const ad=dateValue(a)?.getTime()||0,bd=dateValue(b)?.getTime()||0;if(fixtureFilter==="finished")return bd-ad;if(fixtureFilter==="all"){if(as==="live"&&bs!=="live")return -1;if(bs==="live"&&as!=="live")return 1;if(as==="upcoming"&&bs==="finished")return -1;if(bs==="upcoming"&&as==="finished")return 1;if(as==="upcoming"&&bs==="upcoming")return ad-bd;return bd-ad}return ad-bd;});
   countEl.textContent=rows.length+" jogo"+(rows.length===1?"":"s");
   if(!rows.length){fixturesEl.innerHTML='<div class="empty">Não há jogos para este filtro.</div>';return}
   fixturesEl.innerHTML=rows.slice(0,40).map(item=>{
