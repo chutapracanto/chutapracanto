@@ -2861,3 +2861,38 @@ Só considerar a frente resolvida depois de validar, em runtime, esta sequência
 
 ## Nota de continuidade para futuras IAs
 Uma análise anterior tratou incorretamente o `cpc-football-cron` como mero chamador periódico sem reconhecer inicialmente a arquitetura completa. Esta secção existe para impedir essa regressão: **BSD, Pages Worker, D1, Worker Cron e Cron Trigger devem ser analisados como um único sistema, mantendo a separação entre Pages e o Worker agendado.**
+
+
+# 61. CAUSA RAIZ CONFIRMADA — CACHE STALE BLOQUEAVA REFRESH BSD — 2026-09-29
+
+## Evidência
+A implementação de `/api/competicoes` fazia:
+1. ler a cache exata;
+2. se stale, procurar `getLatestFootballCache()`;
+3. devolver a entrada stale imediatamente;
+4. só mais tarde ter o caminho de `refreshFootballCache()`.
+
+Assim, uma entrada com TTL de 15 minutos podia continuar a ser servida como stale por até 24h, impedindo o refresh BSD. O mesmo acontecia com o fallback de `all` e com o bloco explícito de stale da chave pedida.
+
+Isto explica de forma coerente a experiência observada:
+- a D1 continuava com `v5-taca-liga` de 20:04 apesar do Cron `*/5` existir;
+- os horários corrigidos do código ainda não chegavam à cache pública;
+- um snapshot LIVE antigo podia continuar a ser servido;
+- golos/minutos não avançavam através de novos dados BSD;
+- um LIVE terminado podia permanecer no snapshot e bloquear a percepção de um novo LIVE.
+
+## Correção implementada
+- Commit `696460ad5b3a26df7e5b916e5c40550a007a30f6`: cache stale deixou de ser devolvida antes do refresh; entra agora no caminho BSD e o stale fica como fallback de segurança em caso de erro.
+- O fallback `all` stale também deixou de impedir o refresh.
+- Commit `d99465e02bd0840598a4a6a91b5ec62409bdd444`: a UI deixou de esperar até `kickoff + 60s` quando não conhece um LIVE; passa a consultar o snapshot a cada 60s quando não há LIVE e a cada 15s quando há LIVE.
+
+## Cloudflare
+- Deployment Pages para `696460ad`: criado e concluído com **PASS** no deployment `8445a1d3`.
+- Deployment Pages para `d99465e`: criado e, no momento desta anotação, ainda em `clone_repo`; aguardar PASS antes de considerar a alteração frontend em produção.
+- Worker separado `cpc-football-cron`: confirmado ativo, handler `scheduled`, Cron `*/5 * * * *`, binding D1 `FOOTBALL_CACHE_DB`.
+
+## Estado ainda pendente
+Não declarar a frente LIVE resolvida ainda. É necessário observar nova escrita da D1 após o refresh, confirmar os dois horários corrigidos da Taça da Liga e validar em runtime a sequência LIVE → golo/minuto → terminado → novo LIVE.
+
+## Nota importante
+A conclusão anterior de que o Cron apenas chamava o endpoint sem efeito estava incompleta. O Cron está correto como mecanismo de execução; o defeito estava no contrato de cache do endpoint, que servia stale em vez de renovar quando expirado.
