@@ -2633,6 +2633,37 @@ async function bsdFetchLiveEvents(env, leagueId, seasonId, stage = "", round = n
   return bsdExtractEvents(await bsdFetchJson(env, `https://sports.bzzoiro.com/api/v2/events/live/?${params.toString()}`));
 }
 
+function cpcLiveFixtureMatch(candidate, live) {
+  const candidateHomeId = cpcSafeNumber(candidate?.homeTeam?.id);
+  const candidateAwayId = cpcSafeNumber(candidate?.awayTeam?.id);
+  const liveHomeId = cpcSafeNumber(live?.home_team_id ?? live?.homeTeam?.id ?? live?.home_team?.id);
+  const liveAwayId = cpcSafeNumber(live?.away_team_id ?? live?.awayTeam?.id ?? live?.away_team?.id);
+  if (
+    candidateHomeId != null &&
+    candidateAwayId != null &&
+    liveHomeId != null &&
+    liveAwayId != null &&
+    candidateHomeId === liveHomeId &&
+    candidateAwayId === liveAwayId
+  ) {
+    return true;
+  }
+
+  const normalize = value => String(value || "")
+    .toLocaleLowerCase("pt-PT")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  const candidateHome = normalize(candidate?.homeTeam?.name);
+  const candidateAway = normalize(candidate?.awayTeam?.name);
+  const liveHome = normalize(live?.home_team_name ?? live?.homeTeam?.name ?? live?.home_team?.name);
+  const liveAway = normalize(live?.away_team_name ?? live?.awayTeam?.name ?? live?.away_team?.name);
+  return Boolean(candidateHome && candidateAway && liveHome && liveAway &&
+    candidateHome === liveHome && candidateAway === liveAway);
+}
+
 async function bsdFetchLiveIncidents(env, eventId) {
   try {
     const data = await bsdFetchJson(env, `https://sports.bzzoiro.com/api/v2/events/${eventId}/incidents/`);
@@ -2758,6 +2789,9 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
       const fixturesById = new Map(fixtures.map(item => [item.id, item]));
       liveById.forEach((live, id) => {
         let item = fixturesById.get(id);
+        if (!item) {
+          item = fixtures.find(candidate => cpcLiveFixtureMatch(candidate, live)) || null;
+        }
         if (!item) {
           item = cpcNormalizeEvent(live, stage);
           if (!item.homeTeam.name && item.homeTeam.id != null) {
@@ -3067,6 +3101,63 @@ async function handleFootballCompetitionAPI(request, env) {
     const cached = await getFootballCache(env, cacheKey);
 
     if (cached?.state === "fresh" && footballCacheSeasonIsCurrent(cached.payload)) {
+      if ((status === "upcoming" || status === "all") && !round) {
+        const liveRaw = await bsdFetchLiveEvents(
+          env,
+          competition.leagueId,
+          Number(cached.payload?.season?.id || seasonId || 0),
+          stage,
+          null
+        ).catch(() => []);
+
+        const liveById = new Map(
+          liveRaw
+            .map(item => [cpcSafeNumber(item?.id ?? item?.event_id), item])
+            .filter(([id]) => id != null)
+        );
+        const cachedFixtures = Array.isArray(cached.payload.fixtures) ? cached.payload.fixtures : [];
+        const merged = [];
+        const matchedLiveIds = new Set();
+
+        for (const cachedFixture of cachedFixtures) {
+          const id = cpcSafeNumber(cachedFixture?.id);
+          const live = id != null ? liveById.get(id) : null;
+          const matched = live || liveRaw.find(item => cpcLiveFixtureMatch(cachedFixture, item));
+          if (matched) {
+            const normalized = cpcNormalizeEvent(matched, stage);
+            merged.push({
+              ...cachedFixture,
+              ...normalized,
+              status: "live",
+              groupName: cachedFixture?.groupName || normalized?.groupName || "",
+              score: normalized.score?.home != null || normalized.score?.away != null ? normalized.score : cachedFixture.score
+            });
+            const matchedId = cpcSafeNumber(matched?.id ?? matched?.event_id);
+            if (matchedId != null) matchedLiveIds.add(matchedId);
+          } else if (String(cachedFixture?.status || "").toLowerCase() !== "live") {
+            const kickoff = Date.parse(cachedFixture?.kickoff || "");
+            if (!Number.isFinite(kickoff) || kickoff >= Date.now()) merged.push(cachedFixture);
+          }
+        }
+
+        for (const live of liveRaw) {
+          const liveId = cpcSafeNumber(live?.id ?? live?.event_id);
+          if (liveId == null || matchedLiveIds.has(liveId)) continue;
+          const scheduled = cachedFixtures.find(candidate => cpcLiveFixtureMatch(candidate, live));
+          const normalized = scheduled
+            ? { ...scheduled, ...cpcNormalizeEvent(live, stage) }
+            : cpcNormalizeEvent(live, stage);
+          merged.push({ ...normalized, status: "live" });
+        }
+
+        const payload = { ...cached.payload, fixtures: merged, updatedAt: new Date().toISOString(), updateStatus: "live" };
+        return json(
+          payload,
+          200,
+          { "Cache-Control": "no-store" }
+        );
+      }
+
       return json(
         { ...cached.payload, updateStatus: "cache" },
         200,
