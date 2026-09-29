@@ -332,8 +332,8 @@ roundEl.addEventListener("change",renderFixtures);
 window.addEventListener("popstate",()=>{const key=new URLSearchParams(location.search).get("competition")||"liga-portugal";if(competitions.some(item=>item[0]===key)&&key!==active)loadCompetition(key,"all")});
 active=new URLSearchParams(location.search).get("competition")||"liga-portugal";
 if(!competitions.some(item=>item[0]===active))active="liga-portugal";
-loadCompetition(active,"all");
-setInterval(()=>{ if(document.visibilityState==="visible" && active) loadCompetition(active,fixtureFilter); },60000);
+(async()=>{await prepareCompetitionOrder();await loadCompetition(active,"all")})();
+setInterval(()=>{ if(document.visibilityState==="visible" && active) loadCompetition(active,fixtureFilter); },15000);
 </script>
 <footer>
   <div class="footer-container">
