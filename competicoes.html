@@ -249,19 +249,31 @@ function nationsGroupName(item){
 }
 function nationsGroupLabel(group){return "Liga "+group.charAt(0)+" · Grupo "+group}
 function renderGroupFilter(){
-  const isNations=active==="nations-league";
-  groupFilterWrap.hidden=!isNations;
-  roundEl.hidden=isNations;
-  if(!isNations)return;
-  const groups=Object.keys(NATIONS_GROUPS);
-  groupEl.innerHTML=groups.map(group=>'<option value="'+group+'">'+esc(nationsGroupLabel(group))+'</option>').join("");
-  if(!groups.includes(groupFilter))groupFilter="A4";
+  const isGrouped=Boolean(competitionPhase?.grouped);
+  groupFilterWrap.hidden=!isGrouped;
+  roundEl.hidden=isGrouped;
+  if(!isGrouped)return;
+  const groups=[...new Set(allStandings.map(row=>String(row?.groupName||"").trim()).filter(Boolean))];
+  if(active==="nations-league"){
+    for(const group of Object.keys(NATIONS_GROUPS)) if(!groups.includes(group)) groups.push(group);
+  }
+  groups.sort((a,b)=>{
+    const na=a.match(/^([A-D])([1-4])$/i), nb=b.match(/^([A-D])([1-4])$/i);
+    if(na&&nb)return (na[1]+na[2]).localeCompare(nb[1]+nb[2]);
+    return a.localeCompare(b,"pt-PT");
+  });
+  groupEl.innerHTML=groups.map(group=>{
+    const label=/^[A-D][1-4]$/i.test(group)?nationsGroupLabel(group.toUpperCase()):group;
+    return '<option value="'+esc(group)+'">'+esc(label)+'</option>';
+  }).join("");
+  if(!groups.includes(groupFilter))groupFilter=groups[0]||"";
   groupEl.value=groupFilter;
-  if(standingsScopeEl)standingsScopeEl.textContent=nationsGroupLabel(groupFilter);
+  if(standingsScopeEl)standingsScopeEl.textContent=/^[A-D][1-4]$/i.test(groupFilter)?nationsGroupLabel(groupFilter):groupFilter||competitionPhase.label;
 }
 
 
 let tabOrderReady=true;
+let competitionPhase={type:"single-table",grouped:false,label:"Classificação"};
 
 
 function esc(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));}
@@ -313,10 +325,35 @@ function setCompetitionFilterState(){
     button.setAttribute("aria-pressed",String(selected));
   });
 }
-function prepareCompetitionOrder(){
-  orderedCompetitions=[...competitions];
+async function prepareCompetitionOrder(){
+  const rank=team=>{
+    const name=normalizeTeamName(team?.name);
+    if(name==="porto"||name==="fc porto")return 0;
+    if(name==="sporting"||name==="sporting cp"||name==="sporting clube de portugal")return 1;
+    if(name==="benfica"||name==="sl benfica")return 2;
+    if(name==="portugal")return 3;
+    return 99;
+  };
+  const results=await Promise.all(competitions.map(async meta=>{
+    try{
+      const response=await fetch("/api/competicoes?competition="+encodeURIComponent(meta[0])+"&status=upcoming",{cache:"no-store"});
+      if(!response.ok)throw new Error("order");
+      const data=await response.json();
+      const fixtures=(Array.isArray(data.fixtures)?data.fixtures:[]).filter(item=>fixtureStatus(item)==="upcoming");
+      const priority=fixtures.filter(isPriorityFixture).sort((a,b)=>{
+        const da=dateValue(a)?.getTime()??Infinity, db=dateValue(b)?.getTime()??Infinity;
+        return da-db||rank(a.homeTeam)-rank(b.homeTeam)||rank(a.awayTeam)-rank(b.awayTeam);
+      });
+      const first=priority[0];
+      return {meta,priorityTime:first?dateValue(first)?.getTime()??Infinity:Infinity,priorityRank:first?Math.min(rank(first.homeTeam),rank(first.awayTeam)):99,generalTime:fixtures.length?dateValue(fixtures[0])?.getTime()??Infinity:Infinity};
+    }catch{
+      return {meta,priorityTime:Infinity,priorityRank:99,generalTime:Infinity};
+    }
+  }));
+  results.sort((a,b)=>a.priorityTime-b.priorityTime||a.priorityRank-b.priorityRank||a.generalTime-b.generalTime||a.meta[1].localeCompare(b.meta[1],"pt-PT"));
+  orderedCompetitions=results.map(item=>item.meta);
+  tabOrderReady=true;
   renderTabs();
-  return Promise.resolve();
 }
 function renderTabs(){
   const list=tabOrderReady?orderedCompetitions:competitions;
@@ -329,15 +366,15 @@ function renderTabs(){
     const key=button.dataset.key;
     history.replaceState(null,"","/competicoes?competition="+encodeURIComponent(key));
     fixtureFilter="upcoming";
-    groupFilter=key==="nations-league"?"A4":"";
+    groupFilter=key==="nations-league"?"A1":"";
     roundEl.value="all";
     setCompetitionFilterState();
     loadCompetition(key,fixtureFilter,true);
   }));
 }
 function renderHighlight(){
-  const scopedFixtures=active==="nations-league"
-    ? allFixtures.filter(item=>nationsGroupName(item)===groupFilter)
+  const scopedFixtures=competitionPhase.grouped
+    ? allFixtures.filter(item=>active==="nations-league" ? nationsGroupName(item)===groupFilter : String(item?.groupName||"").trim()===groupFilter)
     : allFixtures;
   const candidates=scopedFixtures.filter(item=>fixtureStatus(item)==="upcoming"||fixtureStatus(item)==="live")
     .sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity));
@@ -359,7 +396,7 @@ function renderHighlight(){
     '<div class="highlight-team"><img src="'+teamLogo(item.awayTeam)+'" alt=""><span>'+away+'</span></div>';
 }
 function renderRounds(selectUpcoming=false){
-  if(active==="nations-league"){roundEl.value="all";return}
+  if(competitionPhase.grouped){roundEl.value="all";return}
   const rounds=new Map();
   allFixtures.forEach(item=>{
     const round=roundIdentity(item);
@@ -407,7 +444,7 @@ function visibleFixtures(){
   let rows=allFixtures.filter(item=>{
     const status=fixtureStatus(item);
     const statusMatches=fixtureFilter==="all"||(fixtureFilter==="upcoming"?(status==="upcoming"||status==="live"):status==="finished");
-    const groupMatches=active!=="nations-league"||nationsGroupName(item)===groupFilter;
+    const groupMatches=!competitionPhase.grouped || (active==="nations-league" ? nationsGroupName(item)===groupFilter : String(item?.groupName||"").trim()===groupFilter);
     return statusMatches&&groupMatches;
   });
   const selectedRound=roundEl.value;
@@ -518,9 +555,12 @@ function updateLiveSnapshot(data){
   updateCompetitionLiveState();
 }
 function renderStandings(rows){
-  if(active==="nations-league")rows=rows.filter(row=>nationsGroupName({team:row.team,groupName:row.groupName})===groupFilter);
+  if(competitionPhase.grouped)rows=rows.filter(row=>{
+    const raw=String(row?.groupName||"").trim();
+    return active==="nations-league" ? (nationsGroupName({team:row.team,groupName:raw})===groupFilter||raw===groupFilter) : raw===groupFilter;
+  });
   if(!rows.length){standingsEl.innerHTML='<div class="empty">Esta competição não disponibiliza uma classificação neste formato.</div>';return}
-  if(standingsScopeEl)standingsScopeEl.textContent=active==="nations-league"?nationsGroupLabel(groupFilter):"Época atual";
+  if(standingsScopeEl)standingsScopeEl.textContent=competitionPhase.grouped ? (/^[A-D][1-4]$/i.test(groupFilter)?nationsGroupLabel(groupFilter):groupFilter) : competitionPhase.label;
   const grouped=new Map();rows.forEach(row=>{
     const key=active==="nations-league"
       ? (nationsGroupName({team:row.team, groupName:row.groupName}) || String(row.groupName||"").trim() || "__single__")
@@ -599,7 +639,7 @@ async function loadCompetition(key,status="all",resetRound=true){
   clearCompetitionRefresh();
   try{
     const effectiveStatus=status || (fixtureFilter==="finished"?"finished":fixtureFilter==="upcoming"?"upcoming":"all");
-    const selectedRound=active==="nations-league"?"all":roundEl.value;
+    const selectedRound=competitionPhase.grouped?"all":roundEl.value;
     const params=new URLSearchParams({competition:key,status:effectiveStatus});
     if(selectedRound && selectedRound!=="all"){
       try{ const parsed=JSON.parse(selectedRound); if(Array.isArray(parsed)&&parsed[1]!=null) params.set("round",String(parsed[1])); if(Array.isArray(parsed)&&parsed[0]) params.set("stage",String(parsed[0])); }catch{}
@@ -615,6 +655,7 @@ async function loadCompetition(key,status="all",resetRound=true){
     allFixtures=Array.isArray(data.fixtures)?data.fixtures:[];
     allStandings=Array.isArray(data.standings)?data.standings:[];
     renderGroupFilter();
+    competitionPhase=data.phase||{type:"single-table",grouped:false,label:"Classificação"};
     if(resetRound)renderRounds(true);
     renderFixtures();
     renderHighlight();
@@ -671,10 +712,11 @@ document.addEventListener("visibilitychange",()=>{
 });
 active=new URLSearchParams(location.search).get("competition")||"liga-portugal";
 if(!competitions.some(item=>item[0]===active))active="liga-portugal";
-groupFilter=active==="nations-league"?"A4":"";
+groupFilter=active==="nations-league"?"A1":"";
 renderGroupFilter();
 setCompetitionFilterState();
 loadCompetition(active,fixtureFilter,true);
+prepareCompetitionOrder().catch(()=>{});
 </script>
 <footer>
   <div class="footer-container">
