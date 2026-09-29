@@ -320,6 +320,10 @@ function renderRounds(selectUpcoming=false){
   allFixtures.forEach(item=>{
     const round=roundIdentity(item);
     if(round.roundKey!=="sem-jornada"){
+      if(active==="liga-portugal" && /^\d+$/.test(round.roundKey)){
+        round.stageLabel="Época regular";
+        round.displayRound="Jornada "+round.roundKey;
+      }
       const current=rounds.get(round.key);
       const time=dateValue(item)?.getTime()||Infinity;
       if(!current)rounds.set(round.key,{...round,firstKickoff:time});
