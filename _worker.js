@@ -2415,16 +2415,23 @@ function bsdExtractEvents(data) {
 }
 
 function bsdExtractStandings(data) {
-  const payload = data?.data && typeof data.data === "object" ? data.data : data;
+  // A BSD pode devolver standings como array direto, em data, standings,
+  // table, groups ou results. Normalizamos todas essas formas aqui.
+  let payload = data;
+  if (Array.isArray(data)) payload = data;
+  else if (Array.isArray(data?.data)) payload = data.data;
+  else if (data?.data && typeof data.data === "object") payload = data.data;
+
+  const addGroupRows = (rows, groupName) => {
+    if (!Array.isArray(rows)) return [];
+    return rows.map(row => ({ ...row, groupName: row?.groupName || row?.group_name || row?.group?.name || row?.group?.label || groupName }));
+  };
+
   const groups = Array.isArray(payload?.groups)
     ? payload.groups
     : Array.isArray(payload?.standings?.groups)
       ? payload.standings.groups
       : [];
-  const addGroupRows = (rows, groupName) => {
-    if (!Array.isArray(rows)) return [];
-    return rows.map(row => ({ ...row, groupName: row?.groupName || row?.group_name || row?.group?.name || row?.group?.label || groupName }));
-  };
 
   if (groups.length) {
     return groups.flatMap((group, index) => {
@@ -2437,7 +2444,9 @@ function bsdExtractStandings(data) {
             ? group.table
             : Array.isArray(group?.teams)
               ? group.teams
-              : [];
+              : Array.isArray(group?.rows)
+                ? group.rows
+                : [];
       return addGroupRows(source, groupName);
     });
   }
@@ -2446,11 +2455,27 @@ function bsdExtractStandings(data) {
     ? payload.standings
     : Array.isArray(payload?.table)
       ? payload.table
-      : [];
+      : Array.isArray(payload?.results)
+        ? payload.results
+        : Array.isArray(payload?.rows)
+          ? payload.rows
+          : Array.isArray(payload)
+            ? payload
+            : [];
+
   if (standings.some(Array.isArray)) {
     return standings.flatMap((group, index) => {
-      const groupName = cpcSafeString(group?.name ?? group?.group_name ?? group?.label) || "Grupo " + String.fromCharCode(65 + index);
-      return addGroupRows(Array.isArray(group) ? group : group?.standings, groupName);
+      const groupName = cpcSafeString(group?.name ?? group?.group_name ?? group?.label ?? group?.group) || "Grupo " + String.fromCharCode(65 + index);
+      const rows = Array.isArray(group)
+        ? group
+        : Array.isArray(group?.standings)
+          ? group.standings
+          : Array.isArray(group?.table)
+            ? group.table
+            : Array.isArray(group?.rows)
+              ? group.rows
+              : [];
+      return addGroupRows(rows, groupName);
     });
   }
 
@@ -2830,7 +2855,7 @@ const footballCacheRefreshes = new Map();
 
 function footballCacheIdentity(competitionKey) {
   return competitionKey === "nations-league"
-    ? "v4-nations|nations-league"
+    ? "v5-nations|nations-league"
     : "v3-" + competitionKey;
 }
 
