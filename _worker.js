@@ -2830,7 +2830,7 @@ async function getFootballCache(env, cacheKey) {
     const expiresAt = Date.parse(row.expires_at);
     const staleUntil = Date.parse(row.stale_until);
     const fetchedAt = Date.parse(row.fetched_at);
-    const liveLike = /\|(all|upcoming|live)$/.test(cacheKey);
+    const liveLike = /\|live$/.test(cacheKey);
     const effectiveExpiresAt = Number.isFinite(fetchedAt)
       ? fetchedAt + (liveLike ? FOOTBALL_CACHE_LIVE_FRESH_MS : FOOTBALL_CACHE_FRESH_MS)
       : expiresAt;
@@ -2975,6 +2975,36 @@ async function handleFootballCompetitionAPI(request, env) {
         { ...cached.payload, updateStatus: "cache" },
         200,
         { "Cache-Control": "public, max-age=60, stale-while-revalidate=300" }
+      );
+    }
+
+    if (!round && status !== "all") {
+      const allKey = footballCacheKey("v3-" + competitionKey, seasonId, stage, null, "all");
+      const allCached = await getFootballCache(env, allKey);
+      if (allCached?.payload && footballCacheSeasonIsCurrent(allCached.payload)) {
+        const payload = allCached.payload;
+        const now = Date.now();
+        const fixtures = Array.isArray(payload.fixtures) ? payload.fixtures.filter(item => {
+          const state = String(item?.status || "").toLowerCase().replace(/[ -]+/g, "_");
+          const kickoff = Date.parse(item?.kickoff || "");
+          if (status === "finished") return ["finished","ended","ft","full_time","completed","aet","penalties"].includes(state);
+          if (status === "live") return ["live","in_progress","in_play","inplay","ongoing"].includes(state);
+          return ["live","in_progress","in_play","inplay","ongoing"].includes(state) ||
+            (Number.isFinite(kickoff) && kickoff >= now);
+        }) : [];
+        return json(
+          { ...payload, fixtures, updateStatus: allCached.state === "fresh" ? "cache" : "stale" },
+          200,
+          { "Cache-Control": "public, max-age=30, stale-while-revalidate=300" }
+        );
+      }
+    }
+
+    if (cached?.payload && cached.state === "stale" && footballCacheSeasonIsCurrent(cached.payload)) {
+      return json(
+        { ...cached.payload, updateStatus: "stale", cacheStale: true },
+        200,
+        { "Cache-Control": "public, max-age=30, stale-while-revalidate=300", "Warning": '110 - "Response is stale"' }
       );
     }
 
