@@ -2252,6 +2252,7 @@ function cpcNormalizeEvent(event) {
     status: cpcSafeString(event?.status),
     stage: cpcSafeString(event?.stage),
     stageName: cpcSafeString(event?.stage_name),
+    groupName: cpcSafeString(event?.group_name ?? event?.group?.name ?? event?.group),
     round: cpcSafeNumber(event?.round_number ?? event?.round),
     roundLabel: cpcSafeString(event?.round_label),
     homeTeam: home,
@@ -2271,30 +2272,26 @@ function cpcNormalizeEvent(event) {
 }
 
 function cpcNormalizeStanding(row) {
+  const stats = row?.stats || row?.record || row?.statistics || {};
+  const played = cpcSafeNumber(row?.played ?? row?.matches_played ?? stats?.played ?? stats?.matches_played);
+  const wins = cpcSafeNumber(row?.wins ?? row?.won ?? stats?.wins ?? stats?.won);
+  const losses = cpcSafeNumber(row?.losses ?? row?.lost ?? row?.lost_matches ?? stats?.losses ?? stats?.lost);
   return {
     position: cpcSafeNumber(row?.position ?? row?.rank),
-    team: cpcTeam(row?.team, row?.team_id),
-    played: cpcSafeNumber(row?.played ?? row?.matches_played),
-    wins: cpcSafeNumber(row?.wins ?? row?.won),
+    groupName: cpcSafeString(row?.groupName ?? row?.group_name ?? row?.group?.name ?? row?.group?.label),
+    team: cpcTeam(row?.team, row?.team_id, row?.team_name),
+    played,
+    wins,
     draws: cpcSafeNumber(
-      row?.draws ??
-      row?.drawn ??
-      row?.draw ??
-      row?.ties ??
-      row?.tied ??
-      ((cpcSafeNumber(row?.played ?? row?.matches_played) != null &&
-        cpcSafeNumber(row?.wins ?? row?.won) != null &&
-        cpcSafeNumber(row?.losses ?? row?.lost) != null)
-        ? cpcSafeNumber(row?.played ?? row?.matches_played) -
-          cpcSafeNumber(row?.wins ?? row?.won) -
-          cpcSafeNumber(row?.losses ?? row?.lost)
-        : null)
+      row?.draws ?? row?.drawn ?? row?.draw ?? row?.ties ?? row?.tied ??
+      stats?.draws ?? stats?.drawn ?? stats?.draw ??
+      (played != null && wins != null && losses != null ? played - wins - losses : null)
     ),
-    losses: cpcSafeNumber(row?.losses ?? row?.lost ?? row?.lost_matches),
-    goalsFor: cpcSafeNumber(row?.goals_for ?? row?.goals_scored ?? row?.gf ?? row?.goalsFor),
-    goalsAgainst: cpcSafeNumber(row?.goals_against ?? row?.goals_conceded ?? row?.ga ?? row?.goalsAgainst),
-    goalDifference: cpcSafeNumber(row?.goal_difference ?? row?.goal_diff ?? row?.gd),
-    points: cpcSafeNumber(row?.points ?? row?.pts)
+    losses,
+    goalsFor: cpcSafeNumber(row?.goals_for ?? row?.goals_scored ?? row?.gf ?? row?.goalsFor ?? stats?.goals_for ?? stats?.goals_scored ?? stats?.gf),
+    goalsAgainst: cpcSafeNumber(row?.goals_against ?? row?.goals_conceded ?? row?.ga ?? row?.goalsAgainst ?? stats?.goals_against ?? stats?.goals_conceded ?? stats?.ga),
+    goalDifference: cpcSafeNumber(row?.goal_difference ?? row?.goal_diff ?? row?.gd ?? stats?.goal_difference ?? stats?.goal_diff ?? stats?.gd),
+    points: cpcSafeNumber(row?.points ?? row?.pts ?? stats?.points ?? stats?.pts)
   };
 }
 
@@ -2336,8 +2333,9 @@ function bsdExtractStandings(data) {
   const rows = Array.isArray(data?.standings) ? [...data.standings] : [];
   if (Array.isArray(data?.groups)) {
     for (const group of data.groups) {
-      if (Array.isArray(group?.standings)) rows.push(...group.standings);
-      else if (Array.isArray(group?.table)) rows.push(...group.table);
+      const groupName = cpcSafeString(group?.name ?? group?.group_name ?? group?.label ?? group?.group);
+      const source = Array.isArray(group?.standings) ? group.standings : Array.isArray(group?.table) ? group.table : [];
+      for (const row of source) rows.push({ ...row, groupName: row?.groupName || groupName });
     }
   }
   return rows;
@@ -2453,6 +2451,30 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
         || seasons[0];
     }
 
+    const today = new Date().toISOString().slice(0, 10);
+    const currentStart = cpcSafeString(current?.start_date);
+    const currentEnd = cpcSafeString(current?.end_date);
+    const currentContainsToday = (!currentStart || today >= currentStart) && (!currentEnd || today <= currentEnd);
+    if (!currentContainsToday) {
+      try {
+        const seasonsData = await bsdFetchJson(env, `https://sports.bzzoiro.com/api/v2/leagues/${competition.leagueId}/seasons/`);
+        const seasons = Array.isArray(seasonsData)
+          ? seasonsData
+          : Array.isArray(seasonsData?.seasons)
+            ? seasonsData.seasons
+            : Array.isArray(seasonsData?.results)
+              ? seasonsData.results
+              : [];
+        const matching = seasons
+          .filter(item => {
+            const start = cpcSafeString(item?.start_date);
+            const end = cpcSafeString(item?.end_date);
+            return start && end && today >= start && today <= end;
+          })
+          .sort((a,b) => String(b?.start_date||"").localeCompare(String(a?.start_date||"")))[0];
+        if (matching) current = matching;
+      } catch {}
+    }
     seasonId = Number(current?.id);
     seasonLabel = cpcSafeString(current?.name || current?.label || current?.year);
     seasonStart = cpcSafeString(current?.start_date);
