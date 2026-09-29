@@ -188,23 +188,24 @@
     .home-important-games-head h3{margin:0;font:700 .95rem var(--font-title)}
     .home-important-games-head p{margin:0;color:var(--text-gray);font-size:.65rem}
     .home-important-games-grid{display:flex;gap:.75rem;overflow-x:auto;padding-bottom:.35rem;scroll-snap-type:x proximity}
-    .home-important-card{display:flex;flex-direction:column;background:var(--card-bg);border:1px solid var(--border-color);border-radius:13px;padding:.85rem;text-decoration:none;color:inherit;flex:0 0 320px;min-width:320px;scroll-snap-align:start;transition:.2s}
+    .home-important-card{display:flex;flex-direction:column;background:var(--card-bg);border:1px solid var(--border-color);border-radius:13px;padding:.85rem;text-decoration:none;color:inherit;flex:0 0 285px;min-width:285px;scroll-snap-align:start;transition:.2s}
     .home-important-card:hover{border-color:var(--neon-green);transform:translateY(-2px)}
     .home-important-card-top{display:flex;align-items:center;gap:.55rem;margin-bottom:.7rem}
     .home-important-card-top img{width:30px;height:30px;object-fit:contain}
     .home-important-card-top strong{font:700 .72rem/1.15 var(--font-title);min-width:0}
     .home-important-card-top span{margin-left:auto;color:var(--neon-green);font-size:.9rem}
     .home-important-label{font:700 .55rem var(--font-title);letter-spacing:.06em;color:var(--neon-green);text-transform:uppercase}
-    .home-important-match{font-size:.69rem;font-weight:700;line-height:1.3;margin:.2rem 0 .55rem}.home-important-match-line{white-space:nowrap;margin-bottom:.18rem}
+    .home-important-match{font-size:.69rem;font-weight:700;line-height:1.3;margin:.2rem 0 .55rem}.home-important-match-line{white-space:nowrap;margin-bottom:.18rem;font-size:.64rem}
     .home-important-next{font-size:.61rem;color:var(--text-gray);line-height:1.35;border-top:1px solid var(--border-color);padding-top:.5rem}
     .home-important-next b{color:var(--text-color)}
+    .home-important-next-label,.home-important-next-game{display:block}.home-important-next-game{margin-top:.2rem;color:var(--text-color);font-size:.68rem;font-weight:700;white-space:nowrap}
     .home-important-match{min-height:3.1rem}
     .home-important-match{min-height:3.1rem}
     @media(max-width:800px){
       .hero{grid-template-columns:1fr;padding:1.1rem 1.15rem}.hero .btn-neon{justify-self:start}
       .home-important-games-grid{display:flex;overflow-x:auto;gap:.7rem;padding-bottom:.25rem;scrollbar-width:none}
       .home-important-games-grid::-webkit-scrollbar{display:none}
-      .home-important-card{flex:0 0 220px}
+      .home-important-card{flex:0 0 235px;min-width:235px}
     }
     @media(max-width:520px){
       .main-featured-card{grid-template-columns:1fr}.sub-featured-card{grid-template-columns:110px 1fr}
@@ -714,9 +715,9 @@
         const importantMatches=selected.map(game=>'<div class="home-important-match-line">'+matchLabel(game)+'</div>').join('');
         const nextMatch=overall
           ? (sameAsImportant(overall)
-            ? '<b>PRÓXIMO JOGO:</b> já está acima.'
-            : '<b>PRÓXIMO JOGO:</b> '+matchLabel(overall))
-          : '<b>PRÓXIMO JOGO:</b> —';
+            ? '<span class="home-important-next-label"><b>PRÓXIMO JOGO</b></span><span class="home-important-next-game">já está acima.</span>'
+            : '<span class="home-important-next-label"><b>PRÓXIMO JOGO</b></span><span class="home-important-next-game">'+esc(overall.homeTeam?.name||'Casa')+' vs '+esc(overall.awayTeam?.name||'Fora')+'</span>')
+          : '<span class="home-important-next-label"><b>PRÓXIMO JOGO</b></span><span class="home-important-next-game">—</span>';
         return '<a class="home-important-card" href="/competicoes?competition='+encodeURIComponent(meta[0])+'"><div class="home-important-card-top"><img src="'+leagueLogo(meta[2])+'" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/logo.png\'"><strong>'+esc(meta[1])+'</strong><span aria-hidden="true">→</span></div><div class="home-important-label">JOGOS IMPORTANTES</div><div class="home-important-match">'+importantMatches+'</div><div class="home-important-next">'+nextMatch+'</div></a>';
       }).join('');
     }
