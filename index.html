@@ -639,7 +639,8 @@
       const teamLogo=team=>safeUrl(team?.logo)||'/images/logo.png';
       const leagueLogo=id=>'/api/football-image?type=league&id='+encodeURIComponent(id);
       const dateValue=item=>{const d=new Date(item?.kickoff||item?.startAt||item?.date);return Number.isNaN(d.getTime())?null:d};
-      const dateLabel=d=>d?new Intl.DateTimeFormat('pt-PT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}).format(d):'—';\n      const priorityList=item=>item.priority30.map(game=>esc(game.homeTeam?.name||'Casa')+' vs '+esc(game.awayTeam?.name||'Fora')+' · '+dateLabel(dateValue(game))).join('<br>');
+      const dateLabel=d=>d?new Intl.DateTimeFormat('pt-PT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}).format(d):'—';
+      const priorityList=item=>item.priority30.map(game=>esc(game.homeTeam?.name||'Casa')+' vs '+esc(game.awayTeam?.name||'Fora')+' · '+dateLabel(dateValue(game))).join('<br>');
       const isPriority=item=>priorityNames.some(name=>[item?.homeTeam?.name,item?.awayTeam?.name].some(team=>String(team||'').toLocaleLowerCase('pt-PT').includes(name)));
       const competitionResults=await Promise.all(competitions.map(async meta=>{
         try{
