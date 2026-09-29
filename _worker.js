@@ -2224,9 +2224,25 @@ const CPC_NATIONS_GROUPS = {
   C1:["san marino","finland","albania","belarus"], C2:["armenia","latvia","montenegro","cyprus"], C3:["faroe islands","kazakhstan","slovakia","moldova"], C4:["bulgaria","luxembourg","iceland","estonia"],
   D1:["andorra","malta","gibraltar"], D2:["liechtenstein","lithuania","azerbaijan"]
 };
+function cpcNormalizeNationName(value) {
+  return cpcSafeString(value)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/\b(?:men|women)(?:'s)?\b/g, " ")
+    .replace(/\b(?:national\s+(?:football\s+)?team|football\s+team)\b/g, " ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim()
+    .replace(/\s+/g, " ");
+}
+
 function cpcNationsGroupForNames(...values) {
-  const names=values.map(value=>cpcSafeString(value).toLocaleLowerCase("pt-PT").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").trim());
-  for (const [group,teams] of Object.entries(CPC_NATIONS_GROUPS)) if (names.some(name=>teams.includes(name))) return "Liga " + group.charAt(0) + " · Grupo " + group;
+  const names = new Set(values.map(cpcNormalizeNationName).filter(Boolean));
+  for (const [group, teams] of Object.entries(CPC_NATIONS_GROUPS)) {
+    if (teams.some(team => names.has(cpcNormalizeNationName(team)))) {
+      return "Liga " + group.charAt(0) + " · Grupo " + group;
+    }
+  }
   return "";
 }
 
@@ -2292,7 +2308,7 @@ function cpcNormalizeEvent(event, defaultStage = "") {
     stage: stageKey,
     stageKey,
     stageName: stageName || stageKey,
-    groupName: cpcSafeString(event?.group_name ?? event?.group?.name ?? event?.group),
+    groupName: cpcSafeString(event?.group_name || event?.group?.name || event?.group?.label || (typeof event?.group === "string" ? event.group : "")),
     round: roundNumeric ?? roundKey,
     roundKey,
     roundLabel: cpcSafeString(
@@ -2351,7 +2367,7 @@ function cpcNormalizeStanding(row) {
   ));
   return {
     position: cpcSafeNumber(first(row?.position, row?.rank, stats?.position, stats?.rank)),
-    groupName: cpcSafeString(row?.groupName ?? row?.group_name ?? row?.group?.name ?? row?.group?.label),
+    groupName: cpcSafeString(first(row?.groupName, row?.group_name, typeof row?.group === "string" ? row.group : row?.group?.name, row?.group?.label)),
     team: cpcTeam(row?.team, row?.team_id, row?.team_name),
     played,
     wins,
@@ -2407,7 +2423,7 @@ function bsdExtractStandings(data) {
       : [];
   const addGroupRows = (rows, groupName) => {
     if (!Array.isArray(rows)) return [];
-    return rows.map(row => ({ ...row, groupName: row?.groupName || row?.group_name || groupName }));
+    return rows.map(row => ({ ...row, groupName: row?.groupName || row?.group_name || row?.group?.name || row?.group?.label || groupName }));
   };
 
   if (groups.length) {
@@ -2672,13 +2688,17 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
 
     fixtures = bsdExtractEvents(eventsData).map(event => {
       const normalized = cpcNormalizeEvent(event, stage);
-      if (competitionKey === "nations-league") normalized.groupName = cpcNationsGroupForNames(normalized.homeTeam?.name, normalized.awayTeam?.name) || normalized.groupName;
 
       if (!normalized.homeTeam.name && normalized.homeTeam.id != null) {
         normalized.homeTeam.name = teamNamesById.get(normalized.homeTeam.id) || "";
       }
       if (!normalized.awayTeam.name && normalized.awayTeam.id != null) {
         normalized.awayTeam.name = teamNamesById.get(normalized.awayTeam.id) || "";
+      }
+
+      if (competitionKey === "nations-league") {
+        const inferredGroup = cpcNationsGroupForNames(normalized.homeTeam?.name, normalized.awayTeam?.name);
+        if (inferredGroup) normalized.groupName = inferredGroup;
       }
 
       if (normalized.homeTeam.id != null && normalized.homeTeam.name) {
@@ -2716,6 +2736,10 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
           if (!item.awayTeam.name && item.awayTeam.id != null) {
             item.awayTeam.name = teamNamesById.get(item.awayTeam.id) || "";
           }
+        }
+        if (competitionKey === "nations-league") {
+          const inferredGroup = cpcNationsGroupForNames(item.homeTeam?.name, item.awayTeam?.name);
+          if (inferredGroup) item.groupName = inferredGroup;
         }
 
         const liveScoreHome = cpcSafeNumber(live?.home_score ?? live?.score?.home);
@@ -2765,9 +2789,12 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
   try {
     standings = bsdExtractStandings(standingsData).map(row => {
       const normalized = cpcNormalizeStanding(row);
-      if (competitionKey === "nations-league") normalized.groupName = cpcNationsGroupForNames(normalized.team?.name) || normalized.groupName;
       if (!normalized.team.name && normalized.team.id != null) {
         normalized.team.name = teamNamesById.get(normalized.team.id) || "";
+      }
+      if (competitionKey === "nations-league") {
+        const inferredGroup = cpcNationsGroupForNames(normalized.team?.name);
+        if (inferredGroup) normalized.groupName = inferredGroup;
       }
       return normalized;
     });
@@ -2801,10 +2828,16 @@ const FOOTBALL_CACHE_LIVE_FRESH_MS = 10 * 1000;
 const FOOTBALL_CACHE_STALE_MS = 24 * 60 * 60 * 1000;
 const footballCacheRefreshes = new Map();
 
+function footballCacheIdentity(competitionKey) {
+  return competitionKey === "nations-league"
+    ? "v4-nations|nations-league"
+    : "v3-" + competitionKey;
+}
+
 function footballCacheKey(competitionKey, seasonId, stage, round, status = "upcoming") {
   return [
     "bsd",
-    competitionKey,
+    footballCacheIdentity(competitionKey),
     seasonId || "auto",
     stage || "",
     round == null ? "" : String(round),
@@ -2814,7 +2847,7 @@ function footballCacheKey(competitionKey, seasonId, stage, round, status = "upco
 
 async function getLatestFootballCache(env, competitionKey, status) {
   if (!env.FOOTBALL_CACHE_DB) return null;
-  const prefix = "bsd|v3-" + competitionKey + "|";
+  const prefix = "bsd|" + footballCacheIdentity(competitionKey) + "|";
   const suffix = "|" + status;
   const row = await env.FOOTBALL_CACHE_DB
     .prepare(
@@ -2992,7 +3025,7 @@ async function handleFootballCompetitionAPI(request, env) {
   if (!["upcoming", "finished", "live", "all"].includes(status)) {
     return json({ error: "Status inválido." }, 400);
   }
-  const cacheKey = footballCacheKey("v3-"+competitionKey, seasonId, stage, round, status);
+  const cacheKey = footballCacheKey(competitionKey, seasonId, stage, round, status);
 
   try {
     const cached = await getFootballCache(env, cacheKey);
@@ -3017,7 +3050,7 @@ async function handleFootballCompetitionAPI(request, env) {
     }
 
     if (!round && status !== "all") {
-      const allKey = footballCacheKey("v3-" + competitionKey, seasonId, stage, null, "all");
+      const allKey = footballCacheKey(competitionKey, seasonId, stage, null, "all");
       const allCached = await getFootballCache(env, allKey);
       if (allCached?.payload && footballCacheSeasonIsCurrent(allCached.payload)) {
         const payload = allCached.payload;
@@ -3081,7 +3114,7 @@ async function handleFootballCompetitionAPI(request, env) {
     // da mesma competição/época e filtra localmente. Isto evita que uma
     // falha transitória do BSD transforme uma troca de competição num erro.
     if (status !== "all" && !round) {
-      const allKey = footballCacheKey("v3-" + competitionKey, seasonId, stage, null, "all");
+      const allKey = footballCacheKey(competitionKey, seasonId, stage, null, "all");
       const allCached = await getFootballCache(env, allKey);
       if (allCached?.payload && footballCacheSeasonIsCurrent(allCached.payload)) {
         const now = Date.now();
