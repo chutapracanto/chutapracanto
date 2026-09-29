@@ -2338,6 +2338,28 @@ function cpcNormalizeEvent(event, defaultStage = "") {
   };
 }
 
+function cpcCorrectTacaLigaSchedule(fixtures, seasonId) {
+  if (!Array.isArray(fixtures) || Number(seasonId) !== 1941) return fixtures;
+
+  const normalizeTeam = value => String(value || "")
+    .normalize("NFD")
+    .replace(/[\\u0300-\\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "");
+
+  const corrections = new Map([
+    ["scbraga|famalicao", "2026-10-29T18:45:00+00:00"],
+    ["benfica|gilvicente", "2026-10-29T20:45:00+00:00"]
+  ]);
+
+  return fixtures.map(fixture => {
+    const home = normalizeTeam(fixture?.homeTeam?.name);
+    const away = normalizeTeam(fixture?.awayTeam?.name);
+    const kickoff = corrections.get(home + "|" + away);
+    return kickoff ? { ...fixture, kickoff } : fixture;
+  });
+}
+
 function cpcInferCompetitionPhase(competitionKey, fixtures, standings) {
   const groupNames = new Set((standings || [])
     .map(row => cpcSafeString(row?.groupName || row?.group_name || (typeof row?.group === "string" ? row.group : row?.group?.name)))
@@ -2772,6 +2794,8 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
       return normalized;
     });
 
+    fixtures = cpcCorrectTacaLigaSchedule(fixtures, seasonId);
+
     const liveRaw = status === "all" || status === "upcoming"
       ? await bsdFetchLiveEvents(env, competition.leagueId, seasonId, stage, options.round).catch(() => [])
       : [];
@@ -2900,7 +2924,7 @@ const footballCacheRefreshes = new Map();
 
 function footballCacheIdentity(competitionKey) {
   if (competitionKey === "nations-league") return "v6-nations|nations-league";
-  if (competitionKey === "taca-liga") return "v4-taca-liga";
+  if (competitionKey === "taca-liga") return "v5-taca-liga";
   return "v3-" + competitionKey;
 }
 
