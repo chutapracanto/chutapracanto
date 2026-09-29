@@ -2273,9 +2273,9 @@ function cpcNormalizeEvent(event) {
 
 function cpcNormalizeStanding(row) {
   const stats = row?.stats || row?.record || row?.statistics || {};
-  const played = cpcSafeNumber(row?.played ?? row?.matches_played ?? stats?.played ?? stats?.matches_played);
-  const wins = cpcSafeNumber(row?.wins ?? row?.won ?? stats?.wins ?? stats?.won);
-  const losses = cpcSafeNumber(row?.losses ?? row?.lost ?? row?.lost_matches ?? stats?.losses ?? stats?.lost);
+  const played = cpcSafeNumber(row?.played ?? row?.matches_played ?? row?.games ?? row?.p ?? stats?.played ?? stats?.matches_played ?? stats?.games ?? stats?.p);
+  const wins = cpcSafeNumber(row?.wins ?? row?.won ?? row?.victories ?? row?.w ?? stats?.wins ?? stats?.won ?? stats?.victories ?? stats?.w);
+  const losses = cpcSafeNumber(row?.losses ?? row?.lost ?? row?.lost_matches ?? row?.defeats ?? row?.l ?? stats?.losses ?? stats?.lost ?? stats?.defeats ?? stats?.l);
   return {
     position: cpcSafeNumber(row?.position ?? row?.rank),
     groupName: cpcSafeString(row?.groupName ?? row?.group_name ?? row?.group?.name ?? row?.group?.label),
@@ -2283,15 +2283,15 @@ function cpcNormalizeStanding(row) {
     played,
     wins,
     draws: cpcSafeNumber(
-      row?.draws ?? row?.drawn ?? row?.draw ?? row?.ties ?? row?.tied ??
-      stats?.draws ?? stats?.drawn ?? stats?.draw ??
+      row?.draws ?? row?.drawn ?? row?.draw ?? row?.ties ?? row?.tied ?? row?.d ??
+      stats?.draws ?? stats?.drawn ?? stats?.draw ?? stats?.d ??
       (played != null && wins != null && losses != null ? played - wins - losses : null)
     ),
     losses,
     goalsFor: cpcSafeNumber(row?.goals_for ?? row?.goals_scored ?? row?.gf ?? row?.goalsFor ?? stats?.goals_for ?? stats?.goals_scored ?? stats?.gf),
     goalsAgainst: cpcSafeNumber(row?.goals_against ?? row?.goals_conceded ?? row?.ga ?? row?.goalsAgainst ?? stats?.goals_against ?? stats?.goals_conceded ?? stats?.ga),
     goalDifference: cpcSafeNumber(row?.goal_difference ?? row?.goal_diff ?? row?.gd ?? stats?.goal_difference ?? stats?.goal_diff ?? stats?.gd),
-    points: cpcSafeNumber(row?.points ?? row?.pts ?? stats?.points ?? stats?.pts)
+    points: cpcSafeNumber(row?.points ?? row?.pts ?? row?.pontos ?? stats?.points ?? stats?.pts ?? stats?.pontos)
   };
 }
 
@@ -2341,7 +2341,7 @@ function bsdExtractStandings(data) {
   return rows;
 }
 
-async function bsdFetchEventsForSeason(env, leagueId, seasonId, status, seasonStart, seasonEnd) {
+async function bsdFetchEventsForSeason(env, leagueId, seasonId, status, seasonStart, seasonEnd, stage = "", round = null) {
   const today = new Date();
   const todayIso = today.toISOString().slice(0, 10);
   const start = seasonStart || todayIso;
@@ -2368,6 +2368,8 @@ async function bsdFetchEventsForSeason(env, leagueId, seasonId, status, seasonSt
       limit: String(limit),
       offset: String(offset)
     });
+    if (stage) params.set("stage", String(stage));
+    if (round != null && String(round) !== "") params.set("round", String(round));
     if (status === "upcoming") params.set("status", "upcoming");
     if (status === "finished") params.set("status", "finished");
 
@@ -2451,6 +2453,7 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
         || seasons[0];
     }
 
+    current = current?.season || current?.data || current?.result || current;
     const today = new Date().toISOString().slice(0, 10);
     const currentStart = cpcSafeString(current?.start_date);
     const currentEnd = cpcSafeString(current?.end_date);
@@ -2515,8 +2518,8 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
   try {
     if (status === "all") {
       const [finished, upcoming] = await Promise.all([
-        bsdFetchEventsForSeason(env, competition.leagueId, seasonId, "finished", seasonStart, seasonEnd),
-        bsdFetchEventsForSeason(env, competition.leagueId, seasonId, "upcoming", seasonStart, seasonEnd)
+        bsdFetchEventsForSeason(env, competition.leagueId, seasonId, "finished", seasonStart, seasonEnd, stage, null),
+        bsdFetchEventsForSeason(env, competition.leagueId, seasonId, "upcoming", seasonStart, seasonEnd, stage, null)
       ]);
       const byId = new Map();
       [...finished, ...upcoming].forEach(item => {
@@ -2534,7 +2537,9 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
         seasonId,
         providerStatus,
         seasonStart,
-        seasonEnd
+        seasonEnd,
+        stage,
+        options.round || null
       );
     }
   } catch (error) {
