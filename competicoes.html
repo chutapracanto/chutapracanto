@@ -605,11 +605,10 @@ function scheduleCompetitionRefresh(){
   const next=allFixtures
     .filter(item=>(active!=="nations-league"||nationsGroupName(item)===groupFilter)&&fixtureStatus(item)==="upcoming")
     .sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity))[0];
-  const kickoff=next?dateValue(next)?.getTime():NaN;
-  if(Number.isFinite(kickoff)){
-    const delay=Math.max(1000,kickoff-Date.now()+60000);
-    refreshTimer=setTimeout(refreshCompetitionSnapshot,Math.min(delay,2147480000));
-  }
+  // Mesmo sem um LIVE conhecido, fazer polling curto permite detetar
+  // um novo jogo que acabou de começar. O backend protege o BSD com cache,
+  // portanto não é necessário esperar pelo kickoff + 60s.
+  refreshTimer=setTimeout(refreshCompetitionSnapshot,60000);
 }
 async function refreshCompetitionSnapshot(){
   if(refreshInFlight||!active)return;
