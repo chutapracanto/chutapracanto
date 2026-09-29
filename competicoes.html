@@ -47,17 +47,18 @@
 .competition-meta span{padding:.3rem .55rem;border:1px solid var(--border-color);border-radius:999px}
 .competition-meta #competition-data-status{display:none}
 .competition-live-status{display:inline-flex;align-items:center;gap:.45rem;font:700 .7rem var(--font-title);letter-spacing:.08em;color:var(--neon-green);margin-top:.55rem}
-.competition-live-status i{width:8px;height:8px;border-radius:50%;background:var(--neon-green);box-shadow:0 0 0 0 rgba(157,255,0,.55);animation:cpcPulse 2.2s infinite}
-.competition-live-status.live{color:#fff}.competition-live-status.live i{background:#ff334f;box-shadow:0 0 0 0 rgba(255,51,79,.55);animation:cpcLivePulse 2.8s ease-in-out infinite}
+.competition-live-status i{width:8px;height:8px;border-radius:50%;background:var(--neon-green);box-shadow:none;animation:none}
+.competition-live-status.live{color:#fff}.competition-live-status.live i{background:#ff334f;box-shadow:none;animation:none}
 @keyframes cpcPulse{0%,100%{box-shadow:0 0 0 0 rgba(157,255,0,.45)}50%{box-shadow:0 0 0 7px rgba(157,255,0,0)}}
 @keyframes cpcLivePulse{0%,100%{box-shadow:0 0 0 0 rgba(255,51,79,.5)}50%{box-shadow:0 0 0 7px rgba(255,51,79,0)}}
 .fixture-live{display:inline-flex;align-items:center;gap:.28rem;color:#fff;background:#d7193f;border-radius:999px;padding:.16rem .38rem;font:700 .62rem var(--font-title);letter-spacing:.07em;line-height:1;margin-bottom:.18rem}
-.fixture-live::before{content:"";width:5px;height:5px;border-radius:50%;background:#fff;animation:cpcLiveDot 2.8s ease-in-out infinite}
+.fixture-live::before{content:"";width:5px;height:5px;border-radius:50%;background:#fff;animation:none}
 @keyframes cpcLiveDot{0%,100%{opacity:.55}50%{opacity:1}}
 .highlight-live{display:inline-flex;align-items:center;gap:.28rem;margin-bottom:.25rem;color:#fff;background:#d7193f;border-radius:999px;padding:.18rem .42rem;font:700 .64rem var(--font-title);letter-spacing:.06em}
-.highlight-live::before{content:"";width:5px;height:5px;border-radius:50%;background:#fff;animation:cpcLiveDot 2.8s ease-in-out infinite}
+.highlight-live::before{content:"";width:5px;height:5px;border-radius:50%;background:#fff;animation:none}
 .highlight-goals{display:block;margin-top:.28rem;color:var(--text-gray);font-size:.66rem;line-height:1.35}
 .highlight-goal{display:block}
+ .fixture-live-detail[hidden]{display:none}
 .fixture-live-detail{display:block;color:var(--text-gray);font-size:.64rem;line-height:1.25;margin-top:.15rem}
 .highlight-score small{display:block;margin-top:.38rem;color:var(--text-gray);font:600 .68rem var(--font-body)}
 .highlight-live{display:block;margin-bottom:.25rem;color:#ff6b84;font:700 .66rem var(--font-title);letter-spacing:.08em}
@@ -72,20 +73,20 @@
 .competition-filter{border:1px solid var(--border-color);background:transparent;color:var(--text-gray);border-radius:8px;padding:.5rem .7rem;font:600 .74rem var(--font-title);cursor:pointer}
 .competition-filter.active{color:var(--text-color);border-color:var(--neon-green);background:rgba(157,255,0,.07)}
 .competition-round-select{border:1px solid var(--border-color);background:var(--card-bg);color:var(--text-color);border-radius:8px;padding:.5rem .65rem;font:600 .74rem var(--font-title)}
-.competition-grid{display:grid;grid-template-columns:minmax(300px,.95fr) minmax(0,1.25fr);gap:1rem}
+.competition-grid{display:grid;grid-template-columns:minmax(350px,1.25fr) minmax(0,1.15fr);gap:1rem}
 .competition-panel{background:var(--card-bg);border:1px solid var(--border-color);border-radius:14px;overflow:hidden}
 .competition-panel-header{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.1rem;border-bottom:1px solid var(--border-color)}
 .competition-panel h2{font:700 1rem var(--font-title);margin:0}
 .competition-panel-header span{font-size:.72rem;color:var(--text-gray)}
 .fixtures{padding:.45rem 1rem}
 .fixture-group-title,.standing-group-title{margin:.85rem 0 .45rem;font:700 .75rem var(--font-title);letter-spacing:.08em;text-transform:uppercase;color:var(--text-gray)}
-.fixture{display:grid;grid-template-columns:5.3rem minmax(0,1fr) 2.4rem minmax(0,1fr);gap:.55rem;align-items:center;padding:.75rem 0;border-bottom:1px solid var(--border-color)}
+.fixture{display:grid;grid-template-columns:6.5rem minmax(0,1fr) 3.5rem minmax(0,1fr);gap:.55rem;align-items:center;padding:.75rem 0;border-bottom:1px solid var(--border-color)}
 .fixture:last-child{border-bottom:0}
 .fixture-time{color:var(--text-gray);font-size:.7rem;line-height:1.35}
 .fixture-team{display:flex;align-items:center;justify-content:flex-end;gap:.45rem;text-align:right;font-size:.82rem}
 .fixture-team.away{justify-content:flex-start;text-align:left}
 .fixture-team img{width:27px;height:27px;object-fit:contain;flex:0 0 auto}
-.fixture-score{font:700 .88rem var(--font-title);text-align:center;color:var(--text-color)}
+.fixture-score{font:700 1rem var(--font-title);text-align:center;color:var(--text-color);min-width:3rem}
 .table-wrap{overflow-x:auto}
 .standings{width:100%;border-collapse:collapse;font-size:.78rem}
 .standings th,.standings td{padding:.62rem .5rem;border-bottom:1px solid var(--border-color);text-align:right}
@@ -207,7 +208,29 @@ let fixtureFilter="upcoming";
 let orderedCompetitions=[...competitions];
 const PRIORITY_TEAM_IDS=new Set([35,22,37,491]);
 const PRIORITY_TEAM_NAMES=new Set(["porto","fc porto","benfica","sl benfica","sporting","sporting cp","sporting clube de portugal","portugal"]);
-let tabOrderReady=false;
+const NATIONS_GROUPS={
+  A1:["france","italy","belgium","turkiye","turkey"],
+  A2:["germany","netherlands","serbia","greece"],
+  A3:["spain","croatia","england","czechia","czech republic"],
+  A4:["portugal","denmark","norway","wales"],
+  B1:["slovenia","scotland","north macedonia","switzerland"],
+  B2:["georgia","northern ireland","hungary","ukraine"],
+  B3:["israel","austria","republic of ireland","ireland","kosovo"],
+  B4:["poland","bosnia and herzegovina","romania","sweden"],
+  C1:["san marino","finland","albania","belarus"],
+  C2:["armenia","latvia","montenegro","cyprus"],
+  C3:["faroe islands","kazakhstan","slovakia","moldova"],
+  C4:["bulgaria","luxembourg","iceland","estonia"],
+  D1:["andorra","malta","gibraltar"],
+  D2:["liechtenstein","lithuania","azerbaijan"]
+};
+function nationsGroupName(item){
+  const names=[item?.homeTeam?.name,item?.awayTeam?.name,item?.team?.name].map(normalizeTeamName);
+  for(const [group,teams] of Object.entries(NATIONS_GROUPS)) if(names.some(name=>teams.includes(name))) return group;
+  return String(item?.groupName||"").trim();
+}
+
+let tabOrderReady=true;
 
 function esc(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));}
 function safeUrl(value){try{const u=new URL(String(value||""),location.origin);return u.protocol==="https:"||u.origin===location.origin?u.href:""}catch{return""}}
@@ -220,6 +243,9 @@ function translateRound(value){
     [/regular-season/gi,"Época regular"],[/regular season/gi,"Época regular"],[/league-phase/gi,"Fase de liga"],[/league phase/gi,"Fase de liga"],[/group-stage/gi,"Fase de grupos"],[/group stage/gi,"Fase de grupos"],[/matchday/gi,"Jornada"],[/qualification-round/gi,"Ronda de qualificação"],[/playoff-round/gi,"Play-off"],[/round of 16/gi,"Oitavos de final"],[/quarterfinals?/gi,"Quartos de final"],[/semifinals?/gi,"Meias-finais"],[/final/gi,"Final"]
   ];
   replacements.forEach(([pattern,replacement])=>{text=text.replace(pattern,replacement)});
+  const roundMatch=text.match(/^round\s+(\d+)$/i);
+  if(roundMatch)return (active==="liga-portugal"?"Jornada ":"Ronda ")+roundMatch[1];
+  if(/^\d+$/.test(text))return (active==="liga-portugal"?"Jornada ":"Ronda ")+text;
   text=text.replace(/\s*[-·]\s*/g," · ");
   return text;
 }
@@ -232,12 +258,34 @@ function liveMinuteLabel(item){const minute=Number(item?.liveMinute);if(!Number.
 function goalLabel(goal){const minute=Number(goal?.minute);const added=Number(goal?.addedTime);if(Number.isFinite(minute))return String(Math.floor(minute))+(Number.isFinite(added)&&added>0?"+"+Math.floor(added):"")+String.fromCharCode(39);if(Number.isFinite(goal?.periodSecond))return String(Math.floor(Number(goal.periodSecond)/60))+String.fromCharCode(39);return ""}
 function goalsLabel(item){if(!Array.isArray(item?.goals)||!item.goals.length)return "";return item.goals.map(goal=>{const side=Number(goal?.teamId)===Number(item.homeTeam?.id)?item.homeTeam?.name:Number(goal?.teamId)===Number(item.awayTeam?.id)?item.awayTeam?.name:"";const player=goal?.player?" · "+esc(goal.player):"";return "<span class=\"highlight-goal\">"+esc(goalLabel(goal))+(side?" · "+esc(side):"")+player+"</span>"}).join("")}
 function fixtureStatus(item){
-  const raw=String(item?.status||"").toLowerCase();
-  if(["finished","ended","ft","completed"].includes(raw))return "finished";
-  if(["live","in_progress","inprogress","in-play","ongoing"].includes(raw))return "live";
-  const d=dateValue(item); return d&&d.getTime()>Date.now()?"upcoming":"finished";
+  const raw=String(item?.status||"").toLowerCase().replace(/[ -]+/g,"_");
+  if(["finished","ended","ft","full_time","completed","aet","penalties"].includes(raw))return "finished";
+  if(["live","in_progress","in_play","inplay","ongoing"].includes(raw))return "live";
+  const d=dateValue(item);
+  return d&&d.getTime()>=Date.now()?"upcoming":"other";
 }
-async function prepareCompetitionOrder(){const now=Date.now();const summaries=await Promise.all(competitions.map(async meta=>{try{const response=await fetch("/api/competicoes?competition="+encodeURIComponent(meta[0])+"&status=upcoming",{cache:"no-store"});if(!response.ok)throw new Error("indisponível");const data=await response.json();const fixtures=Array.isArray(data.fixtures)?data.fixtures:[];const future=fixtures.filter(item=>{const t=dateValue(item)?.getTime();return Number.isFinite(t)&&t>=now&&fixtureStatus(item)!=="finished"}).sort((a,b)=>dateValue(a).getTime()-dateValue(b).getTime());return {meta,nextPriority:future.find(isPriorityFixture),next:future[0]};}catch{return {meta,nextPriority:null,next:null}}}));summaries.sort((a,b)=>{const ap=a.nextPriority?dateValue(a.nextPriority)?.getTime():Infinity;const bp=b.nextPriority?dateValue(b.nextPriority)?.getTime():Infinity;if(ap!==bp)return ap-bp;const an=a.next?dateValue(a.next)?.getTime():Infinity;const bn=b.next?dateValue(b.next)?.getTime():Infinity;if(an!==bn)return an-bn;return competitions.indexOf(a.meta)-competitions.indexOf(b.meta)});orderedCompetitions=summaries.map(item=>item.meta);tabOrderReady=true;renderTabs()}
+function roundIdentity(item){
+  const stageKey=String(item?.stageKey||item?.stage||item?.stageName||"sem-fase").trim()||"sem-fase";
+  const stageLabel=String(item?.stageName||item?.stage||"Fase").trim()||"Fase";
+  const roundKey=String(item?.roundKey??item?.round??item?.roundLabel??"sem-jornada").trim()||"sem-jornada";
+  const roundLabel=String(item?.roundLabel||item?.round||"").trim();
+  const displayStage=translateRound(stageLabel);
+  const displayRound=translateRound(roundLabel||roundKey);
+  return {key:JSON.stringify([stageKey,roundKey]),stageKey,stageLabel:displayStage||stageLabel,roundKey,displayRound};
+}
+function fixtureDomKey(item){return String(item?.id??[item?.kickoff,item?.homeTeam?.name,item?.awayTeam?.name].join("|"))}
+function setCompetitionFilterState(){
+  document.querySelectorAll(".competition-filter").forEach(button=>{
+    const selected=button.dataset.filter===fixtureFilter;
+    button.classList.toggle("active",selected);
+    button.setAttribute("aria-pressed",String(selected));
+  });
+}
+function prepareCompetitionOrder(){
+  orderedCompetitions=[...competitions];
+  renderTabs();
+  return Promise.resolve();
+}
 function renderTabs(){
   const list=tabOrderReady?orderedCompetitions:competitions;
   tabs.innerHTML=list.map(([key,label,id])=>`
@@ -248,94 +296,306 @@ function renderTabs(){
   tabs.querySelectorAll("button").forEach(button=>button.addEventListener("click",()=>{const key=button.dataset.key;history.replaceState(null,"","/competicoes?competition="+encodeURIComponent(key));loadCompetition(key,"all")}));
 }
 function renderHighlight(){
-  const candidates=allFixtures.filter(item=>fixtureStatus(item)==="upcoming"||fixtureStatus(item)==="live").sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity));
+  const candidates=allFixtures.filter(item=>fixtureStatus(item)==="upcoming"||fixtureStatus(item)==="live")
+    .sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity));
   const item=candidates[0]||allFixtures[0];
   if(!item){highlightEl.innerHTML='<span class="empty">Sem jogo disponível.</span>';return}
   const home=esc(item.homeTeam?.name||"Casa"),away=esc(item.awayTeam?.name||"Fora");
-  const hs=item.score?.home,as=item.score?.away;
-  const live=fixtureStatus(item)==="live";
-  const score=hs!=null||as!=null?esc(hs??"—")+" – "+esc(as??"—"):"VS";
+  const state=fixtureStatus(item),live=state==="live";
+  const score=fixtureScore(item);
   const minute=liveMinuteLabel(item);
   const goals=goalsLabel(item);
-  highlightEl.innerHTML=`
-    <div class="highlight-team"><img src="${teamLogo(item.homeTeam)}" alt=""><span>${home}</span></div>
-    <div class="highlight-score">${live?'<span class="highlight-live">LIVE'+(minute?' · '+esc(minute):'')+'</span>':''}<strong>${score}</strong><small>${live&&item.livePeriod?esc(item.livePeriod):dateLabel(dateValue(item))}</small>${goals?'<div class="highlight-goals">'+goals+'</div>':''}</div>
-    <div class="highlight-team"><img src="${teamLogo(item.awayTeam)}" alt=""><span>${away}</span></div>`;
+  highlightEl.innerHTML=
+    '<div class="highlight-team"><img src="'+teamLogo(item.homeTeam)+'" alt=""><span>'+home+'</span></div>'+
+    '<div class="highlight-score" data-event-id="'+esc(fixtureDomKey(item))+'">'+
+      '<span class="highlight-live" data-field="live"'+(live?'':' hidden')+'>'+(live?'LIVE'+(minute?' · '+esc(minute):''):'')+'</span>'+
+      '<strong data-field="score">'+(live||item.score?.home!=null||item.score?.away!=null?score:'VS')+'</strong>'+
+      '<small data-field="detail">'+(live&&item.livePeriod?esc(item.livePeriod):dateLabel(dateValue(item)))+'</small>'+
+      '<div class="highlight-goals" data-field="goals">'+goals+'</div>'+
+    '</div>'+
+    '<div class="highlight-team"><img src="'+teamLogo(item.awayTeam)+'" alt=""><span>'+away+'</span></div>';
 }
-function renderRounds(){
-  const rounds=[...new Set(allFixtures.map(item=>translateRound(item.roundLabel||item.round||"")).filter(Boolean))];
+function renderRounds(selectUpcoming=false){
+  const rounds=new Map();
+  allFixtures.forEach(item=>{
+    const round=roundIdentity(item);
+    if(round.roundKey!=="sem-jornada"){
+      const current=rounds.get(round.key);
+      const time=dateValue(item)?.getTime()||Infinity;
+      if(!current)rounds.set(round.key,{...round,firstKickoff:time});
+      else current.firstKickoff=Math.min(current.firstKickoff,time);
+    }
+  });
   const previous=roundEl.value;
-  roundEl.innerHTML='<option value="all">Todas as jornadas</option>'+rounds.map(round=>'<option value="'+esc(round)+'">'+esc(round)+'</option>').join("");
-  if(rounds.includes(previous)) roundEl.value=previous;
+  const options=[...rounds.values()].sort((a,b)=>a.firstKickoff-b.firstKickoff||a.stageLabel.localeCompare(b.stageLabel,"pt-PT"));
+  if(active==="liga-portugal") options.sort((a,b)=>a.firstKickoff-b.firstKickoff);
+  const labels=options.map(round=>round.stageLabel+" · "+round.displayRound);
+  const labelCounts=new Map(labels.map(label=>[label,labels.filter(item=>item===label).length]));
+  roundEl.innerHTML='<option value="all">Todas as jornadas</option>'+options.map((round,index)=>{
+    const label=labels[index]+(labelCounts.get(labels[index])>1?" · "+round.stageKey:"");
+    return '<option value="'+esc(round.key)+'">'+esc(label)+'</option>';
+  }).join("");
+  const knownRoundCounts={"liga-portugal":34,"champions-league":8,"europa-league":8,"conference-league":8,"nations-league":6};
+  const knownCount=knownRoundCounts[active]||0;
+  if(knownCount){
+    const stageKey=active==="liga-portugal"?"regular-season":active==="nations-league"||active==="champions-league"||active==="europa-league"||active==="conference-league"?"league-phase":"";
+    for(let number=1;number<=knownCount;number++){
+      const key=JSON.stringify([stageKey,String(number)]);
+      if(!options.some(round=>round.key===key)) options.push({key,stageKey,stageLabel:stageKey==="regular-season"?"Época regular":"Fase de liga",roundKey:String(number),displayRound:(active==="liga-portugal"?"Jornada ":"Jornada ")+number,firstKickoff:Infinity});
+    }
+    options.sort((a,b)=>a.firstKickoff-b.firstKickoff||Number(a.roundKey)-Number(b.roundKey));
+  }
+  if(!selectUpcoming&&options.some(round=>round.key===previous))roundEl.value=previous;
+  else if(selectUpcoming){
+    const next=allFixtures.filter(item=>fixtureStatus(item)==="upcoming")
+      .sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity))[0]
+      ||allFixtures.filter(item=>fixtureStatus(item)==="live").sort((a,b)=>(dateValue(a)?.getTime()||0)-(dateValue(b)?.getTime()||0))[0];
+    const nextKey=next?roundIdentity(next).key:"";
+    roundEl.value=options.some(round=>round.key===nextKey)?nextKey:"all";
+  }else roundEl.value="all";
+}
+function visibleFixtures(){
+  let rows=allFixtures.filter(item=>{
+    const status=fixtureStatus(item);
+    return fixtureFilter==="all"||(fixtureFilter==="upcoming"?(status==="upcoming"||status==="live"):status==="finished");
+  });
+  const selectedRound=roundEl.value;
+  if(selectedRound!=="all")rows=rows.filter(item=>roundIdentity(item).key===selectedRound);
+  rows.sort((a,b)=>{
+    const as=fixtureStatus(a),bs=fixtureStatus(b),ad=dateValue(a)?.getTime()||0,bd=dateValue(b)?.getTime()||0;
+    if(fixtureFilter==="finished")return bd-ad;
+    if(fixtureFilter==="all"){
+      if(as==="live"&&bs!=="live")return -1;
+      if(bs==="live"&&as!=="live")return 1;
+      if(as==="upcoming"&&bs==="finished")return -1;
+      if(bs==="upcoming"&&as==="finished")return 1;
+      if(as==="upcoming"&&bs==="upcoming")return ad-bd;
+      return bd-ad;
+    }
+    return ad-bd;
+  });
+  return rows;
+}
+function fixtureScore(item){
+  const hs=item.score?.home,as=item.score?.away;
+  return hs!=null||as!=null?esc(hs??"—")+" – "+esc(as??"—"):"—";
 }
 function renderFixtures(){
-  let rows=allFixtures.filter(item=>{const status=fixtureStatus(item);return fixtureFilter==="all"||(fixtureFilter==="upcoming"?(status==="upcoming"||status==="live"):status===fixtureFilter)});
-  const selectedRound=roundEl.value;
-  if(selectedRound!=="all")rows=rows.filter(item=>translateRound(item.roundLabel||item.round||"").trim()===selectedRound);
-  rows.sort((a,b)=>{const as=fixtureStatus(a),bs=fixtureStatus(b),ad=dateValue(a)?.getTime()||0,bd=dateValue(b)?.getTime()||0;if(fixtureFilter==="finished")return bd-ad;if(fixtureFilter==="all"){if(as==="live"&&bs!=="live")return -1;if(bs==="live"&&as!=="live")return 1;if(as==="upcoming"&&bs==="finished")return -1;if(bs==="upcoming"&&as==="finished")return 1;if(as==="upcoming"&&bs==="upcoming")return ad-bd;return bd-ad}return ad-bd});
+  const rows=visibleFixtures();
   countEl.textContent=rows.length+" jogo"+(rows.length===1?"":"s");
   if(!rows.length){fixturesEl.innerHTML='<div class="empty">Não há jogos para este filtro.</div>';return}
   const groups=new Map();
-  rows.slice(0,40).forEach(item=>{const key=String(item.groupName||"").trim()||"__single__";if(!groups.has(key))groups.set(key,[]);groups.get(key).push(item)});
+  rows.slice(0,40).forEach(item=>{
+    const key=active==="nations-league"
+      ? (nationsGroupName(item) || String(item.groupName||"").trim() || "__single__")
+      : (String(item.groupName||"").trim()||"__single__");
+    if(!groups.has(key))groups.set(key,[]);
+    groups.get(key).push(item);
+  });
   fixturesEl.innerHTML=[...groups.entries()].map(([group,items])=>{
     const label=group==="__single__"?"":'<h4 class="fixture-group-title">'+esc(group)+'</h4>';
     const markup=items.map(item=>{
-      const status=fixtureStatus(item),hs=item.score?.home,as=item.score?.away;
-      const score=hs!=null||as!=null?esc(hs??"—")+" – "+esc(as??"—"):"—",minute=liveMinuteLabel(item),goals=goalsLabel(item);
-      return '<div class="fixture">' +
-        '<div class="fixture-time">' + (status==="live"?'<span class="fixture-live">LIVE</span>':"") + (status==="live"&&minute?'<span class="fixture-live-detail">'+esc(minute)+'</span>':"") + (status!=="live"?dateLabel(dateValue(item))+"<br>":"") + '<span>'+esc(translateRound(item.roundLabel||item.round||""))+'</span></div>' +
+      const state=fixtureStatus(item),isLive=state==="live";
+      const round=roundIdentity(item).displayRound;
+      const minute=liveMinuteLabel(item);
+      const goals=goalsLabel(item);
+      return '<div class="fixture" data-event-id="'+esc(fixtureDomKey(item))+'">' +
+        '<div class="fixture-time"><span class="fixture-status'+(isLive?' fixture-live':'')+'" data-field="status">'+(isLive?'LIVE':dateLabel(dateValue(item)))+'</span>' +
+        '<span class="fixture-live-detail" data-field="minute"'+(isLive&&minute?'':' hidden')+'>'+esc(minute)+'</span>' +
+        (round?'<span class="fixture-round">'+esc(round)+'</span>':'')+'</div>' +
         '<div class="fixture-team"><span>'+esc(item.homeTeam?.name||"Casa")+'</span><img src="'+teamLogo(item.homeTeam)+'" alt=""></div>' +
-        '<div class="fixture-score" title="'+(status==="upcoming"?"Próximo jogo":status==="live"?"Em jogo":"Resultado")+'">'+score+(goals?'<div class="highlight-goals">'+goals+"</div>":"")+"</div>" +
+        '<div class="fixture-score" title="'+(state==="upcoming"?"Próximo jogo":isLive?"Em jogo":state==="finished"?"Resultado":"Jogo")+'"><span data-field="score">'+fixtureScore(item)+'</span><div class="highlight-goals" data-field="goals">'+goals+'</div></div>' +
         '<div class="fixture-team away"><img src="'+teamLogo(item.awayTeam)+'" alt=""><span>'+esc(item.awayTeam?.name||"Fora")+'</span></div></div>';
     }).join("");
     return label+markup;
   }).join("");
 }
+function patchFixtureRow(item){
+  const row=[...fixturesEl.querySelectorAll(".fixture[data-event-id]")].find(node=>node.dataset.eventId===fixtureDomKey(item));
+  if(!row)return;
+  const state=fixtureStatus(item);
+  const visible=fixtureFilter==="all"||(fixtureFilter==="upcoming"?(state==="upcoming"||state==="live"):state==="finished");
+  const selectedRound=roundEl.value;
+  const matchesRound=selectedRound==="all"||roundIdentity(item).key===selectedRound;
+  if(!visible||!matchesRound){row.remove();return}
+  const statusEl=row.querySelector('[data-field="status"]');
+  if(statusEl){
+    statusEl.classList.toggle("fixture-live",state==="live");
+    statusEl.textContent=state==="live"?"LIVE":dateLabel(dateValue(item));
+  }
+  const minuteEl=row.querySelector('[data-field="minute"]');
+  if(minuteEl){
+    const minute=liveMinuteLabel(item);
+    minuteEl.textContent=minute;
+    minuteEl.hidden=state!=="live"||!minute;
+  }
+  const scoreEl=row.querySelector('[data-field="score"]');
+  if(scoreEl)scoreEl.textContent=fixtureScore(item);
+  const goalsEl=row.querySelector('[data-field="goals"]');
+  if(goalsEl)goalsEl.innerHTML=goalsLabel(item);
+  const scoreBox=row.querySelector(".fixture-score");
+  if(scoreBox)scoreBox.title=state==="upcoming"?"Próximo jogo":state==="live"?"Em jogo":state==="finished"?"Resultado":"Jogo";
+}
+function patchHighlight(){
+  const candidates=allFixtures.filter(item=>fixtureStatus(item)==="upcoming"||fixtureStatus(item)==="live")
+    .sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity));
+  const item=candidates[0]||allFixtures[0];
+  if(!item){renderHighlight();return}
+  const current=highlightEl.querySelector(".highlight-score");
+  if(!current||current.dataset.eventId!==fixtureDomKey(item)){renderHighlight();return}
+  const state=fixtureStatus(item),live=state==="live",minute=liveMinuteLabel(item);
+  const liveEl=current.querySelector('[data-field="live"]');
+  if(liveEl){liveEl.hidden=!live;liveEl.textContent=live?"LIVE"+(minute?" · "+minute:""):""}
+  const scoreEl=current.querySelector('[data-field="score"]');
+  if(scoreEl)scoreEl.textContent=live||item.score?.home!=null||item.score?.away!=null?fixtureScore(item):"VS";
+  const detailEl=current.querySelector('[data-field="detail"]');
+  if(detailEl)detailEl.textContent=live&&item.livePeriod?item.livePeriod:dateLabel(dateValue(item));
+  const goalsEl=current.querySelector('[data-field="goals"]');
+  if(goalsEl)goalsEl.innerHTML=goalsLabel(item);
+}
+function updateLiveSnapshot(data){
+  const previous=new Map(allFixtures.map(item=>[fixtureDomKey(item),item]));
+  const incoming=Array.isArray(data.fixtures)?data.fixtures:[];
+  allFixtures=incoming;
+  incoming.forEach(item=>{
+    const old=previous.get(fixtureDomKey(item));
+    if(!old||JSON.stringify([old.status,old.liveMinute,old.livePeriod,old.score,old.goals])!==JSON.stringify([item.status,item.liveMinute,item.livePeriod,item.score,item.goals])){
+      patchFixtureRow(item);
+    }
+  });
+  countEl.textContent=visibleFixtures().length+" jogo"+(visibleFixtures().length===1?"":"s");
+  patchHighlight();
+  updateCompetitionLiveState();
+}
 function renderStandings(rows){
   if(!rows.length){standingsEl.innerHTML='<div class="empty">Esta competição não disponibiliza uma classificação neste formato.</div>';return}
-  const grouped=new Map();rows.forEach(row=>{const key=String(row.groupName||"").trim()||"__single__";if(!grouped.has(key))grouped.set(key,[]);grouped.get(key).push(row)});
+  const grouped=new Map();rows.forEach(row=>{
+    const key=active==="nations-league"
+      ? (nationsGroupName({team:row.team, groupName:row.groupName}) || String(row.groupName||"").trim() || "__single__")
+      : (String(row.groupName||"").trim()||"__single__");
+    if(!grouped.has(key))grouped.set(key,[]);
+    grouped.get(key).push(row);
+  });
   const table=items=>'<div class="table-wrap"><table class="standings"><thead><tr><th>#</th><th>Equipa</th><th><abbr title="Jogos">J</abbr></th><th><abbr title="Vitórias">V</abbr></th><th><abbr title="Empates">E</abbr></th><th><abbr title="Derrotas">D</abbr></th><th><abbr title="Golos marcados">GM</abbr></th><th><abbr title="Golos sofridos">GS</abbr></th><th><abbr title="Diferença de golos">DG</abbr></th><th><abbr title="Pontos">Pts</abbr></th></tr></thead><tbody>'+items.map((row,i)=>'<tr><td>'+esc(row.position??i+1)+'</td><td><div class="standing-team"><img src="'+teamLogo(row.team)+'" alt=""><span>'+esc(row.team?.name||"—")+'</span></div></td><td>'+esc(row.played??"—")+'</td><td>'+esc(row.wins??"—")+'</td><td>'+esc(row.draws??"—")+'</td><td>'+esc(row.losses??"—")+'</td><td>'+esc(row.goalsFor??"—")+'</td><td>'+esc(row.goalsAgainst??"—")+'</td><td>'+esc(row.goalDifference??"—")+'</td><td><strong>'+esc(row.points??"—")+'</strong></td></tr>').join("")+"</tbody></table></div>";
   standingsEl.innerHTML=[...grouped.entries()].map(([group,items])=>group==="__single__"?table(items):'<section class="standing-group"><h4 class="standing-group-title">'+esc(group)+'</h4>'+table(items)+'</section>').join("");
 }
-async function loadCompetition(key,status=fixtureFilter){
-  active=key;loadingStatus=status;renderTabs();
+let refreshTimer=null;
+let refreshInFlight=false;
+let loadedSeasonId=null;
+function updateCompetitionLiveState(){
+  const live=allFixtures.some(item=>fixtureStatus(item)==="live");
+  const liveEl=document.getElementById("competition-live-status");
+  liveEl.classList.toggle("live",live);
+  liveEl.querySelector("b").textContent=live?"AO VIVO":"ONLINE";
+  statusEl.textContent=live?"jogo ao vivo":statusEl.textContent;
+  return live;
+}
+function clearCompetitionRefresh(){
+  if(refreshTimer){clearTimeout(refreshTimer);refreshTimer=null}
+}
+function scheduleCompetitionRefresh(){
+  clearCompetitionRefresh();
+  if(!active||document.visibilityState!=="visible")return;
+  const live=allFixtures.some(item=>fixtureStatus(item)==="live");
+  if(live){
+    if(fixtureFilter!=="finished")refreshTimer=setTimeout(refreshCompetitionSnapshot,15000);
+    return;
+  }
+  const next=allFixtures.filter(item=>fixtureStatus(item)==="upcoming")
+    .sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity))[0];
+  const kickoff=next?dateValue(next)?.getTime():NaN;
+  if(Number.isFinite(kickoff)){
+    const delay=Math.max(1000,kickoff-Date.now()+60000);
+    refreshTimer=setTimeout(refreshCompetitionSnapshot,Math.min(delay,2147480000));
+  }
+}
+async function refreshCompetitionSnapshot(){
+  if(refreshInFlight||!active)return;
+  refreshInFlight=true;
+  try{
+    const requestStatus=fixtureFilter==="finished"?"finished":fixtureFilter==="upcoming"?"upcoming":"all";
+    const params=new URLSearchParams({competition:active,status:requestStatus});
+    const response=await fetch("/api/competicoes?"+params.toString(),{cache:"no-store"});
+    const data=await response.json();
+    if(!response.ok)throw new Error(data?.message||"Não foi possível atualizar os jogos.");
+    if(loadedSeasonId!=null&&String(data.season?.id||"")!==String(loadedSeasonId)){
+      await loadCompetition(active,fixtureFilter==="finished"?"finished":fixtureFilter==="upcoming"?"upcoming":"all",true);
+      return;
+    }
+    seasonEl.textContent=data.season?.label||seasonEl.textContent;
+    const stale=data.updateStatus==="stale";
+    statusEl.textContent=stale?"dados antigos de segurança":"dados atualizados";
+    globalStatusEl.textContent=data.updatedAt?"Atualizado "+dateLabel(data.updatedAt):"Dados atualizados";
+    updateLiveSnapshot(data);
+  }catch{}
+  finally{
+    refreshInFlight=false;
+    scheduleCompetitionRefresh();
+  }
+}
+async function loadCompetition(key,status="all",resetRound=true){
+  const changed=active!==key;
+  active=key;
+  if(changed)renderTabs();
   const meta=competitions.find(item=>item[0]===key);
   nameEl.textContent=meta?.[1]||key;
   logoEl.src=leagueLogo(meta?.[2]||0);
+  seasonEl.textContent="A carregar…";
+  clearCompetitionRefresh();
   try{
-    const params=new URLSearchParams({competition:key});
-    if(status==="finished" || status==="all") params.set("status",status);
+    const effectiveStatus=status || (fixtureFilter==="finished"?"finished":fixtureFilter==="upcoming"?"upcoming":"all");
+    const selectedRound=roundEl.value;
+    const params=new URLSearchParams({competition:key,status:effectiveStatus});
+    if(selectedRound && selectedRound!=="all"){
+      try{ const parsed=JSON.parse(selectedRound); if(Array.isArray(parsed)&&parsed[1]!=null) params.set("round",String(parsed[1])); if(Array.isArray(parsed)&&parsed[0]) params.set("stage",String(parsed[0])); }catch{}
+    }
     const response=await fetch("/api/competicoes?"+params.toString(),{cache:"no-store"});
     const data=await response.json();
     if(!response.ok)throw new Error(data?.message||"Não foi possível obter os dados.");
     seasonEl.textContent=data.season?.label||"Época atual";
-    const stale=data.updateStatus==="stale";
-    statusEl.textContent=stale?"dados antigos de segurança":"dados atualizados";
+    loadedSeasonId=data.season?.id??null;
+    statusEl.textContent=data.updateStatus==="stale"?"dados antigos de segurança":"dados atualizados";
     globalStatusEl.textContent=data.updatedAt?"Atualizado "+dateLabel(data.updatedAt):"Dados atualizados";
-    const live=Array.isArray(data.fixtures)&&data.fixtures.some(item=>fixtureStatus(item)==="live");
-    const liveEl=document.getElementById("competition-live-status");
-    liveEl.classList.toggle("live",live);
-    liveEl.querySelector("b").textContent=live?"AO VIVO":"ONLINE";
     allFixtures=Array.isArray(data.fixtures)?data.fixtures:[];
-    renderRounds();renderFixtures();renderHighlight();renderStandings(Array.isArray(data.standings)?data.standings:[]);
+    if(resetRound)renderRounds(true);
+    renderFixtures();
+    renderHighlight();
+    renderStandings(Array.isArray(data.standings)?data.standings:[]);
+    updateCompetitionLiveState();
+    scheduleCompetitionRefresh();
   }catch(error){
-    seasonEl.textContent="Indisponível";statusEl.textContent="temporariamente indisponível";globalStatusEl.textContent="";
-    const liveEl=document.getElementById("competition-live-status");liveEl.classList.remove("live");liveEl.querySelector("b").textContent="OFFLINE";
-    allFixtures=[];renderHighlight();fixturesEl.innerHTML='<div class="error">'+esc(error.message)+'</div>';standingsEl.innerHTML='<div class="empty">Sem dados.</div>';
+    seasonEl.textContent="Indisponível";
+    statusEl.textContent="temporariamente indisponível";
+    globalStatusEl.textContent="";
+    const liveEl=document.getElementById("competition-live-status");
+    liveEl.classList.remove("live");
+    liveEl.querySelector("b").textContent="OFFLINE";
+    allFixtures=[];
+    renderHighlight();
+    fixturesEl.innerHTML='<div class="error">'+esc(error.message)+'</div>';
+    standingsEl.innerHTML='<div class="empty">Sem dados.</div>';
+    clearCompetitionRefresh();
   }
 }
 document.querySelectorAll(".competition-filter").forEach(button=>button.addEventListener("click",()=>{
   fixtureFilter=button.dataset.filter;
-  document.querySelectorAll(".competition-filter").forEach(item=>item.classList.toggle("active",item===button));
+  setCompetitionFilterState();
   roundEl.value="all";
-  loadCompetition(active,fixtureFilter);
+  loadCompetition(active,fixtureFilter,true);
 }));
-roundEl.addEventListener("change",renderFixtures);
-window.addEventListener("popstate",()=>{const key=new URLSearchParams(location.search).get("competition")||"liga-portugal";if(competitions.some(item=>item[0]===key)&&key!==active)loadCompetition(key,"all")});
+roundEl.addEventListener("change",()=>{ if(roundEl.value==="all"){ renderFixtures(); scheduleCompetitionRefresh(); return; } loadCompetition(active,"all",false); });
+window.addEventListener("popstate",()=>{
+  const key=new URLSearchParams(location.search).get("competition")||"liga-portugal";
+  if(competitions.some(item=>item[0]===key)&&key!==active)loadCompetition(key,fixtureFilter==="finished"?"finished":fixtureFilter==="upcoming"?"upcoming":"all",true);
+});
+document.addEventListener("visibilitychange",()=>{
+  if(document.visibilityState==="visible")scheduleCompetitionRefresh();
+  else clearCompetitionRefresh();
+});
 active=new URLSearchParams(location.search).get("competition")||"liga-portugal";
 if(!competitions.some(item=>item[0]===active))active="liga-portugal";
-(async()=>{await prepareCompetitionOrder();await loadCompetition(active,"all")})();
-setInterval(()=>{ if(document.visibilityState==="visible" && active) loadCompetition(active,fixtureFilter); },15000);
+setCompetitionFilterState();
+(async()=>{prepareCompetitionOrder();await loadCompetition(active,fixtureFilter,true)})();
 </script>
 <footer>
   <div class="footer-container">
