@@ -386,7 +386,9 @@ function renderFixtures(){
   if(!rows.length){fixturesEl.innerHTML='<div class="empty">Não há jogos para este filtro.</div>';return}
   const groups=new Map();
   rows.slice(0,40).forEach(item=>{
-    const key=String(item.groupName||"").trim()||"__single__";
+    const key=active==="nations-league"
+      ? (nationsGroupName(item) || String(item.groupName||"").trim() || "__single__")
+      : (String(item.groupName||"").trim()||"__single__");
     if(!groups.has(key))groups.set(key,[]);
     groups.get(key).push(item);
   });
@@ -467,7 +469,13 @@ function updateLiveSnapshot(data){
 }
 function renderStandings(rows){
   if(!rows.length){standingsEl.innerHTML='<div class="empty">Esta competição não disponibiliza uma classificação neste formato.</div>';return}
-  const grouped=new Map();rows.forEach(row=>{const key=String(row.groupName||"").trim()||"__single__";if(!grouped.has(key))grouped.set(key,[]);grouped.get(key).push(row)});
+  const grouped=new Map();rows.forEach(row=>{
+    const key=active==="nations-league"
+      ? (nationsGroupName({team:row.team, groupName:row.groupName}) || String(row.groupName||"").trim() || "__single__")
+      : (String(row.groupName||"").trim()||"__single__");
+    if(!grouped.has(key))grouped.set(key,[]);
+    grouped.get(key).push(row);
+  });
   const table=items=>'<div class="table-wrap"><table class="standings"><thead><tr><th>#</th><th>Equipa</th><th><abbr title="Jogos">J</abbr></th><th><abbr title="Vitórias">V</abbr></th><th><abbr title="Empates">E</abbr></th><th><abbr title="Derrotas">D</abbr></th><th><abbr title="Golos marcados">GM</abbr></th><th><abbr title="Golos sofridos">GS</abbr></th><th><abbr title="Diferença de golos">DG</abbr></th><th><abbr title="Pontos">Pts</abbr></th></tr></thead><tbody>'+items.map((row,i)=>'<tr><td>'+esc(row.position??i+1)+'</td><td><div class="standing-team"><img src="'+teamLogo(row.team)+'" alt=""><span>'+esc(row.team?.name||"—")+'</span></div></td><td>'+esc(row.played??"—")+'</td><td>'+esc(row.wins??"—")+'</td><td>'+esc(row.draws??"—")+'</td><td>'+esc(row.losses??"—")+'</td><td>'+esc(row.goalsFor??"—")+'</td><td>'+esc(row.goalsAgainst??"—")+'</td><td>'+esc(row.goalDifference??"—")+'</td><td><strong>'+esc(row.points??"—")+'</strong></td></tr>').join("")+"</tbody></table></div>";
   standingsEl.innerHTML=[...grouped.entries()].map(([group,items])=>group==="__single__"?table(items):'<section class="standing-group"><h4 class="standing-group-title">'+esc(group)+'</h4>'+table(items)+'</section>').join("");
 }
@@ -587,7 +595,7 @@ document.addEventListener("visibilitychange",()=>{
 active=new URLSearchParams(location.search).get("competition")||"liga-portugal";
 if(!competitions.some(item=>item[0]===active))active="liga-portugal";
 setCompetitionFilterState();
-(async()=>{prepareCompetitionOrder();await loadCompetition(active,"all",true)})();
+(async()=>{prepareCompetitionOrder();await loadCompetition(active,fixtureFilter,true)})();
 </script>
 <footer>
   <div class="footer-container">
