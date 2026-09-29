@@ -73,14 +73,14 @@
 .competition-filter{border:1px solid var(--border-color);background:transparent;color:var(--text-gray);border-radius:8px;padding:.5rem .7rem;font:600 .74rem var(--font-title);cursor:pointer}
 .competition-filter.active{color:var(--text-color);border-color:var(--neon-green);background:rgba(157,255,0,.07)}
 .competition-round-select{border:1px solid var(--border-color);background:var(--card-bg);color:var(--text-color);border-radius:8px;padding:.5rem .65rem;font:600 .74rem var(--font-title)}
-.competition-grid{display:grid;grid-template-columns:minmax(330px,1.15fr) minmax(0,1.25fr);gap:1rem}
+.competition-grid{display:grid;grid-template-columns:minmax(350px,1.25fr) minmax(0,1.15fr);gap:1rem}
 .competition-panel{background:var(--card-bg);border:1px solid var(--border-color);border-radius:14px;overflow:hidden}
 .competition-panel-header{display:flex;justify-content:space-between;align-items:center;padding:1rem 1.1rem;border-bottom:1px solid var(--border-color)}
 .competition-panel h2{font:700 1rem var(--font-title);margin:0}
 .competition-panel-header span{font-size:.72rem;color:var(--text-gray)}
 .fixtures{padding:.45rem 1rem}
 .fixture-group-title,.standing-group-title{margin:.85rem 0 .45rem;font:700 .75rem var(--font-title);letter-spacing:.08em;text-transform:uppercase;color:var(--text-gray)}
-.fixture{display:grid;grid-template-columns:6rem minmax(0,1fr) 3.1rem minmax(0,1fr);gap:.55rem;align-items:center;padding:.75rem 0;border-bottom:1px solid var(--border-color)}
+.fixture{display:grid;grid-template-columns:6.5rem minmax(0,1fr) 3.5rem minmax(0,1fr);gap:.55rem;align-items:center;padding:.75rem 0;border-bottom:1px solid var(--border-color)}
 .fixture:last-child{border-bottom:0}
 .fixture-time{color:var(--text-gray);font-size:.7rem;line-height:1.35}
 .fixture-team{display:flex;align-items:center;justify-content:flex-end;gap:.45rem;text-align:right;font-size:.82rem}
@@ -208,7 +208,29 @@ let fixtureFilter="upcoming";
 let orderedCompetitions=[...competitions];
 const PRIORITY_TEAM_IDS=new Set([35,22,37,491]);
 const PRIORITY_TEAM_NAMES=new Set(["porto","fc porto","benfica","sl benfica","sporting","sporting cp","sporting clube de portugal","portugal"]);
-let tabOrderReady=false;
+const NATIONS_GROUPS={
+  A1:["france","italy","belgium","turkiye","turkey"],
+  A2:["germany","netherlands","serbia","greece"],
+  A3:["spain","croatia","england","czechia","czech republic"],
+  A4:["portugal","denmark","norway","wales"],
+  B1:["slovenia","scotland","north macedonia","switzerland"],
+  B2:["georgia","northern ireland","hungary","ukraine"],
+  B3:["israel","austria","republic of ireland","ireland","kosovo"],
+  B4:["poland","bosnia and herzegovina","romania","sweden"],
+  C1:["san marino","finland","albania","belarus"],
+  C2:["armenia","latvia","montenegro","cyprus"],
+  C3:["faroe islands","kazakhstan","slovakia","moldova"],
+  C4:["bulgaria","luxembourg","iceland","estonia"],
+  D1:["andorra","malta","gibraltar"],
+  D2:["liechtenstein","lithuania","azerbaijan"]
+};
+function nationsGroupName(item){
+  const names=[item?.homeTeam?.name,item?.awayTeam?.name,item?.team?.name].map(normalizeTeamName);
+  for(const [group,teams] of Object.entries(NATIONS_GROUPS)) if(names.some(name=>teams.includes(name))) return group;
+  return String(item?.groupName||"").trim();
+}
+
+let tabOrderReady=true;
 
 function esc(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));}
 function safeUrl(value){try{const u=new URL(String(value||""),location.origin);return u.protocol==="https:"||u.origin===location.origin?u.href:""}catch{return""}}
@@ -259,33 +281,10 @@ function setCompetitionFilterState(){
     button.setAttribute("aria-pressed",String(selected));
   });
 }
-async function prepareCompetitionOrder(){
-  const now=Date.now();
-  const summaries=await Promise.all(competitions.map(async meta=>{
-    try{
-      const response=await fetch("/api/competicoes?competition="+encodeURIComponent(meta[0])+"&status=upcoming",{cache:"no-store"});
-      if(!response.ok)throw new Error("indisponível");
-      const data=await response.json();
-      const fixtures=Array.isArray(data.fixtures)?data.fixtures:[];
-      const future=fixtures.filter(item=>{
-        const t=dateValue(item)?.getTime();
-        return Number.isFinite(t)&&t>=now&&fixtureStatus(item)==="upcoming";
-      }).sort((a,b)=>dateValue(a).getTime()-dateValue(b).getTime());
-      return {meta,nextPriority:future.find(isPriorityFixture),next:future[0]};
-    }catch{return {meta,nextPriority:null,next:null}}
-  }));
-  summaries.sort((a,b)=>{
-    const ap=a.nextPriority?dateValue(a.nextPriority)?.getTime():Infinity;
-    const bp=b.nextPriority?dateValue(b.nextPriority)?.getTime():Infinity;
-    if(ap!==bp)return ap-bp;
-    const an=a.next?dateValue(a.next)?.getTime():Infinity;
-    const bn=b.next?dateValue(b.next)?.getTime():Infinity;
-    if(an!==bn)return an-bn;
-    return competitions.indexOf(a.meta)-competitions.indexOf(b.meta);
-  });
-  orderedCompetitions=summaries.map(item=>item.meta);
-  tabOrderReady=true;
+function prepareCompetitionOrder(){
+  orderedCompetitions=[...competitions];
   renderTabs();
+  return Promise.resolve();
 }
 function renderTabs(){
   const list=tabOrderReady?orderedCompetitions:competitions;
@@ -329,6 +328,7 @@ function renderRounds(selectUpcoming=false){
   });
   const previous=roundEl.value;
   const options=[...rounds.values()].sort((a,b)=>a.firstKickoff-b.firstKickoff||a.stageLabel.localeCompare(b.stageLabel,"pt-PT"));
+  if(active==="liga-portugal") options.sort((a,b)=>a.firstKickoff-b.firstKickoff);
   const labels=options.map(round=>round.stageLabel+" · "+round.displayRound);
   const labelCounts=new Map(labels.map(label=>[label,labels.filter(item=>item===label).length]));
   roundEl.innerHTML='<option value="all">Todas as jornadas</option>'+options.map((round,index)=>{
@@ -572,7 +572,7 @@ document.addEventListener("visibilitychange",()=>{
 active=new URLSearchParams(location.search).get("competition")||"liga-portugal";
 if(!competitions.some(item=>item[0]===active))active="liga-portugal";
 setCompetitionFilterState();
-(async()=>{await prepareCompetitionOrder();await loadCompetition(active,"all",true)})();
+(async()=>{prepareCompetitionOrder();await loadCompetition(active,"all",true)})();
 </script>
 <footer>
   <div class="footer-container">
