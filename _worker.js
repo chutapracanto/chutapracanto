@@ -2614,7 +2614,7 @@ async function bsdFetchEventsForSeason(env, leagueId, seasonId, status, seasonSt
     if (status === "upcoming") params.set("status", "notstarted");
     if (status === "finished") params.set("status", "finished");
     if (stage) params.set("stage", String(stage));
-    if (round != null && String(round).trim()) params.set("round_number", String(round));
+    if (round != null && String(round).trim()) params.set("round", String(round));
     const data = await bsdFetchJson(env, `https://sports.bzzoiro.com/api/v2/events/?${params.toString()}`);
     const page = bsdExtractEvents(data);
     results.push(...page);
@@ -2629,7 +2629,7 @@ async function bsdFetchEventsForSeason(env, leagueId, seasonId, status, seasonSt
 async function bsdFetchLiveEvents(env, leagueId, seasonId, stage = "", round = null) {
   const params = new URLSearchParams({ league_id: String(leagueId), season_id: String(seasonId) });
   if (stage) params.set("stage", String(stage));
-  if (round != null && String(round).trim()) params.set("round_number", String(round));
+  if (round != null && String(round).trim()) params.set("round", String(round));
   return bsdExtractEvents(await bsdFetchJson(env, `https://sports.bzzoiro.com/api/v2/events/live/?${params.toString()}`));
 }
 
@@ -2899,9 +2899,9 @@ const FOOTBALL_CACHE_STALE_MS = 24 * 60 * 60 * 1000;
 const footballCacheRefreshes = new Map();
 
 function footballCacheIdentity(competitionKey) {
-  return competitionKey === "nations-league"
-    ? "v6-nations|nations-league"
-    : "v3-" + competitionKey;
+  if (competitionKey === "nations-league") return "v6-nations|nations-league";
+  if (competitionKey === "taca-liga") return "v4-taca-liga";
+  return "v3-" + competitionKey;
 }
 
 function footballCacheKey(competitionKey, seasonId, stage, round, status = "upcoming") {
