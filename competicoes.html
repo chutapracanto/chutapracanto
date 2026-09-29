@@ -203,6 +203,10 @@ const roundEl=document.getElementById("round-filter");
 let active="";
 let allFixtures=[];
 let fixtureFilter="upcoming";
+let orderedCompetitions=[...competitions];
+const PRIORITY_TEAM_IDS=new Set([35,22,37,491]);
+const PRIORITY_TEAM_NAMES=new Set(["porto","fc porto","benfica","sl benfica","sporting","sporting cp","sporting clube de portugal","portugal"]);
+let tabOrderReady=false;
 
 function esc(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));}
 function safeUrl(value){try{const u=new URL(String(value||""),location.origin);return u.protocol==="https:"||u.origin===location.origin?u.href:""}catch{return""}}
@@ -220,6 +224,12 @@ function translateRound(value){
 }
 function dateValue(item){const value=item?.kickoff||item?.startAt||item?.date;const d=new Date(value);return Number.isNaN(d.getTime())?null:d}
 function dateLabel(value){const d=value instanceof Date?value:new Date(value);if(Number.isNaN(d.getTime()))return "—";return new Intl.DateTimeFormat("pt-PT",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"}).format(d)}
+function normalizeTeamName(value){return String(value||"").toLocaleLowerCase("pt-PT").normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim()}
+function isPriorityTeam(team){return PRIORITY_TEAM_IDS.has(Number(team?.id))||PRIORITY_TEAM_NAMES.has(normalizeTeamName(team?.name))}
+function isPriorityFixture(item){return isPriorityTeam(item?.homeTeam)||isPriorityTeam(item?.awayTeam)}
+function liveMinuteLabel(item){const minute=Number(item?.liveMinute);if(!Number.isFinite(minute))return "";const added=Number(item?.liveAddedTime);return String(Math.floor(minute))+(Number.isFinite(added)&&added>0?"+"+Math.floor(added):"")+String.fromCharCode(39)}
+function goalLabel(goal){const minute=Number(goal?.minute);const added=Number(goal?.addedTime);if(Number.isFinite(minute))return String(Math.floor(minute))+(Number.isFinite(added)&&added>0?"+"+Math.floor(added):"")+String.fromCharCode(39);if(Number.isFinite(goal?.periodSecond))return String(Math.floor(Number(goal.periodSecond)/60))+String.fromCharCode(39);return ""}
+function goalsLabel(item){if(!Array.isArray(item?.goals)||!item.goals.length)return "";return item.goals.map(goal=>{const side=Number(goal?.teamId)===Number(item.homeTeam?.id)?item.homeTeam?.name:Number(goal?.teamId)===Number(item.awayTeam?.id)?item.awayTeam?.name:"";const player=goal?.player?" · "+esc(goal.player):"";return "<span class=\"highlight-goal\">"+esc(goalLabel(goal))+(side?" · "+esc(side):"")+player+"</span>"}).join("")}
 function fixtureStatus(item){
   const raw=String(item?.status||"").toLowerCase();
   if(["finished","ended","ft","completed"].includes(raw))return "finished";
