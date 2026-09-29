@@ -2777,3 +2777,38 @@ A razão pela qual `[triggers]` não deve voltar ao `wrangler.toml` do Pages per
 - Sintaxe de _worker.js: PASS através de compilação JS com o export default substituído apenas para o teste.
 - Cloudflare Pages production deployment do commit final 998bbbcbd595736456382b3a27beccf0b3168fcb: concluído com sucesso.
 - URL do deployment: https://d567e600.chutapracanto.pages.dev
+
+
+---
+
+# 2026-09-29 — Taça da Liga: correção de cache e filtro de ronda
+
+Foi investigada a anomalia reportada na área `/competicoes` para a Taça da Liga.
+
+## Evidência
+
+A consulta direta à D1 `FOOTBALL_CACHE_DB` mostrou que o snapshot mais recente então usado pela competição era:
+
+`bsd|v3-taca-liga|auto|quarterfinals|27|upcoming`
+
+com `fetched_at = 2026-09-29T11:43:34.512Z`.
+
+Esse snapshot continha dados incorretos para dois jogos:
+- Sporting Braga — Famalicão: `2026-10-27T11:00:00+00:00`
+- Benfica — Gil Vicente: `2026-10-27T11:00:00+00:00`
+
+As fontes públicas atuais consultadas confirmam o calendário correto de 2026/27:
+- SC Braga — Famalicão: 29/10/2026, 18:45;
+- Benfica — Gil Vicente: 29/10/2026, 20:45.
+
+A documentação BSD confirma que os timestamps v2 são ISO-8601 em UTC e devem ser convertidos no cliente; portanto a camada de apresentação `Intl.DateTimeFormat("pt-PT")` não é a causa desta anomalia.
+
+## Correção implementada
+
+Commit `08f8bb4953fb86c07f63ce6c9b3d82d0a90a5e01`:
+
+1. Taça da Liga passou de identidade de cache `v3-taca-liga` para `v4-taca-liga`, invalidando os snapshots antigos sem apagar dados D1.
+2. O parâmetro de filtro de ronda foi corrigido de `round_number` para `round`, conforme contrato atual do BSD.
+3. A correção preserva integralmente a lógica de atualização live implementada nos commits anteriores.
+
+O deployment Pages foi criado a partir da `main` para este commit; a validação final de produção deve confirmar que o novo snapshot BSD contém os horários corrigidos.
