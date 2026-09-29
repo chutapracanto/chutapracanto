@@ -3036,6 +3036,34 @@ async function handleFootballCompetitionAPI(request, env) {
   const competitionKey = url.searchParams.get("competition") || "";
   const competition = CPC_FOOTBALL_COMPETITIONS[competitionKey];
 
+  // DIAGNÓSTICO TEMPORÁRIO: inspecciona apenas a estrutura da resposta BSD de standings.
+  if (competitionKey === "nations-league" && url.searchParams.get("debug") === "nations-standings") {
+    try {
+      const currentSeason = await bsdResolveCurrentSeason(env, competition.leagueId);
+      const seasonId = Number(currentSeason?.id ?? currentSeason?.season_id);
+      const endpoint = "https://sports.bzzoiro.com/api/v2/leagues/" + competition.leagueId + "/standings/?season_id=" + seasonId;
+      const standingsData = await bsdFetchJson(env, endpoint);
+      const describe = value => {
+        if (Array.isArray(value)) return { type: "array", length: value.length, first: value[0] && typeof value[0] === "object" ? Object.keys(value[0]) : typeof value[0] };
+        if (value && typeof value === "object") {
+          const out = { type: "object", keys: Object.keys(value) };
+          for (const key of out.keys) if (Array.isArray(value[key])) out[key + "_length"] = value[key].length;
+          return out;
+        }
+        return { type: typeof value, value: value == null ? null : String(value).slice(0, 100) };
+      };
+      return json({
+        competition: competitionKey,
+        leagueId: competition.leagueId,
+        season: { id: seasonId, label: bsdSeasonLabel(currentSeason) },
+        response: describe(standingsData),
+        nested: standingsData && typeof standingsData === "object" ? Object.fromEntries(Object.entries(standingsData).filter(([, value]) => value && typeof value === "object").map(([key, value]) => [key, describe(value)])) : null
+      }, 200, { "Cache-Control": "no-store" });
+    } catch (error) {
+      return json({ error: error instanceof Error ? error.message : String(error) }, 502, { "Cache-Control": "no-store" });
+    }
+  }
+
   if (!competition) {
     return json({
       error: "Competição não suportada.",
