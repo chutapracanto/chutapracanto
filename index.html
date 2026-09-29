@@ -675,17 +675,29 @@
           button.addEventListener('click',()=>{
             standingsTabs.querySelectorAll('.home-standings-tab').forEach(tab=>tab.classList.remove('active'));
             button.classList.add('active');
-            renderStandings(item.data.standings);
+            renderStandings(item.data.standings,item.data.phase);
           });
           standingsTabs.appendChild(button);
         });
-        const renderStandings=rows=>{
-          const sorted=rows.slice().sort((a,b)=>(Number(a.position??999)-Number(b.position??999)));
-          standingsContent.innerHTML='<table class="home-standings-table"><thead><tr><th>#</th><th>Equipa</th><th title="J = Jogos">J</th><th title="V = Vitórias">V</th><th title="D = Derrotas">D</th><th title="Pts = Pontos">Pts</th></tr></thead><tbody>'+
-            sorted.map((row,i)=>'<tr><td>'+esc(row.position??i+1)+'</td><td><div class="home-standing-team"><img src="'+teamLogo(row.team)+'" alt=""><span>'+esc(row.team?.name||'—')+'</span></div></td><td>'+esc(row.played??row.games??'—')+'</td><td>'+esc(row.wins??row.won??'—')+'</td><td>'+esc(row.losses??row.lost??'—')+'</td><td><strong>'+esc(row.points??'—')+'</strong></td></tr>').join('')+
-            '</tbody></table>';
+        const renderStandings=(rows,phase)=>{
+          const grouped=Boolean(phase?.grouped);
+          const groups=new Map();
+          rows.forEach(row=>{
+            const key=String(row?.groupName||"").trim()||"__single__";
+            if(!groups.has(key))groups.set(key,[]);
+            groups.get(key).push(row);
+          });
+          const table=items=>{
+            const sorted=items.slice().sort((a,b)=>(Number(a.position??999)-Number(b.position??999)));
+            return '<table class="home-standings-table"><thead><tr><th>#</th><th>Equipa</th><th title="J = Jogos">J</th><th title="V = Vitórias">V</th><th title="D = Derrotas">D</th><th title="Pts = Pontos">Pts</th></tr></thead><tbody>'+
+              sorted.map((row,i)=>'<tr><td>'+esc(row.position??i+1)+'</td><td><div class="home-standing-team"><img src="'+teamLogo(row.team)+'" alt=""><span>'+esc(row.team?.name||'—')+'</span></div></td><td>'+esc(row.played??row.games??'—')+'</td><td>'+esc(row.wins??row.won??'—')+'</td><td>'+esc(row.losses??row.lost??'—')+'</td><td><strong>'+esc(row.points??'—')+'</strong></td></tr>').join('')+
+              '</tbody></table>';
+          };
+          if(!grouped||groups.size<=1){standingsContent.innerHTML=table(rows);return}
+          const ordered=[...groups.entries()].sort((a,b)=>a[0].localeCompare(b[0],"pt-PT"));
+          standingsContent.innerHTML=ordered.map(([group,items])=>'<section class="home-standing-group"><h4>'+esc(group)+'</h4>'+table(items)+'</section>').join('');
         };
-        renderStandings(withStandings[0].data.standings);
+        renderStandings(withStandings[0].data.standings,withStandings[0].data.phase);
       }
 
       const priorityCompetitions=competitionResults.filter(item=>item.priority30?.length);
@@ -715,7 +727,7 @@
         );
         const importantMatches=selected.map(game=>'<div class="home-important-match-line">'+matchLabel(game)+'</div>').join('');
         const nextMatch=overall
-          ? '<span class="home-important-next-label"><b>PRÓXIMO JOGO</b></span><span class="home-important-next-game">'+esc(overall.homeTeam?.name||'Casa')+' vs '+esc(overall.awayTeam?.name||'Fora')+'</span>'
+          ? '<span class="home-important-next-label"><b>PRÓXIMO JOGO</b> · '+esc(dateLabel(dateValue(overall)))+'</span><span class="home-important-next-game">'+esc(overall.homeTeam?.name||'Casa')+' vs '+esc(overall.awayTeam?.name||'Fora')+'</span>'
           : '<span class="home-important-next-label"><b>PRÓXIMO JOGO</b></span><span class="home-important-next-game">—</span>';
         return '<a class="home-important-card competition-'+esc(meta[0])+'" href="/competicoes?competition='+encodeURIComponent(meta[0])+'"><div class="home-important-card-top"><img src="'+leagueLogo(meta[2])+'" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/logo.png\'"><strong>'+esc(meta[1])+'</strong><span aria-hidden="true">→</span></div><div class="home-important-label">JOGOS IMPORTANTES</div><div class="home-important-match">'+importantMatches+'</div><div class="home-important-next">'+nextMatch+'</div></a>';
       }).join('');
