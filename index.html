@@ -187,8 +187,8 @@
     .home-important-games-head{display:flex;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:.7rem}
     .home-important-games-head h3{margin:0;font:700 .95rem var(--font-title)}
     .home-important-games-head p{margin:0;color:var(--text-gray);font-size:.65rem}
-    .home-important-games-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.75rem}
-    .home-important-card{display:block;background:var(--card-bg);border:1px solid var(--border-color);border-radius:13px;padding:.85rem;text-decoration:none;color:inherit;min-width:0;transition:.2s}
+    .home-important-games-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,230px));gap:.75rem;align-items:stretch}
+    .home-important-card{display:flex;flex-direction:column;background:var(--card-bg);border:1px solid var(--border-color);border-radius:13px;padding:.85rem;text-decoration:none;color:inherit;min-width:0;transition:.2s}
     .home-important-card:hover{border-color:var(--neon-green);transform:translateY(-2px)}
     .home-important-card-top{display:flex;align-items:center;gap:.55rem;margin-bottom:.7rem}
     .home-important-card-top img{width:30px;height:30px;object-fit:contain}
@@ -198,6 +198,7 @@
     .home-important-match{font-size:.72rem;font-weight:700;line-height:1.35;margin:.2rem 0 .55rem}
     .home-important-next{font-size:.61rem;color:var(--text-gray);line-height:1.35;border-top:1px solid var(--border-color);padding-top:.5rem}
     .home-important-next b{color:var(--text-color)}
+    .home-important-match{min-height:3.1rem}
     @media(max-width:800px){
       .hero{grid-template-columns:1fr;padding:1.1rem 1.15rem}.hero .btn-neon{justify-self:start}
       .home-important-games-grid{display:flex;overflow-x:auto;gap:.7rem;padding-bottom:.25rem;scrollbar-width:none}
@@ -631,17 +632,19 @@
       const standingsTabs=document.getElementById('home-standings-tabs');
       const standingsContent=document.getElementById('home-standings-content');
       const gamesGrid=document.getElementById('home-important-games-grid');
-      const priorityNames=['porto','benfica','sporting','portugal'];
+      const priorityNames=['fc porto','porto','sl benfica','benfica','sporting cp','sporting clube de portugal','portugal'];
       const now=Date.now();
-      const limit=now+(31*24*60*60*1000);
+      const limit=now+(30*24*60*60*1000);
       const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
       const safeUrl=value=>{try{const u=new URL(String(value||''),location.origin);return u.protocol==='https:'||u.origin===location.origin?u.href:''}catch{return ''}};
       const teamLogo=team=>safeUrl(team?.logo)||'/images/logo.png';
       const leagueLogo=id=>'/api/football-image?type=league&id='+encodeURIComponent(id);
       const dateValue=item=>{const d=new Date(item?.kickoff||item?.startAt||item?.date);return Number.isNaN(d.getTime())?null:d};
       const dateLabel=d=>d?new Intl.DateTimeFormat('pt-PT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}).format(d):'—';
-      const priorityList=item=>item.priority30.map(game=>esc(game.homeTeam?.name||'Casa')+' vs '+esc(game.awayTeam?.name||'Fora')+' · '+dateLabel(dateValue(game))).join('<br>');
-      const isPriority=item=>priorityNames.some(name=>[item?.homeTeam?.name,item?.awayTeam?.name].some(team=>String(team||'').toLocaleLowerCase('pt-PT').includes(name)));
+      const normalizeTeamName=value=>String(value||'').toLocaleLowerCase('pt-PT').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
+      const isPriorityTeam=team=>priorityNames.includes(normalizeTeamName(team?.name));
+      const isPriority=item=>isPriorityTeam(item?.homeTeam)||isPriorityTeam(item?.awayTeam);
+      const matchLabel=game=>esc(game.homeTeam?.name||'Casa')+' vs '+esc(game.awayTeam?.name||'Fora')+' · '+dateLabel(dateValue(game));
       const competitionResults=await Promise.all(competitions.map(async meta=>{
         try{
           const response=await fetch('/api/competicoes?competition='+encodeURIComponent(meta[0])+'&status=upcoming',{cache:'no-store'});
@@ -685,9 +688,37 @@
       const priorityCompetitions=competitionResults.filter(item=>item.priority30?.length);
       priorityCompetitions.sort((a,b)=>dateValue(a.priority30[0]).getTime()-dateValue(b.priority30[0]).getTime());
       if(!priorityCompetitions.length){
-        gamesGrid.innerHTML='<div class="home-standings-empty">Não há jogos importantes das equipas prioritárias nos próximos 30 dias.</div>';
+        gamesGrid.innerHTML='<div class="home-standings-empty">Não há jogos das equipas prioritárias nos próximos 30 dias.</div>';
         return;
       }
+      gamesGrid.innerHTML=priorityCompetitions.map(item=>{
+        const meta=item.meta;
+        const selected=[];
+        const usedTeams=new Set();
+        for(const game of item.priority30){
+          if(selected.length>=3) break;
+          const home=normalizeTeamName(game.homeTeam?.name);
+          const away=normalizeTeamName(game.awayTeam?.name);
+          if(!home||!away||usedTeams.has(home)||usedTeams.has(away)) continue;
+          selected.push(game);
+          usedTeams.add(home);
+          usedTeams.add(away);
+        }
+        const overall=item.upcoming[0];
+        const sameAsImportant=game=>selected.some(selectedGame=>
+          dateValue(selectedGame)?.getTime()===dateValue(game)?.getTime() &&
+          normalizeTeamName(selectedGame.homeTeam?.name)===normalizeTeamName(game?.homeTeam?.name) &&
+          normalizeTeamName(selectedGame.awayTeam?.name)===normalizeTeamName(game?.awayTeam?.name)
+        );
+        const importantMatches=selected.map(matchLabel).join('<br>');
+        const nextMatch=overall
+          ? (sameAsImportant(overall)
+            ? '<b>PRÓXIMO JOGO:</b> já está acima.'
+            : '<b>PRÓXIMO JOGO:</b> '+matchLabel(overall))
+          : '<b>PRÓXIMO JOGO:</b> —';
+        return '<a class="home-important-card" href="/competicoes?competition='+encodeURIComponent(meta[0])+'"><div class="home-important-card-top"><img src="'+leagueLogo(meta[2])+'" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/logo.png\'"><strong>'+esc(meta[1])+'</strong><span aria-hidden="true">→</span></div><div class="home-important-label">JOGOS IMPORTANTES</div><div class="home-important-match">'+importantMatches+'</div><div class="home-important-next">'+nextMatch+'</div></a>';
+      }).join('');
+    }
       gamesGrid.innerHTML=priorityCompetitions.map(item=>{
         const meta=item.meta, important=item.priority30[0];
         const overall=item.upcoming[0];
