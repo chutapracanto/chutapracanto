@@ -3039,6 +3039,44 @@ async function handleFootballCompetitionAPI(request, env) {
       );
     }
 
+    // Se o snapshot do filtro pedido falhar, aproveita o snapshot completo
+    // da mesma competição/época e filtra localmente. Isto evita que uma
+    // falha transitória do BSD transforme uma troca de competição num erro.
+    if (status !== "all" && !round) {
+      const allKey = footballCacheKey("v3-" + competitionKey, seasonId, stage, null, "all");
+      const allCached = await getFootballCache(env, allKey);
+      if (allCached?.payload && footballCacheSeasonIsCurrent(allCached.payload)) {
+        const now = Date.now();
+        const fixtures = Array.isArray(allCached.payload.fixtures)
+          ? allCached.payload.fixtures.filter(item => {
+              const state = String(item?.status || "").toLowerCase().replace(/[ -]+/g, "_");
+              const kickoff = Date.parse(item?.kickoff || "");
+              if (status === "finished") {
+                return ["finished","ended","ft","full_time","completed","aet","penalties"].includes(state);
+              }
+              if (status === "live") {
+                return ["live","in_progress","in_play","inplay","ongoing"].includes(state);
+              }
+              return ["live","in_progress","in_play","inplay","ongoing"].includes(state) ||
+                (Number.isFinite(kickoff) && kickoff >= now);
+            })
+          : [];
+        return json(
+          {
+            ...allCached.payload,
+            fixtures,
+            updateStatus: "stale",
+            cacheStale: true
+          },
+          200,
+          {
+            "Cache-Control": "public, max-age=60, stale-while-revalidate=300",
+            "Warning": '110 - "Response is stale"'
+          }
+        );
+      }
+    }
+
     const detail = error instanceof Error ? error.message : "Erro desconhecido.";
     return json({
       error: "Dados de futebol temporariamente indisponíveis.",
