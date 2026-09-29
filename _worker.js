@@ -3012,7 +3012,7 @@ async function handleFootballCompetitionAPI(request, env) {
       return json(
         { ...latestCached.payload, updateStatus: latestCached.state === "fresh" ? "cache" : "stale", cacheStale: latestCached.state !== "fresh" },
         200,
-        { "Cache-Control": "public, max-age": 60, stale-while-revalidate: 300 }
+        { "Cache-Control": "public, max-age=60, stale-while-revalidate=300" }
       );
     }
 
