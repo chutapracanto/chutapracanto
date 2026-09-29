@@ -650,7 +650,7 @@ groupEl.addEventListener("change",()=>{
 });
 roundEl.addEventListener("change",()=>{
   if(active==="nations-league"){roundEl.value="all";renderFixtures();scheduleCompetitionRefresh();return}
-  if(roundEl.value==="all"){ renderFixtures(); scheduleCompetitionRefresh(); return;
+  if(roundEl.value==="all"){ renderFixtures(); scheduleCompetitionRefresh(); return; }
   if(loadedAllSnapshot){ renderFixtures(); return; }
   const requestStatus=fixtureFilter==="finished"?"finished":fixtureFilter==="upcoming"?"upcoming":"all";
   loadCompetition(active,requestStatus,false);
