@@ -236,8 +236,10 @@ function fixtureStatus(item){
   if(["live","in_progress","inprogress","in-play","ongoing"].includes(raw))return "live";
   const d=dateValue(item); return d&&d.getTime()>Date.now()?"upcoming":"finished";
 }
+async function prepareCompetitionOrder(){const now=Date.now();const summaries=await Promise.all(competitions.map(async meta=>{try{const response=await fetch("/api/competicoes?competition="+encodeURIComponent(meta[0])+"&status=upcoming",{cache:"no-store"});if(!response.ok)throw new Error("indisponível");const data=await response.json();const fixtures=Array.isArray(data.fixtures)?data.fixtures:[];const future=fixtures.filter(item=>{const t=dateValue(item)?.getTime();return Number.isFinite(t)&&t>=now&&fixtureStatus(item)!=="finished"}).sort((a,b)=>dateValue(a).getTime()-dateValue(b).getTime());return {meta,nextPriority:future.find(isPriorityFixture),next:future[0]};}catch{return {meta,nextPriority:null,next:null}}}));summaries.sort((a,b)=>{const ap=a.nextPriority?dateValue(a.nextPriority)?.getTime():Infinity;const bp=b.nextPriority?dateValue(b.nextPriority)?.getTime():Infinity;if(ap!==bp)return ap-bp;const an=a.next?dateValue(a.next)?.getTime():Infinity;const bn=b.next?dateValue(b.next)?.getTime():Infinity;if(an!==bn)return an-bn;return competitions.indexOf(a.meta)-competitions.indexOf(b.meta)});orderedCompetitions=summaries.map(item=>item.meta);tabOrderReady=true;renderTabs()}
 function renderTabs(){
-  tabs.innerHTML=competitions.map(([key,label,id])=>`
+  const list=tabOrderReady?orderedCompetitions:competitions;
+  tabs.innerHTML=list.map(([key,label,id])=>`
     <button type="button" class="${key===active?"active":""}" data-key="${key}">
       <img src="${leagueLogo(id)}" alt="" loading="lazy" decoding="async">
       <span>${label}</span>
