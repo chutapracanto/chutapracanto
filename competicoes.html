@@ -254,9 +254,11 @@ function renderHighlight(){
   const hs=item.score?.home,as=item.score?.away;
   const live=fixtureStatus(item)==="live";
   const score=hs!=null||as!=null?esc(hs??"—")+" – "+esc(as??"—"):"VS";
+  const minute=liveMinuteLabel(item);
+  const goals=goalsLabel(item);
   highlightEl.innerHTML=`
     <div class="highlight-team"><img src="${teamLogo(item.homeTeam)}" alt=""><span>${home}</span></div>
-    <div class="highlight-score">${live?'<span class="highlight-live">● AO VIVO</span>':''}<strong>${score}</strong><small>${dateLabel(dateValue(item))}</small></div>
+    <div class="highlight-score">${live?'<span class="highlight-live">LIVE'+(minute?' · '+esc(minute):'')+'</span>':''}<strong>${score}</strong><small>${live&&item.livePeriod?esc(item.livePeriod):dateLabel(dateValue(item))}</small>${goals?'<div class="highlight-goals">'+goals+'</div>':''}</div>
     <div class="highlight-team"><img src="${teamLogo(item.awayTeam)}" alt=""><span>${away}</span></div>`;
 }
 function renderRounds(){
