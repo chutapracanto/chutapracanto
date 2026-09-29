@@ -3007,7 +3007,7 @@ async function handleFootballCompetitionAPI(request, env) {
 
     // O cron aquece a competição sem saber previamente o seasonId. Reutilizamos
     // o snapshot mais recente desse status antes de consultar novamente o BSD.
-    const latestCached = await getLatestFootballCache(env, competitionKey, status);
+    const latestCached = !round ? await getLatestFootballCache(env, competitionKey, status) : null;
     if (latestCached?.payload && footballCacheSeasonIsCurrent(latestCached.payload)) {
       return json(
         { ...latestCached.payload, updateStatus: latestCached.state === "fresh" ? "cache" : "stale", cacheStale: latestCached.state !== "fresh" },
