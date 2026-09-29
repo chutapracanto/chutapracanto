@@ -3212,18 +3212,26 @@ async function handleFootballCompetitionAPI(request, env) {
     // O cron aquece a competição sem saber previamente o seasonId. Reutilizamos
     // o snapshot mais recente desse status antes de consultar novamente o BSD.
     const latestCached = !round ? await getLatestFootballCache(env, competitionKey, status) : null;
-    if (latestCached?.payload && footballCacheSeasonIsCurrent(latestCached.payload)) {
+    if (
+      latestCached?.payload &&
+      latestCached.state === "fresh" &&
+      footballCacheSeasonIsCurrent(latestCached.payload)
+    ) {
       return json(
-        { ...latestCached.payload, updateStatus: latestCached.state === "fresh" ? "cache" : "stale", cacheStale: latestCached.state !== "fresh" },
+        { ...latestCached.payload, updateStatus: "cache" },
         200,
         { "Cache-Control": "public, max-age=60, stale-while-revalidate=300" }
       );
     }
 
+    // Uma entrada stale é apenas fallback de segurança. Não a devolvemos
+    // antes do refresh, porque isso impediria o Cron de 5 em 5 minutos
+    // de renovar a cache quando o TTL de 15 minutos expirasse.
+
     if (!round && status !== "all") {
       const allKey = footballCacheKey(competitionKey, seasonId, stage, null, "all");
       const allCached = await getFootballCache(env, allKey);
-      if (allCached?.payload && footballCacheSeasonIsCurrent(allCached.payload)) {
+      if (allCached?.payload && allCached.state === "fresh" && footballCacheSeasonIsCurrent(allCached.payload)) {
         const payload = allCached.payload;
         const now = Date.now();
         const fixtures = Array.isArray(payload.fixtures) ? payload.fixtures.filter(item => {
@@ -3242,14 +3250,8 @@ async function handleFootballCompetitionAPI(request, env) {
       }
     }
 
-    if (cached?.payload && cached.state === "stale" && footballCacheSeasonIsCurrent(cached.payload)) {
-      return json(
-        { ...cached.payload, updateStatus: "stale", cacheStale: true },
-        200,
-        { "Cache-Control": "public, max-age=30, stale-while-revalidate=300", "Warning": '110 - "Response is stale"' }
-      );
-    }
-
+    // Cache stale: tentar sempre um refresh BSD. Se o fornecedor falhar,
+    // o catch abaixo devolve o snapshot stale como fallback de segurança.
     const data = await refreshFootballCache(env, cacheKey, competitionKey, {
       seasonId,
       stage,
