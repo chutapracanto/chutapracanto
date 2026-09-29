@@ -2370,7 +2370,7 @@ async function bsdFetchEventsForSeason(env, leagueId, seasonId, status, seasonSt
       limit: String(limit),
       offset: String(offset)
     });
-    if (status === "upcoming") params.set("status", "notstarted");
+    if (status === "upcoming") params.set("status", "upcoming");
     if (status === "finished") params.set("status", "finished");
 
     const data = await bsdFetchJson(
