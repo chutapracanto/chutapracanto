@@ -190,6 +190,7 @@
     .home-important-games-grid{display:flex;gap:.75rem;overflow-x:auto;padding-bottom:.35rem;scroll-snap-type:x proximity}
     .home-important-card{display:flex;flex-direction:column;background:var(--card-bg);border:1px solid var(--border-color);border-radius:13px;padding:.85rem;text-decoration:none;color:inherit;flex:0 0 235px;min-width:235px;scroll-snap-align:start;transition:.2s}
     .home-important-card:hover{border-color:var(--neon-green);transform:translateY(-2px)}
+    .home-important-card.competition-taca-liga{flex:0 0 290px;min-width:290px}
     .home-important-card-top{display:flex;align-items:center;gap:.55rem;margin-bottom:.7rem}
     .home-important-card-top img{width:30px;height:30px;object-fit:contain}
     .home-important-card-top strong{font:700 .72rem/1.15 var(--font-title);min-width:0}
@@ -599,7 +600,7 @@
             const card = document.createElement('a');
             card.href = `/noticia?slug=${encodeURIComponent(item.slug)}`;
             card.className = 'sub-featured-card';
-            card.appendChild(createNewsImage(item.image, item.title, 'sub-featured-img'));
+            card.appendChild(createNewsImage(item.image, item.title, 'sub-featured-img', true));
             const content = document.createElement('div');
             content.className = 'sub-featured-content';
             content.appendChild(createTextElement('span', 'tag', (item.category || 'Geral').toUpperCase()));
@@ -649,7 +650,7 @@
       const matchLabel=game=>esc(game.homeTeam?.name||'Casa')+' vs '+esc(game.awayTeam?.name||'Fora')+' · '+dateLabel(dateValue(game));
       const competitionResults=await Promise.all(competitions.map(async meta=>{
         try{
-          const response=await fetch('/api/competicoes?competition='+encodeURIComponent(meta[0])+'&status=all',{cache:'no-store'});
+          const response=await fetch('/api/competicoes?competition='+encodeURIComponent(meta[0])+'&status=upcoming',{cache:'no-store'});
           if(!response.ok)throw new Error('indisponível');
           const data=await response.json();
           const fixtures=Array.isArray(data.fixtures)?data.fixtures:[]; 
@@ -716,7 +717,7 @@
         const nextMatch=overall
           ? '<span class="home-important-next-label"><b>PRÓXIMO JOGO</b></span><span class="home-important-next-game">'+esc(overall.homeTeam?.name||'Casa')+' vs '+esc(overall.awayTeam?.name||'Fora')+'</span>'
           : '<span class="home-important-next-label"><b>PRÓXIMO JOGO</b></span><span class="home-important-next-game">—</span>';
-        return '<a class="home-important-card" href="/competicoes?competition='+encodeURIComponent(meta[0])+'"><div class="home-important-card-top"><img src="'+leagueLogo(meta[2])+'" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/logo.png\'"><strong>'+esc(meta[1])+'</strong><span aria-hidden="true">→</span></div><div class="home-important-label">JOGOS IMPORTANTES</div><div class="home-important-match">'+importantMatches+'</div><div class="home-important-next">'+nextMatch+'</div></a>';
+        return '<a class="home-important-card competition-'+esc(meta[0])+'" href="/competicoes?competition='+encodeURIComponent(meta[0])+'"><div class="home-important-card-top"><img src="'+leagueLogo(meta[2])+'" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/logo.png\'"><strong>'+esc(meta[1])+'</strong><span aria-hidden="true">→</span></div><div class="home-important-label">JOGOS IMPORTANTES</div><div class="home-important-match">'+importantMatches+'</div><div class="home-important-next">'+nextMatch+'</div></a>';
       }).join('');
     }
 

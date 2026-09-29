@@ -233,14 +233,19 @@ const NATIONS_GROUPS={
   D2:["liechtenstein","lithuania","azerbaijan"]
 };
 function nationsGroupName(item){
+  const sourceGroup=String(item?.groupName||"").trim();
+  const groupMatch=sourceGroup.match(/\b([A-D][1-4])\s*$/i);
+  const declaredGroup=groupMatch?.[1]?.toUpperCase();
+  if(declaredGroup&&Object.prototype.hasOwnProperty.call(NATIONS_GROUPS,declaredGroup)) return declaredGroup;
   const names=[item?.homeTeam?.name,item?.awayTeam?.name,item?.team?.name].map(normalizeTeamName);
   for(const [group,teams] of Object.entries(NATIONS_GROUPS)) if(names.some(name=>teams.includes(name))) return group;
-  return String(item?.groupName||"").trim();
+  return "";
 }
 function nationsGroupLabel(group){return "Liga "+group.charAt(0)+" · Grupo "+group}
 function renderGroupFilter(){
   const isNations=active==="nations-league";
   groupFilterWrap.hidden=!isNations;
+  roundEl.hidden=isNations;
   if(!isNations)return;
   const groups=Object.keys(NATIONS_GROUPS);
   groupEl.innerHTML=groups.map(group=>'<option value="'+group+'">'+esc(nationsGroupLabel(group))+'</option>').join("");
@@ -659,7 +664,7 @@ if(!competitions.some(item=>item[0]===active))active="liga-portugal";
 groupFilter=active==="nations-league"?"A4":"";
 renderGroupFilter();
 setCompetitionFilterState();
-(async()=>{prepareCompetitionOrder();await loadCompetition(active,fixtureFilter,true)})();
+loadCompetition(active,fixtureFilter,true);
 </script>
 <footer>
   <div class="footer-container">
