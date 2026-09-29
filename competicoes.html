@@ -293,7 +293,7 @@ function renderTabs(){
       <img src="${leagueLogo(id)}" alt="" loading="lazy" decoding="async">
       <span>${label}</span>
     </button>`).join("");
-  tabs.querySelectorAll("button").forEach(button=>button.addEventListener("click",()=>{const key=button.dataset.key;history.replaceState(null,"","/competicoes?competition="+encodeURIComponent(key));loadCompetition(key,"all")}));
+  tabs.querySelectorAll("button").forEach(button=>button.addEventListener("click",()=>{const key=button.dataset.key;history.replaceState(null,"","/competicoes?competition="+encodeURIComponent(key));loadCompetition(key,fixtureFilter,true)}));
 }
 function renderHighlight(){
   const candidates=allFixtures.filter(item=>fixtureStatus(item)==="upcoming"||fixtureStatus(item)==="live")
@@ -345,6 +345,7 @@ function renderRounds(selectUpcoming=false){
     }
     options.sort((a,b)=>a.firstKickoff-b.firstKickoff||Number(a.roundKey)-Number(b.roundKey));
   }
+  if(fixtureFilter==="all" && !selectUpcoming){ roundEl.value="all"; return; }
   if(!selectUpcoming&&options.some(round=>round.key===previous))roundEl.value=previous;
   else if(selectUpcoming){
     const next=allFixtures.filter(item=>fixtureStatus(item)==="upcoming")
@@ -482,6 +483,7 @@ function renderStandings(rows){
 let refreshTimer=null;
 let refreshInFlight=false;
 let loadedSeasonId=null;
+let loadedAllSnapshot=false;
 function updateCompetitionLiveState(){
   const live=allFixtures.some(item=>fixtureStatus(item)==="live");
   const liveEl=document.getElementById("competition-live-status");
@@ -554,6 +556,7 @@ async function loadCompetition(key,status="all",resetRound=true){
     if(!response.ok)throw new Error(data?.message||"Não foi possível obter os dados.");
     seasonEl.textContent=data.season?.label||"Época atual";
     loadedSeasonId=data.season?.id??null;
+    loadedAllSnapshot=effectiveStatus==="all" && (!selectedRound || selectedRound==="all");
     statusEl.textContent=data.updateStatus==="stale"?"dados antigos de segurança":"dados atualizados";
     globalStatusEl.textContent=data.updatedAt?"Atualizado "+dateLabel(data.updatedAt):"Dados atualizados";
     allFixtures=Array.isArray(data.fixtures)?data.fixtures:[];
@@ -583,7 +586,11 @@ document.querySelectorAll(".competition-filter").forEach(button=>button.addEvent
   roundEl.value="all";
   loadCompetition(active,fixtureFilter,true);
 }));
-roundEl.addEventListener("change",()=>{ if(roundEl.value==="all"){ renderFixtures(); scheduleCompetitionRefresh(); return; } loadCompetition(active,"all",false); });
+roundEl.addEventListener("change",()=>{
+  if(roundEl.value==="all"){ renderFixtures(); scheduleCompetitionRefresh(); return; }
+  if(loadedAllSnapshot){ renderFixtures(); return; }
+  loadCompetition(active,"all",false);
+});
 window.addEventListener("popstate",()=>{
   const key=new URLSearchParams(location.search).get("competition")||"liga-portugal";
   if(competitions.some(item=>item[0]===key)&&key!==active)loadCompetition(key,fixtureFilter==="finished"?"finished":fixtureFilter==="upcoming"?"upcoming":"all",true);
