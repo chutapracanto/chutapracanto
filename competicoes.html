@@ -370,12 +370,7 @@ function visibleFixtures(){
     const as=fixtureStatus(a),bs=fixtureStatus(b),ad=dateValue(a)?.getTime()||0,bd=dateValue(b)?.getTime()||0;
     if(fixtureFilter==="finished")return bd-ad;
     if(fixtureFilter==="all"){
-      if(as==="live"&&bs!=="live")return -1;
-      if(bs==="live"&&as!=="live")return 1;
-      if(as==="upcoming"&&bs==="finished")return -1;
-      if(bs==="upcoming"&&as==="finished")return 1;
-      if(as==="upcoming"&&bs==="upcoming")return ad-bd;
-      return bd-ad;
+      return ad-bd;
     }
     return ad-bd;
   });
@@ -390,7 +385,8 @@ function renderFixtures(){
   countEl.textContent=rows.length+" jogo"+(rows.length===1?"":"s");
   if(!rows.length){fixturesEl.innerHTML='<div class="empty">Não há jogos para este filtro.</div>';return}
   const groups=new Map();
-  rows.slice(0,40).forEach(item=>{
+  const displayRows=fixtureFilter==="all"?rows:rows.slice(0,40);
+  displayRows.forEach(item=>{
     const key=active==="nations-league"
       ? (nationsGroupName(item) || String(item.groupName||"").trim() || "__single__")
       : (String(item.groupName||"").trim()||"__single__");
