@@ -2683,6 +2683,7 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
 }
 
 const FOOTBALL_CACHE_FRESH_MS = 15 * 60 * 1000;
+const FOOTBALL_CACHE_LIVE_FRESH_MS = 10 * 1000;
 const FOOTBALL_CACHE_STALE_MS = 24 * 60 * 60 * 1000;
 const footballCacheRefreshes = new Map();
 
@@ -2714,12 +2715,17 @@ async function getFootballCache(env, cacheKey) {
     const now = Date.now();
     const expiresAt = Date.parse(row.expires_at);
     const staleUntil = Date.parse(row.stale_until);
+    const fetchedAt = Date.parse(row.fetched_at);
+    const liveLike = /\|(all|upcoming|live)$/.test(cacheKey);
+    const effectiveExpiresAt = Number.isFinite(fetchedAt)
+      ? fetchedAt + (liveLike ? FOOTBALL_CACHE_LIVE_FRESH_MS : FOOTBALL_CACHE_FRESH_MS)
+      : expiresAt;
 
-    if (!Number.isFinite(expiresAt) || !Number.isFinite(staleUntil)) {
+    if (!Number.isFinite(expiresAt) || !Number.isFinite(staleUntil) || !Number.isFinite(effectiveExpiresAt)) {
       return null;
     }
 
-    if (now <= expiresAt) {
+    if (now <= effectiveExpiresAt) {
       return { payload, state: "fresh" };
     }
 
