@@ -495,12 +495,13 @@ async function refreshCompetitionSnapshot(){
   if(refreshInFlight||!active)return;
   refreshInFlight=true;
   try{
-    const params=new URLSearchParams({competition:active,status:"all"});
+    const requestStatus=fixtureFilter==="finished"?"finished":fixtureFilter==="upcoming"?"upcoming":"all";
+    const params=new URLSearchParams({competition:active,status:requestStatus});
     const response=await fetch("/api/competicoes?"+params.toString(),{cache:"no-store"});
     const data=await response.json();
     if(!response.ok)throw new Error(data?.message||"Não foi possível atualizar os jogos.");
     if(loadedSeasonId!=null&&String(data.season?.id||"")!==String(loadedSeasonId)){
-      await loadCompetition(active,"all",true);
+      await loadCompetition(active,fixtureFilter==="finished"?"finished":fixtureFilter==="upcoming"?"upcoming":"all",true);
       return;
     }
     seasonEl.textContent=data.season?.label||seasonEl.textContent;
@@ -524,7 +525,8 @@ async function loadCompetition(key,status="all",resetRound=true){
   seasonEl.textContent="A carregar…";
   clearCompetitionRefresh();
   try{
-    const params=new URLSearchParams({competition:key,status});
+    const effectiveStatus=status==="all" ? (fixtureFilter==="finished"?"finished":fixtureFilter==="upcoming"?"upcoming":"all") : status;
+    const params=new URLSearchParams({competition:key,status:effectiveStatus});
     const response=await fetch("/api/competicoes?"+params.toString(),{cache:"no-store"});
     const data=await response.json();
     if(!response.ok)throw new Error(data?.message||"Não foi possível obter os dados.");
@@ -560,10 +562,10 @@ document.querySelectorAll(".competition-filter").forEach(button=>button.addEvent
   renderFixtures();
   scheduleCompetitionRefresh();
 }));
-roundEl.addEventListener("change",renderFixtures);
+roundEl.addEventListener("change",()=>{ renderFixtures(); });
 window.addEventListener("popstate",()=>{
   const key=new URLSearchParams(location.search).get("competition")||"liga-portugal";
-  if(competitions.some(item=>item[0]===key)&&key!==active)loadCompetition(key,"all",true);
+  if(competitions.some(item=>item[0]===key)&&key!==active)loadCompetition(key,fixtureFilter==="finished"?"finished":fixtureFilter==="upcoming"?"upcoming":"all",true);
 });
 document.addEventListener("visibilitychange",()=>{
   if(document.visibilityState==="visible")scheduleCompetitionRefresh();
