@@ -714,9 +714,7 @@
         );
         const importantMatches=selected.map(game=>'<div class="home-important-match-line">'+matchLabel(game)+'</div>').join('');
         const nextMatch=overall
-          ? (sameAsImportant(overall)
-            ? '<span class="home-important-next-label"><b>PRÓXIMO JOGO</b></span><span class="home-important-next-game">já está acima.</span>'
-            : '<span class="home-important-next-label"><b>PRÓXIMO JOGO</b></span><span class="home-important-next-game">'+esc(overall.homeTeam?.name||'Casa')+' vs '+esc(overall.awayTeam?.name||'Fora')+'</span>')
+          ? '<span class="home-important-next-label"><b>PRÓXIMO JOGO</b></span><span class="home-important-next-game">'+esc(overall.homeTeam?.name||'Casa')+' vs '+esc(overall.awayTeam?.name||'Fora')+'</span>'
           : '<span class="home-important-next-label"><b>PRÓXIMO JOGO</b></span><span class="home-important-next-game">—</span>';
         return '<a class="home-important-card" href="/competicoes?competition='+encodeURIComponent(meta[0])+'"><div class="home-important-card-top"><img src="'+leagueLogo(meta[2])+'" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/logo.png\'"><strong>'+esc(meta[1])+'</strong><span aria-hidden="true">→</span></div><div class="home-important-label">JOGOS IMPORTANTES</div><div class="home-important-match">'+importantMatches+'</div><div class="home-important-next">'+nextMatch+'</div></a>';
       }).join('');
