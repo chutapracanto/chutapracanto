@@ -2812,3 +2812,52 @@ Commit `08f8bb4953fb86c07f63ce6c9b3d82d0a90a5e01`:
 3. A correção preserva integralmente a lógica de atualização live implementada nos commits anteriores.
 
 O deployment Pages foi criado a partir da `main` para este commit; a validação final de produção deve confirmar que o novo snapshot BSD contém os horários corrigidos.
+
+
+# 60. RECONCILIAÇÃO OPERACIONAL — BSD + D1 + WORKER CRON + LIVE — 2026-09-29
+
+## Arquitetura confirmada
+A arquitetura real da frente de futebol/Competições foi reconfirmada diretamente no GitHub e Cloudflare. Não confundir o projeto Pages com o Worker de atualização agendada.
+
+- GitHub `main` publica a aplicação Cloudflare Pages, incluindo o endpoint `/api/competicoes` no Pages Worker.
+- Existe um **Worker Cloudflare separado**, `cpc-football-cron`, com handler `scheduled` e **Cron Trigger real `*/5 * * * *`**.
+- O Worker separado tem binding `FOOTBALL_CACHE_DB` para a D1 de futebol.
+- O Cron roda uma competição por slot, em rotação pelas 7 competições, e chama `https://chutapracanto.com/api/competicoes?competition=...`.
+- O Pages Worker/adapter é a camada que conversa com o BSD, resolve época/cache e escreve/reutiliza a D1.
+- **Não reintroduzir `[triggers]` no Wrangler do Pages nem duplicar `scheduled()` no Pages Worker.** O Cron pertence ao Worker separado.
+
+## Experiência atual reportada pela utilizadora
+Foram identificados três sintomas relacionados com a atualização temporal da área `/competicoes`:
+
+1. Taça da Liga:
+   - SC Braga — Famalicão deve ser 29/10/2026 às 18:45.
+   - Benfica — Gil Vicente deve ser 29/10/2026 às 20:45.
+   - A cache `v5-taca-liga` ainda foi observada com ambos em 27/10/2026 às 11:00, pelo que a correção de calendário ainda não está validada em produção.
+2. Jogos LIVE:
+   - jogos em LIVE podem aparecer sem jornada/ronda;
+   - golos/minuto não acompanham corretamente durante o jogo;
+   - jogos que terminam podem permanecer visualmente como LIVE;
+   - novos jogos que entram em LIVE podem não aparecer enquanto um LIVE antigo permanece preso.
+3. O problema não deve ser tratado apenas como um problema de DOM: é necessário validar a cadeia temporal BSD → adapter/Pages Worker → D1/cache → API → frontend.
+
+## Estado técnico relevante
+- O frontend possui refresh periódico do snapshot e lógica de atualização do DOM, mas isso não prova que a fonte server-side esteja a fornecer um estado LIVE novo.
+- Existe `FOOTBALL_CACHE_LIVE_FRESH_MS = 10s`, mas a investigação mostrou que não existe uma chave D1 LIVE independente; o estado LIVE é obtido através do fluxo do endpoint e do overlay sobre o snapshot normal.
+- O endpoint LIVE do BSD é compacto; o detalhe `/events/{id}/` pode ser necessário para recuperar round/stage/kickoff e evitar "sem jornada".
+- A correção frontend `22d2130d15983def54348b44c58a2431001fb271` faz re-render quando a composição da lista muda, mas **não deve ser considerada solução completa do LIVE** até o fluxo server-side ser validado.
+- A correção Worker `57cf3206d582806ceaf09080733f84168f2c0f22` inclui enriquecimento de eventos LIVE e correção de horários da Taça da Liga por IDs de equipas, mas **produção/cache ainda precisa de confirmação posterior**.
+
+## Regra de investigação para esta frente
+Não fazer novos patches por hipótese. Primeiro determinar, com evidência Cloudflare/D1/GitHub/BSD:
+1. qual execução escreveu o snapshot problemático da Taça da Liga;
+2. se o Cron Trigger está efetivamente a executar e a atualizar D1;
+3. em que ponto o estado LIVE deixa de ser atualizado/removido/adicionado;
+4. como uma falha ou resposta vazia do BSD LIVE é tratada;
+5. se o estado LIVE é persistido ou apenas calculado na resposta;
+6. como o frontend descobre um novo LIVE quando ainda não existe nenhum LIVE conhecido.
+
+### Critério de fecho
+Só considerar a frente resolvida depois de validar, em runtime, esta sequência: jogo entra LIVE → minuto/golo atualizam → jogo termina e deixa de ser LIVE → novo jogo entra LIVE → jornada/ronda permanece disponível; e os dois jogos da Taça da Liga aparecem com as datas/horas corretas.
+
+## Nota de continuidade para futuras IAs
+Uma análise anterior tratou incorretamente o `cpc-football-cron` como mero chamador periódico sem reconhecer inicialmente a arquitetura completa. Esta secção existe para impedir essa regressão: **BSD, Pages Worker, D1, Worker Cron e Cron Trigger devem ser analisados como um único sistema, mantendo a separação entre Pages e o Worker agendado.**
