@@ -2561,9 +2561,6 @@ async function bsdResolveCurrentSeason(env, leagueId) {
     if (bsdSeasonCoversToday(endpointSeason, today) || (!hasDates && endpointSeason?.is_current !== false && endpointSeason?.current !== false)) {
       return endpointSeason;
     }
-    if ((endpointSeason?.is_current === true || endpointSeason?.current === true) && (!end || end >= today)) {
-      return endpointSeason;
-    }
   }
 
   const seasonsData = await bsdFetchJson(
@@ -2571,14 +2568,15 @@ async function bsdResolveCurrentSeason(env, leagueId) {
     "https://sports.bzzoiro.com/api/v2/leagues/" + leagueId + "/seasons/"
   );
   const seasons = bsdGetSeasonList(seasonsData);
-  const currentFlagged = seasons.find(item =>
-    (item?.is_current === true || item?.current === true) &&
-    (!item?.end_date || String(item.end_date).slice(0, 10) >= today)
-  );
   const coveringToday = seasons
     .filter(item => item?.start_date && item?.end_date && bsdSeasonCoversToday(item, today))
     .sort((a, b) => String(b?.start_date || "").localeCompare(String(a?.start_date || "")))[0];
-  const selected = currentFlagged || coveringToday;
+  const currentFlagged = seasons.find(item =>
+    (item?.is_current === true || item?.current === true) &&
+    (!item?.start_date || String(item.start_date).slice(0, 10) <= today) &&
+    (!item?.end_date || String(item.end_date).slice(0, 10) >= today)
+  );
+  const selected = coveringToday || currentFlagged;
   const selectedId = Number(selected?.id ?? selected?.season_id);
   if (!Number.isSafeInteger(selectedId) || selectedId <= 0) {
     throw new Error("Época atual não encontrada na BSD.");
