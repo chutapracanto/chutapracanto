@@ -582,7 +582,7 @@ async function refreshCompetitionSnapshot(){
 async function loadCompetition(key,status="all",resetRound=true){
   const changed=active!==key;
   active=key;
-  if(changed)renderTabs();
+  if(changed||!tabs.children.length)renderTabs();
   const meta=competitions.find(item=>item[0]===key);
   nameEl.textContent=meta?.[1]||key;
   logoEl.src=leagueLogo(meta?.[2]||0);
