@@ -573,8 +573,7 @@ document.querySelectorAll(".competition-filter").forEach(button=>button.addEvent
   fixtureFilter=button.dataset.filter;
   setCompetitionFilterState();
   roundEl.value="all";
-  renderFixtures();
-  scheduleCompetitionRefresh();
+  loadCompetition(active,fixtureFilter,true);
 }));
 roundEl.addEventListener("change",()=>{ if(roundEl.value==="all"){ renderFixtures(); scheduleCompetitionRefresh(); return; } loadCompetition(active,"all",false); });
 window.addEventListener("popstate",()=>{
