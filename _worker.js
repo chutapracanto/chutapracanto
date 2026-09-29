@@ -2239,7 +2239,7 @@ function cpcNormalizeNationName(value) {
 function cpcNationsGroupForNames(...values) {
   const rawValues = values.map(value => cpcSafeString(value).trim()).filter(Boolean);
   for (const value of rawValues) {
-    const match = value.match(/(?:league|liga)\\s+([A-D])\\s*[,·-]\\s*(?:group|grupo)\\s*([1-4])/i);
+    const match = value.match(/(?:league|liga)\s+([A-D])\s*[,·-]\s*(?:group|grupo)\s*([1-4])/i);
     if (match) {
       const group = match[1].toUpperCase() + match[2];
       if (Object.prototype.hasOwnProperty.call(CPC_NATIONS_GROUPS, group)) return "Liga " + group.charAt(0) + " · Grupo " + group;
