@@ -2226,7 +2226,7 @@ const CPC_NATIONS_GROUPS = {
 };
 function cpcNationsGroupForNames(...values) {
   const names=values.map(value=>cpcSafeString(value).toLocaleLowerCase("pt-PT").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").trim());
-  for (const [group,teams] of Object.entries(CPC_NATIONS_GROUPS)) if (names.some(name=>teams.includes(name))) return group;
+  for (const [group,teams] of Object.entries(CPC_NATIONS_GROUPS)) if (names.some(name=>teams.includes(name))) return "Liga " + group.charAt(0) + " · Grupo " + group;
   return "";
 }
 
