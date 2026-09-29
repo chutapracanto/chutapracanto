@@ -2348,14 +2348,15 @@ function cpcCorrectTacaLigaSchedule(fixtures, seasonId) {
     .replace(/[^a-z0-9]+/g, "");
 
   const corrections = new Map([
-    ["scbraga|famalicao", "2026-10-29T18:45:00+00:00"],
-    ["benfica|gilvicente", "2026-10-29T20:45:00+00:00"]
+    ["31|27", "2026-10-29T18:45:00+00:00"],
+    ["37|24", "2026-10-29T20:45:00+00:00"]
   ]);
 
   return fixtures.map(fixture => {
     const home = normalizeTeam(fixture?.homeTeam?.name);
     const away = normalizeTeam(fixture?.awayTeam?.name);
-    const kickoff = corrections.get(home + "|" + away);
+    const ids = String(fixture?.homeTeam?.id ?? "") + "|" + String(fixture?.awayTeam?.id ?? "");
+    const kickoff = corrections.get(ids) || corrections.get(home + "|" + away);
     return kickoff ? { ...fixture, kickoff } : fixture;
   });
 }
@@ -2652,7 +2653,8 @@ async function bsdFetchLiveEvents(env, leagueId, seasonId, stage = "", round = n
   const params = new URLSearchParams({ league_id: String(leagueId), season_id: String(seasonId) });
   if (stage) params.set("stage", String(stage));
   if (round != null && String(round).trim()) params.set("round", String(round));
-  return bsdExtractEvents(await bsdFetchJson(env, `https://sports.bzzoiro.com/api/v2/events/live/?${params.toString()}`));
+  const live = bsdExtractEvents(await bsdFetchJson(env, `https://sports.bzzoiro.com/api/v2/events/live/?${params.toString()}`));
+  return Promise.all(live.map(event => bsdEnrichLiveEventMetadata(env, event)));
 }
 
 function cpcLiveFixtureMatch(candidate, live) {
@@ -2684,6 +2686,20 @@ function cpcLiveFixtureMatch(candidate, live) {
   const liveAway = normalize(live?.away_team_name ?? live?.awayTeam?.name ?? live?.away_team?.name);
   return Boolean(candidateHome && candidateAway && liveHome && liveAway &&
     candidateHome === liveHome && candidateAway === liveAway);
+}
+
+async function bsdEnrichLiveEventMetadata(env, event) {
+  const eventId = cpcSafeNumber(event?.id ?? event?.event_id);
+  if (eventId == null) return event;
+  const hasRound = event?.round_number != null || event?.round != null || event?.round_key || event?.round_label || event?.round_name;
+  const hasStage = event?.stage != null || event?.stage_key || event?.stage_slug || event?.stage_name;
+  if (hasRound && hasStage) return event;
+  try {
+    const detail = await bsdFetchJson(env, `https://sports.bzzoiro.com/api/v2/events/${eventId}/`);
+    return { ...detail, ...event, id: eventId };
+  } catch {
+    return event;
+  }
 }
 
 async function bsdFetchLiveIncidents(env, eventId) {
