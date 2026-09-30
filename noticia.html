@@ -700,13 +700,18 @@
         }
                 const encodedPath = entry.path.split('/').map(encodeURIComponent).join('/');
         const markdownPromise = (async () => {
-          let response = await fetch('/' + encodedPath);
+          let response = await fetch('/' + encodedPath, { cache: 'no-store' });
+          if (!response.ok) {
+            const rawUrl = 'https://raw.githubusercontent.com/chutapracanto/chutapracanto/main/' + entry.path.split('/').map(encodeURIComponent).join('/');
+            const rawResponse = await fetch(rawUrl, { cache: 'no-store' });
+            if (rawResponse.ok) response = rawResponse;
+          }
           if (!response.ok) {
             const apiResponse = await fetch('https://api.github.com/repos/chutapracanto/chutapracanto/contents/content/' + (isOpinion ? 'opiniao' : 'noticias'));
             if (apiResponse.ok) {
               const files = await apiResponse.json();
               const matched = files.find(file => file.name.replace(/\.md$/i, '').toLowerCase() === decodeURIComponent(slug).toLowerCase());
-              if (matched && /^https:\/\/raw\.githubusercontent\.com\/chutapracanto\/chutapracanto\//.test(matched.download_url)) response = await fetch(matched.download_url);
+              if (matched && /^https:\/\/raw\.githubusercontent\.com\/chutapracanto\/chutapracanto\//.test(matched.download_url)) response = await fetch(matched.download_url, { cache: 'no-store' });
             }
           }
           return response;
