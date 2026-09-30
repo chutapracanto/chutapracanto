@@ -352,3 +352,13 @@ O desenho técnico está suficientemente fechado, mas a implementação real dep
 3. Meta: app + permissões + Page Access Token e identificação da conta Instagram profissional ligada à Page.
 
 Não criar tokens fictícios, não colocar credenciais no frontend e não construir uma falsa automação de publicação sem estas autorizações.
+
+
+## 18. CORREÇÃO 2026-09-30.5 — PUBLICAÇÃO ADMINISTRATIVA
+
+- Foi detetada uma regressão no fluxo de publicação: o Admin guardava o Markdown da notícia e a imagem no GitHub, mas não atualizava `content/noticias-index.json`.
+- Como `content/noticias/*` está excluído dos Build Watch Paths, o conteúdo novo não gerava deployment por si só; e, sem a entrada no índice, a produção não conseguia descobrir a notícia nova.
+- A notícia de 30/09/2026, “Passaporte carimbado nos Açores: Seleção Sub-21 goleia Gibraltar (4-0) com 'golaço' de Rodrigo Mora e garante Euro 2027”, foi recuperada no índice manualmente.
+- O Worker foi corrigido para sincronizar automaticamente o índice após PUT/DELETE editorial, preservando campos existentes como `sourceUrl` quando a entrada já existe.
+- O commit do Worker `70b1b1af...` iniciou deployment de produção `6cb198fe...`; o commit do índice `b4181c9c...` iniciou deployment `d55ea2ad...`.
+- Regra: uploads/imagens e Markdown isolados continuam sem deployment; a atualização do índice continua a ser o artefacto que publica o novo estado editorial.
