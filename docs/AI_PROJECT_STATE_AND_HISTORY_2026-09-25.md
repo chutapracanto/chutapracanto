@@ -910,3 +910,12 @@ Deployment de produção do commit `7eac9aa...`: `ffca2ec6`, concluído com suce
 A alteração voltou a produzir um deployment Pages normal. O histórico também mostra builds consecutivos e pelo menos um `superseded_queued_build`. A causa conhecida permanece: Pages está com watch paths amplos e commits distintos de conteúdo/índice podem provocar deployments separados.
 
 Isto fica em **standby controlado**, não esquecido: a documentação Cloudflare confirma que Build Watch Paths permitem excluir diretórios/ficheiros do trigger de build. A futura alteração deve ser isolada, validada com uma publicação real e ter rollback fácil.
+
+
+---
+
+# 68. RASCUNHOS LOCAIS DO ADMIN — 2026-09-30
+
+Implementado no Admin com IndexedDB. O rascunho atual guarda localmente título, subtítulo, categoria, data, autor, tipo editorial, URL de imagem, HTML do Quill e o ficheiro de imagem local quando existe. Pode ser recuperado pelo botão **Recuperar rascunho**. Após publicação de novo conteúdo, o rascunho local é limpo.
+
+Decisão arquitetural: não usar GitHub/D1 para esta primeira versão. Assim um rascunho não cria commit, não entra em `content/noticias-index.json`, não aparece no sitemap e não provoca deployment. Se no futuro for necessário rascunho partilhado entre dispositivos/utilizadores, será desenhado separadamente.
