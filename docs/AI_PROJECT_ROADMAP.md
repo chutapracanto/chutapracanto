@@ -326,3 +326,29 @@ A pesquisa de imagens foi reforçada com:
 - normalização do URL antes da pré-visualização.
 
 Limitação conhecida: metadados de data do Openverse não equivalem necessariamente à data de criação/publicação da fotografia. Para garantir robustez máxima, a futura cópia de imagens externas para alojamento próprio deve preservar fonte/licença/atribuição.
+
+
+## 17. ATUALIZAÇÃO 2026-09-30.4 — MONETIZAÇÃO E DISTRIBUIÇÃO
+
+### Monetização — auditoria autónoma concluída
+- `ads.txt` existe e contém o Publisher ID atual: `google.com, pub-1556367149800029, DIRECT, f08c47fec0942fa0`.
+- A Política de Privacidade já identifica a integração técnica do AdSense, explica que anúncios ainda não significam monetização ativa e prevê consentimento aplicável.
+- Termos e Política Editorial estão presentes e distinguem publicidade de conteúdo editorial.
+- A página Contacto já aceita propostas de parceria.
+- Não foi introduzido CMP por código neste ciclo: a publicação de anúncios personalizados no EEE/Reino Unido/Suíça exige uma CMP certificada pela Google integrada com IAB TCF; a configuração pode ser feita através do Privacy & messaging da Google.
+
+**Estado:** tecnicamente preparado; a ativação de consentimento/Privacy & messaging é dependência da conta AdSense e não deve ser inventada nem simulada no código.
+
+### Distribuição de vídeo — matriz oficial fechada
+- **YouTube:** `videos.insert` suporta upload autenticado e uploads resumable; projetos não verificados criados após 28/07/2020 ficam com vídeos privados até auditoria. Requer OAuth e scope `youtube.upload`.
+- **TikTok:** Content Posting API suporta Direct Post; requer app, configuração Direct Post, autorização do utilizador e aprovação do scope `video.publish`. Clientes não auditados ficam limitados a conteúdo privado. Também existe `PULL_FROM_URL`.
+- **Facebook Pages:** a Graph API atual permite publicar vídeos/Reels em Pages através de Page Access Token e permissões de conteúdo; a publicação de vídeo de Page usa `/{page-id}/videos`, e Reels têm fluxo de upload/publicação separado.
+- **Instagram:** Content Publishing/Reels exige conta profissional e integração adequada com uma Page/app; o fluxo de Reels pode usar URL pública ou upload resumable e termina com `media_publish`.
+
+### Condicionante para implementação do MVP
+O desenho técnico está suficientemente fechado, mas a implementação real depende de credenciais/autorização externas que o repositório não possui:
+1. YouTube: projeto OAuth + consentimento da conta do canal + credenciais/token.
+2. TikTok: app com Content Posting API + `video.publish` aprovado/autorizado.
+3. Meta: app + permissões + Page Access Token e identificação da conta Instagram profissional ligada à Page.
+
+Não criar tokens fictícios, não colocar credenciais no frontend e não construir uma falsa automação de publicação sem estas autorizações.
