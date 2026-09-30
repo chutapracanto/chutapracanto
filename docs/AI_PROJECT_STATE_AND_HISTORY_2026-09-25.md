@@ -888,3 +888,25 @@ Pages project: `chutapracanto`; Worker separado: `cpc-football-cron`; cron `*/5 
 
 ## Standby
 Reduzir deploys duplicados de conteúdo + índice/sitemap; pesquisa global; automações adicionais; performance apenas com evidência.
+
+
+---
+
+# 67. ADMIN IMAGENS — MELHORIA 2026-09-30
+
+Implementada no commit `7eac9aa18c04e5d3abcd7aa3b3c112ef643f3608`.
+
+A pesquisa de imagens do Admin agora usa dimensões e proporção disponíveis nas respostas do Openverse/Wikimedia, dá prioridade a imagens horizontais e suficientemente grandes para capas e considera correspondência textual com os termos pesquisados. Os resultados são limitados aos mais adequados e mostram dimensões quando disponíveis.
+
+A investigação confirmou também uma diferença importante:
+- uploads próprios passam pelo Worker, são validados por formato/conteúdo e têm limite de 5 MiB;
+- imagens escolhidas na pesquisa externa permanecem alojadas no servidor de origem e são usadas por URL. Isso significa que um fornecedor pode impedir hotlink ou deixar de servir a imagem, algo que o CPC não controla.
+
+Futura melhoria possível: importar/capturar a imagem externa para alojamento próprio, mas só depois de desenhar validação de origem, limites e preservação de atribuição/licença. Não foi implementada nesta fase.
+
+Deployment de produção do commit `7eac9aa...`: `ffca2ec6`, concluído com sucesso e alias `https://chutapracanto.com`.
+
+## Deploys duplicados — confirmado
+A alteração voltou a produzir um deployment Pages normal. O histórico também mostra builds consecutivos e pelo menos um `superseded_queued_build`. A causa conhecida permanece: Pages está com watch paths amplos e commits distintos de conteúdo/índice podem provocar deployments separados.
+
+Isto fica em **standby controlado**, não esquecido: a documentação Cloudflare confirma que Build Watch Paths permitem excluir diretórios/ficheiros do trigger de build. A futura alteração deve ser isolada, validada com uma publicação real e ter rollback fácil.
