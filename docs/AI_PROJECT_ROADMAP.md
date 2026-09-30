@@ -294,3 +294,7 @@ Objetivo: **upload único → preparação/publicação ou rascunho por platafor
 4. Fechar matriz YouTube + TikTok + Meta e desenhar MVP de vídeo.
 5. Pesquisa global do site.
 6. Otimização de deployments, com teste e rollback fácil.
+
+
+### Atualização 2026-09-30.2 — Admin
+**Implementado:** rascunho local no Admin usando IndexedDB. Guarda campos da notícia, conteúdo Quill e imagem local quando existente; permite recuperar o rascunho antes da publicação. O rascunho não cria commit, não entra no índice/sitemap e não dispara deployment. O rascunho local é uma ferramenta do navegador, não um armazenamento editorial partilhado.
