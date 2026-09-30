@@ -52,7 +52,7 @@ Não tratar o projeto como protótipo.
 - BSD docs: `https://goaldir.com/docs/football/`.
 - Secret: `BSD_API_KEY`.
 
-**API-Football está descartada. Não reintroduzir.**
+**fornecedor alternativo rejeitado está descartada. Não reintroduzir.**
 
 ## 1.3 Estado das grandes frentes
 - Fundação/site/editorial: funcional.
