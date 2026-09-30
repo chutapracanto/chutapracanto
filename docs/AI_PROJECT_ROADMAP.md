@@ -1,914 +1,259 @@
-# CHUTA PRA CANTO — ROADMAP OPERACIONAL DO PROJETO
+# CHUTA PRA CANTO — ROADMAP OPERACIONAL
 
-Versão: 2026-09-28
+Versão: 2026-09-30
 Repo: `chutapracanto/chutapracanto`
 Produção: `https://chutapracanto.com`
 
-## 0. FUNÇÃO DESTE DOCUMENTO
+## 1. REGRA DE EXECUÇÃO
 
-Este ficheiro define **a ordem das grandes frentes do projeto**.
+A ordem operacional é:
+**inspecionar → implementar → validar → corrigir → validar → documentar**.
 
-Não substitui:
-- `.github/AI_PROJECT_RULES.md` — regras de execução;
-- `.github/CODEX_RULES.md` — limites do Codex;
-- `bíblia mestra Chuta Pra Canto.md` — identidade, arquitetura e contexto;
-- `docs/AI_PROJECT_STATE_AND_HISTORY_2026-09-25.md` — histórico operacional, tentativas, falhas e decisões.
+O estado real de GitHub, Cloudflare, D1 e produção prevalece sobre textos antigos. Histórico fechado não deve ser reaberto sem evidência nova.
 
-Este documento responde a uma pergunta diferente:
+## 2. ESTADO ATUAL
 
-> **"Em que fase estamos, qual é a sequência global e o que precisa de estar resolvido antes de considerar uma fase avançada?"**
-
-## 1. REGRA PRINCIPAL DO ROADMAP
-
-A IA deve seguir a sequência abaixo **sem saltar de fase por entusiasmo, por uma ideia criativa ou por uma oportunidade secundária**.
-
-Uma tarefa pedida pela utilizadora pode ser executada mesmo que pertença a outra frente, desde que seja claramente delimitada. Porém:
-
-- executar uma tarefa criativa não muda a fase técnica;
-- descobrir uma oportunidade de distribuição não muda a fase técnica;
-- existir uma métrica interessante não cria automaticamente uma nova fase;
-- uma fase só muda de estado quando os critérios de conclusão forem cumpridos;
-- bloqueio de uma fase não autoriza abandonar o objetivo e saltar silenciosamente para outra;
-- dependências externas devem ficar registadas no ledger.
-
-### Regra de execução
-
-Sempre que a fase atual tiver uma ação autónoma possível:
-
-**inspecionar → executar → validar → corrigir → validar → atualizar documentação → continuar.**
-
-Não responder apenas "o próximo passo é X" quando X estiver ao alcance da IA.
-
----
-
-# 2. VISÃO GLOBAL
-
-| Fase | Frente | Estado em 2026-09-25 |
+| Fase | Frente | Estado |
 |---|---|---|
-| 0 | Continuidade, regras e memória operacional | **CONSOLIDADA** |
-| 1 | Recuperação/consolidação do conteúdo histórico | **CONCLUÍDA — reconciliação de metadata dos 163 registos pós-22/08 validada** |
-| 2 | Sistema editorial e publicação própria | **CONCLUÍDA — frente UX/editorial fechada operacionalmente; melhorias residuais não bloqueantes** |
-| 3 | Dados de futebol e API de competições | **IMPLEMENTAÇÃO CONCLUÍDA — validação runtime final do Cron pendente** |
-| 4 | SEO técnico + indexação real | **ATIVA — auditoria técnica base concluída; indexação real pendente de Search Console** |
-| 5 | Performance mensurável | **PRIMEIRA PASSAGEM IMPLEMENTADA / VALIDAR RESIDUAL** |
-| 6 | Monetização | **PENDENTE** |
-| 7 | Distribuição e crescimento | **PENDENTE / FRENTE CRIATIVA SEPARADA** |
-| 8 | Automação e escala | **PENDENTE** |
+| 0 | Continuidade, regras e documentação | **CONSOLIDADA** |
+| 1 | Conteúdo histórico | **CONCLUÍDA** |
+| 2 | Sistema editorial / UX | **CONCLUÍDA** |
+| 3 | Dados de futebol / competições | **CONCLUÍDA OPERACIONALMENTE** |
+| 4 | SEO + indexação real | **ATIVA — aguardar/medir Search Console** |
+| 5 | Performance | **MANUTENÇÃO — só com evidência nova** |
+| 6 | Monetização | **PREPARAÇÃO / AdSense em análise** |
+| 7 | Distribuição e crescimento | **FRENTE CRIATIVA ATIVA** |
+| 8 | Automação e escala | **PRÓXIMA GRANDE FRENTE TÉCNICA** |
 
-**Fase operacional atual:** **FASE 3 — validação final do Cron de competições.** A Fase 4 só deve reassumir como frente técnica ativa depois de existir evidência do ciclo automático do Cron.
+### Estado operacional em 30/09/2026
 
----
+- BSD é a fonte de futebol em produção.
+- Arquitetura: browser → Pages Worker → adapter BSD → D1/cache → BSD.
+- Worker separado: `cpc-football-cron`.
+- Cron: `*/5 * * * *`.
+- D1: `FOOTBALL_CACHE_DB`.
+- As 7 competições estão implementadas.
+- UI de fases, grupos, jornadas/rondas e LIVE está implementada.
+- Nations League deteta a fase a partir dos dados atuais e não deve ficar presa à fase de grupos.
+- Home LIVE fica em standby quando não existem jogos LIVE reais.
+- Shorts da Home estão a atualizar novamente; confirmado pela utilizadora.
+- Sobre Nós e Contacto ficam no footer, não no menu principal.
+- Sitemap foi submetido ao Search Console em 28/09; após 24h ainda não há evidência pública de indexação nos resultados pesquisáveis. O Search Console continua a ser a fonte correta para confirmar indexação.
 
-# 3. FASE 0 — CONTINUIDADE, REGRAS E MEMÓRIA
+## 3. FASE 3 — DADOS DE FUTEBOL / COMPETIÇÕES
 
-## Objetivo
-Permitir que qualquer IA continue o projeto sem depender da memória de uma conversa específica.
+**Estado: CONCLUÍDA OPERACIONALMENTE.**
 
-## Componentes
-- `.github/AI_PROJECT_RULES.md`
-- `.github/CODEX_RULES.md`
-- `bíblia mestra Chuta Pra Canto.md`
-- `docs/AI_PROJECT_STATE_AND_HISTORY_2026-09-25.md`
-- este Roadmap
-- Bíblias 1 e 2 como arquivo histórico
+### Fechado
+- BSD validado como fonte operacional atual.
+- Adapter server-side.
+- D1/cache com refresh correto e fallback stale apenas quando necessário.
+- Worker de cron separado.
+- UI das 7 competições.
+- LIVE backend/frontend.
+- Inferência dinâmica de fase.
+- Filtros dinâmicos.
+- Nations League por grupos na fase de liga.
+- Normalização de labels de ronda/fase.
+- Não hardcode de fases quando a BSD fornece a estrutura.
 
-## Critério de conclusão
-A hierarquia documental está definida, o estado real do GitHub prevalece e a IA sabe:
-1. onde procurar a verdade;
-2. como executar;
-3. como registar o que aconteceu;
-4. qual é a fase atual.
+### Regra de fases
+A UI deve inferir a estrutura atual pelos dados BSD:
+1. knockout/qualificação/play-offs/quartos/meias/final;
+2. fase de liga;
+3. grupos;
+4. tabela única.
 
-**Estado: CONSOLIDADA.**
+Quando uma competição muda de fase, os filtros devem adaptar-se automaticamente. Não é necessário alterar manualmente a UI para cada transição de época/fase.
 
----
+### Nations League
+Na fase de liga:
+- grupos A1–A4, B1–B4, C1–C4, D1–D2;
+- seleção de grupo mostra jogos passados, presentes e futuros desse grupo;
+- "Todos" limpa grupo/jornada e mostra a competição completa.
 
-# 4. FASE 1 — RECUPERAÇÃO E CONSOLIDAÇÃO DO CONTEÚDO HISTÓRICO
+Quando a BSD passar para quartos/play-offs/fase final, a UI deve deixar de apresentar grupos e passar para o filtro de ronda/fase correspondente.
 
-## Objetivo
-Garantir que o conteúdo histórico que deve pertencer ao Chuta Pra Canto está efetivamente recuperado no sistema atual.
+**Não reabrir esta frente sem regressão ou evidência nova.**
 
-## Situação factual
-A importação de 24/09 validou um lote específico de:
-- 213 URLs únicas encontradas;
-- 179 importadas;
-- 34 duplicadas/ignoradas;
-- 0 falhas.
+## 4. FASE 4 — SEO + INDEXAÇÃO
 
-Esse resultado **não significa** que todo o conteúdo publicado no Framer posteriormente tenha sido migrado.
+**Estado: ATIVA.**
 
-Está registada uma lacuna posterior a 22/08/2026.
-
-## Trabalho obrigatório
-1. Identificar a fonte histórica real do conteúdo posterior do Framer.
-2. Obter inventário real.
-3. Comparar inventário com `content/noticias`.
-4. Comparar com `content/noticias-index.json`.
-5. Separar:
-   - existente;
-   - ausente;
-   - duplicado;
-   - impossível de recuperar;
-   - conteúdo cuja origem/data não pode ser provada.
-6. Importar apenas conteúdo efetivamente identificado e validado.
-7. Regenerar e validar índice/sitemap.
-8. Validar Admin e produção.
-9. Atualizar ledger.
-
-## Proibições nesta fase
-- importação por inferência;
-- inventar artigos;
-- inventar datas/autores/imagens;
-- declarar migração total concluída sem reconciliação;
-- saltar para uma nova fase apenas porque a fonte histórica está bloqueada.
-
-## Estado
-**CONCLUÍDA quanto à reconciliação de metadata do lote pós-22/08.**
-
-Resultado: 163/163 reconciliados; 0 mismatches/0 ausências no índice; conteúdo editorial não alterado; PR #27 mergeada em main (73da0ac1d692a05a3138983e938454fc4be1c5c5); workflow canónico de índice/sitemap validado após o merge.
-
-A migração/encerramento do domínio histórico Framer continua como etapa futura separada e só deve ser executada depois de inventário de URLs, mapeamento e validação de redirects.
-
-Bloqueio atual:
-A fonte histórica foi disponibilizada via export CMS em `docs/framer/framer-news-export-2026-09-25.json`.
-
-A reconciliação dos 163 registos pós-22/08 está agora em execução; só depois será feita qualquer importação.
-
----
-
-# 5. FASE 2 — SISTEMA EDITORIAL E PUBLICAÇÃO PRÓPRIA
-
-## Objetivo
-Garantir que, depois da recuperação histórica, o CPC consegue publicar e manter conteúdo sem depender do Framer.
-
-## Abrange
-- Admin;
-- criar notícia;
-- criar crónica/opinião;
-- editar;
-- imagens;
-- autores;
-- tipos;
-- categorias;
-- ordenação;
-- pesquisa;
-- filtros;
-- índice;
-- sitemap;
-- publicação no GitHub;
-- deploy;
-- partilha social;
-- prevenção de páginas vazias;
-- confirmação de que a operação do Admin realmente persiste no GitHub.
-
-## Critério de conclusão
-Uma publicação nova deve poder percorrer o fluxo completo:
-
-**Admin → GitHub → índice → sitemap quando aplicável → Cloudflare → produção**
-
-sem intervenção manual desnecessária e com validação.
-
----
-
-# 6. FASE 3 — DADOS DE FUTEBOL E API DE COMPETIÇÕES
-
-## Objetivo
-Transformar dados de competições, jogos e classificações numa camada estruturada do site.
-
-Esta fase **é parte oficial do projeto** e não deve ser esquecida ou substituída por conteúdo criativo.
-
-## Base arquitetural já definida
-Ver:
-`docs/arquitetura-futura-competicoes.md`
-
-A arquitetura prevê:
-- competição;
-- época;
-- participantes;
-- classificações;
-- fixtures;
-- resultados;
-- eventos;
-- identificadores internos estáveis;
-- datas armazenadas em UTC;
-- apresentação no fuso local;
-- camada server-side no Worker/Pages;
-- adaptador de fornecedor;
-- cache;
-- deduplicação;
-- rate limits;
-- stale-if-error;
-- atualização automática por Worker separado com Cron Trigger.
-
-## Competições inicialmente previstas
-- Liga Portugal;
-- Taça de Portugal;
-- Taça da Liga;
-- Champions League;
-- Europa League;
-- Conference League;
-- Nations League.
-
-## Regra de fornecedor
-Antes de implementar:
-1. pesquisar fontes/API atuais;
-2. verificar cobertura;
-3. verificar limites;
-4. verificar licença/termos;
-5. verificar estabilidade;
-6. verificar custo;
-7. priorizar opção gratuita sem custo obrigatório;
-8. só depois escolher arquitetura concreta.
-
-Não assumir fornecedor ou preço a partir de memória antiga.
-
-## Critério de conclusão
-Existir uma fonte escolhida e validada e uma implementação server-side que alimente a área de competições sem expor credenciais no frontend.
-
----
-
-# 7. FASE 4 — SEO TÉCNICO E INDEXAÇÃO REAL
-
-## Objetivo
-Garantir que o site é tecnicamente rastreável e medir a indexação real.
-
-## Já existe como base
+### Já implementado
 - canonical;
-- OG/Twitter;
-- JSON-LD;
-- NewsArticle;
-- Article;
-- BreadcrumbList;
 - robots;
 - sitemap;
+- OG/Twitter;
+- JSON-LD;
+- NewsArticle/Article/BreadcrumbList;
 - domínio `.com`;
-- distinção News/Opinion.
+- distinção Notícias/Opinião;
+- shell inicial de artigos.
 
-## Trabalho
-- Search Console;
-- sitemap enviado/verificado;
-- cobertura;
-- indexação;
-- páginas excluídas;
-- erros;
-- problemas de canonical;
-- Google News/Publisher Center quando fizer sentido;
-- labels e classificação editorial corretas.
+### Situação Search Console
+- sitemap submetido em 28/09/2026;
+- Google aceitou o sitemap para processamento;
+- já passaram mais de 24h;
+- uma pesquisa pública `site:chutapracanto.com` não devolveu resultados no momento desta atualização;
+- isto **não prova desindexação** nem substitui os relatórios do Search Console.
 
-## Regra
-**SEO implementado não é sinónimo de indexação comprovada.**
+### Próxima ação autónoma
+Quando houver dados disponíveis no Search Console:
+1. Sitemaps;
+2. Page indexing;
+3. páginas excluídas;
+4. canonical;
+5. erros/avisos;
+6. páginas efetivamente indexadas.
 
-Nunca afirmar indexação real sem evidência do Search Console ou outra fonte apropriada.
+Não fazer alterações SEO por ausência de resultados públicos isoladamente.
 
----
+## 5. FASE 5 — PERFORMANCE
 
-# 8. FASE 5 — PERFORMANCE MENSURÁVEL
+**Estado: manutenção.**
 
-## Objetivo
-Melhorar velocidade apenas quando houver evidência suficiente para justificar uma alteração.
+A primeira passagem de performance já foi aplicada e validada historicamente.
 
-## Princípio
-**problema → evidência → hipótese → alteração mínima → validação → decisão**
+Só reabrir com:
+**problema → evidência → hipótese → alteração mínima → validação**.
 
-## Estado conhecido
-A primeira passagem de performance foi reaplicada na PR #26 e esta foi mergeada em 25/09.
+Não repetir experiências fechadas nem alterar LCP/CLS por palpite.
 
-A PR #25 original foi fechada sem merge.
+## 6. FASE 6 — MONETIZAÇÃO
 
-A primeira passagem inclui, entre outros:
-- fontes não bloqueantes;
-- Font Awesome não bloqueante;
-- prioridade de imagens;
-- otimização de logos;
-- shell inicial de artigo no Worker.
+**Estado: preparação / dependência externa.**
 
-## Não fazer
-- reabrir #25;
-- repetir experiências invalidadas;
-- alterar LCP/CLS sem hipótese nova;
-- usar uma medição Lighthouse inválida como prova;
-- fazer refactor de performance sem objetivo mensurável.
+### AdSense
+- infraestrutura técnica preparada;
+- pedido em análise/"em preparação";
+- aprovação e receita continuam dependentes da Google.
 
-## Critério de conclusão
-A baseline relevante está medida, alterações têm causalidade suficiente e não existem regressões significativas.
+### Enquanto aguarda
+Pode avançar-se autonomamente com:
+- revisão de páginas institucionais e privacidade/cookies;
+- verificação de ads.txt;
+- preparação de espaços publicitários sem os ativar de forma intrusiva;
+- pesquisa de afiliados compatíveis;
+- preparação de parcerias/patrocínios;
+- melhoria de páginas de contacto/parcerias;
+- preparação de métricas e informação comercial.
 
----
+Não criar segunda conta AdSense nem assumir aprovação.
 
-# 9. FASE 6 — MONETIZAÇÃO
+## 7. FASE 7 — DISTRIBUIÇÃO E CRESCIMENTO
 
-## Objetivo
-Transformar audiência e tráfego em receita sem prejudicar o produto editorial.
+**Estado: frente criativa ativa, separada da fase técnica.**
 
-## Frentes
-- AdSense;
-- afiliados quando houver encaixe real;
-- publicidade;
-- parcerias;
-- oportunidades de monetização das plataformas sociais;
-- paid partnerships/patrocínios.
-
-## Regra
-Não confundir:
-- preparação técnica;
-- candidatura;
-- aprovação;
-- receita efetiva.
-
-Cada estado deve ser tratado separadamente.
-
----
-
-# 10. FASE 7 — DISTRIBUIÇÃO E CRESCIMENTO
-
-## Objetivo
-Aumentar alcance e reutilização do conteúdo.
-
-## Inclui
+Inclui:
 - Facebook;
 - Instagram;
 - TikTok;
 - YouTube;
 - Shorts;
 - Reels;
-- podcast;
 - cortes;
-- distribuição cruzada;
-- reaproveitamento editorial.
+- podcast;
+- distribuição cruzada.
 
-## Regra fundamental
-Esta é uma **frente criativa/distribuição**, não uma alteração automática da fase técnica do site.
+### Automação de vídeo — ideia em avaliação
 
-Se a utilizadora pedir:
-- um vídeo;
-- um Reel;
-- um Short;
-- uma thumbnail;
-- um design Canva;
-- um corte de podcast;
+É tecnicamente possível construir um fluxo de:
+**upload único → processamento → publicação/queue por plataforma**, usando APIs oficiais onde cada plataforma permitir.
 
-a IA pode executar essa tarefa.
+Mas as plataformas não oferecem todas o mesmo modelo de publicação. Portanto, antes de construir, devemos mapear:
+- upload/resumable upload;
+- autenticação OAuth;
+- publicação direta vs criação de rascunho;
+- limitações de formato/tamanho;
+- permissões necessárias;
+- quotas;
+- necessidade de aprovação de app;
+- se a conta CPC pode usar a API para publicação.
 
-Mas isso **não altera a fase atual do Roadmap**.
+Só depois decidir se vale a pena implementar.
 
----
+## 8. PESQUISA INTERNA DO SITE
 
-# 11. FASE 8 — AUTOMAÇÃO E ESCALA
+**Estado: ideia futura, não prioridade imediata.**
 
-## Objetivo
-Reduzir progressivamente o trabalho manual da Rute e transformar o CPC numa operação editorial eficiente.
+A pesquisa de Notícias já existe no sistema editorial/indexado.
 
-## Exemplos
-- atualização automática de dados de futebol;
-- geração/atualização de páginas;
+Uma pesquisa global no site pode ser criada posteriormente para:
+- notícias;
+- opinião;
+- eventualmente competições.
+
+Prioridade inferior a:
+1. confirmação do estado Search Console;
+2. preparação AdSense/monetização;
+3. automação de distribuição que reduza trabalho manual recorrente.
+
+## 9. FASE 8 — AUTOMAÇÃO E ESCALA
+
+**Estado: próxima frente técnica.**
+
+Priorizar automações que:
+1. acontecem repetidamente;
+2. consomem tempo;
+3. são previsíveis;
+4. podem ser validadas;
+5. não introduzem risco editorial.
+
+### Candidatos
+- distribuição de vídeos para plataformas;
+- reutilização de conteúdo;
 - validações automáticas;
-- distribuição;
-- reutilização de conteúdos;
-- workflows editoriais;
-- integrações Canva quando úteis;
-- automações entre sistemas quando tecnicamente possíveis;
-- alertas apenas quando houver intervenção humana necessária.
-
-## Princípio
-Automatizar primeiro o que:
-1. acontece repetidamente;
-2. consome tempo;
-3. é previsível;
-4. pode ser validado automaticamente;
-5. não introduz risco editorial desnecessário.
-
----
-
-# 12. CANVA E TRABALHO CRIATIVO — LANE SEPARADA
-
-O Canva pode ser usado nesta conta quando a utilizadora pedir ou quando a tarefa fizer parte explicitamente da produção criativa do CPC.
-
-Isto não cria uma nova fase técnica.
-
-A IA deve separar mentalmente:
-
-### Lane A — Projeto técnico
-Site, GitHub, Cloudflare, Admin, dados, API, SEO, performance, monetização técnica, automação.
-
-### Lane B — Produção criativa
-Canva, vídeos, Shorts, Reels, thumbnails, podcast, clips e materiais sociais.
-
-As duas lanes podem ser executadas na mesma conta, mas **não devem contaminar o estado do Roadmap**.
-
----
-
-# 13. REGRAS DE PRIORIDADE ENTRE FASES
-
-Quando houver várias coisas possíveis, usar esta ordem:
-
-1. dependência/bloqueio que impede uma fase atual;
-2. correção de regressão ou risco real;
-3. conclusão da fase atual;
-4. preparação da próxima fase;
-5. manutenção/automação;
-6. tarefas criativas/distribuição pedidas pela utilizadora;
-7. melhorias futuras sem impacto imediato.
-
-Não usar esta ordem para impedir uma tarefa criativa explicitamente pedida pela utilizadora. Usá-la apenas para decidir **qual é a próxima frente autónoma do projeto**.
-
----
-
-# 14. GATE DE MUDANÇA DE FASE
-
-Só mudar o estado de uma fase quando:
-- o objetivo estiver definido;
-- as tarefas críticas estiverem executadas;
-- a validação relevante existir;
-- regressões óbvias forem verificadas;
-- documentação/ledger estiverem atualizados;
-- não existir uma dependência interna esquecida.
-
-Se uma fase estiver bloqueada por dependência externa:
-- marcar BLOQUEADA;
-- documentar exatamente a dependência;
-- executar trabalho autónomo que não dependa dela apenas se isso estiver claramente separado e não mascarar a prioridade;
-- não declarar a fase concluída.
-
----
-
-# 15. ATUALIZAÇÃO AUTOMÁTICA DO ROADMAP
-
-Sempre que houver:
-- conclusão de tarefa relevante;
-- bloqueio;
-- desbloqueio;
-- nova decisão arquitetural;
-- alteração de prioridade;
-- mudança de fase;
-- conclusão de uma validação que altere o estado;
-
-a IA deve atualizar este ficheiro no mesmo ciclo em que atualiza o ledger.
-
-A utilizadora não deve ter de pedir:
-> "atualiza o roadmap".
-
----
-
-# 16. RESUMO OPERACIONAL PARA QUALQUER IA
-
-Antes de fazer trabalho no CPC:
-
-1. Ler `.github/AI_PROJECT_RULES.md`.
-2. Ler `.github/CODEX_RULES.md`.
-3. Ler este Roadmap.
-4. Ler o ledger quando a tarefa tocar em histórico, falhas, performance, migração ou decisões anteriores.
-5. Ler a Bíblia Mestra quando for necessário contexto/arquitetura.
-6. Confirmar o estado real do GitHub.
-7. Identificar a fase atual.
-8. Executar a ação autónoma disponível.
-9. Validar.
-10. Corrigir se necessário.
-11. Atualizar documentação.
-12. Só depois responder.
-
-**Estado operacional atualizado em 2026-09-28: FASE 4 — SEO técnico + indexação real.** A Fase 3 foi encerrada após PASS de fornecedor BSD, cache D1, Cron, UI `/competicoes` e validação de produção. O sitemap já foi submetido ao Search Console; a indexação real permanece dependente do processamento externo da Google.
-
-O adapter BSD e o endpoint `/api/competicoes` estão tecnicamente validados em produção, mas **BSD não está aprovado como fornecedor definitivo**. API-Football também permanece **não aprovado** após os testes 2026/27. A arquitetura deve permanecer provider-agnostic até a decisão final.
-
-A camada D1/cache está **PASS** em runtime. O mecanismo de Cron foi separado do Pages porque o projeto Pages rejeitou `[triggers]` no `wrangler.toml`; existe código para um Worker separado em `workers/football-cron`, mas **não deve ser criado/deployado ainda**.
-
-Antes do deployment do Worker, a próxima ordem é:
-1. validar a estratégia de atualização e consumo real de requests para cada fornecedor candidato;
-2. definir a frequência final de atualização por competição sem a fixar prematuramente em `*/5`;
-3. concluir a decisão de fornecedor;
-4. só então configurar/deployar o Worker Cron separado;
-5. validar execução automática e atualizar ledger/roadmap.
-
-**Regra operacional nova:** não transformar uma validação técnica de fornecedor em aprovação de fornecedor; não transformar uma implementação de Cron em configuração final até a frequência e o consumo estarem justificados.
-FIM.
-
-
-## PROTOCOLO DE CONTINUIDADE E DESBLOQUEIO — 2026-09-25
-
-A Fase 0 inclui agora o protocolo obrigatório em `docs/AI_EXECUTION_PROTOCOL.md`.
-
-A IA não deve confundir “fase bloqueada” com “trabalho terminado”. Um bloqueio externo deve ser convertido numa dependência operacional concreta: ação autónoma, intervenção da Rute ou tarefa do Codex. A ordem global do Roadmap mantém-se; o protocolo apenas garante que a continuação é explicitamente acionável quando uma fase fica bloqueada.
-
-
-## 17. ATUALIZAÇÃO OPERACIONAL — 2026-09-25 — PÓS-RECONCILIAÇÃO FRAMER
-
-A Fase 1 deixou de ser a frente operacional principal após a conclusão da reconciliação de metadata dos 163 registos Framer posteriores a 22/08/2026.
-
-### Fechado
-- 163/163 registos reconciliados;
-- 0 mismatches e 0 ausências no índice para a população reconciliada;
-- conteúdo editorial não reescrito;
-- PR #27 mergeada em main (73da0ac1d692a05a3138983e938454fc4be1c5c5);
-- workflow canónico de geração do índice/sitemap executado com sucesso após o merge;
-- sitemap servido em produção verificado pela utilizadora como acessível/funcional.
-
-### Próxima frente técnica
-**FASE 2 — Sistema editorial e publicação própria / UX de Notícias.**
-
-Backlog prioritário:
-1. reset de pesquisa/filtros: “Todas” deve devolver claramente à listagem completa;
-2. sticky header: desktop e mobile devem permanecer compactos/translúcidos no topo após encolher, sem desaparecer; tipografia sem quebra de linha durante a transição; no mobile, a navegação secundária deve subir;
-3. ação de gosto/coração junto à partilha — pesquisar primeiro práticas atuais de sites/editoriais de futebol e evidência sobre engagement antes de implementar;
-4. migração/redirects do antigo Framer para o .com: inventariar URLs reais e mapear cada origem para o destino equivalente; não assumir que os Redirects nativos do Framer resolvem cross-domain;
-5. normalização de slugs/variantes no índice/sitemap, sem alterar URLs canónicas sem plano de compatibilidade.
-
-### Ideias preservadas para fases futuras
-- dados/API de futebol e competições (Fase 3);
-- Search Console/indexação real (Fase 4);
-- performance apenas com hipótese/evidência nova (Fase 5);
-- monetização (Fase 6);
-- distribuição/Shorts/Reels/YouTube/podcast (Fase 7);
-- automação e escala (Fase 8).
-
-### Explicitamente não reabrir sem nova evidência
-- LCP/CLS e experiências de performance já validadas;
-- importação histórica Framer já concluída;
-- PRs fechadas sem merge;
-- testes/abordagens que já falharam sem hipótese nova.
-
-## 19. ATUALIZAÇÃO OPERACIONAL — 2026-09-25 — AÇÃO DE GOSTO/CORAÇÃO
-
-A frente de UX editorial avançou após pesquisa de padrões de engagement em futebol/editorial.
-
-- PR #33 mergeada em `main`: `eb76d46beda2a2b1bf762fec2a5776480e80dfca`.
-- Reação de coração/gosto junto à partilha.
-- Persistência local por artigo e eventos de analytics quando disponíveis.
-- Sem backend/contador público nesta primeira versão.
-- 0 PRs abertas após o merge.
-- Produção ainda não foi validada por HTTP nesta sessão porque o domínio externo não está acessível ao ambiente atual.
-
-**Estado histórico — supersedido pela secção 25:** FASE 2 estava em execução nesta data. A frente foi posteriormente fechada com a PR #42 e a Fase 3 foi iniciada.
-
-## 20. ATUALIZAÇÃO OPERACIONAL — 2026-09-25 — INVENTÁRIO DE SLUGS
-
-Foi identificado um conjunto residual de **3 slugs/paths com caracteres zero-width** no conteúdo histórico. Não foram alterados nesta fase porque a correção exige compatibilidade de URLs e deve ser integrada no plano de normalização/redirects.
-
-**Estado:** inventariado; não alterar URLs canónicas até existir estratégia de compatibilidade.
-
-## 21. ATUALIZAÇÃO OPERACIONAL — 2026-09-25 — INVENTÁRIO FRAMER → .COM
-
-O inventário de redirects históricos foi concluído em `docs/framer/framer-url-redirect-inventory-2026-09-25.json`.
-
-- 213/213 origens com destino atual identificado.
-- 179 por `sourceUrl`.
-- 34 por slug.
-- 0 duplicações de origem/destino.
-- Nenhum redirect executado.
-
-A documentação oficial do Framer confirma que redirects cross-domain/domain-level não são resolvidos pelo mecanismo normal de Redirects do projeto; essa parte depende do hosting provider do domínio antigo. Para `chutapracanto.framer.website`, a capacidade de controlar esse host histórico ainda não está disponível no ambiente atual.
-
-**Estado:** inventário concluído; execução dos redirects aguarda confirmação de controlo do host/projeto histórico.
-
-
-
-## 22. ATUALIZAÇÃO OPERACIONAL — 2026-09-25 — CLOUDFLARE / ENGAGEMENT / REORDENAÇÃO DA FASE 2 — HISTÓRICO SUPERSEDIDO PELA SECÇÃO 25
-
-### Correção do estado Cloudflare
-A referência histórica a um Worker separado chamado `chutapracanto` está desatualizada.
-
-A Rute confirmou diretamente no Dashboard da Cloudflare que **esse Worker separado não existe atualmente**.
-
-O que permanece ativo no repositório é o `_worker.js`, que deve ser tratado como parte da arquitetura Pages/runtime existente. Não criar nem ressuscitar um Worker separado para resolver a funcionalidade de likes.
-
-### Fase 2 — nova frente prioritária
-A ação de gosto/coração da PR #33 foi uma implementação transitória em `localStorage`. Não é considerada a arquitetura final porque não produz reação persistente nem contador público partilhado.
-
-A próxima frente técnica é:
-
-**ENGAGEMENT PERSISTENTE — coração/gosto real**
-
-Arquitetura candidata:
-```
-artigo
-  ↓
-/api/article-like
-  ↓
-_pages runtime / _worker.js_
-  ↓
-Cloudflare D1
-  ↓
-estado persistente + contador
-```
-
-### Ordem obrigatória
-1. Inspecionar Cloudflare real.
-2. Confirmar runtime de `/api/*`.
-3. Confirmar D1 existente/não existente.
-4. Confirmar binding existente/não existente.
-5. Confirmar plano e ausência de billing/upgrade obrigatório.
-6. Só então definir schema mínimo e proteção anti-abuso.
-7. Implementar endpoint persistente.
-8. Substituir o localStorage da PR #33.
-9. Validar persistência, idempotência, contagem e falhas.
-
-### Supabase — gate arquitetural
-Supabase não faz parte da implementação por defeito.
-
-Só passa a ser considerado se uma análise concreta provar **ganho materialmente superior** em rentabilidade/automatização/escala e se a solução puder continuar sustentável sem depender de Pro, créditos pagos ou billing obrigatório.
-
-Sem essa prova, **D1 é a opção de referência** por integração nativa com a stack Cloudflare existente.
-
-### Limites gratuitos que entram no desenho
-A documentação oficial Cloudflare atual indica D1 no Workers Free com 5M rows read/dia, 100k rows written/dia e 5 GB de storage; os limites diários são aplicados e, quando excedidos, as queries falham até ao reset. Portanto, a solução deve usar queries/indexes eficientes e evitar operações desnecessárias.
-
-### O que NÃO é o próximo passo
-- não investigar novamente o Framer;
-- não implementar redirects agora;
-- não criar Supabase;
-- não criar outro Worker;
-- não criar ainda tabelas/endpoint de likes;
-- não abrir PR/merge nesta inspeção externa.
-
-### Fases e ideias que permanecem depois da Fase 2
-**Fase 3 — Dados/API de futebol:** competições, épocas, equipas, classificações, fixtures, resultados, eventos, fornecedor gratuito/estável, cache, rate limits, stale-if-error e atualização automática.
-
-**Fase 4 — SEO/indexação real:** Search Console, sitemap enviado, cobertura, canonical, páginas excluídas, Google News/Publisher Center quando fizer sentido.
-
-**Fase 5 — Performance:** apenas hipóteses comprovadas, baseline, LCP/CLS/INP, imagens, scripts, cache e rede; não reabrir experiências antigas sem nova evidência.
-
-**Fase 6 — Monetização:** AdSense, afiliados, publicidade e parcerias; separar preparação técnica, aprovação e receita efetiva.
-
-**Fase 7 — Distribuição/crescimento:** Facebook, Instagram, TikTok, YouTube, Shorts, Reels, podcast, cortes e distribuição cruzada; lane criativa separada da fase técnica.
-
-**Fase 8 — Automação/escala:** publicação, validações, dados, distribuição, workflows, integrações e alertas; automatizar primeiro tarefas repetitivas, previsíveis e validáveis.
-
-**Estado histórico — supersedido pela secção 25:** FASE 2 estava ativa nesta atualização. A implementação persistente em D1 foi posteriormente integrada em `main` e a Fase 3 foi iniciada.
-
-
-## 23. ATUALIZAÇÃO OPERACIONAL — 2026-09-25 — RECONCILIAÇÃO DOS PEDIDOS UX / LIKE / FRAMER
-
-Os pedidos UX apresentados para o sticky/header e o botão de gosto foram reconciliados com o estado real do GitHub.
-
-### 1–3. Sticky/header
-**Objetivo confirmado:**
-- desktop e mobile: depois de encolher, o sticky permanece no topo, compacto e transparente, sem desaparecer;
-- desktop e mobile: a navegação mantém os textos na mesma linha durante a transição, sem reflow de linha;
-- mobile: a navegação secundária sobe mais alguns pixels quando o header recolhe.
-
-**Estado:**
-- implementação anterior (#29/#30) estava mergeada, mas não cumpria visualmente todos os requisitos pedidos;
-- correção adicional foi aplicada na branch `feat/article-likes-sticky-final-v3`;
-- ainda **NÃO está em main nem em produção**;
-- validação browser final continua necessária antes de merge.
-
-### 4. Coração/gosto
-**Objetivo confirmado:**
-- coração apenas por ícone, ao lado de Partilhar;
-- mesma linguagem visual circular da partilha;
-- sem contador visível;
-- estado persistente por servidor/D1;
-- idempotência por visitante/artigo;
-- acessibilidade e estados loading/active;
-- partilha permanece independente.
-
-**Estado:**
-- PR #33: mergeada, mas transitória/localStorage;
-- PR #34: fechada sem merge;
-- PR #38: **aberta**, com a implementação persistente em D1 e coração-only;
-- a branch inclui também a correção adicional do sticky/header;
-- **NÃO está em main nem em produção**.
-
-### Evidência 2026+
-A pesquisa recente sobre publishing desportivo aponta para maior valor de experiências participativas/reactions como mecanismo de engagement e relação direta com audiência; não há base para tratar um like do site como sinal direto de ranking do Google. A implementação é, portanto, uma funcionalidade de engagement próprio, não uma promessa de SEO.
-
-### 5. Framer → .com
-**Objetivo confirmado:**
-- URLs históricas do Framer devem encaminhar para a notícia equivalente no .com quando houver correspondência;
-- páginas sem correspondência devem encaminhar para destino editorial apropriado/home, conforme o mapeamento.
-
-**Estado:**
-- inventário 213/213 já concluído em `docs/framer/framer-url-redirect-inventory-2026-09-25.json`;
-- nenhum redirect foi executado;
-- documentação oficial atual do Framer confirma que Redirects normais são intra-domínio; redirecionamento do domínio/host antigo para outro domínio depende do hosting provider do host antigo;
-- a execução continua **BLOQUEADA** até haver controlo verificável do projeto/host histórico `chutapracanto.framer.website`.
-
-### Ordem operacional atual
-1. Validar browser do sticky/header corrigido.
-2. Validar browser/API/D1 do PR #38.
-3. Se a validação passar, mergear #36 e validar deployment de produção.
-4. Separadamente, resolver a dependência do host Framer histórico e então aplicar/testar os 213 redirects.
-
-
-## 24. FECHO DA FRENTE UX / ENGAGEMENT E TRANSIÇÃO — HISTÓRICO SUPERSEDIDO PELA SECÇÃO 25
-
-> **Nota de leitura:** esta secção foi ultrapassada pelos eventos de 26/09. Não usar os estados de PR #38/#36 abaixo como estado atual.
-
-### Pedidos 1–5 reconciliados
-- Sticky pequeno/transparente persistente: implementado na branch final, aguarda validação browser e produção.
-- Navegação sem mudança de linha: implementado na branch final, aguarda validação browser.
-- Navegação mobile mais acima: implementado na branch final, aguarda validação browser.
-- Coração-only persistente em D1: implementado na PR #38, aguarda validação browser/Preview e merge.
-- Framer → `.com`: inventário 213/213 concluído; redirects continuam bloqueados pela falta de controlo verificável do host histórico.
-
-### Estado da transição
-A frente de implementação está concluída no GitHub na PR #38, mas **não deve ser considerada concluída em produção** até browser validation + merge + deployment validation.
-
-### Próxima ação executiva
-A única ação pendente que não é executável integralmente pelo GitHub é a validação browser/Cloudflare do Preview. Depois dessa validação, o fluxo é: PASS → merge #36 → validar deployment → confirmar `main`/produção → fechar Fase 2 UX/engagement.
-
-**Não reabrir #33/#34 nem recomeçar D1/like. Não voltar ao Framer antes de resolver a dependência do host antigo.**
-
-
-## 25. TRANSIÇÃO PARA FASE 3 — 2026-09-26
-
-A frente UX/editorial do artigo foi fechada operacionalmente com o merge da PR #42 (e4dc204966902f0fc506d36ddef758c4a31b0f03) em main. O pequeno diferencial visual de blur entre header e contexto sticky fica registado como melhoria futura não bloqueante.
-
-A implementação de engagement persistente já está presente em main, incluindo a rota de API de reação e a migração D1, pelo que não constitui uma frente aberta antes da Fase 3.
-
-### Fase 3 — matriz de fornecedores executada — 2026-09-27
-Foi concluída a primeira matriz documental de fornecedores em `docs/AI_FOOTBALL_PROVIDER_MATRIX_2026-09-27.md`.
-
-Evidência atual:
-- **API-Football:** cobertura oficial lista as 7 competições prioritárias; Free $0, 100 requests/dia e 10/minuto; endpoints necessários incluem seasons, fixtures, standings, teams, livescore e events. A cobertura pode variar por época/jogo e as épocas disponíveis no Free são limitadas.
-- **football-data.org:** Free €0, 12 competições, 10/minuto, mas scores/schedules são atrasados; a cobertura Free não comprova as 7 competições simultaneamente. Exige atribuição visível.
-- **Sportmonks:** cobertura ampla e live, mas produção começa em plano pago; fica como fallback técnico.
-- **Sportradar:** cobertura global, mas não foi estabelecido um plano Free de produção comparável.
-
-**Resultado:** API-Football é o candidato principal, mas **ainda não aprovado**. Antes da aprovação são obrigatórios testes autenticados de 2026/27 nas 7 competições e medição do consumo de quota, sobretudo para eventos/live.
-
-Não criar adapter, endpoints de produto, cache ou bindings definitivos antes dessa validação. Exceção estrita autorizada em 2026-09-27: endpoint temporário, protegido pela sessão Admin, POST same-origin e limitado ao branch `main` e aos hosts oficiais de Production para uma única chamada manual `/status` por execução; não aprova o fornecedor nem constitui integração de produto.
-
-**Estado:** FASE 3 — matriz concluída; validação real do candidato principal em curso.
-
-
-## 6A. FASE 3 — MECANISMO DE SECRET INJECTION VALIDADO
-
-A dependência de credencial da Fase 3 deixou de ser uma instrução vaga. O mecanismo seguro previsto para o runtime Pages é um **Cloudflare Pages Secret**.
-
-### Vias suportadas
-1. Dashboard Cloudflare: **Workers & Pages → projeto Pages → Settings → Variables and Secrets → Add → Encrypt → Save**.
-2. Wrangler autenticado: `npx wrangler pages secret put <KEY> --project-name <PROJECT>`.
-
-O segredo fica acessível server-side através de `context.env` e não deve ser colocado no repositório, `wrangler.toml`, frontend ou chat. Fontes oficiais atuais: https://developers.cloudflare.com/pages/functions/bindings/ e https://developers.cloudflare.com/workers/wrangler/commands/pages/.
-
-### Estado da Fase 3
-- fornecedor: **API-Football — candidato principal, não aprovado**;
-- integração: **não implementada**;
-- secret `API_FOOTBALL_KEY`: **configurado apenas em Production**; Preview não tem este secret. Presença/tipo confirmados por API sem aceder ao valor;
-- diagnóstico autenticado: **endpoint temporário em preparação; ainda não publicado nem executado**;
-- validação autenticada 2026/27: **pendente**;
-- mecanismo seguro: **definido**;
-- próxima dependência: integrar/publicar o diagnóstico temporário em Production e executar uma chamada manual `/status`; manter a chave apenas no Cloudflare Pages e não revelar o valor.
-
-
-## 25.1. MODELO QUANTITATIVO DE QUOTA — 2026-09-27
-
-A análise da Fase 3 avançou do critério qualitativo (“API-Football cobre as sete competições”) para um modelo quantitativo de consumo.
-
-A documentação oficial confirma que `/fixtures?league=&season=` pode devolver a época completa e que filtros por data/período/round permitem reduzir o volume; também permite agrupar detalhes de até 20 fixtures por chamada. Portanto, o modelo CPC não deve assumir uma chamada por jogo. citeturn0search1turn0search3turn0search6
-
-Modelos preliminares:
-- 1 fixtures + 1 standings por competição/dia + metadata: ~15 requests/dia;
-- 4 atualizações de fixtures/dia + 1 standings/dia por competição + metadata: ~36/dia;
-- 12 atualizações de fixtures/dia + 1 standings/dia por competição + metadata: ~92/dia.
-
-São modelos de arquitetura, não medições autenticadas. O cenário de ~92/dia não constitui margem confortável.
-
-O gate de aprovação passa a exigir:
-1. cobertura autenticada 2026/27 das 7 competições;
-2. medição real de quota/headers;
-3. modelo por tipo de dia da época;
-4. política de cache/deduplicação/stale-if-error;
-5. validação de 10 requests/minuto;
-6. margem operacional real, e não apenas consumo <=100;
-7. decisão separada sobre live/events, que podem tornar o Free inadequado.
-
-**Estado:** API-Football continua candidato principal, não aprovado. A próxima dependência externa é a API key configurada diretamente como Cloudflare Pages Secret; depois disso, executar testes autenticados e continuar a medição sem pedir a chave no chat.
-
-
-## 26. RECONCILIAÇÃO OPERACIONAL — 2026-09-28
-
-### Estado atual confirmado
-- Repositório de verdade: `chutapracanto/chutapracanto`, branch `main`.
-- Migração/redirecionamentos Framer: **ENCERRADOS**; não reabrir sem nova evidência.
-- BSD: cobertura 2026/27 confirmada nas 7 competições-alvo.
-- BSD: adapter server-side e endpoint público `/api/competicoes`: **PASS**.
-- D1/cache de futebol: **PASS**.
-- Worker separado `cpc-football-cron`: **DEPLOY CONFIRMADO**, Cron `*/5`, binding D1 confirmado.
-- BSD selecionado para a implementação de produção da Fase 3, sujeito a revisão apenas se cobertura, quota, licença ou disponibilidade mudarem.
-- API-Football permanece **NÃO APROVADO** e não é fornecedor da integração de produção atual.
-- Não repetir diagnósticos BSD, API-Football, D1 ou cache já encerrados sem nova hipótese/evidência.
-
-### UI de Competições
-A página pública `/competicoes` está implementada e foi validada manualmente em produção para **todas as 7 competições**:
-1. Liga Portugal
-2. Taça de Portugal
-3. Taça da Liga
-4. UEFA Champions League
-5. UEFA Europa League
-6. UEFA Conference League
-7. UEFA Nations League
-
-A validação confirmou que todas aparecem no seletor e carregam conteúdo real.
-
-**Estado: PASS — UI de Competições em produção.**
-
-### Fase 3 — estado
-**ATIVA — implementação de Competições concluída e validada em produção.**
-
-A camada de dados, adapter, cache, atualização automática e UI estão implementados. A observabilidade detalhada do ciclo Cron → API → D1 permanece apenas como observabilidade complementar e não constitui bloqueio.
-
-## 27. DECISÃO DE FORNECEDOR — BSD SELECIONADO — 2026-09-28
-
-A decisão de fornecedor foi fechada com base em:
-- cobertura 2026/27 das 7 competições;
-- adapter provider-agnostic;
-- endpoint público validado;
-- cache D1;
-- quota BSD Free de 7.500 requests/dia;
-- estratégia normal de 2 requests por competição/refresh;
-- consumo teórico confortável face à quota;
-- licença BSD v4.0 compatível com exibição em website próprio, mantendo raw data e API key atrás da camada server-side.
-
-**Decisão:** BSD é o fornecedor da implementação de produção atual da Fase 3.
-
-API-Football permanece fora da produção.
-
-## 28. ATUALIZAÇÃO AUTOMÁTICA — WORKER CRON — 2026-09-28
-
-- Worker: `cpc-football-cron`.
-- Cron: `*/5 * * * *`.
-- Rotação: uma competição por execução, aproximadamente 35 minutos entre processamentos da mesma competição.
-- D1: `FOOTBALL_CACHE_DB`.
-- Falhas: sem retry imediato.
-- Deployment: confirmado no Cloudflare Dashboard.
-
-**Estado: OPERACIONALMENTE INSTALADO.**
-
-Não fazer novo deployment apenas para obter logs adicionais.
-
-## 29. UI /COMPETICOES — 2026-09-28
-
-- Página pública criada.
-- Consome exclusivamente `/api/competicoes`.
-- Inclui as 7 competições.
-- Inclui jogos/resultados e classificações quando disponíveis.
-- Sitemap inclui `/competicoes`.
-- Homepage inclui acesso à área.
-- Validação manual em produção: **PASS para as 7 competições**.
-
-**Estado: CONCLUÍDO.**
-
-## 30. GATE DE IMPLEMENTAÇÃO DE COMPETIÇÕES — ENCERRADO — 2026-09-28
-
-O gate **fornecedor → quota/licença → frequência → deployment → UI → validação de produção** está encerrado.
-
-Não reabrir estes pontos sem nova evidência objetiva.
-
-## 31. TRANSIÇÃO PARA FASE 4 — SEO TÉCNICO + INDEXAÇÃO — 2026-09-28
-
-### Fase 3 encerrada
-A implementação de Competições foi concluída e validada em produção para as 7 competições. O gate fornecedor → quota/licença → frequência → deployment → UI → validação está encerrado.
-
-### Fase 4 iniciada
-A próxima frente autónoma é **SEO técnico + indexação real**.
-
-### Auditoria técnica já possível sem acesso externo
-- `robots.txt` presente e permite crawling;
-- `robots.txt` aponta para `https://chutapracanto.com/sitemap.xml`;
-- `sitemap.xml` presente no repositório e inclui `/competicoes`;
-- homepage tem canonical para `https://chutapracanto.com/`;
-- `/competicoes` tem canonical para `https://chutapracanto.com/competicoes`;
-- páginas analisadas usam `index,follow,max-image-preview:large`.
-
-### Dependência externa real
-A parte de **indexação real** exige evidência de Google Search Console (propriedade, sitemap processado, cobertura/indexação e eventuais exclusões). Essa evidência não pode ser inferida do código.
-
-### Próxima ação executável
-Obter/validar o estado do Search Console da propriedade `chutapracanto.com`. Depois disso, atuar apenas sobre problemas efetivamente encontrados.
-
-
-## 32. SEARCH CONSOLE — SITEMAP SUBMETIDO — 2026-09-28
-
-### Operação concluída
-- Propriedade utilizada: `chutapracanto.com`.
-- Sitemap submetido à Google Search Console: `https://chutapracanto.com/sitemap.xml`.
-- A Search Console aceitou a submissão e informou que o processará periodicamente e notificará problemas futuros.
-
-### Estado
-**SUBMETIDO — processamento/indexação ainda pendente.**
-
-A Search Console está ainda a processar os dados de indexação e indicou que a informação poderá demorar cerca de um dia. Não existe neste momento evidência de erro de sitemap ou de exclusão que justifique intervenção técnica.
-
-### Regra operacional
-Não repetir submissão nem executar diagnósticos artificiais enquanto os dados não estiverem disponíveis. Quando a Search Console apresentar resultados, verificar primeiro o estado do sitemap e os motivos reais de não indexação; corrigir apenas problemas concretamente identificados.
-
-### Próximo passo
-Aguardar processamento da Google e, quando houver dados, validar **Sitemaps + Indexação de páginas**. A Fase 4 permanece ativa.
-
-## 33. SEO TÉCNICO — DADOS ESTRUTURADOS BASE — 2026-09-28
-
-### Auditoria executada
-Foi revisto o markup SEO das páginas públicas principais. A base de metadata já estava consistente: title, description, canonical, robots e Open Graph nas páginas principais; `noticia.html` já possui JSON-LD dinâmico para artigos.
-
-### Operação executada
-A homepage passou a incluir JSON-LD válido em formato `@graph` com:
-- `Organization` para o Chuta Pra Canto, incluindo URL, logo e perfis sociais;
-- `WebSite` associado à organização e ao idioma `pt-PT`.
-
-Commit: `fc0cd2bb64a621de1dd79b90c1266c682a5e2b7c`.
-
-### Regra
-Não adicionar schema artificial ou duplicado às páginas de artigos/listagens sem necessidade. O JSON-LD de artigos existente continua a ser a fonte para `noticia.html`.
-
-### Próximo passo
-Aguardar o deployment automático desta alteração e, sem gastar créditos em testes repetitivos, fazer a próxima verificação SEO externa apenas quando houver ferramenta/evidência apropriada (Search Console ou validação pública).
+- publicação e atualização editorial;
+- alertas úteis;
+- integrações entre GitHub/Cloudflare/serviços sociais;
+- automações de dados de futebol já existentes.
+
+Não criar automações só por serem possíveis.
+
+## 10. IDEIAS / BACKLOG NÃO PRIORITÁRIO
+
+- pesquisa global avançada no site;
+- automações criativas adicionais;
+- novas integrações sociais;
+- melhorias de performance sem evidência;
+- novas funcionalidades de engagement sem necessidade comprovada.
+
+Uma ideia só sobe de prioridade quando resolve um problema real, poupa trabalho relevante ou desbloqueia receita/distribuição.
+
+## 11. O QUE NÃO REABRIR
+
+Sem evidência nova, não reabrir:
+- arquitetura BSD/D1/cache;
+- Worker `cpc-football-cron`;
+- Cron;
+- filtros Nations já corrigidos;
+- LIVE;
+- Shorts refresh;
+- migração histórica validada;
+- URLs canónicas de notícias;
+- sticky/header editorial;
+- primeira passagem de performance;
+- alterações já fechadas em PRs.
+
+## 12. PRÓXIMA ORDEM PRÁTICA
+
+1. **Search Console:** esperar processamento e validar dados quando aparecerem.
+2. **Monetização:** enquanto AdSense está "em preparação", concluir apenas preparações autónomas de baixo risco.
+3. **Automação de distribuição:** investigar APIs oficiais e verificar se um upload único pode realmente reduzir o trabalho para YouTube + Facebook + Instagram + TikTok.
+4. **Pesquisa interna global:** só depois, salvo surgir uma necessidade concreta.
+5. **Automação/escala:** transformar os fluxos repetitivos validados em processos automáticos.
+
+## 13. REGRA PARA FUTURAS IAs
+
+Antes de alterar:
+1. ler Rules;
+2. ler este Roadmap;
+3. ler o ledger quando houver histórico relevante;
+4. verificar GitHub/Cloudflare/produção;
+5. identificar a camada;
+6. alterar o mínimo;
+7. validar;
+8. documentar.
+
+**Objetivo: avançar sem voltar a introduzir soluções ou fornecedores que já deixaram de fazer parte do projeto.**
