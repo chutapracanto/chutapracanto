@@ -275,8 +275,8 @@ Sitemaps → Page indexing → URL Inspection → canonical declarado vs escolhi
 
 ### Automação de vídeo — estado da investigação
 Objetivo: **upload único → preparação/publicação ou rascunho por plataforma → estado/retry independente**, reduzindo trabalho manual.
-- YouTube: API oficial suporta upload e resumable upload. citeturn0search2turn0search4
-- TikTok: Content Posting API suporta Direct Post e Upload para rascunho; requer app/OAuth/scopes e há requisitos de aprovação/auditoria para publicação pública. Suporta `PULL_FROM_URL`. citeturn0search0turn0search3
+- YouTube: API oficial suporta upload e resumable upload. (Google Developers: YouTube Data API upload/resumable upload)
+- TikTok: Content Posting API suporta Direct Post e Upload para rascunho; requer app/OAuth/scopes e há requisitos de aprovação/auditoria para publicação pública. Suporta `PULL_FROM_URL`. (TikTok for Developers: Content Posting API)
 - Meta/Instagram/Facebook: falta fechar a matriz atual de APIs, permissões, quotas e aprovação antes de construir.
 - Não guardar tokens sociais no frontend; OAuth/secrets ficam server-side.
 - Antes do MVP: confirmar contas, permissões, formatos, quotas, aprovação e modelo direto/rascunho de cada plataforma.
