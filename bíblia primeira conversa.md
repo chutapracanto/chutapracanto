@@ -871,9 +871,8 @@ Foi estudada a utilização de providers externos.
 
 Foram analisados:
 
-- Sportmonks;
-- API-Football;
-- football-data.org;
+- fornecedores alternativos;
+- fontes históricas avaliadas;
 - outras fontes.
 
 Regra atual:
