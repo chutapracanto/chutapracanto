@@ -662,7 +662,7 @@
       const standingsContent=document.getElementById('home-standings-content');
       const gamesGrid=document.getElementById('home-important-games-grid');
       const priorityNames=['fc porto','porto','sl benfica','benfica','sporting cp','sporting clube de portugal','portugal'];
-      const liveState={competitions:new Map(),timer:null,refreshing:false};
+      const liveState={competitions:new Map(),liveKeys:new Set(),timer:null,discoveryTimer:null,refreshing:false};
       const now=Date.now();
       const limit=now+(30*24*60*60*1000);
       const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -718,11 +718,11 @@
           return '<article class="home-live-card"><div class="home-live-top"><span class="home-live-led" aria-hidden="true"></span><strong>LIVE</strong><span>'+esc(metaLabel)+'</span></div><div class="home-live-teams"><div class="home-live-team"><img src="'+logo(home)+'" alt=""><span>'+esc(home.name||'Casa')+'</span></div><div><div class="home-live-score">'+score+'</div><div class="home-live-minute">'+esc(liveMinuteLabel(fixture))+'</div></div><div class="home-live-team away"><span>'+esc(away.name||'Fora')+'</span><img src="'+logo(away)+'" alt=""></div></div>'+(goals?'<div class="home-live-goals">'+goals+'</div>':'')+'</article>';
         }).join('');
       };
-      const refreshHomeLive=async()=>{
+      const refreshHomeLive=async(all=false)=>{
         if(liveState.refreshing)return;
         liveState.refreshing=true;
         try{
-          const targets=liveState.competitions.size?[...liveState.competitions.keys()]:competitions.map(item=>item[0]);
+          const targets=all?competitions.map(item=>item[0]):[...liveState.liveKeys];
           const results=await Promise.all(targets.map(async key=>{
             const meta=competitions.find(item=>item[0]===key);
             if(!meta)return null;
@@ -733,6 +733,10 @@
             }catch{return null}
           }));
           results.filter(Boolean).forEach(item=>liveState.competitions.set(item.meta[0],item));
+          liveState.liveKeys=new Set();
+          liveState.competitions.forEach(({data},key)=>{
+            if((Array.isArray(data?.fixtures)?data.fixtures:[]).some(fixture=>fixtureStatus(fixture)==='live'))liveState.liveKeys.add(key);
+          });
           renderLiveGames();
         }finally{liveState.refreshing=false}
       };
@@ -825,6 +829,11 @@
           : '<span class="home-important-next-label"><b>PRÓXIMO JOGO</b></span><span class="home-important-next-game">—</span>';
         return '<a class="home-important-card competition-'+esc(meta[0])+'" href="/competicoes?competition='+encodeURIComponent(meta[0])+'"><div class="home-important-card-top"><img src="'+leagueLogo(meta[2])+'" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/logo.png\'"><strong>'+esc(meta[1])+'</strong><span aria-hidden="true">→</span></div><div class="home-important-label">JOGOS IMPORTANTES</div><div class="home-important-match">'+importantMatches+'</div><div class="home-important-next">'+nextMatch+'</div></a>';
       }).join('');
+      refreshHomeLive(true);
+      clearInterval(liveState.discoveryTimer);
+      clearInterval(liveState.timer);
+      liveState.discoveryTimer=setInterval(()=>refreshHomeLive(true),60000);
+      liveState.timer=setInterval(()=>{if(liveState.liveKeys.size)refreshHomeLive(false)},15000);
     }
 
     function iniciarFeedsAdiados() {
