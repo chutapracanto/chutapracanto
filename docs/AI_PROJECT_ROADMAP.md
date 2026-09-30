@@ -282,7 +282,7 @@ Objetivo: **upload único → preparação/publicação ou rascunho por platafor
 - Antes do MVP: confirmar contas, permissões, formatos, quotas, aprovação e modelo direto/rascunho de cada plataforma.
 
 ### Melhorias em standby
-- reduzir deploys duplicados causados por commits de conteúdo + índice/sitemap, depois de validar path exclusions/build triggers;
+- monitorizar o novo Build Watch Paths já aplicado; commits em `docs/*`, `images/uploads/*` e `content/noticias/*` não devem gerar deployment isolado, enquanto código e índices continuam a poder gerar deployment;
 - pesquisa global do site;
 - automações adicionais de distribuição/reutilização;
 - performance apenas com evidência nova.
@@ -293,8 +293,35 @@ Objetivo: **upload único → preparação/publicação ou rascunho por platafor
 3. Preparação AdSense de baixo risco.
 4. Fechar matriz YouTube + TikTok + Meta e desenhar MVP de vídeo.
 5. Pesquisa global do site.
-6. Otimização de deployments, com teste e rollback fácil.
+6. Monitorizar a configuração de deployments já corrigida e só alterar novamente se aparecer uma regressão.
 
 
 ### Atualização 2026-09-30.2 — Admin
 **Implementado:** rascunho local no Admin usando IndexedDB. Guarda campos da notícia, conteúdo Quill e imagem local quando existente; permite recuperar o rascunho antes da publicação. O rascunho não cria commit, não entra no índice/sitemap e não dispara deployment. O rascunho local é uma ferramenta do navegador, não um armazenamento editorial partilhado.
+
+
+## 16. ATUALIZAÇÃO 2026-09-30.3 — DEPLOYMENTS E IMAGENS
+
+### Deployments — implementado
+A configuração do Cloudflare Pages foi ajustada:
+- includes: `*`;
+- excludes: `docs/*`, `images/uploads/*`, `content/noticias/*`.
+
+Objetivo: evitar builds isolados para documentação, uploads e Markdown individual, mantendo código e artefactos editoriais/índices dentro do trigger quando necessário.
+
+Validação realizada:
+- commit de código `b0b75366...` → deployment de produção `56b7ce0d...` → SUCCESS;
+- commit documental `d49b27a73b98bf8256088b3de307c6529aec0f21` → deployment marcado `skipped` com `skip_reason=path_config`.
+
+Portanto a nova regra já está efetivamente a ser aplicada em produção.
+
+### Admin / imagens — implementado
+A pesquisa de imagens foi reforçada com:
+- pesquisas adicionais pelo ano atual e anterior;
+- ranking por relevância textual + resolução + proporção + sinais de data disponíveis;
+- prioridade reforçada a capas horizontais de boa resolução;
+- penalização de retratos e formatos extremos;
+- suporte para colar URLs embrulhados pelo Google Images, extraindo parâmetros que apontem para o URL direto da imagem;
+- normalização do URL antes da pré-visualização.
+
+Limitação conhecida: metadados de data do Openverse não equivalem necessariamente à data de criação/publicação da fotografia. Para garantir robustez máxima, a futura cópia de imagens externas para alojamento próprio deve preservar fonte/licença/atribuição.
