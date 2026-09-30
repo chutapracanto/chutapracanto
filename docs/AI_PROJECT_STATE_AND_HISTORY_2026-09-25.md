@@ -4,8 +4,8 @@
 **Repositório:** `chutapracanto/chutapracanto`
 **Branch de produção:** `main`
 **Site:** `https://chutapracanto.com`
-**HEAD verificado:** `33fd0a904b1f6884cddbd019f2525be83a5b0669`
-**Último commit:** `docs: record home and competition fixes`
+**HEAD verificado:** `b0b75366a6f137a87ed43385bd61394c0dd49f53`
+**Último commit de código:** `Melhorar pesquisa de imagens e aceitar URLs do Google`
 
 > **FUNÇÃO DESTE DOCUMENTO**
 >
@@ -919,3 +919,49 @@ Isto fica em **standby controlado**, não esquecido: a documentação Cloudflare
 Implementado no Admin com IndexedDB. O rascunho atual guarda localmente título, subtítulo, categoria, data, autor, tipo editorial, URL de imagem, HTML do Quill e o ficheiro de imagem local quando existe. Pode ser recuperado pelo botão **Recuperar rascunho**. Após publicação de novo conteúdo, o rascunho local é limpo.
 
 Decisão arquitetural: não usar GitHub/D1 para esta primeira versão. Assim um rascunho não cria commit, não entra em `content/noticias-index.json`, não aparece no sitemap e não provoca deployment. Se no futuro for necessário rascunho partilhado entre dispositivos/utilizadores, será desenhado separadamente.
+
+
+# 69. DEPLOYMENTS + PESQUISA DE IMAGENS — 2026-09-30
+
+## 69.1 Build Watch Paths — implementado
+A configuração do Cloudflare Pages foi corrigida para evitar deployments provocados por commits que não alteram a aplicação publicada.
+
+Configuração atual do projeto `chutapracanto`:
+- `path_includes: ["*"]`;
+- `path_excludes: ["docs/*", "images/uploads/*", "content/noticias/*"]`;
+- produção: `main`;
+- deployments automáticos de produção continuam ativos;
+- previews continuam ativos.
+
+Decisão arquitetural:
+- alterações em documentação não precisam de novo deployment;
+- upload de imagem pode chegar ao GitHub sem disparar um deployment isolado;
+- Markdown individual de notícia não dispara deployment isolado;
+- o índice `content/noticias-index.json` continua dentro do watch global e pode servir de publicação/gate para o estado editorial;
+- alterações de código continuam a disparar deployment.
+
+Isto reduz o risco de builds concorrentes/intermédios e evita que um fluxo Admin com vários commits publique estados parciais. A documentação atual do Cloudflare confirma que Build Watch Paths são precisamente o mecanismo para excluir caminhos do trigger de build.
+
+### Validação
+- Antes: `path_includes=["*"]`, `path_excludes=[]`.
+- Depois: exclusões aplicadas diretamente no projeto Pages.
+- O primeiro commit posterior que alterou código (`b0b75366a6f137a87ed43385bd61394c0dd49f53`) gerou exatamente um deployment de produção: `56b7ce0d-a40d-4665-ac72-be167739d178`, concluído com sucesso e alias `https://chutapracanto.com`.
+- A validação negativa por commit apenas documental fica para o próximo commit em `docs/*`; esse commit deve ser observado para confirmar `skip_reason=path_config`/ausência de novo build.
+
+## 69.2 Pesquisa de imagens — melhoria implementada
+Commit de código: `b0b75366a6f137a87ed43385bd61394c0dd49f53`.
+
+Alterações:
+- pesquisa sem ano acrescenta o ano atual e o ano anterior para aumentar a probabilidade de encontrar material recente;
+- Openverse passa a conservar `created_on`/`updated_on` quando disponíveis;
+- Wikimedia passa a recolher timestamp/data original quando disponível;
+- ranking considera atualidade, além de relevância textual, resolução e proporção;
+- prioridade maior para imagens horizontais de qualidade de capa;
+- penalização mais forte para retratos e formatos extremos;
+- suporte a URL do Google Images no campo manual: o Admin tenta extrair parâmetros `imgurl`, `mediaurl`, `imageurl`, `url` ou `q` quando apontam para uma imagem HTTP/HTTPS;
+- URLs selecionadas são normalizadas antes da pré-visualização.
+
+### Limitação importante
+A data `created_on` do Openverse é a data de entrada no catálogo, não necessariamente a data em que a fotografia foi criada/publicada. Portanto, não tratar essa data como prova de atualidade jornalística. A pesquisa por ano + metadados disponíveis é apenas um reforço de relevância.
+
+As imagens externas continuam alojadas na origem. A futura melhoria de maior robustez é importar a imagem escolhida para `images/uploads/`, mantendo origem/licença/atribuição, em vez de depender de hotlink externo. Não implementar essa cópia sem preservar a informação de licença/atribuição.
