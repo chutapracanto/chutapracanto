@@ -3153,7 +3153,7 @@ async function pesquisarImagens() {
                 const licenseNormalizada = String(license).toLowerCase();
 
                 const reutilizavel =
-                    /^(?:public domain(?: mark(?: 1\\.0)?)?|cc0(?: \\d+(?:\\.\\d+)?)?|cc by(?:-sa)?(?: \\d+(?:\\.\\d+)?)?)$/i.test(licenseNormalizada);
+                    /^(?:public domain(?: mark(?: 1\.0)?)?|cc0(?: \\d+(?:\.\\d+)?)?|cc by(?:-sa)?(?: \\d+(?:\.\\d+)?)?)$/i.test(licenseNormalizada);
 
                 if (!reutilizavel || !info?.url) return null;
 
@@ -3161,7 +3161,7 @@ async function pesquisarImagens() {
                     String(value || "")
                         .replace(/<[^>]*>/g, " ")
                         .replace(/&nbsp;/gi, " ")
-                        .replace(/\\s+/g, " ")
+                        .replace(/\s+/g, " ")
                         .trim();
 
                 const creator =
@@ -3191,7 +3191,7 @@ async function pesquisarImagens() {
         // Quando existe uma categoria com o nome pesquisado, o Commons pode
         // ter muito mais fotografias do jogador/pessoa do que a pesquisa textual.
         const categoryRequests = consultas.map(async consulta => {
-            const title = "Category:" + consulta.replace(/\\s+/g, " ").trim();
+            const title = "Category:" + consulta.replace(/\s+/g, " ").trim();
             const params = new URLSearchParams({
                 action: "query",
                 generator: "categorymembers",
@@ -3222,7 +3222,7 @@ async function pesquisarImagens() {
                 const meta = info?.extmetadata || {};
                 const license = meta.LicenseShortName?.value || "";
                 const reutilizavel =
-                    /^(?:public domain(?: mark(?: 1\\.0)?)?|cc0(?: \\d+(?:\\.\\d+)?)?|cc by(?:-sa)?(?: \\d+(?:\\.\\d+)?)?)$/i.test(String(license).toLowerCase());
+                    /^(?:public domain(?: mark(?: 1\.0)?)?|cc0(?: \\d+(?:\.\\d+)?)?|cc by(?:-sa)?(?: \\d+(?:\.\\d+)?)?)$/i.test(String(license).toLowerCase());
 
                 if (!reutilizavel || !info?.url) return null;
 
@@ -3230,7 +3230,7 @@ async function pesquisarImagens() {
                     String(value || "")
                         .replace(/<[^>]*>/g, " ")
                         .replace(/&nbsp;/gi, " ")
-                        .replace(/\\s+/g, " ")
+                        .replace(/\s+/g, " ")
                         .trim();
 
                 return {
@@ -3284,9 +3284,9 @@ async function pesquisarImagens() {
             String(texto || "")
                 .toLowerCase()
                 .normalize("NFD")
-                .replace(/[\\u0300-\\u036f]/g, "")
+                .replace(/[\u0300-\u036f]/g, "")
                 .replace(/[^a-z0-9]+/g, " ")
-                .replace(/\\s+/g, " ")
+                .replace(/\s+/g, " ")
                 .trim();
 
         const termosPesquisa = normalizarTexto(query)
