@@ -651,7 +651,7 @@ async function loadCompetition(key,status="all",resetRound=true){
   clearCompetitionRefresh();
   try{
     const effectiveStatus=status || (fixtureFilter==="finished"?"finished":fixtureFilter==="upcoming"?"upcoming":"all");
-    const selectedRound=competitionPhase.grouped?"all":roundEl.value;
+    const selectedRound=roundEl.value;
     const params=new URLSearchParams({competition:key,status:effectiveStatus});
     if(selectedRound && selectedRound!=="all"){
       try{ const parsed=JSON.parse(selectedRound); if(Array.isArray(parsed)&&parsed[1]!=null) params.set("round",String(parsed[1])); if(Array.isArray(parsed)&&parsed[0]) params.set("stage",String(parsed[0])); }catch{}
