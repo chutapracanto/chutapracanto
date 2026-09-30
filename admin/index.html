@@ -3089,12 +3089,10 @@ async function pesquisarImagens() {
     status.classList.remove("hidden");
     results.replaceChildren();
 
-    const anoAtual = String(new Date().getFullYear());
+    // A pesquisa deve respeitar primeiro a relevância do nome pedido.
+    // Acrescentar automaticamente anos recentes introduzia resultados
+    // diferentes e podia afastar o alvo principal.
     const consultas = [query];
-    if (!/\b20\d{2}\b/.test(query)) {
-        consultas.push(query + " " + anoAtual);
-        consultas.push(query + " " + (Number(anoAtual) - 1));
-    }
 
     try {
         const openverseRequests = consultas.map(async (consulta) => {
@@ -3229,14 +3227,6 @@ async function pesquisarImagens() {
             .split(/[^a-z0-9]+/)
             .filter(t => t.length >= 3);
 
-        const agora = Date.now();
-        const parseDataImagem = (item) => {
-            const candidatos = [item._createdOn, item._updatedOn]
-                .map(value => Date.parse(String(value || "")))
-                .filter(Number.isFinite);
-            return candidatos.length ? Math.max(...candidatos) : 0;
-        };
-
         const pontuarImagem = (item) => {
             const largura = Number(item._width) || 0;
             const altura = Number(item._height) || 0;
@@ -3250,31 +3240,26 @@ async function pesquisarImagens() {
                 .replace(/[\\u0300-\\u036f]/g, "");
 
             let score = 0;
+            const frasePesquisa = termosPesquisa.join(" ");
+            const textoCompacto = texto.replace(/[^a-z0-9]+/g, " ").replace(/\\s+/g, " ").trim();
+
+            // A relevância textual domina a ordenação.
+            if (frasePesquisa && textoCompacto.includes(frasePesquisa)) score += 100;
             for (const termo of termosPesquisa) {
-                if (texto.includes(termo)) score += 9;
+                if (texto.includes(termo)) score += 25;
+                else score -= 18;
             }
 
-            if (largura >= 1600) score += 6;
-            else if (largura >= 1200) score += 4;
-            else if (largura >= 900) score += 2;
+            // Só depois da relevância aplicamos preferência editorial de capa.
+            if (largura >= 1600) score += 4;
+            else if (largura >= 1200) score += 2;
+            else if (largura >= 900) score += 1;
 
-            if (altura >= 900) score += 2;
-            else if (altura >= 600) score += 1;
+            if (altura >= 600) score += 1;
 
-            if (proporcao >= 1.35 && proporcao <= 2.2) score += 10;
-            else if (proporcao >= 1.15 && proporcao < 1.35) score += 4;
-            else if (proporcao > 0 && proporcao < 0.9) score -= 10;
-
-            if (proporcao > 0 && proporcao > 2.8) score -= 5;
-
-            const dataImagem = parseDataImagem(item);
-            if (dataImagem) {
-                const idadeDias = Math.max(0, (agora - dataImagem) / 86400000);
-                if (idadeDias <= 30) score += 10;
-                else if (idadeDias <= 180) score += 7;
-                else if (idadeDias <= 365) score += 4;
-                else if (idadeDias <= 730) score += 1;
-            }
+            if (proporcao >= 1.2 && proporcao <= 2.2) score += 4;
+            else if (proporcao >= 1.05 && proporcao < 1.2) score += 1;
+            else if (proporcao > 0 && proporcao < 0.75) score -= 4;
 
             if (item._sourceLabel === "Wikimedia Commons") score += 1;
             return score;
@@ -3381,14 +3366,31 @@ async function pesquisarImagens() {
     }
 }
 
-function selecionarImagemExterna(item) {
+async function selecionarImagemExterna(item) {
     const url = extrairUrlImagemDireta(item?.url || "");
     if (!/^https?:\/\//i.test(url)) return;
-    document.getElementById("noticia-imagem-url").value = url;
-    mostrarPreview(url);
-    fecharPesquisaImagens();
+
     const help = document.querySelector(".image-help");
-    if (help) help.textContent = "Imagem externa selecionada. O URL foi normalizado para a imagem direta; o ficheiro continua alojado no servidor de origem.";
+    if (help) help.textContent = "A importar a imagem para o ChutaPraCanto...";
+
+    try {
+        const response = await apiFetch("/api/admin/image/import", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ url, sourceUrl: item?._sourceUrl || url })
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok || !data.path) {
+            throw new Error(data.message || data.error || "Não foi possível importar a imagem.");
+        }
+        document.getElementById("noticia-imagem-url").value = data.path;
+        mostrarPreview(data.path);
+        fecharPesquisaImagens();
+        if (help) help.textContent = "Imagem importada para o ChutaPraCanto. Podes removê-la no × e escolher outra.";
+    } catch (error) {
+        if (help) help.textContent = error?.message || "Não foi possível importar a imagem.";
+        alert("Não foi possível importar esta imagem.\n\n" + (error?.message || "O servidor de origem recusou o acesso."));
+    }
 }
 
 // ============================================================
@@ -5079,31 +5081,35 @@ async function partilharNativamente() {
 function extrairUrlImagemDireta(valor) {
     if (!valor) return "";
 
-    let url = String(valor).trim();
-    if (!url) return "";
+    let atual = String(valor).trim();
+    if (!atual) return "";
 
-    const tentarParametro = (nome) => {
-        try {
-            const parsed = new URL(url);
-            const candidate = parsed.searchParams.get(nome);
-            if (candidate && /^https?:\/\//i.test(candidate)) {
-                return decodeURIComponent(candidate);
-            }
-        } catch {
-            // URL incompleto ou inválido: continuar com o valor original.
+    for (let tentativa = 0; tentativa < 4; tentativa++) {
+        if (/^https?:\/\//i.test(atual) && !/(?:google\.[^/]+|googleusercontent\.com)\//i.test(atual)) {
+            return atual;
         }
-        return "";
-    };
 
-    for (const nome of ["imgurl", "mediaurl", "imageurl", "url", "q"]) {
-        const candidate = tentarParametro(nome);
-        if (candidate) {
-            url = candidate;
-            break;
+        try {
+            const parsed = new URL(atual);
+            const nomes = ["imgurl", "img_url", "mediaurl", "media_url", "imageurl", "image_url", "url", "q"];
+            let candidato = "";
+
+            for (const nome of nomes) {
+                const valorParametro = parsed.searchParams.get(nome);
+                if (valorParametro && /^https?:\/\//i.test(valorParametro)) {
+                    candidato = valorParametro;
+                    break;
+                }
+            }
+
+            if (!candidato) return /^https?:\/\//i.test(atual) ? atual : "";
+            atual = decodeURIComponent(candidato);
+        } catch {
+            return "";
         }
     }
 
-    return url;
+    return /^https?:\/\//i.test(atual) ? atual : "";
 }
 
 function normalizarUrlImagem(
@@ -5143,12 +5149,37 @@ document
     .addEventListener(
         "input",
         function() {
-
-            mostrarPreview(
-                this.value.trim()
-            );
+            mostrarPreview(this.value.trim());
         }
     );
+
+document
+    .getElementById("noticia-imagem-url")
+    .addEventListener("change", async function() {
+        const valor = this.value.trim();
+        if (!/^https?:\/\//i.test(valor)) return;
+
+        const direto = extrairUrlImagemDireta(valor);
+        if (!direto) return;
+
+        const help = document.querySelector(".image-help");
+        if (help) help.textContent = "A importar a imagem para o ChutaPraCanto...";
+
+        try {
+            const response = await apiFetch("/api/admin/image/import", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ url: valor, sourceUrl: valor })
+            });
+            const data = await response.json().catch(() => ({}));
+            if (!response.ok || !data.path) throw new Error(data.message || data.error || "Não foi possível importar a imagem.");
+            this.value = data.path;
+            mostrarPreview(data.path);
+            if (help) help.textContent = "Imagem importada para o ChutaPraCanto. Podes removê-la no × e escolher outra.";
+        } catch (error) {
+            if (help) help.textContent = error?.message || "Não foi possível importar a imagem.";
+        }
+    });
 
 
 // ============================================================
