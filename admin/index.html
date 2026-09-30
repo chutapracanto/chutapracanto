@@ -3096,7 +3096,9 @@ async function pesquisarImagens() {
                 ? data.results.map(item => ({
                     ...item,
                     _sourceLabel: "Openverse",
-                    _sourceUrl: item.foreign_landing_url || item.url || ""
+                    _sourceUrl: item.foreign_landing_url || item.url || "",
+                    _width: Number(item.width) || 0,
+                    _height: Number(item.height) || 0
                 }))
                 : [];
         });
@@ -3158,6 +3160,8 @@ async function pesquisarImagens() {
                         creator,
                         license: license || "Licença não indicada",
                         source: "Wikimedia Commons",
+                        _width: Number(info.width) || 0,
+                        _height: Number(info.height) || 0,
                         _sourceLabel: "Wikimedia Commons",
                         _sourceUrl: info.descriptionurl || (
                             "https://commons.wikimedia.org/wiki/" +
@@ -3193,14 +3197,55 @@ async function pesquisarImagens() {
             return;
         }
 
+        // Para notícias de futebol, damos prioridade a imagens horizontais,
+        // grandes o suficiente para uma capa e com títulos que correspondam
+        // às palavras pesquisadas. Evita que os primeiros resultados sejam
+        // maioritariamente retratos, logos ou thumbnails demasiado pequenos.
+        const termosPesquisa = query
+            .toLowerCase()
+            .normalize("NFD")
+            .replace(/[\\u0300-\\u036f]/g, "")
+            .split(/[^a-z0-9]+/)
+            .filter(t => t.length >= 3);
+
+        const pontuarImagem = (item) => {
+            const largura = Number(item._width) || 0;
+            const altura = Number(item._height) || 0;
+            const proporcao = largura && altura ? largura / altura : 0;
+            const texto = [
+                item.title,
+                item.creator,
+                item.tags?.map?.(tag => tag?.name).join(" ")
+            ].filter(Boolean).join(" ").toLowerCase()
+                .normalize("NFD")
+                .replace(/[\\u0300-\\u036f]/g, "");
+
+            let score = 0;
+            for (const termo of termosPesquisa) {
+                if (texto.includes(termo)) score += 8;
+            }
+            if (largura >= 1200) score += 4;
+            else if (largura >= 900) score += 2;
+            if (altura >= 600) score += 2;
+            if (proporcao >= 1.35 && proporcao <= 2.2) score += 8;
+            else if (proporcao >= 1.15 && proporcao < 1.35) score += 3;
+            else if (proporcao > 0 && proporcao < 0.9) score -= 6;
+            if (item._sourceLabel === "Wikimedia Commons") score += 1;
+            return score;
+        };
+
+        items.sort((a, b) => pontuarImagem(b) - pontuarImagem(a));
+
+        const resultadosVisiveis = items.slice(0, 48);
+
         status.textContent =
-            items.length +
-            " imagens encontradas em Openverse e Wikimedia Commons.";
+            resultadosVisiveis.length +
+            " imagens selecionadas entre Openverse e Wikimedia Commons (prioridade a formatos adequados para capa).";
         status.classList.remove("hidden");
 
         const fragment = document.createDocumentFragment();
 
-        items.forEach(item => {
+        resultadosVisiveis.forEach(item => {
             const imageUrl = item.url || "";
             const thumbnail = item.thumbnail || imageUrl;
 
@@ -3240,10 +3285,16 @@ async function pesquisarImagens() {
 
             const license = document.createElement("div");
             license.className = "image-result-license";
+            const dimensoes =
+                item._width && item._height
+                    ? " · " + item._width + "×" + item._height
+                    : "";
+
             license.textContent = [
                 item.license
                     ? String(item.license).toUpperCase()
                     : "LICENÇA NÃO INDICADA",
+                dimensoes,
                 item.creator
                     ? " · " + item.creator
                     : "",
