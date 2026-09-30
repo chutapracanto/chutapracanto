@@ -1055,6 +1055,22 @@
                 </button>
 
                 <button
+                    type="button"
+                    class="secondary-btn"
+                    onclick="guardarRascunho()"
+                >
+                    💾 Guardar rascunho
+                </button>
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    onclick="carregarRascunho()"
+                >
+                    📂 Recuperar rascunho
+                </button>
+
+                <button
                     class="main-btn"
                     onclick="guardarNoticia()"
                 >
@@ -3346,6 +3362,176 @@ function selecionarImagemExterna(item) {
 }
 
 // ============================================================
+// RASCUNHO LOCAL
+// ============================================================
+
+const RASCUNHO_DB_NAME = "cpc_admin_local";
+const RASCUNHO_DB_VERSION = 1;
+const RASCUNHO_STORE = "rascunhos";
+
+function abrirBaseRascunhos() {
+    return new Promise((resolve, reject) => {
+        if (!window.indexedDB) {
+            reject(new Error("O navegador não disponibiliza armazenamento local de rascunhos."));
+            return;
+        }
+
+        const request = indexedDB.open(
+            RASCUNHO_DB_NAME,
+            RASCUNHO_DB_VERSION
+        );
+
+        request.onupgradeneeded = () => {
+            const db = request.result;
+            if (!db.objectStoreNames.contains(RASCUNHO_STORE)) {
+                db.createObjectStore(RASCUNHO_STORE, { keyPath: "id" });
+            }
+        };
+
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () =>
+            reject(request.error || new Error("Não foi possível abrir o armazenamento de rascunhos."));
+    });
+}
+
+async function guardarRascunho() {
+    if (!quill) return;
+
+    const titulo = document.getElementById("noticia-titulo").value.trim();
+
+    if (!titulo && !quill.getText().trim()) {
+        mostrarSucesso("Não há conteúdo para guardar como rascunho.");
+        return;
+    }
+
+    const fileInput = document.getElementById("image-upload");
+    const file = fileInput?.files?.[0] || null;
+
+    const draft = {
+        id: "current",
+        guardadoEm: new Date().toISOString(),
+        titulo,
+        subtitulo: document.getElementById("noticia-subtitulo").value.trim(),
+        categoria: document.getElementById("noticia-categoria").value.trim(),
+        data: document.getElementById("noticia-data").value,
+        autor: document.getElementById("noticia-autor").value.trim(),
+        tipoEditorial: document.getElementById("noticia-type")?.value || "news",
+        imagemUrl: document.getElementById("noticia-imagem-url").value.trim(),
+        conteudoHtml: quill.root.innerHTML,
+        imagemFicheiro: file || null
+    };
+
+    try {
+        const db = await abrirBaseRascunhos();
+
+        await new Promise((resolve, reject) => {
+            const transaction = db.transaction(RASCUNHO_STORE, "readwrite");
+            transaction.objectStore(RASCUNHO_STORE).put(draft);
+            transaction.oncomplete = resolve;
+            transaction.onerror = () =>
+                reject(transaction.error || new Error("Não foi possível guardar o rascunho."));
+        });
+
+        db.close();
+
+        const hora = new Date(draft.guardadoEm).toLocaleString("pt-PT");
+        mostrarSucesso("Rascunho guardado neste navegador às " + hora + ".");
+    } catch (error) {
+        console.error("Erro ao guardar rascunho:", error);
+        const statusEl = document.getElementById("status");
+        statusEl.style.display = "block";
+        statusEl.style.background = "#fee2e2";
+        statusEl.style.color = "#991b1b";
+        statusEl.innerText =
+            error?.message || "Não foi possível guardar o rascunho.";
+    }
+}
+
+async function carregarRascunho() {
+    try {
+        const db = await abrirBaseRascunhos();
+
+        const draft = await new Promise((resolve, reject) => {
+            const transaction = db.transaction(RASCUNHO_STORE, "readonly");
+            const request = transaction.objectStore(RASCUNHO_STORE).get("current");
+            request.onsuccess = () => resolve(request.result || null);
+            request.onerror = () =>
+                reject(request.error || new Error("Não foi possível ler o rascunho."));
+        });
+
+        db.close();
+
+        if (!draft) {
+            mostrarSucesso("Não existe nenhum rascunho guardado neste navegador.");
+            return;
+        }
+
+        iniciarEditor();
+
+        document.getElementById("noticia-titulo").value = draft.titulo || "";
+        document.getElementById("noticia-subtitulo").value = draft.subtitulo || "";
+        document.getElementById("noticia-categoria").value = draft.categoria || "";
+        document.getElementById("noticia-data").value = draft.data || "";
+        document.getElementById("noticia-autor").value = draft.autor || "ChutaPraCanto";
+
+        const tipo = document.getElementById("noticia-type");
+        if (tipo) tipo.value = draft.tipoEditorial || "news";
+
+        document.getElementById("noticia-imagem-url").value = draft.imagemUrl || "";
+        document.getElementById("image-upload").value = "";
+
+        if (quill) {
+            quill.root.innerHTML = draft.conteudoHtml || "";
+        }
+
+        if (draft.imagemFicheiro) {
+            try {
+                const transfer = new DataTransfer();
+                transfer.items.add(draft.imagemFicheiro);
+                document.getElementById("image-upload").files = transfer.files;
+                mostrarPreview(URL.createObjectURL(draft.imagemFicheiro));
+            } catch {
+                mostrarPreview(draft.imagemUrl || "");
+            }
+        } else {
+            mostrarPreview(draft.imagemUrl || "");
+        }
+
+        noticiaEmEdicao = null;
+        document.getElementById("form-title").innerText = "Criar conteúdo";
+        document.getElementById("save-button-text").innerText = "Publicar Notícia";
+        document.getElementById("delete-button").classList.add("hidden");
+
+        const hora = new Date(draft.guardadoEm).toLocaleString("pt-PT");
+        mostrarSucesso("Rascunho recuperado. Guardado em " + hora + ".");
+    } catch (error) {
+        console.error("Erro ao recuperar rascunho:", error);
+        const statusEl = document.getElementById("status");
+        statusEl.style.display = "block";
+        statusEl.style.background = "#fee2e2";
+        statusEl.style.color = "#991b1b";
+        statusEl.innerText =
+            error?.message || "Não foi possível recuperar o rascunho.";
+    }
+}
+
+async function apagarRascunhoLocal() {
+    try {
+        const db = await abrirBaseRascunhos();
+        await new Promise((resolve, reject) => {
+            const transaction = db.transaction(RASCUNHO_STORE, "readwrite");
+            transaction.objectStore(RASCUNHO_STORE).delete("current");
+            transaction.oncomplete = resolve;
+            transaction.onerror = () => reject(transaction.error);
+        });
+        db.close();
+    } catch (error) {
+        console.error("Erro ao apagar rascunho local:", error);
+    }
+}
+
+
+// ============================================================
 // GUARDAR
 // ============================================================
 
@@ -3595,6 +3781,8 @@ async function guardarNoticia() {
                         })
                 }
             );
+
+            await apagarRascunhoLocal();
 
             mostrarSucesso(
                 "Conteúdo publicado com sucesso!"
