@@ -283,6 +283,55 @@ function isAllowedImageUploadPath(path) {
     !path.includes("..");
 }
 
+function base64FromBytes(bytes) {
+  let binary = "";
+  const chunkSize = 0x8000;
+  for (let i = 0; i < bytes.length; i += chunkSize) {
+    binary += String.fromCharCode(...bytes.subarray(i, Math.min(i + chunkSize, bytes.length)));
+  }
+  return btoa(binary);
+}
+
+function extensaoImagemPorContentType(contentType, sourceUrl) {
+  const type = String(contentType || "").split(";")[0].trim().toLowerCase();
+  if (type === "image/jpeg") return "jpg";
+  if (type === "image/png") return "png";
+  if (type === "image/webp") return "webp";
+
+  try {
+    const pathname = new URL(sourceUrl).pathname.toLowerCase();
+    if (/\.jpe?g$/.test(pathname)) return "jpg";
+    if (/\.png$/.test(pathname)) return "png";
+    if (/\.webp$/.test(pathname)) return "webp";
+  } catch {}
+
+  return "";
+}
+
+function hostnameEhPrivado(hostname) {
+  const host = String(hostname || "").toLowerCase().replace(/[\[\]]/g, "");
+  if (
+    host === "localhost" ||
+    host === "localhost.localdomain" ||
+    host.endsWith(".localhost") ||
+    host === "0.0.0.0" ||
+    host === "::1"
+  ) return true;
+
+  const ipv4 = host.match(/^(\d+)\.(\d+)\.(\d+)\.(\d+)$/);
+  if (!ipv4) return false;
+
+  const [a,b,c,d] = ipv4.slice(1).map(Number);
+  return (
+    a === 10 ||
+    a === 127 ||
+    (a === 169 && b === 254) ||
+    (a === 172 && b >= 16 && b <= 31) ||
+    (a === 192 && b === 168) ||
+    a === 0
+  );
+}
+
 const MAX_IMAGE_UPLOAD_BYTES = 5 * 1024 * 1024;
 const MAX_IMAGE_REQUEST_BYTES = 7 * 1024 * 1024;
 
@@ -1745,6 +1794,112 @@ async function handleAdminAPI(request, env) {
   // ----------------------------------------------------------
   // IMAGENS: LER / ENVIAR / APAGAR
   // ----------------------------------------------------------
+
+  if (pathname === "/api/admin/image/import") {
+    if (request.method !== "POST") {
+      return json({ error: "Método não permitido.", message: "Método não permitido." }, 405);
+    }
+
+    let payload;
+    try {
+      payload = await request.json();
+    } catch {
+      return json({ error: "Corpo inválido.", message: "Corpo inválido." }, 400);
+    }
+
+    const sourceUrl = typeof payload?.url === "string" ? payload.url.trim() : "";
+    if (!/^https?:\/\//i.test(sourceUrl)) {
+      return json({ error: "URL inválido.", message: "Indica um URL HTTP ou HTTPS." }, 400);
+    }
+
+    let parsedUrl;
+    try {
+      parsedUrl = new URL(sourceUrl);
+    } catch {
+      return json({ error: "URL inválido.", message: "Não foi possível interpretar o URL." }, 400);
+    }
+
+    if (parsedUrl.username || parsedUrl.password || hostnameEhPrivado(parsedUrl.hostname)) {
+      return json({ error: "URL não permitido.", message: "O URL indicado não é permitido." }, 400);
+    }
+
+    let upstream;
+    try {
+      upstream = await fetch(parsedUrl.toString(), {
+        method: "GET",
+        redirect: "follow",
+        headers: {
+          "Accept": "image/avif,image/webp,image/apng,image/*,*/*;q=0.8",
+          "User-Agent": "ChutaPraCanto Image Importer"
+        }
+      });
+    } catch {
+      return json({ error: "Não foi possível aceder à imagem.", message: "O servidor de origem recusou ou não respondeu ao pedido." }, 502);
+    }
+
+    if (!upstream.ok) {
+      return json({ error: "Imagem inacessível.", message: "O servidor de origem respondeu com HTTP " + upstream.status + "." }, 502);
+    }
+
+    const contentType = String(upstream.headers.get("content-type") || "").split(";")[0].trim().toLowerCase();
+    const extension = extensaoImagemPorContentType(contentType, parsedUrl.toString());
+    if (!extension) {
+      return json({ error: "Não é uma imagem suportada.", message: "O URL não devolveu JPEG, PNG ou WebP." }, 415);
+    }
+
+    const lengthHeader = Number(upstream.headers.get("content-length") || 0);
+    if (lengthHeader > MAX_IMAGE_UPLOAD_BYTES) {
+      return json({ error: "Imagem demasiado grande.", message: "A imagem excede o limite de 5 MiB." }, 413);
+    }
+
+    let bytes;
+    try {
+      const buffer = await upstream.arrayBuffer();
+      if (buffer.byteLength > MAX_IMAGE_UPLOAD_BYTES) {
+        return json({ error: "Imagem demasiado grande.", message: "A imagem excede o limite de 5 MiB." }, 413);
+      }
+      bytes = new Uint8Array(buffer);
+    } catch {
+      return json({ error: "Falha ao ler a imagem.", message: "Não foi possível ler os dados da imagem." }, 502);
+    }
+
+    const nomeBase = "external-import-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 7);
+    const path = "images/uploads/" + nomeBase + "." + extension;
+    const content = base64FromBytes(bytes);
+
+    if (!validarImagemUpload(content, path)) {
+      return json({ error: "Conteúdo de imagem inválido.", message: "O conteúdo recebido não corresponde a um JPEG, PNG ou WebP válido." }, 415);
+    }
+
+    const githubPath = "/repos/" + GITHUB_OWNER + "/" + GITHUB_REPO + "/contents/" + path;
+    const githubResponse = await githubRequest(env, githubPath, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message: "Importar imagem externa",
+        content,
+        branch: obterBranchGithub(env)
+      })
+    });
+
+    const responseText = await githubResponse.text();
+    let data;
+    try { data = JSON.parse(responseText); }
+    catch { data = { error: responseText || "Resposta inválida do GitHub." }; }
+
+    if (!githubResponse.ok) {
+      return json({
+        error: data?.message || data?.error || "Não foi possível guardar a imagem.",
+        message: data?.message || data?.error || "Não foi possível guardar a imagem."
+      }, githubResponse.status);
+    }
+
+    return json({
+      ok: true,
+      path: "/" + path,
+      sourceUrl: typeof payload?.sourceUrl === "string" ? payload.sourceUrl : sourceUrl
+    });
+  }
 
   if (pathname === "/api/admin/image") {
     const path =
