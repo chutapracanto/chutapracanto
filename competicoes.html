@@ -265,10 +265,14 @@ function renderGroupFilter(){
     return a.localeCompare(b,"pt-PT");
   });
   groupEl.innerHTML='<option value="all">Todos os grupos</option>'+groups.map(group=>{
+    const value=active==="nations-league" && /^[A-D][1-4]$/i.test(group) ? group.toUpperCase() : group;
     const label=/^[A-D][1-4]$/i.test(group)?nationsGroupLabel(group.toUpperCase()):group;
-    return '<option value="'+esc(group)+'">'+esc(label)+'</option>';
+    return '<option value="'+esc(value)+'">'+esc(label)+'</option>';
   }).join("");
-  if(groupFilter!=="all"&&!groups.includes(groupFilter))groupFilter="all";
+  if(groupFilter!=="all"&&!groups.some(group=>{
+    const value=active==="nations-league" && /^[A-D][1-4]$/i.test(group) ? group.toUpperCase() : group;
+    return value===groupFilter;
+  }))groupFilter="all";
   groupEl.value=groupFilter;
   if(standingsScopeEl)standingsScopeEl.textContent=groupFilter==="all"?"Todos os grupos":(/^[A-D][1-4]$/i.test(groupFilter)?nationsGroupLabel(groupFilter):groupFilter);
 }
