@@ -965,3 +965,51 @@ Alterações:
 A data `created_on` do Openverse é a data de entrada no catálogo, não necessariamente a data em que a fotografia foi criada/publicada. Portanto, não tratar essa data como prova de atualidade jornalística. A pesquisa por ano + metadados disponíveis é apenas um reforço de relevância.
 
 As imagens externas continuam alojadas na origem. A futura melhoria de maior robustez é importar a imagem escolhida para `images/uploads/`, mantendo origem/licença/atribuição, em vez de depender de hotlink externo. Não implementar essa cópia sem preservar a informação de licença/atribuição.
+
+
+# 70. ADMIN IMAGENS — CORREÇÃO DE REGRESSÃO + PESQUISA 2026-09-30
+
+## 70.1 Regressão identificada e corrigida
+
+Após a melhoria de pesquisa/importação externa, os previews das imagens antigas no Admin deixaram de aparecer. A investigação confirmou que **os ficheiros antigos em `images/uploads/` não foram apagados nem alterados** e que o site continuava a servi-los normalmente.
+
+Causa exata:
+- o normalizador novo de URLs passava primeiro por `extrairUrlImagemDireta()`;
+- essa função aceitava URLs `http/https`, mas não caminhos locais como `/images/uploads/nome.jpg`;
+- por isso, o índice continuava a fornecer corretamente as imagens, mas o Admin transformava os caminhos locais em string vazia e escondia o preview.
+
+Correção:
+- caminhos locais absolutos do próprio site, incluindo `/images/uploads/*`, são agora aceites diretamente pelo normalizador;
+- não foi feita qualquer migração, limpeza ou alteração da pasta de uploads.
+
+Commit de correção funcional: `793526b6c9993fd5bb0003fcd55e2970bc264fa0`.
+
+## 70.2 Pesquisa de imagens — nova abordagem
+
+A pesquisa anterior estava demasiado dependente de pontuação posterior sobre um conjunto limitado de resultados. Foi substituída por uma abordagem com maior cobertura e relevância:
+
+- Openverse: 3 páginas de resultados, mantendo licenças reutilizáveis;
+- Wikimedia Commons: pesquisa textual até 100 ficheiros;
+- Wikimedia Commons: quando existe uma categoria com o nome pesquisado, consulta também diretamente essa categoria até 100 ficheiros;
+- resultados da categoria recebem sinal de correspondência forte, mesmo quando o nome do jogador não aparece no título do ficheiro;
+- correspondência textual passou a ser normalizada corretamente, incluindo acentos e espaços;
+- resultados sem qualquer correspondência textual/categórica são excluídos;
+- só depois da relevância são aplicadas preferências de capa: resolução e formato horizontal;
+- até 60 resultados são apresentados;
+- continuam a ser mostradas licença, dimensões, autor quando disponível e fonte.
+
+Exemplo validado externamente: o Wikimedia Commons mantém uma categoria específica de Chris Smalling com várias fotografias e subcategorias por ano; existem ficheiros horizontais de alta resolução nessa coleção. A pesquisa textual simples não estava a explorar essa categoria. 
+
+## 70.3 Limitação consciente
+
+Isto melhora muito a cobertura de imagens reutilizáveis, mas não transforma o Admin num espelho do Google Images. Muitas imagens que aparecem no Google pertencem a sites/fotógrafos sem licença reutilizável e não devem ser importadas automaticamente como se fossem livres.
+
+A pesquisa agora procura deliberadamente material que possa ser reutilizado dentro das fontes consultadas, em vez de trocar relevância por imagens potencialmente não licenciadas.
+
+## 70.4 Estado de deployment
+
+`793526b6...` concluiu deployment de produção `398ae289` com sucesso e alias `https://chutapracanto.com`.
+
+A correção seguinte das expressões regulares da pesquisa foi commit `8720f78850dfe723a740d118b2ba7cc702573819`; no momento do registo, o deployment `7ce3235a` encontrava-se em fase `deploy`. A produção deve ser revalidada após conclusão.
+
+Regra para IA futura: não confundir ausência de preview no Admin com perda de ficheiros em `images/uploads/`. Primeiro verificar o caminho local e o normalizador antes de tocar nos uploads.
