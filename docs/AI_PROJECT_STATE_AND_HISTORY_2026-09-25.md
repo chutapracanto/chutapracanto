@@ -2896,3 +2896,120 @@ Não declarar a frente LIVE resolvida ainda. É necessário observar nova escrit
 
 ## Nota importante
 A conclusão anterior de que o Cron apenas chamava o endpoint sem efeito estava incompleta. O Cron está correto como mecanismo de execução; o defeito estava no contrato de cache do endpoint, que servia stale em vez de renovar quando expirado.
+
+
+# 62. MODELO DINÂMICO DE FASES E FILTROS DE COMPETIÇÕES — 2026-09-30
+
+## 62.1 Regra conceptual que futuras IAs DEVEM preservar
+
+A área /competicoes não pode assumir que uma competição tem uma única estrutura durante toda a época.
+
+O estado da competição deve ser determinado pela informação atual recebida da BSD, sobretudo:
+- stageName / stage / stageKey dos fixtures;
+- groupName dos standings;
+- roundKey / roundLabel.
+
+A aplicação deve adaptar automaticamente a interface quando a competição muda de fase. Não usar datas fixas da época para decidir que uma competição "já passou" de fase.
+
+### Modelo já validado
+
+**Campeonato / Liga Portugal**
+- estrutura regular de tabela única;
+- jogos organizados por jornada;
+- filtro principal de jornadas;
+- não existe filtro de grupos.
+
+**Competições com fase de grupos**
+- existem grupos independentes;
+- deve existir filtro de grupo;
+- deve existir também filtro de jornada quando os jogos da fase estão organizados por jornada;
+- grupo + jornada podem coexistir;
+- "Todos" deve limpar ambos os filtros.
+
+**Competições com fase de liga**
+- Champions League, Europa League e Conference League usam actualmente fase de liga, não uma fase de grupos tradicional;
+- não devem ganhar artificialmente um filtro de grupo;
+- devem ter filtro de jornada;
+- quando passarem à fase a eliminar, o mesmo filtro de jornadas deve passar a apresentar a ronda/fase correspondente.
+
+**Fases a eliminar**
+- quartos-de-final, meias-finais, final, play-offs, oitavos, etc.;
+- não usar filtro de grupos;
+- o filtro de jornadas/rondas deve continuar disponível;
+- a label deve reflectir a fase actual fornecida pela BSD.
+
+### Nations League 2026/27
+
+A Nations League está actualmente na fase de liga, composta por grupos dentro das Ligas A, B, C e D. A UEFA define 14 grupos nesta fase: quatro em A, quatro em B, quatro em C e dois em D. A Liga A tem depois quartos-de-final e fase final; existem ainda play-offs de promoção/despromoção.
+
+Fontes oficiais UEFA:
+- https://documents.uefa.com/r/Regulations-of-the-UEFA-Nations-League-2026/27/Article-12-Competition-stages-Online
+- https://www.uefa.com/uefanationsleague/news/02a1-1fc60cd57c4d-de2c1d716ed6-1000--2026-27-uefa-nations-league-league-phase-draw/
+
+**Regra para a implementação:** não tratar "Nations League = grupos para sempre". Enquanto a BSD indicar grupos/fase de liga, mostrar grupo + jornada. Quando a BSD passar a indicar quartos/play-offs/finais, a inferência de fase deve mudar automaticamente e remover o filtro de grupo, mantendo o filtro de ronda.
+
+## 62.2 Inferência automática implementada
+
+Commit:
+- 16a6b4a8fe09caaddc97bb9b4ba28405da92e364 — fix: infer competition phase from current BSD state
+
+A função cpcInferCompetitionPhase() passou a seguir esta prioridade:
+1. detectar primeiro fases a eliminar/qualificação/play-offs/quartos/meias/final;
+2. detectar fase de liga;
+3. detectar grupos através de groupName e/ou texto da fase;
+4. devolver single-table quando não existe estrutura especial.
+
+Assim, a mudança de fase não depende de uma data ou de um ID fixo de fase.
+
+## 62.3 Filtros implementados/corrigidos
+
+Commits:
+- 7052244c7d24485fac4001b8889392525ed138f9 — fix: make competition phase filters dynamic
+- f9ba435c9ce4aa64816645845cb70039cfa98360 — fix: apply round filter to grouped competitions
+
+Regras:
+- competições agrupadas mostram grupo + jornada;
+- o filtro de jornada deixou de ser escondido só porque existe grupo;
+- a selecção de uma jornada é enviada também quando existe filtro de grupo;
+- "Todos" limpa o grupo e a jornada;
+- grupos têm opção Todos os grupos;
+- o filtro de grupo altera também a classificação e o jogo em destaque;
+- a interface não deve repetir a mesma informação nas labels.
+
+## 62.4 Bug de labels duplicadas identificado
+
+Foram encontrados:
+- Champions / Europa / Conference: Fase de liga · Fase de liga · Jornada X;
+- Taça da Liga: Quartos de final repetido;
+- Taça de Portugal: Ronda 3 repetido.
+
+Causa: stageLabel e roundLabel da BSD podem conter a mesma informação ou a ronda já pode incluir o nome da fase.
+
+A normalização de roundIdentity() passou a remover a repetição antes de construir a label do filtro.
+
+## 62.5 Bug "Todos" / Nations League
+
+Foi reportado que na Nations League:
+- "Próximos" apresentava correctamente os próximos jogos;
+- "Todos" não apresentava o histórico esperado;
+- um grupo como Liga A · Grupo A1 podia permanecer seleccionado sem que isso fosse evidente;
+- não existia filtro de jornada na fase agrupada.
+
+A correcção da UI garante agora que:
+- "Todos" limpa grupo e jornada;
+- é possível seleccionar Todos os grupos;
+- a fase agrupada mantém filtro de jornada;
+- a jornada seleccionada é realmente aplicada ao pedido à API.
+
+**Nota de validação:** o comportamento final de "Todos" deve ainda ser validado em produção com a resposta status=all da API da Nations League, porque a sessão actual não dispõe de acesso HTTP directo ao domínio para executar esse teste runtime. A correcção de código e a lógica server-side existente foram inspeccionadas.
+
+## 62.6 Regra para futuras alterações
+
+Não adicionar novamente listas hardcoded do tipo:
+- Nations é grupos;
+- Champions é fase de liga;
+- Taça da Liga é quartos;
+- Taça de Portugal é ronda 3.
+
+Esses valores podem servir apenas como fallback de apresentação quando a BSD não fornece dados suficientes. A decisão de fase em runtime deve continuar baseada no estado actual da fonte BSD.
+
