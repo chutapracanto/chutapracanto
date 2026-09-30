@@ -102,3 +102,17 @@ Regra crítica: **UM BLOQUEIO NÃO É UM RESULTADO.** Se a IA não conseguir exe
 - Fase 4: ativa — SEO técnico + indexação real; sitemap submetido ao Search Console e processamento externo pendente.
 - Próxima ação autónoma: acompanhar/validar Search Console e corrigir apenas problemas de indexação/SEO comprovados.
 - Fase 5 performance, Fase 6 monetização, Fase 7 distribuição e Fase 8 automação permanecem futuras.
+
+
+## REFERÊNCIA RÁPIDA — ARQUITETURA E FILA ATUAL (2026-09-30)
+
+- Site: GitHub `main` → Cloudflare Pages + `_worker.js`.
+- Conteúdo: Markdown em `content/noticias` / `content/opiniao`; GitHub Action gera `content/noticias-index.json` e sitemap/taxonomia relacionados.
+- Futebol: browser → Pages Worker → BSD → D1/cache → frontend.
+- Cron: `cpc-football-cron`, `*/5 * * * *`, binding `FOOTBALL_CACHE_DB`.
+- D1 likes: `ARTICLE_LIKES_DB`.
+- Secrets: `ADMIN_PASSWORD`, `GITHUB_TOKEN`, `BSD_API_KEY`.
+- Domínio canónico: `https://chutapracanto.com`.
+- BSD é a única fonte de futebol validada; não reintroduzir o fornecedor rejeitado.
+
+Fila atual: **Search Console → Admin/imagens/rascunhos → matriz de APIs de vídeo → automação de upload único**. Pesquisa global e otimização de deployments ficam em standby.
