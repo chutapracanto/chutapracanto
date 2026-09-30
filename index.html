@@ -838,7 +838,10 @@
 
     function iniciarFeedsAdiados() {
       const feeds = [
-        { id: 'carousel-shorts', carregar: () => carregarYouTube('PLUXnJ5IDIDWU', 'carousel-shorts') },
+        { id: 'carousel-shorts', carregar: () => {
+          carregarYouTube('PLUXnJ5IDIDWU', 'carousel-shorts');
+          setInterval(() => carregarYouTube('PLUXnJ5IDIDWU', 'carousel-shorts'), 10 * 60 * 1000);
+        } },
         { id: 'carousel-podcasts', carregar: () => carregarYouTube('PLFJ6oHgZs4WU', 'carousel-podcasts') },
         { id: 'episodes-container', carregar: () => carregarFeedSpotify('https://anchor.fm/s/1159ff964/podcast/rss') }
       ];
