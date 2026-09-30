@@ -1409,6 +1409,113 @@ async function handleArticleLikeAPI(request, env) {
 }
 
 
+async function sincronizarIndiceEditorial(env, path, action, markdown = "") {
+  const indexPath = "content/noticias-index.json";
+  const githubIndexPath = `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${indexPath}?ref=${encodeURIComponent(obterBranchGithub(env))}`;
+
+  const indexResponse = await githubRequest(env, githubIndexPath, { method: "GET" });
+  if (!indexResponse.ok) {
+    throw new Error("Não foi possível ler o índice editorial.");
+  }
+
+  const indexData = await indexResponse.json();
+  const indexContent = decodeGithubBase64(indexData.content || "");
+  let entries;
+
+  try {
+    entries = JSON.parse(indexContent);
+  } catch {
+    throw new Error("O índice editorial existente é inválido.");
+  }
+
+  if (!Array.isArray(entries)) {
+    throw new Error("O índice editorial existente não é uma lista.");
+  }
+
+  const existing = entries.find(item => item && item.path === path);
+
+  if (action === "delete") {
+    entries = entries.filter(item => !item || item.path !== path);
+  } else {
+    const slug = path.split("/").pop().replace(/\.md$/i, "");
+    const entry = {
+      slug,
+      path,
+      type: extrairCampoFrontmatter(markdown, "type") || (path.includes("/opiniao/") ? "opinion" : "news"),
+      title: extrairCampoFrontmatter(markdown, "title") || existing?.title || "Sem título",
+      subtitle:
+        extrairCampoFrontmatter(markdown, "subtitle") ||
+        extrairCampoFrontmatter(markdown, "subtitulo") ||
+        existing?.subtitle ||
+        "",
+      category:
+        extrairCampoFrontmatter(markdown, "category") ||
+        extrairCampoFrontmatter(markdown, "categoria") ||
+        existing?.category ||
+        "Geral",
+      categoryId: existing?.categoryId || "",
+      categoryKind: existing?.categoryKind || "mixed",
+      author:
+        extrairCampoFrontmatter(markdown, "author") ||
+        extrairCampoFrontmatter(markdown, "autor") ||
+        existing?.author ||
+        "ChutaPraCanto",
+      authorId: existing?.authorId || "chuta-pra-canto",
+      authorType: existing?.authorType || "Organization",
+      published: extrairDataNoticia(markdown) || existing?.published || "",
+      publishedAt: extrairDataNoticia(markdown) || existing?.publishedAt || "",
+      image:
+        extrairCampoFrontmatter(markdown, "image") ||
+        extrairCampoFrontmatter(markdown, "imagem") ||
+        extrairCampoFrontmatter(markdown, "featured_image") ||
+        extrairCampoFrontmatter(markdown, "featuredImage") ||
+        existing?.image ||
+        ""
+    };
+
+    const position = entries.findIndex(item => item && item.path === path);
+    if (position >= 0) {
+      entries[position] = { ...entries[position], ...entry };
+    } else {
+      entries.push(entry);
+    }
+  }
+
+  entries.sort((a, b) => {
+    const ta = Date.parse(a?.published || a?.publishedAt || "") || 0;
+    const tb = Date.parse(b?.published || b?.publishedAt || "") || 0;
+    return tb - ta;
+  });
+
+  const nextContent = JSON.stringify(entries, null, 2) + "\n";
+  const updateResponse = await githubRequest(
+    env,
+    `/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${indexPath}`,
+    {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        message:
+          action === "delete"
+            ? "Atualizar índice após apagar conteúdo"
+            : "Atualizar índice após publicar conteúdo",
+        content: base64FromBytes(new TextEncoder().encode(nextContent)),
+        sha: indexData.sha,
+        branch: obterBranchGithub(env)
+      })
+    }
+  );
+
+  if (!updateResponse.ok) {
+    const detail = await updateResponse.text();
+    throw new Error(
+      "O conteúdo foi guardado, mas não foi possível atualizar o índice editorial." +
+      (detail ? " " + detail.slice(0, 300) : "")
+    );
+  }
+}
+
+
 async function handleAdminAPI(request, env) {
   const url = new URL(request.url);
   const pathname = url.pathname;
@@ -1782,6 +1889,37 @@ async function handleAdminAPI(request, env) {
           responseText ||
           "Resposta inválida do GitHub."
       };
+    }
+
+    if (githubResponse.ok) {
+      try {
+        const markdown =
+          request.method === "PUT" && typeof body === "string"
+            ? decodeGithubBase64(JSON.parse(body).content || "")
+            : "";
+
+        await sincronizarIndiceEditorial(
+          env,
+          path,
+          request.method === "DELETE" ? "delete" : "upsert",
+          markdown
+        );
+      } catch (error) {
+        console.error("Falha ao sincronizar índice editorial:", error);
+        return json(
+          {
+            error:
+              error?.message ||
+              "Conteúdo guardado, mas o índice editorial não foi atualizado.",
+            message:
+              error?.message ||
+              "Conteúdo guardado, mas o índice editorial não foi atualizado.",
+            contentSaved: true,
+            indexSynced: false
+          },
+          500
+        );
+      }
     }
 
     return json(
