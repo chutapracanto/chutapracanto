@@ -814,3 +814,47 @@ Se houver bloqueio:
 
 ## 64.4 Shorts
 - A utilizadora confirmou que novos Shorts começaram a entrar na Home; isto é consistente com o refresh periódico/cache-buster já implementado.
+
+
+# 65. ROADMAP + LIMPEZA DE FORNECEDOR + INDEXAÇÃO — 2026-09-30
+
+## 65.1 Roadmap reconciliado
+- Roadmap substituído por uma versão operacional limpa de 2026-09-30.
+- Fase 3 passou a constar como **CONCLUÍDA OPERACIONALMENTE**.
+- Fase 4 permanece **ATIVA**, dependente da evidência do Search Console.
+- Fase 5 ficou em manutenção e só reabre com evidência.
+- Fase 6 ficou em preparação enquanto o AdSense permanece "em preparação".
+- Fase 8 passou a ser a próxima grande frente técnica, com distribuição de vídeo como candidato concreto.
+- Pesquisa global do site ficou como ideia futura, abaixo das prioridades atuais.
+
+## 65.2 Search Console
+- Sitemap foi submetido em 28/09/2026 e aceite para processamento.
+- Em 30/09 já passaram mais de 24h.
+- Pesquisa pública site:chutapracanto.com não devolveu resultados na verificação realizada.
+- Isto não substitui o Search Console e não prova, por si só, ausência de indexação.
+- Próxima validação: Sitemaps → Page indexing → excluídas → canonical → erros/avisos → páginas indexadas, assim que os relatórios tiverem dados.
+
+## 65.3 Limpeza de fornecedor antigo
+- O fornecedor antigo que já não faz parte da arquitetura foi removido do código ativo e da documentação operacional.
+- Removidos do GitHub os documentos específicos de matriz/decisão desse fornecedor.
+- Removidos do _worker.js os endpoints diagnósticos temporários.
+- Removida do Cloudflare Pages Production a secret antiga associada a esse fornecedor.
+- Produção/Preview ficam apenas com ADMIN_PASSWORD, BSD_API_KEY e GITHUB_TOKEN como secrets do projeto.
+- BSD permanece como fonte de futebol em produção.
+- Não reintroduzir o fornecedor removido.
+
+## 65.4 Nations League — confirmação da arquitetura
+- cpcInferCompetitionPhase() está implementada no Worker.
+- A função usa o estado atual fornecido pela BSD (stageName/stage/stageKey, grupos e ronda), sem calendário hardcoded.
+- Se a BSD mudar de fase, o tipo de fase e a estrutura de filtros mudam com os dados atuais.
+- Na fase agrupada, o grupo continua disponível; em knockout, a estrutura passa para ronda/fase sem grupo.
+- A arquitetura é dinâmica nos dois sentidos: se os dados atuais da fonte representarem novamente uma fase agrupada, a inferência volta a uma estrutura agrupada.
+- O requisito de Nations de A1–A4/B1–B4/C1–C4/D1–D2 e seleção de grupo com passado/presente/futuro continua fechado.
+
+## 65.5 Distribuição de vídeo — investigação futura
+- É tecnicamente viável construir um fluxo de upload único e publicação por APIs oficiais, mas cada plataforma tem autenticação, permissões, quotas e regras próprias.
+- YouTube permite upload via videos.insert.
+- Instagram possui Reels Publishing API.
+- Facebook possui Reels Publishing API.
+- TikTok possui Content Posting API com Direct Post, sujeito a aprovação/autorização da app.
+- Antes de implementar, deve ser feita uma matriz real de permissões, aprovação de apps, formatos, quotas e publicação para as contas CPC.
