@@ -257,3 +257,40 @@ Antes de alterar:
 8. documentar.
 
 **Objetivo: avançar sem voltar a introduzir soluções ou fornecedores que já deixaram de fazer parte do projeto.**
+
+
+---
+
+## 15. CONSOLIDAÇÃO 2026-09-30.1 — FILA ATUAL
+
+### Admin / criação de conteúdo
+- Investigar por que algumas imagens carregadas podem falhar e tornar o erro observável sem perder o conteúdo.
+- Melhorar relevância/qualidade da pesquisa de imagens externas (Openverse + Wikimedia Commons).
+- Manter o cancelar/remover da imagem selecionada claro e seguro.
+- Implementar **Guardar como rascunho** antes de publicar; rascunhos não podem entrar no índice público nem sitemap.
+- Não alterar o fluxo de publicação atual até o modelo de rascunho estar desenhado.
+
+### SEO / Search Console — checklist quando houver dados
+Sitemaps → Page indexing → URL Inspection → canonical declarado vs escolhido → páginas excluídas e motivos → robots/HTTP/redirects → dados estruturados. Corrigir apenas problemas comprovados. Uma pesquisa pública `site:` sem resultados não é, sozinha, evidência suficiente para alterar a arquitetura.
+
+### Automação de vídeo — estado da investigação
+Objetivo: **upload único → preparação/publicação ou rascunho por plataforma → estado/retry independente**, reduzindo trabalho manual.
+- YouTube: API oficial suporta upload e resumable upload. citeturn0search2turn0search4
+- TikTok: Content Posting API suporta Direct Post e Upload para rascunho; requer app/OAuth/scopes e há requisitos de aprovação/auditoria para publicação pública. Suporta `PULL_FROM_URL`. citeturn0search0turn0search3
+- Meta/Instagram/Facebook: falta fechar a matriz atual de APIs, permissões, quotas e aprovação antes de construir.
+- Não guardar tokens sociais no frontend; OAuth/secrets ficam server-side.
+- Antes do MVP: confirmar contas, permissões, formatos, quotas, aprovação e modelo direto/rascunho de cada plataforma.
+
+### Melhorias em standby
+- reduzir deploys duplicados causados por commits de conteúdo + índice/sitemap, depois de validar path exclusions/build triggers;
+- pesquisa global do site;
+- automações adicionais de distribuição/reutilização;
+- performance apenas com evidência nova.
+
+### Ordem prática atual
+1. Search Console quando os relatórios estiverem disponíveis.
+2. Admin/imagens/rascunhos.
+3. Preparação AdSense de baixo risco.
+4. Fechar matriz YouTube + TikTok + Meta e desenhar MVP de vídeo.
+5. Pesquisa global do site.
+6. Otimização de deployments, com teste e rollback fácil.
