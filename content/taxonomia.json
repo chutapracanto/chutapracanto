@@ -171,6 +171,11 @@
       "id": "fc-porto-futebol-nacional-mercado-de-transferencias-primeira-liga",
       "label": "FC Porto, Futebol Nacional, Mercado de Transferências, Primeira Liga",
       "kind": "mixed"
+    },
+    {
+      "id": "selecao-nacional-liga-das-nacoes-futebol-internacional-exclusivo",
+      "label": "Seleção Nacional, Liga das Nações, Futebol Internacional, Exclusivo",
+      "kind": "mixed"
     }
   ]
 }
