@@ -1007,7 +1007,7 @@
                 <input
                     type="text"
                     id="noticia-imagem-url"
-                    placeholder="Ou cola aqui o URL da imagem..."
+                    placeholder="Ou cola aqui o URL direto da imagem ou um URL do Google Images..."
                 >
 
                 <div class="image-help">
@@ -1108,7 +1108,7 @@
             <h2 style="margin-bottom:0;">Pesquisar imagem</h2>
             <button type="button" class="secondary-btn" onclick="fecharPesquisaImagens()">Fechar</button>
         </div>
-        <div class="image-picker-note">Pesquisa no Openverse e Wikimedia Commons por imagens com licença permitida ou domínio público. Confirma sempre a licença da imagem escolhida antes de publicar. A imagem é usada por URL externo e não é copiada para o Chuta Pra Canto.</div>
+        <div class="image-picker-note">Pesquisa no Openverse e Wikimedia Commons por imagens com licença permitida ou domínio público. A pesquisa dá prioridade a imagens horizontais, grandes e com sinais de atualidade. Também podes colar um URL vindo do Google Images: o Admin tenta extrair automaticamente o URL direto da imagem. Confirma sempre a licença antes de publicar.</div>
         <div class="image-search-row">
             <input type="text" id="image-search-query" placeholder="Ex.: Cristiano Ronaldo, FC Porto, futebol português..." onkeydown="if(event.key==='Enter') pesquisarImagens()">
             <button type="button" class="main-btn" onclick="pesquisarImagens()">Pesquisar</button>
@@ -3093,6 +3093,7 @@ async function pesquisarImagens() {
     const consultas = [query];
     if (!/\b20\d{2}\b/.test(query)) {
         consultas.push(query + " " + anoAtual);
+        consultas.push(query + " " + (Number(anoAtual) - 1));
     }
 
     try {
@@ -3114,7 +3115,9 @@ async function pesquisarImagens() {
                     _sourceLabel: "Openverse",
                     _sourceUrl: item.foreign_landing_url || item.url || "",
                     _width: Number(item.width) || 0,
-                    _height: Number(item.height) || 0
+                    _height: Number(item.height) || 0,
+                    _createdOn: item.created_on || "",
+                    _updatedOn: item.updated_on || ""
                 }))
                 : [];
         });
@@ -3127,7 +3130,7 @@ async function pesquisarImagens() {
                 gsrnamespace: "6",
                 gsrlimit: "30",
                 prop: "imageinfo",
-                iiprop: "url|thumburl|mime|extmetadata",
+                iiprop: "url|thumburl|mime|extmetadata|timestamp",
                 iiurlwidth: "500",
                 iiextmetadatafilter: "LicenseShortName|LicenseUrl|Artist|Credit|Attribution",
                 format: "json",
@@ -3182,7 +3185,9 @@ async function pesquisarImagens() {
                         _sourceUrl: info.descriptionurl || (
                             "https://commons.wikimedia.org/wiki/" +
                             encodeURIComponent(page.title || "")
-                        )
+                        ),
+                        _createdOn: meta.DateTimeOriginal?.value || info.timestamp || "",
+                        _updatedOn: info.timestamp || ""
                     };
                 })
                 .filter(Boolean);
@@ -3224,6 +3229,14 @@ async function pesquisarImagens() {
             .split(/[^a-z0-9]+/)
             .filter(t => t.length >= 3);
 
+        const agora = Date.now();
+        const parseDataImagem = (item) => {
+            const candidatos = [item._createdOn, item._updatedOn]
+                .map(value => Date.parse(String(value || "")))
+                .filter(Number.isFinite);
+            return candidatos.length ? Math.max(...candidatos) : 0;
+        };
+
         const pontuarImagem = (item) => {
             const largura = Number(item._width) || 0;
             const altura = Number(item._height) || 0;
@@ -3238,14 +3251,31 @@ async function pesquisarImagens() {
 
             let score = 0;
             for (const termo of termosPesquisa) {
-                if (texto.includes(termo)) score += 8;
+                if (texto.includes(termo)) score += 9;
             }
-            if (largura >= 1200) score += 4;
+
+            if (largura >= 1600) score += 6;
+            else if (largura >= 1200) score += 4;
             else if (largura >= 900) score += 2;
-            if (altura >= 600) score += 2;
-            if (proporcao >= 1.35 && proporcao <= 2.2) score += 8;
-            else if (proporcao >= 1.15 && proporcao < 1.35) score += 3;
-            else if (proporcao > 0 && proporcao < 0.9) score -= 6;
+
+            if (altura >= 900) score += 2;
+            else if (altura >= 600) score += 1;
+
+            if (proporcao >= 1.35 && proporcao <= 2.2) score += 10;
+            else if (proporcao >= 1.15 && proporcao < 1.35) score += 4;
+            else if (proporcao > 0 && proporcao < 0.9) score -= 10;
+
+            if (proporcao > 0 && proporcao > 2.8) score -= 5;
+
+            const dataImagem = parseDataImagem(item);
+            if (dataImagem) {
+                const idadeDias = Math.max(0, (agora - dataImagem) / 86400000);
+                if (idadeDias <= 30) score += 10;
+                else if (idadeDias <= 180) score += 7;
+                else if (idadeDias <= 365) score += 4;
+                else if (idadeDias <= 730) score += 1;
+            }
+
             if (item._sourceLabel === "Wikimedia Commons") score += 1;
             return score;
         };
@@ -3352,13 +3382,13 @@ async function pesquisarImagens() {
 }
 
 function selecionarImagemExterna(item) {
-    const url = item?.url || "";
+    const url = extrairUrlImagemDireta(item?.url || "");
     if (!/^https?:\/\//i.test(url)) return;
     document.getElementById("noticia-imagem-url").value = url;
     mostrarPreview(url);
     fecharPesquisaImagens();
     const help = document.querySelector(".image-help");
-    if (help) help.textContent = "Imagem externa selecionada. O ficheiro permanece no servidor de origem e não é copiado para o Chuta Pra Canto.";
+    if (help) help.textContent = "Imagem externa selecionada. O URL foi normalizado para a imagem direta; o ficheiro continua alojado no servidor de origem.";
 }
 
 // ============================================================
@@ -5046,16 +5076,40 @@ async function partilharNativamente() {
 // IMAGENS
 // ============================================================
 
+function extrairUrlImagemDireta(valor) {
+    if (!valor) return "";
+
+    let url = String(valor).trim();
+    if (!url) return "";
+
+    const tentarParametro = (nome) => {
+        try {
+            const parsed = new URL(url);
+            const candidate = parsed.searchParams.get(nome);
+            if (candidate && /^https?:\/\//i.test(candidate)) {
+                return decodeURIComponent(candidate);
+            }
+        } catch {
+            // URL incompleto ou inválido: continuar com o valor original.
+        }
+        return "";
+    };
+
+    for (const nome of ["imgurl", "mediaurl", "imageurl", "url", "q"]) {
+        const candidate = tentarParametro(nome);
+        if (candidate) {
+            url = candidate;
+            break;
+        }
+    }
+
+    return url;
+}
+
 function normalizarUrlImagem(
     url
 ) {
-
-    if (!url) {
-        return "";
-    }
-
-    url =
-        String(url).trim();
+    url = extrairUrlImagemDireta(url);
 
     if (!url) {
         return "";
