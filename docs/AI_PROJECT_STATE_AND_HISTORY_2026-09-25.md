@@ -1013,3 +1013,33 @@ A pesquisa agora procura deliberadamente material que possa ser reutilizado dent
 A correção seguinte das expressões regulares da pesquisa foi commit `8720f78850dfe723a740d118b2ba7cc702573819`; no momento do registo, o deployment `7ce3235a` encontrava-se em fase `deploy`. A produção deve ser revalidada após conclusão.
 
 Regra para IA futura: não confundir ausência de preview no Admin com perda de ficheiros em `images/uploads/`. Primeiro verificar o caminho local e o normalizador antes de tocar nos uploads.
+
+
+# 65. CICLO 2026-09-30 — MONETIZAÇÃO + MATRIZ DE DISTRIBUIÇÃO
+
+## 65.1 Auditoria AdSense / monetização
+Verificado diretamente no GitHub:
+- `ads.txt` existe com `google.com, pub-1556367149800029, DIRECT, f08c47fec0942fa0`.
+- `privacidade.html` já documenta o AdSense, distingue código técnico de anúncios efetivamente publicados e prevê CMP/consentimento antes da publicação efetiva.
+- `termos.html` existe e cobre conteúdo, informação editorial, recursos externos e alterações.
+- `politica-editorial.html` distingue publicidade de conteúdo editorial.
+- `contacto.html` já inclui propostas de parceria e formulário funcional.
+
+Conclusão: não existe uma lacuna autónoma de baixo risco que justifique alterar estas páginas neste momento. A próxima etapa de consentimento depende da configuração da conta AdSense/Privacy & messaging. A Google exige CMP certificada integrada com IAB TCF para anúncios personalizados no EEE/Reino Unido/Suíça.
+
+## 65.2 Investigação oficial — distribuição de vídeo
+Matriz fechada sem implementação prematura:
+- YouTube: `videos.insert` + OAuth + `youtube.upload`; resumable upload suportado; projetos não verificados podem ficar limitados a vídeos privados até auditoria.
+- TikTok: Content Posting API + Direct Post + `video.publish`; requer app/configuração/autorização e aprovação; clientes não auditados ficam privados. `PULL_FROM_URL` é suportado.
+- Facebook Page: publicação de vídeos através de Page Access Token/permissões; Reels têm fluxo de upload/publicação próprio.
+- Instagram: Content Publishing para contas profissionais; Reels podem usar URL pública ou upload resumable e depois `media_publish`.
+
+## 65.3 Estado / bloqueio real
+O MVP de distribuição não deve ser implementado ainda porque faltam autorizações externas específicas. São necessárias:
+1. YouTube OAuth/consentimento da conta CPC.
+2. TikTok app com Content Posting API e scope `video.publish` autorizado/aprovado.
+3. Meta app com permissões de publicação, Page Access Token e ligação/identificação da conta Instagram profissional.
+
+Esta dependência é externa ao GitHub/Cloudflare. Não foram criados tokens, endpoints fictícios nem armazenamento de credenciais.
+
+**Standby:** imagens do Admin continuam deliberadamente fora desta linha de trabalho.
