@@ -3013,3 +3013,68 @@ Não adicionar novamente listas hardcoded do tipo:
 
 Esses valores podem servir apenas como fallback de apresentação quando a BSD não fornece dados suficientes. A decisão de fase em runtime deve continuar baseada no estado actual da fonte BSD.
 
+
+
+# 63. HOME + COMPETIÇÕES — CORREÇÕES 2026-09-30
+
+## 63.1 Nations League — filtro de grupo com "Todos"
+
+Foi identificado que, depois de seleccionar "Todos" e escolher por exemplo "Liga A · Grupo A3", a lista continuava a mostrar jogos de todos os grupos.
+
+Causa:
+- a label apresentada ao utilizador era "Liga A · Grupo A3";
+- a Nations normaliza internamente o grupo dos fixtures para "A3";
+- o select guardava o valor completo em vez do identificador normalizado.
+
+Correção:
+- as opções da Nations passam a guardar A1/A2/.../D2 como value e a apresentar "Liga A · Grupo A1", etc. como label;
+- "Todos" continua a limpar grupo e jornada;
+- com "Todos" seleccionado, escolher um grupo mostra todos os jogos desse grupo, passados, presentes e futuros;
+- o filtro de jornada continua disponível dentro do grupo.
+
+Commit:
+- bf7e0851c83d9f6d1dbfe4a4dab4c7e203c9f074 — correção final da Home após correcções anteriores de filtros.
+
+## 63.2 Home — jogos LIVE
+
+Foi adicionada abaixo de "PRÓXIMOS JOGOS IMPORTANTES" uma área "JOGOS EM DIRETO".
+
+Cada cartão LIVE apresenta:
+- LED vermelho com pulsação lenta;
+- competição;
+- grupo, quando fornecido;
+- jornada/ronda;
+- emblema/bandeira disponível da equipa;
+- resultado actual;
+- minuto do jogo;
+- golos com minuto, marcador e equipa correspondente, quando a BSD fornece esses eventos.
+
+Atualização:
+- descoberta de novos jogos LIVE: a cada 60 segundos;
+- jogos já LIVE: actualização a cada 15 segundos;
+- a Home não faz 7 pedidos a cada 15 segundos: o polling rápido limita-se às competições actualmente LIVE.
+
+A lista desaparece automaticamente quando já não existe nenhum jogo LIVE.
+
+## 63.3 Home — notícia principal
+
+A imagem da notícia mais recente nos destaques foi reduzida de aproximadamente 54% para 50% da largura do cartão desktop.
+
+## 63.4 Home — Shorts
+
+O feed de Shorts da Home usa actualmente o playlist/feed configurado no código. Foi reforçada a actualização:
+- pedidos ao RSS2JSON recebem cache-buster;
+- depois de o carrossel Shorts ser carregado, o feed é actualizado novamente a cada 10 minutos.
+
+Isto evita que a Home fique presa a uma resposta RSS/API antiga. Se o próprio playlist configurado deixar de corresponder ao conjunto actual de Shorts do canal, será necessário substituir a fonte, não aumentar o polling.
+
+## 63.5 Validação
+
+O JavaScript da Home foi compilado/testado sintacticamente após as alterações e passou sem erro.
+
+Commits funcionais desta sequência:
+- 1225af6dd6188069ac4870537a432e8abbc2a7b6 — filtro Nations normalizado;
+- 3ec40584983ecfe7b320abf0a440e11c26bd2c80 — cartões LIVE;
+- bc3165b1261df31037764db149b50ea143b8176d — polling LIVE;
+- bf7e0851c83d9f6d1dbfe4a4dab4c7e203c9f074 — refresh periódico dos Shorts.
+
