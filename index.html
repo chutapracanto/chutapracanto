@@ -155,7 +155,7 @@
     .hero .btn-neon{margin:0;white-space:nowrap;padding:.65rem 1rem;font-size:.7rem}
     .featured-wrapper{gap:.85rem;margin-bottom:2.8rem}
     @media(min-width:769px){.featured-wrapper{min-height:0}}
-    .main-featured-card{grid-template-columns:minmax(0,1fr) minmax(0,.85fr)}
+    .main-featured-card{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
     .main-featured-img{aspect-ratio:16/7}
     .main-featured-content{padding:.95rem}
     .main-featured-content h2{font-size:1.08rem;margin:.4rem 0}
@@ -203,7 +203,27 @@
     .home-important-next b{color:var(--text-color)}
     .home-important-next-label,.home-important-next-game{display:block}.home-important-next-game{margin-top:.2rem;color:var(--text-color);font-size:.68rem;font-weight:700;white-space:nowrap}
     .home-important-match{min-height:3.1rem}
-    .home-important-match{min-height:3.1rem}
+    .home-live-games{margin-top:1.2rem}
+    .home-live-games-head{display:flex;align-items:center;gap:.55rem;margin-bottom:.7rem}
+    .home-live-games-head h3{margin:0;font:700 .95rem var(--font-title)}
+    .home-live-led{width:8px;height:8px;border-radius:50%;background:#f22;box-shadow:0 0 0 0 rgba(255,0,0,.7);animation:homeLivePulse 1.8s infinite}
+    @keyframes homeLivePulse{0%,100%{box-shadow:0 0 0 0 rgba(255,0,0,.65);opacity:1}50%{box-shadow:0 0 0 5px rgba(255,0,0,0);opacity:.7}}
+    .home-live-games-grid{display:flex;gap:.75rem;overflow-x:auto;padding-bottom:.35rem;scroll-snap-type:x proximity}
+    .home-live-card{display:flex;flex-direction:column;background:var(--card-bg);border:1px solid rgba(255,40,40,.5);border-radius:13px;padding:.85rem;flex:0 0 255px;min-width:255px;scroll-snap-align:start}
+    .home-live-top{display:flex;align-items:center;gap:.5rem;margin-bottom:.7rem}
+    .home-live-top strong{font:700 .62rem var(--font-title);color:#f55;text-transform:uppercase}
+    .home-live-top span{margin-left:auto;color:var(--text-gray);font-size:.56rem}
+    .home-live-teams{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.5rem}
+    .home-live-team{display:flex;align-items:center;gap:.4rem;min-width:0;font-size:.68rem;font-weight:700}
+    .home-live-team.away{justify-content:flex-end;text-align:right}
+    .home-live-team img{width:27px;height:27px;object-fit:contain;flex:0 0 27px}
+    .home-live-score{font:700 1.05rem var(--font-title);white-space:nowrap;text-align:center}
+    .home-live-minute{margin-top:.3rem;text-align:center;color:#f55;font-size:.64rem;font-weight:700}
+    .home-live-meta{margin-top:.65rem;padding-top:.55rem;border-top:1px solid var(--border-color);color:var(--text-gray);font-size:.57rem;line-height:1.35}
+    .home-live-goals{display:flex;flex-direction:column;gap:.18rem;margin-top:.55rem;font-size:.58rem}
+    .home-live-goal{color:var(--text-color)}
+    .home-live-goal b{color:#f55}
+    @media(max-width:800px){.home-live-games-grid{display:flex;overflow-x:auto;gap:.7rem;padding-bottom:.25rem;scrollbar-width:none}.home-live-games-grid::-webkit-scrollbar{display:none}.home-live-card{flex:0 0 255px;min-width:255px}}
     @media(max-width:800px){
       .hero{grid-template-columns:1fr;padding:1.1rem 1.15rem}.hero .btn-neon{justify-self:start}
       .home-important-games-grid{display:flex;overflow-x:auto;gap:.7rem;padding-bottom:.25rem;scrollbar-width:none}
@@ -294,6 +314,10 @@
         <div id="home-important-games-grid" class="home-important-games-grid">
           <div class="home-standings-empty">A procurar jogos…</div>
         </div>
+      </div>
+      <div class="home-live-games" id="home-live-games" hidden>
+        <div class="home-live-games-head"><span class="home-live-led" aria-hidden="true"></span><h3>JOGOS EM DIRETO</h3></div>
+        <div id="home-live-games-grid" class="home-live-games-grid"></div>
       </div>
     </section>
 
@@ -468,7 +492,7 @@
     async function carregarYouTube(playlistId, containerId) {
       const container = document.getElementById(containerId);
       const feedUrl = `https://www.youtube.com/feeds/videos.xml?playlist_id=${encodeURIComponent(playlistId)}`;
-      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`;
+      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}&_=${Date.now()}`;
       try {
         const res = await fetch(apiUrl);
         const data = await res.json();
@@ -638,12 +662,80 @@
       const standingsContent=document.getElementById('home-standings-content');
       const gamesGrid=document.getElementById('home-important-games-grid');
       const priorityNames=['fc porto','porto','sl benfica','benfica','sporting cp','sporting clube de portugal','portugal'];
+      const liveState={competitions:new Map(),timer:null,refreshing:false};
       const now=Date.now();
       const limit=now+(30*24*60*60*1000);
       const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
       const safeUrl=value=>{try{const u=new URL(String(value||''),location.origin);return u.protocol==='https:'||u.origin===location.origin?u.href:''}catch{return ''}};
       const teamLogo=team=>safeUrl(team?.logo)||'/images/logo.png';
       const leagueLogo=id=>'/api/football-image?type=league&id='+encodeURIComponent(id);
+      const fixtureStatus=item=>{
+        const raw=String(item?.status||'').toLowerCase().replace(/[ -]+/g,'_');
+        if(['live','in_progress','in_play','inplay','ongoing'].includes(raw))return 'live';
+        if(['finished','ended','ft','full_time','completed','aet','penalties'].includes(raw))return 'finished';
+        const d=dateValue(item);
+        return d&&d.getTime()>=Date.now()?'upcoming':'other';
+      };
+      const liveMinuteLabel=item=>{
+        const minute=Number(item?.liveMinute);
+        if(!Number.isFinite(minute))return '';
+        const added=Number(item?.liveAddedTime);
+        return String(Math.floor(minute))+(Number.isFinite(added)&&added>0?'+'+Math.floor(added):'')+"'";
+      };
+      const roundLabel=item=>{
+        const stage=String(item?.stageName||item?.stage||'').trim();
+        const round=String(item?.roundLabel||item?.round||item?.roundKey||'').trim();
+        if(!round)return stage;
+        if(stage&&round.toLowerCase().startsWith((stage+' · ').toLowerCase()))return round.slice(stage.length+3);
+        if(stage&&round.toLowerCase()===stage.toLowerCase())return '';
+        return round;
+      };
+      const renderLiveGames=()=>{
+        const liveEl=document.getElementById('home-live-games');
+        const grid=document.getElementById('home-live-games-grid');
+        if(!liveEl||!grid)return;
+        const rows=[];
+        liveState.competitions.forEach(({meta,data})=>{
+          (Array.isArray(data?.fixtures)?data.fixtures:[]).filter(fixture=>fixtureStatus(fixture)==='live').forEach(fixture=>rows.push({meta,fixture}));
+        });
+        rows.sort((a,b)=>(dateValue(a.fixture)?.getTime()||0)-(dateValue(b.fixture)?.getTime()||0));
+        liveEl.hidden=!rows.length;
+        if(!rows.length){grid.replaceChildren();return}
+        grid.innerHTML=rows.map(({meta,fixture})=>{
+          const home=fixture.homeTeam||{},away=fixture.awayTeam||{};
+          const logo=team=>safeUrl(team?.flag)||safeUrl(team?.logo)||'/images/logo.png';
+          const score=(fixture.score?.home!=null||fixture.score?.away!=null)?esc(fixture.score?.home??0)+' – '+esc(fixture.score?.away??0):'—';
+          const goals=Array.isArray(fixture.goals)?fixture.goals.map(goal=>{
+            const minute=Number(goal?.minute),added=Number(goal?.addedTime);
+            const when=Number.isFinite(minute)?String(Math.floor(minute))+(Number.isFinite(added)&&added>0?'+'+Math.floor(added):'')+"'":'';
+            const player=goal?.player?String(goal.player):'';
+            const team=Number(goal?.teamId)===Number(home.id)?home.name:Number(goal?.teamId)===Number(away.id)?away.name:'';
+            return '<div class="home-live-goal"><b>'+esc(when)+'</b> '+esc(player)+(team?' · '+esc(team):'')+'</div>';
+          }).join(''):'';
+          const group=String(fixture.groupName||'').trim();
+          const round=roundLabel(fixture);
+          const metaLabel=[String(meta[1]||'').trim(),group,round].filter(Boolean).join(' · ');
+          return '<article class="home-live-card"><div class="home-live-top"><span class="home-live-led" aria-hidden="true"></span><strong>LIVE</strong><span>'+esc(metaLabel)+'</span></div><div class="home-live-teams"><div class="home-live-team"><img src="'+logo(home)+'" alt=""><span>'+esc(home.name||'Casa')+'</span></div><div><div class="home-live-score">'+score+'</div><div class="home-live-minute">'+esc(liveMinuteLabel(fixture))+'</div></div><div class="home-live-team away"><span>'+esc(away.name||'Fora')+'</span><img src="'+logo(away)+'" alt=""></div></div>'+(goals?'<div class="home-live-goals">'+goals+'</div>':'')+'</article>';
+        }).join('');
+      };
+      const refreshHomeLive=async()=>{
+        if(liveState.refreshing)return;
+        liveState.refreshing=true;
+        try{
+          const targets=liveState.competitions.size?[...liveState.competitions.keys()]:competitions.map(item=>item[0]);
+          const results=await Promise.all(targets.map(async key=>{
+            const meta=competitions.find(item=>item[0]===key);
+            if(!meta)return null;
+            try{
+              const response=await fetch('/api/competicoes?competition='+encodeURIComponent(key)+'&status=upcoming',{cache:'no-store'});
+              if(!response.ok)throw new Error('live');
+              return {meta,data:await response.json()};
+            }catch{return null}
+          }));
+          results.filter(Boolean).forEach(item=>liveState.competitions.set(item.meta[0],item));
+          renderLiveGames();
+        }finally{liveState.refreshing=false}
+      };
       const dateValue=item=>{const d=new Date(item?.kickoff||item?.startAt||item?.date);return Number.isNaN(d.getTime())?null:d};
       const dateLabel=d=>d?new Intl.DateTimeFormat('pt-PT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}).format(d):'—';
       const normalizeTeamName=value=>String(value||'').toLocaleLowerCase('pt-PT').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
