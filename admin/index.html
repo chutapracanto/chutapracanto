@@ -3267,7 +3267,7 @@ async function pesquisarImagens() {
         for (const grupo of grupos) {
             for (const item of grupo) {
                 const imageUrl = item?.url || "";
-                if (!/^https?:\\/\\//i.test(imageUrl)) continue;
+                if (!/^https?:\/\//i.test(imageUrl)) continue;
 
                 const existente = vistos.get(imageUrl);
                 if (existente) {
@@ -3370,7 +3370,7 @@ async function pesquisarImagens() {
             const imageUrl = item.url || "";
             const thumbnail = item.thumbnail || imageUrl;
 
-            if (!/^https?:\\/\\//i.test(imageUrl)) return;
+            if (!/^https?:\/\//i.test(imageUrl)) return;
 
             const button = document.createElement("button");
             button.type = "button";
