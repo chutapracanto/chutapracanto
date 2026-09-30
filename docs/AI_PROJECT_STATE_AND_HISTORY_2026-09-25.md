@@ -858,3 +858,33 @@ Se houver bloqueio:
 - Facebook possui Reels Publishing API.
 - TikTok possui Content Posting API com Direct Post, sujeito a aprovação/autorização da app.
 - Antes de implementar, deve ser feita uma matriz real de permissões, aprovação de apps, formatos, quotas e publicação para as contas CPC.
+
+
+---
+
+# 66. CONSOLIDAÇÃO OPERACIONAL — 2026-09-30.1
+
+Esta secção é o resumo que uma IA nova deve absorver sem reler todo o histórico.
+
+## Admin
+O fluxo atual publica Markdown via Pages Worker/GitHub. Quando há upload próprio, a imagem é criada primeiro em `images/uploads/` e depois o Markdown é criado/atualizado. A pesquisa externa usa Openverse + Wikimedia Commons e referencia a imagem por URL externa.
+
+Backlog confirmado: robustez/diagnóstico de uploads de imagem; melhoria de relevância da pesquisa de imagens; cancelar/remover imagem; Guardar como rascunho; garantir que rascunhos não entram no índice público/sitemap.
+
+## SEO
+Infraestrutura técnica já existe: canonical, robots, sitemap, OG/Twitter e JSON-LD. Sitemap submetido ao Search Console em 28/09/2026. Próxima análise: Sitemaps → Page indexing → URL Inspection → canonical escolhido → exclusões/erros → dados estruturados. Não alterar SEO só porque `site:` não mostra resultados.
+
+## Vídeo
+Objetivo: upload único e distribuição por plataforma com estados independentes, retry e proteção contra duplicação.
+- YouTube: upload + resumable upload oficiais. citeturn0search2turn0search4
+- TikTok: Direct Post + Upload para rascunho; app/OAuth/scopes e requisitos de aprovação/auditoria; `PULL_FROM_URL` disponível. citeturn0search0turn0search3
+- Meta/Instagram/Facebook: matriz de APIs/permissões ainda por validar.
+Não implementar o MVP antes de fechar contas, OAuth, permissões, quotas, formatos e aprovação.
+
+## Arquitetura de referência
+`GitHub main → Cloudflare Pages/_worker.js → site/Admin/APIs`.
+`cpc-football-cron → Pages Worker → BSD → D1/cache → frontend`.
+Pages project: `chutapracanto`; Worker separado: `cpc-football-cron`; cron `*/5 * * * *`; D1 futebol `FOOTBALL_CACHE_DB`; D1 likes `ARTICLE_LIKES_DB`; secrets runtime `ADMIN_PASSWORD`, `GITHUB_TOKEN`, `BSD_API_KEY`; produção em `main`; domínio `https://chutapracanto.com`.
+
+## Standby
+Reduzir deploys duplicados de conteúdo + índice/sitemap; pesquisa global; automações adicionais; performance apenas com evidência.
