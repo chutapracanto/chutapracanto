@@ -2368,10 +2368,27 @@ function cpcInferCompetitionPhase(competitionKey, fixtures, standings) {
   const stageTexts = (fixtures || [])
     .map(item => cpcSafeString(item?.stageName || item?.stage || item?.stageKey))
     .filter(Boolean).join(" ").toLowerCase();
-  if (groupNames.size > 1 || /group[- _]?stage|group stage|fase de grupos|grupo/.test(stageTexts)) {
-    return { type: "group-stage", grouped: true, label: "Fase de grupos" };
+
+  // A fase deve ser inferida do estado atual fornecido pela BSD. Não há
+  // calendário hardcoded: quando a competição muda de fase, a resposta muda
+  // automaticamente com ela.
+  const knockout = /knockout|qualifying|qualification|playoff|play-off|quarterfinal|quarter-final|semifinal|semi-final|final|quartos|oitavos|meias-finais|ronda de qualificação/.test(stageTexts);
+  if (knockout) {
+    return { type: "knockout", grouped: false, label: "Fase a eliminar" };
   }
-  if (/league[- _]?phase|league phase|fase de liga/.test(stageTexts)) {
+
+  const leaguePhase = /league[- _]?phase|league phase|fase de liga/.test(stageTexts);
+  const groupStage = /group[- _]?stage|group stage|fase de grupos|grupo/.test(stageTexts);
+  const grouped = groupNames.size > 1 || groupStage;
+
+  if (grouped) {
+    return {
+      type: leaguePhase ? "league-phase-groups" : "group-stage",
+      grouped: true,
+      label: leaguePhase ? "Fase de liga" : "Fase de grupos"
+    };
+  }
+  if (leaguePhase) {
     return { type: "league-phase", grouped: false, label: "Fase de liga" };
   }
   return { type: "single-table", grouped: false, label: "Classificação" };
