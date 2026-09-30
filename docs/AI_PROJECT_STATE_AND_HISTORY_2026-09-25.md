@@ -1065,3 +1065,57 @@ O `_worker.js` passou a sincronizar automaticamente `content/noticias-index.json
 A configuração de Build Watch Paths mantém-se intencional: o índice é o artefacto que desencadeia a publicação do estado editorial; uploads e Markdown individual não criam builds intermédios.
 
 **Estado:** correção aplicada; aguardar conclusão do deployment para validação final em produção.
+
+
+# 67. PUBLICAÇÃO ADMINISTRATIVA + BUILD WATCH PATHS — CONSOLIDAÇÃO 2026-09-30
+
+## 67.1 Decisão sobre deployments
+A configuração de Build Watch Paths foi mantida deliberadamente seletiva:
+- `path_includes: ["*"]`;
+- `path_excludes: ["docs/*", "images/uploads/*", "content/noticias/*"]`;
+- produção em `main`;
+- deployments automáticos de produção continuam ativos.
+
+A intenção original foi evitar builds intermédios/duplicados quando uma operação do Admin gera vários commits relacionados com conteúdo, imagens e documentação. O Cloudflare Pages suporta explicitamente este mecanismo: paths excluídos são ignorados antes da avaliação dos paths incluídos; se nenhum path restante corresponder, o build é ignorado. citeturn0search0
+
+## 67.2 O que correu mal
+A estratégia de excluir `content/noticias/*` revelou uma lacuna no fluxo de publicação: o Admin gravava o Markdown da notícia, mas não atualizava automaticamente `content/noticias-index.json`.
+
+Resultado:
+- o commit do Markdown foi corretamente ignorado pelo Build Watch Paths;
+- o índice público permaneceu desatualizado;
+- a notícia existia no GitHub, mas não era descoberta/publicada no site.
+
+Isto não significou que a configuração de deployments automáticos estivesse desligada. Os deployments automáticos de produção continuavam ativos; o problema era especificamente o filtro de paths e a ausência de sincronização do índice.
+
+## 67.3 Correção estrutural
+O `_worker.js` passou a sincronizar `content/noticias-index.json` automaticamente após PUT/DELETE de notícias.
+
+Commit:
+`70b1b1af483c1a6f2f4305fc6b0e11bbe4d5921e`
+
+Deployment de produção:
+`6cb198fe` — SUCCESS.
+
+A publicação fica agora com esta sequência lógica:
+1. Admin grava/atualiza o Markdown;
+2. Worker sincroniza o índice editorial;
+3. a alteração do índice permanece dentro dos watch paths;
+4. o índice funciona como gate de publicação;
+5. Cloudflare faz o deployment do estado editorial completo.
+
+Se a sincronização do índice falhar, a API sinaliza a falha em vez de considerar a publicação concluída.
+
+## 67.4 Regra para futuras IAs
+Não remover os Build Watch Paths apenas porque um Markdown individual não dispara deployment.
+
+Antes de alterar esta arquitetura, verificar:
+- se o índice editorial continua a ser atualizado atomicamente pelo fluxo de publicação;
+- se uma publicação real gera o deployment esperado;
+- se commits isolados de `docs/*`, `images/uploads/*` e `content/noticias/*` continuam a ser ignorados quando apropriado.
+
+A configuração não deve ser confundida com "Cloudflare configurado para não fazer deployments": os deployments automáticos continuam ligados; apenas determinados paths são excluídos do trigger.
+
+## 67.5 Estado
+**RESOLVIDO E CONSOLIDADO.**
+Não reabrir esta decisão sem nova evidência de regressão ou duplicação de deployments.
