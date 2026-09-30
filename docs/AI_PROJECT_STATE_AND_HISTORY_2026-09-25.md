@@ -790,3 +790,27 @@ Se houver bloqueio:
 - nunca transformar um bloqueio num "próximo passo" vago.
 
 **O objetivo não é produzir mais alterações. É manter o sistema correto enquanto se avança.**
+
+
+# 64. HEADER INSTITUCIONAL + VALIDAÇÃO LIVE — 2026-09-30
+
+## 64.1 Header
+- "Sobre Nós" e "Contacto" foram removidos do menu principal em todas as páginas que usam o header do site.
+- Permanecem acessíveis no bloco de navegação do footer.
+- O header principal fica uniformizado com: Home → Notícias → Opinião → Competições.
+- Foram preservados os links institucionais no footer e as páginas existentes.
+
+## 64.2 AdSense / navegação
+- A documentação atual do Google AdSense exige conteúdo/divulgações de privacidade e cookies adequadas, mas não determina que "Sobre Nós" ou "Contacto" estejam no menu principal.
+- A decisão de UX é manter esses links no footer, sem os tornar menos acessíveis.
+
+## 64.3 LIVE — validação real no D1
+- O Worker de cron cpc-football-cron está ativo e chama /api/competicoes em rotação pelas 7 competições.
+- D1 FOOTBALL_CACHE_DB foi consultado diretamente.
+- Nas entradas atuais da cache não existe nenhum fixture com estado LIVE/in_progress/in_play/inplay/ongoing.
+- Existem jogos futuros na cache; portanto a ausência do bloco "JOGOS EM DIRETO" na Home, neste momento, é compatível com o comportamento implementado: o bloco é renderizado apenas quando existe pelo menos um jogo efetivamente LIVE.
+- Exemplo de próximo jogo encontrado: Azerbaijão — Liechtenstein, 01/10/2026 16:00 UTC, estado notstarted.
+- Não foram encontradas evidências, nesta verificação, de que o Worker/cache esteja atualmente a bloquear jogos LIVE.
+
+## 64.4 Shorts
+- A utilizadora confirmou que novos Shorts começaram a entrar na Home; isto é consistente com o refresh periódico/cache-buster já implementado.
