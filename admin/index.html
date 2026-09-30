@@ -421,12 +421,42 @@
             margin-bottom: 15px;
         }
 
+        .image-preview-wrap {
+            position: relative;
+            display: none;
+            width: fit-content;
+            max-width: 100%;
+            margin-top: 10px;
+        }
+
         .image-preview {
             max-width: 220px;
-            max-height: 140px;
-            margin-top: 10px;
+            max-height: 180px;
             border-radius: 8px;
-            display: none;
+            display: block;
+            object-fit: cover;
+        }
+
+        .image-preview-remove {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 26px;
+            height: 26px;
+            border: 0;
+            border-radius: 50%;
+            background: #dc2626;
+            color: #fff;
+            font-size: 18px;
+            line-height: 26px;
+            padding: 0;
+            cursor: pointer;
+            font-weight: 700;
+            box-shadow: 0 1px 5px rgba(0,0,0,.25);
+        }
+
+        .image-preview-remove:hover {
+            background: #b91c1c;
         }
 
         .image-help {
@@ -984,11 +1014,21 @@
                     Podes enviar JPEG, PNG ou WebP até 5 MiB, colar um URL ou pesquisar imagens com licença aberta. As imagens pesquisadas ficam alojadas no servidor de origem e não ocupam espaço no site.
                 </div>
 
-                <img
-                    id="image-preview"
-                    class="image-preview"
-                    alt="Pré-visualização da imagem"
-                >
+                <div id="image-preview-wrap" class="image-preview-wrap">
+                    <img
+                        id="image-preview"
+                        class="image-preview"
+                        alt="Pré-visualização da imagem"
+                    >
+                    <button
+                        type="button"
+                        id="image-preview-remove"
+                        class="image-preview-remove"
+                        title="Remover imagem"
+                        aria-label="Remover imagem"
+                        onclick="removerImagemSelecionada()"
+                    >×</button>
+                </div>
 
             </div>
 
@@ -3957,23 +3997,127 @@ function mostrarPreview(url) {
             "image-preview"
         );
 
-    if (!url) {
+    const wrap =
+        document.getElementById(
+            "image-preview-wrap"
+        );
 
-        preview.style.display =
+    const help =
+        document.querySelector(".image-help");
+
+    const normalizedUrl =
+        normalizarUrlImagem(url);
+
+    if (!normalizedUrl) {
+
+        wrap.style.display =
             "none";
 
-        preview.src =
-            "";
+        preview.removeAttribute("src");
 
         return;
     }
 
-    preview.src =
-        normalizarUrlImagem(url);
+    preview.onload = () => {
+        wrap.style.display = "block";
+        if (help) {
+            help.textContent =
+                "Imagem pronta. Podes removê-la no × e escolher outra.";
+        }
+    };
 
-    preview.style.display =
-        "block";
+    preview.onerror = () => {
+        wrap.style.display = "none";
+        preview.removeAttribute("src");
+        if (help) {
+            help.textContent =
+                "Não foi possível carregar esta imagem. Se colaste um URL, tem de ser o URL direto do ficheiro de imagem (JPG, PNG ou WebP), não o endereço da página do Google.";
+        }
+    };
+
+    preview.src =
+        normalizedUrl;
 }
+
+function removerImagemSelecionada() {
+
+    const fileInput =
+        document.getElementById("image-upload");
+
+    const urlInput =
+        document.getElementById("noticia-imagem-url");
+
+    if (fileInput) {
+        fileInput.value = "";
+    }
+
+    if (urlInput) {
+        urlInput.value = "";
+    }
+
+    mostrarPreview("");
+
+    const help =
+        document.querySelector(".image-help");
+
+    if (help) {
+        help.textContent =
+            "Podes enviar JPEG, PNG ou WebP até 5 MiB, colar um URL direto de imagem ou pesquisar imagens com licença aberta.";
+    }
+}
+
+document
+    .getElementById("image-upload")
+    .addEventListener("change", function() {
+
+        const file =
+            this.files?.[0];
+
+        if (!file) {
+            mostrarPreview("");
+            return;
+        }
+
+        const allowedTypes =
+            ["image/jpeg", "image/png", "image/webp"];
+
+        if (!allowedTypes.includes(file.type)) {
+            this.value = "";
+            removerImagemSelecionada();
+            alert("Formato não permitido. Seleciona uma imagem JPEG, PNG ou WebP.");
+            return;
+        }
+
+        const objectUrl =
+            URL.createObjectURL(file);
+
+        const urlInput =
+            document.getElementById("noticia-imagem-url");
+
+        if (urlInput) {
+            urlInput.value = "";
+        }
+
+        mostrarPreview(objectUrl);
+
+        const help =
+            document.querySelector(".image-help");
+
+        if (help) {
+            help.textContent =
+                "Fotografia selecionada. Podes removê-la no × antes de publicar.";
+        }
+
+        const preview =
+            document.getElementById("image-preview");
+
+        if (preview) {
+            preview.onload = () => {
+                document.getElementById("image-preview-wrap").style.display = "block";
+                URL.revokeObjectURL(objectUrl);
+            };
+        }
+    });
 
 
 // ============================================================
