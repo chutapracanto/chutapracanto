@@ -264,8 +264,9 @@ Antes de alterar:
 ## 15. CONSOLIDAÇÃO 2026-09-30.1 — FILA ATUAL
 
 ### Admin / criação de conteúdo
-- Investigar por que algumas imagens carregadas podem falhar e tornar o erro observável sem perder o conteúdo.
-- Melhorar relevância/qualidade da pesquisa de imagens externas (Openverse + Wikimedia Commons).
+- Regressão de previews de uploads antigos identificada e corrigida: os ficheiros em `images/uploads/` nunca foram apagados; o problema estava na normalização de caminhos locais no Admin.
+- Pesquisa de imagens melhorada: Openverse + Wikimedia Commons, maior cobertura, pesquisa direta de categoria quando disponível, filtro de relevância e preferência por capas horizontais.
+- Importação de imagens externas para `images/uploads/` está implementada; preservação explícita de origem/licença/atribuição permanece melhoria futura.
 - Manter o cancelar/remover da imagem selecionada claro e seguro.
 - Implementar **Guardar como rascunho** antes de publicar; rascunhos não podem entrar no índice público nem sitemap.
 - Não alterar o fluxo de publicação atual até o modelo de rascunho estar desenhado.
