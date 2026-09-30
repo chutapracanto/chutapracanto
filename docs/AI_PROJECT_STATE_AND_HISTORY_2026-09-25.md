@@ -1043,3 +1043,25 @@ O MVP de distribuição não deve ser implementado ainda porque faltam autoriza�
 Esta dependência é externa ao GitHub/Cloudflare. Não foram criados tokens, endpoints fictícios nem armazenamento de credenciais.
 
 **Standby:** imagens do Admin continuam deliberadamente fora desta linha de trabalho.
+
+
+# 66. INCIDENTE 2026-09-30 — ÚLTIMA NOTÍCIA NÃO PUBLICADA
+
+## Diagnóstico
+A notícia “Passaporte carimbado nos Açores: Seleção Sub-21 goleia Gibraltar (4-0) com 'golaço' de Rodrigo Mora e garante Euro 2027” foi corretamente gravada no GitHub em `content/noticias/...`. A imagem também foi gravada. O problema estava no índice editorial: `content/noticias-index.json` não tinha a nova entrada.
+
+O Admin utilizava `PUT /api/admin/news` para guardar o Markdown, mas essa rota não sincronizava o índice. Como o Build Watch Paths exclui `content/noticias/*`, o commit do Markdown foi corretamente ignorado pelo Cloudflare. Sem atualização do índice, a produção continuou a servir o índice anterior.
+
+## Correção imediata
+- Entrada da notícia adicionada a `content/noticias-index.json`.
+- Índice ordenado por data de publicação.
+- Commit: `b4181c9c80b97d4f63b4feb88f948dcaddd9f1d2`.
+
+## Correção estrutural
+O `_worker.js` passou a sincronizar automaticamente `content/noticias-index.json` após PUT/DELETE de conteúdo editorial, preservando metadados existentes quando disponíveis.
+- Commit: `70b1b1af483c1a6f2f4305fc6b0e11bbe4d5921e`.
+- Deployment: `6cb198fe`.
+
+A configuração de Build Watch Paths mantém-se intencional: o índice é o artefacto que desencadeia a publicação do estado editorial; uploads e Markdown individual não criam builds intermédios.
+
+**Estado:** correção aplicada; aguardar conclusão do deployment para validação final em produção.
