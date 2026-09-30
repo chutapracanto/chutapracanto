@@ -251,8 +251,10 @@ function nationsGroupLabel(group){return "Liga "+group.charAt(0)+" · Grupo "+gr
 function renderGroupFilter(){
   const isGrouped=Boolean(competitionPhase?.grouped);
   groupFilterWrap.hidden=!isGrouped;
-  roundEl.hidden=isGrouped;
-  if(!isGrouped)return;
+  if(!isGrouped){
+    groupFilter="all";
+    return;
+  }
   const groups=[...new Set(allStandings.map(row=>String(row?.groupName||"").trim()).filter(Boolean))];
   if(active==="nations-league"){
     for(const group of Object.keys(NATIONS_GROUPS)) if(!groups.includes(group)) groups.push(group);
@@ -262,13 +264,13 @@ function renderGroupFilter(){
     if(na&&nb)return (na[1]+na[2]).localeCompare(nb[1]+nb[2]);
     return a.localeCompare(b,"pt-PT");
   });
-  groupEl.innerHTML=groups.map(group=>{
+  groupEl.innerHTML='<option value="all">Todos os grupos</option>'+groups.map(group=>{
     const label=/^[A-D][1-4]$/i.test(group)?nationsGroupLabel(group.toUpperCase()):group;
     return '<option value="'+esc(group)+'">'+esc(label)+'</option>';
   }).join("");
-  if(!groups.includes(groupFilter))groupFilter=groups[0]||"";
+  if(groupFilter!=="all"&&!groups.includes(groupFilter))groupFilter="all";
   groupEl.value=groupFilter;
-  if(standingsScopeEl)standingsScopeEl.textContent=/^[A-D][1-4]$/i.test(groupFilter)?nationsGroupLabel(groupFilter):groupFilter||competitionPhase.label;
+  if(standingsScopeEl)standingsScopeEl.textContent=groupFilter==="all"?"Todos os grupos":(/^[A-D][1-4]$/i.test(groupFilter)?nationsGroupLabel(groupFilter):groupFilter);
 }
 
 
@@ -314,7 +316,12 @@ function roundIdentity(item){
   const roundKey=String(item?.roundKey??item?.round??item?.roundLabel??"sem-jornada").trim()||"sem-jornada";
   const roundLabel=String(item?.roundLabel||item?.round||"").trim();
   const displayStage=translateRound(stageLabel);
-  const displayRound=translateRound(roundLabel||roundKey);
+  let displayRound=translateRound(roundLabel||roundKey);
+  if(displayRound&&displayStage){
+    const prefix=displayStage+" · ";
+    if(displayRound.toLowerCase().startsWith(prefix.toLowerCase()))displayRound=displayRound.slice(prefix.length).trim();
+    if(displayRound.toLowerCase()===displayStage.toLowerCase())displayRound="";
+  }
   return {key:JSON.stringify([stageKey,roundKey]),stageKey,stageLabel:displayStage||stageLabel,roundKey,displayRound};
 }
 function fixtureDomKey(item){return String(item?.id??[item?.kickoff,item?.homeTeam?.name,item?.awayTeam?.name].join("|"))}
@@ -396,7 +403,6 @@ function renderHighlight(){
     '<div class="highlight-team"><img src="'+teamLogo(item.awayTeam)+'" alt=""><span>'+away+'</span></div>';
 }
 function renderRounds(selectUpcoming=false){
-  if(competitionPhase.grouped){roundEl.value="all";return}
   const rounds=new Map();
   allFixtures.forEach(item=>{
     const round=roundIdentity(item);
@@ -414,7 +420,7 @@ function renderRounds(selectUpcoming=false){
   const previous=roundEl.value;
   const options=[...rounds.values()].sort((a,b)=>a.firstKickoff-b.firstKickoff||a.stageLabel.localeCompare(b.stageLabel,"pt-PT"));
   if(active==="liga-portugal") options.sort((a,b)=>a.firstKickoff-b.firstKickoff);
-  const labels=options.map(round=>round.stageLabel+" · "+round.displayRound);
+  const labels=options.map(round=>round.displayRound?round.stageLabel+" · "+round.displayRound:round.stageLabel);
   const labelCounts=new Map(labels.map(label=>[label,labels.filter(item=>item===label).length]));
   roundEl.innerHTML='<option value="all">Todas as jornadas</option>'+options.map((round,index)=>{
     const label=labels[index]+(labelCounts.get(labels[index])>1?" · "+round.stageKey:"");
@@ -444,11 +450,11 @@ function visibleFixtures(){
   let rows=allFixtures.filter(item=>{
     const status=fixtureStatus(item);
     const statusMatches=fixtureFilter==="all"||(fixtureFilter==="upcoming"?(status==="upcoming"||status==="live"):status==="finished");
-    const groupMatches=!competitionPhase.grouped || (active==="nations-league" ? nationsGroupName(item)===groupFilter : String(item?.groupName||"").trim()===groupFilter);
+    const groupMatches=!competitionPhase.grouped || groupFilter==="all" || (active==="nations-league" ? nationsGroupName(item)===groupFilter : String(item?.groupName||"").trim()===groupFilter);
     return statusMatches&&groupMatches;
   });
   const selectedRound=roundEl.value;
-  if(active!=="nations-league"&&selectedRound!=="all")rows=rows.filter(item=>roundIdentity(item).key===selectedRound);
+  if(selectedRound!=="all")rows=rows.filter(item=>roundIdentity(item).key===selectedRound);
   rows.sort((a,b)=>{
     const as=fixtureStatus(a),bs=fixtureStatus(b),ad=dateValue(a)?.getTime()||0,bd=dateValue(b)?.getTime()||0;
     if(fixtureFilter==="finished")return bd-ad;
@@ -521,8 +527,8 @@ function patchFixtureRow(item){
   if(scoreBox)scoreBox.title=state==="upcoming"?"Próximo jogo":state==="live"?"Em jogo":state==="finished"?"Resultado":"Jogo";
 }
 function patchHighlight(){
-  const scopedFixtures=active==="nations-league"
-    ? allFixtures.filter(item=>nationsGroupName(item)===groupFilter)
+  const scopedFixtures=competitionPhase.grouped&&groupFilter!=="all"
+    ? allFixtures.filter(item=>active==="nations-league" ? nationsGroupName(item)===groupFilter : String(item?.groupName||"").trim()===groupFilter)
     : allFixtures;
   const candidates=scopedFixtures.filter(item=>fixtureStatus(item)==="upcoming"||fixtureStatus(item)==="live")
     .sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity));
@@ -562,12 +568,12 @@ function updateLiveSnapshot(data){
   updateCompetitionLiveState();
 }
 function renderStandings(rows){
-  if(competitionPhase.grouped)rows=rows.filter(row=>{
+  if(competitionPhase.grouped&&groupFilter!=="all")rows=rows.filter(row=>{
     const raw=String(row?.groupName||"").trim();
     return active==="nations-league" ? (nationsGroupName({team:row.team,groupName:raw})===groupFilter||raw===groupFilter) : raw===groupFilter;
   });
   if(!rows.length){standingsEl.innerHTML='<div class="empty">Esta competição não disponibiliza uma classificação neste formato.</div>';return}
-  if(standingsScopeEl)standingsScopeEl.textContent=competitionPhase.grouped ? (/^[A-D][1-4]$/i.test(groupFilter)?nationsGroupLabel(groupFilter):groupFilter) : competitionPhase.label;
+  if(standingsScopeEl)standingsScopeEl.textContent=competitionPhase.grouped ? (groupFilter==="all"?"Todos os grupos":(/^[A-D][1-4]$/i.test(groupFilter)?nationsGroupLabel(groupFilter):groupFilter)) : competitionPhase.label;
   const grouped=new Map();rows.forEach(row=>{
     const key=active==="nations-league"
       ? (nationsGroupName({team:row.team, groupName:row.groupName}) || String(row.groupName||"").trim() || "__single__")
@@ -686,17 +692,22 @@ document.querySelectorAll(".competition-filter").forEach(button=>button.addEvent
   fixtureFilter=button.dataset.filter;
   setCompetitionFilterState();
   roundEl.value="all";
+  if(fixtureFilter==="all"){
+    groupFilter="all";
+    renderGroupFilter();
+  }
   loadCompetition(active,fixtureFilter,true);
 }));
 groupEl.addEventListener("change",()=>{
-  groupFilter=groupEl.value||"A4";
+  groupFilter=groupEl.value||"all";
+  roundEl.value="all";
   renderGroupFilter();
   renderFixtures();
   renderStandings(allStandings);
   renderHighlight();
+  scheduleCompetitionRefresh();
 });
 roundEl.addEventListener("change",()=>{
-  if(active==="nations-league"){roundEl.value="all";renderFixtures();scheduleCompetitionRefresh();return}
   if(roundEl.value==="all"){ renderFixtures(); scheduleCompetitionRefresh(); return; }
   if(loadedAllSnapshot){ renderFixtures(); return; }
   const requestStatus=fixtureFilter==="finished"?"finished":fixtureFilter==="upcoming"?"upcoming":"all";
@@ -718,7 +729,7 @@ document.addEventListener("visibilitychange",()=>{
 });
 active=new URLSearchParams(location.search).get("competition")||"liga-portugal";
 if(!competitions.some(item=>item[0]===active))active="liga-portugal";
-groupFilter=active==="nations-league"?"A1":"";
+groupFilter="all";
 renderGroupFilter();
 setCompetitionFilterState();
 loadCompetition(active,fixtureFilter,true);
