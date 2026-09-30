@@ -876,8 +876,8 @@ Infraestrutura técnica já existe: canonical, robots, sitemap, OG/Twitter e JSO
 
 ## Vídeo
 Objetivo: upload único e distribuição por plataforma com estados independentes, retry e proteção contra duplicação.
-- YouTube: upload + resumable upload oficiais. citeturn0search2turn0search4
-- TikTok: Direct Post + Upload para rascunho; app/OAuth/scopes e requisitos de aprovação/auditoria; `PULL_FROM_URL` disponível. citeturn0search0turn0search3
+- YouTube: upload + resumable upload oficiais. (Google Developers: YouTube Data API upload/resumable upload)
+- TikTok: Direct Post + Upload para rascunho; app/OAuth/scopes e requisitos de aprovação/auditoria; `PULL_FROM_URL` disponível. (TikTok for Developers: Content Posting API)
 - Meta/Instagram/Facebook: matriz de APIs/permissões ainda por validar.
 Não implementar o MVP antes de fechar contas, OAuth, permissões, quotas, formatos e aprovação.
 
