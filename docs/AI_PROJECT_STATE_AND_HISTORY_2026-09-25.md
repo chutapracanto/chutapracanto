@@ -1310,3 +1310,11 @@ Estado no ciclo atual:
 - Portanto, neste momento a evidência aponta para execução/propagação do Cron Trigger, mas NÃO prova ainda a causa exata.
 - Não foram alterados frontend, BSD adapter, cache/D1 ou lógica das competições durante este diagnóstico.
 - Não repetir PUT do mesmo schedule sem evidência nova. Próxima decisão técnica deve depender de nova evidência de execução após a janela de propagação ou de uma alternativa de observabilidade que permita confirmar a invocação.
+
+
+### Atualização 18:51 UTC
+- Nova consulta de telemetria até 18:50 UTC também não encontrou a mensagem `Football cron` nem qualquer evento cron observável.
+- A pesquisa da API Cloudflare confirmou que não existe endpoint REST de execução manual de `scheduled()`; apenas gestão do schedule está exposta.
+- Foi confirmada a configuração Wrangler `workers/football-cron/wrangler.toml`: `crons = ["*/5 * * * *"]`, D1 correto e sem segundo trigger.
+- A documentação Cloudflare atual confirma propagação de alterações de Cron Trigger até 15 minutos; neste momento não há evidência suficiente para afirmar falha do código do Worker.
+- A linha de investigação autónoma chegou ao limite das ferramentas desta sessão: falta observar diretamente o Cron Events/Tail no Dashboard/CLI depois da janela de propagação.
