@@ -154,7 +154,7 @@ nav a:hover, nav a.active {
     width: 100%;
   }
   nav ul {
-    justify-content: flex-start;
+    justify-content: center;
     flex-wrap: nowrap;
     gap: 0 .75rem;
     white-space: nowrap;
