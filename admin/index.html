@@ -4374,6 +4374,10 @@ function mostrarPreview(url) {
         return;
     }
 
+    // Mostrar o contentor imediatamente para que o botão × fique sempre
+    // disponível enquanto a imagem carrega.
+    wrap.style.display = "block";
+
     preview.onload = () => {
         wrap.style.display = "block";
         if (help) {
@@ -4515,11 +4519,31 @@ function previsualizarNoticia() {
             .value
             .trim();
 
-    const imagem =
+    const imagemUrl =
         document
             .getElementById("noticia-imagem-url")
             .value
             .trim();
+
+    const imagemPreviewEl =
+        document.getElementById("image-preview");
+
+    const imagemPreviewWrap =
+        document.getElementById("image-preview-wrap");
+
+    // Se a imagem veio de upload local, o URL está no <img> de pré-visualização
+    // como blob:... e não no campo de URL. A pré-visualização do artigo deve
+    // usar essa mesma imagem, independentemente da origem.
+    const imagem =
+        imagemUrl ||
+        (
+            imagemPreviewEl &&
+            imagemPreviewWrap &&
+            imagemPreviewWrap.style.display !== "none" &&
+            imagemPreviewEl.src
+                ? imagemPreviewEl.src
+                : ""
+        );
 
     document
         .getElementById("preview-title")
