@@ -26,7 +26,7 @@ export default {
       if (row?.season_id) seasonId = String(row.season_id);
     }
 
-    const params = new URLSearchParams({ competition });
+    const params = new URLSearchParams({\n      competition,\n      _cron: String(controller.scheduledTime)\n    });
     if (seasonId) params.set("seasonId", seasonId);
 
     const response = await fetch(
