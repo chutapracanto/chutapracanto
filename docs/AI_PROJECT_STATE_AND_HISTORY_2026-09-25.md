@@ -1451,3 +1451,72 @@ A validação final deve ser feita após uma execução posterior ao deployment:
 4. confirmar Home e Competições.
 
 Até essa validação, a correção está **deployada mas não declarada como PASS runtime**.
+
+
+# 77. CORREÇÃO 2026-10-01 — CRON FORCE-REFRESH NO ENDPOINT
+
+## 77.1 Remendo adicional após a correção HTTP
+A correção de cache: "no-store" no cpc-football-cron eliminava a cache HTTP do subrequest, mas a investigação do _worker.js encontrou uma segunda camada independente: o próprio /api/competicoes podia devolver uma entrada D1 fresca antes de chegar ao BSD.
+
+Assim, mesmo que o Cron executasse corretamente e o subrequest não fosse servido da cache HTTP, isso não garantia que a D1 fosse renovada.
+
+## 77.2 Correção aplicada
+No _worker.js, /api/competicoes passou a reconhecer a presença do parâmetro interno _cron.
+
+Quando _cron está presente:
+- não reutiliza diretamente getFootballCache() para a chave pedida;
+- segue para o fluxo de refresh BSD;
+- grava o novo snapshot através de putFootballCache();
+- mantém o comportamento normal para pedidos públicos sem _cron.
+
+O Cron já envia _cron=controller.scheduledTime, tornando cada pedido único. O no-store continua presente.
+
+Commit:
+- 6d1c117bdc6717f93753ab387b0fa8d6de966560
+- fix(football): force cron requests to refresh BSD cache
+
+## 77.3 Deploy Pages
+O commit desencadeou novo deployment de produção do Pages:
+- deployment: 6b8e6ad7-04a4-4efa-97f1-062bbe3bfe06;
+- commit: 6d1c117bdc6717f93753ab387b0fa8d6de966560;
+- build confirmado como SUCCESS;
+- no momento do registo, a etapa de deploy ainda estava ACTIVE.
+
+## 77.4 O que foi alterado e o que NÃO foi alterado
+Alterado:
+- bypass da cache HTTP no Cron;
+- URL única por execução do Cron;
+- bypass da cache D1 para pedidos marcados internamente pelo Cron.
+
+Não alterado:
+- frontend Home/Competições;
+- inferência de fases;
+- filtros/grupos/jornadas;
+- fornecedor BSD;
+- schema D1;
+- arquitetura Pages → D1 → frontend;
+- frequência do Cron (*/5 * * * *);
+- existência do único Worker cpc-football-cron.
+
+## 77.5 Risco/regressão a vigiar
+Esta correção é deliberadamente mínima, mas o efeito real deve ser observado porque força cada execução do Cron a consultar o BSD em vez de reutilizar a cache D1.
+
+Se aparecer comportamento incorreto depois desta alteração, verificar primeiro:
+1. respostas/erros do BSD;
+2. normalização do adapter BSD;
+3. escrita putFootballCache();
+4. fetched_at e payload na D1;
+5. só depois Home/Competições.
+
+Não desfazer nem criar outro remendo apenas porque a UI parece errada; comparar primeiro o snapshot D1 e a resposta do endpoint.
+
+## 77.6 Critério objetivo de PASS
+A correção não é considerada definitivamente validada apenas por deployment SUCCESS.
+
+PASS runtime quando, após uma execução real do Cron:
+- fetched_at de pelo menos uma competição fica posterior ao último valor de 2026-09-30;
+- o payload D1 corresponde ao snapshot atual esperado;
+- Home e Competições deixam de apresentar os dados congelados;
+- uma execução posterior continua a renovar a cache sem criar duplicações ou novos Workers/triggers.
+
+Se estes pontos forem confirmados, o incidente pode ser marcado como resolvido.
