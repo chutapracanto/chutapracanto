@@ -1156,3 +1156,75 @@ Estado verificado diretamente:
 - deployment canónico 6cb198fe... SUCCESS e alias https://chutapracanto.com.
 
 **Estado geral:** nenhuma regressão nova encontrada. A próxima dependência real é acesso ao Search Console ou, em alternativa, teste funcional do rascunho no Admin quando houver browser disponível.
+
+# 72. CICLO 2026-10-01 — ADMIN IMAGENS: IMPORTAÇÃO EXTERNA + PREVIEWS
+
+## 72.1 Estado real após os últimos commits
+
+Depois da verificação anterior, o fluxo de imagens do Admin avançou além do estado registado na secção 71:
+
+- a importação de imagem externa para `images/uploads/` está implementada no `_worker.js` através de `POST /api/admin/image/import`;
+- commits que apenas adicionam ficheiros em `images/uploads/*` continuam corretamente a ser ignorados pelo Build Watch Paths;
+- a publicação da alteração de código ocorre quando `admin/index.html` / `_worker.js` são alterados, porque esses caminhos continuam incluídos no trigger;
+- o Admin passou a manter a origem de preview separada do caminho persistido, evitando que uma imagem temporária do navegador seja perdida antes da importação/publicação.
+
+## 72.2 Correções de preview
+
+Sequência relevante em `main`:
+
+- `64e792c752f1fd3bd0fea80965bee3c413a1837d` — correção da pré-visualização da imagem no editor;
+- `1a153ebc3e593fdda1f7bcd0113a972219aab500` — correção de preview de imagens locais/importadas;
+- `71a55d55039fa0a4e5415688aa50ac0a30850856` — preservação de URLs `blob:`/`data:` para previews locais do navegador.
+
+A correção final em `71a55d...` também removeu a revogação prematura do `blob:` URL no `onload`, que poderia invalidar a fonte temporária enquanto o Admin ainda precisava dela.
+
+## 72.3 Importação externa e Build Watch Paths
+
+Foram observados commits de importação como:
+
+- `9313e05903bc635fec413e9e89173c8aaf2513f8`
+- `d122aa889d5bcd045037485e751a1b9534347d24`
+- `c5700b4e72fb3109471888004069b18215c6ab56`
+- `369faf62c841d618e5f488887244c824ec861090`
+
+A inspeção confirmou que estes commits são alterações em `images/uploads/*`, pelo que os deployments correspondentes foram corretamente marcados `skipped / path_config`. Isto não é uma falha de deployment.
+
+## 72.4 Cloudflare / produção
+
+Estado real verificado diretamente:
+
+- Pages `chutapracanto`: produção = `main`;
+- domínio canónico: `https://chutapracanto.com`;
+- Build Watch Paths:
+  - include `*`;
+  - exclude `docs/*`;
+  - exclude `images/uploads/*`;
+  - exclude `content/noticias/*`;
+- deployment de produção mais recente:
+  - commit `71a55d55039fa0a4e5415688aa50ac0a30850856`;
+  - deployment `60d23290-1f94-44a0-b327-574abd1bcf82`;
+  - estado `success`;
+  - alias canónico `https://chutapracanto.com`.
+
+O deployment confirma que o estado atual de `main` está publicado.
+
+## 72.5 Worker de futebol
+
+Cloudflare continua a mostrar exatamente um Worker separado:
+
+- `cpc-football-cron`;
+- handler `scheduled`;
+- cron `*/5 * * * *`;
+- sem duplicação de triggers observada;
+- D1 `FOOTBALL_CACHE_DB` continua ligado ao Pages project.
+
+Não foi criada nem ressuscitada qualquer infraestrutura Worker adicional para o site.
+
+## 72.6 Estado operacional atualizado
+
+A frente Admin/imagens já não está no estado descrito pelos primeiros registos de 30/09. A importação externa e as correções de preview estão efetivamente em `main` e publicadas.
+
+Permanece como backlog separado a futura **pesquisa inteligente de imagens**, que deve inferir termos a partir do conteúdo da notícia antes da pesquisa, sem substituir a pesquisa manual.
+
+A validação funcional final de interação no Admin continua a depender de execução num browser autenticado. Não foi inventada essa evidência.
+
