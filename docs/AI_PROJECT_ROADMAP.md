@@ -400,3 +400,36 @@ No fluxo de criação de notícia do Admin, ao clicar em **Pesquisar imagens**, 
 - preservar os critérios já existentes de relevância, qualidade/resolução, proporção e adequação da imagem.
 
 **Importante:** esta entrada é apenas uma ideia para o roadmap. Não alterar o Admin, APIs de imagens, pesquisa Openverse/Wikimedia ou fluxo editorial por causa desta ideia nesta fase.
+
+
+## 18. ATUALIZAÇÃO 2026-10-01 — CRON / API COMPETIÇÕES 503
+
+### Estado
+A frente de dados de futebol continua ativa até o refresh automático voltar a escrever no D1.
+
+### Diagnóstico fechado
+O Cron `cpc-football-cron` tem uma única agenda `*/5 * * * *` e estava a executar chamadas para `https://chutapracanto.com/api/competicoes`. O último erro observável confirmado foi HTTP 503 no ciclo de Champions League. O D1 não recebe novo refresh desde 15:35 UTC.
+
+A investigação encontrou uma condicionante de arquitetura Cloudflare: o Cron Worker faz fetch para um Pages Worker no mesmo domínio/zona, mas o Worker Cron estava sem a compatibilidade `global_fetch_strictly_public`. A Cloudflare documenta que Worker→Worker via fetch requer Service Binding ou essa compatibilidade para este tipo de chamada. citeturn4search0turn4search2
+
+### Correção aplicada
+Aplicado diretamente no Worker existente:
+- `global_fetch_strictly_public` ativo;
+- Cron mantido em `*/5 * * * *`;
+- D1 mantido;
+- nenhum Worker adicional criado;
+- nenhum novo remendo de cache introduzido.
+
+Deployment/version ativa: `ccc410e9-05e0-4720-a30b-91187fb81550`, 100%.
+
+### Validação pendente automática
+O próximo ciclo deve confirmar duas coisas:
+1. nova invocação do Cron sem 503;
+2. nova escrita/atualização em `FOOTBALL_CACHE_DB`.
+
+Workers/Pages logs são a fonte adequada para confirmar invocações e erros. citeturn3search10turn0search2
+
+### Persistência
+O runtime Cloudflare já está corrigido. A mesma configuração deve ser persistida em `workers/football-cron/wrangler.toml` antes de qualquer futuro deploy Wrangler/Codex, para impedir regressão.
+
+**Estado:** CORREÇÃO DE RUNTIME APLICADA — aguardar primeiro ciclo de validação. Imagens continuam em standby.
