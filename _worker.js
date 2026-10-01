@@ -3228,9 +3228,10 @@ async function handleFootballCompetitionAPI(request, env) {
     return json({ error: "Status inválido." }, 400);
   }
   const cacheKey = footballCacheKey(competitionKey, seasonId, stage, round, status);
+  const cronRefresh = url.searchParams.has("_cron");
 
   try {
-    const cached = await getFootballCache(env, cacheKey);
+    const cached = cronRefresh ? null : await getFootballCache(env, cacheKey);
 
     if (cached?.state === "fresh" && footballCacheSeasonIsCurrent(cached.payload)) {
       if ((status === "upcoming" || status === "all") && !round) {
