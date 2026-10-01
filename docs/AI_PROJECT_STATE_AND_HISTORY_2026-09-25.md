@@ -1228,3 +1228,69 @@ Permanece como backlog separado a futura **pesquisa inteligente de imagens**, qu
 
 A validação funcional final de interação no Admin continua a depender de execução num browser autenticado. Não foi inventada essa evidência.
 
+# 73. INCIDENTE 2026-10-01 — COMPETIÇÕES INDISPONÍVEIS
+
+## 73.1 Diagnóstico inicial confirmado
+
+A regressão afeta simultaneamente:
+- Home → classificações/jogos/LIVE;
+- página Competições.
+
+A camada comum é `/api/competicoes`, servida pelo Pages Worker. A UI continua a apontar para este endpoint; não foi encontrada alteração recente na lógica de competições em `main` depois do último código de futebol validado.
+
+A investigação direta ao D1 confirmou que **nenhuma competição foi refrescada desde 2026-09-30 15:35 UTC**:
+- Taça de Portugal: 15:35:19;
+- Liga Portugal: 15:34:17;
+- Nations League: 15:34:17;
+- Europa League: 15:34:17;
+- Conference League: 15:34:17;
+- Champions League: 15:30:12;
+- Taça da Liga: 15:25:06.
+
+As épocas guardadas são válidas para 2026/27 e terminam em 2027-06-30, portanto a idade da cache é o problema observado, não uma mudança legítima de época.
+
+## 73.2 Cron / Cloudflare
+
+O Worker separado `cpc-football-cron` continua existente com:
+- único cron `*/5 * * * *`;
+- handler `scheduled`;
+- binding D1 correto `FOOTBALL_CACHE_DB`;
+- versões recentes 186–193 têm o mesmo etag de script e o mesmo binding.
+
+O cron estava configurado corretamente, mas o D1 não recebia novas escritas.
+
+Em 2026-10-01 18:08 UTC a trigger foi reaplicada explicitamente com exatamente o mesmo único cron:
+`*/5 * * * *`.
+Cloudflare confirmou a alteração com sucesso e atualizou `modified_on`.
+
+**Não foram criadas triggers adicionais nem alterado o intervalo.**
+
+Após o primeiro slot seguinte, às 18:10 UTC, ainda não havia nova escrita no D1. A alteração de trigger pode demorar vários minutos a propagar globalmente.
+
+## 73.3 Hipótese operacional atual
+
+A evidência aponta para uma falha/interrupção do ciclo de execução do `cpc-football-cron` ou da chamada que este faz ao `/api/competicoes`, e não para uma regressão da UI das competições.
+
+O código atual do cron:
+1. escolhe uma competição por slot de 5 minutos;
+2. lê o último `season_id` dessa competição no D1;
+3. chama `https://chutapracanto.com/api/competicoes?competition=...`;
+4. não grava diretamente no D1;
+5. marca `noRetry()` se o endpoint responder com status não-2xx.
+
+A próxima validação deve determinar se o cron voltou a executar após a reaplicação da trigger e, caso execute, qual status está a receber do endpoint.
+
+## 73.4 Regra de não-regressão
+
+Não alterar:
+- `cpcInferCompetitionPhase()`;
+- filtros Nations League;
+- arquitetura BSD/D1/cache;
+- frontend de Home/Competições;
+- fornecedor BSD.
+
+Primeiro recuperar a execução do ciclo de atualização e identificar a causa do erro. Só depois fazer alteração mínima, caso exista evidência de falha no código.
+
+## 73.5 Imagens
+
+A ideia de pesquisa inteligente de imagens baseada no teor da notícia está **já registada no Roadmap, secção 20, como BACKLOG / NÃO IMPLEMENTAR AGORA**. Permanece em standby e não faz parte deste incidente.
