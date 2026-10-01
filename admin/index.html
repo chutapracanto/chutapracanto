@@ -4470,15 +4470,7 @@ document
                 "Fotografia selecionada. Podes removê-la no × antes de publicar.";
         }
 
-        const preview =
-            document.getElementById("image-preview");
 
-        if (preview) {
-            preview.onload = () => {
-                document.getElementById("image-preview-wrap").style.display = "block";
-                URL.revokeObjectURL(objectUrl);
-            };
-        }
     });
 
 
@@ -5194,8 +5186,12 @@ function extrairUrlImagemDireta(valor) {
     let atual = String(valor).trim();
     if (!atual) return "";
 
+    // Fontes temporárias do navegador também são URLs válidos de preview.
+    if (atual.startsWith("blob:") || atual.startsWith("data:")) {
+        return atual;
+    }
+
     // Caminhos locais do próprio ChutaPraCanto devem continuar a funcionar.
-    // O problema anterior era tratar /images/uploads/... como se fosse URL externa.
     if (atual.startsWith("/") && !atual.startsWith("//")) {
         return atual;
     }
