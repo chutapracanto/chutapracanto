@@ -41,7 +41,12 @@ export default {
     );
 
     if (!response.ok) {
-      console.error("Football cron HTTP error", competition, response.status);
+      let detail = "";
+      try {
+        const body = await response.clone().json();
+        detail = body?.debugStage || body?.message || body?.error || "";
+      } catch {}
+      console.error("Football cron HTTP error", competition, response.status, detail);
       controller.noRetry();
       return;
     }
