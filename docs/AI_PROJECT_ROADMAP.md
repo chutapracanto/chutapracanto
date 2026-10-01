@@ -385,3 +385,18 @@ Não criar tokens fictícios, não colocar credenciais no frontend e não constr
 - O deployment mais recente é o commit documental 0fede328..., corretamente marcado como skipped / path_config; o deployment canónico continua a ser 6cb198fe..., SUCCESS, com alias de produção https://chutapracanto.com.
 
 **Fila após esta verificação:** Search Console aguarda acesso/dados; Admin aguarda teste funcional real; monetização permanece em preparação; distribuição de vídeo continua bloqueada apenas pelas autorizações externas já identificadas.
+
+## 20. IDEIA FUTURA — PESQUISA INTELIGENTE DE IMAGENS NO ADMIN
+
+**Estado: BACKLOG / NÃO IMPLEMENTAR AGORA.**
+
+No fluxo de criação de notícia do Admin, ao clicar em **Pesquisar imagens**, o sistema deverá no futuro:
+
+- analisar automaticamente o **título, teor/conteúdo e restantes metadados editoriais disponíveis** da notícia;
+- inferir os termos/conceitos mais relevantes para a pesquisa;
+- gerar automaticamente uma pesquisa de imagens contextualizada com a notícia;
+- apresentar imediatamente resultados relevantes, sem obrigar a utilizadora a escrever primeiro uma pesquisa manual;
+- manter sempre disponível a possibilidade de a utilizadora **alterar a pesquisa e pesquisar novamente** caso nenhum resultado seja adequado;
+- preservar os critérios já existentes de relevância, qualidade/resolução, proporção e adequação da imagem.
+
+**Importante:** esta entrada é apenas uma ideia para o roadmap. Não alterar o Admin, APIs de imagens, pesquisa Openverse/Wikimedia ou fluxo editorial por causa desta ideia nesta fase.
