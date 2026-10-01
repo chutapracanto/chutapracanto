@@ -571,8 +571,6 @@
   </div>
 </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
-
   <script src="https://cdn.jsdelivr.net/npm/marked@18.0.7/lib/marked.umd.js"></script>
   <script src="/vendor/dompurify-3.4.15.min.js"></script>
 
@@ -655,6 +653,48 @@
       if (script) script.textContent = JSON.stringify([schema, crumbs]);
     }
 
+    function parseArticleFrontmatter(source) {
+      const scalarKeys = new Set([
+        'title', 'subtitle', 'subtitulo', 'description', 'descricao', 'resumo',
+        'category', 'categoria', 'tag', 'author', 'authorUrl', 'author_url',
+        'published', 'date', 'dataNoticia', 'data', 'dateModified', 'date_modified',
+        'modified', 'image', 'imagem', 'featured_image', 'featuredImage'
+      ]);
+      const result = {};
+      for (const line of String(source || '').split(/\r?\n/)) {
+        const match = line.match(/^\s*([A-Za-z][A-Za-z0-9_-]*)\s*:\s*(.*?)\s*$/);
+        if (!match || !scalarKeys.has(match[1])) continue;
+        const key = match[1];
+        const rawValue = match[2].trim();
+        if (!rawValue || /^(?:~|null)$/i.test(rawValue)) {
+          result[key] = '';
+          continue;
+        }
+        const doubleQuoted = rawValue.match(/^("(?:\\.|[^"\\])*")(?:\s+#.*)?$/);
+        const singleQuoted = rawValue.match(/^'((?:[^']|'')*)'(?:\s+#.*)?$/);
+        let value;
+        if (doubleQuoted) {
+          try { value = JSON.parse(doubleQuoted[1]); }
+          catch { value = doubleQuoted[1].slice(1, -1); }
+        } else if (singleQuoted) {
+          value = singleQuoted[1].replace(/''/g, "'");
+        } else {
+          value = rawValue.replace(/\s+#.*$/, '').trim();
+        }
+        result[key] = typeof value === 'string' ? value : String(value ?? '');
+      }
+      return result;
+    }
+
+    function hasValidInitialArticle(container) {
+      if (!container) return false;
+      const seoShell = container.querySelector('.article-seo-shell');
+      if (seoShell && seoShell.textContent.trim().length >= 120) return true;
+      const heading = container.querySelector('.article-heading h1')?.textContent.trim();
+      const body = container.querySelector('.art-body')?.textContent.trim();
+      return Boolean(heading && body && body.length >= 120);
+    }
+
     async function loadArticle() {
       const slug = new URLSearchParams(window.location.search).get('slug');
       const container = document.getElementById('article-content');
@@ -725,10 +765,10 @@
         const markdown = await response.text();
         const parts = markdown.split('---');
         if (parts.length < 3) throw new Error('Formato do artigo inválido');
-        const frontmatter = jsyaml.load(parts[1]) || {};
+        const frontmatter = parseArticleFrontmatter(parts[1]);
         let body = parts.slice(2).join('---').trim().replace(/^!\[.*?\]\(.*?\)/, '');
         const title = String(frontmatter.title || entry.title || 'Sem título');
-        const description = String(frontmatter.subtitle || frontmatter.subtitulo || frontmatter.descricao || frontmatter.resumo || entry.subtitle || '');
+        const description = String(frontmatter.subtitle || frontmatter.subtitulo || frontmatter.description || frontmatter.descricao || frontmatter.resumo || entry.subtitle || '');
         const category = String(frontmatter.category || frontmatter.categoria || frontmatter.tag || entry.category || 'Geral');
         const authorRecord = Array.isArray(authors)
           ? authors.find(item => item.id === entry.authorId)
@@ -856,7 +896,9 @@
         if (error?.message !== 'Artigo não encontrado') {
           console.error('Erro ao carregar notícia:', error);
         }
-        container.textContent = 'Não foi possível carregar esta notícia. Volta à página de Notícias e tenta outro artigo.';
+        if (!hasValidInitialArticle(container)) {
+          container.textContent = 'Não foi possível carregar esta notícia. Volta à página de Notícias e tenta outro artigo.';
+        }
       } finally {
         document.body.classList.remove('article-loading');
       }
