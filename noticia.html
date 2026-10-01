@@ -844,6 +844,7 @@
         const bodyElement = document.createElement('div');
         bodyElement.className = 'art-body';
         bodyElement.innerHTML = sanitizeArticleHtml(marked.parse(body));
+        container.querySelector(".article-seo-shell")?.remove();
         container.appendChild(bodyElement);
 
         addArticleJsonLd({ slug: entry.slug, title, description, image, datePublished: published, dateModified: modified, author, authorType, authorUrl, editorialType, editorialTypeLabel });
