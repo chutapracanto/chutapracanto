@@ -1294,3 +1294,19 @@ Primeiro recuperar a execução do ciclo de atualização e identificar a causa 
 ## 73.5 Imagens
 
 A ideia de pesquisa inteligente de imagens baseada no teor da notícia está **já registada no Roadmap, secção 20, como BACKLOG / NÃO IMPLEMENTAR AGORA**. Permanece em standby e não faz parte deste incidente.
+
+
+# 74. INCIDENTE 2026-10-01 — DIAGNÓSTICO DO CRON APÓS REATIVAÇÃO
+
+Estado no ciclo atual:
+- O problema continua a afetar Home e Competições através da camada comum /api/competicoes.
+- O Worker cpc-football-cron continua com exatamente um Cron Trigger: */5 * * * *.
+- A configuração foi reaplicada via API Cloudflare às 18:38:25 UTC para forçar a atualização do trigger.
+- A versão 194 continua publicada com handler scheduled e binding D1 FOOTBALL_CACHE_DB.
+- Após a reaplicação, a telemetria Cloudflare consultada entre 18:23:45 e 18:47:55 UTC devolveu ZERO eventos com $metadata.origin = cron.
+- A D1 continua sem novos fetched_at desde 30/09, confirmando que nenhuma execução cron observável chegou a produzir refresh.
+- Foi iniciado um Worker Tail no cpc-football-cron às 18:48:34 UTC para captura de futuras invocações; o endpoint devolveu URL de tail válida. A sessão atual não permite consumir o WebSocket do tail diretamente.
+- Documentação Cloudflare atual confirma que alterações de Cron Trigger podem demorar até 15 minutos a propagar.
+- Portanto, neste momento a evidência aponta para execução/propagação do Cron Trigger, mas NÃO prova ainda a causa exata.
+- Não foram alterados frontend, BSD adapter, cache/D1 ou lógica das competições durante este diagnóstico.
+- Não repetir PUT do mesmo schedule sem evidência nova. Próxima decisão técnica deve depender de nova evidência de execução após a janela de propagação ou de uma alternativa de observabilidade que permita confirmar a invocação.
