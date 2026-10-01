@@ -3304,7 +3304,7 @@ async function handleFootballCompetitionAPI(request, env) {
 
     // O cron aquece a competição sem saber previamente o seasonId. Reutilizamos
     // o snapshot mais recente desse status antes de consultar novamente o BSD.
-    const latestCached = !round ? await getLatestFootballCache(env, competitionKey, status) : null;
+    const latestCached = !cronRefresh && !round ? await getLatestFootballCache(env, competitionKey, status) : null;
     if (
       latestCached?.payload &&
       latestCached.state === "fresh" &&
@@ -3323,7 +3323,7 @@ async function handleFootballCompetitionAPI(request, env) {
 
     if (!round && status !== "all") {
       const allKey = footballCacheKey(competitionKey, seasonId, stage, null, "all");
-      const allCached = await getFootballCache(env, allKey);
+      const allCached = cronRefresh ? null : await getFootballCache(env, allKey);
       if (allCached?.payload && allCached.state === "fresh" && footballCacheSeasonIsCurrent(allCached.payload)) {
         const payload = allCached.payload;
         const now = Date.now();
