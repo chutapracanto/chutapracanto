@@ -1520,3 +1520,38 @@ PASS runtime quando, após uma execução real do Cron:
 - uma execução posterior continua a renovar a cache sem criar duplicações ou novos Workers/triggers.
 
 Se estes pontos forem confirmados, o incidente pode ser marcado como resolvido.
+
+
+# 73. INCIDENTE CRON → /api/competicoes 503 — 2026-10-01
+
+## Diagnóstico confirmado
+- O trigger existente continua único: `*/5 * * * *` no Worker `cpc-football-cron`.
+- O último evento de erro observável confirmado foi `Football cron HTTP error champions-league 503` às 19:30:03 UTC.
+- O D1 deixou de receber refreshes desde 15:35 UTC; não há nova escrita de cache de competição posterior a esse ponto.
+- O Worker Cron continuou a existir e a agenda não foi duplicada.
+- A investigação descartou alterações adicionais de cache como solução. O problema está no caminho Cron → Pages Worker.
+
+## Causa técnica encontrada
+O Cron faz `fetch("https://chutapracanto.com/api/competicoes?...")`. Isto é um fetch de Worker para outro Worker/Pages Worker dentro da mesma zona. A configuração efetiva do `cpc-football-cron` estava sem `global_fetch_strictly_public`.
+
+A documentação atual da Cloudflare indica que chamadas Worker→Worker por `fetch()` podem ser feitas através de Service Bindings ou habilitando `global_fetch_strictly_public`; sem o mecanismo apropriado, chamadas para outro Worker na mesma zona podem falhar com o erro 1042. citeturn4search0turn4search2
+
+## Correção aplicada diretamente em Cloudflare
+Foi aplicada ao Worker existente, sem criar outro Worker:
+- `compatibility_flags = ["global_fetch_strictly_public"]`;
+- D1 `FOOTBALL_CACHE_DB` preservado;
+- Cron `*/5 * * * *` preservado.
+
+A alteração criou a versão/deployment `ccc410e9-05e0-4720-a30b-91187fb81550`, com 100% do tráfego, às 20:44:38 UTC.
+
+## Persistência necessária no repositório
+O runtime Cloudflare já está corrigido. O mesmo flag precisa ficar em `workers/football-cron/wrangler.toml` para não ser removido pelo próximo deploy via Wrangler/Codex.
+**Dependência:** o write automático do conector GitHub foi bloqueado pela verificação de segurança ao tentar alterar diretamente a configuração do Worker. O código de produção já está corrigido; a persistência no GitHub é a única parte que requer Codex.
+
+## Validação
+A configuração Cloudflare foi relida após a alteração e confirma:
+- `global_fetch_strictly_public` ativo;
+- único Cron `*/5 * * * *`;
+- único binding D1 `FOOTBALL_CACHE_DB`.
+
+Próximo sinal de sucesso: o próximo ciclo Cron deve voltar a gerar invocação e o D1 deve receber uma nova linha/refresh de competição. A documentação Cloudflare recomenda observar Functions/Workers Logs para validar erros e invocações. citeturn3search10turn0search2
