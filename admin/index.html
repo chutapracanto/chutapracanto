@@ -3469,7 +3469,7 @@ async function selecionarImagemExterna(item) {
             throw new Error(data.message || data.error || "Não foi possível importar a imagem.");
         }
         document.getElementById("noticia-imagem-url").value = data.path;
-        mostrarPreview(data.path);
+        mostrarPreview(url);
         fecharPesquisaImagens();
         if (help) help.textContent = "Imagem importada para o ChutaPraCanto. Podes removê-la no × e escolher outra.";
     } catch (error) {
@@ -4370,6 +4370,7 @@ function mostrarPreview(url) {
             "none";
 
         preview.removeAttribute("src");
+        delete preview.dataset.previewSource;
 
         return;
     }
@@ -4395,6 +4396,7 @@ function mostrarPreview(url) {
         }
     };
 
+    preview.dataset.previewSource = normalizedUrl;
     preview.src =
         normalizedUrl;
 }
@@ -4535,14 +4537,13 @@ function previsualizarNoticia() {
     // como blob:... e não no campo de URL. A pré-visualização do artigo deve
     // usar essa mesma imagem, independentemente da origem.
     const imagem =
-        imagemUrl ||
         (
             imagemPreviewEl &&
             imagemPreviewWrap &&
             imagemPreviewWrap.style.display !== "none" &&
-            imagemPreviewEl.src
-                ? imagemPreviewEl.src
-                : ""
+            imagemPreviewEl.dataset.previewSource
+                ? imagemPreviewEl.dataset.previewSource
+                : imagemUrl
         );
 
     document
@@ -5238,7 +5239,9 @@ function normalizarUrlImagem(
 
     if (
         url.startsWith("http://") ||
-        url.startsWith("https://")
+        url.startsWith("https://") ||
+        url.startsWith("blob:") ||
+        url.startsWith("data:")
     ) {
         return url;
     }
@@ -5281,7 +5284,9 @@ document
         if (help) help.textContent = "A importar a imagem para o ChutaPraCanto...";
 
         try {
-            const response = await apiFetch("/api/admin/image/import", {
+            mostrarPreview(direto);
+
+        const response = await apiFetch("/api/admin/image/import", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ url: valor, sourceUrl: valor })
@@ -5289,7 +5294,7 @@ document
             const data = await response.json().catch(() => ({}));
             if (!response.ok || !data.path) throw new Error(data.message || data.error || "Não foi possível importar a imagem.");
             this.value = data.path;
-            mostrarPreview(data.path);
+            mostrarPreview(direto);
             if (help) help.textContent = "Imagem importada para o ChutaPraCanto. Podes removê-la no × e escolher outra.";
         } catch (error) {
             if (help) help.textContent = error?.message || "Não foi possível importar a imagem.";
