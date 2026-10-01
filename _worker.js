@@ -2726,7 +2726,7 @@ async function bsdFetchEventsForSeason(env, leagueId, seasonId, status, seasonSt
       league_id: String(leagueId), season_id: String(seasonId),
       date_from: dateFrom, date_to: dateTo, limit: String(limit), offset: String(offset)
     });
-    if (status === "upcoming") params.set("status", "notstarted");
+    if (status === "upcoming") params.set("status", "upcoming");
     if (status === "finished") params.set("status", "finished");
     if (stage) params.set("stage", String(stage));
     if (round != null && String(round).trim()) params.set("round", String(round));
