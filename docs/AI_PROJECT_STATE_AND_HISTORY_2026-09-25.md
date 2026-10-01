@@ -1119,3 +1119,40 @@ A configuração não deve ser confundida com "Cloudflare configurado para não 
 ## 67.5 Estado
 **RESOLVIDO E CONSOLIDADO.**
 Não reabrir esta decisão sem nova evidência de regressão ou duplicação de deployments.
+
+
+# 71. VERIFICAÇÃO AUTÓNOMA 2026-10-01
+
+## 71.1 Search Console
+Não existe conector Search Console disponível nesta sessão. Não foi simulada nem inferida informação privada do Search Console. A documentação atual da Google confirma que o relatório de Sitemaps mostra se o sitemap foi processado e que o Page indexing é o local apropriado para os estados de indexação. citeturn0search0turn0search1
+
+Resultado: **sem alteração SEO** até existir acesso aos dados reais.
+
+## 71.2 Admin / rascunhos
+Verificação do admin/index.html em main confirmou a implementação de rascunho local com IndexedDB:
+- armazenamento local cpc_admin_local / store rascunhos;
+- guardar campos, conteúdo Quill e ficheiro de imagem local;
+- recuperar o rascunho e repor os campos/editor;
+- não existe chamada editorial durante guardar/recuperar;
+- o fluxo é local ao navegador.
+
+Resultado: implementação presente. Teste funcional final requer execução no navegador real; não foi introduzida alteração sem evidência de regressão.
+
+## 71.3 Monetização
+Reconfirmados diretamente no GitHub:
+- ads.txt com o Publisher ID atual;
+- Política de Privacidade com documentação do AdSense e da necessidade de CMP/consentimento aplicável;
+- Termos;
+- Política Editorial;
+- Contacto com propostas de parceria.
+
+Resultado: nenhuma alteração de baixo risco necessária neste momento.
+
+## 71.4 Cloudflare
+Estado verificado diretamente:
+- projeto Pages chutapracanto ligado ao GitHub chutapracanto/chutapracanto, produção em main;
+- Build Watch Paths mantidos;
+- deployment 0fede328... ignorado corretamente por path_config;
+- deployment canónico 6cb198fe... SUCCESS e alias https://chutapracanto.com.
+
+**Estado geral:** nenhuma regressão nova encontrada. A próxima dependência real é acesso ao Search Console ou, em alternativa, teste funcional do rascunho no Admin quando houver browser disponível.
