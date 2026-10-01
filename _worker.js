@@ -599,6 +599,49 @@ async function enriquecerNoticias(env, noticias) {
 // DADOS PARA PARTILHA SOCIAL
 // ============================================================
 
+function markdownParaShellSeo(markdown) {
+  const novaLinha = String.fromCharCode(10);
+  const retorno = String.fromCharCode(13);
+  const linhas = String(markdown || "").replace(/^\uFEFF/, "").split(novaLinha).map(linha =>
+    linha.endsWith(retorno) ? linha.slice(0, -1) : linha
+  );
+
+  if (linhas[0]?.trim() === "---") {
+    const fimFrontmatter = linhas.findIndex((linha, indice) => indice > 0 && linha.trim() === "---");
+    if (fimFrontmatter > 0) linhas.splice(0, fimFrontmatter + 1);
+  }
+
+  const blocos = [];
+  let blocoAtual = [];
+  for (const linha of linhas) {
+    const limpa = linha.trim();
+    if (!limpa) {
+      if (blocoAtual.length) {
+        blocos.push(blocoAtual.join(" "));
+        blocoAtual = [];
+      }
+    } else {
+      blocoAtual.push(limpa);
+    }
+  }
+  if (blocoAtual.length) blocos.push(blocoAtual.join(" "));
+
+  return blocos.map(bloco => {
+    const textoPlano = bloco
+      .replace(/^#{1,6}\s+/, "")
+      .replace(/^>\s?/, "")
+      .replace(/^(?:[-+*]|\d+[.)])\s+/, "")
+      .replace(/^\[[^\]]+\]:\s*\S+.*$/, "")
+      .replace(/!\[([^\]]*)\]\([^)]*\)/g, "$1")
+      .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1")
+      .replace(/<[^>]*>/g, " ")
+      .replace(/[\*_~\x60]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+    return textoPlano ? "<p>" + escaparHtml(textoPlano) + "</p>" : "";
+  }).join("");
+}
+
 function escaparHtml(valor) {
   return String(valor || "")
     .replace(/&/g, "&amp;")
@@ -746,6 +789,23 @@ async function prepararShellArtigoInicial(request, env, response) {
       index.find(item => item?.slug === slug) ||
       index.find(item => String(item?.slug || "").toLowerCase() === slug.toLowerCase());
     if (!entry) return response;
+    if (!isAllowedNewsPath(entry.path)) return response;
+
+    let markdownBodyHtml = "";
+    try {
+      const markdownResponse = await env.ASSETS.fetch(
+        new Request(new URL("/" + entry.path, request.url))
+      );
+      if (markdownResponse.ok) {
+        markdownBodyHtml = markdownParaShellSeo(await markdownResponse.text());
+      }
+    } catch {
+      // Mantém a shell de metadados se o Markdown não estiver disponível.
+    }
+
+    const seoBodyHtml = markdownBodyHtml
+      ? '<div class="article-seo-shell art-body">' + markdownBodyHtml + "</div>"
+      : "";
 
     const title = String(entry.title || "Sem título");
     const category = String(entry.category || "Geral");
@@ -802,7 +862,7 @@ async function prepararShellArtigoInicial(request, env, response) {
     return new HTMLRewriter()
       .on("#article-content", {
         element(element) {
-          element.setInnerContent(headerHtml + imageHtml, { html: true });
+          element.setInnerContent(headerHtml + imageHtml + seoBodyHtml, { html: true });
         }
       })
       .transform(htmlResponse);
