@@ -1318,3 +1318,83 @@ Estado no ciclo atual:
 - Foi confirmada a configuração Wrangler `workers/football-cron/wrangler.toml`: `crons = ["*/5 * * * *"]`, D1 correto e sem segundo trigger.
 - A documentação Cloudflare atual confirma propagação de alterações de Cron Trigger até 15 minutos; neste momento não há evidência suficiente para afirmar falha do código do Worker.
 - A linha de investigação autónoma chegou ao limite das ferramentas desta sessão: falta observar diretamente o Cron Events/Tail no Dashboard/CLI depois da janela de propagação.
+
+
+# 75. REGRA OPERACIONAL CONSOLIDADA — DEPLOYMENTS VS CRON — 2026-10-01
+
+Esta secção consolida algo que **já estava explicitamente registado antes**, mas que agora foi reforçado porque o incidente atual demonstrou o risco de voltar a interpretar um problema de execução do Cron como necessidade de novo deployment.
+
+## 75.1 O que já estava documentado antes deste incidente
+O ledger/roadmap já dizia, desde 2026-09-28:
+- `cpc-football-cron` é um Worker separado do Pages;
+- o deployment do Worker já tinha sido confirmado como PASS;
+- o trigger `*/5 * * * *` já tinha sido confirmado no Cloudflare;
+- o binding D1 já tinha sido confirmado;
+- a ausência de Logs impedia apenas observabilidade detalhada do ciclo Cron → API → D1;
+- **não fazer novo deployment apenas para produzir logs/testes artificiais**;
+- depois do deployment confirmado, a direção deveria ser validação/runtime/UI, não repetir deployment do Worker.
+
+## 75.2 Distinção obrigatória para futuras IAs
+Há três operações diferentes e não devem ser confundidas:
+
+1. **Deploy do código do Worker**
+   - necessário quando `workers/football-cron/index.js` ou a configuração Wrangler muda;
+   - publica uma nova versão do Worker.
+
+2. **Alteração do Cron Trigger**
+   - operação de infraestrutura Cloudflare;
+   - pode ser feita sem alterar o código do Worker;
+   - não exige novo deployment do código se o código/configuração já estiver correta.
+
+3. **Observabilidade/runtime**
+   - verificar Cron Events, Workers Logs, Tail, D1 e resposta do endpoint;
+   - observar não significa fazer deploy.
+
+## 75.3 O que NÃO deve voltar a acontecer
+Se no futuro as competições pararem de atualizar e houver evidência de que:
+- o Worker publicado tem `scheduled`;
+- o Wrangler mantém `crons = ["*/5 * * * *"]`;
+- o binding D1 está correto;
+- não há mudanças de código que expliquem a regressão;
+- D1 deixou de receber refreshes;
+
+**não fazer automaticamente:**
+- novo deployment do `cpc-football-cron`;
+- criar outro Worker;
+- criar segundo Cron;
+- alterar o intervalo;
+- reescrever o handler `scheduled()`;
+- alterar BSD/cache/D1/frontend;
+- fazer deploy do Pages apenas para "acordar" o Cron.
+
+Primeiro observar a execução real do trigger.
+
+## 75.4 O que já foi testado neste incidente
+- configuração do schedule via API Cloudflare: correta;
+- reaplicação do mesmo schedule `*/5 * * * *`: feita às 18:38:25 UTC;
+- versão Worker 194: correta, com `scheduled` e D1 correto;
+- Wrangler: correto;
+- telemetria: zero eventos cron observáveis no período consultado;
+- D1: sem novos `fetched_at`;
+- Tail: sessão criada, mas esta ferramenta não consegue consumir o WebSocket diretamente;
+- endpoint público testado a partir da ferramenta Cloudflare: bloqueado pelo ambiente da ferramenta (403 "requests to chutapracanto.com are not allowed"), portanto esse resultado **não é evidência de falha do endpoint em produção**.
+
+## 75.5 Regra de decisão
+**Cron parado ≠ código do Cron defeituoso.**
+
+Só alterar/deployar o Worker se existir evidência de que a execução ocorre e o próprio código/configuração está a falhar.
+
+Se a execução não aparece, a investigação deve permanecer em Cloudflare Trigger / Cron Events / Tail / propagação / infraestrutura.
+
+Se a execução aparece e o endpoint falha, investigar o endpoint.
+
+Se a execução e endpoint funcionam mas D1 não atualiza, investigar cache/D1.
+
+Se backend e D1 funcionam mas a UI não mostra dados, investigar frontend.
+
+Esta sequência passa a ser a ordem oficial de diagnóstico para incidentes de atualização de competições.
+
+## 75.6 Resultado da auditoria do ledger
+**Já havia informação explícita suficiente para evitar um novo deployment do Worker neste incidente.** O que faltava era transformar essa informação histórica numa regra operacional inequívoca e consolidada no topo da memória do incidente.
+
+A partir daqui, qualquer IA nova deve consultar esta secção antes de publicar novamente `cpc-football-cron` durante uma falha de atualização.
