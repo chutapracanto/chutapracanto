@@ -1555,3 +1555,56 @@ A configuração Cloudflare foi relida após a alteração e confirma:
 - único binding D1 `FOOTBALL_CACHE_DB`.
 
 Próximo sinal de sucesso: o próximo ciclo Cron deve voltar a gerar invocação e o D1 deve receber uma nova linha/refresh de competição. A documentação Cloudflare recomenda observar Functions/Workers Logs para validar erros e invocações. citeturn3search10turn0search2
+
+
+# 78. CONFIGURAÇÃO CLOUDFLARE — SECRETS E VALIDAÇÃO DO BSD — 2026-10-01
+
+## 78.1 Padrão identificado
+Durante incidentes consecutivos, o runtime do Pages devolveu como indisponíveis secrets que estavam visíveis/configurados no projeto Cloudflare: ADMIN_PASSWORD e BSD_API_KEY.
+
+Em ambos os casos, a recriação do secret resolveu o comportamento. A documentação Cloudflare confirma que secrets são bindings de runtime e que devem existir antes do deployment que os utiliza.
+
+Regra operacional nova: quando um secret do Pages estiver configurado no painel mas o runtime disser que está ausente, confirmar o nome exato, confirmar Production/Preview, recriar se necessário, fazer novo deployment e só depois investigar código/backend/D1.
+
+## 78.2 Auditoria de configuração realizada
+Pages chutapracanto: ADMIN_PASSWORD, BSD_API_KEY e GITHUB_TOKEN como secrets em Production + Preview; ARTICLE_LIKES_DB aponta para ba093005-9101-43f4-98fa-69d913edb09c; FOOTBALL_CACHE_DB aponta para 92e3ef93-4c44-46c8-a1a4-ff5c09f4b49f.
+
+O Wrangler do Pages declara os mesmos dois D1 e os mesmos IDs. O Worker cpc-football-cron também usa exatamente o mesmo FOOTBALL_CACHE_DB.
+
+Não foi apagada nem recriada nenhuma base D1. Não havia evidência para isso.
+
+## 78.3 Reinstanciação do Pages após recriação do secret
+Depois de o BSD_API_KEY ser apagado/recriado, foi feito retry do deployment de produção existente, sem alteração de código: deployment 59b4f492-2f14-4e61-9eb8-a4c908d5b69d, commit c918a103adb3e707b4fee10eb31a0f6e9dbb8ad4, resultado SUCCESS.
+
+## 78.4 Validação runtime — PASS BSD → Pages → D1
+Para não esperar cinco minutos pelo cron normal, a agenda foi temporariamente alterada de */5 * * * * para * * * * * apenas para validação. Depois de uma execução, a D1 apresentou uma escrita nova em conference-league, fetched_at 2026-10-01T22:35:48.835Z, season_id 1606.
+
+Antes desta validação, a última escrita era de 2026-09-30. Portanto, existe agora prova objetiva de que o circuito voltou a executar e a persistir dados depois da recriação do BSD_API_KEY + redeployment do Pages.
+
+A agenda foi imediatamente restaurada para */5 * * * *.
+
+Não foram criados segundos Workers, triggers ou bindings.
+
+## 78.5 Estado atual
+BSD/API/cache: PASS runtime.
+
+O incidente das competições deixa de ser classificado como D1 parado por causa desconhecida. O backend voltou a escrever no cache.
+
+Ainda não se deve apagar/recriar D1 nem alterar o adapter BSD sem nova evidência.
+
+## 78.6 Auditoria dos restantes secrets
+Os três secrets atuais do Pages são ADMIN_PASSWORD, BSD_API_KEY e GITHUB_TOKEN.
+
+BSD_API_KEY foi validado pelo refresh real acima. ADMIN_PASSWORD já tinha demonstrado comportamento semelhante num incidente anterior e foi recriado. GITHUB_TOKEN permanece configurado; o seu valor não é legível pela API Cloudflare e não deve ser exposto.
+
+Se uma funcionalidade que depende do GITHUB_TOKEN voltar a reportar indisponível, aplicar a mesma sequência: confirmar secret, recriar se necessário, redeploy e teste real. Não alterar D1 como primeira resposta.
+
+## 78.7 Infraestrutura que NÃO deve ser desfeita
+FOOTBALL_CACHE_DB permanece intacto; ARTICLE_LIKES_DB permanece intacto; cpc-football-cron permanece único; Cron normal permanece */5 * * * *; global_fetch_strictly_public permanece no cpc-football-cron; cache no-store e Cache-Control no-store permanecem no fetch do cron; _cron continua a forçar o caminho de refresh BSD no endpoint de competições.
+
+Estas alterações têm histórico próprio e não devem ser removidas apenas por suspeita.
+
+## 78.8 Próxima validação funcional
+Com o backend agora a renovar a D1, a próxima verificação deve ser de consumo: Home, /competicoes, filtros/grupos/jornadas, uma execução posterior para confirmar nova atualização de fetched_at e, se necessário, Admin para confirmar ADMIN_PASSWORD/GITHUB_TOKEN no runtime.
+
+Imagens relacionadas por teor da notícia continuam em BACKLOG/STANDBY e não fazem parte deste incidente.
