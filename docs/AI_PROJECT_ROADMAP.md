@@ -433,3 +433,27 @@ Workers/Pages logs são a fonte adequada para confirmar invocações e erros. �
 O runtime Cloudflare já está corrigido. A mesma configuração deve ser persistida em `workers/football-cron/wrangler.toml` antes de qualquer futuro deploy Wrangler/Codex, para impedir regressão.
 
 **Estado:** CORREÇÃO DE RUNTIME APLICADA — aguardar primeiro ciclo de validação. Imagens continuam em standby.
+
+
+## 21. ATUALIZAÇÃO 2026-10-01 — PASS DO PIPELINE BSD / CACHE E PADRÃO DE SECRETS
+
+### Resultado
+O pipeline de competições voltou a escrever no FOOTBALL_CACHE_DB após a recriação do BSD_API_KEY no Cloudflare Pages e um novo deployment de produção.
+
+### Evidência objetiva
+- Pages deployment de validação: 59b4f492-2f14-4e61-9eb8-a4c908d5b69d — SUCCESS.
+- Nova escrita D1: conference-league, fetched_at = 2026-10-01T22:35:48.835Z, season_id = 1606.
+- Cron foi temporariamente acelerado para * * * * * exclusivamente para observar uma execução real e foi imediatamente restaurado para */5 * * * *.
+
+### Conclusão operacional
+O D1 não estava a precisar de ser apagado/recriado. O problema comprovado estava no estado/runtime do secret BSD_API_KEY.
+
+Foi identificado um padrão semelhante ao incidente anterior de ADMIN_PASSWORD: um secret pode aparecer configurado no painel e ainda assim o runtime que serve o deployment não o refletir corretamente. A documentação Cloudflare indica que secrets/bindings devem estar presentes antes do deployment que os utiliza.
+
+Regra: para secrets que o runtime diz estarem ausentes, confirmar secret + ambiente + novo deployment antes de mexer em D1 ou no código.
+
+### Estado
+PASS — backend BSD → Pages → D1 validado em runtime.
+
+### Próxima frente
+Testar o consumo no frontend Home/Competições e confirmar uma segunda renovação automática. Não reabrir alterações de D1, adapter BSD ou arquitetura sem nova evidência.
