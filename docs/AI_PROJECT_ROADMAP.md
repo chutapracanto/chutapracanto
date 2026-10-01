@@ -362,3 +362,26 @@ Não criar tokens fictícios, não colocar credenciais no frontend e não constr
 - O Worker foi corrigido para sincronizar automaticamente o índice após PUT/DELETE editorial, preservando campos existentes como `sourceUrl` quando a entrada já existe.
 - O commit do Worker `70b1b1af...` iniciou deployment de produção `6cb198fe...`; o commit do índice `b4181c9c...` iniciou deployment `d55ea2ad...`.
 - Regra: uploads/imagens e Markdown isolados continuam sem deployment; a atualização do índice continua a ser o artefacto que publica o novo estado editorial.
+
+
+## 19. ATUALIZAÇÃO 2026-10-01 — VERIFICAÇÃO AUTÓNOMA
+
+### Search Console
+- Não existe conector Search Console disponível nesta sessão, portanto não é possível ler diretamente Sitemaps, Page indexing ou URL Inspection privados.
+- A documentação atual da Google confirma que o relatório de Sitemaps é a fonte para saber se o sitemap foi processado e que a indexação pode demorar dias; uma pesquisa pública site: não substitui esses relatórios. citeturn0search0turn0search1
+- Não foi feita qualquer alteração SEO por falta de dados do Search Console.
+
+### Admin / rascunhos
+- O código atual do Admin contém o fluxo de rascunho local em IndexedDB, com guardar e recuperar conteúdo, campos editoriais e imagem local.
+- O rascunho não chama a API editorial, não cria commit, não entra no índice público/sitemap e não gera deployment.
+- A validação estrutural confirmou que a implementação existe no main; teste funcional final no navegador continua pendente de execução real no Admin.
+
+### Monetização
+- Reconfirmados ads.txt, Política de Privacidade, Termos, Política Editorial e Contacto no main.
+- Não foi encontrada uma alteração autónoma de baixo risco que justifique mexer nestas páginas antes da configuração final do AdSense/Privacy & Messaging.
+
+### Cloudflare / produção
+- Pages continua com path_includes ["*"] e exclusões docs/*, images/uploads/*, content/noticias/*.
+- O deployment mais recente é o commit documental 0fede328..., corretamente marcado como skipped / path_config; o deployment canónico continua a ser 6cb198fe..., SUCCESS, com alias de produção https://chutapracanto.com.
+
+**Fila após esta verificação:** Search Console aguarda acesso/dados; Admin aguarda teste funcional real; monetização permanece em preparação; distribuição de vídeo continua bloqueada apenas pelas autorizações externas já identificadas.
