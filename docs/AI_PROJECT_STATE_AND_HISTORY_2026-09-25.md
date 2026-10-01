@@ -1398,3 +1398,56 @@ Esta sequência passa a ser a ordem oficial de diagnóstico para incidentes de a
 **Já havia informação explícita suficiente para evitar um novo deployment do Worker neste incidente.** O que faltava era transformar essa informação histórica numa regra operacional inequívoca e consolidada no topo da memória do incidente.
 
 A partir daqui, qualquer IA nova deve consultar esta secção antes de publicar novamente `cpc-football-cron` durante uma falha de atualização.
+
+
+# 76. CORREÇÃO 2026-10-01 — CRON DE COMPETIÇÕES E CACHE HTTP
+
+## 76.1 Causa técnica identificada no código
+O Worker `cpc-football-cron` fazia o refresh através de um `fetch()` HTTP GET para o próprio domínio `https://chutapracanto.com/api/competicoes`, mas não declarava qualquer bypass de cache no subrequest.
+
+O endpoint de competições devolve respostas `200` com `Cache-Control: public, max-age=60, stale-while-revalidate=300` em vários caminhos. Um cron que depende de executar o Pages Worker para provocar o refresh da D1 não pode aceitar uma resposta HTTP potencialmente servida da cache como equivalente a executar a lógica do endpoint.
+
+Isto explica a discrepância observada no incidente:
+- Cron Trigger: execução `Success`;
+- HTTP: podia ser `2xx`;
+- D1: sem novas escritas;
+- código do cron: não distinguia resposta cacheada de execução real do endpoint.
+
+A documentação atual do Cloudflare confirma que subrequests `fetch()` passam pela cache e que `cache: "no-store"` impede a consulta/armazenamento dessa cache.
+
+## 76.2 Correção aplicada
+Commit:
+- `0f55e48e9735cb550492f785db84bb7319ed065e` — `fix: bypass HTTP cache in football cron refresh`
+
+O fetch do cron passou a usar:
+- `cache: "no-store"`;
+- header `Cache-Control: no-store`;
+- mantendo o mesmo endpoint, rotação, D1 e arquitetura.
+
+Não foram criados Workers, triggers ou bindings adicionais.
+
+## 76.3 Deployment
+O Worker `cpc-football-cron` foi publicado diretamente no Cloudflare após a alteração, com:
+- handler `scheduled`;
+- D1 `FOOTBALL_CACHE_DB`;
+- compatibility date `2026-09-16`;
+- usage model `standard`;
+- exatamente um Cron Trigger `*/5 * * * *`.
+
+Deployment Cloudflare:
+- deployment id `309faa5c228e4c2387077f259c4e2b14`;
+- tag `0515365069a84a3b9e0da6c3f66e9847`;
+- publicação concluída às `2026-10-01T19:35:04.419391Z`.
+
+## 76.4 Validação ainda em curso
+Às `19:39:40 UTC`, uma consulta de Observability aos últimos 10 minutos ainda mostrava zero eventos `origin=cron`, porque o próximo slot após o deployment é às `19:40 UTC`.
+
+A D1 consultada antes desse slot continuava sem novas escritas.
+
+A validação final deve ser feita após uma execução posterior ao deployment:
+1. confirmar invocação do cron;
+2. confirmar que o subrequest chega ao `/api/competicoes`;
+3. confirmar novo `fetched_at` na D1;
+4. confirmar Home e Competições.
+
+Até essa validação, a correção está **deployada mas não declarada como PASS runtime**.
