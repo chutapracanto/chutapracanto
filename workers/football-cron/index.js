@@ -31,7 +31,13 @@ export default {
 
     const response = await fetch(
       `https://chutapracanto.com/api/competicoes?${params.toString()}`,
-      { headers: { "Accept": "application/json" } }
+      {
+        cache: "no-store",
+        headers: {
+          "Accept": "application/json",
+          "Cache-Control": "no-store"
+        }
+      }
     );
 
     if (!response.ok) {
