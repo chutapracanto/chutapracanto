@@ -5,7 +5,7 @@
 **Branch de produção:** `main`
 **Site:** `https://chutapracanto.com`
 **HEAD verificado:** `b0b75366a6f137a87ed43385bd61394c0dd49f53`
-**Último commit de código:** `Melhorar pesquisa de imagens e aceitar URLs do Google`
+**Último commit de código: `fix: alinhar politica de privacidade com analytics first-party`
 
 > **FUNÇÃO DESTE DOCUMENTO**
 >
@@ -2230,3 +2230,22 @@ Não reimplementar analytics nem trocar por GA4/terceiros sem uma razão concret
 
 ## 71.6 Regra de continuidade
 Até 22/10/2026, continuar sem depender de Codex. Para novas alterações em Competições, primeiro ler esta secção e verificar o estado real de `competicoes.html`, `_worker.js` e produção. Não reabrir BSD/D1/cron para problemas que sejam apenas de filtro ou apresentação.
+
+
+## 2026-10-02 — AUDITORIA DE MONETIZAÇÃO / PRIVACIDADE — ANALYTICS FIRST-PARTY
+
+Foi encontrada uma discrepância documental concreta: `privacidade.html` ainda afirmava que não existia analytics próprio, mas o sistema `analytics.js` já estava implementado e em produção.
+
+### Correção
+- Atualizada `privacidade.html` para descrever o analytics first-party atualmente existente.
+- Clarificado que a sessão usa `sessionStorage` e é um identificador técnico de sessão, não um identificador persistente nem uma contagem de pessoas únicas.
+- Documentados, em termos gerais, os eventos atualmente recolhidos: pageviews, origem/referrer/UTM quando disponíveis, navegação entre páginas, tempo ativo, profundidade de scroll e algumas interações editoriais.
+- Mantida a distinção entre o tracking first-party existente e o código técnico do AdSense, cuja presença não significa que anúncios estejam efetivamente a ser apresentados.
+- Não foi introduzido GA4, terceiro adicional, cookie de rastreio ou alteração de D1.
+
+### Evidência / implementação
+- `analytics.js` confirma a utilização de `sessionStorage`, `sessionId`, attribution/referrer/UTM, page_view, page_exit, active_time, scroll_depth e eventos editoriais.
+- Commit da correção: `e094f650071d7dd6639506d4e73008a343543189`.
+
+### Regra de continuidade
+Não alterar o sistema de analytics apenas para alinhar documentação. Se houver futura necessidade de visitantes únicos persistentes ou novos sinais de tracking, fazer revisão específica de privacidade antes da implementação.
