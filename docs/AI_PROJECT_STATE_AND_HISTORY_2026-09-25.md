@@ -2455,3 +2455,11 @@ Commits:
 - Commit: 8f1197a70ea5458797d250f09a92aa6db89da8b6 — fix: alinhar classificacao dos jogos Nations com standings.
 - Cloudflare Pages production deployment: 874e3e16-eea1-46e9-b7b2-d197d1d825e1 — SUCCESS em 2026-10-02 17:01:36 UTC.
 - Validação visual/comportamental direta no domínio continua pendente nesta sessão; o deploy foi confirmado pelo Cloudflare.
+
+
+## 80. Correção do estado inicial Nations League → A4 (2026-10-02)
+- Sintoma: ao entrar pela primeira vez em **Competições**, quando a ordenação inicial selecionava a UEFA Nations League e o grupo A4 por defeito, a lista mostrava "Não há jogos para este filtro."; após atualizar a página ou trocar de grupo, os jogos apareciam.
+- Causa encontrada no frontend: `renderRounds(true)` escolhia a próxima jornada olhando para **todos os jogos da competição**, antes de aplicar o grupo A4. O filtro final exigia simultaneamente grupo A4 + essa jornada, podendo resultar em zero jogos. Ao trocar de grupo, a jornada era reiniciada para "Todas", mascarando o problema.
+- Correção: a seleção automática da próxima jornada passa a limitar primeiro o universo ao grupo selecionado quando a competição é a Nations League agrupada. Assim, A4 determina também a jornada inicial, sem alterar dados BSD, Worker, D1 ou cron.
+- Commit: `2b357c1018b26bad558139f3febdaed503b89d14` — `fix: alinhar jornada inicial com grupo Nations selecionado`.
+- Deployment Pages production: `ebb5d2f0-c1f3-4b93-b374-6e74859b7e5a` — SUCCESS às 17:07:13 UTC.
