@@ -3330,7 +3330,7 @@ const FOOTBALL_CACHE_STALE_MS = 24 * 60 * 60 * 1000;
 const footballCacheRefreshes = new Map();
 
 function footballCacheIdentity(competitionKey) {
-  if (competitionKey === "nations-league") return "v6-nations|nations-league";
+  if (competitionKey === "nations-league") return "v7-nations|nations-league";
   if (competitionKey === "taca-liga") return "v5-taca-liga";
   return "v3-" + competitionKey;
 }
