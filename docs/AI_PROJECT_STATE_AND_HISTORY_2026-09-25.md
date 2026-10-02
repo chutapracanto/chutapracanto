@@ -2021,3 +2021,38 @@ Após a revisão dos cartões LIVE:
 - JavaScript funcional de Home e Competições voltou a compilar sem erros;
 - Home: commit `b6c356e38c94448149d6a0954e360149d03354a0`; deployment `69921b9f-8310-4027-9e0e-42de7dfd83e0` SUCCESS;
 - Competições: commit `303d5d9311eb22add31150cc18d8a7a58a330e90`; deployment `5a1e629a-a3c0-4182-8dfe-56a9fbf86e66` SUCCESS.
+
+## 2026-10-02 — CORREÇÃO DOS GOLOS LIVE + SEM BOLAS ARTIFICIAIS (segunda correção)
+
+A utilizadora voltou a confirmar que os golos continuavam sem aparecer com **minuto + jogador por baixo da equipa marcadora**, tanto na Home como em **Jogo em destaque** e **Jogos e resultados**. Foi feita auditoria ao frontend e ao Pages Worker antes de alterar qualquer infraestrutura.
+
+### Causa identificada
+- O frontend já tinha os elementos para mostrar os golos, mas as atualizações LIVE incrementais (patchFixtureRow e patchHighlight) atualizavam marcador/minuto e não atualizavam os blocos de detalhes dos golos.
+- O normalizador do Pages Worker aceitava event.goals apenas como array bruto e não normalizava de forma consistente variantes BSD de equipa, jogador e minuto.
+- No merge LIVE, uma resposta de incidentes sem golos podia substituir os golos já existentes do evento por [].
+- Em Competições ainda existia fallback ⚽ dentro de teamVisual, incluindo no erro de carregamento da imagem. Esse fallback foi removido completamente.
+
+### Correção aplicada
+- _worker.js: criada normalização robusta de golos para dados de evento e incidentes BSD, incluindo team_id/team.id/home|away, player_name/player.name/scorer, minute, added_time e period_second.
+- _worker.js: quando os incidentes LIVE não devolvem golos, preserva os golos já existentes no evento em vez de os apagar.
+- competicoes.html: atualização incremental dos cartões passa agora também os detalhes dos golos por equipa, sem exigir render completo.
+- competicoes.html: destaque LIVE atualiza também minuto + jogador por baixo da equipa marcadora.
+- competicoes.html: eliminado o fallback visual de bola de futebol; imagem inexistente/partida deixa simplesmente de mostrar símbolo inventado.
+- index.html: reforçado o tratamento de qualquer Matchday/Round N residual para Jornada N no cartão LIVE da Home.
+
+### Infraestrutura preservada
+- Não foi alterado o Worker separado cpc-football-cron, nem o cron */5 * * * *.
+- Não foi alterado D1, cache, BSD API key, adapter estrutural ou filtros.
+- A alteração do backend foi no Pages Worker _worker.js, que é o caminho que normaliza/enriquece os dados para /api/competicoes.
+
+### Commits / produção
+- Home: 83c25201b54848cf8201067f9fac46caee1305cf — deployment 541c3cdb-9c61-4bde-97bb-60c469f15813 SUCCESS.
+- Competições: 839409bd3e504e89b7dab84fbc219fdab40b37f8 — deployment 588e93e4-f2d6-4dde-a06e-4a946859631d SUCCESS.
+- Pages Worker/backend: 9803db686f75d57e45dff782b8c70b3d2ea64d6e — deployment 59490b0a-b540-4431-ad8a-ed6963526e0e SUCCESS, alias https://chutapracanto.com.
+- O último deployment da produção contém os três commits porque o branch main avançou sequencialmente.
+
+### Validação / pendente
+- Os três deployments estão SUCCESS e o último está associado ao domínio de produção.
+- A validação visual definitiva deve ser feita no próximo LIVE real com pelo menos um golo, porque não se deve fabricar um jogo para testar a apresentação.
+- Regra mantida: **minuto + jogador aparecem por baixo da equipa que marcou**; minuto do jogo permanece dentro de **LIVE · N'**.
+
