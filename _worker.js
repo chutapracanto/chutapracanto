@@ -1791,13 +1791,26 @@ async function handleAdminAPI(request, env) {
     if (!env.ARTICLE_LIKES_DB) {
       return json({ error: "ARTICLE_LIKES_DB não está configurada." }, 503);
     }
+
+    const period = url.searchParams.get("period") || "30d";
+    const periodModifiers = {
+      "1d": "-1 day",
+      "7d": "-7 days",
+      "30d": "-30 days"
+    };
+    const modifier = periodModifiers[period];
+    if (!modifier) {
+      return json({ error: "Período inválido." }, 400);
+    }
+
     try {
       const result = await env.ARTICLE_LIKES_DB
-        .prepare("SELECT article_slug AS slug, COUNT(*) AS count FROM article_views GROUP BY article_slug ORDER BY count DESC, article_slug ASC")
+        .prepare("SELECT article_slug AS slug, COUNT(*) AS count FROM article_views WHERE datetime(viewed_at) >= datetime('now', ?1) GROUP BY article_slug ORDER BY count DESC, article_slug ASC")
+        .bind(modifier)
         .all();
       const items = (result?.results || []).map(row => ({ slug: String(row.slug || ""), count: Number(row.count || 0) }));
       const totalViews = items.reduce((sum, item) => sum + item.count, 0);
-      return json({ ok: true, totalViews, articlesWithViews: items.filter(item => item.count > 0).length, items });
+      return json({ ok: true, period, totalViews, articlesWithViews: items.filter(item => item.count > 0).length, items });
     } catch (error) {
       console.error("Admin metrics views error:", error);
       return json({ error: "Não foi possível carregar as métricas de visualizações." }, 503);
@@ -1816,9 +1829,21 @@ async function handleAdminAPI(request, env) {
       return json({ error: "ARTICLE_LIKES_DB não está configurada." }, 503);
     }
 
+    const period = url.searchParams.get("period") || "30d";
+    const periodModifiers = {
+      "1d": "-1 day",
+      "7d": "-7 days",
+      "30d": "-30 days"
+    };
+    const modifier = periodModifiers[period];
+    if (!modifier) {
+      return json({ error: "Período inválido." }, 400);
+    }
+
     try {
       const result = await env.ARTICLE_LIKES_DB
-        .prepare("SELECT article_slug AS slug, COUNT(*) AS count FROM article_likes GROUP BY article_slug ORDER BY count DESC, article_slug ASC")
+        .prepare("SELECT article_slug AS slug, COUNT(*) AS count FROM article_likes WHERE datetime(created_at) >= datetime('now', ?1) GROUP BY article_slug ORDER BY count DESC, article_slug ASC")
+        .bind(modifier)
         .all();
       const items = (result?.results || []).map(row => ({
         slug: String(row.slug || ""),
@@ -1827,6 +1852,7 @@ async function handleAdminAPI(request, env) {
       const totalLikes = items.reduce((sum, item) => sum + item.count, 0);
       return json({
         ok: true,
+        period,
         totalLikes,
         articlesWithLikes: items.filter(item => item.count > 0).length,
         items
