@@ -540,3 +540,10 @@ O Admin passou a ter uma área **📊 Métricas** com:
 
 ### Próxima melhoria
 Se forem necessários utilizadores únicos, sessões, origem de tráfego ou outras métricas de analytics, tratar como uma fase separada. Não confundir essas métricas com pageviews nem introduzir tracking adicional sem revisão de privacidade.
+
+
+### Correção de validação 2026-10-02
+Na revisão pós-implementação foi detetado que a função de pageview estava criada e o frontend a chamava, mas a rota pública /api/article-view ainda não estava ligada no dispatcher principal do Worker. A ligação foi corrigida antes de considerar a funcionalidade concluída.
+- commit: 33e49aa8f0174051755f72ae0a318ae28cbb4d10;
+- deployment: cc35198e, SUCCESS, alias de produção;
+- não foram inseridos pageviews artificiais.
