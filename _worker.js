@@ -3547,19 +3547,61 @@ async function handleFootballCompetitionAPI(request, env) {
             .map(item => [cpcSafeNumber(item?.id ?? item?.event_id), item])
             .filter(([id]) => id != null)
         );
+
+        // O pedido live servido a partir da cache fresca também precisa de
+        // incidentes BSD. Caso contrário o cron pode ter o golo guardado,
+        // mas o refresh de 15s entrega score sem minuto/marcador.
+        const liveWithGoalsById = new Map();
+        await Promise.all([...liveById.entries()].map(async ([id, live]) => {
+          const incidents = await bsdFetchLiveIncidents(env, id);
+          const incidentGoals = incidents
+            .filter(incident => {
+              const type = String(
+                incident?.type ??
+                incident?.event_type ??
+                incident?.incident_type ??
+                incident?.kind ??
+                incident?.action_type ??
+                ""
+              ).toLowerCase();
+              return type.includes("goal") && !incident?.rescinded && !type.includes("temp_");
+            })
+            .map(incident => cpcNormalizeGoal(
+              incident,
+              live?.home_team_id ?? live?.homeTeam?.id ?? live?.home_team?.id,
+              live?.away_team_id ?? live?.awayTeam?.id ?? live?.away_team?.id
+            ))
+            .filter(goal => goal.teamId != null || goal.player || goal.minute != null);
+
+          const liveGoals = cpcNormalizeGoals(
+            live,
+            live?.home_team_id ?? live?.homeTeam?.id ?? live?.home_team?.id,
+            live?.away_team_id ?? live?.awayTeam?.id ?? live?.away_team?.id
+          );
+
+          liveWithGoalsById.set(id, {
+            ...live,
+            goals: incidentGoals.length ? incidentGoals : liveGoals
+          });
+        }));
+
         const cachedFixtures = Array.isArray(cached.payload.fixtures) ? cached.payload.fixtures : [];
         const merged = [];
         const matchedLiveIds = new Set();
 
         for (const cachedFixture of cachedFixtures) {
           const id = cpcSafeNumber(cachedFixture?.id);
-          const live = id != null ? liveById.get(id) : null;
+          const live = id != null ? liveWithGoalsById.get(id) : null;
           const matched = live || liveRaw.find(item => cpcLiveFixtureMatch(cachedFixture, item));
           if (matched) {
             const normalized = cpcNormalizeEvent(matched, stage);
+            const normalizedGoals = Array.isArray(normalized?.goals) && normalized.goals.length
+              ? normalized.goals
+              : (Array.isArray(cachedFixture?.goals) ? cachedFixture.goals : []);
             merged.push({
               ...cachedFixture,
               ...normalized,
+              goals: normalizedGoals,
               stageKey: cachedFixture?.stageKey || normalized?.stageKey || "",
               stageName: cachedFixture?.stageName || normalized?.stageName || "",
               roundKey: cachedFixture?.roundKey || normalized?.roundKey || "",
@@ -3580,10 +3622,14 @@ async function handleFootballCompetitionAPI(request, env) {
           const liveId = cpcSafeNumber(live?.id ?? live?.event_id);
           if (liveId == null || matchedLiveIds.has(liveId)) continue;
           const scheduled = cachedFixtures.find(candidate => cpcLiveFixtureMatch(candidate, live));
+          const liveWithGoals = liveWithGoalsById.get(liveId) || live;
           const normalized = scheduled
-            ? { ...scheduled, ...cpcNormalizeEvent(live, stage) }
-            : cpcNormalizeEvent(live, stage);
-          merged.push({ ...normalized, status: "live" });
+            ? { ...scheduled, ...cpcNormalizeEvent(liveWithGoals, stage) }
+            : cpcNormalizeEvent(liveWithGoals, stage);
+          const normalizedGoals = Array.isArray(normalized?.goals) && normalized.goals.length
+            ? normalized.goals
+            : (Array.isArray(scheduled?.goals) ? scheduled.goals : []);
+          merged.push({ ...normalized, goals: normalizedGoals, status: "live" });
         }
 
         const payload = { ...cached.payload, fixtures: merged, updatedAt: new Date().toISOString(), updateStatus: "live" };
