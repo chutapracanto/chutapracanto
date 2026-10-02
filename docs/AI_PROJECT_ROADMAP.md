@@ -767,3 +767,12 @@ Não alterar D1, cache, adapter BSD, cron ou regras de filtros para resolver um 
 - arquitetura de cache;
 - fallback de bolas/ícones inventados;
 - remoção de siglas/códigos grandes dos clubes.
+
+
+## 2026-10-02 — LIVE: renderização explícita de minuto + marcador
+- Corrigida a renderização final dos nomes dos marcadores em Home e Competições.
+- O frontend deixou de aceitar objectos `player/scorer` como texto e procura os campos de nome corretos.
+- Formato visual fechado: `67' João Silva`, diretamente sob a equipa que marcou.
+- Aplicado nas três superfícies LIVE: Home, Jogo em destaque e Jogos e resultados.
+- Worker também normaliza o nome do marcador de forma estrita.
+- Commits: `2c85ed60ad5d4ee3de759d66ba5a70ee587caadd`, `19022bf25c8bc7641e4781ac856a6f93309589dd`, `fc42e5916155c62aa9eda19b1abf3d653d88261c`.
