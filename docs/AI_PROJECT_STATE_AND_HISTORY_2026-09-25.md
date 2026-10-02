@@ -1683,3 +1683,16 @@ A tabela foi criada diretamente na D1 de produção e a migration foi adicionada
 
 ## Limitação da validação externa
 Não foi possível fazer um pedido HTTP externo a chutapracanto.com a partir do ambiente de execução por ausência de resolução DNS nesse ambiente. A validação de deployment/D1 foi feita diretamente via Cloudflare. Não foram inventados pageviews para substituir o teste.
+
+
+# 82. CORREÇÃO — ROUTE DE PAGEVIEW — 2026-10-02
+
+Durante a revisão final foi encontrado um erro de integração: a função handleArticleViewAPI e a chamada em noticia.html já existiam, mas o dispatcher principal do Worker ainda não encaminhava /api/article-view para essa função.
+
+Correção aplicada diretamente:
+- adicionada a rota /api/article-view no Worker;
+- commit 33e49aa8f0174051755f72ae0a318ae28cbb4d10;
+- deployment cc35198e;
+- SUCCESS em produção com alias https://chutapracanto.com.
+
+Este remendo fica registado para que a implementação futura não seja confundida com uma alteração de arquitetura. A medição continua baseada apenas em pageviews, sem identificadores pessoais.
