@@ -1800,3 +1800,15 @@ migrations/0003_analytics_events.sql fica no repositório como fonte de persist�
 - Deployment Cloudflare Pages: `83c87c55`, production, commit acima, build/deploy SUCCESS, alias `https://chutapracanto.com`.
 - Não foram alteradas as funções de criação/edição de notícias ou crónicas, nem o backend de futebol.
 - Regra para futuras alterações: não aninhar `#metrics-screen` dentro de `#list-screen`; qualquer nova secção analítica deve permanecer dentro de 📊 Métricas. Manter os botões de criação no lado direito do cabeçalho editorial.
+
+
+## 2026-10-02 — AJUSTE FINAL DA ESTRUTURA DAS MÉTRICAS NO ADMIN
+
+- Correção solicitada: as métricas não devem aparecer por baixo das listas de 📰 Notícias ou ✍️ Crónicas. As três áreas principais continuam separadas: Notícias, Crónicas e 📊 Métricas.
+- Dentro de 📊 Métricas, os separadores internos 📰 Notícias / ✍️ Crónicas permanecem e passam a ficar **acima** do filtro de período e da descrição da página, conforme o layout pretendido.
+- Removido o botão `← Voltar aos conteúdos` da área de métricas; a navegação deve ser feita pelos separadores principais.
+- O título da secção editorial dentro das métricas passa a acompanhar o separador interno selecionado.
+- Reforçada a inicialização do Admin para esconder explicitamente `#metrics-screen` e `#form-screen` quando o painel é aberto, evitando que métricas apareçam simultaneamente com a lista editorial.
+- Commit direto no GitHub, sem Codex: `4c087e63957f78ca927a4d2832ea3e301e184d59`.
+- Deployment Cloudflare Pages: `14e3b2a9`, production, build/deploy SUCCESS, alias `https://chutapracanto.com`.
+- Não foram alterados futebol, D1, analytics backend, likes/pageviews ou criação/edição de conteúdos.
