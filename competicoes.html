@@ -776,7 +776,7 @@ async function loadCompetition(key,status="all",resetRound=true){
     // Alguns snapshots antigos de status=all podem ter apenas a janela futura.
     // Se o snapshot não trouxer qualquer resultado terminado, recupera o histórico
     // explicitamente sem alterar a lógica normal de cache/cron.
-    if(effectiveStatus==="all" && allFixtures.length && !allFixtures.some(item=>fixtureStatus(item)==="finished")){
+    if(effectiveStatus==="all" && (key==="nations-league" || !allFixtures.some(item=>fixtureStatus(item)==="finished"))){
       try{
         const finishedResponse=await fetch("/api/competicoes?"+new URLSearchParams({competition:key,status:"finished"}).toString(),{cache:"no-store"});
         if(finishedResponse.ok){
