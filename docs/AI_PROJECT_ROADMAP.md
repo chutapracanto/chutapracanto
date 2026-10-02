@@ -557,3 +557,56 @@ Na revisão pós-implementação foi detetado que a função de pageview estava 
 - [x] Backend restringe os valores de período a uma whitelist (`1d`, `7d`, `30d`).
 - [x] Sem dados históricos inventados; apenas os eventos efetivamente registados entram nas métricas.
 - [ ] Fase futura separada: visitantes únicos/sessões/origens de tráfego, caso seja necessário e após revisão de privacidade.
+
+
+## 25. ANALYTICS CPC — ORIGEM, JORNADA E RELACIONADAS — 2026-10-02
+
+**Estado: IMPLEMENTADO EM PRODUÇÃO — primeira fase.**
+
+### Objetivo
+Perceber não apenas quantas visualizações uma notícia tem, mas:
+- de onde veio a sessão;
+- que páginas visitou;
+- quanto tempo ativo passou;
+- até onde fez scroll;
+- se viu/clicou numa notícia relacionada;
+- se foi para Competições;
+- se clicou em VER TODAS Competições na Home;
+- se interagiu com Shorts na Home;
+- quais origens trazem sessões (Facebook, Google, Linktree, Threads, X, etc.).
+
+### Implementado
+- analytics.js first-party em Home, Notícias, Opinião, Competições e notícia;
+- sessão técnica via sessionStorage;
+- classificação UTM/referrer;
+- suporte a Facebook, Instagram, Google, YouTube, TikTok, Reddit, Linktree, Threads, X/Twitter, Bing, direto, interno e referral;
+- page views e exits;
+- tempo ativo;
+- scroll 25/50/75/90%;
+- impressões/cliques de notícias relacionadas;
+- clique VER TODAS da Home → Competições;
+- impressões/cliques dos Shorts;
+- endpoint /api/analytics/event;
+- tabela D1 analytics_events;
+- Admin → Métricas com sessões, tempo ativo médio, sessões de uma página, origens e ações.
+
+### Relacionadas
+A antiga lógica era essencialmente mesma categoria primeiro + data. Agora usa relevância temática + categoria + recência. Mantêm-se 3 cartões e o layout existente.
+
+### Privacidade / interpretação
+Não guardar IP, nome ou email. A sessão técnica não deve ser apresentada como pessoa única. A pesquisa Google é classificada como Google quando o referrer/UTM permite; o termo de pesquisa individual não é recolhido nesta fase. Search Console deve continuar a ser usado para queries e impressões de pesquisa.
+
+### Próxima evolução
+- [ ] comparar origem → primeira notícia → segunda página → saída;
+- [ ] distinguir entrada interna da Home/Notícias/Competições;
+- [ ] aprofundar métricas de Competições e Shorts;
+- [ ] calcular uma definição de bounce baseada em sessão + ausência de interação significativa, se a amostra for suficiente;
+- [ ] eventualmente acrescentar medianas/buckets de tempo;
+- [ ] integrar dados do Search Console se for desejado saber as pesquisas concretas que levam ao site;
+- [ ] só considerar visitantes únicos persistentes após revisão de privacidade e necessidade real.
+
+### Regra
+Não instalar GA4/terceiros apenas para obter estas métricas sem antes avaliar o sistema first-party já implementado. Não duplicar tracking. Não alterar o football backend, D1 de competições ou sistema de likes para esta frente.
+
+### Regra de execução
+Até 22/10/2026, continuar sem depender de Codex.
