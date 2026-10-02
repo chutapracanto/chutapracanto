@@ -2533,3 +2533,24 @@ Commits:
 - Commit da correção: `6c814258776760cf6bd7dcf4afc1063ba6da2669` — `fix: tornar workflow do indice resistente a concorrencia`.
 - Validação: nova execução `37068159627` terminou **SUCCESS** em 2026-10-02T21:40:06Z.
 - Não foi alterada a lógica editorial nem o conteúdo das notícias; a correção é exclusivamente de sincronização Git do workflow.
+
+
+# 87. ELIMINAR DEFINITIVAMENTE O FLASH DA COMPETIÇÃO PROVISÓRIA — 2026-10-02
+
+- Feedback posterior: mesmo com o controlo de loadSequence, a **Liga Portugal** ainda era visível por uma fração de segundo ao abrir Competições sem competição explícita na URL.
+- Causa real remanescente: prepareCompetitionOrder() ainda iniciava loadCompetition("liga-portugal","all") em paralelo com os pedidos usados para determinar a ordem. O loadSequence impedia respostas obsoletas de sobrescreverem a UI, mas não impedia a própria Liga Portugal de pintar primeiro.
+- Correção definitiva: removida a carga provisória paralela. Quando não existe ?competition=..., a página mantém apenas o estado de carregamento enquanto determina a competição prioritária; só depois chama loadCompetition() para a competição final. Assim não existe nenhuma renderização intermédia de Liga Portugal para depois trocar para Nations League.
+- Mantido o comportamento dinâmico de prioridade Porto → Sporting → Benfica → Portugal, pela proximidade temporal dos jogos, sem hardcode da Nations League como escolha fixa.
+- Commit: 62bf177d5dafdbb58748432b6471ee8b1f000959 — fix: impedir flash da competicao provisoria.
+- Cloudflare Pages deployment production: bd2cb7d8-948c-4208-8c07-ec1df348e4f8.
+- Não foram alterados Worker, BSD, D1 ou cron.
+
+# 88. WORKFLOW DO ÍNDICE — CONFLITO NO REBASE APÓS A PRIMEIRA CORREÇÃO — 2026-10-02
+
+- Novas falhas reportadas: runs 37068289698 (commit ce6d1615...) e 37068612253 (commit 044807167...).
+- Diagnóstico: a correção #86 eliminou o non-fast-forward, mas o git pull --rebase origin main passou a parar em CONFLICT (content) em content/noticias-index.json, que é um ficheiro gerado pelo próprio workflow.
+- Causa: enquanto o índice estava a ser gerado, outro commit automático do índice avançou a main; o rebase tentou reconciliar duas versões do artefacto derivado.
+- Correção: o workflow passou a usar git pull --rebase -X theirs origin main, fazendo prevalecer a versão do índice gerada pelo run atual durante conflitos do rebase. Isto é apropriado para o artefacto derivado que o próprio workflow recalcula; não altera a fonte editorial como estratégia de resolução.
+- Commit: 357e91178d8160e5eb3718adc2a11f7e7d194f97 — fix: resolver conflitos do indice no rebase.
+- Validação real: run 37068889825 terminou SUCCESS às 2026-10-02T21:47:33Z.
+- Não houve alteração à lógica de geração editorial; a correção é de sincronização/resolução do artefacto gerado.
