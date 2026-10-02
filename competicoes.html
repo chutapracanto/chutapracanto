@@ -501,7 +501,6 @@ function renderFixtures(){
       const state=fixtureStatus(item),isLive=state==="live";
       const round=roundIdentity(item).displayRound;
       const minute=liveMinuteLabel(item);
-      const goals=goalsLabel(item);
       return '<div class="fixture" data-event-id="'+esc(fixtureDomKey(item))+'">' +
         '<div class="fixture-time"><span class="fixture-status'+(isLive?' fixture-live':'')+'" data-field="status">'+(isLive?'LIVE'+(minute?' · '+esc(minute):''):dateLabel(dateValue(item)))+'</span>' +
         (round?'<span class="fixture-round">'+esc(round)+'</span>':'')+'</div>' +
@@ -553,8 +552,6 @@ function patchHighlight(){
   if(scoreEl)scoreEl.textContent=live||item.score?.home!=null||item.score?.away!=null?fixtureScore(item):"VS";
   const detailEl=current.querySelector('[data-field="detail"]');
   if(detailEl)detailEl.textContent=live&&item.livePeriod?item.livePeriod:dateLabel(dateValue(item));
-  const goalsEl=current.querySelector('[data-field="goals"]');
-  if(goalsEl)goalsEl.innerHTML=goalsLabel(item);
 }
 function updateLiveSnapshot(data){
   const previous=new Map(allFixtures.map(item=>[fixtureDomKey(item),item]));
