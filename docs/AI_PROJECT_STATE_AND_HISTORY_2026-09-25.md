@@ -2365,3 +2365,27 @@ Não reabrir a arquitetura de futebol para esta regressão. A falha foi frontend
 Commits:
 - frontend: `87f8956db181391f4b9ca7bd3b3c71e816731518`
 - Worker/cache Nations: `46c8ca12e85d5724aa349eb76edac25280f9e983`
+
+# 75. COMPETIÇÕES + HOME — PRIORIDADE DE LIGAS, NATIONS A4, FOCO LIVE E REGRESSÃO HOME LIVE — 2026-10-02
+
+## Pedido e correções
+- Competições passa a ordenar as abas pela proximidade do próximo jogo envolvendo clubes/equipa prioritários, com desempate pela prioridade Porto → Sporting → Benfica → Portugal. A liga que fica em primeiro passa a ser a liga aberta por defeito quando a página é aberta sem competição explícita na URL.
+- Nations League passa a abrir por defeito em Liga A · Grupo A4, o grupo de Portugal, tanto em Competições como na classificação da Home. Um grupo explicitamente indicado na URL continua a ser respeitado.
+- O clique numa aba de competição Nations League também passa a iniciar em A4.
+- O botão AO VIVO da competição passou a ser visualmente uma pílula vermelha como o estado LIVE e só fica clicável quando existe pelo menos um LIVE. ONLINE permanece visual e não interativo.
+- Ao clicar em AO VIVO, todos os filtros de grupo/jornada são ultrapassados: o âmbito passa temporariamente a todos os jogos LIVE da competição e a página desloca-se para o primeiro jogo LIVE.
+- Home: os cartões JOGOS EM DIRETO deixaram de ser bloqueados pelo return da secção de próximos jogos prioritários. A atualização LIVE é agora iniciada mesmo quando não existem próximos jogos prioritários no período de 30 dias.
+- Home: as abas de classificações usam a mesma ordenação de competições baseada nos próximos jogos prioritários da área Competições.
+- Home: quando a classificação é a Nations League, a primeira visualização mostra A4 em vez de todos os grupos.
+
+## Implementação
+- competicoes.html: defaults A4, carregamento da primeira competição ordenada, foco LIVE que ignora filtros, estado ONLINE desativado e estilo restaurado para LIVE.
+- index.html: ordenação das classificações alinhada com a prioridade de competições, Nations A4 por defeito e correção do fluxo que impedia refreshHomeLive(true) de arrancar.
+
+## Commits
+- Competições: cc94108067aebbbd78c9e098c4cbe2c3d5c7c707
+- Home: 0812408e0df43a0c1ed810449807f25af60b4add
+
+## Validação
+- Cloudflare Pages criou deployments de produção para ambos os commits; o deployment Home a4577f93-1366-409f-99fb-36506abea8f6 estava em build no momento do registo. O deployment de Competições 321f1664-caf3-4f73-8c0c-4c48dc8db080 concluiu build e deploy com sucesso e mantém o alias de produção.
+- Validação visual completa em browser externo continua dependente de acesso funcional ao site; não declarar validação visual final sem essa evidência.
