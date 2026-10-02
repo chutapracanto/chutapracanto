@@ -1013,3 +1013,9 @@ Regra central: **UM BLOQUEIO NÃO É UM RESULTADO.** Uma IA não deve limitar-se
 - Se forem necessários mais detalhes, dividir a execução em prompts/etapas curtos.
 - Só ultrapassar 2.000 caracteres quando for tecnicamente inevitável; nesse caso, reduzir ao mínimo absoluto e justificar internamente a necessidade.
 - Esta regra substitui a formulação anterior de “poucas centenas de palavras” como critério principal: **o limite de caracteres é o controlo operacional**.
+
+## 2026-10-02 — Regra permanente de prioridade das competições
+- A ordem de competições deve ser calculada pelos próximos jogos relevantes das equipas prioritárias, usando a mesma lógica na aba Competições e nas classificações da Home.
+- Prioridade de desempate: FC Porto/Porto → Sporting → Benfica → Portugal.
+- Nations League: o grupo de Portugal é A4 e deve ser o grupo por defeito nas classificações e na entrada normal da competição, salvo filtro/URL explicitamente escolhido pelo utilizador.
+- O estado ONLINE não é interativo. AO VIVO só é interativo quando existe LIVE e, ao ser acionado, deve ultrapassar filtros de grupo/jornada para mostrar os jogos LIVE da competição.
