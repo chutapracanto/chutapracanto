@@ -1024,10 +1024,12 @@
             <section class="metrics-section">
                 <div class="metrics-section-heading"><h3>📰 Notícias e ✍️ Crónicas</h3><p>Todos os conteúdos juntos, ordenados por visualizações, com likes e partilhas.</p></div>
                 <div class="metrics-grid">
+                    <div class="metric-card"><div class="metric-card-label">Visualizações de conteúdos</div><div id="metric-total-content-views" class="metric-card-value">—</div></div>
                     <div class="metric-card"><div class="metric-card-label">Likes totais</div><div id="metric-total-likes" class="metric-card-value">—</div></div>
+                    <div class="metric-card"><div class="metric-card-label">Conteúdos com likes</div><div id="metric-content-with-likes" class="metric-card-value">—</div></div>
                     <div class="metric-card"><div class="metric-card-label">Partilhas totais</div><div id="metric-total-shares" class="metric-card-value">—</div></div>
                 </div>
-                <div class="metrics-table-wrap"><table class="metrics-table"><thead><tr><th>Conteúdo</th><th>Tipo</th><th>Visualizações</th><th>Likes</th><th>Partilhas</th><th>Ação</th></tr></thead><tbody id="metrics-likes-body"><tr><td colspan="6">A carregar métricas…</td></tr></tbody></table></div>
+                <div class="metrics-table-wrap"><table class="metrics-table"><thead><tr><th>Conteúdo</th><th>Tipo</th><th>Visualizações</th><th>Likes</th><th>Like rate</th><th>Partilhas</th><th>Ação</th></tr></thead><tbody id="metrics-likes-body"><tr><td colspan="7">A carregar métricas…</td></tr></tbody></table></div>
             </section>
         </div>
 
@@ -2088,6 +2090,398 @@ function formatarDataNoticia(
 // MOSTRAR LISTA
 // ============================================================
 
+function mostrarLista(lista) {
+
+    const container = document.getElementById("news-list");
+    const pagination = document.getElementById("pagination");
+
+    if (!lista.length) {
+        const vazio = document.createElement("div");
+        vazio.className = "loading";
+        vazio.textContent = "Não existem notícias.";
+        container.replaceChildren(vazio);
+        pagination.replaceChildren();
+        return;
+    }
+
+    const totalPaginas = Math.ceil(lista.length / NOTICIAS_POR_PAGINA);
+    if (paginaAtual > totalPaginas) paginaAtual = totalPaginas;
+
+    const inicio = (paginaAtual - 1) * NOTICIAS_POR_PAGINA;
+    const noticiasDaPagina = lista.slice(inicio, inicio + NOTICIAS_POR_PAGINA);
+    const fragmento = document.createDocumentFragment();
+
+    noticiasDaPagina.forEach(file => {
+        const titulo = file.titulo || slugParaTitulo(file.name || "");
+        const categoria = file.categoria || file.category || "";
+        const imagem = normalizarUrlImagem(
+            file.imagem || file.image || file.featured_image || file.featuredImage || ""
+        );
+        const path = file.path || "";
+        const sha = file.sha || "";
+        const dataFormatada = formatarDataNoticia(file);
+
+        const item = document.createElement("div");
+        item.className = "news-item";
+
+        const thumb = document.createElement("div");
+        thumb.className = "news-thumb";
+        if (imagem) {
+            const img = document.createElement("img");
+            img.src = imagem;
+            img.alt = "";
+            img.addEventListener("error", () => {
+                const placeholder = document.createElement("div");
+                placeholder.className = "news-thumb-placeholder";
+                placeholder.textContent = "📰";
+                thumb.replaceChildren(placeholder);
+            }, { once: true });
+            thumb.appendChild(img);
+        } else {
+            const placeholder = document.createElement("div");
+            placeholder.className = "news-thumb-placeholder";
+            placeholder.textContent = "📰";
+            thumb.appendChild(placeholder);
+        }
+
+        const info = document.createElement("div");
+        info.className = "news-info";
+
+        const titleElement = document.createElement("div");
+        titleElement.className = "news-title";
+        titleElement.textContent = titulo;
+        info.appendChild(titleElement);
+
+        const meta = document.createElement("div");
+        meta.className = "news-meta";
+        if (categoria) {
+            const categoryElement = document.createElement("span");
+            categoryElement.className = "news-category";
+            categoryElement.textContent = categoria;
+            meta.appendChild(categoryElement);
+        }
+
+        const dateElement = document.createElement("span");
+        dateElement.className = "news-date";
+        dateElement.textContent = dataFormatada;
+        meta.appendChild(dateElement);
+
+        const autor = file.autor || file.author || "";
+        if (autor) {
+            const authorElement = document.createElement("span");
+            authorElement.className = "news-author";
+            authorElement.textContent = "✍️ " + autor;
+            meta.appendChild(authorElement);
+        }
+        info.appendChild(meta);
+
+        const fileElement = document.createElement("div");
+        fileElement.className = "news-file";
+        fileElement.textContent = file.name || "";
+        info.appendChild(fileElement);
+
+        const actions = document.createElement("div");
+        actions.className = "news-actions";
+        const createActionButton = (label, className, action) => {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = className;
+            button.textContent = label;
+            button.addEventListener("click", action);
+            return button;
+        };
+
+        actions.append(
+            createActionButton("👁️ Ver", "preview-btn", () => previsualizarDaLista(path)),
+            createActionButton("📊 Ver métricas", "secondary-btn", () => verMetricasConteudo(file.slug || "", titulo)),
+            createActionButton("📤 Partilhar", "share-btn", () => abrirPartilha(path, titulo)),
+            createActionButton("✏️ Editar", "edit-btn", () => editarNoticia(path)),
+            createActionButton("🗑️ Apagar", "delete-list-btn", () => apagarDaLista(path, sha, titulo))
+        );
+
+        item.append(thumb, info, actions);
+        fragmento.appendChild(item);
+    });
+
+    container.replaceChildren(fragmento);
+    mostrarPaginacao(totalPaginas, lista.length);
+}
+
+
+// ============================================================
+// PAGINAÇÃO
+// ============================================================
+
+function mostrarPaginacao(
+    totalPaginas,
+    totalResultados
+) {
+
+    const pagination =
+        document.getElementById(
+            "pagination"
+        );
+
+    if (
+        totalPaginas <= 1
+    ) {
+
+        pagination.innerHTML = `
+            <div class="page-info">
+                ${totalResultados}
+                notícia${totalResultados === 1 ? "" : "s"}
+            </div>
+        `;
+
+        return;
+    }
+
+    let html = "";
+
+    html += `
+
+        <button
+            class="page-btn"
+            onclick="mudarPagina(${paginaAtual - 1})"
+            ${paginaAtual === 1 ? "disabled" : ""}
+        >
+            ←
+        </button>
+
+    `;
+
+    for (
+        let i = 1;
+        i <= totalPaginas;
+        i++
+    ) {
+
+        html += `
+
+            <button
+                class="page-btn ${i === paginaAtual ? "active" : ""}"
+                onclick="mudarPagina(${i})"
+            >
+                ${i}
+            </button>
+
+        `;
+    }
+
+    html += `
+
+        <span class="page-info">
+            ${totalResultados} notícias
+        </span>
+
+    `;
+
+    html += `
+
+        <button
+            class="page-btn"
+            onclick="mudarPagina(${paginaAtual + 1})"
+            ${paginaAtual === totalPaginas ? "disabled" : ""}
+        >
+            →
+        </button>
+
+    `;
+
+    pagination.innerHTML =
+        html;
+}
+
+
+function mudarPagina(numero) {
+
+    const totalPaginas =
+        Math.ceil(
+            noticiasFiltradas.length /
+            NOTICIAS_POR_PAGINA
+        );
+
+    if (
+        numero < 1 ||
+        numero > totalPaginas
+    ) {
+        return;
+    }
+
+    paginaAtual =
+        numero;
+
+    mostrarLista(
+        noticiasFiltradas
+    );
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+
+
+// ============================================================
+// PESQUISA
+// ============================================================
+
+function filtrarLista() {
+
+    const termo =
+        document
+            .getElementById(
+                "search-news"
+            )
+            .value
+            .trim()
+            .toLowerCase();
+
+    if (!termo) {
+
+        noticiasFiltradas =
+            noticias.filter(
+                file => obterTipoConteudo(file) === secaoAdminAtual
+            );
+
+        paginaAtual = 1;
+
+        mostrarLista(
+            noticiasFiltradas
+        );
+
+        return;
+    }
+
+    noticiasFiltradas =
+        noticias.filter(
+            file => {
+                if (obterTipoConteudo(file) !== secaoAdminAtual) return false;
+
+                const titulo =
+                    (
+                        file.titulo ||
+                        ""
+                    ).toLowerCase();
+
+                const categoria =
+                    (
+                        file.categoria ||
+                        file.category ||
+                        ""
+                    ).toLowerCase();
+
+                const autor =
+                    (
+                        file.autor ||
+                        file.author ||
+                        ""
+                    ).toLowerCase();
+
+                const subtitulo =
+                    (
+                        file.subtitulo ||
+                        file.subtitle ||
+                        ""
+                    ).toLowerCase();
+
+                const nomeFicheiro =
+                    (
+                        file.name ||
+                        ""
+                    ).toLowerCase();
+
+                return (
+                    titulo.includes(termo) ||
+                    categoria.includes(termo) ||
+                    autor.includes(termo) ||
+                    subtitulo.includes(termo) ||
+                    nomeFicheiro.includes(termo)
+                );
+            }
+        );
+
+    paginaAtual = 1;
+
+    mostrarLista(
+        noticiasFiltradas
+    );
+}
+
+
+function slugParaTitulo(filename) {
+
+    return filename
+        .replace(/\.md$/i, "")
+        .replace(/[-_]+/g, " ")
+        .replace(/\b\w/g, letra =>
+            letra.toUpperCase()
+        );
+}
+
+
+// ============================================================
+// NOVA NOTÍCIA
+// ============================================================
+
+function novaCronica() {
+    novaNoticia();
+    document.getElementById("noticia-type").value = "opinion";
+    document.getElementById("form-title").innerText = "Nova Crónica";
+    document.getElementById("mode-label").innerText = "Criar uma nova crónica / opinião";
+    document.getElementById("save-button-text").innerText = "Publicar Crónica";
+}
+
+function novaNoticia() {
+
+    noticiaEmEdicao = null;
+
+    limparFormulario();
+
+    document
+        .getElementById("form-title")
+        .innerText =
+            "Nova Notícia";
+
+    document
+        .getElementById("mode-label")
+        .innerText =
+            "Criar um novo conteúdo";
+
+    document
+        .getElementById("save-button-text")
+        .innerText =
+            "Publicar Notícia";
+
+    document
+        .getElementById("delete-button")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("list-screen")
+        .classList
+        .add("hidden");
+
+    document
+        .getElementById("form-screen")
+        .classList
+        .remove("hidden");
+
+    document
+        .getElementById("noticia-data")
+        .valueAsDate =
+            new Date();
+
+    iniciarEditor();
+}
+
+
+// ============================================================
+// EDITAR NOTÍCIA
+// ============================================================
+
+
 function obterTipoConteudo(file) {
     return file?.type === "opinion" ? "opinion" : "news";
 }
@@ -2117,17 +2511,17 @@ function fecharMetricasConteudo(){document.getElementById("content-metrics-modal
 async function abrirMetricasAdmin() {
     document.getElementById("tab-news")?.classList.remove("active"); document.getElementById("tab-opinion")?.classList.remove("active"); document.getElementById("tab-metrics")?.classList.add("active");
     document.getElementById("list-screen")?.classList.add("hidden"); document.getElementById("form-screen")?.classList.add("hidden"); document.getElementById("metrics-screen")?.classList.remove("hidden");
-    const period=document.getElementById("metrics-period")?.value||"30d", body=document.getElementById("metrics-likes-body"); body.innerHTML='<tr><td colspan="6" class="metrics-empty">A carregar métricas…</td></tr>';
+    const period=document.getElementById("metrics-period")?.value||"30d", body=document.getElementById("metrics-likes-body"); body.innerHTML='<tr><td colspan="7" class="metrics-empty">A carregar métricas…</td></tr>';
     try {
       const q="?period="+encodeURIComponent(period), [likesData,viewsData,analyticsData]=await Promise.all([apiFetch("/api/admin/metrics/likes"+q),apiFetch("/api/admin/metrics/views"+q),apiFetch("/api/admin/metrics/analytics"+q)]), s=analyticsData.summary||{}, secs=Number(s.avgActiveSeconds||0);
-      document.getElementById("metric-total-likes").textContent=String(likesData.totalLikes||0); document.getElementById("metric-total-shares").textContent=String((analyticsData.shares||[]).reduce((a,x)=>a+Number(x.events||0),0)); document.getElementById("metric-total-site-visits").textContent=String(s.pageViews||0); document.getElementById("metric-total-sessions").textContent=String(s.sessions||0);
+      document.getElementById("metric-total-likes").textContent=String(likesData.totalLikes||0); document.getElementById("metric-content-with-likes").textContent=String(likesData.articlesWithLikes||0); document.getElementById("metric-total-content-views").textContent=String(viewsData.totalViews||0); document.getElementById("metric-total-shares").textContent=String((analyticsData.shares||[]).reduce((a,x)=>a+Number(x.events||0),0)); document.getElementById("metric-total-site-visits").textContent=String(s.pageViews||0); document.getElementById("metric-total-sessions").textContent=String(s.sessions||0);
       document.getElementById("metric-avg-time").textContent=secs>=60?Math.floor(secs/60)+"m "+Math.round(secs%60)+"s":Math.round(secs)+"s"; document.getElementById("metric-single-page").textContent=String(s.singlePageSessions||0); document.getElementById("metric-bounce").textContent=(s.sessions?(Number(s.singlePageSessions||0)/Number(s.sessions)*100):0).toFixed(1)+"%";
       const td=v=>{const e=document.createElement("td");e.textContent=String(v??"—");return e;}, fill=(id,rows,n,make)=>{const e=document.getElementById(id);if(!e)return;if(!rows?.length){e.innerHTML='<tr><td colspan="'+n+'" class="metrics-empty">Sem dados.</td></tr>';return;}e.replaceChildren(...rows.slice(0,20).map(make));};
       fill("metrics-sources-body",analyticsData.sources,4,x=>{const tr=document.createElement("tr");tr.append(td(x.source||"direct"),td(x.medium||"unknown"),td(x.sessions||0),td(x.visits||x.events||0));return tr;}); fill("metrics-countries-body",analyticsData.countries,3,x=>{const tr=document.createElement("tr");tr.append(td(x.country||"Desconhecido"),td(x.sessions||0),td(x.visits||0));return tr;}); fill("metrics-referrers-body",analyticsData.referrers,3,x=>{const tr=document.createElement("tr");tr.append(td(x.site||"direct"),td(x.sessions||0),td(x.visits||0));return tr;});
       const likes=new Map((likesData.items||[]).map(x=>[x.slug,Number(x.count||0)])), views=new Map((viewsData.items||[]).map(x=>[x.slug,Number(x.count||0)])), shares=new Map((analyticsData.contentShares||[]).map(x=>[x.slug,Number(x.count||0)]));
       const rows=noticias.map(f=>({...f,likeCount:likes.get(f.slug)||0,viewCount:views.get(f.slug)||0,shareCount:shares.get(f.slug)||0})).filter(f=>f.viewCount||f.likeCount||f.shareCount).sort((a,b)=>b.viewCount-a.viewCount||b.likeCount-a.likeCount||b.shareCount-a.shareCount);
       if(!rows.length){body.innerHTML='<tr><td colspan="6" class="metrics-empty">Não existem métricas registadas neste período.</td></tr>';return;}
-      body.replaceChildren(...rows.map(f=>{const tr=document.createElement("tr");tr.append(td(f.title||f.name),td(obterTipoConteudo(f)==="opinion"?"Crónica":"Notícia"),td(f.viewCount),td(f.likeCount),td(f.shareCount));const a=document.createElement("td"),b=document.createElement("button");b.type="button";b.className="secondary-btn";b.textContent="📊 Ver métricas";b.onclick=()=>verMetricasConteudo(f.slug,f.title||f.name);a.appendChild(b);tr.appendChild(a);return tr;}));
+      body.replaceChildren(...rows.map(f=>{const tr=document.createElement("tr");const rate=f.viewCount?(f.likeCount/f.viewCount*100).toFixed(1)+"%":"—"; tr.append(td(f.title||f.name),td(obterTipoConteudo(f)==="opinion"?"Crónica":"Notícia"),td(f.viewCount),td(f.likeCount),td(rate),td(f.shareCount));const a=document.createElement("td"),b=document.createElement("button");b.type="button";b.className="secondary-btn";b.textContent="📊 Ver métricas";b.onclick=()=>verMetricasConteudo(f.slug,f.title||f.name);a.appendChild(b);tr.appendChild(a);return tr;}));
     } catch(e){body.innerHTML='<tr><td colspan="6" class="metrics-empty">Não foi possível carregar as métricas.</td></tr>';console.error(e);}
 }
 
