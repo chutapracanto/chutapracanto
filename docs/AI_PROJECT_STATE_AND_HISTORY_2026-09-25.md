@@ -2565,3 +2565,15 @@ Commits:
 - Commit: `743eb61f7a457857b8eab66e8e86892a1acd9bb3` — `perf: reutilizar dados da ordenacao inicial`.
 - Cloudflare Pages production deployment: `5355a055-5a56-432c-8e7a-f21a984757fe`; build concluído com sucesso, deploy confirmado em produção.
 - Não foram alterados Worker, BSD, D1 ou cron.
+
+
+# 90. ACELERAR A DESCOBERTA INICIAL DAS COMPETIÇÕES — 2026-10-02
+
+- Feedback: mesmo após eliminar o pedido duplicado da otimização #89, a entrada em **Competições** continuava a ser sentida como lenta.
+- Diagnóstico: a ordenação inicial só precisa de jogos **futuros/LIVE** para decidir a competição prioritária, mas estava a pedir `status=all` para as 7 competições. Esse payload é muito maior porque inclui o universo completo usado pelos filtros/histórico.
+- Correção: `prepareCompetitionOrder()` passou a consultar `status=upcoming` para a descoberta da prioridade. O Worker já trata esse estado como janela futura + LIVE, que é exatamente o conjunto necessário para o ranking. Depois de determinar a competição final, `loadCompetition()` continua a pedir `status=all`, preservando histórico, jornadas, resultados e classificações.
+- Não foi reintroduzida carga provisória nem foi alterada a prioridade dinâmica Porto → Sporting → Benfica → Portugal.
+- Não foram alterados Worker, BSD, D1 ou cron.
+- Commit: e35e0c4451eba3fb55a953c04ea4aea3f2d5cdbc — perf: tornar descoberta de competicao inicial mais leve.
+- Cloudflare Pages production deployment: ee772745-d1b4-4c1f-aa2b-dac919c7d22f — SUCCESS às 21:56:12 UTC; commit de produção confirmado como e35e0c4451eba3fb55a953c04ea4aea3f2d5cdbc.
+- Validação visual/medição real no domínio continua limitada nesta sessão por falha de resolução DNS; a implementação e o deployment foram confirmados.
