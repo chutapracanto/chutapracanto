@@ -1234,6 +1234,9 @@
 
 
     function registarPartilha(plataforma) {
+      if (window.CPCAnalytics?.send) {
+        window.CPCAnalytics.send('share_option_click', { target: plataforma, metadata: { platform: plataforma, method: 'outbound' } });
+      }
       if (typeof window.gtag === 'function') {
         window.gtag('event', 'share', { method: plataforma, content_type: 'article', item_id: new URL(window.location.href).searchParams.get('slug') || '' });
       } else if (Array.isArray(window.dataLayer)) {
@@ -1260,6 +1263,9 @@
         const status = document.getElementById('share-status');
         if (status) status.textContent = 'Link copiado';
         registarPartilha('copy');
+        if (window.CPCAnalytics?.send) {
+          window.CPCAnalytics.send('share_copy_completed', { target: 'copy', metadata: { platform: 'copy', method: 'clipboard' } });
+        }
       } catch (error) {
         const status = document.getElementById('share-status');
         if (status) status.textContent = 'Não foi possível copiar o link';
