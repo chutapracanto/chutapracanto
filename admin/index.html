@@ -142,6 +142,16 @@
             flex-wrap: wrap;
         }
 
+        .metrics-period-select {
+            width: min(280px, 100%);
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            background: #fff;
+            margin-top: 6px;
+        }
+
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -948,7 +958,13 @@
             <div class="metrics-toolbar">
                 <div>
                     <h2>📊 Métricas</h2>
-                    <p>Likes reais registados por notícia. As métricas de visitas e rates serão acrescentadas quando a medição de pageviews estiver ativa.</p>
+                    <p>Visualizações e likes registados por notícia no período selecionado. As visualizações são pageviews, não pessoas únicas.</p>
+                    <label for="metrics-period">Período</label>
+                    <select id="metrics-period" class="metrics-period-select" onchange="abrirMetricasAdmin()">
+                        <option value="1d">Últimas 24 horas</option>
+                        <option value="7d">Últimos 7 dias</option>
+                        <option value="30d" selected>Últimos 30 dias</option>
+                    </select>
                 </div>
                 <button type="button" class="secondary-btn" onclick="fecharMetricasAdmin()">← Voltar aos conteúdos</button>
             </div>
@@ -2058,13 +2074,15 @@ async function abrirMetricasAdmin() {
     document.getElementById("form-screen")?.classList.add("hidden");
     document.getElementById("metrics-screen")?.classList.remove("hidden");
 
+    const period = document.getElementById("metrics-period")?.value || "30d";
     const body = document.getElementById("metrics-likes-body");
     body.innerHTML = '<tr><td colspan="5" class="metrics-empty">A carregar métricas…</td></tr>';
 
     try {
+        const query = "?period=" + encodeURIComponent(period);
         const [likesData, viewsData] = await Promise.all([
-            apiFetch("/api/admin/metrics/likes"),
-            apiFetch("/api/admin/metrics/views")
+            apiFetch("/api/admin/metrics/likes" + query),
+            apiFetch("/api/admin/metrics/views" + query)
         ]);
 
         document.getElementById("metric-total-likes").textContent = String(likesData.totalLikes || 0);
@@ -2083,7 +2101,7 @@ async function abrirMetricasAdmin() {
             .sort((x, y) => y.viewCount - x.viewCount || y.likeCount - x.likeCount);
 
         if (!rows.length) {
-            body.innerHTML = '<tr><td colspan="5" class="metrics-empty">Ainda não existem visualizações ou likes registados.</td></tr>';
+            body.innerHTML = '<tr><td colspan="5" class="metrics-empty">Não existem visualizações ou likes registados neste período.</td></tr>';
             return;
         }
 
