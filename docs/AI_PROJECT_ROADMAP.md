@@ -787,3 +787,76 @@ Não alterar D1, cache, adapter BSD, cron ou regras de filtros para resolver um 
 - Deployment: `67caf14c-272a-4dec-9218-f691fc0d1dd3`, SUCCESS.
 - Não alterados cron, D1, BSD como fonte ou infraestrutura estável.
 - Pendente: validação visual real em jogo LIVE com golo nas três superfícies.
+
+
+## 2026-10-02 — RECONCILIAÇÃO: LIVE, FILTROS, MÉTRICAS E STANDBY
+
+### LIVE — CONCLUÍDO
+- [x] Home LIVE: minuto + marcador por baixo da equipa que marcou.
+- [x] Competições → Jogo em destaque: mesmo detalhe de golo.
+- [x] Competições → Jogos e resultados: mesmo detalhe de golo.
+- [x] Worker preserva golos conhecidos perante respostas transitórias vazias do endpoint de incidentes BSD.
+- [x] Produção confirmada pela utilizadora após o último ciclo de correções.
+
+### Jogo em destaque — regra definitiva
+- [x] Sem LIVE: exatamente 1 jogo em destaque.
+- [x] 1 LIVE: apenas esse LIVE, sem setas.
+- [x] 2+ LIVE: todos os LIVE do âmbito selecionado, com duas setas independentes ← →.
+- [x] As setas só aparecem quando existem pelo menos 2 LIVE.
+- [x] Nations League + Todos + todos os grupos: todos os LIVE da Nations no destaque, por ordem.
+- [x] Nations League + grupo selecionado: apenas LIVE desse grupo.
+- [x] Outras competições: LIVE limitado ao âmbito/filtros selecionados.
+
+### Todos / histórico — CONCLUÍDO
+- [x] Ao selecionar Todos, o filtro de jornada passa obrigatoriamente para Todas as jornadas.
+- [x] Em Todos aparecem jogos passados, LIVE e futuros.
+- [x] Liga Portugal deixa de ficar presa a uma jornada específica quando Todos é selecionado.
+- [x] Ordenação continua temporal dentro da lista.
+- [x] Commit: 005ee55036046c2cb0423ac8fce7efd89c70c899.
+- [x] Deployment: e8470ac8-4c8c-4b99-909c-ea7f13248c02, SUCCESS.
+
+### Métricas — estado reconciliado
+A antiga entrada de backlog inicial de métricas deve ser lida como SUPERADA pelo trabalho já concluído em produção.
+
+**Já implementado:**
+- [x] likes por conteúdo;
+- [x] pageviews;
+- [x] Like rate;
+- [x] períodos 24h / 7d / 30d;
+- [x] analytics first-party;
+- [x] sessões técnicas;
+- [x] tempo ativo;
+- [x] páginas/saídas;
+- [x] scroll;
+- [x] origens/referrers/UTM;
+- [x] impressões/cliques de conteúdos relacionados;
+- [x] ações Home/Competições/Shorts registadas quando aplicável;
+- [x] leitura agregada no Admin;
+- [x] métricas editoriais anteriores preservadas após a regressão da lista do Admin.
+
+**Standby controlado — não implementar por rotina:**
+- [ ] origem → primeira notícia → segunda página → saída;
+- [ ] distinção mais fina de entradas internas;
+- [ ] métricas mais profundas de Competições e Shorts;
+- [ ] definição/validação de bounce baseada em sessão + interação significativa, apenas com amostra suficiente;
+- [ ] medianas/buckets de tempo;
+- [ ] Search Console para queries/impressões quando houver acesso/dados;
+- [ ] visitantes únicos persistentes, após revisão de privacidade e necessidade real.
+
+**Regra:** não duplicar tracking nem trocar o sistema first-party por GA4/terceiros apenas para obter métricas que já são suportadas. Não apresentar sessão técnica como utilizador único.
+
+### Imagens — standby mantido
+- [ ] pesquisa automática de imagens relacionada com o teor/título da notícia;
+- [ ] utilizadora continua a poder alterar manualmente a pesquisa;
+- [ ] eventual importação de imagens externas para images/uploads/, preservando licença/atribuição;
+- [ ] não alterar agora o fluxo de pesquisa existente por causa desta ideia.
+
+### Outras frentes em standby
+- [ ] redução de deployments duplicados, apenas com nova validação real e rollback simples;
+- [ ] pesquisa global;
+- [ ] automação de distribuição de vídeo, dependente de OAuth/permissões/quotas/aprovações;
+- [ ] performance apenas com evidência de runtime;
+- [ ] aprofundamento Search Console quando os relatórios estiverem disponíveis.
+
+### Continuidade
+Até 22/10/2026, trabalhar diretamente via GitHub/Cloudflare e não depender de Codex. Em Competições, preservar BSD → Worker → D1 → frontend e não mexer na infraestrutura para resolver problemas de UI/filtros.
