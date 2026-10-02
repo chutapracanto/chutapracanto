@@ -923,7 +923,19 @@
 
                 <div>
                     <h1 id="admin-section-title">📰 Notícias</h1>
+    <div class="metrics-section">
+                    <div class="metrics-section-heading">
+                        <h3>📤 Partilhas</h3>
+                        <p>Mostra a opção de partilha escolhida. “Link copiado” é uma ação concluída; nas plataformas externas não conseguimos confirmar o envio efetivo.</p>
+                    </div>
+                    <div class="metrics-table-wrap">
+                        <table class="metrics-table">
+                            <thead><tr><th>Onde</th><th>Ação</th><th>Sessões</th><th>Eventos</th></tr></thead>
+                            <tbody id="metrics-shares-body"><tr><td colspan="4" class="metrics-empty">Sem dados de partilhas.</td></tr></tbody>
+                        </table>
+                    </div>
                 </div>
+            </div>
 
                 <div style="display:flex; gap:8px; flex-wrap:wrap;">
 
@@ -2174,6 +2186,15 @@ async function abrirMetricasAdmin() {
             const sessions=document.createElement("td"); sessions.textContent=String(item.sessions || 0);
             const events=document.createElement("td"); events.textContent=String(item.events || 0);
             tr.append(source,medium,sessions,events); return tr;
+        }));
+        const sharesBody = document.getElementById("metrics-shares-body");
+        sharesBody.replaceChildren(...(analyticsData.shares || []).slice(0, 20).map(item => {
+            const tr=document.createElement("tr");
+            const platform=document.createElement("td"); platform.textContent=item.platform || "unknown";
+            const type=document.createElement("td"); type.textContent=item.eventType === "share_copy_completed" ? "Link copiado" : "Opção de partilha escolhida";
+            const sessions=document.createElement("td"); sessions.textContent=String(item.sessions || 0);
+            const events=document.createElement("td"); events.textContent=String(item.events || 0);
+            tr.append(platform,type,sessions,events); return tr;
         }));
         journeyBody.replaceChildren(...(analyticsData.journeys || []).slice(0, 20).map(item => {
             const tr=document.createElement("tr");
