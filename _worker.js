@@ -1918,6 +1918,7 @@ async function handleAdminAPI(request, env) {
       await ensureAnalyticsSchema(env.ARTICLE_LIKES_DB);
       const sourceRows = await env.ARTICLE_LIKES_DB.prepare("SELECT source, medium, COUNT(*) AS events, COUNT(DISTINCT session_id) AS sessions FROM analytics_events WHERE datetime(occurred_at) >= datetime('now', ?1) GROUP BY source, medium ORDER BY sessions DESC, events DESC, source ASC").bind(modifier).all();
       const journeyRows = await env.ARTICLE_LIKES_DB.prepare("SELECT event_type, COUNT(*) AS events, COUNT(DISTINCT session_id) AS sessions FROM analytics_events WHERE datetime(occurred_at) >= datetime('now', ?1) GROUP BY event_type ORDER BY events DESC, event_type ASC").bind(modifier).all();
+      const shareRows = await env.ARTICLE_LIKES_DB.prepare("SELECT COALESCE(json_extract(metadata_json,'$.platform'),'unknown') AS platform, event_type, COUNT(*) AS events, COUNT(DISTINCT session_id) AS sessions FROM analytics_events WHERE event_type IN ('share_option_click','share_copy_completed','share_native_completed') AND datetime(occurred_at) >= datetime('now', ?1) GROUP BY platform, event_type ORDER BY events DESC, platform ASC").bind(modifier).all();
       const pageRows = await env.ARTICLE_LIKES_DB.prepare("SELECT page_path, COUNT(*) AS views, COUNT(DISTINCT session_id) AS sessions FROM analytics_events WHERE event_type = 'page_view' AND datetime(occurred_at) >= datetime('now', ?1) GROUP BY page_path ORDER BY views DESC, page_path ASC").bind(modifier).all();
       const summary = await env.ARTICLE_LIKES_DB.prepare("SELECT COUNT(DISTINCT session_id) AS sessions, SUM(CASE WHEN event_type='page_view' THEN 1 ELSE 0 END) AS page_views, COUNT(DISTINCT CASE WHEN event_type='page_exit' THEN session_id END) AS sessions_with_exit, AVG(CASE WHEN event_type='page_exit' THEN CAST(json_extract(metadata_json,'$.activeSeconds') AS REAL) END) AS avg_active_seconds FROM analytics_events WHERE datetime(occurred_at) >= datetime('now', ?1)").bind(modifier).first();
       const onePageRows = await env.ARTICLE_LIKES_DB.prepare("SELECT COUNT(*) AS sessions FROM (SELECT session_id FROM analytics_events WHERE event_type='page_view' AND datetime(occurred_at) >= datetime('now', ?1) GROUP BY session_id HAVING COUNT(*) = 1)").bind(modifier).first();
@@ -1925,7 +1926,8 @@ async function handleAdminAPI(request, env) {
         summary:{sessions:Number(summary?.sessions||0),pageViews:Number(summary?.page_views||0),sessionsWithExit:Number(summary?.sessions_with_exit||0),singlePageSessions:Number(onePageRows?.sessions||0),avgActiveSeconds:Number(summary?.avg_active_seconds||0)},
         sources:(sourceRows?.results||[]).map(r=>({source:String(r.source||""),medium:String(r.medium||""),events:Number(r.events||0),sessions:Number(r.sessions||0)})),
         journeys:(journeyRows?.results||[]).map(r=>({eventType:String(r.event_type||""),events:Number(r.events||0),sessions:Number(r.sessions||0)})),
-        pages:(pageRows?.results||[]).map(r=>({pagePath:String(r.page_path||""),views:Number(r.views||0),sessions:Number(r.sessions||0)}))
+        pages:(pageRows?.results||[]).map(r=>({pagePath:String(r.page_path||""),views:Number(r.views||0),sessions:Number(r.sessions||0)})),
+        shares:(shareRows?.results||[]).map(r=>({platform:String(r.platform||"unknown"),eventType:String(r.event_type||""),events:Number(r.events||0),sessions:Number(r.sessions||0)}))
       });
     } catch (error) {
       console.error("Admin analytics metrics error:", error);
