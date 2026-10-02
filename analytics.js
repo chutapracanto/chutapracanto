@@ -171,7 +171,10 @@
   });
 
   const heartbeat = window.setInterval(() => {
-    if (document.visibilityState === 'visible') send('active_time', { metadata: { seconds: Math.round(activeMs / 1000) } });
+    if (document.visibilityState === 'visible') {
+      const currentActiveMs = activeMs + Math.max(0, performance.now() - (visibleSince ?? performance.now()));
+      send('active_time', { metadata: { seconds: Math.round(currentActiveMs / 1000) } });
+    }
   }, 30000);
 
   window.addEventListener('pagehide', () => {
