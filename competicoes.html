@@ -382,7 +382,7 @@ async function prepareCompetitionOrder(){
         return da-db||rank(a.homeTeam)-rank(b.homeTeam)||rank(a.awayTeam)-rank(b.awayTeam);
       });
       const first=priority[0];
-      return {meta,priorityTime:first?dateValue(first)?.getTime()??Infinity:Infinity,priorityRank:first?Math.min(rank(first.homeTeam),rank(first.awayTeam)):99,generalTime:fixtures.length?dateValue(fixtures[0])?.getTime()??Infinity:Infinity};
+      return {meta,data,priorityTime:first?dateValue(first)?.getTime()??Infinity:Infinity,priorityRank:first?Math.min(rank(first.homeTeam),rank(first.awayTeam)):99,generalTime:fixtures.length?dateValue(fixtures[0])?.getTime()??Infinity:Infinity};
     }catch{
       return {meta,priorityTime:Infinity,priorityRank:99,generalTime:Infinity};
     }
@@ -405,7 +405,8 @@ async function prepareCompetitionOrder(){
       renderTabs();
       groupFilter=firstKey==="nations-league"?"A4":"all";
       roundEl.value="all";
-      await loadCompetition(firstKey,"all",true);
+      const selected=results.find(item=>item.meta?.[0]===firstKey);
+      await loadCompetition(firstKey,"all",true,selected?.data||null);
     }
   }
 }
@@ -748,7 +749,7 @@ async function refreshCompetitionSnapshot(){
     scheduleCompetitionRefresh();
   }
 }
-async function loadCompetition(key,status="all",resetRound=true){
+async function loadCompetition(key,status="all",resetRound=true,prefetchedData=null){
   const requestId=++loadSequence;
   const changed=active!==key;
   active=key;
@@ -763,9 +764,12 @@ async function loadCompetition(key,status="all",resetRound=true){
     if(selectedRound && selectedRound!=="all"){
       try{ const parsed=JSON.parse(selectedRound); if(Array.isArray(parsed)&&parsed[1]!=null) params.set("round",String(parsed[1])); if(Array.isArray(parsed)&&parsed[0]) params.set("stage",String(parsed[0])); }catch{}
     }
-    const response=await fetch("/api/competicoes?"+params.toString(),{cache:"no-store"});
-    const data=await response.json();
-    if(!response.ok)throw new Error(data?.message||"Não foi possível obter os dados.");
+    let data=prefetchedData;
+    if(!data){
+      const response=await fetch("/api/competicoes?"+params.toString(),{cache:"no-store"});
+      data=await response.json();
+      if(!response.ok)throw new Error(data?.message||"Não foi possível obter os dados.");
+    }
     if(requestId!==loadSequence)return;
     nameEl.textContent=meta?.[1]||key;
     logoEl.src=leagueLogo(meta?.[2]||0);
