@@ -46,9 +46,10 @@
 .competition-meta{display:flex;gap:.55rem;flex-wrap:wrap;color:var(--text-gray);font-size:.78rem}
 .competition-meta span{padding:.3rem .55rem;border:1px solid var(--border-color);border-radius:999px}
 .competition-meta #competition-data-status{display:none}
-.competition-live-status{display:inline-flex;align-items:center;gap:.45rem;font:700 .7rem var(--font-title);letter-spacing:.08em;color:var(--neon-green);margin-top:.55rem}
+.competition-live-status{display:inline-flex;align-items:center;gap:.45rem;border:0;background:transparent;padding:0;color:var(--neon-green);font:700 .7rem var(--font-title);letter-spacing:.08em;margin-top:.55rem;cursor:default}
 .competition-live-status i{width:8px;height:8px;border-radius:50%;background:var(--neon-green);box-shadow:none;animation:none}
-.competition-live-status.live{color:#fff}.competition-live-status.live i{background:#ff334f;box-shadow:none;animation:none}
+.competition-live-status.live{color:#fff;background:#d7193f;border-radius:999px;padding:.28rem .55rem;cursor:pointer}
+.competition-live-status.live i{background:#fff;box-shadow:none;animation:cpcLivePulse 1.8s infinite}
 @keyframes cpcPulse{0%,100%{box-shadow:0 0 0 0 rgba(157,255,0,.45)}50%{box-shadow:0 0 0 7px rgba(157,255,0,0)}}
 @keyframes cpcLivePulse{0%,100%{box-shadow:0 0 0 0 rgba(255,51,79,.5)}50%{box-shadow:0 0 0 7px rgba(255,51,79,0)}}
 .fixture-live{display:inline-flex;align-items:center;gap:.28rem;color:#fff;background:#d7193f;border-radius:999px;padding:.16rem .38rem;font:700 .62rem var(--font-title);letter-spacing:.07em;line-height:1;margin-bottom:.18rem}
@@ -146,7 +147,7 @@
         <div class="competition-meta">
           <span id="competition-season">Época —</span>
           <span id="competition-data-status">A atualizar</span>
-          <button id="competition-live-status" class="competition-live-status" type="button" onclick="focusLiveGames()" title="Ir para os jogos ao vivo"><i aria-hidden="true"></i><b>ONLINE</b></button>
+          <button id="competition-live-status" class="competition-live-status" type="button" title="Ir para os jogos ao vivo" disabled><i aria-hidden="true"></i><b>ONLINE</b></button>
         </div>
       </div>
     </article>
@@ -372,6 +373,19 @@ async function prepareCompetitionOrder(){
   orderedCompetitions=results.map(item=>item.meta);
   tabOrderReady=true;
   renderTabs();
+  if(!initialCompetitionFromUrl){
+    const firstKey=orderedCompetitions[0]?.[0]||"liga-portugal";
+    if(active!==firstKey){
+      active=firstKey;
+      fixtureFilter="upcoming";
+      liveOnlyFocus=false;
+      groupFilter=firstKey==="nations-league"?"A4":"all";
+      roundEl.value="all";
+      history.replaceState(null,"","/competicoes?competition="+encodeURIComponent(firstKey)+(firstKey==="nations-league"?"&group=A4":""));
+      setCompetitionFilterState();
+      await loadCompetition(firstKey,"upcoming",true);
+    }
+  }
 }
 function renderTabs(){
   const list=tabOrderReady?orderedCompetitions:competitions;
@@ -384,7 +398,7 @@ function renderTabs(){
     const key=button.dataset.key;
     history.replaceState(null,"","/competicoes?competition="+encodeURIComponent(key));
     fixtureFilter="upcoming";
-    groupFilter=key==="nations-league"?"A1":"";
+    groupFilter=key==="nations-league"?"A4":"all";
     roundEl.value="all";
     setCompetitionFilterState();
     loadCompetition(key,fixtureFilter,true);
@@ -588,15 +602,28 @@ function updateLiveSnapshot(data){
   const now=Date.now();
   const incoming=Array.isArray(data.fixtures)?data.fixtures:[];
   allFixtures.forEach(item=>{const key=fixtureDomKey(item);if(fixtureStatus(item)==="live") recentlyFinishedAt.delete(key);});
-  previous.forEach((old,key)=>{if(fixtureStatus(old)==="live"){const fresh=incoming.find(item=>fixtureDomKey(item)===key);if(fresh&&fixtureStatus(fresh)==="finished")recentlyFinishedAt.set(key,now);}});
+  previous.forEach((old,key)=>{
+    if(fixtureStatus(old)!=="live")return;
+    const fresh=incoming.find(item=>fixtureDomKey(item)===key);
+    if(fresh&&fixtureStatus(fresh)==="finished")recentlyFinishedAt.set(key,now);
+    else if(!fresh)recentlyFinishedAt.set(key,now);
+  });
+  const retained=incoming.slice();
+  previous.forEach((old,key)=>{
+    if(fixtureStatus(old)!=="live"||!recentlyFinishedAt.has(key))return;
+    if(now-recentlyFinishedAt.get(key)>=15*60*1000)return;
+    if(!retained.some(item=>fixtureDomKey(item)===key)){
+      retained.push({...old,status:"finished"});
+    }
+  });
   const previousKeys=new Set(previous.keys());
-  const incomingKeys=new Set(incoming.map(fixtureDomKey));
+  const incomingKeys=new Set(retained.map(fixtureDomKey));
   const membershipChanged=previousKeys.size!==incomingKeys.size||[...previousKeys].some(key=>!incomingKeys.has(key));
-  allFixtures=incoming;
+  allFixtures=retained;
   if(membershipChanged){
     renderFixtures();
   }else{
-    incoming.forEach(item=>{
+    retained.forEach(item=>{
       const old=previous.get(fixtureDomKey(item));
       if(!old||JSON.stringify([old.status,old.liveMinute,old.livePeriod,old.score,old.goals,old.roundKey,old.roundLabel])!==JSON.stringify([item.status,item.liveMinute,item.livePeriod,item.score,item.goals,item.roundKey,item.roundLabel])){
         patchFixtureRow(item);
@@ -632,16 +659,23 @@ let liveOnlyFocus=false;
 const recentlyFinishedAt=new Map();
 let allStandings=[];
 function focusLiveGames(){
+  if(!document.getElementById("competition-live-status")?.classList.contains("live"))return;
   liveOnlyFocus=true;
+  fixtureFilter="upcoming";
+  groupFilter="all";
   roundEl.value="all";
+  setCompetitionFilterState();
+  renderGroupFilter();
   renderFixtures();
   const first=fixturesEl.querySelector('.fixture[data-event-id]');
   if(first)first.scrollIntoView({behavior:"smooth",block:"center"});
 }
+document.getElementById("competition-live-status")?.addEventListener("click",focusLiveGames);
 function updateCompetitionLiveState(){
   const live=allFixtures.some(item=>fixtureStatus(item)==="live");
   const liveEl=document.getElementById("competition-live-status");
   liveEl.classList.toggle("live",live);
+  liveEl.disabled=!live;
   liveEl.querySelector("b").textContent=live?"AO VIVO":"ONLINE";
   statusEl.textContent=live?"jogo ao vivo":statusEl.textContent;
   return live;
@@ -782,14 +816,15 @@ document.addEventListener("visibilitychange",()=>{
   else clearCompetitionRefresh();
 });
 const initialParams=new URLSearchParams(location.search);
+const initialCompetitionFromUrl=initialParams.has("competition");
 active=initialParams.get("competition")||"liga-portugal";
 if(!competitions.some(item=>item[0]===active))active="liga-portugal";
-groupFilter=active==="nations-league" ? String(initialParams.get("group")||"all").toUpperCase() : "all";
+groupFilter=active==="nations-league" ? String(initialParams.get("group")||"A4").toUpperCase() : "all";
 const initialRound=initialParams.get("round");
 const initialRoundFromUrl=initialRound && /^\d+$/.test(initialRound) ? JSON.stringify([active==="nations-league"?"group-stage":"",initialRound]) : "";
 renderGroupFilter();
 setCompetitionFilterState();
-loadCompetition(active,fixtureFilter,true);
+if(initialCompetitionFromUrl)loadCompetition(active,fixtureFilter,true);
 prepareCompetitionOrder().catch(()=>{});
 </script>
 <footer>
