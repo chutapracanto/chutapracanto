@@ -3237,7 +3237,7 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
         const liveScoreHome = cpcSafeNumber(live?.home_score ?? live?.score?.home);
         const liveScoreAway = cpcSafeNumber(live?.away_score ?? live?.score?.away);
         const incidents = incidentsById.get(id) || [];
-        const goals = incidents
+        const incidentGoals = incidents
           .filter(incident => {
             const type = String(
               incident?.type ??
@@ -3251,6 +3251,16 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
           })
           .map(incident => cpcNormalizeGoal(incident, item.homeTeam?.id, item.awayTeam?.id))
           .filter(goal => goal.teamId != null || goal.player || goal.minute != null);
+
+        // BSD's incidents endpoint can briefly return an empty list while the
+        // live match is still being updated. Never erase already-known goals
+        // during that transient response.
+        const liveGoals = cpcNormalizeGoals(live, item.homeTeam?.id, item.awayTeam?.id);
+        const goals = incidentGoals.length
+          ? incidentGoals
+          : liveGoals.length
+            ? liveGoals
+            : (Array.isArray(item.goals) ? item.goals : []);
 
         fixturesById.set(id, {
           ...item,
