@@ -682,6 +682,7 @@ async function loadCompetition(key,status="all",resetRound=true){
     competitionPhase=data.phase||{type:"single-table",grouped:false,label:"Classificação"};
     renderGroupFilter();
     if(resetRound)renderRounds(true);
+    if(resetRound && initialRoundFromUrl && [...roundEl.options].some(option=>option.value===initialRoundFromUrl)) roundEl.value=initialRoundFromUrl;
     renderFixtures();
     renderHighlight();
     renderStandings(allStandings);
@@ -745,7 +746,7 @@ active=initialParams.get("competition")||"liga-portugal";
 if(!competitions.some(item=>item[0]===active))active="liga-portugal";
 groupFilter=active==="nations-league" ? String(initialParams.get("group")||"all").toUpperCase() : "all";
 const initialRound=initialParams.get("round");
-if(initialRound && /^\\d+$/.test(initialRound)) roundEl.value=JSON.stringify([active==="nations-league"?"group-stage":"",initialRound]);
+const initialRoundFromUrl=initialRound && /^\d+$/.test(initialRound) ? JSON.stringify([active==="nations-league"?"group-stage":"",initialRound]) : "";
 renderGroupFilter();
 setCompetitionFilterState();
 loadCompetition(active,fixtureFilter,true);
