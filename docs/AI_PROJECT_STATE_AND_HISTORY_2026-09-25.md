@@ -5,7 +5,7 @@
 **Branch de produção:** `main`
 **Site:** `https://chutapracanto.com`
 **HEAD verificado:** `b0b75366a6f137a87ed43385bd61394c0dd49f53`
-**Último commit de código: `fix: alinhar politica de privacidade com analytics first-party`
+**Último commit de código: `docs: registar preparacao AdSense e privacidade`
 
 > **FUNÇÃO DESTE DOCUMENTO**
 >
@@ -2249,3 +2249,31 @@ Foi encontrada uma discrepância documental concreta: `privacidade.html` ainda a
 
 ### Regra de continuidade
 Não alterar o sistema de analytics apenas para alinhar documentação. Se houver futura necessidade de visitantes únicos persistentes ou novos sinais de tracking, fazer revisão específica de privacidade antes da implementação.
+
+
+## 2026-10-02 — MATRIZ INICIAL DE APIs DE VÍDEO — INVESTIGAÇÃO OFICIAL
+
+Foi feita a verificação atual da documentação oficial disponível para o próximo candidato técnico de automação de distribuição.
+
+### YouTube
+- YouTube Data API suporta upload de vídeos através de OAuth 2.0.
+- O fluxo oficial suporta upload resumable, adequado para ficheiros maiores e recuperação após interrupções.
+- O upload permite definir metadata como título, descrição, tags, categoria e estado de privacidade.
+- Fonte verificada: documentação oficial Google Developers.
+
+### TikTok
+- Content Posting API suporta **Direct Post** e **Upload para rascunho**.
+- Direct Post requer o produto configurado, OAuth e scope `video.publish`; clientes não auditados ficam restringidos a conteúdo privado.
+- Upload para rascunho usa `video.upload`; o utilizador continua o fluxo dentro do TikTok.
+- `PULL_FROM_URL` é suportado quando o vídeo está num URL elegível/verificado.
+- Há limites e quotas por utilizador/app que terão de ser respeitados.
+- Fontes verificadas: documentação oficial TikTok for Developers, atualizada em agosto de 2026.
+
+### Meta — Facebook / Instagram
+- A matriz não foi considerada fechada neste ciclo porque a documentação oficial relevante não ficou acessível de forma verificável através do ambiente disponível.
+- Não inferir permissões, scopes, quotas ou capacidade de publicação a partir de documentação antiga ou memória.
+- Não implementar OAuth/Graph API Meta até a matriz atual ser confirmada.
+
+### Decisão
+Não criar ainda o MVP de upload único. A próxima etapa técnica da frente de vídeo é fechar a matriz Meta com documentação oficial atual e, depois, definir o fluxo mínimo:
+**upload único → armazenamento/preparação → publicação ou rascunho por plataforma → estado/retry independente**.
