@@ -2512,3 +2512,14 @@ Commits:
 - Não foram alterados Worker, BSD, D1 ou cron.
 - Commit: `2882f91cb458f556d65a404d0ecc5738a5df27d3` — `fix: evitar flash da competicao anterior no carregamento`.
 - Cloudflare Pages production deployment: `4a633a6d-f4ea-4af2-b31b-eb1329927875` — **SUCCESS** às 17:43:27 UTC.
+
+
+# 85. ROBUSTEZ DO FEED LIVE — 2026-10-02
+
+- Sintoma reportado: os cartões de jogos LIVE voltaram a desaparecer da Home.
+- Inspeção: a Home continua a usar `/api/competicoes?competition=...&status=live`, sem alteração desde a correção que recuperou o LIVE. O adapter BSD, porém, tratava a classificação como dependência obrigatória também para pedidos LIVE: se o endpoint de standings falhasse/transitoriamente, todo o pedido LIVE falhava e a Home ficava sem cartões.
+- Correção: para `status=live`, uma falha de standings agora devolve standings vazias em vez de invalidar o feed LIVE. Os jogos LIVE continuam independentes da classificação; os grupos Nations continuam a poder ser inferidos pelos nomes das equipas.
+- Não foram alterados BSD, D1, cron ou a lógica de descoberta da Home.
+- Commit: `c4725a11ee27f882882e304fe67828b59dbd704e` — `fix: tornar feed LIVE independente da classificacao BSD`.
+- Cloudflare Pages production deployment: `5f0e8b55-0ad6-4499-8fc5-f057a79abc19` — **SUCCESS** às 17:53:22 UTC.
+- Validação de browser da produção continua limitada pelo acesso DNS deste ambiente; a alteração foi validada por código + deployment.
