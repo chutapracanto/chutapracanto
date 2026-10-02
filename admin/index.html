@@ -989,7 +989,17 @@
             <div class="metrics-toolbar">
                 <div>
                     <h2>📊 Métricas</h2>
-                    <p>Visualizações e likes registados por notícia no período selecionado. As visualizações são pageviews, não pessoas únicas.</p>
+                </div>
+            </div>
+
+            <div class="section-tabs" role="tablist" aria-label="Conteúdo editorial nas métricas">
+                <button type="button" id="metrics-tab-news" class="section-tab active" onclick="mudarTipoMetricas('news')">📰 Notícias</button>
+                <button type="button" id="metrics-tab-opinion" class="section-tab" onclick="mudarTipoMetricas('opinion')">✍️ Crónicas</button>
+            </div>
+
+            <div class="metrics-toolbar">
+                <div>
+                    <p>Visualizações e likes registados por conteúdo no período selecionado. As visualizações são pageviews, não pessoas únicas.</p>
                     <label for="metrics-period">Período</label>
                     <select id="metrics-period" class="metrics-period-select" onchange="abrirMetricasAdmin()">
                         <option value="1d">Últimas 24 horas</option>
@@ -997,12 +1007,6 @@
                         <option value="30d" selected>Últimos 30 dias</option>
                     </select>
                 </div>
-                <button type="button" class="secondary-btn" onclick="fecharMetricasAdmin()">← Voltar aos conteúdos</button>
-            </div>
-
-            <div class="section-tabs" role="tablist" aria-label="Área editorial nas métricas">
-                <button type="button" id="metrics-tab-news" class="section-tab active" onclick="mudarTipoMetricas('news')">📰 Notícias</button>
-                <button type="button" id="metrics-tab-opinion" class="section-tab" onclick="mudarTipoMetricas('opinion')">✍️ Crónicas</button>
             </div>
 
     <div class="metrics-section">
@@ -1020,7 +1024,7 @@
             </div>
 
             <section class="metrics-section">
-                <div class="metrics-section-heading"><h3>📰 Notícias</h3><p>Desempenho editorial: visualizações, likes e taxa de likes por visualização.</p></div>
+                <div class="metrics-section-heading"><h3 id="metrics-content-heading">📰 Notícias</h3><p>Desempenho editorial: visualizações, likes e taxa de likes por visualização.</p></div>
                 <div class="metrics-grid">
                 <div class="metric-card">
                     <div class="metric-card-label">Likes totais</div>
@@ -1648,6 +1652,21 @@ function mostrarAdmin() {
         .classList
         .remove("hidden");
 
+    document
+        .getElementById("list-screen")
+        ?.classList
+        .remove("hidden");
+
+    document
+        .getElementById("metrics-screen")
+        ?.classList
+        .add("hidden");
+
+    document
+        .getElementById("form-screen")
+        ?.classList
+        .add("hidden");
+
     iniciarEditor();
 
     carregarNoticias();
@@ -2159,6 +2178,10 @@ function mudarTipoMetricas(tipo) {
     metricsTipoAtual = tipo === "opinion" ? "opinion" : "news";
     document.getElementById("metrics-tab-news")?.classList.toggle("active", metricsTipoAtual === "news");
     document.getElementById("metrics-tab-opinion")?.classList.toggle("active", metricsTipoAtual === "opinion");
+    const heading = document.getElementById("metrics-content-heading");
+    if (heading) {
+        heading.textContent = metricsTipoAtual === "opinion" ? "✍️ Crónicas" : "📰 Notícias";
+    }
     abrirMetricasAdmin();
 }
 
