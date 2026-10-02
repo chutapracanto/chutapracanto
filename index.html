@@ -753,7 +753,7 @@
           }).map(goal=>{
             const minute=Number(goal?.minute??goal?.min??goal?.time?.minute),added=Number(goal?.addedTime??goal?.added_time??goal?.added??goal?.time?.injury_time);
             const when=Number.isFinite(minute)?String(Math.floor(minute))+(Number.isFinite(added)&&added>0?'+'+Math.floor(added):'')+"'":'';
-            const player=goal?.player??goal?.player_name??goal?.player?.name??goal?.scorer??goal?.scorer_name??goal?.scorer?.name;
+            const player=typeof goal?.player_name==='string'&&goal.player_name.trim()?goal.player_name.trim():typeof goal?.player==='string'&&goal.player.trim()?goal.player.trim():typeof goal?.player?.name==='string'&&goal.player.name.trim()?goal.player.name.trim():typeof goal?.scorer_name==='string'&&goal.scorer_name.trim()?goal.scorer_name.trim():typeof goal?.scorer==='string'&&goal.scorer.trim()?goal.scorer.trim():typeof goal?.scorer?.name==='string'&&goal.scorer.name.trim()?goal.scorer.name.trim():'';
             return '<div class="home-live-team-goal"><b>'+esc(when)+'</b>'+(player?' '+esc(String(player)):'')+'</div>';
           }).join(''):'';
 
