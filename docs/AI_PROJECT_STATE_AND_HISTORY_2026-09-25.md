@@ -2393,3 +2393,21 @@ Commits:
 ### Correção adicional do ciclo 75
 - Verificou-se que a ordenação podia mudar o conteúdo aberto sem atualizar visualmente a aba ativa. Corrigido para sincronizar a aba ativa com a primeira competição ordenada antes do carregamento.
 - Commit Competições: bbfa7b4f9e12a8b8ffd8f1c67b819800234c41c5.
+
+
+# 76. REGRESSÃO LIVE HOME + CARREGAMENTO/ORDENAÇÃO COMPETIÇÕES — 2026-10-02
+
+## Diagnóstico
+- A Home estava a descobrir LIVE através de `status=upcoming`, apesar de o backend BSD ter um fluxo próprio `status=live`. A descoberta LIVE foi separada e passou a consultar `status=live`.
+- A ordenação das competições dependia de sete pedidos `status=upcoming` em paralelo e podia ficar bloqueada/atrasada quando um pedido não respondia. A ordenação passou a consultar o snapshot `status=all`, com timeout individual de 8s, e considera jogos futuros/LIVE das equipas prioritárias.
+- O carregamento normal de uma competição passou a usar o snapshot completo `all` para o filtro visual de Próximos, evitando depender de uma resposta upstream específica de upcoming.
+- Nations League: o reconhecimento do grupo deixou de exigir que A4 estivesse no fim exato do texto; agora extrai A1–D4 de qualquer posição válida na designação. A classificação Home continua a abrir filtrada em A4.
+
+## Commits
+- Competições: `79740c633d722bc867290f4de1b9a43fd4e32f40`
+- Home: `22e3aaad6cd714b72e5093d97b9c24e7d511a8bc`
+
+## Validação técnica
+- Estrutura de chavetas dos dois HTML: equilibrada.
+- Confirmado no código: ordenação usa `status=all`; carregamento de competição usa snapshot `all`; Home LIVE usa `status=live`; Nations A4 usa extração robusta do grupo.
+- Produção ainda depende da conclusão dos deployments Cloudflare destes dois commits; não considerar fechado antes de ambos concluírem com SUCCESS.
