@@ -2523,3 +2523,13 @@ Commits:
 - Commit: `c4725a11ee27f882882e304fe67828b59dbd704e` — `fix: tornar feed LIVE independente da classificacao BSD`.
 - Cloudflare Pages production deployment: `5f0e8b55-0ad6-4499-8fc5-f057a79abc19` — **SUCCESS** às 17:53:22 UTC.
 - Validação de browser da produção continua limitada pelo acesso DNS deste ambiente; a alteração foi validada por código + deployment.
+
+
+# 86. WORKFLOW DO ÍNDICE DE NOTÍCIAS — CORREÇÃO DE NON-FAST-FORWARD — 2026-10-02
+
+- Run falhado: `37067866936` (`Gerar índice de notícias`), associado ao commit editorial `9a5e8e5...`.
+- Diagnóstico: o passo **Gerar índice** terminou com sucesso; a falha ocorreu apenas no `git push`, com `non-fast-forward`, porque a `main` tinha avançado enquanto o workflow estava a executar.
+- Correção: `.github/workflows/gerar-indice-noticias.yml` agora faz `git pull --rebase origin main` entre o commit automático do índice e o `git push`.
+- Commit da correção: `6c814258776760cf6bd7dcf4afc1063ba6da2669` — `fix: tornar workflow do indice resistente a concorrencia`.
+- Validação: nova execução `37068159627` terminou **SUCCESS** em 2026-10-02T21:40:06Z.
+- Não foi alterada a lógica editorial nem o conteúdo das notícias; a correção é exclusivamente de sincronização Git do workflow.
