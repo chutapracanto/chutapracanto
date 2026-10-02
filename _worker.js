@@ -1379,7 +1379,10 @@ async function handleAnalyticsEventAPI(request, env) {
   const referrerHost = payload?.referrerHost == null ? null : String(payload.referrerHost).trim().slice(0, 160);
   const previousPage = payload?.previousPage == null ? null : String(payload.previousPage).trim().slice(0, 240);
   const target = payload?.target == null ? null : String(payload.target).trim().slice(0, 240);
-  const metadata = payload?.metadata && typeof payload.metadata === "object" ? JSON.stringify(payload.metadata).slice(0, 1200) : null;
+  const metadataObject = payload?.metadata && typeof payload.metadata === "object" ? { ...payload.metadata } : {};
+  const country = request.headers.get("CF-IPCountry") || request.cf?.country || null;
+  if (country) metadataObject.country = String(country).slice(0, 8);
+  const metadata = Object.keys(metadataObject).length ? JSON.stringify(metadataObject).slice(0, 1200) : null;
   if (!/^[0-9a-f-]{20,80}$/i.test(sessionId) || !/^[a-z][a-z0-9_]{1,47}$/i.test(eventType) || !pagePath.startsWith("/") || pagePath.length > 240 || articleSlug?.length > 160) return respond({ error: "Evento inválido." }, 400);
   if (/[\u0000-\u001f\u007f]/u.test(pagePath) || (articleSlug && /[\\/\u0000-\u001f\u007f]/u.test(articleSlug))) return respond({ error: "Evento inválido." }, 400);
   try {
@@ -1911,29 +1914,62 @@ async function handleAdminAPI(request, env) {
     if (request.method !== "GET") return json({ error: "Método não permitido." }, 405);
     if (!env.ARTICLE_LIKES_DB) return json({ error: "ARTICLE_LIKES_DB não está configurada." }, 503);
     const period = url.searchParams.get("period") || "30d";
-    const modifiers = { "1d": "-1 day", "7d": "-7 days", "30d": "-30 days" };
-    const modifier = modifiers[period];
+    const modifiers = { "1d": "-1 day", "7d": "-7 days", "30d": "-30 days" }, modifier = modifiers[period];
     if (!modifier) return json({ error: "Período inválido." }, 400);
     try {
       await ensureAnalyticsSchema(env.ARTICLE_LIKES_DB);
-      const sourceRows = await env.ARTICLE_LIKES_DB.prepare("SELECT source, medium, COUNT(*) AS events, COUNT(DISTINCT session_id) AS sessions FROM analytics_events WHERE datetime(occurred_at) >= datetime('now', ?1) GROUP BY source, medium ORDER BY sessions DESC, events DESC, source ASC").bind(modifier).all();
-      const journeyRows = await env.ARTICLE_LIKES_DB.prepare("SELECT event_type, COUNT(*) AS events, COUNT(DISTINCT session_id) AS sessions FROM analytics_events WHERE datetime(occurred_at) >= datetime('now', ?1) GROUP BY event_type ORDER BY events DESC, event_type ASC").bind(modifier).all();
-      const shareRows = await env.ARTICLE_LIKES_DB.prepare("SELECT COALESCE(json_extract(metadata_json,'$.platform'),'unknown') AS platform, event_type, COUNT(*) AS events, COUNT(DISTINCT session_id) AS sessions FROM analytics_events WHERE event_type IN ('share_option_click','share_copy_completed','share_native_completed') AND datetime(occurred_at) >= datetime('now', ?1) GROUP BY platform, event_type ORDER BY events DESC, platform ASC").bind(modifier).all();
-      const pageRows = await env.ARTICLE_LIKES_DB.prepare("SELECT page_path, COUNT(*) AS views, COUNT(DISTINCT session_id) AS sessions FROM analytics_events WHERE event_type = 'page_view' AND datetime(occurred_at) >= datetime('now', ?1) GROUP BY page_path ORDER BY views DESC, page_path ASC").bind(modifier).all();
-      const summary = await env.ARTICLE_LIKES_DB.prepare("SELECT COUNT(DISTINCT session_id) AS sessions, SUM(CASE WHEN event_type='page_view' THEN 1 ELSE 0 END) AS page_views, COUNT(DISTINCT CASE WHEN event_type='page_exit' THEN session_id END) AS sessions_with_exit, AVG(CASE WHEN event_type='page_exit' THEN CAST(json_extract(metadata_json,'$.activeSeconds') AS REAL) END) AS avg_active_seconds FROM analytics_events WHERE datetime(occurred_at) >= datetime('now', ?1)").bind(modifier).first();
-      const onePageRows = await env.ARTICLE_LIKES_DB.prepare("SELECT COUNT(*) AS sessions FROM (SELECT session_id FROM analytics_events WHERE event_type='page_view' AND datetime(occurred_at) >= datetime('now', ?1) GROUP BY session_id HAVING COUNT(*) = 1)").bind(modifier).first();
-      return json({ ok:true, period,
-        summary:{sessions:Number(summary?.sessions||0),pageViews:Number(summary?.page_views||0),sessionsWithExit:Number(summary?.sessions_with_exit||0),singlePageSessions:Number(onePageRows?.sessions||0),avgActiveSeconds:Number(summary?.avg_active_seconds||0)},
-        sources:(sourceRows?.results||[]).map(r=>({source:String(r.source||""),medium:String(r.medium||""),events:Number(r.events||0),sessions:Number(r.sessions||0)})),
-        journeys:(journeyRows?.results||[]).map(r=>({eventType:String(r.event_type||""),events:Number(r.events||0),sessions:Number(r.sessions||0)})),
-        pages:(pageRows?.results||[]).map(r=>({pagePath:String(r.page_path||""),views:Number(r.views||0),sessions:Number(r.sessions||0)})),
-        shares:(shareRows?.results||[]).map(r=>({platform:String(r.platform||"unknown"),eventType:String(r.event_type||""),events:Number(r.events||0),sessions:Number(r.sessions||0)}))
+      const where="datetime(occurred_at) >= datetime('now', ?1)";
+      const sourceRows=await env.ARTICLE_LIKES_DB.prepare(`SELECT source, medium, COUNT(*) AS visits, COUNT(DISTINCT session_id) AS sessions FROM analytics_events WHERE event_type='page_view' AND ${where} GROUP BY source, medium ORDER BY visits DESC, sessions DESC, source ASC`).bind(modifier).all();
+      const countryRows=await env.ARTICLE_LIKES_DB.prepare(`SELECT COALESCE(json_extract(metadata_json,'$.country'),'unknown') AS country, COUNT(*) AS visits, COUNT(DISTINCT session_id) AS sessions FROM analytics_events WHERE event_type='page_view' AND ${where} GROUP BY country ORDER BY visits DESC, sessions DESC, country ASC`).bind(modifier).all();
+      const refRows=await env.ARTICLE_LIKES_DB.prepare(`SELECT COALESCE(referrer_host, source, 'direct') AS site, COUNT(*) AS visits, COUNT(DISTINCT session_id) AS sessions FROM analytics_events WHERE event_type='page_view' AND ${where} GROUP BY site ORDER BY visits DESC, sessions DESC, site ASC`).bind(modifier).all();
+      const journeyRows=await env.ARTICLE_LIKES_DB.prepare(`SELECT event_type, COUNT(*) AS events, COUNT(DISTINCT session_id) AS sessions FROM analytics_events WHERE ${where} GROUP BY event_type ORDER BY events DESC, event_type ASC`).bind(modifier).all();
+      const shareRows=await env.ARTICLE_LIKES_DB.prepare(`SELECT COALESCE(json_extract(metadata_json,'$.platform'),'unknown') AS platform, event_type, COUNT(*) AS events, COUNT(DISTINCT session_id) AS sessions FROM analytics_events WHERE event_type IN ('share_option_click','share_copy_completed','share_native_completed') AND ${where} GROUP BY platform, event_type ORDER BY events DESC, platform ASC`).bind(modifier).all();
+      const contentShareRows=await env.ARTICLE_LIKES_DB.prepare(`SELECT article_slug AS slug, COUNT(*) AS count FROM analytics_events WHERE event_type IN ('share_option_click','share_copy_completed','share_native_completed') AND article_slug IS NOT NULL AND ${where} GROUP BY article_slug ORDER BY count DESC`).bind(modifier).all();
+      const summary=await env.ARTICLE_LIKES_DB.prepare(`SELECT COUNT(DISTINCT session_id) AS sessions, SUM(CASE WHEN event_type='page_view' THEN 1 ELSE 0 END) AS page_views, AVG(CASE WHEN event_type='page_exit' THEN CAST(json_extract(metadata_json,'$.activeSeconds') AS REAL) END) AS avg_active_seconds FROM analytics_events WHERE ${where}`).bind(modifier).first();
+      const onePage=await env.ARTICLE_LIKES_DB.prepare(`SELECT COUNT(*) AS sessions FROM (SELECT session_id FROM analytics_events WHERE event_type='page_view' AND ${where} GROUP BY session_id HAVING COUNT(*)=1)`).bind(modifier).first();
+      return json({ok:true,period,summary:{sessions:Number(summary?.sessions||0),pageViews:Number(summary?.page_views||0),singlePageSessions:Number(onePage?.sessions||0),avgActiveSeconds:Number(summary?.avg_active_seconds||0)},
+        sources:(sourceRows.results||[]).map(r=>({source:String(r.source||""),medium:String(r.medium||""),visits:Number(r.visits||0),events:Number(r.visits||0),sessions:Number(r.sessions||0)})),
+        countries:(countryRows.results||[]).map(r=>({country:String(r.country||"unknown"),visits:Number(r.visits||0),sessions:Number(r.sessions||0)})),
+        referrers:(refRows.results||[]).map(r=>({site:String(r.site||"direct"),visits:Number(r.visits||0),sessions:Number(r.sessions||0)})),
+        journeys:(journeyRows.results||[]).map(r=>({eventType:String(r.event_type||""),events:Number(r.events||0),sessions:Number(r.sessions||0)})),
+        shares:(shareRows.results||[]).map(r=>({platform:String(r.platform||"unknown"),eventType:String(r.event_type||""),events:Number(r.events||0),sessions:Number(r.sessions||0)})),
+        contentShares:(contentShareRows.results||[]).map(r=>({slug:String(r.slug||""),count:Number(r.count||0)}))
       });
-    } catch (error) {
-      console.error("Admin analytics metrics error:", error);
-      return json({ error: "Não foi possível carregar as métricas de analytics." }, 503);
-    }
+    } catch(error){ console.error("Admin analytics metrics error:",error); return json({error:"Não foi possível carregar as métricas de analytics."},503); }
   }
+
+  // ----------------------------------------------------------
+  // MÉTRICAS — DETALHE DE CONTEÚDO
+  // ----------------------------------------------------------
+
+  if (pathname === "/api/admin/metrics/article") {
+    if (request.method !== "GET") return json({error:"Método não permitido."},405);
+    if (!env.ARTICLE_LIKES_DB) return json({error:"ARTICLE_LIKES_DB não está configurada."},503);
+    const slug=url.searchParams.get("slug")||"", period=url.searchParams.get("period")||"30d";
+    const modifiers={"1d":"-1 day","7d":"-7 days","30d":"-30 days"}, modifier=modifiers[period];
+    if(!slug||slug.length>160||/[\\/\u0000-\u001f\u007f]/u.test(slug)||!modifier)return json({error:"Parâmetros inválidos."},400);
+    try {
+      await ensureAnalyticsSchema(env.ARTICLE_LIKES_DB);
+      const since="datetime(occurred_at) >= datetime('now', ?1)";
+      const views=await env.ARTICLE_LIKES_DB.prepare("SELECT COUNT(*) AS count FROM article_views WHERE article_slug=?1 AND datetime(viewed_at)>=datetime('now',?2)").bind(slug,modifier).first();
+      const likes=await env.ARTICLE_LIKES_DB.prepare("SELECT COUNT(*) AS count FROM article_likes WHERE article_slug=?1 AND datetime(created_at)>=datetime('now',?2)").bind(slug,modifier).first();
+      const shares=await env.ARTICLE_LIKES_DB.prepare(`SELECT COUNT(*) AS count FROM analytics_events WHERE article_slug=?1 AND event_type IN ('share_option_click','share_copy_completed','share_native_completed') AND ${since}`).bind(slug,modifier).first();
+      const shareRows=await env.ARTICLE_LIKES_DB.prepare(`SELECT COALESCE(json_extract(metadata_json,'$.platform'),'unknown') AS platform,COUNT(*) AS count FROM analytics_events WHERE article_slug=?1 AND event_type IN ('share_option_click','share_copy_completed','share_native_completed') AND ${since} GROUP BY platform ORDER BY count DESC`).bind(slug,modifier).all();
+      const avgTime=await env.ARTICLE_LIKES_DB.prepare(`SELECT AVG(CAST(json_extract(metadata_json,'$.activeSeconds') AS REAL)) AS seconds FROM analytics_events WHERE article_slug=?1 AND event_type='page_exit' AND ${since}`).bind(slug,modifier).first();
+      const exits=await env.ARTICLE_LIKES_DB.prepare(`SELECT COUNT(*) AS count FROM analytics_events e WHERE e.article_slug=?1 AND e.event_type='page_exit' AND ${since}`).bind(slug,modifier).first();
+      const continued=await env.ARTICLE_LIKES_DB.prepare(`SELECT COUNT(*) AS count FROM analytics_events e WHERE e.article_slug=?1 AND e.event_type='page_exit' AND ${since} AND EXISTS (SELECT 1 FROM analytics_events n WHERE n.session_id=e.session_id AND n.event_type='page_view' AND n.occurred_at>e.occurred_at AND n.page_path<>e.page_path)`).bind(slug,modifier).first();
+      const entry=await env.ARTICLE_LIKES_DB.prepare(`SELECT source,COUNT(DISTINCT session_id) AS sessions FROM analytics_events WHERE article_slug=?1 AND event_type='page_view' AND ${since} GROUP BY source ORDER BY sessions DESC`).bind(slug,modifier).all();
+      const prev=await env.ARTICLE_LIKES_DB.prepare(`SELECT previous_page AS page,COUNT(DISTINCT session_id) AS sessions FROM analytics_events WHERE article_slug=?1 AND event_type='page_view' AND previous_page LIKE '/noticia%' AND ${since} GROUP BY previous_page ORDER BY sessions DESC`).bind(slug,modifier).all();
+      const next=await env.ARTICLE_LIKES_DB.prepare(`SELECT n.page_path AS page,COUNT(DISTINCT n.session_id) AS sessions FROM analytics_events e JOIN analytics_events n ON n.session_id=e.session_id AND n.event_type='page_view' AND n.occurred_at>e.occurred_at WHERE e.article_slug=?1 AND e.event_type='page_exit' AND ${since} AND n.page_path<>e.page_path GROUP BY n.page_path ORDER BY sessions DESC`).bind(slug,modifier).all();
+      return json({ok:true,period,slug,views:Number(views?.count||0),likes:Number(likes?.count||0),shares:Number(shares?.count||0),avgActiveSeconds:Number(avgTime?.seconds||0),exits:Number(exits?.count||0),continuedSessions:Number(continued?.count||0),
+        shareBreakdown:(shareRows.results||[]).map(r=>({platform:String(r.platform||"unknown"),count:Number(r.count||0)})),
+        entrySources:(entry.results||[]).map(r=>({source:String(r.source||"direct"),sessions:Number(r.sessions||0)})),
+        previousArticles:(prev.results||[]).map(r=>({page:String(r.page||""),sessions:Number(r.sessions||0)})),
+        nextPages:(next.results||[]).map(r=>({page:String(r.page||""),sessions:Number(r.sessions||0)}))
+      });
+    } catch(error){console.error("Admin article metrics error:",error);return json({error:"Não foi possível carregar as métricas deste conteúdo."},503);}
+  }
+
 
   // ----------------------------------------------------------
   // LISTAR NOTÍCIAS
