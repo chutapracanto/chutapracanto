@@ -2444,3 +2444,14 @@ Commits:
 - Commit: `7ec5ab718e5b68975b6a6e94a520e016352de451` — `fix: garantir carregamento inicial da competicao ordenada`.
 - Cloudflare Pages production deployment: `b42b6e68-a677-4c38-b655-0ba9dc6eea65` — **SUCCESS** em 2026-10-02 16:59:27 UTC.
 - Validação final de comportamento visual em browser continua pendente por indisponibilidade de acesso direto ao domínio nesta sessão.
+
+
+# 79. NATIONS LEAGUE A4 — CLASSIFICAÇÃO DOS JOGOS PELOS STANDINGS — 2026-10-02
+
+- O problema persistiu após as correções de carregamento inicial: ao abrir Competições, A4 podia apresentar “Não há jogos para este filtro”, apesar de os jogos aparecerem após outra interação.
+- Nova causa atacada: o filtro frontend dependia da inferência de grupo a partir do próprio fixture. O Worker normaliza o grupo também a partir da classificação (standings), mas o frontend não fazia esse cruzamento.
+- Correção: nationsGroupName() passou a aceitar variantes de groupName e, quando necessário, procurar a equipa do fixture em allStandings para obter o grupo A-D1..D4 antes de recorrer à tabela local de equipas.
+- Não foram alterados Worker, BSD, D1 ou cron.
+- Commit: 8f1197a70ea5458797d250f09a92aa6db89da8b6 — fix: alinhar classificacao dos jogos Nations com standings.
+- Cloudflare Pages production deployment: 874e3e16-eea1-46e9-b7b2-d197d1d825e1 — SUCCESS em 2026-10-02 17:01:36 UTC.
+- Validação visual/comportamental direta no domínio continua pendente nesta sessão; o deploy foi confirmado pelo Cloudflare.
