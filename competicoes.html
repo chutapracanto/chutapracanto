@@ -464,8 +464,7 @@ function renderRounds(selectUpcoming=false){
     options.sort((a,b)=>a.firstKickoff-b.firstKickoff||Number(a.roundKey)-Number(b.roundKey));
   }
   if(fixtureFilter==="all" && !selectUpcoming){ roundEl.value="all"; return; }
-  if(!selectUpcoming&&options.some(round=>round.key===previous))roundEl.value=previous;
-  else if(selectUpcoming){
+  // Quando o filtro está em "Todos", o filtro de jornada deve ficar sempre em "Todas as jornadas".\n  // Isto é obrigatório para que o histórico completo da competição volte a aparecer.\n  if(fixtureFilter==="all"){ roundEl.value="all"; return; }\n  if(!selectUpcoming&&options.some(round=>round.key===previous))roundEl.value=previous;\n  else if(selectUpcoming){
     const next=allFixtures.filter(item=>fixtureStatus(item)==="upcoming")
       .sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity))[0]
       ||allFixtures.filter(item=>fixtureStatus(item)==="live").sort((a,b)=>(dateValue(a)?.getTime()||0)-(dateValue(b)?.getTime()||0))[0];
