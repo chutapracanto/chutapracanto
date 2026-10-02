@@ -1630,3 +1630,27 @@ Likes por notícia; pageviews/visualizações; utilizadores/sessões quando supo
 
 ## Nota operacional
 O próximo desenho deve distinguir claramente pageview, sessão, utilizador e engagement rate. A solução deve ser simples, de baixo custo, compatível com privacidade/AdSense e não degradar performance.
+
+
+# 80. PAINEL DE MÉTRICAS NO ADMIN — FASE 1 — 2026-10-02
+
+Foi pedido um painel único no Admin para consultar likes, visitas e rates por notícia.
+
+## Implementação realizada diretamente
+- Endpoint autenticado: /api/admin/metrics/likes.
+- Consulta agrupada diretamente ao ARTICLE_LIKES_DB.
+- Nova área 📊 Métricas no Admin.
+- Mostra total de likes, número de notícias com likes e tabela por notícia/data/likes.
+- Área de visualizações fica preparada no mesmo painel, mas não apresenta valores fictícios enquanto a medição de pageviews não existir.
+- Endpoint de métricas fica protegido pela autenticação já existente do Admin.
+
+## Deploy
+- Worker/API: commit fb9147dcf072c0305d1f812d198933460c909ab0, deployment 59c1ca98, SUCCESS.
+- Admin UI: commit 21a8bc10ed05e1938377fbd7a38c15ac14b9876d, deployment abc360e2, SUCCESS e alias de produção.
+- Alteração documental 3d0b73786604d2b4c9fce73983ef31b0df9cda01 ficou corretamente skipped por path_config.
+
+## Próxima fase
+Implementar medição real de pageviews/visualizações e, se tecnicamente adequado e respeitador da privacidade, métricas de visitantes únicos e rates. O mesmo painel deverá consumir esses dados.
+
+## Regra de execução até 22/10/2026
+Não depender de Codex enquanto os créditos da utilizadora estiverem esgotados. Preferir implementação direta pelos acessos disponíveis; recorrer a Codex apenas quando necessário após essa data.
