@@ -947,35 +947,77 @@
 
         const dataPublicacao = noticia => String(noticia.published || '').slice(0, 10);
 
-        const recentes = noticias.filter(noticia => {
+        const normalizarTexto = valor => String(valor || '')
+          .toLowerCase()
+          .normalize('NFD')
+          .replace(/[\\u0300-\\u036f]/g, '')
+          .replace(/[^a-z0-9\\s]/g, ' ')
+          .split(/\\s+/)
+          .filter(palavra => palavra.length >= 4);
 
-          if (!noticia.slug || noticia.slug === currentSlug || (noticia.type || 'news') !== 'news') return false;
+        const dataPublicacaoTimestamp = noticia => {
+          const valor = Date.parse(String(noticia?.published || ''));
+          return Number.isFinite(valor) ? valor : 0;
+        };
 
-          const publicadaEm = dataPublicacao(noticia);
+        const hojeTimestamp = Date.now();
+        const dataAtual = dataPublicacao(noticiaAtual);
+        const palavrasAtuais = new Set([
+          ...normalizarTexto(noticiaAtual.title),
+          ...normalizarTexto(noticiaAtual.subtitle),
+          ...normalizarTexto(noticiaAtual.category)
+        ]);
 
-          return /^\d{4}-\d{2}-\d{2}$/.test(publicadaEm) && publicadaEm <= hoje;
+        const recentes = noticias
+          .filter(noticia => {
+            if (!noticia.slug || noticia.slug === currentSlug || (noticia.type || 'news') !== 'news') return false;
+            const publicadaEm = dataPublicacao(noticia);
+            return /^\\d{4}-\\d{2}-\\d{2}$/.test(publicadaEm) && publicadaEm <= hoje;
+          })
+          .map(noticia => {
+            const palavras = new Set([
+              ...normalizarTexto(noticia.title),
+              ...normalizarTexto(noticia.subtitle),
+              ...normalizarTexto(noticia.category)
+            ]);
+            let sobreposicao = 0;
+            palavrasAtuais.forEach(palavra => {
+              if (palavras.has(palavra)) sobreposicao += 1;
+            });
 
-        }).sort((a, b) => dataPublicacao(b).localeCompare(dataPublicacao(a)));
+            const categoriaAtual = String(noticiaAtual.category || '').trim().toLowerCase();
+            const categoriaCandidata = String(noticia.category || '').trim().toLowerCase();
+            const mesmaCategoria = Boolean(categoriaAtual && categoriaAtual === categoriaCandidata);
+            const publicadaTimestamp = dataPublicacaoTimestamp(noticia);
+            const idadeDias = publicadaTimestamp
+              ? Math.max(0, (hojeTimestamp - publicadaTimestamp) / 86400000)
+              : 9999;
+
+            // A actualidade pesa bastante, mas relevância temática tem prioridade.
+            const recenciaScore = Math.max(0, 18 - Math.min(18, idadeDias));
+            const categoriaScore = mesmaCategoria ? 24 : 0;
+            const termosScore = Math.min(36, sobreposicao * 6);
+            const score = termosScore + categoriaScore + recenciaScore;
+
+            return { noticia, score, publicadaTimestamp, sobreposicao };
+          })
+          .sort((a, b) =>
+            b.score - a.score ||
+            b.sobreposicao - a.sobreposicao ||
+            b.publicadaTimestamp - a.publicadaTimestamp
+          );
 
         const slugsIncluidos = new Set([currentSlug]);
+        const relacionadas = [];
 
-        const noticiasUnicas = recentes.filter(noticia => {
+        for (const candidato of recentes) {
+          if (relacionadas.length >= 3) break;
+          if (slugsIncluidos.has(candidato.noticia.slug)) continue;
+          slugsIncluidos.add(candidato.noticia.slug);
+          relacionadas.push(candidato.noticia);
+        }
 
-          if (slugsIncluidos.has(noticia.slug)) return false;
 
-          slugsIncluidos.add(noticia.slug);
-
-          return true;
-
-        });
-
-        const mesmaCategoria = noticiasUnicas.filter(noticia => noticia.category === noticiaAtual.category);
-
-        const outrasCategorias = noticiasUnicas.filter(noticia => noticia.category !== noticiaAtual.category);
-
-        const relacionadas = [...mesmaCategoria, ...outrasCategorias].slice(0, 3);
-
-        if (relacionadas.length !== 3) return;
 
         const heading = document.createElement('h2');
 
