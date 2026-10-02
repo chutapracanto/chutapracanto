@@ -372,7 +372,7 @@ async function prepareCompetitionOrder(){
     try{
       const controller=new AbortController();
       const timeout=setTimeout(()=>controller.abort(),8000);
-      const response=await fetch("/api/competicoes?competition="+encodeURIComponent(meta[0])+"&status=all",{cache:"no-store",signal:controller.signal});
+      const response=await fetch("/api/competicoes?competition="+encodeURIComponent(meta[0])+"&status=upcoming",{cache:"no-store",signal:controller.signal});
       clearTimeout(timeout);
       if(!response.ok)throw new Error("order");
       const data=await response.json();
@@ -405,8 +405,7 @@ async function prepareCompetitionOrder(){
       renderTabs();
       groupFilter=firstKey==="nations-league"?"A4":"all";
       roundEl.value="all";
-      const selected=results.find(item=>item.meta?.[0]===firstKey);
-      await loadCompetition(firstKey,"all",true,selected?.data||null);
+      await loadCompetition(firstKey,"all",true);
     }
   }
 }
