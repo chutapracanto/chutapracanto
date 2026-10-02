@@ -2473,3 +2473,20 @@ Commits:
 - Deployment Pages production: `3af0accd-5794-4fb3-aca3-65c9daeba144` — SUCCESS às 17:32:53 UTC.
 - Pendente de validação visual pelo utilizador: confirmar que **Todos** mostra jogos anteriores com resultados e que a entrada em Competições ficou mais rápida.
 - Nota: os cartões LIVE da Home continuam a ser uma questão separada e devem ser investigados sem mexer no fluxo BSD/D1 sem evidência.
+
+
+# 82. HOME NATIONS A4 PRIMEIRO + HISTÓRICO COMPLETO DA NATIONS NO TODOS — 2026-10-02
+
+- Feedback confirmado: os cartões **LIVE da Home voltaram a funcionar**; não foram alterados nesta correção.
+- Home — classificação Nations League: o código estava a filtrar a classificação exclusivamente para A4. Correção: A4 continua a aparecer primeiro, mas todos os restantes grupos permanecem visíveis, ordenados depois de A4.
+- Competições — Nations League: o snapshot `status=all` podia conter apenas a janela recente (a partir de jornadas posteriores), fazendo desaparecer as jornadas 1 e 2 do seletor e impedindo o histórico completo no filtro **Todos**.
+- Evidência externa: a UEFA confirma que a fase de liga 2026/27 começou em 24/09 e inclui as jornadas 1 (24–26/09), 2 (27–29/09) e 3 (01–03/10), incluindo Portugal no Grupo A4. Isto confirma que as jornadas 1 e 2 devem existir nos dados apresentados pelo CPC. 
+- Correção frontend: quando a competição é Nations League e o pedido é `status=all`, o frontend recupera também `status=finished` e funde os jogos por ID/chave, mesmo que o snapshot `all` já contenha alguns resultados. Isto garante que o histórico terminado das jornadas anteriores seja incorporado antes de construir o seletor de jornadas e a lista.
+- Não foram alterados Worker, BSD, D1 ou cron nesta correção.
+- Commits:
+  - `247161ed98a89f293c54bf7cea0882ebd4429ac6` — `fix: ordenar grupos Nations com A4 primeiro`
+  - `bf736b37165deb886026816398580409e38258a9` — `fix: recuperar historico completo Nations no Todos`
+- Cloudflare Pages production deployments:
+  - `f7951a62-c7b9-44e4-919b-562e44cdf07b` — SUCCESS às 17:37:33 UTC (Home).
+  - `7094aaaf-db79-446d-822b-22aae3e2cc5d` — SUCCESS às 17:37:54 UTC (Competições).
+- Validação de browser no domínio canónico continua pendente nesta sessão; deployments foram confirmados pelo Cloudflare.
