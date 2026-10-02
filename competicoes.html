@@ -378,17 +378,15 @@ async function prepareCompetitionOrder(){
   renderTabs();
   if(!initialCompetitionFromUrl){
     const firstKey=orderedCompetitions[0]?.[0]||"liga-portugal";
-    if(active!==firstKey){
-      active=firstKey;
-      renderTabs();
-      fixtureFilter="upcoming";
-      liveOnlyFocus=false;
-      groupFilter=firstKey==="nations-league"?"A4":"all";
-      roundEl.value="all";
-      history.replaceState(null,"","/competicoes?competition="+encodeURIComponent(firstKey)+(firstKey==="nations-league"?"&group=A4":""));
-      setCompetitionFilterState();
-      await loadCompetition(firstKey,"all",true);
-    }
+    active=firstKey;
+    renderTabs();
+    fixtureFilter="upcoming";
+    liveOnlyFocus=false;
+    groupFilter=firstKey==="nations-league"?"A4":"all";
+    roundEl.value="all";
+    history.replaceState(null,"","/competicoes?competition="+encodeURIComponent(firstKey)+(firstKey==="nations-league"?"&group=A4":""));
+    setCompetitionFilterState();
+    await loadCompetition(firstKey,"all",true);
   }
 }
 function renderTabs(){
