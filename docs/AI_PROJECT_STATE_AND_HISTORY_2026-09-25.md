@@ -1812,3 +1812,21 @@ migrations/0003_analytics_events.sql fica no repositório como fonte de persist�
 - Commit direto no GitHub, sem Codex: `4c087e63957f78ca927a4d2832ea3e301e184d59`.
 - Deployment Cloudflare Pages: `14e3b2a9`, production, build/deploy SUCCESS, alias `https://chutapracanto.com`.
 - Não foram alterados futebol, D1, analytics backend, likes/pageviews ou criação/edição de conteúdos.
+
+
+## 2026-10-02 — REFORMULAÇÃO DAS MÉTRICAS: VISÃO GLOBAL + DETALHE POR CONTEÚDO
+
+- Correção da interpretação anterior: as abas internas que separavam métricas de Notícias e Crónicas foram removidas. A área 📊 Métricas é agora **uma visão conjunta** de Notícias + Crónicas.
+- As abas principais do Admin (`📰 Notícias`, `✍️ Crónicas`, `📊 Métricas`) continuam a ser a navegação para voltar a cada área editorial. Não existem subabas dentro das métricas.
+- A área global começa por: visitas/pageviews totais, sessões totais, tempo ativo médio, sessões de 1 página e bounce calculado como sessões de 1 página / sessões totais.
+- A seguir mostra origem das visitas, países e sites/referrers.
+- Depois mostra Notícias + Crónicas juntas, ordenadas por visualizações, com likes e ações de partilha por conteúdo.
+- Cada notícia/crónica no Admin ganhou `📊 Ver métricas`, abrindo detalhe individual com visualizações, likes, partilhas registadas e onde, tempo ativo médio, origem de entrada, entrada a partir de outra notícia e navegação seguinte/encerramento.
+- O detalhe usa a jornada já recolhida pelo analytics first-party; não inventa dados históricos.
+- País passou a ser associado aos eventos através do código de país fornecido pelo Cloudflare (`CF-IPCountry`), sem guardar IP.
+- O endpoint `/api/admin/metrics/analytics` passou a contar origens como pageviews (em vez de todos os eventos) e a devolver países, referrers e partilhas por conteúdo.
+- Novo endpoint `/api/admin/metrics/article?slug=...&period=...` para detalhe individual.
+- Commits diretos, sem Codex: `a96b0f8d72960a389624ecd5d88244d3a501cbfa` (Admin) e `f6958e65de60f1e0fa8496c108983fbe6aefa7f1` (Worker/analytics).
+- Deployment final Cloudflare Pages: `310bf5d5`, production, SUCCESS, alias `https://chutapracanto.com`.
+- Não foram alterados futebol, D1 de competições ou o funcionamento editorial de criação/edição.
+- Nota: “partilhas” externas são ações de partilha/click registadas pelo site; o site não consegue confirmar que Facebook/WhatsApp/X/Telegram efetivamente publicaram a partilha. `Link copiado` é uma ação concluída pelo navegador.
