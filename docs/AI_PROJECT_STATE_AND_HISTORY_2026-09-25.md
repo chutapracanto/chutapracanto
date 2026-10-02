@@ -1979,3 +1979,33 @@ Foi identificado um erro introduzido na primeira implementação dos fallbacks v
 - `competicoes.html`: JavaScript executável compila.
 - `index.html`: o único erro da validação sintática automática é o primeiro bloco JSON-LD, que não é JavaScript executável; o bloco funcional compila.
 - O pipeline LIVE continua a usar os dados reais do BSD/D1.
+
+
+## 2026-10-02 — AJUSTE FINAL DOS CARTÕES LIVE: GOLOS POR EQUIPA + MINUTO NO LIVE
+
+A pedido da utilizadora, foi feita uma alteração exclusivamente visual nos cartões LIVE de Home e Competições.
+
+### Home
+- cartão LIVE aumentado de ~255 px para ~290 px, dando mais espaço entre equipas e marcador;
+- removidas as grandes siglas/códigos de país usados como fallback visual; o fallback passou a ser apenas uma pequena bola neutra quando não existe imagem válida;
+- quando existe golo, o minuto e o jogador passam a aparecer **diretamente por baixo da equipa que marcou**;
+- removida a duplicação da lista de golos no rodapé do cartão;
+- nomes das equipas e navegação competição/grupo/jornada preservados.
+
+### Competições
+- removidas as grandes siglas/códigos de país dos visuais das equipas;
+- **Jogo em destaque**: minuto + jogador do golo aparecem por baixo da equipa que marcou, em vez de no centro;
+- **Jogos e resultados**: mesma apresentação, com minuto + jogador por baixo da equipa marcadora;
+- em jogos LIVE, o minuto passou para dentro da própria etiqueta vermelha **LIVE · N'**;
+- a antiga linha separada do minuto LIVE deixou de ser usada;
+- imagens válidas continuam a ser preferidas; fallback não usa siglas grandes.
+
+### Proteção / validação
+- nenhuma alteração a BSD, D1, cache, cpc-football-cron ou normalização de dados;
+- JavaScript funcional inline de index.html e competicoes.html: compilação sintática OK após a alteração;
+- Home deployment ad664158-8e17-478a-bf34-e28abb8a4bfa — SUCCESS — alias https://chutapracanto.com;
+- Competições deployment 770c7ebc-ed9b-4793-9878-878cb46369c0 — SUCCESS — alias https://chutapracanto.com;
+- commits finais: Home a159360403428270064d50d8d49a60b6209ffd57; Competições b54ade21380f58f2fa571fd1218602694a918e70.
+
+### Regra para futuras alterações
+Os eventos de golo devem ser apresentados junto à equipa marcadora, e não como uma lista genérica abaixo do marcador, salvo pedido explícito em contrário. O minuto do jogo LIVE deve permanecer dentro da etiqueta LIVE quando apresentado na lista de jogos/resultados.
