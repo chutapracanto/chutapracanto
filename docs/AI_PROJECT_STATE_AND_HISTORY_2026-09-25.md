@@ -2490,3 +2490,14 @@ Commits:
   - `f7951a62-c7b9-44e4-919b-562e44cdf07b` — SUCCESS às 17:37:33 UTC (Home).
   - `7094aaaf-db79-446d-822b-22aae3e2cc5d` — SUCCESS às 17:37:54 UTC (Competições).
 - Validação de browser no domínio canónico continua pendente nesta sessão; deployments foram confirmados pelo Cloudflare.
+
+
+# 83. REGRESSÃO NO CARREGAMENTO INICIAL DA COMPETIÇÃO — 2026-10-02
+
+- Sintoma: ao entrar em **Competições**, o separador podia ficar selecionado em **Nations League** enquanto o conteúdo ainda era da **Liga Portugal**; clicar novamente em Nations corrigia.
+- Causa: a otimização anterior iniciou em paralelo `loadCompetition(active)` com `active=liga-portugal`. Quando a ordenação posterior escolhia Nations League, o código alterava `active` para Nations mas, por erro lógico, considerava que a carga inicial já correspondia à competição selecionada. O conteúdo da carga da Liga Portugal acabava, portanto, por ser renderizado sob o separador Nations.
+- Correção: guardar a competição efetivamente iniciada (`initialKey`) e, depois da ordenação, comparar `firstKey` com essa chave. Se a ordenação escolher outra competição, essa competição é carregada explicitamente antes de terminar a inicialização.
+- Não foram alterados Worker, BSD, D1 ou cron.
+- Commit: `c0ab3f5e984d7a3caecf2c9cbb9ce74ccac49c66` — `fix: sincronizar competicao inicial com dados carregados`.
+- Cloudflare Pages production deployment: `5078bb88-cfc2-4f29-a09d-f92582b54765` — **SUCCESS** às 17:41:16 UTC.
+- Cartões LIVE da Home: mantidos sem alterações; utilizador confirmou que estão a funcionar.
