@@ -3602,6 +3602,10 @@ export default {
         if (footballResponse) return footballResponse;
       }
 
+      if (url.pathname === "/api/article-view") {
+        return handleArticleViewAPI(request, env);
+      }
+
       if (
         url.pathname === "/api/article-like") {
         return handleArticleLikeAPI(request, env);
