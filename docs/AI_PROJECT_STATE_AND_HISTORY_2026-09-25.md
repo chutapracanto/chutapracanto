@@ -2101,3 +2101,14 @@ A causa dos golos está agora sustentada pelo formato BSD documentado, mas a pro
 4. atualização após novo golo sem recarregar a página.
 
 Não inventar um golo de teste nem declarar validação visual final sem jogo real.
+
+
+# 68. LIVE — RENDERIZAÇÃO EXPLÍCITA DE MINUTO + MARCADOR — 2026-10-02
+
+Foi corrigida a camada final de apresentação que ainda podia impedir o nome do marcador de aparecer: o frontend já não dá prioridade a `goal.player`/`goal.scorer` quando estes são objectos; procura explicitamente os campos string `player_name`, `player.name`, `scorer_name` e `scorer.name`. O Worker aplica a mesma regra ao normalizar o incidente.
+
+Requisito visual fechado: cada golo deve aparecer debaixo da equipa que marcou como **`minuto' Jogador`** (ex.: `67' João Silva`). A informação aplica-se à Home LIVE, ao Jogo em destaque e aos Jogos e resultados de Competições.
+
+Commits: Worker `2c85ed60ad5d4ee3de759d66ba5a70ee587caadd`; Home `19022bf25c8bc7641e4781ac856a6f93309589dd`; Competições `fc42e5916155c62aa9eda19b1abf3d653d88261c`.
+
+Ainda é necessária uma validação com golo LIVE real para confirmar a cadeia BSD → Worker → API → renderização em produção.
