@@ -1839,3 +1839,12 @@ migrations/0003_analytics_events.sql fica no repositório como fonte de persist�
 - As métricas globais foram complementadas, não substituídas: visualizações de conteúdos, likes totais, conteúdos com likes, partilhas totais e `Like rate` por conteúdo, mantendo o dashboard único de Notícias + Crónicas e o seletor de período.
 - Cloudflare Pages produção: deployment `ecd0a194-6867-4f51-8197-098ae4d51dba`, commit `3980cd083fb4ed71caa46db41f8169735ff8754a`, build/deploy SUCCESS, alias `https://chutapracanto.com`.
 - Regra para próximas alterações: em `admin/index.html`, nunca remover funções de renderização/listagem ao reorganizar a área de métricas; métricas são acrescentadas à área própria e não substituem a gestão de conteúdos.
+
+## 2026-10-02 — Métricas: restauração integral + integração com visão do Site
+- Comparação direta com a versão anterior das métricas confirmou que, ao acrescentar a visão do Site, tinham desaparecido da UI quatro elementos anteriores: `metric-total-views`, `metric-liked-articles`, `metrics-shares-body` e `metrics-journeys-body`.
+- Restaurados. A visão do Site foi mantida como camada adicional, e as métricas editoriais anteriores não foram substituídas.
+- O ranking conjunto Notícias + Crónicas mantém visualizações, likes, Like rate e partilhas, e voltou a mostrar a data do conteúdo.
+- Voltaram as tabelas de Partilhas e Percursos/Ações. A tabela de origens existente foi preservada e enriquecida com países e sites/referências na área Site.
+- Comparação base usada: commit `8a6c2b05097fcfd80524b6da0d77f6c86b41ff52`; correções finais: `76b6a273773c06c5ebec5d485e3a41707e9d6768` e `e7f4c0dbe278c0c9fdc05d8c20a85be8168787bc`.
+- Produção Cloudflare: deployment `d1d7c081-90fa-44d5-9b1e-362fed423e3b`, SUCCESS, alias `https://chutapracanto.com`.
+- Regra reforçada: ao adicionar uma camada nova de métricas, comparar a UI anterior e preservar todos os indicadores/tabelas existentes; adicionar, melhorar ou reorganizar, nunca remover por presumir duplicação.
