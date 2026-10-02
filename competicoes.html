@@ -377,6 +377,7 @@ async function prepareCompetitionOrder(){
     const firstKey=orderedCompetitions[0]?.[0]||"liga-portugal";
     if(active!==firstKey){
       active=firstKey;
+      renderTabs();
       fixtureFilter="upcoming";
       liveOnlyFocus=false;
       groupFilter=firstKey==="nations-league"?"A4":"all";
