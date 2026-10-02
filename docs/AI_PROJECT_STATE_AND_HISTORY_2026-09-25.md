@@ -2433,3 +2433,14 @@ Commits:
 - Confirmado no código que as entradas normais usam `loadCompetition(...,"all",...)`.
 - O deployment correspondente ao commit concluiu com sucesso.
 - Não foi declarada validação visual externa, por a resolução/acesso direto ao domínio não estar disponível neste ambiente.
+
+
+# 78. CARREGAMENTO INICIAL DA COMPETIÇÃO ORDENADA — 2026-10-02
+
+- Sintoma reportado: ao entrar diretamente na aba **Competições**, a seleção inicial da competição (incluindo o caso da Nations League A4) podia apresentar “Não há jogos para este filtro”, enquanto após outra interação os dados apareciam.
+- Causa encontrada no frontend: a rotina `prepareCompetitionOrder()` só chamava `loadCompetition()` quando a competição escolhida pela ordenação era diferente da competição inicialmente definida. Se fossem iguais, a página podia ficar sem um carregamento efetivo dos dados.
+- Correção: depois de concluir a ordenação, a competição escolhida passou a ser sempre definida e carregada explicitamente com `status=all`; para Nations League mantém-se A4 como grupo inicial.
+- Não foram alterados Worker, BSD, D1 ou cron.
+- Commit: `7ec5ab718e5b68975b6a6e94a520e016352de451` — `fix: garantir carregamento inicial da competicao ordenada`.
+- Cloudflare Pages production deployment: `b42b6e68-a677-4c38-b655-0ba9dc6eea65` — **SUCCESS** em 2026-10-02 16:59:27 UTC.
+- Validação final de comportamento visual em browser continua pendente por indisponibilidade de acesso direto ao domínio nesta sessão.
