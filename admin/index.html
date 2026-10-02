@@ -997,12 +997,7 @@
             <div class="metrics-toolbar">
                 <div>
                     <h2>📊 Métricas</h2>
-                </div>
-            </div>
-
-            <div class="metrics-toolbar">
-                <div>
-                    <p>Visualizações e likes registados por conteúdo no período selecionado. As visualizações são pageviews, não pessoas únicas.</p>
+                    <p>Visão geral do site e desempenho conjunto de Notícias e Crónicas. As visualizações são pageviews, não pessoas únicas.</p>
                     <label for="metrics-period">Período</label>
                     <select id="metrics-period" class="metrics-period-select" onchange="abrirMetricasAdmin()">
                         <option value="1d">Últimas 24 horas</option>
@@ -1011,92 +1006,30 @@
                     </select>
                 </div>
             </div>
-
-    <div class="metrics-section">
-                    <div class="metrics-section-heading">
-                        <h3>📤 Partilhas</h3>
-                        <p>Mostra a opção de partilha escolhida. “Link copiado” é uma ação concluída; nas plataformas externas não conseguimos confirmar o envio efetivo.</p>
-                    </div>
-                    <div class="metrics-table-wrap">
-                        <table class="metrics-table">
-                            <thead><tr><th>Onde</th><th>Ação</th><th>Sessões</th><th>Eventos</th></tr></thead>
-                            <tbody id="metrics-shares-body"><tr><td colspan="4" class="metrics-empty">Sem dados de partilhas.</td></tr></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
             <section class="metrics-section">
-                <div class="metrics-section-heading"><h3 id="metrics-content-heading">📰 Notícias</h3><p>Desempenho editorial: visualizações, likes e taxa de likes por visualização.</p></div>
+                <div class="metrics-section-heading"><h3>🌐 Site</h3><p>Visitas, origens, países e sites de referência.</p></div>
                 <div class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-card-label">Likes totais</div>
-                    <div id="metric-total-likes" class="metric-card-value">—</div>
+                    <div class="metric-card"><div class="metric-card-label">Visitas totais</div><div id="metric-total-site-visits" class="metric-card-value">—</div></div>
+                    <div class="metric-card"><div class="metric-card-label">Sessões totais</div><div id="metric-total-sessions" class="metric-card-value">—</div></div>
+                    <div class="metric-card"><div class="metric-card-label">Tempo ativo médio</div><div id="metric-avg-time" class="metric-card-value">—</div></div>
+                    <div class="metric-card"><div class="metric-card-label">Sessões de 1 página</div><div id="metric-single-page" class="metric-card-value">—</div></div>
+                    <div class="metric-card"><div class="metric-card-label">Bounce</div><div id="metric-bounce" class="metric-card-value">—</div></div>
                 </div>
-                <div class="metric-card">
-                    <div class="metric-card-label">Notícias com likes</div>
-                    <div id="metric-liked-articles" class="metric-card-value">—</div>
+                <div class="metrics-analytics-grid">
+                    <div class="metrics-table-wrap"><h3 class="metrics-table-title">De onde vêm as visitas</h3><table class="metrics-table"><thead><tr><th>Origem</th><th>Meio</th><th>Sessões</th><th>Visitas</th></tr></thead><tbody id="metrics-sources-body"><tr><td colspan="4">A carregar…</td></tr></tbody></table></div>
+                    <div class="metrics-table-wrap"><h3 class="metrics-table-title">Países</h3><table class="metrics-table"><thead><tr><th>País</th><th>Sessões</th><th>Visitas</th></tr></thead><tbody id="metrics-countries-body"><tr><td colspan="3">A carregar…</td></tr></tbody></table></div>
+                    <div class="metrics-table-wrap"><h3 class="metrics-table-title">Sites / referências</h3><table class="metrics-table"><thead><tr><th>Site</th><th>Sessões</th><th>Visitas</th></tr></thead><tbody id="metrics-referrers-body"><tr><td colspan="3">A carregar…</td></tr></tbody></table></div>
                 </div>
-                <div class="metric-card">
-                    <div class="metric-card-label">Visualizações</div>
-                    <div id="metric-total-views" class="metric-card-value">—</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-card-label">Sessões</div>
-                    <div id="metric-total-sessions" class="metric-card-value">—</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-card-label">Tempo ativo médio</div>
-                    <div id="metric-avg-time" class="metric-card-value">—</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-card-label">Sessões de 1 página</div>
-                    <div id="metric-single-page" class="metric-card-value">—</div>
-                </div>
-            </div>
-
-            <div class="metrics-table-wrap">
-                <table class="metrics-table">
-                    <thead>
-                        <tr>
-                            <th>Notícia</th>
-                            <th>Data</th>
-                            <th>Visualizações</th>
-                            <th>Likes</th>
-                            <th>Like rate</th>
-                        </tr>
-                    </thead>
-                    <tbody id="metrics-likes-body">
-                        <tr><td colspan="5" class="metrics-empty">A carregar métricas…</td></tr>
-                    </tbody>
-                </table>
-            </div>
             </section>
-
             <section class="metrics-section">
-                <div class="metrics-section-heading"><h3>🚦 Origens e jornada</h3><p>De onde chegam as sessões e o que fazem depois de entrar no site.</p></div>
-
-            <div class="metrics-analytics-grid">
-                <div class="metrics-table-wrap">
-                    <h3 style="padding:14px 14px 0;margin:0;">Origens</h3>
-                    <table class="metrics-table">
-                        <thead><tr><th>Origem</th><th>Meio</th><th>Sessões</th><th>Eventos</th></tr></thead>
-                        <tbody id="metrics-sources-body"><tr><td colspan="4" class="metrics-empty">A carregar…</td></tr></tbody>
-                    </table>
+                <div class="metrics-section-heading"><h3>📰 Notícias e ✍️ Crónicas</h3><p>Todos os conteúdos juntos, ordenados por visualizações, com likes e partilhas.</p></div>
+                <div class="metrics-grid">
+                    <div class="metric-card"><div class="metric-card-label">Likes totais</div><div id="metric-total-likes" class="metric-card-value">—</div></div>
+                    <div class="metric-card"><div class="metric-card-label">Partilhas totais</div><div id="metric-total-shares" class="metric-card-value">—</div></div>
                 </div>
-                <div class="metrics-table-wrap">
-                    <h3 style="padding:14px 14px 0;margin:0;">Percursos e ações</h3>
-                    <table class="metrics-table">
-                        <thead><tr><th>Ação</th><th>Sessões</th><th>Eventos</th></tr></thead>
-                        <tbody id="metrics-journeys-body"><tr><td colspan="3" class="metrics-empty">A carregar…</td></tr></tbody>
-                    </table>
-                </div>
-            </div>
+                <div class="metrics-table-wrap"><table class="metrics-table"><thead><tr><th>Conteúdo</th><th>Tipo</th><th>Visualizações</th><th>Likes</th><th>Partilhas</th><th>Ação</th></tr></thead><tbody id="metrics-likes-body"><tr><td colspan="6">A carregar métricas…</td></tr></tbody></table></div>
             </section>
         </div>
-
-
-
 
         <div id="content-metrics-modal" class="admin-modal hidden" onclick="if(event.target===this) fecharMetricasConteudo()"><div class="admin-modal-card"><div class="admin-modal-header"><div><h2>📊 Métricas</h2><p id="content-metrics-subtitle"></p></div><button type="button" class="secondary-btn" onclick="fecharMetricasConteudo()">Fechar</button></div><div id="content-metrics-body" class="content-metrics-body">A carregar…</div></div></div>
 
