@@ -511,6 +511,11 @@
           const title = typeof item.title === 'string' && item.title.trim() ? item.title.trim() : 'Vídeo Chuta Pra Canto';
           const card = document.createElement('div');
           card.className = 'carousel-item';
+          if (containerId === 'carousel-shorts') {
+            card.dataset.analyticsEvent = 'short_impression';
+            card.dataset.analyticsTarget = 'https://youtube.com/watch?v=' + videoId;
+            card.dataset.analyticsLabel = title;
+          }
           const trigger = document.createElement('button');
           trigger.type = 'button';
           trigger.className = 'youtube-play-trigger';
@@ -526,6 +531,12 @@
           playIcon.textContent = '▶';
           trigger.append(thumbnail, playIcon);
           trigger.addEventListener('click', () => {
+            if (containerId === 'carousel-shorts' && window.CPCAnalytics) {
+              window.CPCAnalytics.send('short_click', {
+                target: 'https://youtube.com/watch?v=' + videoId,
+                metadata: { title }
+              });
+            }
             const iframe = document.createElement('iframe');
             iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1`;
             iframe.title = title;
