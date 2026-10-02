@@ -746,20 +746,25 @@
         grid.innerHTML=rows.map(({meta,fixture})=>{
           const home=fixture.homeTeam||{},away=fixture.awayTeam||{};
           const score=(fixture.score?.home!=null||fixture.score?.away!=null)?esc(fixture.score?.home??0)+' – '+esc(fixture.score?.away??0):'—';
-          const teamGoals=teamId=>Array.isArray(fixture.goals)?fixture.goals.filter(goal=>Number(goal?.teamId)===Number(teamId)).map(goal=>{
-            const minute=Number(goal?.minute),added=Number(goal?.addedTime);
+          const teamGoals=(teamId,side)=>Array.isArray(fixture.goals)?fixture.goals.filter(goal=>{
+            const gid=goal?.teamId??goal?.team_id??goal?.team?.id;
+            const gside=String(goal?.side??goal?.team??'').toLowerCase();
+            return Number(gid)===Number(teamId)||(gside===side);
+          }).map(goal=>{
+            const minute=Number(goal?.minute??goal?.min??goal?.time?.minute),added=Number(goal?.addedTime??goal?.added_time??goal?.added??goal?.time?.injury_time);
             const when=Number.isFinite(minute)?String(Math.floor(minute))+(Number.isFinite(added)&&added>0?'+'+Math.floor(added):'')+"'":'';
-            const player=goal?.player?String(goal.player):'';
-            return '<div class="home-live-team-goal"><b>'+esc(when)+'</b>'+(player?' '+esc(player):'')+'</div>';
+            const player=goal?.player??goal?.player_name??goal?.player?.name??goal?.scorer??goal?.scorer_name??goal?.scorer?.name;
+            return '<div class="home-live-team-goal"><b>'+esc(when)+'</b>'+(player?' '+esc(String(player)):'')+'</div>';
           }).join(''):'';
 
           const group=String(fixture.groupName||'').trim().replace(/^.*?(Liga\\s+[A-D]\\s*·\\s*Grupo\\s+[A-D]\\d+).*$/i,'$1');
           const groupKey=competitionGroupKey(fixture);
           const roundKey=competitionRoundKey(fixture);
-          const roundText=roundKey?'Jornada '+roundKey:String(fixture.roundLabel||'').replace(/.*?Matchday\\s*(\\d+)/i,'Jornada $1').replace(/.*?Jornada\\s*(\\d+)/i,'Jornada $1');
+          const rawRound=String(fixture.roundLabel||fixture.round||fixture.roundKey||'').trim();
+          const roundText=roundKey?'Jornada '+roundKey:rawRound.replace(/.*?Matchday\s*(\d+)/i,'Jornada $1').replace(/.*?Jornada\s*(\d+)/i,'Jornada $1').replace(/.*?Round\s*(\d+)/i,'Jornada $1');
           const metaLabel=[group,roundText].filter(Boolean).join(' · ');
           const href='/competicoes?competition='+encodeURIComponent(meta[0])+(groupKey?'&group='+encodeURIComponent(groupKey):'')+(roundKey?'&round='+encodeURIComponent(roundKey):'');
-          return '<a class="home-live-card" href="'+href+'"><div class="home-live-top"><span class="home-live-led" aria-hidden="true"></span><strong>LIVE</strong><span>'+esc(metaLabel)+'</span></div><div class="home-live-teams"><div class="home-live-team"><span class="home-live-team-visual">'+liveTeamVisual(home,'home')+'</span><span>'+esc(teamDisplayName(home)||'Casa')+'</span><div class="home-live-team-goals">'+teamGoals(home.id)+'</div></div><div><div class="home-live-score">'+score+'</div><div class="home-live-minute">'+esc(liveMinuteLabel(fixture))+'</div></div><div class="home-live-team away"><span class="home-live-team-visual">'+liveTeamVisual(away,'away')+'</span><span>'+esc(teamDisplayName(away)||'Fora')+'</span><div class="home-live-team-goals">'+teamGoals(away.id)+'</div></div></div></a>';
+          return '<a class="home-live-card" href="'+href+'"><div class="home-live-top"><span class="home-live-led" aria-hidden="true"></span><strong>LIVE</strong><span>'+esc(metaLabel)+'</span></div><div class="home-live-teams"><div class="home-live-team"><span class="home-live-team-visual">'+liveTeamVisual(home,'home')+'</span><span>'+esc(teamDisplayName(home)||'Casa')+'</span><div class="home-live-team-goals">'+teamGoals(home.id,'home')+'</div></div><div><div class="home-live-score">'+score+'</div><div class="home-live-minute">'+esc(liveMinuteLabel(fixture))+'</div></div><div class="home-live-team away"><span class="home-live-team-visual">'+liveTeamVisual(away,'away')+'</span><span>'+esc(teamDisplayName(away)||'Fora')+'</span><div class="home-live-team-goals">'+teamGoals(away.id,'away')+'</div></div></div></a>';
         }).join('');
       };
       const refreshHomeLive=async(all=false)=>{
