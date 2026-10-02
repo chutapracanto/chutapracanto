@@ -67,7 +67,7 @@
 .competition-highlight-card h3{font:700 .8rem var(--font-title);text-transform:uppercase;letter-spacing:.08em;color:var(--text-gray);margin:0 0 .75rem}
 .competition-highlight-main{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:.6rem}
 .highlight-team{text-align:center;font-weight:700;font-size:.82rem}
-.highlight-team img{width:42px;height:42px;object-fit:contain;display:block;margin:0 auto .35rem}
+.highlight-team img{width:42px;height:42px;object-fit:contain;display:block;margin:0 auto .35rem}.highlight-team .fixture-team-flag{width:42px;height:42px;display:grid;place-items:center;font-size:2rem;margin:0 auto .35rem}
 .highlight-score{font:700 1.1rem var(--font-title);color:var(--neon-green);text-align:center}
 .competition-controls{display:flex;justify-content:space-between;align-items:center;gap:1rem;margin-bottom:.9rem}
 .competition-filters{display:flex;gap:.45rem;flex-wrap:wrap}
@@ -86,7 +86,7 @@
 .fixture-time{display:flex;flex-direction:column;gap:.18rem;color:var(--text-gray);font-size:.7rem;line-height:1.35}
 .fixture-team{display:flex;align-items:center;justify-content:flex-end;gap:.45rem;text-align:right;font-size:.82rem}
 .fixture-team.away{justify-content:flex-start;text-align:left}
-.fixture-team img{width:27px;height:27px;object-fit:contain;flex:0 0 auto}
+.fixture-team img{width:27px;height:27px;object-fit:contain;flex:0 0 auto}.fixture-team-flag{width:27px;height:27px;display:grid;place-items:center;font-size:1.25rem;flex:0 0 auto}
 .fixture-score{font:700 1rem var(--font-title);text-align:center;color:var(--text-color);min-width:3rem}
 .table-wrap{overflow-x:auto}
 .standings{width:100%;border-collapse:collapse;font-size:.78rem}
@@ -232,7 +232,7 @@ const NATIONS_GROUPS={
   B4:["poland","bosnia and herzegovina","romania","sweden"],
   C1:["san marino","finland","albania","belarus"],
   C2:["armenia","latvia","montenegro","cyprus"],
-  C3:["faroe islands","kazakhstan","slovakia","moldova"],
+  C3:["faroe islands","kazakhstan","slovakia","moldova","ilhas faroé","cazaquistão","eslováquia","moldávia"],
   C4:["bulgaria","luxembourg","iceland","estonia"],
   D1:["andorra","malta","gibraltar"],
   D2:["liechtenstein","lithuania","azerbaijan"]
@@ -283,7 +283,12 @@ let competitionPhase={type:"single-table",grouped:false,label:"Classificação"}
 
 function esc(value){return String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));}
 function safeUrl(value){try{const u=new URL(String(value||""),location.origin);return u.protocol==="https:"||u.origin===location.origin?u.href:""}catch{return""}}
-function teamLogo(team){return safeUrl(team?.logo)||"/images/logo.png"}
+const TEAM_NAMES_PT={"kazakhstan":"Cazaquistão","moldova":"Moldávia","slovakia":"Eslováquia","faroe islands":"Ilhas Faroé","poland":"Polónia","sweden":"Suécia","bosnia & herzegovina":"Bósnia e Herzegovina","romania":"Roménia","austria":"Áustria","ireland":"Irlanda","republic of ireland":"República da Irlanda","ukraine":"Ucrânia","georgia":"Geórgia","hungary":"Hungria","northern ireland":"Irlanda do Norte","wales":"País de Gales","denmark":"Dinamarca","norway":"Noruega","germany":"Alemanha","netherlands":"Países Baixos","north macedonia":"Macedónia do Norte","slovenia":"Eslovénia","portugal":"Portugal","spain":"Espanha","england":"Inglaterra","croatia":"Croácia","czechia":"Chéquia","france":"França","turkiye":"Turquia","turkey":"Turquia","belgium":"Bélgica","italy":"Itália","finland":"Finlândia","san marino":"São Marino","albania":"Albânia","belarus":"Bielorrússia","latvia":"Letónia","armenia":"Arménia","cyprus":"Chipre","montenegro":"Montenegro","bulgaria":"Bulgária","luxembourg":"Luxemburgo","iceland":"Islândia","estonia":"Estónia","andorra":"Andorra","malta":"Malta","gibraltar":"Gibraltar","liechtenstein":"Liechtenstein","lithuania":"Lituânia","azerbaijan":"Azerbaijão","scotland":"Escócia","switzerland":"Suíça","israel":"Israel","kosovo":"Kosovo"};
+function teamDisplayName(team){const raw=String(team?.name||"").trim();return TEAM_NAMES_PT[normalizeTeamName(raw)]||raw}
+const TEAM_FLAGS={"kazakhstan":"🇰🇿","moldova":"🇲🇩","slovakia":"🇸🇰","faroe islands":"🇫🇴","poland":"🇵🇱","sweden":"🇸🇪","bosnia & herzegovina":"🇧🇦","romania":"🇷🇴","austria":"🇦🇹","ireland":"🇮🇪","ukraine":"🇺🇦","georgia":"🇬🇪","hungary":"🇭🇺","northern ireland":"🇬🇧","wales":"🏴","denmark":"🇩🇰","norway":"🇳🇴","germany":"🇩🇪","netherlands":"🇳🇱","north macedonia":"🇲🇰","slovenia":"🇸🇮","portugal":"🇵🇹","spain":"🇪🇸","england":"🏴","croatia":"🇭🇷","czechia":"🇨🇿","france":"🇫🇷","turkiye":"🇹🇷","turkey":"🇹🇷","belgium":"🇧🇪","italy":"🇮🇹","finland":"🇫🇮","san marino":"🇸🇲","albania":"🇦🇱","belarus":"🇧🇾","latvia":"🇱🇻","armenia":"🇦🇲","cyprus":"🇨🇾","montenegro":"🇲🇪","bulgaria":"🇧🇬","luxembourg":"🇱🇺","iceland":"🇮🇸","estonia":"🇪🇪","andorra":"🇦🇩","malta":"🇲🇹","gibraltar":"🇬🇮","liechtenstein":"🇱🇮","lithuania":"🇱🇹","azerbaijan":"🇦🇿","scotland":"🏴","switzerland":"🇨🇭","israel":"🇮🇱","kosovo":"🇽🇰"};
+function teamLogo(team){return safeUrl(team?.flag)||safeUrl(team?.logo)||""}
+function teamVisual(team){const url=teamLogo(team);const fallback='<span class="fixture-team-flag" aria-hidden="true">'+(TEAM_FLAGS[normalizeTeamName(team?.name)]||"⚽")+'</span>';return url?'<img src="'+url+'" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(document.createRange().createContextualFragment('+JSON.stringify(fallback)+'))">':fallback}
+function leagueLogo(id){return "/api/football-image?type=league&id="+encodeURIComponent(id)}
 function leagueLogo(id){return "/api/football-image?type=league&id="+encodeURIComponent(id)}
 function translateRound(value){
   let text=String(value||"").trim();
@@ -383,27 +388,28 @@ function renderTabs(){
   }));
 }
 function renderHighlight(){
-  const scopedFixtures=competitionPhase.grouped
+  const scopedFixtures=competitionPhase.grouped&&groupFilter!=="all"
     ? allFixtures.filter(item=>active==="nations-league" ? nationsGroupName(item)===groupFilter : String(item?.groupName||"").trim()===groupFilter)
     : allFixtures;
-  const candidates=scopedFixtures.filter(item=>fixtureStatus(item)==="upcoming"||fixtureStatus(item)==="live")
-    .sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity));
+  const liveCandidates=scopedFixtures.filter(item=>fixtureStatus(item)==="live").sort((a,b)=>(dateValue(a)?.getTime()||0)-(dateValue(b)?.getTime()||0));
+  const upcomingCandidates=scopedFixtures.filter(item=>fixtureStatus(item)==="upcoming").sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity));
+  const candidates=[...liveCandidates,...upcomingCandidates];
   const item=candidates[0]||scopedFixtures[0];
   if(!item){highlightEl.innerHTML='<span class="empty">Sem jogo disponível.</span>';return}
-  const home=esc(item.homeTeam?.name||"Casa"),away=esc(item.awayTeam?.name||"Fora");
+  const home=esc(teamDisplayName(item.homeTeam)||"Casa"),away=esc(teamDisplayName(item.awayTeam)||"Fora");
   const state=fixtureStatus(item),live=state==="live";
   const score=fixtureScore(item);
   const minute=liveMinuteLabel(item);
   const goals=goalsLabel(item);
   highlightEl.innerHTML=
-    '<div class="highlight-team"><img src="'+teamLogo(item.homeTeam)+'" alt=""><span>'+home+'</span></div>'+
+    '<div class="highlight-team">'+teamVisual(item.homeTeam)+'<span>'+home+'</span></div>'+
     '<div class="highlight-score" data-event-id="'+esc(fixtureDomKey(item))+'">'+
       '<span class="highlight-live" data-field="live"'+(live?'':' hidden')+'>'+(live?'LIVE'+(minute?' · '+esc(minute):''):'')+'</span>'+
       '<strong data-field="score">'+(live||item.score?.home!=null||item.score?.away!=null?score:'VS')+'</strong>'+
       '<small data-field="detail">'+(live&&item.livePeriod?esc(item.livePeriod):dateLabel(dateValue(item)))+'</small>'+
       '<div class="highlight-goals" data-field="goals">'+goals+'</div>'+
     '</div>'+
-    '<div class="highlight-team"><img src="'+teamLogo(item.awayTeam)+'" alt=""><span>'+away+'</span></div>';
+    '<div class="highlight-team">'+teamVisual(item.awayTeam)+'<span>'+away+'</span></div>';
 }
 function renderRounds(selectUpcoming=false){
   const rounds=new Map();
@@ -496,9 +502,9 @@ function renderFixtures(){
         '<div class="fixture-time"><span class="fixture-status'+(isLive?' fixture-live':'')+'" data-field="status">'+(isLive?'LIVE':dateLabel(dateValue(item)))+'</span>' +
         '<span class="fixture-live-detail" data-field="minute"'+(isLive&&minute?'':' hidden')+'>'+esc(minute)+'</span>' +
         (round?'<span class="fixture-round">'+esc(round)+'</span>':'')+'</div>' +
-        '<div class="fixture-team"><span>'+esc(item.homeTeam?.name||"Casa")+'</span><img src="'+teamLogo(item.homeTeam)+'" alt=""></div>' +
+        '<div class="fixture-team"><span>'+esc(teamDisplayName(item.homeTeam)||"Casa")+'</span>'+teamVisual(item.homeTeam)+'</div>' +
         '<div class="fixture-score" title="'+(state==="upcoming"?"Próximo jogo":isLive?"Em jogo":state==="finished"?"Resultado":"Jogo")+'"><span data-field="score">'+fixtureScore(item)+'</span><div class="highlight-goals" data-field="goals">'+goals+'</div></div>' +
-        '<div class="fixture-team away"><img src="'+teamLogo(item.awayTeam)+'" alt=""><span>'+esc(item.awayTeam?.name||"Fora")+'</span></div></div>';
+        '<div class="fixture-team away">'+teamVisual(item.awayTeam)+'<span>'+esc(teamDisplayName(item.awayTeam)||"Fora")+'</span></div></div>';
     }).join("");
     return label+markup;
   }).join("");
@@ -730,9 +736,12 @@ document.addEventListener("visibilitychange",()=>{
   if(document.visibilityState==="visible")scheduleCompetitionRefresh();
   else clearCompetitionRefresh();
 });
-active=new URLSearchParams(location.search).get("competition")||"liga-portugal";
+const initialParams=new URLSearchParams(location.search);
+active=initialParams.get("competition")||"liga-portugal";
 if(!competitions.some(item=>item[0]===active))active="liga-portugal";
-groupFilter="all";
+groupFilter=active==="nations-league" ? String(initialParams.get("group")||"all").toUpperCase() : "all";
+const initialRound=initialParams.get("round");
+if(initialRound && /^\\d+$/.test(initialRound)) roundEl.value=JSON.stringify([active==="nations-league"?"group-stage":"",initialRound]);
 renderGroupFilter();
 setCompetitionFilterState();
 loadCompetition(active,fixtureFilter,true);
