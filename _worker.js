@@ -2591,6 +2591,53 @@ function cpcTeam(team, fallbackId = null, fallbackName = "") {
   };
 }
 
+function cpcNormalizeGoal(goal, homeId = null, awayId = null) {
+  const rawTeam = goal?.team ?? goal?.side ?? goal?.team_id ?? goal?.teamId;
+  const side = String(typeof rawTeam === "string" ? rawTeam : "").toLowerCase();
+  const teamId = cpcSafeNumber(
+    goal?.team_id ??
+    goal?.teamId ??
+    goal?.team?.id ??
+    (side === "home" ? homeId : side === "away" ? awayId : null)
+  );
+  const player = cpcSafeString(
+    goal?.player_name ??
+    goal?.player?.name ??
+    goal?.scorer_name ??
+    goal?.scorer?.name ??
+    goal?.player ??
+    goal?.scorer
+  );
+  const minute = cpcSafeNumber(
+    goal?.minute ??
+    goal?.min ??
+    goal?.time?.minute ??
+    goal?.clock?.minute
+  );
+  const addedTime = cpcSafeNumber(
+    goal?.added_time ??
+    goal?.addedTime ??
+    goal?.added ??
+    goal?.time?.injury_time ??
+    goal?.clock?.injury_time
+  );
+  const periodSecond = cpcSafeNumber(goal?.period_second ?? goal?.periodSecond ?? goal?.time?.period_second);
+  return { teamId, player, minute, addedTime, periodSecond };
+}
+
+function cpcNormalizeGoals(event, homeId = null, awayId = null) {
+  const raw = event?.goals;
+  if (Array.isArray(raw)) return raw.map(goal => cpcNormalizeGoal(goal, homeId, awayId)).filter(goal => goal.teamId != null || goal.player || goal.minute != null);
+  if (!raw || typeof raw !== "object") return [];
+  const rows = [];
+  for (const [side, values] of Object.entries(raw)) {
+    if (!Array.isArray(values)) continue;
+    const sideId = String(side).toLowerCase() === "home" ? homeId : String(side).toLowerCase() === "away" ? awayId : null;
+    values.forEach(goal => rows.push(cpcNormalizeGoal({ ...(goal || {}), side }, sideId, sideId === homeId ? awayId : homeId)));
+  }
+  return rows.filter(goal => goal.teamId != null || goal.player || goal.minute != null);
+}
+
 function cpcNormalizeEvent(event, defaultStage = "") {
   const home = cpcTeam(
     event?.home_team,
@@ -2656,7 +2703,7 @@ function cpcNormalizeEvent(event, defaultStage = "") {
     halfTimeScore: event?.half_time_score ?? event?.ht_score ?? null,
     extraTimeScore: event?.extra_time_score ?? null,
     penaltyShootout: event?.penalty_shootout ?? null,
-    goals: Array.isArray(event?.goals) ? event.goals : []
+    goals: cpcNormalizeGoals(event, home.id, away.id)
   };
 }
 
@@ -3198,17 +3245,10 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
               incident?.action_type ??
               ""
             ).toLowerCase();
-            return type.includes("goal") && !incident?.rescinded;
+            return type.includes("goal") && !incident?.rescinded && !type.includes("temp_");
           })
-          .map(incident => ({
-            teamId: cpcSafeNumber(incident?.team_id ??
-              incident?.team?.id ??
-              (String(incident?.team ?? incident?.side ?? "").toLowerCase()==="home" ? item.homeTeam?.id : String(incident?.team ?? incident?.side ?? "").toLowerCase()==="away" ? item.awayTeam?.id : null)),
-            player: cpcSafeString(incident?.player_name ?? incident?.player?.name ?? incident?.player),
-            minute: cpcSafeNumber(incident?.minute ?? incident?.min ?? incident?.time?.minute),
-            addedTime: cpcSafeNumber(incident?.added_time ?? incident?.added ?? incident?.time?.injury_time),
-            periodSecond: cpcSafeNumber(incident?.period_second)
-          }));
+          .map(incident => cpcNormalizeGoal(incident, item.homeTeam?.id, item.awayTeam?.id))
+          .filter(goal => goal.teamId != null || goal.player || goal.minute != null);
 
         fixturesById.set(id, {
           ...item,
