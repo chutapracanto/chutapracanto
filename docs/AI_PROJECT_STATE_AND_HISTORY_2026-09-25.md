@@ -1654,3 +1654,32 @@ Implementar medição real de pageviews/visualizações e, se tecnicamente adequ
 
 ## Regra de execução até 22/10/2026
 Não depender de Codex enquanto os créditos da utilizadora estiverem esgotados. Preferir implementação direta pelos acessos disponíveis; recorrer a Codex apenas quando necessário após essa data.
+
+
+# 81. PAGEVIEWS E PAINEL DE MÉTRICAS — 2026-10-02
+
+Após a Fase 1 de likes, foi implementada a medição real de visualizações das notícias sem depender de Codex ou fornecedor externo.
+
+## Alterações
+- criada migrations/0002_article_views.sql;
+- criada tabela article_views na D1 ARTICLE_LIKES_DB de produção, com índice por slug e data;
+- endpoint público POST /api/article-view, com validação do slug contra o índice editorial;
+- noticia.html envia uma visualização depois de a notícia ser carregada com sucesso;
+- Admin passou a consultar /api/admin/metrics/views e calcular o **Like rate = likes / pageviews**;
+- painel mostra likes, visualizações e rate por notícia.
+
+## Privacidade / definição da métrica
+A tabela de pageviews guarda apenas slug e timestamp. Não guarda IP, email, nome nem o identificador anónimo utilizado para likes. Portanto a métrica é **pageview**, não visitante único.
+
+## D1 / validação
+Antes da implementação: likes_total=1, views_total=0. Nenhum pageview artificial foi inserido para testar o painel.
+A tabela foi criada diretamente na D1 de produção e a migration foi adicionada ao repositório para persistência.
+
+## Deploys
+- _worker.js: fea653288e77a269941d5fce3304023fe996da66 — SUCCESS / produção.
+- noticia.html: a077f7ec2782e675b09c495d16a84cdbd16ec846 — SUCCESS.
+- admin/index.html: bc45da65baa3d68325203cb314b3e460e176cf94 — deployment e608bc59, SUCCESS, alias de produção.
+- migration: 00a696ec115ce0c99d01fc0a6b3271232fad2807 — deployment concluído; a D1 foi também aplicada diretamente para garantir existência imediata.
+
+## Limitação da validação externa
+Não foi possível fazer um pedido HTTP externo a chutapracanto.com a partir do ambiente de execução por ausência de resolução DNS nesse ambiente. A validação de deployment/D1 foi feita diretamente via Cloudflare. Não foram inventados pageviews para substituir o teste.
