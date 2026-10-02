@@ -710,3 +710,12 @@ Não alterar D1, cache, adapter BSD, cron ou regras de filtros para resolver um 
 - [x] Nenhuma alteração ao BSD/D1/cache/cron.
 - [x] JavaScript funcional validado sintaticamente após a alteração.
 - [x] Produção: Home ad664158-8e17-478a-bf34-e28abb8a4bfa SUCCESS; Competições 770c7ebc-ed9b-4793-9878-878cb46369c0 SUCCESS.
+
+
+## 2026-10-02 — CORREÇÃO DOS CARTÕES LIVE: SEM FALLBACK INVENTADO + ERRO `goalsLabel`
+
+- [x] Remover bola de futebol artificial quando não existe imagem válida.
+- [x] Não inventar siglas, bolas ou outros visuais de substituição nos cartões LIVE.
+- [x] Remover referência residual a `goalsLabel()` que causava erro em Competições.
+- [x] Validar sintaxe JavaScript de Home e Competições.
+- [x] Produção validada: Home `69921b9f-8310-4027-9e0e-42de7dfd83e0` SUCCESS; Competições `5a1e629a-a3c0-4182-8dfe-56a9fbf86e66` SUCCESS.
