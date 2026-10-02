@@ -2066,3 +2066,38 @@ A utilizadora voltou a confirmar que os golos continuavam sem aparecer com **min
 - Validação sintática: scripts funcionais de Home e Competições OK; sem bolas artificiais em nenhum dos dois ficheiros.
 - Produção: Home 7fc26630-7a3e-427a-beca-cf0fc1db2c28 SUCCESS; Competições 250cb04c-3f76-49be-84eb-34db35941f3b SUCCESS; último deploy 250cb04c com alias de produção.
 - Próximo teste obrigatório: LIVE real com pelo menos um golo, verificando Home, Jogo em destaque e Jogos e resultados simultaneamente.
+
+
+# 67. LIVE — CORREÇÃO REAL DA ORIGEM DOS GOLOS — 2026-10-02
+
+## 67.1 Causa raiz confirmada
+A documentação pública da BSD mostra que os incidentes de golo usam, entre outros campos, `type: "goal"`, `minute`, `player_name` e `is_home`. A normalização anterior aceitava minuto/jogador, mas não convertia `is_home` para a equipa do golo.
+
+Resultado: o frontend recebia o golo sem `teamId`; como os cartões filtram os golos pela equipa da casa/fora, o minuto e marcador não apareciam debaixo da equipa correta.
+
+## 67.2 Correção aplicada
+- `_worker.js`: `cpcNormalizeGoal()` passa a interpretar `is_home/isHome` e a atribuir `homeId/awayId`.
+- `_worker.js`: jogador deixa de poder transformar objectos inesperadamente em `[object Object]`; são priorizados `player_name`, `player.name`, `scorer_name` e `scorer.name`.
+- Não foi alterado o cron `cpc-football-cron`, D1, cache ou BSD como fonte.
+- Commit Worker: `1bb93007f2086254813725312d1c300e4e96c9e5`.
+
+## 67.3 Home — nome da competição restaurado
+O cartão LIVE da Home passa a apresentar também o nome da competição, seguido dos metadados de grupo e jornada quando existem:
+`Competição · Liga/Grupo · Jornada N`.
+
+A jornada continua traduzida para "Jornada N".
+
+Commit Home: `7ce23dfe0fc04d0de75919b75a5e2b7fc5d85509`.
+
+## 67.4 Produção
+- Worker fix: deployment `02ded6ac-b515-4f09-9c09-55a45c982bb4`, SUCCESS, alias de produção `https://chutapracanto.com`.
+- Home fix: deployment `2225f120-4e07-4714-a752-916ff2c9b8fd`, em clone/build/deploy no momento do registo; aguardar SUCCESS antes de considerar a alteração visual publicada.
+
+## 67.5 Validação necessária
+A causa dos golos está agora sustentada pelo formato BSD documentado, mas a prova final continua a ser um jogo LIVE real com pelo menos um golo. Quando existir:
+1. Home LIVE — minuto + jogador sob a equipa que marcou;
+2. Competições — Jogo em destaque — mesmo detalhe;
+3. Competições — Jogos e resultados — mesmo detalhe;
+4. atualização após novo golo sem recarregar a página.
+
+Não inventar um golo de teste nem declarar validação visual final sem jogo real.
