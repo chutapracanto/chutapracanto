@@ -216,6 +216,7 @@ const groupFilterWrap=document.getElementById("group-filter-wrap");
 const groupEl=document.getElementById("group-filter");
 const standingsScopeEl=document.querySelector(".competition-panel:nth-of-type(2) .competition-panel-header span");
 let active="";
+let loadSequence=0;
 let allFixtures=[];
 let fixtureFilter="upcoming";
 let groupFilter="A4";
@@ -749,12 +750,11 @@ async function refreshCompetitionSnapshot(){
   }
 }
 async function loadCompetition(key,status="all",resetRound=true){
+  const requestId=++loadSequence;
   const changed=active!==key;
   active=key;
   if(changed||!tabs.children.length)renderTabs();
   const meta=competitions.find(item=>item[0]===key);
-  nameEl.textContent=meta?.[1]||key;
-  logoEl.src=leagueLogo(meta?.[2]||0);
   seasonEl.textContent="A carregar…";
   clearCompetitionRefresh();
   try{
@@ -767,6 +767,9 @@ async function loadCompetition(key,status="all",resetRound=true){
     const response=await fetch("/api/competicoes?"+params.toString(),{cache:"no-store"});
     const data=await response.json();
     if(!response.ok)throw new Error(data?.message||"Não foi possível obter os dados.");
+    if(requestId!==loadSequence)return;
+    nameEl.textContent=meta?.[1]||key;
+    logoEl.src=leagueLogo(meta?.[2]||0);
     seasonEl.textContent=data.season?.label||"Época atual";
     loadedSeasonId=data.season?.id??null;
     loadedAllSnapshot=effectiveStatus==="all" && (!selectedRound || selectedRound==="all");
@@ -801,6 +804,9 @@ async function loadCompetition(key,status="all",resetRound=true){
     updateCompetitionLiveState();
     scheduleCompetitionRefresh();
   }catch(error){
+    if(requestId!==loadSequence)return;
+    nameEl.textContent=meta?.[1]||key;
+    logoEl.src=leagueLogo(meta?.[2]||0);
     seasonEl.textContent="Indisponível";
     statusEl.textContent="temporariamente indisponível";
     globalStatusEl.textContent="";
