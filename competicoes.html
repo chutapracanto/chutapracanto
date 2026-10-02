@@ -241,12 +241,21 @@ const NATIONS_GROUPS={
   D2:["liechtenstein","lithuania","azerbaijan"]
 };
 function nationsGroupName(item){
-  const sourceGroup=String(item?.groupName||"").trim();
+  const sourceGroup=String(item?.groupName||item?.group_name||item?.group?.name||item?.group?.label||"").trim();
   const groupMatch=sourceGroup.match(/\b([A-D][1-4])\b/i);
   const declaredGroup=groupMatch?.[1]?.toUpperCase();
   if(declaredGroup&&Object.prototype.hasOwnProperty.call(NATIONS_GROUPS,declaredGroup)) return declaredGroup;
   const names=[item?.homeTeam?.name,item?.awayTeam?.name,item?.team?.name].map(normalizeTeamName).filter(Boolean);
-  for(const [group,teams] of Object.entries(NATIONS_GROUPS)) if(names.some(name=>teams.some(team=>name===team||name.startsWith(team+" ")||name.includes(" "+team+" ")))) return group;
+  if(Array.isArray(allStandings)&&names.length){
+    for(const row of allStandings){
+      const standingName=normalizeTeamName(row?.team?.name);
+      if(!standingName||!names.some(name=>name===standingName||name.startsWith(standingName+" ")||standingName.startsWith(name+" ")))continue;
+      const standingGroup=String(row?.groupName||row?.group_name||row?.group?.name||row?.group?.label||"").match(/\b([A-D][1-4])\b/i)?.[1]?.toUpperCase();
+      if(standingGroup&&Object.prototype.hasOwnProperty.call(NATIONS_GROUPS,standingGroup)) return standingGroup;
+    }
+  }
+  for(const [group,teams] of Object.entries(NATIONS_GROUPS))
+    if(names.some(name=>teams.some(team=>name===team||name.startsWith(team+" ")||name.includes(" "+team+" ")))) return group;
   return "";
 }
 function nationsGroupLabel(group){return "Liga "+group.charAt(0)+" · Grupo "+group}
