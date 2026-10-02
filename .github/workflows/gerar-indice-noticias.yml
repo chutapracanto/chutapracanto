@@ -319,4 +319,8 @@ jobs:
             exit 0
           fi
           git commit -m "Atualizar índice de notícias"
+          # A main pode avançar enquanto o índice é gerado (por exemplo, uma
+          # publicação ou uma alteração técnica feita em paralelo). Rebaseia
+          # antes do push para evitar falhas de non-fast-forward.
+          git pull --rebase origin main
           git push
