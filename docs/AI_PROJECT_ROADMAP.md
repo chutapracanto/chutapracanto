@@ -860,3 +860,17 @@ A antiga entrada de backlog inicial de métricas deve ser lida como SUPERADA pel
 
 ### Continuidade
 Até 22/10/2026, trabalhar diretamente via GitHub/Cloudflare e não depender de Codex. Em Competições, preservar BSD → Worker → D1 → frontend e não mexer na infraestrutura para resolver problemas de UI/filtros.
+
+
+## 2026-10-02.1 — PREPARAÇÃO ADSENSE / PRIVACIDADE — CONCLUÍDA
+
+A revisão autónoma de baixo risco prevista na fila de monetização foi executada.
+
+- `ads.txt` presente e com o publisher ID atualmente usado pelo site.
+- Código técnico do AdSense já está presente nas páginas públicas.
+- A Política de Privacidade foi reconciliada com o analytics first-party que já estava em produção; a versão anterior dizia incorretamente que não existia analytics próprio.
+- Não foi introduzido CMP, porque anúncios ainda não estão confirmados como efetivamente publicados e a configuração final de consentimento depende do estado real da publicação/configuração do AdSense.
+- Não foram alterados secrets, D1, BSD, cron, football backend ou tracking.
+- Não assumir aprovação/receita do AdSense.
+
+**Próxima ordem prática mantém-se:** Search Console quando houver dados → preparação AdSense de baixo risco restante → matriz de APIs de vídeo → pesquisa global/automação conforme prioridade.
