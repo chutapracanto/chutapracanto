@@ -1830,3 +1830,12 @@ migrations/0003_analytics_events.sql fica no repositório como fonte de persist�
 - Deployment final Cloudflare Pages: `310bf5d5`, production, SUCCESS, alias `https://chutapracanto.com`.
 - Não foram alterados futebol, D1 de competições ou o funcionamento editorial de criação/edição.
 - Nota: “partilhas” externas são ações de partilha/click registadas pelo site; o site não consegue confirmar que Facebook/WhatsApp/X/Telegram efetivamente publicaram a partilha. `Link copiado` é uma ação concluída pelo navegador.
+
+
+## 2026-10-02 — Remendo imediato do Admin: lista de conteúdos + métricas anteriores
+- Foi detetada uma regressão introduzida durante a reorganização das métricas: a função `mostrarLista` e as funções auxiliares de paginação/pesquisa deixaram de existir no `admin/index.html`, causando `mostrarLista is not defined` e impedindo o carregamento de Notícias e Crónicas.
+- Corrigido diretamente no GitHub, sem Codex: commit `3980cd083fb4ed71caa46db41f8169735ff8754a`.
+- Restauradas `mostrarLista`, `mostrarPaginacao`, `mudarPagina` e `filtrarLista`, preservando Ver, Partilhar, Editar e Apagar e acrescentando `📊 Ver métricas` por conteúdo.
+- As métricas globais foram complementadas, não substituídas: visualizações de conteúdos, likes totais, conteúdos com likes, partilhas totais e `Like rate` por conteúdo, mantendo o dashboard único de Notícias + Crónicas e o seletor de período.
+- Cloudflare Pages produção: deployment `ecd0a194-6867-4f51-8197-098ae4d51dba`, commit `3980cd083fb4ed71caa46db41f8169735ff8754a`, build/deploy SUCCESS, alias `https://chutapracanto.com`.
+- Regra para próximas alterações: em `admin/index.html`, nunca remover funções de renderização/listagem ao reorganizar a área de métricas; métricas são acrescentadas à área própria e não substituem a gestão de conteúdos.
