@@ -1725,6 +1725,39 @@ async function handleAdminAPI(request, env) {
 
 
   // ----------------------------------------------------------
+  // MÉTRICAS — LIKES
+  // ----------------------------------------------------------
+
+  if (pathname === "/api/admin/metrics/likes") {
+    if (request.method !== "GET") {
+      return json({ error: "Método não permitido.", message: "Método não permitido." }, 405);
+    }
+    if (!env.ARTICLE_LIKES_DB) {
+      return json({ error: "ARTICLE_LIKES_DB não está configurada." }, 503);
+    }
+
+    try {
+      const result = await env.ARTICLE_LIKES_DB
+        .prepare("SELECT article_slug AS slug, COUNT(*) AS count FROM article_likes GROUP BY article_slug ORDER BY count DESC, article_slug ASC")
+        .all();
+      const items = (result?.results || []).map(row => ({
+        slug: String(row.slug || ""),
+        count: Number(row.count || 0)
+      }));
+      const totalLikes = items.reduce((sum, item) => sum + item.count, 0);
+      return json({
+        ok: true,
+        totalLikes,
+        articlesWithLikes: items.filter(item => item.count > 0).length,
+        items
+      });
+    } catch (error) {
+      console.error("Admin metrics likes error:", error);
+      return json({ error: "Não foi possível carregar as métricas de likes." }, 503);
+    }
+  }
+
+  // ----------------------------------------------------------
   // LISTAR NOTÍCIAS
   // ----------------------------------------------------------
 
