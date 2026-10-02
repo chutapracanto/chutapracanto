@@ -133,6 +133,76 @@
             background: #d1d5db;
         }
 
+        .metrics-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+
+        .metric-card {
+            background: #f8fafc;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 18px;
+        }
+
+        .metric-card-label {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 6px;
+        }
+
+        .metric-card-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .metrics-table-wrap {
+            overflow-x: auto;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+        }
+
+        .metrics-table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 620px;
+        }
+
+        .metrics-table th,
+        .metrics-table td {
+            padding: 12px 14px;
+            border-bottom: 1px solid #e5e7eb;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        .metrics-table th {
+            background: #f8fafc;
+            font-size: 13px;
+        }
+
+        .metrics-table tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .metrics-empty {
+            padding: 24px;
+            color: #64748b;
+            text-align: center;
+        }
+
         .danger-btn {
             background: #dc2626;
             color: #fff;
@@ -844,6 +914,7 @@
             <div class="section-tabs" role="tablist" aria-label="Área editorial">
                 <button type="button" id="tab-news" class="section-tab active" onclick="mudarSecaoAdmin('news')">📰 Notícias</button>
                 <button type="button" id="tab-opinion" class="section-tab" onclick="mudarSecaoAdmin('opinion')">✍️ Crónicas</button>
+                <button type="button" id="tab-metrics" class="section-tab" onclick="abrirMetricasAdmin()">📊 Métricas</button>
             </div>
 
             <input
@@ -868,6 +939,49 @@
                 class="pagination"
             ></div>
 
+        </div>
+
+        <div
+            id="metrics-screen"
+            class="hidden"
+        >
+            <div class="metrics-toolbar">
+                <div>
+                    <h2>📊 Métricas</h2>
+                    <p>Likes reais registados por notícia. As métricas de visitas e rates serão acrescentadas quando a medição de pageviews estiver ativa.</p>
+                </div>
+                <button type="button" class="secondary-btn" onclick="fecharMetricasAdmin()">← Voltar aos conteúdos</button>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-card-label">Likes totais</div>
+                    <div id="metric-total-likes" class="metric-card-value">—</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-card-label">Notícias com likes</div>
+                    <div id="metric-liked-articles" class="metric-card-value">—</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-card-label">Visualizações</div>
+                    <div class="metric-card-value">Em preparação</div>
+                </div>
+            </div>
+
+            <div class="metrics-table-wrap">
+                <table class="metrics-table">
+                    <thead>
+                        <tr>
+                            <th>Notícia</th>
+                            <th>Data</th>
+                            <th>Likes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="metrics-likes-body">
+                        <tr><td colspan="3" class="metrics-empty">A carregar métricas…</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
 
@@ -1919,12 +2033,67 @@ function mudarSecaoAdmin(tipo) {
     secaoAdminAtual = tipo === "opinion" ? "opinion" : "news";
     document.getElementById("tab-news")?.classList.toggle("active", secaoAdminAtual === "news");
     document.getElementById("tab-opinion")?.classList.toggle("active", secaoAdminAtual === "opinion");
+    document.getElementById("tab-metrics")?.classList.remove("active");
+    document.getElementById("list-screen")?.classList.remove("hidden");
+    document.getElementById("metrics-screen")?.classList.add("hidden");
     const sectionTitle = document.getElementById("admin-section-title");
     if (sectionTitle) {
         sectionTitle.textContent = secaoAdminAtual === "opinion" ? "✍️ Crónicas" : "📰 Notícias";
     }
     paginaAtual = 1;
     filtrarLista();
+}
+
+function fecharMetricasAdmin() {
+    mudarSecaoAdmin("news");
+}
+
+async function abrirMetricasAdmin() {
+    document.getElementById("tab-news")?.classList.remove("active");
+    document.getElementById("tab-opinion")?.classList.remove("active");
+    document.getElementById("tab-metrics")?.classList.add("active");
+    document.getElementById("list-screen")?.classList.add("hidden");
+    document.getElementById("form-screen")?.classList.add("hidden");
+    document.getElementById("metrics-screen")?.classList.remove("hidden");
+
+    const body = document.getElementById("metrics-likes-body");
+    body.innerHTML = '<tr><td colspan="3" class="metrics-empty">A carregar métricas…</td></tr>';
+
+    try {
+        const data = await apiFetch("/api/admin/metrics/likes");
+        document.getElementById("metric-total-likes").textContent = String(data.totalLikes || 0);
+        document.getElementById("metric-liked-articles").textContent = String(data.articlesWithLikes || 0);
+
+        const bySlug = new Map((data.items || []).map(item => [item.slug, Number(item.count || 0)]));
+        const rows = noticias
+            .filter(file => bySlug.has(file.slug))
+            .map(file => ({
+                ...file,
+                likeCount: bySlug.get(file.slug) || 0
+            }))
+            .sort((x, y) => y.likeCount - x.likeCount);
+
+        if (!rows.length) {
+            body.innerHTML = '<tr><td colspan="3" class="metrics-empty">Ainda não existem likes registados.</td></tr>';
+            return;
+        }
+
+        body.replaceChildren(...rows.map(file => {
+            const tr = document.createElement("tr");
+            const title = document.createElement("td");
+            title.textContent = file.titulo || slugParaTitulo(file.name || file.slug || "");
+            const date = document.createElement("td");
+            date.textContent = formatarDataNoticia(file);
+            const likes = document.createElement("td");
+            likes.textContent = String(file.likeCount);
+            likes.style.fontWeight = "700";
+            tr.append(title, date, likes);
+            return tr;
+        }));
+    } catch (error) {
+        body.innerHTML = '<tr><td colspan="3" class="metrics-empty">Não foi possível carregar as métricas.</td></tr>';
+        console.error("Erro ao carregar métricas:", error);
+    }
 }
 
 function mostrarLista(lista) {
