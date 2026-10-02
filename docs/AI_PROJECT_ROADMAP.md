@@ -740,3 +740,30 @@ Não alterar D1, cache, adapter BSD, cron ou regras de filtros para resolver um 
 - [x] Validar JavaScript.
 - [x] Produção SUCCESS nos dois ficheiros.
 - [ ] Confirmar com um LIVE real com golo.
+
+
+## 2026-10-02 — LIVE: causa raiz dos golos + restauração do nome da competição
+
+### CONCLUÍDO — correção de dados de golo
+- Confirmado no formato BSD que os incidentes de golo podem vir com `is_home`, `player_name` e `minute`.
+- O adapter já consultava `/events/{id}/incidents/`, mas a normalização não usava `is_home` para determinar a equipa.
+- Corrigido `cpcNormalizeGoal()` para mapear `is_home/isHome` → equipa da casa/fora.
+- Corrigida a extração do nome do jogador para evitar objectos convertidos em texto inválido.
+- Commit: `1bb93007f2086254813725312d1c300e4e96c9e5`.
+
+### CONCLUÍDO — Home LIVE
+- Restaurado o nome da competição no cabeçalho do cartão LIVE.
+- Mantidos grupo e Jornada quando disponíveis.
+- Commit: `7ce23dfe0fc04d0de75919b75a5e2b7fc5d85509`.
+
+### PENDENTE DE VALIDAÇÃO REAL
+- Confirmar em jogo LIVE real com golo: minuto + jogador sob a equipa correta na Home, destaque de Competições e lista de Jogos e resultados.
+- Confirmar atualização de novo golo durante o polling sem refresh manual.
+
+### NÃO ALTERAR
+- `cpc-football-cron`;
+- `FOOTBALL_CACHE_DB`;
+- BSD/API key;
+- arquitetura de cache;
+- fallback de bolas/ícones inventados;
+- remoção de siglas/códigos grandes dos clubes.
