@@ -290,7 +290,7 @@ const CLUB_NAMES_PT={"sporting cp":"Sporting CP","sporting clube de portugal":"S
 function teamDisplayName(team){const raw=String(team?.name||"").trim();const key=normalizeTeamName(raw);return CLUB_NAMES_PT[key]||TEAM_NAMES_PT_EXTRA[key]||raw}
 const TEAM_FLAGS={"kazakhstan":"🇰🇿","moldova":"🇲🇩","slovakia":"🇸🇰","faroe islands":"🇫🇴","poland":"🇵🇱","sweden":"🇸🇪","bosnia & herzegovina":"🇧🇦","romania":"🇷🇴","austria":"🇦🇹","ireland":"🇮🇪","ukraine":"🇺🇦","georgia":"🇬🇪","hungary":"🇭🇺","northern ireland":"🇬🇧","wales":"🏴","denmark":"🇩🇰","norway":"🇳🇴","germany":"🇩🇪","netherlands":"🇳🇱","north macedonia":"🇲🇰","slovenia":"🇸🇮","portugal":"🇵🇹","spain":"🇪🇸","england":"🏴","croatia":"🇭🇷","czechia":"🇨🇿","france":"🇫🇷","turkiye":"🇹🇷","turkey":"🇹🇷","belgium":"🇧🇪","italy":"🇮🇹","finland":"🇫🇮","san marino":"🇸🇲","albania":"🇦🇱","belarus":"🇧🇾","latvia":"🇱🇻","armenia":"🇦🇲","cyprus":"🇨🇾","montenegro":"🇲🇪","bulgaria":"🇧🇬","luxembourg":"🇱🇺","iceland":"🇮🇸","estonia":"🇪🇪","andorra":"🇦🇩","malta":"🇲🇹","gibraltar":"🇬🇮","liechtenstein":"🇱🇮","lithuania":"🇱🇹","azerbaijan":"🇦🇿","scotland":"🏴","switzerland":"🇨🇭","israel":"🇮🇱","kosovo":"🇽🇰"};
 function teamLogo(team){return safeUrl(team?.logo)||safeUrl(team?.flag)||""}
-function teamVisual(team){const url=teamLogo(team);const fallback="⚽";if(!url)return '<span class="fixture-team-flag" aria-hidden="true">'+fallback+'</span>';return '<span class="fixture-team-visual"><img src="'+esc(url)+'" alt="" loading="lazy" decoding="async" onerror="this.style.display=\'none\';this.nextElementSibling.hidden=false"><span class="fixture-team-flag" aria-hidden="true" hidden>'+fallback+'</span></span>'}
+function teamVisual(team){const url=teamLogo(team);if(!url)return "";return '<span class="fixture-team-visual"><img src="'+esc(url)+'" alt="" loading="lazy" decoding="async" onerror="this.style.display=\'none\'"></span>'}
 function leagueLogo(id){return "/api/football-image?type=league&id="+encodeURIComponent(id)}
 function leagueLogo(id){return "/api/football-image?type=league&id="+encodeURIComponent(id)}
 function translateRound(value){
@@ -532,6 +532,9 @@ function patchFixtureRow(item){
   }
   const scoreEl=row.querySelector('[data-field="score"]');
   if(scoreEl)scoreEl.textContent=fixtureScore(item);
+  const goalEls=row.querySelectorAll(".team-goal-details");
+  if(goalEls[0])goalEls[0].innerHTML=goalDetailsForTeam(item,item.homeTeam?.id);
+  if(goalEls[1])goalEls[1].innerHTML=goalDetailsForTeam(item,item.awayTeam?.id);
   const scoreBox=row.querySelector(".fixture-score");
   if(scoreBox)scoreBox.title=state==="upcoming"?"Próximo jogo":state==="live"?"Em jogo":state==="finished"?"Resultado":"Jogo";
 }
@@ -550,6 +553,9 @@ function patchHighlight(){
   if(liveEl){liveEl.hidden=!live;liveEl.textContent=live?"LIVE"+(minute?" · "+minute:""):""}
   const scoreEl=current.querySelector('[data-field="score"]');
   if(scoreEl)scoreEl.textContent=live||item.score?.home!=null||item.score?.away!=null?fixtureScore(item):"VS";
+  const goalEls=current.querySelectorAll(".team-goal-details");
+  if(goalEls[0])goalEls[0].innerHTML=goalDetailsForTeam(item,item.homeTeam?.id);
+  if(goalEls[1])goalEls[1].innerHTML=goalDetailsForTeam(item,item.awayTeam?.id);
   const detailEl=current.querySelector('[data-field="detail"]');
   if(detailEl)detailEl.textContent=live&&item.livePeriod?item.livePeriod:dateLabel(dateValue(item));
 }
