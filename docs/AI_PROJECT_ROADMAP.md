@@ -719,3 +719,15 @@ Não alterar D1, cache, adapter BSD, cron ou regras de filtros para resolver um 
 - [x] Remover referência residual a `goalsLabel()` que causava erro em Competições.
 - [x] Validar sintaxe JavaScript de Home e Competições.
 - [x] Produção validada: Home `69921b9f-8310-4027-9e0e-42de7dfd83e0` SUCCESS; Competições `5a1e629a-a3c0-4182-8dfe-56a9fbf86e66` SUCCESS.
+
+## 2026-10-02 — CORREÇÃO DE DADOS/ATUALIZAÇÃO DOS GOLOS LIVE
+- [x] Removido completamente o fallback de bola ⚽ em Competições, tanto no destaque como em Jogos e resultados e no erro de imagem.
+- [x] Home: Matchday/Round N residual convertido para **Jornada N**.
+- [x] Pages Worker: normalização robusta de golos BSD para equipa, jogador, minuto e compensação de tempo.
+- [x] Pages Worker: preservação dos golos existentes quando o endpoint de incidentes LIVE não devolve golos.
+- [x] Competições: atualização LIVE incremental passa a atualizar também minuto + jogador dos golos por equipa.
+- [x] Competições: destaque LIVE atualiza também os detalhes dos golos sem depender de render completo.
+- [x] cpc-football-cron, D1 e cache preservados sem alterações.
+- [x] Produção: Home 541c3cdb-9c61-4bde-97bb-60c469f15813 SUCCESS; Competições 588e93e4-f2d6-4dde-a06e-4a946859631d SUCCESS; último deploy 59490b0a-b540-4431-ad8a-ed6963526e0e SUCCESS com alias de produção.
+- [ ] Confirmar visualmente no próximo LIVE real com golo.
+
