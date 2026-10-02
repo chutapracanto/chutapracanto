@@ -2056,3 +2056,13 @@ A utilizadora voltou a confirmar que os golos continuavam sem aparecer com **min
 - A validação visual definitiva deve ser feita no próximo LIVE real com pelo menos um golo, porque não se deve fabricar um jogo para testar a apresentação.
 - Regra mantida: **minuto + jogador aparecem por baixo da equipa que marcou**; minuto do jogo permanece dentro de **LIVE · N'**.
 
+
+## 2026-10-02 — SEGUNDA CORREÇÃO: JORNADA NO LIVE + GOLOS POR EQUIPA EM TODAS AS VISTAS
+- A causa do Matchday persistente foi encontrada: a regex no cartão Home tinha escape duplicado dentro do literal JavaScript e não correspondia ao espaço de Matchday 3. Corrigido para regex funcional e acrescentado suporte a Round N.
+- Home LIVE: reforçado o fallback de roundLabel/round/roundKey e tradução para Jornada N.
+- Home LIVE: os golos agora aceitam também variantes BSD de team_id, team.id, side, player_name, player.name, scorer, minute/min e tempos adicionais.
+- Competições: a função de detalhe do golo passa a resolver equipa por ID ou por lado (home/away) e jogador por todas as variantes relevantes.
+- Competições: mantida a atualização incremental dos detalhes dos golos em Jogos e resultados e Jogo em destaque.
+- Validação sintática: scripts funcionais de Home e Competições OK; sem bolas artificiais em nenhum dos dois ficheiros.
+- Produção: Home 7fc26630-7a3e-427a-beca-cf0fc1db2c28 SUCCESS; Competições 250cb04c-3f76-49be-84eb-34db35941f3b SUCCESS; último deploy 250cb04c com alias de produção.
+- Próximo teste obrigatório: LIVE real com pelo menos um golo, verificando Home, Jogo em destaque e Jogos e resultados simultaneamente.
