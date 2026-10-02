@@ -2326,3 +2326,29 @@ O build/deploy confirma que a página voltou a ser publicável; a validação fu
 ## Regra de continuidade
 
 Não reabrir a arquitetura de futebol para esta regressão. A falha foi frontend/JavaScript e está corrigida diretamente no ficheiro afetado.
+
+
+# 73. COMPETIÇÕES — SETAS LATERAIS, HISTÓRICO NATIONS E FINAL DE JOGO — 2026-10-02
+
+## Pedido e implementação
+- Jogo em destaque: as setas deixaram de ser setas de texto soltas e passaram a botões laterais discretos, alinhados verticalmente ao centro das laterais do cartão, com símbolos de chevron esquerdo/direito.
+- As setas continuam a aparecer apenas quando existem 2 ou mais jogos LIVE aplicáveis ao destaque.
+- Quando não existe LIVE, continua a existir apenas um jogo em destaque.
+- Quando um LIVE termina durante a sessão, o jogo que estava em destaque é preservado no cartão e o texto central deixa de mostrar minutos, passando a mostrar **Final de jogo**.
+- Corrigido o filtro de jornadas: a seleção de uma jornada já não é ignorada especificamente para a Nations League. Com **Todos** + **Todos os grupos** + **Todas as jornadas**, a Nations League usa o snapshot completo da época e pode mostrar jogos passados, LIVE e futuros, tal como as restantes competições.
+
+## Commit
+- `a870d450fe7f28ecaaa7eb79b97f0140e26d9faa`
+- Ficheiro: `competicoes.html`
+
+## Limites preservados
+- Não houve alteração ao BSD, D1, cron ou arquitetura de cache.
+- Não foram introduzidas datas/rounds hardcoded para resolver o problema.
+- A lógica de grupos da Nations League continua baseada na normalização existente.
+
+## Validação de código
+- Confirmada a construção de pedidos `status=all` quando o filtro é Todos.
+- Confirmado que o frontend deixa de forçar a Nations League a ignorar o round selecionado.
+- Confirmado que o destaque mantém um jogo acabado quando esse jogo era o LIVE atualmente apresentado e passa a mostrar `Final de jogo`.
+- Confirmado que os botões laterais permanecem condicionados a múltiplos LIVE.
+- Validação visual/runtime no browser continua dependente de ambiente com acesso funcional ao site; deployment/build devem ser verificados após a publicação.
