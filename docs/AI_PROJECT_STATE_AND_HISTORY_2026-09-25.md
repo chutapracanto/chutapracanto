@@ -2009,3 +2009,15 @@ A pedido da utilizadora, foi feita uma alteração exclusivamente visual nos car
 
 ### Regra para futuras alterações
 Os eventos de golo devem ser apresentados junto à equipa marcadora, e não como uma lista genérica abaixo do marcador, salvo pedido explícito em contrário. O minuto do jogo LIVE deve permanecer dentro da etiqueta LIVE quando apresentado na lista de jogos/resultados.
+
+
+## 2026-10-02 — CORREÇÃO IMEDIATA: SEM BOLAS ARTIFICIAIS + `goalsLabel` RESIDUAL
+
+Após a revisão dos cartões LIVE:
+- removido completamente o fallback visual de bola de futebol por baixo dos clubes na Home;
+- o cartão não inventa qualquer imagem/símbolo quando não existe URL válida;
+- corrigida uma referência residual a `goalsLabel()` em `competicoes.html` que já não tinha a função definida, causando `goalsLabel is not defined`;
+- mantida a apresentação de minuto + jogador junto à equipa marcadora;
+- JavaScript funcional de Home e Competições voltou a compilar sem erros;
+- Home: commit `b6c356e38c94448149d6a0954e360149d03354a0`; deployment `69921b9f-8310-4027-9e0e-42de7dfd83e0` SUCCESS;
+- Competições: commit `303d5d9311eb22add31150cc18d8a7a58a330e90`; deployment `5a1e629a-a3c0-4182-8dfe-56a9fbf86e66` SUCCESS.
