@@ -508,3 +508,35 @@ Ainda não existe medição de pageviews no site. A implementação deverá prim
 
 ### Regra
 O painel deve ficar protegido pela autenticação existente do Admin e nunca expor dados de métricas através de uma rota pública.
+
+
+## 24. PAINEL DE MÉTRICAS — FASE 1 + PAGEVIEWS — 2026-10-02
+
+### Estado
+**IMPLEMENTADO EM PRODUÇÃO.**
+
+O Admin passou a ter uma área **📊 Métricas** com:
+- likes totais;
+- notícias com likes;
+- visualizações/pageviews totais;
+- tabela por notícia com visualizações, likes e **Like rate** (likes ÷ pageviews), claramente identificado como tal;
+- visualizações são registadas no carregamento concluído de uma notícia.
+
+### Medição
+- Pageviews são registados numa tabela article_views do ARTICLE_LIKES_DB.
+- O evento não guarda IP, nome, email ou o identificador anónimo usado pelo sistema de likes.
+- A medição é client-side e só é enviada depois de a notícia ser carregada.
+- A métrica atual é **pageview**, não "pessoas únicas". Não apresentar pageviews como utilizadores únicos.
+
+### Infraestrutura
+- migration migrations/0002_article_views.sql criada;
+- tabela e índices aplicados diretamente à D1 de produção;
+- endpoint público mínimo /api/article-view apenas regista a visualização validada;
+- endpoints /api/admin/metrics/likes e /api/admin/metrics/views ficam protegidos pela sessão Admin.
+
+### Validação
+- D1 confirmou article_views criada e views_total = 0 no momento da validação, sem dados artificiais inseridos.
+- deployment final Admin: e608bc59, SUCCESS, alias de produção https://chutapracanto.com.
+
+### Próxima melhoria
+Se forem necessários utilizadores únicos, sessões, origem de tráfego ou outras métricas de analytics, tratar como uma fase separada. Não confundir essas métricas com pageviews nem introduzir tracking adicional sem revisão de privacidade.
