@@ -1848,3 +1848,10 @@ migrations/0003_analytics_events.sql fica no repositório como fonte de persist�
 - Comparação base usada: commit `8a6c2b05097fcfd80524b6da0d77f6c86b41ff52`; correções finais: `76b6a273773c06c5ebec5d485e3a41707e9d6768` e `e7f4c0dbe278c0c9fdc05d8c20a85be8168787bc`.
 - Produção Cloudflare: deployment `d1d7c081-90fa-44d5-9b1e-362fed423e3b`, SUCCESS, alias `https://chutapracanto.com`.
 - Regra reforçada: ao adicionar uma camada nova de métricas, comparar a UI anterior e preservar todos os indicadores/tabelas existentes; adicionar, melhorar ou reorganizar, nunca remover por presumir duplicação.
+
+## 2026-10-02 — Métricas: retorno editorial e layout vertical
+- Ajuste solicitado no Admin: dentro de **Métricas** foram adicionadas duas abas/botões de retorno direto para **📰 Notícias** e **✍️ Crónicas**, sem criar sub-abas para separar as métricas.
+- As tabelas **📤 Partilhas** e **🚦 Percursos e ações** deixaram de ficar lado a lado na mesma linha. O bloco de métricas analíticas passou para uma única coluna, com cada tabela em largura total e linhas separadas.
+- Preservado o dashboard combinado de Notícias + Crónicas e todas as métricas existentes.
+- Commit: `5401424f86dbb1ffb18045e003ffd495a3cc3635`.
+- Regra: as métricas continuam juntas; apenas a navegação de retorno e a disposição visual foram alteradas. Não remover métricas existentes ao acrescentar novas.
