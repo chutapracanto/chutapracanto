@@ -245,8 +245,8 @@ function nationsGroupName(item){
   const groupMatch=sourceGroup.match(/\b([A-D][1-4])\b/i);
   const declaredGroup=groupMatch?.[1]?.toUpperCase();
   if(declaredGroup&&Object.prototype.hasOwnProperty.call(NATIONS_GROUPS,declaredGroup)) return declaredGroup;
-  const names=[item?.homeTeam?.name,item?.awayTeam?.name,item?.team?.name].map(normalizeTeamName);
-  for(const [group,teams] of Object.entries(NATIONS_GROUPS)) if(names.some(name=>teams.includes(name))) return group;
+  const names=[item?.homeTeam?.name,item?.awayTeam?.name,item?.team?.name].map(normalizeTeamName).filter(Boolean);
+  for(const [group,teams] of Object.entries(NATIONS_GROUPS)) if(names.some(name=>teams.some(team=>name===team||name.startsWith(team+" ")||name.includes(" "+team+" ")))) return group;
   return "";
 }
 function nationsGroupLabel(group){return "Liga "+group.charAt(0)+" · Grupo "+group}
@@ -755,6 +755,8 @@ async function loadCompetition(key,status="all",resetRound=true){
     allStandings=Array.isArray(data.standings)?data.standings:[];
     competitionPhase=data.phase||{type:"single-table",grouped:false,label:"Classificação"};
     renderGroupFilter();
+    if(active==="nations-league" && competitionPhase.grouped && groupFilter==="all" && !initialParams.has("group")) groupFilter="A4";
+    if(active==="nations-league" && competitionPhase.grouped && !initialParams.has("group")) { groupEl.value="A4"; if(standingsScopeEl) standingsScopeEl.textContent=nationsGroupLabel("A4"); }
     if(resetRound)renderRounds(true);
     if(resetRound && initialRoundFromUrl && [...roundEl.options].some(option=>option.value===initialRoundFromUrl)) roundEl.value=initialRoundFromUrl;
     renderFixtures();
