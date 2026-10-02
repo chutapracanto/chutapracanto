@@ -410,7 +410,7 @@ function renderHighlight(){
       '<span class="highlight-live" data-field="live"'+(live?'':' hidden')+'>'+(live?'LIVE'+(minute?' · '+esc(minute):''):'')+'</span>'+
       '<strong data-field="score">'+(live||item.score?.home!=null||item.score?.away!=null?score:'VS')+'</strong>'+
       '<small data-field="detail">'+(live&&item.livePeriod?esc(item.livePeriod):dateLabel(dateValue(item)))+'</small>'+
-      '<div class="highlight-goals" data-field="goals">'+goals+'</div>'+
+ 
     '</div>'+
     '<div class="highlight-team">'+teamVisual(item.awayTeam)+'<span>'+away+'</span><div class="team-goal-details">'+goalDetailsForTeam(item,item.awayTeam?.id)+'</div></div>'+(fixtureFilter==="all"&&highlightCandidates.length>1?'<button type="button" class="highlight-next" onclick="nextHighlightGame()" aria-label="Ver próximo jogo">→</button>':'');
 }
