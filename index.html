@@ -688,7 +688,7 @@
       };
       const liveMinuteLabel=item=>{
         const minute=Number(item?.liveMinute);
-        if(!Number.isFinite(minute))return '';
+        if(!Number.isFinite(minute)||minute<=0)return '';
         const added=Number(item?.liveAddedTime);
         return String(Math.floor(minute))+(Number.isFinite(added)&&added>0?'+'+Math.floor(added):'')+"'";
       };
