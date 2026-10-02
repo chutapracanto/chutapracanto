@@ -313,7 +313,7 @@ function isPriorityTeam(team){return PRIORITY_TEAM_IDS.has(Number(team?.id))||PR
 function isPriorityFixture(item){return isPriorityTeam(item?.homeTeam)||isPriorityTeam(item?.awayTeam)}
 function liveMinuteLabel(item){const minute=Number(item?.liveMinute);if(!Number.isFinite(minute))return "";const added=Number(item?.liveAddedTime);return String(Math.floor(minute))+(Number.isFinite(added)&&added>0?"+"+Math.floor(added):"")+String.fromCharCode(39)}
 function goalLabel(goal){const minute=Number(goal?.minute);const added=Number(goal?.addedTime);if(Number.isFinite(minute))return String(Math.floor(minute))+(Number.isFinite(added)&&added>0?"+"+Math.floor(added):"")+String.fromCharCode(39);if(Number.isFinite(goal?.periodSecond))return String(Math.floor(Number(goal.periodSecond)/60))+String.fromCharCode(39);return ""}
-function goalDetailsForTeam(item,teamId){if(!Array.isArray(item?.goals))return "";return item.goals.filter(goal=>Number(goal?.teamId)===Number(teamId)).map(goal=>{const minute=goalLabel(goal);const player=goal?.player?String(goal.player):"";return "<span class=\"team-goal-detail\"><b>"+esc(minute)+"</b>"+(player?" "+esc(player):"")+"</span>"}).join("")}
+function goalDetailsForTeam(item,teamId,side){if(!Array.isArray(item?.goals))return "";return item.goals.filter(goal=>{const gid=goal?.teamId??goal?.team_id??goal?.team?.id;const gside=String(goal?.side??goal?.team??"").toLowerCase();return Number(gid)===Number(teamId)||(side&&gside===side)}).map(goal=>{const minute=goalLabel(goal);const player=goal?.player??goal?.player_name??goal?.player?.name??goal?.scorer??goal?.scorer_name??goal?.scorer?.name??"";return "<span class=\"team-goal-detail\"><b>"+esc(minute)+"</b>"+(player?" "+esc(String(player)):"")+"</span>"}).join("")}
 function fixtureStatus(item){
   const raw=String(item?.status||"").toLowerCase().replace(/[ -]+/g,"_");
   if(["finished","ended","ft","full_time","completed","aet","penalties"].includes(raw))return "finished";
@@ -405,14 +405,14 @@ function renderHighlight(){
   const score=fixtureScore(item);
   const minute=liveMinuteLabel(item);
   highlightEl.innerHTML=
-    '<div class="highlight-team">'+teamVisual(item.homeTeam)+'<span>'+home+'</span><div class="team-goal-details">'+goalDetailsForTeam(item,item.homeTeam?.id)+'</div></div>'+
+    '<div class="highlight-team">'+teamVisual(item.homeTeam)+'<span>'+home+'</span><div class="team-goal-details">'+goalDetailsForTeam(item,item.homeTeam?.id,"home")+'</div></div>'+
     '<div class="highlight-score" data-event-id="'+esc(fixtureDomKey(item))+'">'+
       '<span class="highlight-live" data-field="live"'+(live?'':' hidden')+'>'+(live?'LIVE'+(minute?' · '+esc(minute):''):'')+'</span>'+
       '<strong data-field="score">'+(live||item.score?.home!=null||item.score?.away!=null?score:'VS')+'</strong>'+
       '<small data-field="detail">'+(live&&item.livePeriod?esc(item.livePeriod):dateLabel(dateValue(item)))+'</small>'+
  
     '</div>'+
-    '<div class="highlight-team">'+teamVisual(item.awayTeam)+'<span>'+away+'</span><div class="team-goal-details">'+goalDetailsForTeam(item,item.awayTeam?.id)+'</div></div>'+(fixtureFilter==="all"&&highlightCandidates.length>1?'<button type="button" class="highlight-next" onclick="nextHighlightGame()" aria-label="Ver próximo jogo">→</button>':'');
+    '<div class="highlight-team">'+teamVisual(item.awayTeam)+'<span>'+away+'</span><div class="team-goal-details">'+goalDetailsForTeam(item,item.awayTeam?.id,"away")+'</div></div>'+(fixtureFilter==="all"&&highlightCandidates.length>1?'<button type="button" class="highlight-next" onclick="nextHighlightGame()" aria-label="Ver próximo jogo">→</button>':'');
 }
 function nextHighlightGame(){if(fixtureFilter!=="all"||highlightCandidates.length<2)return;highlightIndex=(highlightIndex+1)%highlightCandidates.length;renderHighlight();}
 function renderRounds(selectUpcoming=false){
@@ -504,9 +504,9 @@ function renderFixtures(){
       return '<div class="fixture" data-event-id="'+esc(fixtureDomKey(item))+'">' +
         '<div class="fixture-time"><span class="fixture-status'+(isLive?' fixture-live':'')+'" data-field="status">'+(isLive?'LIVE'+(minute?' · '+esc(minute):''):dateLabel(dateValue(item)))+'</span>' +
         (round?'<span class="fixture-round">'+esc(round)+'</span>':'')+'</div>' +
-        '<div class="fixture-team"><span>'+esc(teamDisplayName(item.homeTeam)||"Casa")+'<div class="team-goal-details">'+goalDetailsForTeam(item,item.homeTeam?.id)+'</div></span>'+teamVisual(item.homeTeam)+'</div>' +
+        '<div class="fixture-team"><span>'+esc(teamDisplayName(item.homeTeam)||"Casa")+'<div class="team-goal-details">'+goalDetailsForTeam(item,item.homeTeam?.id,"home")+'</div></span>'+teamVisual(item.homeTeam)+'</div>' +
         '<div class="fixture-score" title="'+(state==="upcoming"?"Próximo jogo":isLive?"Em jogo":state==="finished"?"Resultado":"Jogo")+'"><span data-field="score">'+fixtureScore(item)+'</span></div>' +
-        '<div class="fixture-team away">'+teamVisual(item.awayTeam)+'<span>'+esc(teamDisplayName(item.awayTeam)||"Fora")+'<div class="team-goal-details">'+goalDetailsForTeam(item,item.awayTeam?.id)+'</div></span></div></div>';
+        '<div class="fixture-team away">'+teamVisual(item.awayTeam)+'<span>'+esc(teamDisplayName(item.awayTeam)||"Fora")+'<div class="team-goal-details">'+goalDetailsForTeam(item,item.awayTeam?.id,"away")+'</div></span></div></div>';
     }).join("");
     return label+markup;
   }).join("");
@@ -533,8 +533,8 @@ function patchFixtureRow(item){
   const scoreEl=row.querySelector('[data-field="score"]');
   if(scoreEl)scoreEl.textContent=fixtureScore(item);
   const goalEls=row.querySelectorAll(".team-goal-details");
-  if(goalEls[0])goalEls[0].innerHTML=goalDetailsForTeam(item,item.homeTeam?.id);
-  if(goalEls[1])goalEls[1].innerHTML=goalDetailsForTeam(item,item.awayTeam?.id);
+  if(goalEls[0])goalEls[0].innerHTML=goalDetailsForTeam(item,item.homeTeam?.id,"home");
+  if(goalEls[1])goalEls[1].innerHTML=goalDetailsForTeam(item,item.awayTeam?.id,"away");
   const scoreBox=row.querySelector(".fixture-score");
   if(scoreBox)scoreBox.title=state==="upcoming"?"Próximo jogo":state==="live"?"Em jogo":state==="finished"?"Resultado":"Jogo";
 }
@@ -554,8 +554,8 @@ function patchHighlight(){
   const scoreEl=current.querySelector('[data-field="score"]');
   if(scoreEl)scoreEl.textContent=live||item.score?.home!=null||item.score?.away!=null?fixtureScore(item):"VS";
   const goalEls=current.querySelectorAll(".team-goal-details");
-  if(goalEls[0])goalEls[0].innerHTML=goalDetailsForTeam(item,item.homeTeam?.id);
-  if(goalEls[1])goalEls[1].innerHTML=goalDetailsForTeam(item,item.awayTeam?.id);
+  if(goalEls[0])goalEls[0].innerHTML=goalDetailsForTeam(item,item.homeTeam?.id,"home");
+  if(goalEls[1])goalEls[1].innerHTML=goalDetailsForTeam(item,item.awayTeam?.id,"away");
   const detailEl=current.querySelector('[data-field="detail"]');
   if(detailEl)detailEl.textContent=live&&item.livePeriod?item.livePeriod:dateLabel(dateValue(item));
 }
