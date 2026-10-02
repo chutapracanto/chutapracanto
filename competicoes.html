@@ -362,6 +362,9 @@ async function prepareCompetitionOrder(){
     if(name==="portugal")return 3;
     return 99;
   };
+  // Carrega a competição atualmente selecionada em paralelo com a ordenação dos separadores,
+  // para que a página não fique bloqueada à espera dos pedidos de todas as competições.
+  const initialLoad=!initialCompetitionFromUrl ? loadCompetition(active,"all",true).catch(()=>{}) : null;
   const results=await Promise.all(competitions.map(async meta=>{
     try{
       const controller=new AbortController();
@@ -395,7 +398,14 @@ async function prepareCompetitionOrder(){
     roundEl.value="all";
     history.replaceState(null,"","/competicoes?competition="+encodeURIComponent(firstKey)+(firstKey==="nations-league"?"&group=A4":""));
     setCompetitionFilterState();
-    await loadCompetition(firstKey,"all",true);
+    if(firstKey!==active){
+      active=firstKey;
+      groupFilter=firstKey==="nations-league"?"A4":"all";
+      roundEl.value="all";
+      await loadCompetition(firstKey,"all",true);
+    }else if(initialLoad){
+      await initialLoad;
+    }
   }
 }
 function renderTabs(){
@@ -763,6 +773,21 @@ async function loadCompetition(key,status="all",resetRound=true){
     globalStatusEl.textContent=data.updatedAt?"Atualizado "+dateLabel(data.updatedAt):"Dados atualizados";
     allFixtures=Array.isArray(data.fixtures)?data.fixtures:[];
     allStandings=Array.isArray(data.standings)?data.standings:[];
+    // Alguns snapshots antigos de status=all podem ter apenas a janela futura.
+    // Se o snapshot não trouxer qualquer resultado terminado, recupera o histórico
+    // explicitamente sem alterar a lógica normal de cache/cron.
+    if(effectiveStatus==="all" && allFixtures.length && !allFixtures.some(item=>fixtureStatus(item)==="finished")){
+      try{
+        const finishedResponse=await fetch("/api/competicoes?"+new URLSearchParams({competition:key,status:"finished"}).toString(),{cache:"no-store"});
+        if(finishedResponse.ok){
+          const finishedData=await finishedResponse.json();
+          const finishedFixtures=Array.isArray(finishedData.fixtures)?finishedData.fixtures:[];
+          const byId=new Map(allFixtures.map(item=>[fixtureDomKey(item),item]));
+          finishedFixtures.forEach(item=>byId.set(fixtureDomKey(item),item));
+          allFixtures=[...byId.values()];
+        }
+      }catch{}
+    }
     competitionPhase=data.phase||{type:"single-table",grouped:false,label:"Classificação"};
     renderGroupFilter();
     if(active==="nations-league" && competitionPhase.grouped && groupFilter==="all" && !initialParams.has("group")) groupFilter="A4";
