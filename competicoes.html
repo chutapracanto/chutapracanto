@@ -387,7 +387,7 @@ async function prepareCompetitionOrder(){
       roundEl.value="all";
       history.replaceState(null,"","/competicoes?competition="+encodeURIComponent(firstKey)+(firstKey==="nations-league"?"&group=A4":""));
       setCompetitionFilterState();
-      await loadCompetition(firstKey,"upcoming",true);
+      await loadCompetition(firstKey,"all",true);
     }
   }
 }
@@ -405,7 +405,7 @@ function renderTabs(){
     groupFilter=key==="nations-league"?"A4":"all";
     roundEl.value="all";
     setCompetitionFilterState();
-    loadCompetition(key,fixtureFilter,true);
+    loadCompetition(key,"all",true);
   }));
 }
 function renderHighlight(){
@@ -802,7 +802,7 @@ roundEl.addEventListener("change",()=>{
   if(roundEl.value==="all"){ renderFixtures(); scheduleCompetitionRefresh(); return; }
   if(loadedAllSnapshot){ renderFixtures(); return; }
   const requestStatus=fixtureFilter==="finished"?"finished":fixtureFilter==="upcoming"?"upcoming":"all";
-  loadCompetition(active,requestStatus,false);
+  loadCompetition(active,requestStatus==="finished"?"finished":"all",false);
 });
 window.addEventListener("popstate",()=>{
   const key=new URLSearchParams(location.search).get("competition")||"liga-portugal";
@@ -828,7 +828,7 @@ const initialRound=initialParams.get("round");
 const initialRoundFromUrl=initialRound && /^\d+$/.test(initialRound) ? JSON.stringify([active==="nations-league"?"group-stage":"",initialRound]) : "";
 renderGroupFilter();
 setCompetitionFilterState();
-if(initialCompetitionFromUrl)loadCompetition(active,fixtureFilter,true);
+if(initialCompetitionFromUrl)loadCompetition(active,"all",true);
 prepareCompetitionOrder().catch(()=>{});
 </script>
 <footer>
