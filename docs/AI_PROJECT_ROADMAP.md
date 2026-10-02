@@ -776,3 +776,14 @@ Não alterar D1, cache, adapter BSD, cron ou regras de filtros para resolver um 
 - Aplicado nas três superfícies LIVE: Home, Jogo em destaque e Jogos e resultados.
 - Worker também normaliza o nome do marcador de forma estrita.
 - Commits: `2c85ed60ad5d4ee3de759d66ba5a70ee587caadd`, `19022bf25c8bc7641e4781ac856a6f93309589dd`, `fc42e5916155c62aa9eda19b1abf3d653d88261c`.
+
+
+## 2026-10-02 — LIVE: causa do desaparecimento dos marcadores corrigida
+- Identificada a diferença entre o caminho completo do adapter e o caminho de **cache fresca + refresh LIVE**.
+- O segundo caminho não consultava incidentes BSD, apesar de ser o caminho usado repetidamente durante o polling LIVE.
+- Resultado: o marcador podia aparecer num refresh e desaparecer no seguinte porque o payload LIVE não trazia novamente os detalhes do golo.
+- Corrigido `_worker.js` para enriquecer o refresh LIVE com os incidentes de cada jogo e preservar `goals` da cache quando os incidentes chegam vazios/transitoriamente incompletos.
+- Commit: `9a254a1376e1c2e1f3f75ffe69399bd9f8d79a15`.
+- Deployment: `67caf14c-272a-4dec-9218-f691fc0d1dd3`, SUCCESS.
+- Não alterados cron, D1, BSD como fonte ou infraestrutura estável.
+- Pendente: validação visual real em jogo LIVE com golo nas três superfícies.
