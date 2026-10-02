@@ -1000,6 +1000,12 @@
                 <button type="button" class="secondary-btn" onclick="fecharMetricasAdmin()">← Voltar aos conteúdos</button>
             </div>
 
+            <div class="section-tabs" role="tablist" aria-label="Área editorial nas métricas">
+                <button type="button" id="metrics-tab-news" class="section-tab" onclick="mudarSecaoAdmin('news')">📰 Notícias</button>
+                <button type="button" id="metrics-tab-opinion" class="section-tab" onclick="mudarSecaoAdmin('opinion')">✍️ Crónicas</button>
+                <button type="button" class="section-tab active" aria-current="page">📊 Métricas</button>
+            </div>
+
     <div class="metrics-section">
                     <div class="metrics-section-heading">
                         <h3>📤 Partilhas</h3>
@@ -2135,6 +2141,8 @@ function mudarSecaoAdmin(tipo) {
     document.getElementById("tab-news")?.classList.toggle("active", secaoAdminAtual === "news");
     document.getElementById("tab-opinion")?.classList.toggle("active", secaoAdminAtual === "opinion");
     document.getElementById("tab-metrics")?.classList.remove("active");
+    document.getElementById("metrics-tab-news")?.classList.toggle("active", false);
+    document.getElementById("metrics-tab-opinion")?.classList.toggle("active", false);
     document.getElementById("list-screen")?.classList.remove("hidden");
     document.getElementById("metrics-screen")?.classList.add("hidden");
     const sectionTitle = document.getElementById("admin-section-title");
