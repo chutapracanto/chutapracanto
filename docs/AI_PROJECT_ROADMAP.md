@@ -618,3 +618,56 @@ Até 22/10/2026, continuar sem depender de Codex.
 - Dashboard de métricas continua único para Notícias + Crónicas e voltou a incluir também as métricas anteriores: visualizações de conteúdos, likes totais, conteúdos com likes e `Like rate`, além de partilhas e analytics globais.
 - Commit: `3980cd083fb4ed71caa46db41f8169735ff8754a`; produção SUCCESS no deployment `ecd0a194`.
 - Regra: alterações futuras às métricas não podem remover funções editoriais nem substituir métricas existentes; apenas acrescentar/reorganizar dentro da área de Métricas.
+## 2026-10-02 — VERIFICAÇÃO PÓS-TESTE: MÉTRICAS, GOOGLE E CONTINUA A LER
+
+### Métricas — evidência real
+A utilizadora executou três percursos reais em produção (Facebook → notícia → like; URL → Notícias → notícia → like; Google → Home → notícia → permanência → like). A D1 confirmou que os likes e eventos de analytics estão a ser recolhidos.
+
+Conclusão: a recolha não deve ser reescrita por causa do painel vazio. A próxima investigação é exclusivamente da camada de leitura/apresentação do Admin: D1 → API de métricas → frontend do Admin.
+
+### "Continua a ler"
+Problema confirmado pela utilização: os cartões relacionados não estão a aparecer, apesar de o índice atual conter notícias relacionadas suficientes.
+Próximo passo: investigar a execução/renderização da secção no artigo e corrigir apenas a camada responsável, preservando o algoritmo de relevância e o tracking já existente.
+
+### Pesquisa Google por "Chuta Pra Canto"
+O facto de Sobre Nós/Contacto/Termos ou redes sociais aparecerem antes da Home não deve ser interpretado como "Google escolheu as páginas menos vistas". Pageviews internos não determinam diretamente a ordem dos resultados. O Google usa sinais de relevância, correspondência e outros sinais de pesquisa; as próprias orientações recomendam propósito claro, conteúdo útil e títulos/heading descritivos.
+Objetivo futuro: reforçar semanticamente o domínio como publicação de futebol e melhorar a descoberta de Home/Competições, mas sem criar sinais artificiais nem alterar páginas institucionais só para tentar mudar a ordem.
+
+## 2026-10-02 — FRENTE LIVE: AUDITORIA ANTES DE MELHORIA
+
+### Estado comprovado do que já existe
+Home:
+- secção JOGOS EM DIRETO já existe e fica escondida quando não há jogos LIVE;
+- cartão já mostra LED vermelho pulsante, LIVE, competição, grupo/jornada, equipas, resultado, minuto e golos quando fornecidos pela BSD;
+- descoberta de LIVE: ~60 s;
+- quando existem competições LIVE conhecidas: ~15 s;
+- não há polling de todas as 7 competições a cada 15 s.
+
+Competições:
+- estado LIVE da competição já existe;
+- fixtures LIVE aparecem como LIVE, com minuto, marcador e golos;
+- snapshot LIVE é atualizado ~15 s quando existe LIVE;
+- sem LIVE conhecido, nova descoberta ~60 s;
+- fases/grupos/rondas continuam a ser determinados pelos dados BSD.
+
+Backend:
+- endpoint /api/competicoes já faz refresh/enriquecimento LIVE e funde o estado LIVE no snapshot normalizado;
+- cache LIVE tem TTL próprio (10 s), enquanto a cache normal tem TTL de 15 min;
+- stale é fallback e não deve bloquear refresh;
+- cpc-football-cron permanece separado e não deve ser recriado.
+
+### Próxima melhoria — sem desfigurar
+Antes de alterar os cartões, validar em produção/runtime a cadeia:
+BSD LIVE → /api/competicoes → normalização → Home/Competições → atualização visual.
+
+Só depois escolher melhorias visuais/funcionais. A validação mínima deve cobrir:
+1. entrada de jogo em LIVE;
+2. aparecimento do cartão;
+3. atualização do minuto;
+4. atualização do marcador;
+5. aparecimento de novo golo/marcador;
+6. término e saída de LIVE;
+7. entrada de outro jogo sem refresh manual;
+8. preservação de jornada/ronda/grupo.
+
+Não alterar D1, cache, adapter BSD, cron ou regras de filtros para resolver um problema exclusivamente visual.
