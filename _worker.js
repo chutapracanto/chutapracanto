@@ -1352,6 +1352,46 @@ async function prepararPaginaParaPartilha(
 // ============================================================
 // API ADMIN
 // ============================================================
+async function ensureAnalyticsSchema(db) {
+  await db.prepare("CREATE TABLE IF NOT EXISTS analytics_events (id INTEGER PRIMARY KEY AUTOINCREMENT, session_id TEXT NOT NULL CHECK (length(session_id) BETWEEN 20 AND 80), occurred_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')), event_type TEXT NOT NULL CHECK (length(event_type) BETWEEN 2 AND 48), page_path TEXT NOT NULL CHECK (length(page_path) BETWEEN 1 AND 240), article_slug TEXT, source TEXT NOT NULL DEFAULT 'direct', medium TEXT NOT NULL DEFAULT 'unknown', referrer_host TEXT, previous_page TEXT, target TEXT, metadata_json TEXT);").run();
+  await db.prepare("CREATE INDEX IF NOT EXISTS idx_analytics_events_occurred_at ON analytics_events(occurred_at)").run();
+  await db.prepare("CREATE INDEX IF NOT EXISTS idx_analytics_events_session ON analytics_events(session_id)").run();
+  await db.prepare("CREATE INDEX IF NOT EXISTS idx_analytics_events_type ON analytics_events(event_type)").run();
+  await db.prepare("CREATE INDEX IF NOT EXISTS idx_analytics_events_source ON analytics_events(source)").run();
+  await db.prepare("CREATE INDEX IF NOT EXISTS idx_analytics_events_page ON analytics_events(page_path)").run();
+}
+
+async function handleAnalyticsEventAPI(request, env) {
+  const url = new URL(request.url);
+  const respond = (data, status = 200) => json(data, status, { "X-Robots-Tag": "noindex, nofollow, noarchive" });
+  if (request.method !== "POST") return respond({ error: "Método não permitido." }, 405);
+  if (request.headers.get("Origin") !== url.origin) return respond({ error: "Origem não permitida." }, 403);
+  if (!env.ARTICLE_LIKES_DB) return respond({ error: "Analytics temporariamente indisponível." }, 503);
+  if (!(request.headers.get("Content-Type") || "").toLowerCase().includes("application/json")) return respond({ error: "Content-Type inválido." }, 415);
+  let payload;
+  try { payload = JSON.parse(await lerCorpoLimitado(request, 4096)); } catch { return respond({ error: "Pedido inválido." }, 400); }
+  const sessionId = typeof payload?.sessionId === "string" ? payload.sessionId.trim() : "";
+  const eventType = typeof payload?.eventType === "string" ? payload.eventType.trim() : "";
+  const pagePath = typeof payload?.pagePath === "string" ? payload.pagePath.trim() : "";
+  const articleSlug = payload?.articleSlug == null ? null : String(payload.articleSlug).trim();
+  const source = typeof payload?.source === "string" ? payload.source.trim().slice(0, 80) : "direct";
+  const medium = typeof payload?.medium === "string" ? payload.medium.trim().slice(0, 40) : "unknown";
+  const referrerHost = payload?.referrerHost == null ? null : String(payload.referrerHost).trim().slice(0, 160);
+  const previousPage = payload?.previousPage == null ? null : String(payload.previousPage).trim().slice(0, 240);
+  const target = payload?.target == null ? null : String(payload.target).trim().slice(0, 240);
+  const metadata = payload?.metadata && typeof payload.metadata === "object" ? JSON.stringify(payload.metadata).slice(0, 1200) : null;
+  if (!/^[0-9a-f-]{20,80}$/i.test(sessionId) || !/^[a-z][a-z0-9_]{1,47}$/i.test(eventType) || !pagePath.startsWith("/") || pagePath.length > 240 || articleSlug?.length > 160) return respond({ error: "Evento inválido." }, 400);
+  if (/[\u0000-\u001f\u007f]/u.test(pagePath) || (articleSlug && /[\\/\u0000-\u001f\u007f]/u.test(articleSlug))) return respond({ error: "Evento inválido." }, 400);
+  try {
+    await ensureAnalyticsSchema(env.ARTICLE_LIKES_DB);
+    await env.ARTICLE_LIKES_DB.prepare("INSERT INTO analytics_events (session_id, event_type, page_path, article_slug, source, medium, referrer_host, previous_page, target, metadata_json) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)").bind(sessionId, eventType, pagePath, articleSlug, source || "direct", medium || "unknown", referrerHost, previousPage, target, metadata).run();
+    return respond({ ok: true });
+  } catch (error) {
+    console.error("Analytics event error:", error);
+    return respond({ error: "Analytics temporariamente indisponível." }, 503);
+  }
+}
+
 async function handleArticleViewAPI(request, env) {
   const url = new URL(request.url);
   const respond = (data, status = 200) =>
@@ -1860,6 +1900,29 @@ async function handleAdminAPI(request, env) {
     } catch (error) {
       console.error("Admin metrics likes error:", error);
       return json({ error: "Não foi possível carregar as métricas de likes." }, 503);
+    }
+  }
+
+  // ----------------------------------------------------------
+  // MÉTRICAS — JORNADAS / ORIGENS
+  // ----------------------------------------------------------
+
+  if (pathname === "/api/admin/metrics/analytics") {
+    if (request.method !== "GET") return json({ error: "Método não permitido." }, 405);
+    if (!env.ARTICLE_LIKES_DB) return json({ error: "ARTICLE_LIKES_DB não está configurada." }, 503);
+    const period = url.searchParams.get("period") || "30d";
+    const modifiers = { "1d": "-1 day", "7d": "-7 days", "30d": "-30 days" };
+    const modifier = modifiers[period];
+    if (!modifier) return json({ error: "Período inválido." }, 400);
+    try {
+      await ensureAnalyticsSchema(env.ARTICLE_LIKES_DB);
+      const sourceRows = await env.ARTICLE_LIKES_DB.prepare("SELECT source, medium, COUNT(*) AS events, COUNT(DISTINCT session_id) AS sessions FROM analytics_events WHERE datetime(occurred_at) >= datetime('now', ?1) GROUP BY source, medium ORDER BY sessions DESC, events DESC, source ASC").bind(modifier).all();
+      const journeyRows = await env.ARTICLE_LIKES_DB.prepare("SELECT event_type, COUNT(*) AS events, COUNT(DISTINCT session_id) AS sessions FROM analytics_events WHERE datetime(occurred_at) >= datetime('now', ?1) GROUP BY event_type ORDER BY events DESC, event_type ASC").bind(modifier).all();
+      const pageRows = await env.ARTICLE_LIKES_DB.prepare("SELECT page_path, COUNT(*) AS views, COUNT(DISTINCT session_id) AS sessions FROM analytics_events WHERE event_type = 'page_view' AND datetime(occurred_at) >= datetime('now', ?1) GROUP BY page_path ORDER BY views DESC, page_path ASC").bind(modifier).all();
+      return json({ ok:true, period, sources:(sourceRows?.results||[]).map(r=>({source:String(r.source||""),medium:String(r.medium||""),events:Number(r.events||0),sessions:Number(r.sessions||0)})), journeys:(journeyRows?.results||[]).map(r=>({eventType:String(r.event_type||""),events:Number(r.events||0),sessions:Number(r.sessions||0)})), pages:(pageRows?.results||[]).map(r=>({pagePath:String(r.page_path||""),views:Number(r.views||0),sessions:Number(r.sessions||0)})) });
+    } catch (error) {
+      console.error("Admin analytics metrics error:", error);
+      return json({ error: "Não foi possível carregar as métricas de analytics." }, 503);
     }
   }
 
@@ -3626,6 +3689,10 @@ export default {
       if (url.pathname === "/api/competicoes") {
         const footballResponse = await handleFootballCompetitionAPI(request, env);
         if (footballResponse) return footballResponse;
+      }
+
+      if (url.pathname === "/api/analytics/event") {
+        return handleAnalyticsEventAPI(request, env);
       }
 
       if (url.pathname === "/api/article-view") {
