@@ -2463,3 +2463,13 @@ Commits:
 - Correção: a seleção automática da próxima jornada passa a limitar primeiro o universo ao grupo selecionado quando a competição é a Nations League agrupada. Assim, A4 determina também a jornada inicial, sem alterar dados BSD, Worker, D1 ou cron.
 - Commit: `2b357c1018b26bad558139f3febdaed503b89d14` — `fix: alinhar jornada inicial com grupo Nations selecionado`.
 - Deployment Pages production: `ebb5d2f0-c1f3-4b93-b374-6e74859b7e5a` — SUCCESS às 17:07:13 UTC.
+
+
+## 81. Entrada em Competições + histórico no filtro Todos (2026-10-02)
+- Sintoma: entrada em Competições podia esperar cerca de 2s porque a ordenação dos separadores fazia sete pedidos `status=all` antes de carregar a competição; e o filtro **Todos** podia receber um snapshot sem jogos terminados, não mostrando histórico/resultados.
+- Correção frontend em `competicoes.html`: carregamento da competição atual inicia em paralelo com a ordenação dos separadores; só é feito novo carregamento se a ordenação escolher outra competição. Para `status=all`, se o snapshot não contiver nenhum jogo terminado, é feita recuperação explícita do endpoint `status=finished` e os jogos são fundidos pelo ID/chave do jogo.
+- Não foram alterados Worker, BSD, D1 ou cron nesta correção.
+- Commit: `5339e56670a48b9d1f97a082b489edd17ae76e03` — `fix: acelerar entrada e recuperar historico no filtro Todos`.
+- Deployment Pages production: `3af0accd-5794-4fb3-aca3-65c9daeba144` — SUCCESS às 17:32:53 UTC.
+- Pendente de validação visual pelo utilizador: confirmar que **Todos** mostra jogos anteriores com resultados e que a entrada em Competições ficou mais rápida.
+- Nota: os cartões LIVE da Home continuam a ser uma questão separada e devem ser investigados sem mexer no fluxo BSD/D1 sem evidência.
