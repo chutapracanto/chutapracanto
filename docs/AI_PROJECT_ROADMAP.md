@@ -610,3 +610,11 @@ Não instalar GA4/terceiros apenas para obter estas métricas sem antes avaliar 
 
 ### Regra de execução
 Até 22/10/2026, continuar sem depender de Codex.
+
+
+## 2026-10-02 — Correção Admin: regressão da lista + métricas anteriores
+- Corrigida regressão `mostrarLista is not defined` que impedia carregar Notícias e Crónicas.
+- Restauradas funções de listagem, paginação e pesquisa no `admin/index.html`, mantendo `📊 Ver métricas` por conteúdo.
+- Dashboard de métricas continua único para Notícias + Crónicas e voltou a incluir também as métricas anteriores: visualizações de conteúdos, likes totais, conteúdos com likes e `Like rate`, além de partilhas e analytics globais.
+- Commit: `3980cd083fb4ed71caa46db41f8169735ff8754a`; produção SUCCESS no deployment `ecd0a194`.
+- Regra: alterações futuras às métricas não podem remover funções editoriais nem substituir métricas existentes; apenas acrescentar/reorganizar dentro da área de Métricas.
