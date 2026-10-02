@@ -457,3 +457,33 @@ PASS — backend BSD → Pages → D1 validado em runtime.
 
 ### Próxima frente
 Testar o consumo no frontend Home/Competições e confirmar uma segunda renovação automática. Não reabrir alterações de D1, adapter BSD ou arquitetura sem nova evidência.
+
+
+## 22. MÉTRICAS EDITORIAIS E AUDIÊNCIA — BACKLOG PRIORITÁRIO
+
+### Objetivo
+Criar uma forma simples de acompanhar, por notícia e no total:
+- número de likes;
+- visualizações/entradas na notícia;
+- utilizadores/sessões, quando a ferramenta de analytics permitir;
+- origem/tráfego (Google, Facebook, direto, etc.), quando disponível;
+- taxa de engagement/relação entre visualizações e likes;
+- evolução temporal.
+
+### Estado atual
+- Existe ARTICLE_LIKES_DB em produção, pelo que a infraestrutura de likes já existe.
+- Não foi encontrada uma área administrativa/relatório que apresente os likes por notícia de forma utilizável pela equipa.
+- Não foi encontrada uma integração de analytics ativa no código atual para medir visitas e comportamento das notícias.
+
+### Decisão
+Não alterar o sistema de likes nem introduzir analytics por impulso nesta tarefa. Esta frente fica registada para implementação própria, com preferência por uma solução simples, de baixo custo e com métricas úteis para decisões editoriais.
+
+### Próximo desenho quando esta frente subir
+1. confirmar exatamente o modelo atual de likes e respetivas contagens;
+2. escolher a solução de analytics compatível com custo, privacidade e AdSense;
+3. medir pageviews/visitas por URL de notícia;
+4. disponibilizar os dados no Admin ou num painel simples;
+5. acrescentar métricas agregadas e por notícia;
+6. validar que a medição não prejudica performance nem SEO.
+
+**Importante:** não confundir "pageview", "sessão", "utilizador" e "engagement rate". Cada métrica deve ser apresentada com a definição correta.
