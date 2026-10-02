@@ -2598,15 +2598,17 @@ function cpcNormalizeGoal(goal, homeId = null, awayId = null) {
     goal?.team_id ??
     goal?.teamId ??
     goal?.team?.id ??
-    (side === "home" ? homeId : side === "away" ? awayId : null)
+    (goal?.is_home === true || goal?.isHome === true ? homeId :
+      goal?.is_home === false || goal?.isHome === false ? awayId :
+      (side === "home" ? homeId : side === "away" ? awayId : null))
   );
   const player = cpcSafeString(
     goal?.player_name ??
     goal?.player?.name ??
     goal?.scorer_name ??
     goal?.scorer?.name ??
-    goal?.player ??
-    goal?.scorer
+    (typeof goal?.player === "string" ? goal.player : "") ??
+    (typeof goal?.scorer === "string" ? goal.scorer : "")
   );
   const minute = cpcSafeNumber(
     goal?.minute ??
