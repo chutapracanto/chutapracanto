@@ -2554,3 +2554,14 @@ Commits:
 - Commit: 357e91178d8160e5eb3718adc2a11f7e7d194f97 — fix: resolver conflitos do indice no rebase.
 - Validação real: run 37068889825 terminou SUCCESS às 2026-10-02T21:47:33Z.
 - Não houve alteração à lógica de geração editorial; a correção é de sincronização/resolução do artefacto gerado.
+
+
+# 89. ACELERAR ENTRADA EM COMPETIÇÕES SEM DUPLICAR PEDIDO — 2026-10-02
+
+- Feedback: o flash da Liga Portugal desapareceu, mas a entrada em **Competições** continuava a demorar cerca de 1 segundo.
+- Causa: sem competição na URL, `prepareCompetitionOrder()` fazia 7 pedidos concorrentes para descobrir a prioridade e, depois de descobrir a competição vencedora, `loadCompetition()` fazia um **oitavo pedido** para voltar a buscar exatamente os mesmos dados da competição escolhida.
+- Correção: os resultados da ordenação passam agora a conservar o payload `data` recebido de cada competição. A competição selecionada reutiliza diretamente esse payload através de `loadCompetition(..., prefetchedData)`, eliminando o pedido duplicado e mantendo a mesma lógica de dados, filtros, classificação e prioridade.
+- Não foi reintroduzida nenhuma carga provisória de Liga Portugal.
+- Commit: `743eb61f7a457857b8eab66e8e86892a1acd9bb3` — `perf: reutilizar dados da ordenacao inicial`.
+- Cloudflare Pages production deployment: `5355a055-5a56-432c-8e7a-f21a984757fe`; build concluído com sucesso, deploy confirmado em produção.
+- Não foram alterados Worker, BSD, D1 ou cron.
