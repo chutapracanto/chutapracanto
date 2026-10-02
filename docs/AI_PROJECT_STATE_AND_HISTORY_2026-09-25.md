@@ -2129,3 +2129,104 @@ Commit Worker: `9a254a1376e1c2e1f3f75ffe69399bd9f8d79a15` — `fix: enrich fresh
 Produção: deployment `67caf14c-272a-4dec-9218-f691fc0d1dd3`, SUCCESS, alias de produção ativo.
 
 Este é agora o ponto técnico principal a validar com um jogo LIVE real: Home, Jogo em destaque e Jogos e resultados devem manter `minuto' Jogador` durante os refreshes, inclusive quando a resposta de incidentes BSD estiver temporariamente vazia.
+
+
+# 71. LIVE + COMPETIÇÕES — FECHO DA SEQUÊNCIA 2026-10-02
+
+## 71.1 Golos LIVE — problema finalmente fechado
+A utilizadora confirmou em produção que o minuto + nome do marcador voltou a aparecer corretamente. A causa do desaparecimento intermitente foi identificada e corrigida: durante o polling LIVE, o endpoint de incidentes BSD pode devolver temporariamente uma lista vazia. O adapter não deve interpretar essa resposta transitória como "não existem golos".
+
+Correção final no Pages Worker:
+- golos vindos de incidentes BSD continuam a ter prioridade;
+- se os incidentes vierem vazios, são usados golos LIVE já normalizados quando existirem;
+- se também não houver golos LIVE no payload atual, são preservados os golos já conhecidos no item em cache;
+- cron, D1, BSD e arquitetura de cache não foram alterados.
+
+Commit final desta correção: `f6fe6aa6c9e481a01a213cdb46ccedc170613a5b`.
+Deployment: `ec150859-78b0-497a-a4d3-2a77d3219483`, SUCCESS, produção `https://chutapracanto.com`.
+
+## 71.2 Apresentação fechada dos golos
+Nas três superfícies LIVE:
+- Home → JOGOS EM DIRETO;
+- Competições → Jogo em destaque;
+- Competições → Jogos e resultados;
+
+o formato pretendido é:
+`67' Nome do jogador`
+
+diretamente por baixo da equipa que marcou.
+
+Também ficam fechados:
+- minuto dentro da etiqueta vermelha `LIVE · N'`;
+- Jornada N em vez de Matchday/Round;
+- sem siglas grandes de país;
+- sem bola/ícone de futebol inventado;
+- atualização incremental dos detalhes de golos durante o polling.
+
+## 71.3 Jogo em destaque — comportamento definitivo
+Em **Competições → Jogo em destaque**:
+- sem LIVE: existe exatamente 1 jogo em destaque, o próximo jogo disponível dentro do âmbito selecionado;
+- 1 LIVE: aparece apenas esse LIVE e não há setas;
+- mais de 1 LIVE: todos os LIVE desse âmbito podem ser percorridos no destaque;
+- as setas são duas, independentes: ← à esquerda e → à direita;
+- as setas só existem quando há pelo menos 2 jogos LIVE;
+- não usar uma seta única que pareça navegar para outra página.
+
+### Nations League
+- com **Todos + todos os grupos**, todos os LIVE da Nations entram no destaque, por ordem temporal;
+- com um grupo selecionado, só os LIVE desse grupo entram no destaque;
+- sem LIVE no âmbito selecionado, volta a existir apenas 1 jogo não-LIVE em destaque.
+
+### Restantes competições
+A mesma regra LIVE aplica-se ao âmbito selecionado, sem misturar jogos de outros grupos/fases.
+
+## 71.4 Filtro Todos — histórico completo
+Ao selecionar **Todos**:
+- o filtro de jornada deve ser automaticamente colocado em **Todas as jornadas**;
+- devem voltar a aparecer jogos passados, LIVE e futuros;
+- não deve ficar selecionada implicitamente a jornada atual/futura;
+- a ordenação de Jogos e resultados permanece cronológica, permitindo consultar também o histórico.
+
+Correção adicional aplicada em `competicoes.html`:
+- commit `005ee55036046c2cb0423ac8fce7efd89c70c899`;
+- deployment `e8470ac8-4c8c-4b99-909c-ea7f13248c02`, SUCCESS.
+
+A implementação anterior das setas LIVE já estava no commit `9288d7f54478d549e63d00f630251d85e6acfaf6`, deployment `e9dd1010-5cf3-4ca3-8425-92c415d6b305`, SUCCESS. O commit posterior garantiu o reset do filtro de jornada quando o modo Todos é escolhido.
+
+## 71.5 Métricas — estado atual e o que NÃO reabrir
+A frente de métricas deixou de ser backlog inicial. Já estão implementados em produção:
+- likes;
+- pageviews;
+- Like rate;
+- filtros 24h/7d/30d;
+- analytics first-party;
+- sessões técnicas;
+- tempo ativo;
+- páginas/saídas;
+- scroll;
+- origens/referrers/UTM;
+- impressões e cliques de relacionadas;
+- cliques relevantes da Home/Competições/Shorts;
+- visualização agregada no Admin.
+
+Não reimplementar analytics nem trocar por GA4/terceiros sem uma razão concreta. A sessão técnica não é utilizador único.
+
+### Métricas ainda em standby/backlog controlado
+- comparação origem → primeira notícia → segunda página → saída;
+- distinção mais fina das entradas internas;
+- aprofundamento de métricas específicas de Competições e Shorts;
+- definição/validação de bounce baseada em sessão e interação significativa, apenas se a amostra justificar;
+- medianas/buckets de tempo, se forem úteis;
+- integração Search Console para queries/impressões, quando houver acesso/dados;
+- visitantes únicos persistentes, apenas após revisão de privacidade e necessidade real.
+
+### Outras frentes que permanecem em standby
+- pesquisa inteligente de imagens baseada no teor da notícia;
+- eventual importação de imagens externas para alojamento próprio, preservando licença/atribuição;
+- redução de deployments duplicados, apenas com nova validação/rollback simples;
+- automações de publicação/distribuição de vídeo, dependentes de OAuth, permissões, quotas e aprovações externas;
+- performance apenas quando existir evidência/runtime suficiente;
+- pesquisa global do site.
+
+## 71.6 Regra de continuidade
+Até 22/10/2026, continuar sem depender de Codex. Para novas alterações em Competições, primeiro ler esta secção e verificar o estado real de `competicoes.html`, `_worker.js` e produção. Não reabrir BSD/D1/cron para problemas que sejam apenas de filtro ou apresentação.
