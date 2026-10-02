@@ -148,6 +148,9 @@
   }
   observe();
 
+  const mutationObserver = new MutationObserver(() => observe());
+  mutationObserver.observe(document.body, { childList: true, subtree: true });
+
   document.addEventListener('click', event => {
     const link = event.target.closest('a');
     if (!link) return;
