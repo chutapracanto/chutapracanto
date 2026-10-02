@@ -568,7 +568,7 @@ function patchHighlight(){
     : allFixtures;
   const candidates=scopedFixtures.filter(item=>fixtureStatus(item)==="upcoming"||fixtureStatus(item)==="live")
     .sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity));
-  const item=candidates[0]||scopedFixtures[0];
+  const item=candidates[0];
   if(!item){renderHighlight();return}
   const current=highlightEl.querySelector(".highlight-score");
   if(!current||current.dataset.eventId!==fixtureDomKey(item)){renderHighlight();return}
@@ -586,9 +586,9 @@ function patchHighlight(){
 function updateLiveSnapshot(data){
   const previous=new Map(allFixtures.map(item=>[fixtureDomKey(item),item]));
   const now=Date.now();
+  const incoming=Array.isArray(data.fixtures)?data.fixtures:[];
   allFixtures.forEach(item=>{const key=fixtureDomKey(item);if(fixtureStatus(item)==="live") recentlyFinishedAt.delete(key);});
   previous.forEach((old,key)=>{if(fixtureStatus(old)==="live"){const fresh=incoming.find(item=>fixtureDomKey(item)===key);if(fresh&&fixtureStatus(fresh)==="finished")recentlyFinishedAt.set(key,now);}});
-  const incoming=Array.isArray(data.fixtures)?data.fixtures:[];
   const previousKeys=new Set(previous.keys());
   const incomingKeys=new Set(incoming.map(fixtureDomKey));
   const membershipChanged=previousKeys.size!==incomingKeys.size||[...previousKeys].some(key=>!incomingKeys.has(key));
