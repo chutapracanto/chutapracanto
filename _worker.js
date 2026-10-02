@@ -3150,7 +3150,13 @@ async function bsdFootballAdapter(env, competitionKey, options = {}) {
       `https://sports.bzzoiro.com/api/v2/leagues/${competition.leagueId}/standings/?season_id=${seasonId}`
     );
   } catch (error) {
-    throw new Error("BSD_STANDINGS:" + (error instanceof Error ? error.message : "unknown"));
+    // O feed LIVE não pode desaparecer só porque a classificação falhou.
+    // Para pedidos LIVE, os jogos e o estado em campo são independentes da tabela.
+    if (status === "live") {
+      standingsData = { results: [] };
+    } else {
+      throw new Error("BSD_STANDINGS:" + (error instanceof Error ? error.message : "unknown"));
+    }
   }
 
   let fixtures;
