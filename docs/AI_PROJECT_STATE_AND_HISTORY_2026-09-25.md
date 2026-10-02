@@ -2389,3 +2389,7 @@ Commits:
 ## Validação
 - Cloudflare Pages criou deployments de produção para ambos os commits; o deployment Home a4577f93-1366-409f-99fb-36506abea8f6 estava em build no momento do registo. O deployment de Competições 321f1664-caf3-4f73-8c0c-4c48dc8db080 concluiu build e deploy com sucesso e mantém o alias de produção.
 - Validação visual completa em browser externo continua dependente de acesso funcional ao site; não declarar validação visual final sem essa evidência.
+
+### Correção adicional do ciclo 75
+- Verificou-se que a ordenação podia mudar o conteúdo aberto sem atualizar visualmente a aba ativa. Corrigido para sincronizar a aba ativa com a primeira competição ordenada antes do carregamento.
+- Commit Competições: bbfa7b4f9e12a8b8ffd8f1c67b819800234c41c5.
