@@ -1037,6 +1037,9 @@
           card.className = 'sub-featured-card related-news-card';
 
           card.href = 'noticia.html?slug=' + encodeURIComponent(noticia.slug);
+          card.dataset.analyticsEvent = 'related_article_impression';
+          card.dataset.analyticsTarget = noticia.slug;
+          card.dataset.analyticsLabel = noticia.title || 'Notícia relacionada';
 
           const imagem = noticia.image ? document.createElement('div') : null;
 
