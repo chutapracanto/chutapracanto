@@ -219,6 +219,8 @@ let allFixtures=[];
 let fixtureFilter="upcoming";
 let groupFilter="A4";
 let orderedCompetitions=[...competitions];
+let highlightCandidates=[];
+let highlightIndex=0;
 const PRIORITY_TEAM_IDS=new Set([35,22,37,491]);
 const PRIORITY_TEAM_NAMES=new Set(["porto","fc porto","benfica","sl benfica","sporting","sporting cp","sporting clube de portugal","portugal"]);
 const NATIONS_GROUPS={
@@ -393,9 +395,10 @@ function renderHighlight(){
     : allFixtures;
   const liveCandidates=scopedFixtures.filter(item=>fixtureStatus(item)==="live").sort((a,b)=>(dateValue(a)?.getTime()||0)-(dateValue(b)?.getTime()||0));
   const upcomingCandidates=scopedFixtures.filter(item=>fixtureStatus(item)==="upcoming").sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity));
-  const candidates=[...liveCandidates,...upcomingCandidates];
-  const item=candidates[0]||scopedFixtures[0];
-  if(!item){highlightEl.innerHTML='<span class="empty">Sem jogo disponível.</span>';return}
+  highlightCandidates=[...liveCandidates,...upcomingCandidates];
+  if(!highlightCandidates.length){highlightEl.innerHTML='<span class="empty">Sem jogo disponível.</span>';return}
+  if(highlightIndex>=highlightCandidates.length)highlightIndex=0;
+  const item=highlightCandidates[highlightIndex];
   const home=esc(teamDisplayName(item.homeTeam)||"Casa"),away=esc(teamDisplayName(item.awayTeam)||"Fora");
   const state=fixtureStatus(item),live=state==="live";
   const score=fixtureScore(item);
