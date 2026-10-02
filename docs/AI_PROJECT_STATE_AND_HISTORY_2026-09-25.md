@@ -1708,3 +1708,84 @@ Este remendo fica registado para que a implementação futura não seja confundi
 - Implementação direta, sem Codex, devido à indisponibilidade de créditos até 22/10/2026.
 - Commits: `_worker.js` `19b987bc0a15aca22756ec0d429d4fa24c456c8b`; `admin/index.html` `3fdfba17c5958cd47a1b4c188ba297e3b24a2d8a`.
 - Remendo/precaução: o filtro usa uma whitelist de períodos no backend, evitando aceitar modificadores SQL arbitrários vindos do cliente.
+
+
+# 83. ANALYTICS FIRST-PARTY + ORIGENS + JORNADA + RELACIONADAS — 2026-10-02
+
+A utilizadora clarificou que a análise de aquisição deve distinguir também tráfego vindo de Linktree, Threads, X, Google Search/pesquisa direta por Chuta Pra Canto, além de Facebook, Instagram, YouTube, TikTok, Reddit e tráfego direto. Clarificou ainda que não existe um botão "Continua a ler": existem notícias relacionadas no fundo da notícia, e estas devem tornar-se mais relevantes, dando preferência a notícias recentes quando o conteúdo também for relacionado.
+
+## Implementação direta, sem Codex
+Foi criada uma primeira camada de analytics própria do Chuta Pra Canto, sem fornecedor externo e sem depender de Codex.
+
+### Tracking
+- novo analytics.js carregado em Home, Notícias, Opinião, Competições e página individual de notícia;
+- sessão anónima por sessionStorage, sem IP, nome ou email;
+- eventos: page_view, page_exit, active_time, scroll_depth, related_article_impression, related_article_click, competition_more_click, short_impression e short_click;
+- tempo ativo usa visibilitychange, evitando tratar simplesmente uma aba aberta e inativa como tempo de leitura;
+- observação por IntersectionObserver, incluindo componentes carregados dinamicamente através de MutationObserver.
+
+### Origem
+Classificação inicial por utm_source quando presente e, caso contrário, pelo domínio de referência:
+- Facebook;
+- Instagram;
+- Google / pesquisa orgânica;
+- YouTube;
+- TikTok;
+- Reddit;
+- Linktree;
+- Threads;
+- X/Twitter;
+- Bing;
+- referral genérico;
+- interno;
+- direto.
+
+UTM é preferível quando o Chuta controla o link. O referrer pode ser removido por algumas aplicações/navegadores, portanto não é uma classificação perfeita. A pesquisa Google permite identificar a origem Google quando o referrer chega, mas não guarda a pesquisa feita pelo utilizador nesta primeira fase. Para consultas de pesquisa propriamente ditas, Search Console continua a ser a fonte adequada.
+
+### Eventos específicos
+- Notícias relacionadas: impressão quando entram no viewport e clique no artigo destino.
+- Home → Competições: clique em VER TODAS.
+- Home → Shorts: impressão do cartão e clique para reproduzir.
+- Página/URL anterior e origem inicial da sessão ficam associados aos eventos.
+
+### Notícias relacionadas
+O algoritmo anterior escolhia primeiro todas as notícias da mesma categoria e depois as restantes por data. Foi substituído por uma pontuação simples que combina:
+1. sobreposição de termos relevantes entre título/subtítulo/categoria;
+2. mesma categoria;
+3. recência;
+4. desempate por maior sobreposição e data.
+
+Mantêm-se 3 notícias relacionadas, sem alteração do layout estrutural. A intenção é que uma notícia recente e realmente sobre o mesmo assunto apareça antes de uma notícia apenas recente da mesma categoria.
+
+### Backend / Admin
+- nova tabela analytics_events;
+- nova migration migrations/0003_analytics_events.sql;
+- rota pública mínima POST /api/analytics/event, protegida por same-origin, validação de payload e sem dados pessoais;
+- schema também é garantido lazy no primeiro evento, para não depender de aplicação manual da D1 antes do primeiro uso;
+- novo endpoint autenticado /api/admin/metrics/analytics?period=1d|7d|30d;
+- Admin → Métricas passou a mostrar sessões, tempo ativo médio, sessões de uma página, origens e ações/jornadas.
+
+### Definições importantes
+- Visualizações continuam a ser pageviews, não pessoas únicas.
+- Sessão é o identificador técnico temporário usado para reconstruir uma jornada no mesmo contexto de navegação; não equivale a uma pessoa.
+- Sessões de 1 página são apresentadas como tal e não como uma taxa de bounce oficial.
+- O tempo apresentado é tempo ativo médio, não simplesmente tempo desde a abertura da aba.
+
+## Commits e produção
+- migration: 33b5c197919953523466bcd8333484789427de90;
+- analytics.js: bb8545448dd636ce3c27d155ba93c038493d55dc, seguido de correção de observação dinâmica b17af73b128045f971a085747c2b247919b52be2;
+- Worker analytics: 21dfc3d6004d4253dbea8eab75e49800b165c03b, seguido de resumo de sessões/tempo 65d96050dfb5b65bdfb39193bff43d44504c1de8;
+- melhoria das notícias relacionadas: d27671255bdeece047b9ba1a1ce7c7f3a819d829;
+- marcação de impressões das relacionadas: 574b85b8fd05d55f98511e19134dd219911d8421;
+- Home Shorts: 0df7cd682b9e754889f3a8fffc2ae041faf0078c;
+- ativação de analytics nas páginas: 9da6cb2137a9c03c2af93a458664bcc5270bf8e4, 3a4bceea92c582ee38f06744f35aee967e8f2be, 995e09ad1af4e59b2155a67a88c11f7751af74a0, a0dd21c29347adb34534abfb2524c067afa8fa45, 7031d9e07bbd5906c8291cff753f3e445cd6e88a;
+- Admin: d5f075903bf8f88038999b04d148b50b0ee6a73c;
+- deployment final desta sequência: 88386ea7, SUCCESS, produção, alias https://chutapracanto.com.
+
+## Limitação de validação
+O deployment foi validado diretamente via Cloudflare. O ambiente de execução não conseguiu abrir externamente o domínio/pages.dev para fazer um browser test HTTP real, por isso não se deve afirmar que foi feito um teste visual externo. Não foram inseridos eventos/pageviews artificiais.
+
+## Remendo importante
+Foram gerados vários deployments em sequência; Cloudflare marcou alguns como skipped por serem builds ultrapassados por commits seguintes. O deployment 88386ea7 é o final desta sequência e terminou em SUCCESS. Não é necessário reverter nem tentar reativar os deployments skipped.
+
+migrations/0003_analytics_events.sql fica no repositório como fonte de persistência. O Worker também cria a tabela/índices de forma idempotente no primeiro uso para evitar uma dependência de migração manual.
