@@ -1901,3 +1901,50 @@ Regra para a próxima implementação: melhorar os cartões LIVE apenas por alte
 
 ### SEO / LIVE — não misturar frentes
 O comportamento da pesquisa Google e a indexação não justificam alterar a arquitetura dos jogos LIVE. São frentes independentes.
+
+
+## 2026-10-02 — LIVE: CARTÃO HOME + DESTAQUE DE COMPETIÇÕES — MELHORIA APLICADA
+
+### Evidência de runtime
+Foi observado em produção um jogo LIVE real da UEFA Nations League:
+- Cazaquistão — Moldávia;
+- grupo: Liga C · Grupo C3;
+- jornada: 3;
+- o cartão LIVE já aparecia corretamente na Home;
+- FOOTBALL_CACHE_DB confirmou o mesmo fixture em estado `live` (25' no momento da consulta).
+
+### Alterações aplicadas
+**Home — cartão LIVE**
+- nomes das seleções passam a ser apresentados em português;
+- removida a duplicação inglesa do contexto da jornada: fica a competição, a Liga/Grupo e **Jornada N**;
+- quando a imagem da seleção não é utilizável, existe fallback visual de bandeira em vez de imagem quebrada;
+- o cartão LIVE passou a ser clicável;
+- o destino é construído com competição + grupo + jornada, por exemplo `/competicoes?competition=nations-league&group=C3&round=3`.
+
+**Competições — Jogo em destaque**
+- os LIVE passam a ter prioridade sobre os próximos;
+- no filtro **Todos**, quando há vários candidatos, existe uma seta discreta para avançar pelo destaque;
+- a seta só aparece em **Todos** e quando há vários jogos;
+- nomes das seleções e dos autores dos golos passam a ser apresentados em português;
+- imagens quebradas de seleções têm fallback visual de bandeira;
+- ao abrir um LIVE vindo da Home, o contexto de grupo e jornada é preservado.
+
+### Proteção da arquitetura
+- não foram alterados BSD, adapter, D1, cache, cron ou filtros estruturais;
+- a alteração é de apresentação/navegação no frontend;
+- não foram introduzidos dados LIVE artificiais.
+
+### Commits / produção
+- Home: `9158e9158e091c1820cdf1beb8e6543f565a91d0` — deployment `db7b7df9` SUCCESS.
+- Competições base: `c7aa057533e007ad5b81672c328c64390d1f4c51` — deployment `f2de4778` SUCCESS.
+- Prioridade LIVE no destaque: `2daa580a7e5986256c5abcd80a27bbf3e3d3dcd6` — deployment `b1ca26a9` SUCCESS.
+- Navegação suave em **Todos**: `3ddeffd3b0a28bd17b1006f333831c765f5cd390` — deployment SUCCESS.
+- Preservação de grupo/jornada no destino: `304918fdd47ee2f9243eb5268657126d68aecfcb` — deployment `58299270`, build SUCCESS e deploy ativo no momento do registo.
+
+### Validação técnica
+- JavaScript inline de `competicoes.html`: compilação sintática OK.
+- Script funcional inline de `index.html`: compilação sintática OK; o primeiro `script` é JSON-LD, não JavaScript executável.
+- Ainda falta validação visual final no navegador em produção; não foi fabricado nenhum jogo para esse teste.
+
+### Regra
+Para seleções nacionais, a bandeira é fallback aceitável. Não trocar novamente o sistema de imagens/API sem evidência de que a solução atual é insuficiente.
