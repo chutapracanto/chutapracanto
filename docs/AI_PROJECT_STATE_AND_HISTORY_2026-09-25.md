@@ -1855,3 +1855,49 @@ migrations/0003_analytics_events.sql fica no repositório como fonte de persist�
 - Preservado o dashboard combinado de Notícias + Crónicas e todas as métricas existentes.
 - Commit: `5401424f86dbb1ffb18045e003ffd495a3cc3635`.
 - Regra: as métricas continuam juntas; apenas a navegação de retorno e a disposição visual foram alteradas. Não remover métricas existentes ao acrescentar novas.
+
+## 2026-10-02 — VERIFICAÇÃO REAL DAS MÉTRICAS + SEO PÚBLICO + CONTINUA A LER
+
+### Analytics: teste funcional realizado pela utilizadora
+Foram realizados testes reais em produção através de três percursos:
+1. Facebook → notícia partilhada → leitura/exploração → like;
+2. URL direta → Notícias → outra notícia → leitura/exploração → like;
+3. pesquisa Google por "Chuta Pra Canto" → resultado do site → Home → outra notícia → permanência na página → like.
+
+### Evidência D1
+A recolha está funcional. A D1 de likes contém likes reais dos testes e a D1 de analytics contém eventos reais de navegação/tempo/scroll. Portanto, o problema observado no Admin não está demonstrado como falha da recolha frontend → Worker → D1.
+
+Evidência observada na D1 durante a validação:
+- article_likes: 5 registos no momento da consulta;
+- analytics_events: eventos reais de page_view/page_exit/active_time/scroll_depth;
+- article_views: visualizações de artigos reais, incluindo artigos usados nos testes.
+
+### Regra de diagnóstico para o Admin
+Não alterar o sistema de likes/pageviews/tracking sem nova evidência. A próxima camada a validar é:
+D1 → endpoint autenticado de métricas → JavaScript do Admin → cartões/tabelas.
+
+### Continuação de leitura
+A utilizadora reportou que nenhum cartão aparece em "Continua a ler". A análise do índice atual mostrou que existem várias notícias semanticamente relacionadas para os artigos testados, incluindo correspondências fortes por título/categoria/termos.
+Estado: bug de renderização/execução a investigar. Não assumir que é falta de dados ou falha do algoritmo antes de inspecionar o runtime.
+
+### Google / pesquisa pública
+Na pesquisa pública por "Chuta Pra Canto", a utilizadora observou primeiro páginas institucionais do domínio (Sobre Nós, Contacto, Termos) e redes sociais, enquanto o domínio principal aparece mais abaixo.
+Isto não significa que o Google tenha escolhido "a página menos vista" por engano: ranking e indexação não são ordenados por pageviews internos do Chuta. A página apresentada para uma consulta depende da correspondência/relevância e de sinais de pesquisa do Google; pageviews internos não são uma instrução de ordenação.
+O objetivo editorial continua a ser reforçar a compreensão do domínio como site de futebol, mas não alterar páginas institucionais ou criar sinais artificiais para forçar a Home. Google recomenda conteúdo útil, propósito claro do site e títulos/heading descritivos.
+
+### Competições / LIVE — auditoria antes de nova alteração
+A arquitetura existente foi reaberta apenas para inspeção, não para refatoração:
+- BSD continua a ser a única fonte validada;
+- cpc-football-cron continua separado, */5 * * * *;
+- FOOTBALL_CACHE_DB permanece o D1 oficial;
+- stale continua fallback de segurança, não resposta normal;
+- endpoint /api/competicoes já consulta/enriquece LIVE e integra LIVE no snapshot normalizado;
+- Home já possui secção JOGOS EM DIRETO, LED vermelho pulsante, competição/grupo/jornada, equipas, marcador, minuto e eventos de golo;
+- Home faz descoberta global aproximadamente a cada 60 s e polling de competições já LIVE a cada 15 s, sem fazer 7 pedidos a cada 15 s;
+- Competições já possui estado LIVE por competição, atualização a cada ~15 s quando existe LIVE, e atualização de descoberta a cada ~60 s quando não existe LIVE conhecido;
+- fases/grupos/rondas continuam dinâmicos.
+
+Regra para a próxima implementação: melhorar os cartões LIVE apenas por alteração localizada e com validação do ciclo completo: entrada LIVE → cartão → minuto → golo → fim → remoção → novo jogo LIVE. Não alterar cache, adapter BSD, D1, cron ou filtros de competição sem evidência específica.
+
+### SEO / LIVE — não misturar frentes
+O comportamento da pesquisa Google e a indexação não justificam alterar a arquitetura dos jogos LIVE. São frentes independentes.
