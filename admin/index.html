@@ -964,7 +964,7 @@
                 </div>
                 <div class="metric-card">
                     <div class="metric-card-label">Visualizações</div>
-                    <div class="metric-card-value">Em preparação</div>
+                    <div id="metric-total-views" class="metric-card-value">—</div>
                 </div>
             </div>
 
@@ -974,11 +974,13 @@
                         <tr>
                             <th>Notícia</th>
                             <th>Data</th>
+                            <th>Visualizações</th>
                             <th>Likes</th>
+                            <th>Like rate</th>
                         </tr>
                     </thead>
                     <tbody id="metrics-likes-body">
-                        <tr><td colspan="3" class="metrics-empty">A carregar métricas…</td></tr>
+                        <tr><td colspan="5" class="metrics-empty">A carregar métricas…</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -2057,24 +2059,31 @@ async function abrirMetricasAdmin() {
     document.getElementById("metrics-screen")?.classList.remove("hidden");
 
     const body = document.getElementById("metrics-likes-body");
-    body.innerHTML = '<tr><td colspan="3" class="metrics-empty">A carregar métricas…</td></tr>';
+    body.innerHTML = '<tr><td colspan="5" class="metrics-empty">A carregar métricas…</td></tr>';
 
     try {
-        const data = await apiFetch("/api/admin/metrics/likes");
-        document.getElementById("metric-total-likes").textContent = String(data.totalLikes || 0);
-        document.getElementById("metric-liked-articles").textContent = String(data.articlesWithLikes || 0);
+        const [likesData, viewsData] = await Promise.all([
+            apiFetch("/api/admin/metrics/likes"),
+            apiFetch("/api/admin/metrics/views")
+        ]);
 
-        const bySlug = new Map((data.items || []).map(item => [item.slug, Number(item.count || 0)]));
+        document.getElementById("metric-total-likes").textContent = String(likesData.totalLikes || 0);
+        document.getElementById("metric-liked-articles").textContent = String(likesData.articlesWithLikes || 0);
+        document.getElementById("metric-total-views").textContent = String(viewsData.totalViews || 0);
+
+        const likesBySlug = new Map((likesData.items || []).map(item => [item.slug, Number(item.count || 0)]));
+        const viewsBySlug = new Map((viewsData.items || []).map(item => [item.slug, Number(item.count || 0)]));
         const rows = noticias
-            .filter(file => bySlug.has(file.slug))
             .map(file => ({
                 ...file,
-                likeCount: bySlug.get(file.slug) || 0
+                likeCount: likesBySlug.get(file.slug) || 0,
+                viewCount: viewsBySlug.get(file.slug) || 0
             }))
-            .sort((x, y) => y.likeCount - x.likeCount);
+            .filter(file => file.likeCount > 0 || file.viewCount > 0)
+            .sort((x, y) => y.viewCount - x.viewCount || y.likeCount - x.likeCount);
 
         if (!rows.length) {
-            body.innerHTML = '<tr><td colspan="3" class="metrics-empty">Ainda não existem likes registados.</td></tr>';
+            body.innerHTML = '<tr><td colspan="5" class="metrics-empty">Ainda não existem visualizações ou likes registados.</td></tr>';
             return;
         }
 
@@ -2084,14 +2093,18 @@ async function abrirMetricasAdmin() {
             title.textContent = file.titulo || slugParaTitulo(file.name || file.slug || "");
             const date = document.createElement("td");
             date.textContent = formatarDataNoticia(file);
+            const views = document.createElement("td");
+            views.textContent = String(file.viewCount);
             const likes = document.createElement("td");
             likes.textContent = String(file.likeCount);
             likes.style.fontWeight = "700";
-            tr.append(title, date, likes);
+            const rate = document.createElement("td");
+            rate.textContent = file.viewCount ? ((file.likeCount / file.viewCount) * 100).toFixed(1) + "%" : "—";
+            tr.append(title, date, views, likes, rate);
             return tr;
         }));
     } catch (error) {
-        body.innerHTML = '<tr><td colspan="3" class="metrics-empty">Não foi possível carregar as métricas.</td></tr>';
+        body.innerHTML = '<tr><td colspan="5" class="metrics-empty">Não foi possível carregar as métricas.</td></tr>';
         console.error("Erro ao carregar métricas:", error);
     }
 }
