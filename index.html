@@ -721,7 +721,7 @@
         const url=safeUrl(team?.logo)||safeUrl(team?.flag);
         const fallback=teamFlagEmoji(team);
         if(!url)return '<span class="home-live-team-flag" aria-hidden="true">'+fallback+'</span>';
-        return '<span class="home-live-team-visual"><img src="'+esc(url)+'" alt="" loading="lazy" decoding="async" onerror="this.style.display=\\'none\\';this.nextElementSibling.hidden=false"><span class="home-live-team-flag" aria-hidden="true" hidden>'+fallback+'</span></span>';
+        return '<span class="home-live-team-visual"><img src="'+esc(url)+'" alt="" loading="lazy" decoding="async" onerror="this.style.display='none';this.nextElementSibling.hidden=false"><span class="home-live-team-flag" aria-hidden="true" hidden>'+fallback+'</span></span>';
       };
       const competitionGroupKey=fixture=>{
         const raw=String(fixture?.groupName||'');
