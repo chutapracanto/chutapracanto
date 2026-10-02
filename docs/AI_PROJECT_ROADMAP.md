@@ -487,3 +487,24 @@ Não alterar o sistema de likes nem introduzir analytics por impulso nesta taref
 6. validar que a medição não prejudica performance nem SEO.
 
 **Importante:** não confundir "pageview", "sessão", "utilizador" e "engagement rate". Cada métrica deve ser apresentada com a definição correta.
+
+
+## 23. PAINEL DE MÉTRICAS NO ADMIN — IMPLEMENTAÇÃO FASEADA
+
+### Objetivo
+Ter um único local no Admin para consultar:
+- likes por notícia;
+- visualizações/pageviews;
+- utilizadores/sessões, quando disponíveis;
+- origem do tráfego;
+- rates de engagement;
+- evolução temporal.
+
+### Fase 1 — likes
+Pode ser implementada autonomamente agora porque o D1 ARTICLE_LIKES_DB já existe e o endpoint de likes já contabiliza por artigo.
+
+### Fase 2 — visitas e rates
+Ainda não existe medição de pageviews no site. A implementação deverá primeiro definir uma medição simples e respeitadora de privacidade; depois o mesmo painel passa a apresentar visitas e rates sem criar um segundo sistema de consulta.
+
+### Regra
+O painel deve ficar protegido pela autenticação existente do Admin e nunca expor dados de métricas através de uma rota pública.
