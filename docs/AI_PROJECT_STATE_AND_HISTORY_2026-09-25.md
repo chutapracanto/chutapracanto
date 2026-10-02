@@ -2277,3 +2277,52 @@ Foi feita a verificação atual da documentação oficial disponível para o pr�
 ### Decisão
 Não criar ainda o MVP de upload único. A próxima etapa técnica da frente de vídeo é fechar a matriz Meta com documentação oficial atual e, depois, definir o fluxo mínimo:
 **upload único → armazenamento/preparação → publicação ou rascunho por plataforma → estado/retry independente**.
+
+
+# 72. REGRESSÃO APÓS ALTERAÇÃO DE COMPETIÇÕES — 2026-10-02
+
+A utilizadora reportou imediatamente após a alteração do comportamento de **Jogo em destaque / Todos**:
+- Competições ficava em carregamento indefinido;
+- Home continuava a mostrar LIVE, mas o minuto aparecia como `0'`.
+
+## Causa confirmada
+
+A regressão de carregamento estava em `competicoes.html`, no commit `005ee55036046c2cb0423ac8fce7efd89c70c899`.
+
+O patch tinha introduzido literalmente as sequências `\\n` dentro de uma linha de comentário JavaScript, em vez de inserir quebras de linha reais. Isso engolia o bloco `if/else` seguinte e deixava a estrutura JavaScript inválida. Como consequência, o script da página de Competições não inicializava.
+
+## Correção
+
+Commit:
+`cae4c34b13089c981bb4de80e4bbe982d12a2220`
+
+- substituídas as sequências literais `\\n` por quebras de linha reais;
+- restaurado o bloco completo de `renderRounds()`;
+- mantida a regra de **Todos → Todas as jornadas**;
+- não foram alterados Worker, BSD, D1 ou cron para resolver esta regressão.
+
+## Minuto LIVE = 0'
+
+Também foi corrigida a apresentação do minuto nas duas superfícies:
+- `competicoes.html`;
+- `index.html`.
+
+Agora um valor LIVE de minuto ausente, inválido ou `<= 0` não é apresentado como `0'`. O indicador LIVE continua presente e o minuto volta a aparecer assim que existir um valor positivo válido.
+
+Commit adicional:
+`0b0d0d132478567803e8f06e692baff4011e181f`
+
+## Validação
+
+Cloudflare Pages:
+- deployment `bd12a4c6-c485-41da-966d-40815272bc45`;
+- commit `0b0d0d132478567803e8f06e692baff4011e181f`;
+- build SUCCESS;
+- deploy SUCCESS;
+- alias de produção `https://chutapracanto.com` ativo.
+
+O build/deploy confirma que a página voltou a ser publicável; a validação funcional visual através de browser externo não está disponível neste ambiente, pelo que não se deve declarar uma validação visual completa.
+
+## Regra de continuidade
+
+Não reabrir a arquitetura de futebol para esta regressão. A falha foi frontend/JavaScript e está corrigida diretamente no ficheiro afetado.
