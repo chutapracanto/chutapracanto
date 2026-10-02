@@ -311,7 +311,7 @@ function dateLabel(value){const d=value instanceof Date?value:new Date(value);if
 function normalizeTeamName(value){return String(value||"").toLocaleLowerCase("pt-PT").normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim()}
 function isPriorityTeam(team){return PRIORITY_TEAM_IDS.has(Number(team?.id))||PRIORITY_TEAM_NAMES.has(normalizeTeamName(team?.name))}
 function isPriorityFixture(item){return isPriorityTeam(item?.homeTeam)||isPriorityTeam(item?.awayTeam)}
-function liveMinuteLabel(item){const minute=Number(item?.liveMinute);if(!Number.isFinite(minute))return "";const added=Number(item?.liveAddedTime);return String(Math.floor(minute))+(Number.isFinite(added)&&added>0?"+"+Math.floor(added):"")+String.fromCharCode(39)}
+function liveMinuteLabel(item){const minute=Number(item?.liveMinute);if(!Number.isFinite(minute)||minute<=0)return "";const added=Number(item?.liveAddedTime);return String(Math.floor(minute))+(Number.isFinite(added)&&added>0?"+"+Math.floor(added):"")+String.fromCharCode(39)}
 function goalLabel(goal){const minute=Number(goal?.minute);const added=Number(goal?.addedTime);if(Number.isFinite(minute))return String(Math.floor(minute))+(Number.isFinite(added)&&added>0?"+"+Math.floor(added):"")+String.fromCharCode(39);if(Number.isFinite(goal?.periodSecond))return String(Math.floor(Number(goal.periodSecond)/60))+String.fromCharCode(39);return ""}
 function goalDetailsForTeam(item,teamId,side){if(!Array.isArray(item?.goals))return "";return item.goals.filter(goal=>{const gid=goal?.teamId??goal?.team_id??goal?.team?.id;const gside=String(goal?.side??goal?.team??"").toLowerCase();return Number(gid)===Number(teamId)||(side&&gside===side)}).map(goal=>{const minute=goalLabel(goal);const player=typeof goal?.player_name==="string"&&goal.player_name.trim()?goal.player_name.trim():typeof goal?.player==="string"&&goal.player.trim()?goal.player.trim():typeof goal?.player?.name==="string"&&goal.player.name.trim()?goal.player.name.trim():typeof goal?.scorer_name==="string"&&goal.scorer_name.trim()?goal.scorer_name.trim():typeof goal?.scorer==="string"&&goal.scorer.trim()?goal.scorer.trim():typeof goal?.scorer?.name==="string"&&goal.scorer.name.trim()?goal.scorer.name.trim():"";return "<span class=\"team-goal-detail\"><b>"+esc(minute)+"</b>"+(player?" "+esc(String(player)):"")+"</span>"}).join("")}
 function fixtureStatus(item){
@@ -464,7 +464,11 @@ function renderRounds(selectUpcoming=false){
     options.sort((a,b)=>a.firstKickoff-b.firstKickoff||Number(a.roundKey)-Number(b.roundKey));
   }
   if(fixtureFilter==="all" && !selectUpcoming){ roundEl.value="all"; return; }
-  // Quando o filtro está em "Todos", o filtro de jornada deve ficar sempre em "Todas as jornadas".\n  // Isto é obrigatório para que o histórico completo da competição volte a aparecer.\n  if(fixtureFilter==="all"){ roundEl.value="all"; return; }\n  if(!selectUpcoming&&options.some(round=>round.key===previous))roundEl.value=previous;\n  else if(selectUpcoming){
+  // Quando o filtro está em "Todos", o filtro de jornada deve ficar sempre em "Todas as jornadas".
+  // Isto é obrigatório para que o histórico completo da competição volte a aparecer.
+  if(fixtureFilter==="all"){ roundEl.value="all"; return; }
+  if(!selectUpcoming&&options.some(round=>round.key===previous))roundEl.value=previous;
+  else if(selectUpcoming){
     const next=allFixtures.filter(item=>fixtureStatus(item)==="upcoming")
       .sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity))[0]
       ||allFixtures.filter(item=>fixtureStatus(item)==="live").sort((a,b)=>(dateValue(a)?.getTime()||0)-(dateValue(b)?.getTime()||0))[0];
