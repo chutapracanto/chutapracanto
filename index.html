@@ -700,24 +700,9 @@
         if(stage&&round.toLowerCase()===stage.toLowerCase())return '';
         return round;
       };
-      const TEAM_NAMES_PT={
-        'kazakhstan':'Cazaquistão','moldova':'Moldávia','slovakia':'Eslováquia','faroe islands':'Ilhas Faroé',
-        'poland':'Polónia','sweden':'Suécia','bosnia & herzegovina':'Bósnia e Herzegovina','romania':'Roménia',
-        'israel':'Israel','austria':'Áustria','ireland':'Irlanda','republic of ireland':'República da Irlanda',
-        'kosovo':'Kosovo','ukraine':'Ucrânia','georgia':'Geórgia','hungary':'Hungria','northern ireland':'Irlanda do Norte',
-        'wales':'País de Gales','denmark':'Dinamarca','norway':'Noruega','germany':'Alemanha','netherlands':'Países Baixos',
-        'north macedonia':'Macedónia do Norte','slovenia':'Eslovénia','portugal':'Portugal','spain':'Espanha',
-        'england':'Inglaterra','croatia':'Croácia','czechia':'Chéquia','france':'França','turkiye':'Turquia','turkey':'Turquia',
-        'belgium':'Bélgica','italy':'Itália','finland':'Finlândia','san marino':'São Marino','albania':'Albânia',
-        'belarus':'Bielorrússia','latvia':'Letónia','armenia':'Arménia','cyprus':'Chipre','montenegro':'Montenegro',
-        'bulgaria':'Bulgária','luxembourg':'Luxemburgo','iceland':'Islândia','estonia':'Estónia','andorra':'Andorra',
-        'malta':'Malta','gibraltar':'Gibraltar','liechtenstein':'Liechtenstein','lithuania':'Lituânia','azerbaijan':'Azerbaijão',
-        'scotland':'Escócia','switzerland':'Suíça','israel':'Israel'
-      };
-      const teamDisplayName=team=>{
-        const raw=String(team?.name||'').trim();
-        return TEAM_NAMES_PT[normalizeTeamName(raw)]||raw;
-      };
+      const TEAM_NAMES_PT_EXTRA={"greece":"Grécia","serbia":"Sérvia","belarus":"Bielorrússia","slovakia":"Eslováquia","bosnia and herzegovina":"Bósnia e Herzegovina","netherlands":"Países Baixos","north macedonia":"Macedónia do Norte","czech republic":"Chéquia","turkey":"Turquia","turkiye":"Turquia","croatia":"Croácia","switzerland":"Suíça","ireland":"Irlanda","republic of ireland":"República da Irlanda","scotland":"Escócia","wales":"País de Gales","england":"Inglaterra","poland":"Polónia","sweden":"Suécia","romania":"Roménia","austria":"Áustria","georgia":"Geórgia","hungary":"Hungria","ukraine":"Ucrânia","denmark":"Dinamarca","norway":"Noruega","germany":"Alemanha","france":"França","italy":"Itália","belgium":"Bélgica","finland":"Finlândia","albania":"Albânia","armenia":"Arménia","latvia":"Letónia","montenegro":"Montenegro","cyprus":"Chipre","bulgaria":"Bulgária","luxembourg":"Luxemburgo","iceland":"Islândia","estonia":"Estónia","andorra":"Andorra","malta":"Malta","gibraltar":"Gibraltar","liechtenstein":"Liechtenstein","lithuania":"Lituânia","azerbaijan":"Azerbaijão","israel":"Israel","kosovo":"Kosovo","kazakhstan":"Cazaquistão","moldova":"Moldávia","portugal":"Portugal","spain":"Espanha","slovenia":"Eslovénia","faroe islands":"Ilhas Faroé","san marino":"São Marino","europe":"Europa"};
+      const CLUB_NAMES_PT={"sporting cp":"Sporting CP","sporting clube de portugal":"Sporting CP","sporting lisbon":"Sporting CP","sc braga":"SC Braga","sporting braga":"SC Braga","sporting clube de braga":"SC Braga","fc porto":"FC Porto","sl benfica":"SL Benfica","benfica":"SL Benfica","moreirense fc":"Moreirense","gil vicente fc":"Gil Vicente","fc alverca":"FC Alverca","famalicao":"Famalicão","fc famalicão":"Famalicão","casa pia ac":"Casa Pia","santa clara":"Santa Clara","maritimo":"CS Marítimo","cs maritimo":"CS Marítimo","academico viseu":"Académico de Viseu","academico de viseu":"Académico de Viseu","estoril praia":"Estoril Praia"};
+      function teamDisplayName(team){const raw=String(team?.name||"").trim();const key=normalizeTeamName(raw);return CLUB_NAMES_PT[key]||TEAM_NAMES_PT_EXTRA[key]||raw}
       const teamFlagEmoji=team=>{
         const flags={
           'kazakhstan':'🇰🇿','moldova':'🇲🇩','slovakia':'🇸🇰','faroe islands':'🇫🇴','poland':'🇵🇱','sweden':'🇸🇪',
@@ -733,12 +718,10 @@
         return flags[normalizeTeamName(team?.name)]||'⚽';
       };
       const liveTeamVisual=(team,side)=>{
-        const url=safeUrl(team?.flag)||safeUrl(team?.logo);
-        const label=teamDisplayName(team);
-        const fallback='<span class="home-live-team-flag" aria-hidden="true">'+teamFlagEmoji(team)+'</span>';
-        return url
-          ? '<img src="'+url+'" alt="" loading="lazy" decoding="async" onerror="this.replaceWith(document.createRange().createContextualFragment('+JSON.stringify(fallback)+'))">'
-          : fallback;
+        const url=safeUrl(team?.logo)||safeUrl(team?.flag);
+        const fallback=teamFlagEmoji(team);
+        if(!url)return '<span class="home-live-team-flag" aria-hidden="true">'+fallback+'</span>';
+        return '<span class="home-live-team-visual"><img src="'+esc(url)+'" alt="" loading="lazy" decoding="async" onerror="this.style.display=\\'none\\';this.nextElementSibling.hidden=false"><span class="home-live-team-flag" aria-hidden="true" hidden>'+fallback+'</span></span>';
       };
       const competitionGroupKey=fixture=>{
         const raw=String(fixture?.groupName||'');
@@ -770,10 +753,11 @@
             const team=Number(goal?.teamId)===Number(home.id)?teamDisplayName(home):Number(goal?.teamId)===Number(away.id)?teamDisplayName(away):'';
             return '<div class="home-live-goal"><b>'+esc(when)+'</b> '+esc(player)+(team?' · '+esc(team):'')+'</div>';
           }).join(''):'';
-          const group=String(fixture.groupName||'').replace(/League [A-D]\\s*,?\\s*/i,'').replace(/,?\\s*Group \\d+/i,'').trim();
+          const group=String(fixture.groupName||'').trim().replace(/^.*?(Liga\\s+[A-D]\\s*·\\s*Grupo\\s+[A-D]\\d+).*$/i,'$1');
           const groupKey=competitionGroupKey(fixture);
           const roundKey=competitionRoundKey(fixture);
-          const metaLabel=[String(meta[1]||'').trim(),group,roundKey?'Jornada '+roundKey:''].filter(Boolean).join(' · ');
+          const roundText=roundKey?'Jornada '+roundKey:String(fixture.roundLabel||'').replace(/.*?Matchday\\s*(\\d+)/i,'Jornada $1').replace(/.*?Jornada\\s*(\\d+)/i,'Jornada $1');
+          const metaLabel=[group,roundText].filter(Boolean).join(' · ');
           const href='/competicoes?competition='+encodeURIComponent(meta[0])+(groupKey?'&group='+encodeURIComponent(groupKey):'')+(roundKey?'&round='+encodeURIComponent(roundKey):'');
           return '<a class="home-live-card" href="'+href+'"><div class="home-live-top"><span class="home-live-led" aria-hidden="true"></span><strong>LIVE</strong><span>'+esc(metaLabel)+'</span></div><div class="home-live-teams"><div class="home-live-team"><span class="home-live-team-visual">'+liveTeamVisual(home,'home')+'</span><span>'+esc(teamDisplayName(home)||'Casa')+'</span></div><div><div class="home-live-score">'+score+'</div><div class="home-live-minute">'+esc(liveMinuteLabel(fixture))+'</div></div><div class="home-live-team away"><span>'+esc(teamDisplayName(away)||'Fora')+'</span><span class="home-live-team-visual">'+liveTeamVisual(away,'away')+'</span></div></div>'+(goals?'<div class="home-live-goals">'+goals+'</div>':'')+'</a>';
         }).join('');
