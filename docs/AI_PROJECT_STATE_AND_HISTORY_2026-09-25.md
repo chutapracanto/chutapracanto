@@ -2352,3 +2352,16 @@ Não reabrir a arquitetura de futebol para esta regressão. A falha foi frontend
 - Confirmado que o destaque mantém um jogo acabado quando esse jogo era o LIVE atualmente apresentado e passa a mostrar `Final de jogo`.
 - Confirmado que os botões laterais permanecem condicionados a múltiplos LIVE.
 - Validação visual/runtime no browser continua dependente de ambiente com acesso funcional ao site; deployment/build devem ser verificados após a publicação.
+
+
+# 74. COMPETIÇÕES — SETAS, FOCO AO VIVO, FINAL DE JOGO E CACHE NATIONS — 2026-10-02
+
+- Setas do destaque refinadas visualmente para chevrons `‹ ›`, mantendo a posição lateral e centrada.
+- O estado `AO VIVO` junto ao cabeçalho da competição passou a ser clicável e leva diretamente ao primeiro jogo que está LIVE nesse momento, filtrando temporariamente a lista para os jogos LIVE.
+- O destaque deixa de considerar um jogo acabado como candidato imediatamente após o fim; não fica artificialmente no destaque. O estado de `Resultado final` fica reservado à atualização/visualização do jogo terminado.
+- Criada memória de transição de LIVE → terminado para permitir a apresentação temporária de `LIVE` durante até 15 minutos onde o snapshot terminado ainda estiver presente, sem voltar a colocá-lo no destaque.
+- Nations League: cache identity passou de `v6-nations` para `v7-nations`, forçando a renovação do snapshot completo da época e evitando reutilizar o snapshot anterior que estava a devolver apenas a janela atual. O pedido `status=all` continua baseado no intervalo completo da época fornecido pelo BSD.
+
+Commits:
+- frontend: `87f8956db181391f4b9ca7bd3b3c71e816731518`
+- Worker/cache Nations: `46c8ca12e85d5724aa349eb76edac25280f9e983`
