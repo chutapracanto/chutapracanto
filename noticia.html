@@ -891,6 +891,7 @@
         await mostrarNoticiasRelacionadas(entry.slug, index);
         configurarGosto(entry.slug);
         configurarPartilha();
+        registarVisualizacao(entry.slug);
 
       } catch (error) {
         if (error?.message !== 'Artigo não encontrado') {
@@ -1085,6 +1086,22 @@
       return visitorId;
     }
 
+
+    async function registarVisualizacao(articleSlug) {
+      if (!articleSlug) return;
+      try {
+        await fetch('/api/article-view', {
+          method: 'POST',
+          credentials: 'same-origin',
+          cache: 'no-store',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug: articleSlug }),
+          keepalive: true
+        });
+      } catch (error) {
+        console.warn('Não foi possível registar a visualização:', error);
+      }
+    }
 
     function configurarGosto(articleSlug) {
       const trigger = document.getElementById('like-trigger');
