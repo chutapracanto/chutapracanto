@@ -1608,3 +1608,25 @@ Estas alterações têm histórico próprio e não devem ser removidas apenas po
 Com o backend agora a renovar a D1, a próxima verificação deve ser de consumo: Home, /competicoes, filtros/grupos/jornadas, uma execução posterior para confirmar nova atualização de fetched_at e, se necessário, Admin para confirmar ADMIN_PASSWORD/GITHUB_TOKEN no runtime.
 
 Imagens relacionadas por teor da notícia continuam em BACKLOG/STANDBY e não fazem parte deste incidente.
+
+
+# 79. MÉTRICAS EDITORIAIS / AUDIÊNCIA — 2026-10-02
+
+A utilizadora pediu para não perder de vista duas necessidades de medição:
+- saber quantas pessoas fizeram like em cada notícia;
+- saber quantas pessoas entram/visualizam cada notícia e obter rates úteis.
+
+## Auditoria inicial
+- O projeto possui o binding D1 ARTICLE_LIKES_DB, já existente em produção.
+- A pesquisa do código atual não encontrou uma área de analytics/relatório que apresente likes por notícia ao utilizador.
+- A pesquisa do código atual também não encontrou integração ativa identificável de Google Analytics/GA4/gtag ou equivalente para pageviews.
+- Não foi feita qualquer alteração nesta frente nesta sessão.
+
+## Decisão
+Registado no roadmap como frente própria de métricas editoriais/audiência. Não mexer no sistema de likes nem adicionar analytics antes de definir o modelo e a solução mais adequada.
+
+## Métricas pretendidas
+Likes por notícia; pageviews/visualizações; utilizadores/sessões quando suportados; origem de tráfego; evolução temporal; relação visualizações/likes e outras rates úteis.
+
+## Nota operacional
+O próximo desenho deve distinguir claramente pageview, sessão, utilizador e engagement rate. A solução deve ser simples, de baixo custo, compatível com privacidade/AdSense e não degradar performance.
