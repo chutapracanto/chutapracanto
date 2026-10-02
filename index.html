@@ -777,7 +777,7 @@
             const meta=competitions.find(item=>item[0]===key);
             if(!meta)return null;
             try{
-              const response=await fetch('/api/competicoes?competition='+encodeURIComponent(key)+'&status=upcoming',{cache:'no-store'});
+              const response=await fetch('/api/competicoes?competition='+encodeURIComponent(key)+'&status=live',{cache:'no-store'});
               if(!response.ok)throw new Error('live');
               return {meta,data:await response.json()};
             }catch{return null}
@@ -844,13 +844,14 @@
           });
           standingsTabs.appendChild(button);
         });
+        const nationsGroupKey=value=>{
+          const raw=String(value||'').trim();
+          const match=raw.match(/\b([A-D][1-4])\b/i);
+          return match?.[1]?.toUpperCase()||'';
+        };
         const renderStandings=(rows,phase,competitionKey='')=>{
           if(competitionKey==='nations-league'&&phase?.grouped){
-            rows=rows.filter(row=>{
-              const raw=String(row?.groupName||'').trim();
-              const match=raw.match(/(?:Grupo\s*)?([A-D][1-4])$/i);
-              return match?.[1]?.toUpperCase()==='A4';
-            });
+            rows=rows.filter(row=>nationsGroupKey(row?.groupName)==='A4');
           }
           const grouped=Boolean(phase?.grouped);
           const groups=new Map();
@@ -873,7 +874,13 @@
       }
 
       const priorityCompetitions=competitionResults.filter(item=>item.priority30?.length);
-      priorityCompetitions.sort((a,b)=>dateValue(a.priority30[0]).getTime()-dateValue(b.priority30[0]).getTime());
+      priorityCompetitions.sort((a,b)=>{
+        const ag=a.priority30[0],bg=b.priority30[0];
+        const at=dateValue(ag)?.getTime()??Infinity,bt=dateValue(bg)?.getTime()??Infinity;
+        const ar=Math.min(competitionRank(ag.homeTeam),competitionRank(ag.awayTeam));
+        const br=Math.min(competitionRank(bg.homeTeam),competitionRank(bg.awayTeam));
+        return at-bt||ar-br||String(a.meta[1]).localeCompare(String(b.meta[1]),'pt-PT');
+      });
       if(!priorityCompetitions.length){
         gamesGrid.innerHTML='<div class="home-standings-empty">Não há jogos das equipas prioritárias nos próximos 30 dias.</div>';
       }else{
