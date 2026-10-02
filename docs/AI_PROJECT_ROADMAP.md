@@ -671,3 +671,18 @@ Só depois escolher melhorias visuais/funcionais. A validação mínima deve cob
 8. preservação de jornada/ronda/grupo.
 
 Não alterar D1, cache, adapter BSD, cron ou regras de filtros para resolver um problema exclusivamente visual.
+
+
+### LIVE — melhoria frontend 2026-10-02
+- [x] Home: nomes das seleções em português.
+- [x] Home: fallback visual de bandeira quando a imagem falha.
+- [x] Home: cartão LIVE clicável para competição + grupo + jornada.
+- [x] Home: duplicação inglesa removida; usar **Jornada N**.
+- [x] Competições: **Jogo em destaque** prioriza LIVE.
+- [x] Competições: em **Todos**, com vários jogos, existe navegação discreta por seta.
+- [x] Competições: nomes das seleções/golos em português.
+- [x] Competições: grupo e jornada preservados ao abrir LIVE a partir da Home.
+- [ ] Validação visual final em produção com o jogo LIVE real.
+- [ ] Futuramente, se necessário, avaliar fonte de imagens de seleções mais robusta sem mexer no backend BSD.
+
+**Regra:** não alterar D1, cron, adapter BSD ou cache para resolver problemas de apresentação.
