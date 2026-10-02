@@ -1352,6 +1352,62 @@ async function prepararPaginaParaPartilha(
 // ============================================================
 // API ADMIN
 // ============================================================
+async function handleArticleViewAPI(request, env) {
+  const url = new URL(request.url);
+  const respond = (data, status = 200) =>
+    json(data, status, { "X-Robots-Tag": "noindex, nofollow, noarchive" });
+
+  if (request.method !== "POST") {
+    return respond({ error: "Método não permitido.", message: "Método não permitido." }, 405);
+  }
+  if (request.headers.get("Origin") !== url.origin) {
+    return respond({ error: "Origem não permitida.", message: "Origem não permitida." }, 403);
+  }
+  if (!env.ARTICLE_LIKES_DB || !env.ASSETS) {
+    return respond({ error: "Métrica temporariamente indisponível.", message: "Métrica temporariamente indisponível." }, 503);
+  }
+
+  let payload;
+  try {
+    payload = JSON.parse(await lerCorpoLimitado(request, 1024));
+  } catch {
+    return respond({ error: "Pedido inválido.", message: "Pedido inválido." }, 400);
+  }
+
+  const slug = typeof payload?.slug === "string" ? payload.slug.trim() : "";
+  if (!slug || slug.length > 160 || /[\\/\u0000-\u001f\u007f]/u.test(slug)) {
+    return respond({ error: "Artigo inválido.", message: "Artigo inválido." }, 400);
+  }
+
+  try {
+    const indexResponse = await env.ASSETS.fetch(
+      new Request(new URL("/content/noticias-index.json", url.origin))
+    );
+    if (!indexResponse.ok) return respond({ error: "Métrica temporariamente indisponível." }, 503);
+    const index = await indexResponse.json();
+    const articleExists = Array.isArray(index) && index.some((entry) =>
+      entry && entry.slug === slug &&
+      (() => {
+        const pathParts = String(entry.path || "").split("/");
+        return pathParts.length === 3 && pathParts[0] === "content" &&
+          (pathParts[1] === "noticias" || pathParts[1] === "opiniao") &&
+          pathParts[2].endsWith(".md");
+      })()
+    );
+    if (!articleExists) return respond({ error: "Artigo não encontrado.", message: "Artigo não encontrado." }, 404);
+
+    await env.ARTICLE_LIKES_DB
+      .prepare("INSERT INTO article_views (article_slug) VALUES (?)")
+      .bind(slug)
+      .run();
+
+    return respond({ ok: true });
+  } catch (error) {
+    console.error("Article view metric error:", error);
+    return respond({ error: "Métrica temporariamente indisponível.", message: "Métrica temporariamente indisponível." }, 503);
+  }
+}
+
 async function handleArticleLikeAPI(request, env) {
   const url = new URL(request.url);
   const noindexHeaders = { "X-Robots-Tag": "noindex, nofollow, noarchive" };
@@ -1723,6 +1779,30 @@ async function handleAdminAPI(request, env) {
     return authError;
   }
 
+
+  // ----------------------------------------------------------
+  // MÉTRICAS — VISUALIZAÇÕES
+  // ----------------------------------------------------------
+
+  if (pathname === "/api/admin/metrics/views") {
+    if (request.method !== "GET") {
+      return json({ error: "Método não permitido.", message: "Método não permitido." }, 405);
+    }
+    if (!env.ARTICLE_LIKES_DB) {
+      return json({ error: "ARTICLE_LIKES_DB não está configurada." }, 503);
+    }
+    try {
+      const result = await env.ARTICLE_LIKES_DB
+        .prepare("SELECT article_slug AS slug, COUNT(*) AS count FROM article_views GROUP BY article_slug ORDER BY count DESC, article_slug ASC")
+        .all();
+      const items = (result?.results || []).map(row => ({ slug: String(row.slug || ""), count: Number(row.count || 0) }));
+      const totalViews = items.reduce((sum, item) => sum + item.count, 0);
+      return json({ ok: true, totalViews, articlesWithViews: items.filter(item => item.count > 0).length, items });
+    } catch (error) {
+      console.error("Admin metrics views error:", error);
+      return json({ error: "Não foi possível carregar as métricas de visualizações." }, 503);
+    }
+  }
 
   // ----------------------------------------------------------
   // MÉTRICAS — LIKES
