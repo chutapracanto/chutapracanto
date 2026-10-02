@@ -2112,3 +2112,20 @@ Requisito visual fechado: cada golo deve aparecer debaixo da equipa que marcou c
 Commits: Worker `2c85ed60ad5d4ee3de759d66ba5a70ee587caadd`; Home `19022bf25c8bc7641e4781ac856a6f93309589dd`; Competições `fc42e5916155c62aa9eda19b1abf3d653d88261c`.
 
 Ainda é necessária uma validação com golo LIVE real para confirmar a cadeia BSD → Worker → API → renderização em produção.
+
+
+# 69. LIVE — GOLOS DESAPARECIAM NO REFRESH DA CACHE FRESCA — 2026-10-02
+
+Diagnóstico confirmado a partir do comportamento observado: o golo chegou a aparecer brevemente em Competições e depois desaparecia. A causa não estava apenas no frontend nem no incidente BSD vazio. O endpoint `/api/competicoes`, quando encontrava a cache da competição ainda fresca, fazia um refresh LIVE de ~15s através de `bsdFetchLiveEvents()`, mas esse caminho não consultava `/events/{id}/incidents/`. Assim, o cron/cache podia conter `goals`, enquanto o refresh LIVE seguinte devolvia score/minuto sem os detalhes dos golos e o merge podia substituí-los.
+
+Correção aplicada em `_worker.js`:
+- o caminho de cache fresca passou também a consultar os incidentes BSD para cada jogo LIVE;
+- normaliza `minute`, `player_name`/nome do jogador e equipa do golo nesse caminho;
+- se os incidentes vierem temporariamente vazios, preserva os golos já existentes na fixture em cache;
+- o mesmo comportamento foi aplicado aos jogos LIVE descobertos no refresh e não apenas aos já presentes na cache.
+
+Commit Worker: `9a254a1376e1c2e1f3f75ffe69399bd9f8d79a15` — `fix: enrich fresh live cache with goal incidents`.
+
+Produção: deployment `67caf14c-272a-4dec-9218-f691fc0d1dd3`, SUCCESS, alias de produção ativo.
+
+Este é agora o ponto técnico principal a validar com um jogo LIVE real: Home, Jogo em destaque e Jogos e resultados devem manter `minuto' Jogador` durante os refreshes, inclusive quando a resposta de incidentes BSD estiver temporariamente vazia.
