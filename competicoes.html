@@ -242,7 +242,7 @@ const NATIONS_GROUPS={
 };
 function nationsGroupName(item){
   const sourceGroup=String(item?.groupName||"").trim();
-  const groupMatch=sourceGroup.match(/\b([A-D][1-4])\s*$/i);
+  const groupMatch=sourceGroup.match(/\b([A-D][1-4])\b/i);
   const declaredGroup=groupMatch?.[1]?.toUpperCase();
   if(declaredGroup&&Object.prototype.hasOwnProperty.call(NATIONS_GROUPS,declaredGroup)) return declaredGroup;
   const names=[item?.homeTeam?.name,item?.awayTeam?.name,item?.team?.name].map(normalizeTeamName);
@@ -355,10 +355,13 @@ async function prepareCompetitionOrder(){
   };
   const results=await Promise.all(competitions.map(async meta=>{
     try{
-      const response=await fetch("/api/competicoes?competition="+encodeURIComponent(meta[0])+"&status=upcoming",{cache:"no-store"});
+      const controller=new AbortController();
+      const timeout=setTimeout(()=>controller.abort(),8000);
+      const response=await fetch("/api/competicoes?competition="+encodeURIComponent(meta[0])+"&status=all",{cache:"no-store",signal:controller.signal});
+      clearTimeout(timeout);
       if(!response.ok)throw new Error("order");
       const data=await response.json();
-      const fixtures=(Array.isArray(data.fixtures)?data.fixtures:[]).filter(item=>fixtureStatus(item)==="upcoming");
+      const fixtures=(Array.isArray(data.fixtures)?data.fixtures:[]).filter(item=>fixtureStatus(item)==="upcoming"||fixtureStatus(item)==="live");
       const priority=fixtures.filter(isPriorityFixture).sort((a,b)=>{
         const da=dateValue(a)?.getTime()??Infinity, db=dateValue(b)?.getTime()??Infinity;
         return da-db||rank(a.homeTeam)-rank(b.homeTeam)||rank(a.awayTeam)-rank(b.awayTeam);
@@ -704,13 +707,13 @@ async function refreshCompetitionSnapshot(){
   if(refreshInFlight||!active)return;
   refreshInFlight=true;
   try{
-    const requestStatus=fixtureFilter==="finished"?"finished":fixtureFilter==="upcoming"?"upcoming":"all";
+    const requestStatus=fixtureFilter==="finished"?"finished":"all";
     const params=new URLSearchParams({competition:active,status:requestStatus});
     const response=await fetch("/api/competicoes?"+params.toString(),{cache:"no-store"});
     const data=await response.json();
     if(!response.ok)throw new Error(data?.message||"Não foi possível atualizar os jogos.");
     if(loadedSeasonId!=null&&String(data.season?.id||"")!==String(loadedSeasonId)){
-      await loadCompetition(active,fixtureFilter==="finished"?"finished":fixtureFilter==="upcoming"?"upcoming":"all",true);
+      await loadCompetition(active,fixtureFilter==="finished"?"finished":"all",true);
       return;
     }
     seasonEl.textContent=data.season?.label||seasonEl.textContent;
@@ -734,7 +737,7 @@ async function loadCompetition(key,status="all",resetRound=true){
   seasonEl.textContent="A carregar…";
   clearCompetitionRefresh();
   try{
-    const effectiveStatus=status || (fixtureFilter==="finished"?"finished":fixtureFilter==="upcoming"?"upcoming":"all");
+    const effectiveStatus=status || (fixtureFilter==="finished"?"finished":"all");
     const selectedRound=roundEl.value;
     const params=new URLSearchParams({competition:key,status:effectiveStatus});
     if(selectedRound && selectedRound!=="all"){
