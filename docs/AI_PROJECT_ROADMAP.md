@@ -697,3 +697,16 @@ Não alterar D1, cache, adapter BSD, cron ou regras de filtros para resolver um 
 - [x] Competições aplica o mesmo sistema de imagens/nomenclatura.
 - [x] Infraestrutura BSD/D1/cache/cron preservada.
 - [ ] Confirmar visualmente no navegador com Cazaquistão–Moldávia LIVE e com a lista de jogos de Liga Portugal.
+
+
+## 2026-10-02 — MELHORIA DOS CARTÕES LIVE: GOLO JUNTO À EQUIPA MARCADORA
+
+- [x] Home: cartão LIVE ligeiramente maior (~290 px) para melhorar a separação visual entre equipas e resultado.
+- [x] Home: removidas grandes siglas/códigos de país dos visuais.
+- [x] Home: minuto + jogador de cada golo colocados por baixo da equipa que marcou.
+- [x] Competições — Jogo em destaque: minuto + jogador colocados por baixo da equipa marcadora.
+- [x] Competições — Jogos e resultados: mesma apresentação dos golos.
+- [x] Competições — LIVE: minuto integrado na etiqueta vermelha **LIVE · N'**.
+- [x] Nenhuma alteração ao BSD/D1/cache/cron.
+- [x] JavaScript funcional validado sintaticamente após a alteração.
+- [x] Produção: Home ad664158-8e17-478a-bf34-e28abb8a4bfa SUCCESS; Competições 770c7ebc-ed9b-4793-9878-878cb46369c0 SUCCESS.
