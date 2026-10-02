@@ -500,9 +500,12 @@ function renderRounds(selectUpcoming=false){
   if(fixtureFilter==="all"){ roundEl.value="all"; return; }
   if(!selectUpcoming&&options.some(round=>round.key===previous))roundEl.value=previous;
   else if(selectUpcoming){
-    const next=allFixtures.filter(item=>fixtureStatus(item)==="upcoming")
+    const roundScope=active==="nations-league" && competitionPhase.grouped && groupFilter!=="all"
+      ? allFixtures.filter(item=>nationsGroupName(item)===groupFilter)
+      : allFixtures;
+    const next=roundScope.filter(item=>fixtureStatus(item)==="upcoming")
       .sort((a,b)=>(dateValue(a)?.getTime()||Infinity)-(dateValue(b)?.getTime()||Infinity))[0]
-      ||allFixtures.filter(item=>fixtureStatus(item)==="live").sort((a,b)=>(dateValue(a)?.getTime()||0)-(dateValue(b)?.getTime()||0))[0];
+      ||roundScope.filter(item=>fixtureStatus(item)==="live").sort((a,b)=>(dateValue(a)?.getTime()||0)-(dateValue(b)?.getTime()||0))[0];
     const nextKey=next?roundIdentity(next).key:"";
     roundEl.value=options.some(round=>round.key===nextKey)?nextKey:"all";
   }else roundEl.value="all";
