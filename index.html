@@ -850,9 +850,6 @@
           return match?.[1]?.toUpperCase()||'';
         };
         const renderStandings=(rows,phase,competitionKey='')=>{
-          if(competitionKey==='nations-league'&&phase?.grouped){
-            rows=rows.filter(row=>nationsGroupKey(row?.groupName)==='A4');
-          }
           const grouped=Boolean(phase?.grouped);
           const groups=new Map();
           rows.forEach(row=>{
@@ -867,7 +864,14 @@
               '</tbody></table>';
           };
           if(!grouped||groups.size<=1){standingsContent.innerHTML=table(rows);return}
-          const ordered=[...groups.entries()].sort((a,b)=>a[0].localeCompare(b[0],"pt-PT"));
+          const ordered=[...groups.entries()].sort((a,b)=>{
+            if(competitionKey==='nations-league'){
+              const ga=nationsGroupKey(a[0]),gb=nationsGroupKey(b[0]);
+              if(ga==='A4'&&gb!=='A4')return -1;
+              if(gb==='A4'&&ga!=='A4')return 1;
+            }
+            return a[0].localeCompare(b[0],"pt-PT");
+          });
           standingsContent.innerHTML=ordered.map(([group,items])=>'<section class="home-standing-group"><h4>'+esc(group)+'</h4>'+table(items)+'</section>').join('');
         };
         renderStandings(withStandings[0].data.standings,withStandings[0].data.phase,withStandings[0].meta[0]);
