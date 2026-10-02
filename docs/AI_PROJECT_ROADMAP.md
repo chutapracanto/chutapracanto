@@ -880,7 +880,7 @@ A revisão autónoma de baixo risco prevista na fila de monetização foi execut
 
 Investigação oficial inicial concluída:
 
-- **YouTube:** upload via YouTube Data API + OAuth 2.0; suporte a upload resumable e metadata de vídeo. citeturn1search0turn1search1
-- **TikTok:** Content Posting API suporta Direct Post e Upload para rascunho; Direct Post usa `video.publish`, Upload usa `video.upload`; clientes não auditados têm restrição de visibilidade; `PULL_FROM_URL` é suportado em condições próprias. citeturn1search2turn1search3turn1search5
+- **YouTube:** upload via YouTube Data API + OAuth 2.0; suporte a upload resumable e metadata de vídeo. (fontes: Google Developers — YouTube Data API upload/resumable upload)
+- **TikTok:** Content Posting API suporta Direct Post e Upload para rascunho; Direct Post usa `video.publish`, Upload usa `video.upload`; clientes não auditados têm restrição de visibilidade; `PULL_FROM_URL` é suportado em condições próprias. (fontes: TikTok for Developers — Content Posting API Direct Post/Upload)
 - **Meta/Facebook/Instagram:** matriz permanece aberta até confirmação por documentação oficial atual acessível/verificável. Não inferir scopes, quotas ou capacidades a partir de documentação antiga.
 - **Decisão:** não implementar ainda o MVP de upload único. Primeiro fechar Meta; depois desenhar o fluxo mínimo de armazenamento/preparação, publicação ou rascunho por plataforma e retry independente.
