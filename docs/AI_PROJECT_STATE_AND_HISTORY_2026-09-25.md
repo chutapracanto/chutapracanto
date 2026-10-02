@@ -1696,3 +1696,15 @@ Correção aplicada diretamente:
 - SUCCESS em produção com alias https://chutapracanto.com.
 
 Este remendo fica registado para que a implementação futura não seja confundida com uma alteração de arquitetura. A medição continua baseada apenas em pageviews, sem identificadores pessoais.
+
+
+## 2026-10-02 — Métricas por período
+
+- Atualizado o painel **Admin → Métricas** para permitir leitura por janela temporal: **últimas 24 horas, últimos 7 dias e últimos 30 dias**.
+- Os endpoints autenticados `/api/admin/metrics/views` e `/api/admin/metrics/likes` passaram a aceitar `?period=1d|7d|30d` e filtram, respetivamente, `article_views.viewed_at` e `article_likes.created_at`.
+- O painel aplica o mesmo período a visualizações e likes, recalcula totais, notícias com atividade e o **Like rate** dentro dessa janela.
+- O sistema continua a medir **pageviews**, não pessoas únicas.
+- Não foram criados dados históricos artificiais; o período apenas filtra os registos que já existem.
+- Implementação direta, sem Codex, devido à indisponibilidade de créditos até 22/10/2026.
+- Commits: `_worker.js` `19b987bc0a15aca22756ec0d429d4fa24c456c8b`; `admin/index.html` `3fdfba17c5958cd47a1b4c188ba297e3b24a2d8a`.
+- Remendo/precaução: o filtro usa uma whitelist de períodos no backend, evitando aceitar modificadores SQL arbitrários vindos do cliente.
