@@ -364,7 +364,8 @@ async function prepareCompetitionOrder(){
   };
   // Carrega a competição atualmente selecionada em paralelo com a ordenação dos separadores,
   // para que a página não fique bloqueada à espera dos pedidos de todas as competições.
-  const initialLoad=!initialCompetitionFromUrl ? loadCompetition(active,"all",true).catch(()=>{}) : null;
+  const initialKey=active;
+  const initialLoad=!initialCompetitionFromUrl ? loadCompetition(initialKey,"all",true).catch(()=>{}) : null;
   const results=await Promise.all(competitions.map(async meta=>{
     try{
       const controller=new AbortController();
@@ -390,7 +391,6 @@ async function prepareCompetitionOrder(){
   renderTabs();
   if(!initialCompetitionFromUrl){
     const firstKey=orderedCompetitions[0]?.[0]||"liga-portugal";
-    active=firstKey;
     renderTabs();
     fixtureFilter="upcoming";
     liveOnlyFocus=false;
@@ -398,8 +398,9 @@ async function prepareCompetitionOrder(){
     roundEl.value="all";
     history.replaceState(null,"","/competicoes?competition="+encodeURIComponent(firstKey)+(firstKey==="nations-league"?"&group=A4":""));
     setCompetitionFilterState();
-    if(firstKey!==active){
+    if(firstKey!==initialKey){
       active=firstKey;
+      renderTabs();
       groupFilter=firstKey==="nations-league"?"A4":"all";
       roundEl.value="all";
       await loadCompetition(firstKey,"all",true);
