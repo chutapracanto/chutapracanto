@@ -1020,16 +1020,36 @@
                     <div class="metrics-table-wrap"><h3 class="metrics-table-title">Países</h3><table class="metrics-table"><thead><tr><th>País</th><th>Sessões</th><th>Visitas</th></tr></thead><tbody id="metrics-countries-body"><tr><td colspan="3">A carregar…</td></tr></tbody></table></div>
                     <div class="metrics-table-wrap"><h3 class="metrics-table-title">Sites / referências</h3><table class="metrics-table"><thead><tr><th>Site</th><th>Sessões</th><th>Visitas</th></tr></thead><tbody id="metrics-referrers-body"><tr><td colspan="3">A carregar…</td></tr></tbody></table></div>
                 </div>
+                <div class="metrics-grid">
+                    <div class="metric-card"><div class="metric-card-label">Sessões com conteúdos</div><div id="metric-content-sessions" class="metric-card-value">—</div></div>
+                    <div class="metric-card"><div class="metric-card-label">Tempo ativo médio no site</div><div id="metric-content-avg-time" class="metric-card-value">—</div></div>
+                    <div class="metric-card"><div class="metric-card-label">Sessões de 1 página</div><div id="metric-content-single-page" class="metric-card-value">—</div></div>
+                </div>
             </section>
             <section class="metrics-section">
                 <div class="metrics-section-heading"><h3>📰 Notícias e ✍️ Crónicas</h3><p>Todos os conteúdos juntos, ordenados por visualizações, com likes e partilhas.</p></div>
                 <div class="metrics-grid">
-                    <div class="metric-card"><div class="metric-card-label">Visualizações de conteúdos</div><div id="metric-total-content-views" class="metric-card-value">—</div></div>
                     <div class="metric-card"><div class="metric-card-label">Likes totais</div><div id="metric-total-likes" class="metric-card-value">—</div></div>
-                    <div class="metric-card"><div class="metric-card-label">Conteúdos com likes</div><div id="metric-content-with-likes" class="metric-card-value">—</div></div>
+                    <div class="metric-card"><div class="metric-card-label">Conteúdos com likes</div><div id="metric-liked-articles" class="metric-card-value">—</div></div>
+                    <div class="metric-card"><div class="metric-card-label">Visualizações de conteúdos</div><div id="metric-total-views" class="metric-card-value">—</div></div>
+                    <div class="metric-card"><div class="metric-card-label">Sessões</div><div id="metric-content-sessions" class="metric-card-value">—</div></div>
+                    <div class="metric-card"><div class="metric-card-label">Tempo ativo médio</div><div id="metric-content-avg-time" class="metric-card-value">—</div></div>
+                    <div class="metric-card"><div class="metric-card-label">Sessões de 1 página</div><div id="metric-content-single-page" class="metric-card-value">—</div></div>
                     <div class="metric-card"><div class="metric-card-label">Partilhas totais</div><div id="metric-total-shares" class="metric-card-value">—</div></div>
                 </div>
-                <div class="metrics-table-wrap"><table class="metrics-table"><thead><tr><th>Conteúdo</th><th>Tipo</th><th>Visualizações</th><th>Likes</th><th>Like rate</th><th>Partilhas</th><th>Ação</th></tr></thead><tbody id="metrics-likes-body"><tr><td colspan="7">A carregar métricas…</td></tr></tbody></table></div>
+                <div class="metrics-table-wrap"><table class="metrics-table"><thead><tr><th>Conteúdo</th><th>Tipo</th><th>Data</th><th>Visualizações</th><th>Likes</th><th>Like rate</th><th>Partilhas</th><th>Ação</th></tr></thead><tbody id="metrics-likes-body"><tr><td colspan="8">A carregar métricas…</td></tr></tbody></table></div>
+                <div class="metrics-analytics-grid">
+                    <div class="metrics-table-wrap">
+                        <h3 class="metrics-table-title">📤 Partilhas</h3>
+                        <p class="metrics-table-note">Mostra a opção de partilha escolhida. “Link copiado” é uma ação concluída; nas plataformas externas não conseguimos confirmar o envio efetivo.</p>
+                        <table class="metrics-table"><thead><tr><th>Onde</th><th>Ação</th><th>Sessões</th><th>Eventos</th></tr></thead><tbody id="metrics-shares-body"><tr><td colspan="4" class="metrics-empty">A carregar…</td></tr></tbody></table>
+                    </div>
+                    <div class="metrics-table-wrap">
+                        <h3 class="metrics-table-title">🚦 Percursos e ações</h3>
+                        <p class="metrics-table-note">O que as sessões fazem depois de entrar no site.</p>
+                        <table class="metrics-table"><thead><tr><th>Ação</th><th>Sessões</th><th>Eventos</th></tr></thead><tbody id="metrics-journeys-body"><tr><td colspan="3" class="metrics-empty">A carregar…</td></tr></tbody></table>
+                    </div>
+                </div>
             </section>
         </div>
 
@@ -2514,15 +2534,17 @@ async function abrirMetricasAdmin() {
     const period=document.getElementById("metrics-period")?.value||"30d", body=document.getElementById("metrics-likes-body"); body.innerHTML='<tr><td colspan="7" class="metrics-empty">A carregar métricas…</td></tr>';
     try {
       const q="?period="+encodeURIComponent(period), [likesData,viewsData,analyticsData]=await Promise.all([apiFetch("/api/admin/metrics/likes"+q),apiFetch("/api/admin/metrics/views"+q),apiFetch("/api/admin/metrics/analytics"+q)]), s=analyticsData.summary||{}, secs=Number(s.avgActiveSeconds||0);
-      document.getElementById("metric-total-likes").textContent=String(likesData.totalLikes||0); document.getElementById("metric-content-with-likes").textContent=String(likesData.articlesWithLikes||0); document.getElementById("metric-total-content-views").textContent=String(viewsData.totalViews||0); document.getElementById("metric-total-shares").textContent=String((analyticsData.shares||[]).reduce((a,x)=>a+Number(x.events||0),0)); document.getElementById("metric-total-site-visits").textContent=String(s.pageViews||0); document.getElementById("metric-total-sessions").textContent=String(s.sessions||0);
-      document.getElementById("metric-avg-time").textContent=secs>=60?Math.floor(secs/60)+"m "+Math.round(secs%60)+"s":Math.round(secs)+"s"; document.getElementById("metric-single-page").textContent=String(s.singlePageSessions||0); document.getElementById("metric-bounce").textContent=(s.sessions?(Number(s.singlePageSessions||0)/Number(s.sessions)*100):0).toFixed(1)+"%";
+      document.getElementById("metric-total-likes").textContent=String(likesData.totalLikes||0); document.getElementById("metric-liked-articles").textContent=String(likesData.articlesWithLikes||0); document.getElementById("metric-total-views").textContent=String(viewsData.totalViews||0); document.getElementById("metric-total-shares").textContent=String((analyticsData.shares||[]).reduce((a,x)=>a+Number(x.events||0),0)); document.getElementById("metric-total-site-visits").textContent=String(s.pageViews||0); document.getElementById("metric-total-sessions").textContent=String(s.sessions||0);
+      document.getElementById("metric-avg-time").textContent=secs>=60?Math.floor(secs/60)+"m "+Math.round(secs%60)+"s":Math.round(secs)+"s"; document.getElementById("metric-single-page").textContent=String(s.singlePageSessions||0); document.getElementById("metric-content-sessions").textContent=String(s.sessions||0); document.getElementById("metric-content-avg-time").textContent=secs>=60?Math.floor(secs/60)+"m "+Math.round(secs%60)+"s":Math.round(secs)+"s"; document.getElementById("metric-content-single-page").textContent=String(s.singlePageSessions||0); document.getElementById("metric-bounce").textContent=(s.sessions?(Number(s.singlePageSessions||0)/Number(s.sessions)*100):0).toFixed(1)+"%";
       const td=v=>{const e=document.createElement("td");e.textContent=String(v??"—");return e;}, fill=(id,rows,n,make)=>{const e=document.getElementById(id);if(!e)return;if(!rows?.length){e.innerHTML='<tr><td colspan="'+n+'" class="metrics-empty">Sem dados.</td></tr>';return;}e.replaceChildren(...rows.slice(0,20).map(make));};
       fill("metrics-sources-body",analyticsData.sources,4,x=>{const tr=document.createElement("tr");tr.append(td(x.source||"direct"),td(x.medium||"unknown"),td(x.sessions||0),td(x.visits||x.events||0));return tr;}); fill("metrics-countries-body",analyticsData.countries,3,x=>{const tr=document.createElement("tr");tr.append(td(x.country||"Desconhecido"),td(x.sessions||0),td(x.visits||0));return tr;}); fill("metrics-referrers-body",analyticsData.referrers,3,x=>{const tr=document.createElement("tr");tr.append(td(x.site||"direct"),td(x.sessions||0),td(x.visits||0));return tr;});
+      fill("metrics-shares-body",analyticsData.shares,4,x=>{const tr=document.createElement("tr");tr.append(td(x.platform||"unknown"),td(x.eventType==="share_copy_completed"?"Link copiado":"Opção de partilha escolhida"),td(x.sessions||0),td(x.events||0));return tr;});
+      fill("metrics-journeys-body",analyticsData.journeys,3,x=>{const tr=document.createElement("tr");tr.append(td(x.eventType||"—"),td(x.sessions||0),td(x.events||0));return tr;});
       const likes=new Map((likesData.items||[]).map(x=>[x.slug,Number(x.count||0)])), views=new Map((viewsData.items||[]).map(x=>[x.slug,Number(x.count||0)])), shares=new Map((analyticsData.contentShares||[]).map(x=>[x.slug,Number(x.count||0)]));
       const rows=noticias.map(f=>({...f,likeCount:likes.get(f.slug)||0,viewCount:views.get(f.slug)||0,shareCount:shares.get(f.slug)||0})).filter(f=>f.viewCount||f.likeCount||f.shareCount).sort((a,b)=>b.viewCount-a.viewCount||b.likeCount-a.likeCount||b.shareCount-a.shareCount);
-      if(!rows.length){body.innerHTML='<tr><td colspan="6" class="metrics-empty">Não existem métricas registadas neste período.</td></tr>';return;}
-      body.replaceChildren(...rows.map(f=>{const tr=document.createElement("tr");const rate=f.viewCount?(f.likeCount/f.viewCount*100).toFixed(1)+"%":"—"; tr.append(td(f.title||f.name),td(obterTipoConteudo(f)==="opinion"?"Crónica":"Notícia"),td(f.viewCount),td(f.likeCount),td(rate),td(f.shareCount));const a=document.createElement("td"),b=document.createElement("button");b.type="button";b.className="secondary-btn";b.textContent="📊 Ver métricas";b.onclick=()=>verMetricasConteudo(f.slug,f.title||f.name);a.appendChild(b);tr.appendChild(a);return tr;}));
-    } catch(e){body.innerHTML='<tr><td colspan="6" class="metrics-empty">Não foi possível carregar as métricas.</td></tr>';console.error(e);}
+      if(!rows.length){body.innerHTML='<tr><td colspan="8" class="metrics-empty">Não existem métricas registadas neste período.</td></tr>';return;}
+      body.replaceChildren(...rows.map(f=>{const tr=document.createElement("tr");const rate=f.viewCount?(f.likeCount/f.viewCount*100).toFixed(1)+"%":"—"; tr.append(td(f.title||f.name),td(obterTipoConteudo(f)==="opinion"?"Crónica":"Notícia"),td(formatarDataNoticia(f)),td(f.viewCount),td(f.likeCount),td(rate),td(f.shareCount));const a=document.createElement("td"),b=document.createElement("button");b.type="button";b.className="secondary-btn";b.textContent="📊 Ver métricas";b.onclick=()=>verMetricasConteudo(f.slug,f.title||f.name);a.appendChild(b);tr.appendChild(a);return tr;}));
+    } catch(e){body.innerHTML='<tr><td colspan="8" class="metrics-empty">Não foi possível carregar as métricas.</td></tr>';console.error(e);}
 }
 
 async function editarNoticia(path) {
