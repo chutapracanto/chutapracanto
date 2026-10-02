@@ -686,3 +686,14 @@ Não alterar D1, cache, adapter BSD, cron ou regras de filtros para resolver um 
 - [ ] Futuramente, se necessário, avaliar fonte de imagens de seleções mais robusta sem mexer no backend BSD.
 
 **Regra:** não alterar D1, cron, adapter BSD ou cache para resolver problemas de apresentação.
+
+
+### Correção regressão visual LIVE/Competições — 2026-10-02
+- [x] Corrigido `safeUrl("")` que estava a gerar a Home como URL de imagem.
+- [x] Corrigido markup do fallback visual que estava a aparecer partido no ecrã.
+- [x] Logo BSD é usado como primeira fonte visual; bandeira/bola é fallback.
+- [x] Nomes de seleções e clubes relevantes tratados em português.
+- [x] Home volta a mostrar explicitamente **Jornada N** no cartão LIVE.
+- [x] Competições aplica o mesmo sistema de imagens/nomenclatura.
+- [x] Infraestrutura BSD/D1/cache/cron preservada.
+- [ ] Confirmar visualmente no navegador com Cazaquistão–Moldávia LIVE e com a lista de jogos de Liga Portugal.
