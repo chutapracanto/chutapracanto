@@ -757,12 +757,13 @@
             return '<div class="home-live-team-goal"><b>'+esc(when)+'</b>'+(player?' '+esc(String(player)):'')+'</div>';
           }).join(''):'';
 
+          const competitionName=String(meta[1]||'').trim();
           const group=String(fixture.groupName||'').trim().replace(/^.*?(Liga\\s+[A-D]\\s*·\\s*Grupo\\s+[A-D]\\d+).*$/i,'$1');
           const groupKey=competitionGroupKey(fixture);
           const roundKey=competitionRoundKey(fixture);
           const rawRound=String(fixture.roundLabel||fixture.round||fixture.roundKey||'').trim();
           const roundText=roundKey?'Jornada '+roundKey:rawRound.replace(/.*?Matchday\s*(\d+)/i,'Jornada $1').replace(/.*?Jornada\s*(\d+)/i,'Jornada $1').replace(/.*?Round\s*(\d+)/i,'Jornada $1');
-          const metaLabel=[group,roundText].filter(Boolean).join(' · ');
+          const metaLabel=[competitionName,group,roundText].filter(Boolean).join(' · ');
           const href='/competicoes?competition='+encodeURIComponent(meta[0])+(groupKey?'&group='+encodeURIComponent(groupKey):'')+(roundKey?'&round='+encodeURIComponent(roundKey):'');
           return '<a class="home-live-card" href="'+href+'"><div class="home-live-top"><span class="home-live-led" aria-hidden="true"></span><strong>LIVE</strong><span>'+esc(metaLabel)+'</span></div><div class="home-live-teams"><div class="home-live-team"><span class="home-live-team-visual">'+liveTeamVisual(home,'home')+'</span><span>'+esc(teamDisplayName(home)||'Casa')+'</span><div class="home-live-team-goals">'+teamGoals(home.id,'home')+'</div></div><div><div class="home-live-score">'+score+'</div><div class="home-live-minute">'+esc(liveMinuteLabel(fixture))+'</div></div><div class="home-live-team away"><span class="home-live-team-visual">'+liveTeamVisual(away,'away')+'</span><span>'+esc(teamDisplayName(away)||'Fora')+'</span><div class="home-live-team-goals">'+teamGoals(away.id,'away')+'</div></div></div></a>';
         }).join('');
