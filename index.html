@@ -796,6 +796,14 @@
       const isPriorityTeam=team=>priorityNames.includes(normalizeTeamName(team?.name));
       const isPriority=item=>isPriorityTeam(item?.homeTeam)||isPriorityTeam(item?.awayTeam);
       const matchLabel=game=>esc(game.homeTeam?.name||'Casa')+' vs '+esc(game.awayTeam?.name||'Fora')+' · '+dateLabel(dateValue(game));
+      const competitionRank=team=>{
+        const name=normalizeTeamName(team?.name);
+        if(name==='fc porto'||name==='porto')return 0;
+        if(name==='sporting cp'||name==='sporting clube de portugal'||name==='sporting')return 1;
+        if(name==='sl benfica'||name==='benfica')return 2;
+        if(name==='portugal')return 3;
+        return 99;
+      };
       const competitionResults=await Promise.all(competitions.map(async meta=>{
         try{
           const response=await fetch('/api/competicoes?competition='+encodeURIComponent(meta[0])+'&status=upcoming',{cache:'no-store'});
@@ -810,6 +818,15 @@
         }catch{return {meta,data:null,upcoming:[],priority30:null}}
       }));
 
+      competitionResults.sort((a,b)=>{
+        const aFirst=a.priority30?.[0]||a.upcoming?.find(isPriority)||a.upcoming?.[0];
+        const bFirst=b.priority30?.[0]||b.upcoming?.find(isPriority)||b.upcoming?.[0];
+        const at=aFirst?dateValue(aFirst)?.getTime()??Infinity:Infinity;
+        const bt=bFirst?dateValue(bFirst)?.getTime()??Infinity:Infinity;
+        const ar=aFirst?Math.min(competitionRank(aFirst.homeTeam),competitionRank(aFirst.awayTeam)):99;
+        const br=bFirst?Math.min(competitionRank(bFirst.homeTeam),competitionRank(bFirst.awayTeam)):99;
+        return at-bt||ar-br||((a.meta?.[1]||'').localeCompare(b.meta?.[1]||'','pt-PT'));
+      });
       const withStandings=competitionResults.filter(item=>Array.isArray(item.data?.standings)&&item.data.standings.length);
       standingsTabs.replaceChildren();
       if(!withStandings.length){
@@ -823,11 +840,18 @@
           button.addEventListener('click',()=>{
             standingsTabs.querySelectorAll('.home-standings-tab').forEach(tab=>tab.classList.remove('active'));
             button.classList.add('active');
-            renderStandings(item.data.standings,item.data.phase);
+            renderStandings(item.data.standings,item.data.phase,item.meta[0]);
           });
           standingsTabs.appendChild(button);
         });
-        const renderStandings=(rows,phase)=>{
+        const renderStandings=(rows,phase,competitionKey='')=>{
+          if(competitionKey==='nations-league'&&phase?.grouped){
+            rows=rows.filter(row=>{
+              const raw=String(row?.groupName||'').trim();
+              const match=raw.match(/(?:Grupo\s*)?([A-D][1-4])$/i);
+              return match?.[1]?.toUpperCase()==='A4';
+            });
+          }
           const grouped=Boolean(phase?.grouped);
           const groups=new Map();
           rows.forEach(row=>{
@@ -845,16 +869,15 @@
           const ordered=[...groups.entries()].sort((a,b)=>a[0].localeCompare(b[0],"pt-PT"));
           standingsContent.innerHTML=ordered.map(([group,items])=>'<section class="home-standing-group"><h4>'+esc(group)+'</h4>'+table(items)+'</section>').join('');
         };
-        renderStandings(withStandings[0].data.standings,withStandings[0].data.phase);
+        renderStandings(withStandings[0].data.standings,withStandings[0].data.phase,withStandings[0].meta[0]);
       }
 
       const priorityCompetitions=competitionResults.filter(item=>item.priority30?.length);
       priorityCompetitions.sort((a,b)=>dateValue(a.priority30[0]).getTime()-dateValue(b.priority30[0]).getTime());
       if(!priorityCompetitions.length){
         gamesGrid.innerHTML='<div class="home-standings-empty">Não há jogos das equipas prioritárias nos próximos 30 dias.</div>';
-        return;
-      }
-      gamesGrid.innerHTML=priorityCompetitions.map(item=>{
+      }else{
+        gamesGrid.innerHTML=priorityCompetitions.map(item=>{
         const meta=item.meta;
         const selected=[];
         const usedTeams=new Set();
@@ -878,7 +901,8 @@
           ? '<span class="home-important-next-label"><b>PRÓXIMO JOGO</b> · '+esc(dateLabel(dateValue(overall)))+'</span><span class="home-important-next-game">'+esc(overall.homeTeam?.name||'Casa')+' vs '+esc(overall.awayTeam?.name||'Fora')+'</span>'
           : '<span class="home-important-next-label"><b>PRÓXIMO JOGO</b></span><span class="home-important-next-game">—</span>';
         return '<a class="home-important-card competition-'+esc(meta[0])+'" href="/competicoes?competition='+encodeURIComponent(meta[0])+'"><div class="home-important-card-top"><img src="'+leagueLogo(meta[2])+'" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/images/logo.png\'"><strong>'+esc(meta[1])+'</strong><span aria-hidden="true">→</span></div><div class="home-important-label">JOGOS IMPORTANTES</div><div class="home-important-match">'+importantMatches+'</div><div class="home-important-next">'+nextMatch+'</div></a>';
-      }).join('');
+        }).join('');
+      }
       refreshHomeLive(true);
       clearInterval(liveState.discoveryTimer);
       clearInterval(liveState.timer);
