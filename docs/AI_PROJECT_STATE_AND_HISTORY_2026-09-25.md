@@ -1948,3 +1948,34 @@ Foi observado em produção um jogo LIVE real da UEFA Nations League:
 
 ### Regra
 Para seleções nacionais, a bandeira é fallback aceitável. Não trocar novamente o sistema de imagens/API sem evidência de que a solução atual é insuficiente.
+
+
+## 2026-10-02 — CORREÇÃO DO REGRESSO VISUAL DOS JOGOS/LIVE
+
+Foi identificado um erro introduzido na primeira implementação dos fallbacks visuais dos cartões LIVE/Competições.
+
+### Causa raiz
+- `safeUrl("")` estava a transformar uma string vazia em `https://chutapracanto.com/`, porque `new URL("", location.origin)` devolve a origem.
+- Isto fazia com que imagens sem URL válida fossem renderizadas como imagens apontando para a própria Home.
+- O fallback visual tinha sido construído com `onerror` dentro de uma string HTML e ficou mal escapado, produzindo texto/markup partido visível no cartão.
+- O resultado foi exatamente o padrão observado: imagem apontada para Home, bandeira/markup exposto e nomes visualmente “lixados”.
+
+### Correção
+- `safeUrl` agora rejeita imediatamente valores vazios antes de criar o URL.
+- O fallback de equipa passou a ser markup simples e seguro: imagem válida + bandeira/bola escondida, revelada apenas se a imagem falhar.
+- A imagem usa primeiro o `logo` fornecido pelo BSD e só depois `flag`.
+- Nomes foram centralizados num mapa PT para seleções e clubes relevantes; nomes não mapeados continuam a usar o nome real recebido do fornecedor, sem inventar traduções.
+- Home: a etiqueta da jornada voltou a ser mostrada explicitamente como **Jornada N**. Ex.: **Liga C · Grupo C3 · Jornada 3**.
+- Competições: o mesmo tratamento de nomes/imagens foi aplicado ao destaque e à lista de jogos.
+- Não foram alterados BSD, D1, cron ou o modelo de cache.
+
+### Commits
+- Home: `0843826c79cc699063064f6c661ad0c234d35f20`, seguido de correção de escaping em `fe8967575fe9ee3b90825f4c8f78fe22bc782d36`.
+- Competições: `6247a6931299c3609a78a603f1021870d5cb4fd6`, seguido de correção de escaping em `be58fca1a7ad65edb1b0a0f59bc849d1e6537ec2`.
+- Último deployment de Competições: `b8060631-ac2e-447b-9c1c-ee84bd38abb2` — SUCCESS — alias `https://chutapracanto.com`.
+- Último deployment da Home da mesma correção: `0ab9e8f1-e04c-429b-bb8d-60e14a89b141` — SUCCESS — alias `https://chutapracanto.com`.
+
+### Validação
+- `competicoes.html`: JavaScript executável compila.
+- `index.html`: o único erro da validação sintática automática é o primeiro bloco JSON-LD, que não é JavaScript executável; o bloco funcional compila.
+- O pipeline LIVE continua a usar os dados reais do BSD/D1.
