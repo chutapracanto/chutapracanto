@@ -5,7 +5,7 @@
 **Branch de produção:** `main`
 **Site:** `https://chutapracanto.com`
 **HEAD verificado:** `b0b75366a6f137a87ed43385bd61394c0dd49f53`
-**Último commit de código: `docs: registar preparacao AdSense e privacidade`
+**Último commit de código: `docs: limpar referencias internas da matriz de video`
 
 > **FUNÇÃO DESTE DOCUMENTO**
 >
