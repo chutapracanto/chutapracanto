@@ -178,6 +178,26 @@
             color: #111827;
         }
 
+        .metrics-section {
+            margin-bottom: 30px;
+        }
+
+        .metrics-section-heading {
+            margin: 0 0 14px;
+        }
+
+        .metrics-section-heading h3 {
+            margin: 0 0 5px;
+            font-size: 19px;
+        }
+
+        .metrics-section-heading p {
+            margin: 0;
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
         .metrics-analytics-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -980,7 +1000,9 @@
                 <button type="button" class="secondary-btn" onclick="fecharMetricasAdmin()">← Voltar aos conteúdos</button>
             </div>
 
-            <div class="metrics-grid">
+            <section class="metrics-section">
+                <div class="metrics-section-heading"><h3>📰 Notícias</h3><p>Desempenho editorial: visualizações, likes e taxa de likes por visualização.</p></div>
+                <div class="metrics-grid">
                 <div class="metric-card">
                     <div class="metric-card-label">Likes totais</div>
                     <div id="metric-total-likes" class="metric-card-value">—</div>
@@ -1023,6 +1045,10 @@
                     </tbody>
                 </table>
             </div>
+            </section>
+
+            <section class="metrics-section">
+                <div class="metrics-section-heading"><h3>🚦 Origens e jornada</h3><p>De onde chegam as sessões e o que fazem depois de entrar no site.</p></div>
 
             <div class="metrics-analytics-grid">
                 <div class="metrics-table-wrap">
@@ -1040,6 +1066,7 @@
                     </table>
                 </div>
             </div>
+            </section>
         </div>
 
 
