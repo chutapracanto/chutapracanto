@@ -1789,3 +1789,14 @@ O deployment foi validado diretamente via Cloudflare. O ambiente de execução n
 Foram gerados vários deployments em sequência; Cloudflare marcou alguns como skipped por serem builds ultrapassados por commits seguintes. O deployment 88386ea7 é o final desta sequência e terminou em SUCCESS. Não é necessário reverter nem tentar reativar os deployments skipped.
 
 migrations/0003_analytics_events.sql fica no repositório como fonte de persistência. O Worker também cria a tabela/índices de forma idempotente no primeiro uso para evitar uma dependência de migração manual.
+
+
+## 2026-10-02 — CORREÇÃO DO PAINEL ADMIN: MÉTRICAS E LAYOUT EDITORIAL
+
+- Problema identificado: o bloco `#metrics-screen` tinha sido colocado **dentro** de `#list-screen`. Como `abrirMetricasAdmin()` esconde `#list-screen`, as próprias métricas ficavam escondidas e não podiam carregar/aparecer.
+- Correção direta, sem Codex: commit `f8f8931ad5f8c6b28679a402fac9590ca705d88b`.
+- `#metrics-screen` foi retirado de dentro de `#list-screen` e passou a ser irmão dos ecrãs de conteúdos/formulário, permitindo que o botão 📊 Métricas o mostre corretamente.
+- O bloco superior do Admin foi também corrigido para preservar o layout anterior: título à esquerda e os botões `+ Nova Notícia`, `+ Nova Crónica` e `Sair` do lado direito.
+- Deployment Cloudflare Pages: `83c87c55`, production, commit acima, build/deploy SUCCESS, alias `https://chutapracanto.com`.
+- Não foram alteradas as funções de criação/edição de notícias ou crónicas, nem o backend de futebol.
+- Regra para futuras alterações: não aninhar `#metrics-screen` dentro de `#list-screen`; qualquer nova secção analítica deve permanecer dentro de 📊 Métricas. Manter os botões de criação no lado direito do cabeçalho editorial.
