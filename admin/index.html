@@ -198,14 +198,36 @@
             line-height: 1.5;
         }
 
+        .metrics-return-tabs {
+            display: flex;
+            gap: 8px;
+            margin: 0 0 18px;
+            flex-wrap: wrap;
+        }
+
+        .metrics-return-tab {
+            border: 1px solid #d1d5db;
+            background: #fff;
+            color: #374151;
+            padding: 9px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .metrics-return-tab:hover {
+            background: #f3f4f6;
+        }
+
         .metrics-analytics-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 18px;
+            grid-template-columns: 1fr;
+            gap: 24px;
             margin-top: 24px;
         }
 
         .metrics-analytics-grid .metrics-table-wrap {
+            width: 100%;
             min-width: 0;
         }
 
@@ -996,7 +1018,11 @@
         >
             <div class="metrics-toolbar">
                 <div>
-                    <h2>📊 Métricas</h2>
+                    <h2>📊 Métricas</h2>                <div class="metrics-return-tabs" role="tablist" aria-label="Voltar à área editorial">
+                    <button type="button" class="metrics-return-tab" onclick="mudarSecaoAdmin('news')">← 📰 Notícias</button>
+                    <button type="button" class="metrics-return-tab" onclick="mudarSecaoAdmin('opinion')">← ✍️ Crónicas</button>
+                </div>
+
                     <p>Visão geral do site e desempenho conjunto de Notícias e Crónicas. As visualizações são pageviews, não pessoas únicas.</p>
                     <label for="metrics-period">Período</label>
                     <select id="metrics-period" class="metrics-period-select" onchange="abrirMetricasAdmin()">
