@@ -65,7 +65,7 @@
 
 
 .competition-highlight-card h3{font:700 .8rem var(--font-title);text-transform:uppercase;letter-spacing:.08em;color:var(--text-gray);margin:0 0 .75rem}
-.competition-highlight-main{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:.7rem;position:relative;min-height:116px;padding:0 2.1rem}.highlight-nav{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:64px;display:grid;place-items:center;border:1px solid var(--border-color);border-radius:10px;background:rgba(255,255,255,.025);color:var(--text-gray);font:500 2rem/1 var(--font-body);cursor:pointer;opacity:.78;transition:opacity .2s,background .2s,border-color .2s,color .2s}.highlight-nav:hover{opacity:1;background:rgba(157,255,0,.07);border-color:var(--neon-green);color:var(--neon-green)}.highlight-nav.left{left:0}.highlight-nav.right{right:0}
+.competition-highlight-main{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:.7rem;position:relative;min-height:116px;padding:0 2.1rem}.highlight-nav{position:absolute;top:50%;transform:translateY(-50%);width:34px;height:58px;display:grid;place-items:center;border:0;border-radius:12px;background:transparent;color:var(--text-gray);font:400 2.15rem/1 var(--font-body);cursor:pointer;opacity:.78;transition:opacity .2s,background .2s,color .2s}.highlight-nav:hover{opacity:1;background:rgba(157,255,0,.07);color:var(--neon-green)}.highlight-nav.left{left:0}.highlight-nav.right{right:0}
 .highlight-team{text-align:center;font-weight:700;font-size:.82rem}
 .highlight-team img{width:42px;height:42px;object-fit:contain;display:block;margin:0 auto .35rem}.fixture-team-visual{width:27px;height:27px;display:grid;place-items:center;flex:0 0 27px}.fixture-team-visual img{width:27px;height:27px;object-fit:contain}.fixture-team-flag{width:27px;height:27px;display:grid;place-items:center;font-size:1.25rem;line-height:1}.highlight-team .fixture-team-visual,.highlight-team .fixture-team-visual img{width:42px;height:42px}.highlight-team .fixture-team-visual{margin:0 auto .35rem}.highlight-team .fixture-team-flag{width:42px;height:42px;display:grid;place-items:center;font-size:2rem;margin:0}
 .highlight-score{font:700 1.1rem var(--font-title);color:var(--neon-green);text-align:center}
@@ -146,7 +146,7 @@
         <div class="competition-meta">
           <span id="competition-season">Época —</span>
           <span id="competition-data-status">A atualizar</span>
-          <span id="competition-live-status" class="competition-live-status"><i aria-hidden="true"></i><b>ONLINE</b></span>
+          <button id="competition-live-status" class="competition-live-status" type="button" onclick="focusLiveGames()" title="Ir para os jogos ao vivo"><i aria-hidden="true"></i><b>ONLINE</b></button>
         </div>
       </div>
     </article>
@@ -403,7 +403,7 @@ function renderHighlight(){
   const recentlyFinished=currentKey
     ? scopedFixtures.find(item=>fixtureDomKey(item)===currentKey&&fixtureStatus(item)==="finished")
     : null;
-  highlightCandidates=liveCandidates.length ? liveCandidates : recentlyFinished ? [recentlyFinished] : upcomingCandidates.slice(0,1);
+  highlightCandidates=liveCandidates.length ? liveCandidates : upcomingCandidates.slice(0,1);
   highlightIndex=liveCandidates.length ? Math.min(highlightIndex,Math.max(0,highlightCandidates.length-1)) : 0;
   if(!highlightCandidates.length){highlightEl.innerHTML='<span class="empty">Sem jogo disponível.</span>';return}
   const item=highlightCandidates[highlightIndex];
@@ -421,8 +421,8 @@ function renderHighlight(){
     '</div>'+
     '<div class="highlight-team">'+teamVisual(item.awayTeam)+'<span>'+away+'</span><div class="team-goal-details">'+goalDetailsForTeam(item,item.awayTeam?.id,"away")+'</div></div>'+
     (live && highlightCandidates.length>1
-      ? '<button type="button" class="highlight-nav left" onclick="previousHighlightGame()" aria-label="Jogo anterior" title="Jogo anterior">←</button>'+
-        '<button type="button" class="highlight-nav right" onclick="nextHighlightGame()" aria-label="Próximo jogo" title="Próximo jogo">→</button>'
+      ? '<button type="button" class="highlight-nav left" onclick="previousHighlightGame()" aria-label="Jogo anterior" title="Jogo anterior">‹</button>'+
+        '<button type="button" class="highlight-nav right" onclick="nextHighlightGame()" aria-label="Próximo jogo" title="Próximo jogo">›</button>'
       : '');
 }
 function previousHighlightGame(){
@@ -485,7 +485,7 @@ function renderRounds(selectUpcoming=false){
 function visibleFixtures(){
   let rows=allFixtures.filter(item=>{
     const status=fixtureStatus(item);
-    const statusMatches=fixtureFilter==="all"||(fixtureFilter==="upcoming"?(status==="upcoming"||status==="live"):status==="finished");
+    const statusMatches=liveOnlyFocus ? status==="live" : fixtureFilter==="all"||(fixtureFilter==="upcoming"?(status==="upcoming"||status==="live"):status==="finished");
     const groupMatches=!competitionPhase.grouped || groupFilter==="all" || (active==="nations-league" ? nationsGroupName(item)===groupFilter : String(item?.groupName||"").trim()===groupFilter);
     return statusMatches&&groupMatches;
   });
@@ -538,14 +538,15 @@ function patchFixtureRow(item){
   const row=[...fixturesEl.querySelectorAll(".fixture[data-event-id]")].find(node=>node.dataset.eventId===fixtureDomKey(item));
   if(!row)return;
   const state=fixtureStatus(item);
-  const visible=fixtureFilter==="all"||(fixtureFilter==="upcoming"?(state==="upcoming"||state==="live"):state==="finished");
+  const visible=liveOnlyFocus?state==="live":fixtureFilter==="all"||(fixtureFilter==="upcoming"?(state==="upcoming"||state==="live"):state==="finished");
   const selectedRound=roundEl.value;
   const matchesRound=selectedRound==="all"||roundIdentity(item).key===selectedRound;
   if(!visible||!matchesRound){row.remove();return}
   const statusEl=row.querySelector('[data-field="status"]');
   if(statusEl){
     statusEl.classList.toggle("fixture-live",state==="live");
-    statusEl.textContent=state==="live"?"LIVE"+(liveMinuteLabel(item)?" · "+liveMinuteLabel(item):""):dateLabel(dateValue(item));
+    const justFinished=state==="finished" && recentlyFinishedAt.has(fixtureDomKey(item)) && Date.now()-recentlyFinishedAt.get(fixtureDomKey(item))<15*60*1000;
+    statusEl.textContent=justFinished?"LIVE":state==="live"?"LIVE"+(liveMinuteLabel(item)?" · "+liveMinuteLabel(item):""):dateLabel(dateValue(item));
   }
   const minuteEl=row.querySelector('[data-field="minute"]');
   if(minuteEl){
@@ -571,19 +572,22 @@ function patchHighlight(){
   if(!item){renderHighlight();return}
   const current=highlightEl.querySelector(".highlight-score");
   if(!current||current.dataset.eventId!==fixtureDomKey(item)){renderHighlight();return}
-  const state=fixtureStatus(item),live=state==="live",minute=liveMinuteLabel(item);
+  const state=fixtureStatus(item),live=state==="live",minute=liveMinuteLabel(item),justFinished=state==="finished"&&recentlyFinishedAt.has(fixtureDomKey(item))&&Date.now()-recentlyFinishedAt.get(fixtureDomKey(item))<15*60*1000;
   const liveEl=current.querySelector('[data-field="live"]');
-  if(liveEl){liveEl.hidden=!live;liveEl.textContent=live?"LIVE"+(minute?" · "+minute:""):""}
+  if(liveEl){liveEl.hidden=!live&&!justFinished;liveEl.textContent=(live||justFinished)?"LIVE"+(live&&minute?" · "+minute:""):""}
   const scoreEl=current.querySelector('[data-field="score"]');
   if(scoreEl)scoreEl.textContent=live||item.score?.home!=null||item.score?.away!=null?fixtureScore(item):"VS";
   const goalEls=current.querySelectorAll(".team-goal-details");
   if(goalEls[0])goalEls[0].innerHTML=goalDetailsForTeam(item,item.homeTeam?.id,"home");
   if(goalEls[1])goalEls[1].innerHTML=goalDetailsForTeam(item,item.awayTeam?.id,"away");
   const detailEl=current.querySelector('[data-field="detail"]');
-  if(detailEl)detailEl.textContent=live&&item.livePeriod?item.livePeriod:state==="finished"?"Final de jogo":dateLabel(dateValue(item));
+  if(detailEl)detailEl.textContent=live&&item.livePeriod?item.livePeriod:justFinished?"Resultado final":state==="finished"?"Resultado final":dateLabel(dateValue(item));
 }
 function updateLiveSnapshot(data){
   const previous=new Map(allFixtures.map(item=>[fixtureDomKey(item),item]));
+  const now=Date.now();
+  allFixtures.forEach(item=>{const key=fixtureDomKey(item);if(fixtureStatus(item)==="live") recentlyFinishedAt.delete(key);});
+  previous.forEach((old,key)=>{if(fixtureStatus(old)==="live"){const fresh=incoming.find(item=>fixtureDomKey(item)===key);if(fresh&&fixtureStatus(fresh)==="finished")recentlyFinishedAt.set(key,now);}});
   const incoming=Array.isArray(data.fixtures)?data.fixtures:[];
   const previousKeys=new Set(previous.keys());
   const incomingKeys=new Set(incoming.map(fixtureDomKey));
@@ -624,7 +628,16 @@ let refreshTimer=null;
 let refreshInFlight=false;
 let loadedSeasonId=null;
 let loadedAllSnapshot=false;
+let liveOnlyFocus=false;
+const recentlyFinishedAt=new Map();
 let allStandings=[];
+function focusLiveGames(){
+  liveOnlyFocus=true;
+  roundEl.value="all";
+  renderFixtures();
+  const first=fixturesEl.querySelector('.fixture[data-event-id]');
+  if(first)first.scrollIntoView({behavior:"smooth",block:"center"});
+}
 function updateCompetitionLiveState(){
   const live=allFixtures.some(item=>fixtureStatus(item)==="live");
   const liveEl=document.getElementById("competition-live-status");
@@ -727,6 +740,7 @@ async function loadCompetition(key,status="all",resetRound=true){
 }
 document.querySelectorAll(".competition-filter").forEach(button=>button.addEventListener("click",()=>{
   fixtureFilter=button.dataset.filter;
+  liveOnlyFocus=false;
   setCompetitionFilterState();
   roundEl.value="all";
   if(fixtureFilter==="all"){
@@ -737,6 +751,7 @@ document.querySelectorAll(".competition-filter").forEach(button=>button.addEvent
 }));
 groupEl.addEventListener("change",()=>{
   groupFilter=groupEl.value||"all";
+  liveOnlyFocus=false;
   roundEl.value="all";
   renderGroupFilter();
   renderFixtures();
@@ -745,6 +760,7 @@ groupEl.addEventListener("change",()=>{
   scheduleCompetitionRefresh();
 });
 roundEl.addEventListener("change",()=>{
+  liveOnlyFocus=false;
   if(roundEl.value==="all"){ renderFixtures(); scheduleCompetitionRefresh(); return; }
   if(loadedAllSnapshot){ renderFixtures(); return; }
   const requestStatus=fixtureFilter==="finished"?"finished":fixtureFilter==="upcoming"?"upcoming":"all";
@@ -754,6 +770,7 @@ window.addEventListener("popstate",()=>{
   const key=new URLSearchParams(location.search).get("competition")||"liga-portugal";
   if(competitions.some(item=>item[0]===key)&&key!==active){
     fixtureFilter="upcoming";
+    liveOnlyFocus=false;
     groupFilter=key==="nations-league"?"A4":"";
     roundEl.value="all";
     setCompetitionFilterState();
