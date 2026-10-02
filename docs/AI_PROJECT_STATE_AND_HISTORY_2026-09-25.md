@@ -2411,3 +2411,25 @@ Commits:
 - Estrutura de chavetas dos dois HTML: equilibrada.
 - Confirmado no código: ordenação usa `status=all`; carregamento de competição usa snapshot `all`; Home LIVE usa `status=live`; Nations A4 usa extração robusta do grupo.
 - Produção ainda depende da conclusão dos deployments Cloudflare destes dois commits; não considerar fechado antes de ambos concluírem com SUCCESS.
+
+# 77. CORREÇÃO DO CARREGAMENTO INICIAL A4 — 2026-10-02
+
+## Diagnóstico
+- Ao abrir/selecionar uma competição, a interface mantinha o filtro visual `Próximos`, mas enviava ao backend `status=upcoming` no carregamento inicial.
+- Isto contrariava a correção do ciclo 76, que passou a depender do snapshot completo `status=all` para filtrar os jogos no cliente e podia fazer a Nations League A4 aparecer como “Não há jogos para este filtro”.
+
+## Correção
+- A entrada normal nas competições passa a carregar sempre `status=all` e mantém `Próximos` apenas como filtro visual.
+- A seleção de uma aba, a competição inicial e a entrada por URL passam a usar o mesmo fluxo.
+- O filtro explícito `Resultados` continua a poder pedir apenas `finished`.
+- O filtro `Próximos` deixa de depender da resposta upstream específica de `upcoming`.
+
+## Commit e produção
+- Competições: `672d223aac56ab7305c817f3cd196858fa86ceb3`
+- Deployment Pages: `8e6a44ce-4401-44da-a348-fdb53de2d48c`
+- Estado: SUCCESS em produção.
+
+## Validação
+- Confirmado no código que as entradas normais usam `loadCompetition(...,"all",...)`.
+- O deployment correspondente ao commit concluiu com sucesso.
+- Não foi declarada validação visual externa, por a resolução/acesso direto ao domínio não estar disponível neste ambiente.
