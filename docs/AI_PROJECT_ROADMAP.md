@@ -547,3 +547,13 @@ Na revisão pós-implementação foi detetado que a função de pageview estava 
 - commit: 33e49aa8f0174051755f72ae0a318ae28cbb4d10;
 - deployment: cc35198e, SUCCESS, alias de produção;
 - não foram inseridos pageviews artificiais.
+
+
+## 2026-10-02 — Métricas por período
+
+- [x] Admin → Métricas: filtro de **últimas 24h / 7 dias / 30 dias**.
+- [x] Likes e pageviews filtrados pelo mesmo período.
+- [x] Totais e Like rate recalculados para a janela selecionada.
+- [x] Backend restringe os valores de período a uma whitelist (`1d`, `7d`, `30d`).
+- [x] Sem dados históricos inventados; apenas os eventos efetivamente registados entram nas métricas.
+- [ ] Fase futura separada: visitantes únicos/sessões/origens de tráfego, caso seja necessário e após revisão de privacidade.
