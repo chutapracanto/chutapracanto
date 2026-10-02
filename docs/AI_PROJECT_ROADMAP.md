@@ -731,3 +731,12 @@ Não alterar D1, cache, adapter BSD, cron ou regras de filtros para resolver um 
 - [x] Produção: Home 541c3cdb-9c61-4bde-97bb-60c469f15813 SUCCESS; Competições 588e93e4-f2d6-4dde-a06e-4a946859631d SUCCESS; último deploy 59490b0a-b540-4431-ad8a-ed6963526e0e SUCCESS com alias de produção.
 - [ ] Confirmar visualmente no próximo LIVE real com golo.
 
+
+## 2026-10-02 — SEGUNDA CORREÇÃO DOS CARTÕES LIVE
+- [x] Corrigir regex que impedia a tradução real de Matchday para Jornada no Home.
+- [x] Suportar também Round N → Jornada N.
+- [x] Tornar a leitura de golos Home/Competições tolerante a variantes de equipa/jogador/minuto vindas do BSD.
+- [x] Aplicar a resolução por lado home/away quando o golo não traz teamId utilizável.
+- [x] Validar JavaScript.
+- [x] Produção SUCCESS nos dois ficheiros.
+- [ ] Confirmar com um LIVE real com golo.
