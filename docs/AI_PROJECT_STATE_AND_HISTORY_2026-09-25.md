@@ -2501,3 +2501,14 @@ Commits:
 - Commit: `c0ab3f5e984d7a3caecf2c9cbb9ce74ccac49c66` — `fix: sincronizar competicao inicial com dados carregados`.
 - Cloudflare Pages production deployment: `5078bb88-cfc2-4f29-a09d-f92582b54765` — **SUCCESS** às 17:41:16 UTC.
 - Cartões LIVE da Home: mantidos sem alterações; utilizador confirmou que estão a funcionar.
+
+
+# 84. ELIMINAR FLASH DA LIGA PORTUGAL AO ABRIR COMPETIÇÕES — 2026-10-02
+
+- Sintoma: ao abrir **Competições**, a Liga Portugal aparecia durante uma fração de segundo antes de a ordenação selecionar Nations League.
+- Causa: a carga inicial da competição por defeito (`liga-portugal`) foi mantida em paralelo para acelerar a entrada. Essa carga podia começar a preencher a interface antes de a ordenação determinar a competição final.
+- Correção: adicionada uma sequência de pedidos (`loadSequence`) para que apenas a resposta da carga atualmente válida possa atualizar a UI. A carga paralela antiga continua a poder ser aproveitada sem permitir que uma competição entretanto ultrapassada substitua a competição final.
+- O título/logótipo da competição só são atualizados pela resposta válida, eliminando o flash visual da Liga Portugal durante a seleção inicial.
+- Não foram alterados Worker, BSD, D1 ou cron.
+- Commit: `2882f91cb458f556d65a404d0ecc5738a5df27d3` — `fix: evitar flash da competicao anterior no carregamento`.
+- Cloudflare Pages production deployment: `4a633a6d-f4ea-4af2-b31b-eb1329927875` — **SUCCESS** às 17:43:27 UTC.
