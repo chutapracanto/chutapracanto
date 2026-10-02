@@ -363,10 +363,11 @@ async function prepareCompetitionOrder(){
     if(name==="portugal")return 3;
     return 99;
   };
-  // Carrega a competição atualmente selecionada em paralelo com a ordenação dos separadores,
-  // para que a página não fique bloqueada à espera dos pedidos de todas as competições.
+  // Não carregar a competição provisória (Liga Portugal) antes de a ordenação terminar.
+  // Caso contrário, a página pinta Liga Portugal por instantes e só depois troca para a
+  // competição realmente prioritária. Primeiro determina-se a ordem; depois carrega-se apenas
+  // a competição escolhida.
   const initialKey=active;
-  const initialLoad=!initialCompetitionFromUrl ? loadCompetition(initialKey,"all",true).catch(()=>{}) : null;
   const results=await Promise.all(competitions.map(async meta=>{
     try{
       const controller=new AbortController();
@@ -399,14 +400,12 @@ async function prepareCompetitionOrder(){
     roundEl.value="all";
     history.replaceState(null,"","/competicoes?competition="+encodeURIComponent(firstKey)+(firstKey==="nations-league"?"&group=A4":""));
     setCompetitionFilterState();
-    if(firstKey!==initialKey){
+    if(firstKey!==initialKey || !initialCompetitionFromUrl){
       active=firstKey;
       renderTabs();
       groupFilter=firstKey==="nations-league"?"A4":"all";
       roundEl.value="all";
       await loadCompetition(firstKey,"all",true);
-    }else if(initialLoad){
-      await initialLoad;
     }
   }
 }
