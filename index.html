@@ -928,6 +928,10 @@
             || (dateValue(a)?.getTime()??Infinity)-(dateValue(b)?.getTime()??Infinity)
             || Math.min(competitionRank(a.homeTeam),competitionRank(a.awayTeam))-Math.min(competitionRank(b.homeTeam),competitionRank(b.awayTeam));
         });
+        // Regra normal: no máximo 1 jogo por clube dentro dos 3 lugares.
+        // Exceção: se não houver 3 clubes/jogos diferentes disponíveis,
+        // preenchemos os lugares restantes com os jogos seguintes, mesmo
+        // que pertençam ao mesmo clube já mostrado.
         for(const game of orderedPriorityGames){
           if(selected.length>=3) break;
           const home=normalizeTeamName(game.homeTeam?.name);
@@ -936,6 +940,26 @@
           selected.push(game);
           usedTeams.add(home);
           usedTeams.add(away);
+        }
+        if(selected.length<3){
+          const selectedKeys=new Set(selected.map(game=>{
+            return [
+              dateValue(game)?.getTime()??'',
+              normalizeTeamName(game.homeTeam?.name),
+              normalizeTeamName(game.awayTeam?.name)
+            ].join('|');
+          }));
+          for(const game of orderedPriorityGames){
+            if(selected.length>=3) break;
+            const key=[
+              dateValue(game)?.getTime()??'',
+              normalizeTeamName(game.homeTeam?.name),
+              normalizeTeamName(game.awayTeam?.name)
+            ].join('|');
+            if(selectedKeys.has(key)) continue;
+            selected.push(game);
+            selectedKeys.add(key);
+          }
         }
         const overall=item.upcoming[0];
         const sameAsImportant=game=>selected.some(selectedGame=>
