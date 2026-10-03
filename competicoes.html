@@ -493,11 +493,17 @@ function renderRounds(selectUpcoming=false){
   const previous=roundEl.value;
   const options=[...rounds.values()].sort((a,b)=>a.firstKickoff-b.firstKickoff||a.stageLabel.localeCompare(b.stageLabel,"pt-PT"));
   if(active==="liga-portugal") options.sort((a,b)=>a.firstKickoff-b.firstKickoff);
-  const labels=options.map(round=>round.displayRound?round.stageLabel+" · "+round.displayRound:round.stageLabel);
+  const labels=options.map(round=>{
+    if(active==="nations-league"){
+      return round.displayRound || (/^\\d+$/.test(String(round.roundKey||"")) ? "Jornada "+round.roundKey : "Jornada");
+    }
+    return round.displayRound?round.stageLabel+" · "+round.displayRound:round.stageLabel;
+  });
   const labelCounts=new Map(labels.map(label=>[label,labels.filter(item=>item===label).length]));
+  roundEl.setAttribute("aria-label",active==="nations-league"?"Jornadas":"Jornadas");
   roundEl.innerHTML='<option value="all">Todas as jornadas</option>'+options.map((round,index)=>{
-    const label=labels[index]+(labelCounts.get(labels[index])>1?" · "+round.stageKey:"");
-    return '<option value="'+esc(round.key)+'">'+esc(label)+'</option>';
+    const label=labels[index]+(active!=="nations-league"&&labelCounts.get(labels[index])>1?" · "+round.stageKey:"");
+    return '<option value="'+esc(round.key)+'">'+esc(label)+"</option>";
   }).join("");
   const knownRoundCounts={"liga-portugal":34,"champions-league":8,"europa-league":8,"conference-league":8,"nations-league":6};
   const knownCount=knownRoundCounts[active]||0;
