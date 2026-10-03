@@ -2605,3 +2605,19 @@ Commits:
 - Correção em `noticia.html`: restauradas as expressões regulares para os escapes JavaScript normais (`\u`, `\s`, `\d`), incluindo a validação da data e normalização de texto.
 - Commit: `6810dd474caac6cb456502d200f18944aa45f098` — `fix: corrigir filtragem das noticias relacionadas`.
 - Cloudflare Pages produção: deployment `49411476-f424-4efa-a563-9cbd9f8b5b41`, estado SUCCESS, alias `https://chutapracanto.com`.
+
+
+## 2026-10-03 — AUDITORIA OPERACIONAL GITHUB + CLOUDFLARE
+
+- GitHub `main` verificado: HEAD atual `8c8403fc9aefca6b4e36f3ebdf78432c08ec362f` (commit documental sobre “Continua a ler”).
+- Última alteração funcional de produção: `6810dd474caac6cb456502d200f18944aa45f098` — correção da filtragem das notícias relacionadas.
+- Cloudflare Pages confirmou que o deployment desse commit `8c8403fc` foi criado mas ficou **skipped / path_config**, porque o projeto exclui `docs/*` da construção de produção. Isto é esperado para alterações apenas documentais e não substitui a produção funcional.
+- Deployment canónico de produção confirmado: `49411476-f424-4efa-a563-9cbd9f8b5b41`, SUCCESS, commit `6810dd474caac6cb456502d200f18944aa45f098`, alias `https://chutapracanto.com`.
+- Cloudflare Pages continua ligado ao GitHub `chutapracanto/chutapracanto`, branch de produção `main`, com `chutapracanto.com` e `chutapracanto.pages.dev`.
+- D1 confirmado: `FOOTBALL_CACHE_DB` → `cpc-football-cache` (ID `92e3ef93-4c44-46c8-a1a4-ff5c09f4b49f`); `ARTICLE_LIKES_DB` → `cpc-article-likes` (ID `ba093005-9101-43f4-98fa-69d913edb09c`). Não alterar IDs.
+- Worker separado confirmado: `cpc-football-cron`; handlers `scheduled`; schedule Cloudflare confirmado como `*/5 * * * *`. Continua separado do Pages Worker e não deve ser recriado.
+- Cron teve deployments Wrangler recentes e a versão ativa mais recente foi confirmada em 2026-10-03. Não houve alteração da arquitetura BSD → Pages Worker → D1/cache → frontend.
+- Variáveis/secrets de produção confirmados pelo Cloudflare como existentes: `ADMIN_PASSWORD`, `BSD_API_KEY`, `GITHUB_TOKEN`; valores não são expostos pela auditoria.
+- PRs abertas antigas continuam não sendo produção. Em particular, #52 e #47 permanecem abertas e não devem ser tratadas como estado ativo da `main` sem merge/validação posterior.
+- Regras, Roadmap e protocolo foram relidos antes desta auditoria. A ordem vigente permanece Fase 4 / SEO-indexação como fase técnica, enquanto LIVE, métricas e correções editoriais são frentes já implementadas que só devem ser reabertas perante regressão/evidência.
+- Regra operacional reforçada: deployment SUCCESS prova publicação, não prova UX/funcionalidade; deployment skipped por `path_config` em documentação não representa regressão da produção.
