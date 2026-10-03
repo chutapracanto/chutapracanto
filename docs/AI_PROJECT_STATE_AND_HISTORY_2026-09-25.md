@@ -2646,3 +2646,11 @@ Commits:
 - Não foram alterados Worker, BSD, D1, secrets, cron ou IDs de base de dados.
 - Commit frontend Nations League: `ab40316faf841dafd83dba408107c86554bcb7f6`.
 - Commit frontend Home prioridades: `384d578d6d843eb13d7a1cc60f1b2d8c9fd5d1dd`.
+
+## 2026-10-03 — CORREÇÃO DE REGRESSÃO HOME + FILTRO NATIONS LEAGUE
+- Regressão identificada após a separação das prioridades na Home: em `carregarCompeticoesHome()`, a variável existente é `isPriorityTeam`, mas a filtragem dos próximos jogos passou a chamar uma referência inexistente `isPriority`. A exceção era capturada por competição, deixando `competitionResults` vazio e impedindo o preenchimento de Classificações, Próximos Jogos e o estado LIVE da Home.
+- Corrigido em `index.html`: `upcoming.filter(isPriority)` → `upcoming.filter(isPriorityTeam)`.
+- Na Nations League, o filtro da direita foi tornado estritamente textual de jornadas: para essa competição, o rótulo agora extrai apenas `Jornada N` mesmo quando o BSD fornece valores como `Grupo A4 · Jornada N`; as opções sintéticas também seguem o mesmo formato.
+- Commits funcionais: `0086876e7ee23670fd330e74b6b6df64528733d3` (Home) e `84e19f47f4dcd733508959e2ff8da4991ab650ea` (Nations League).
+- Production Pages deployment: `a5081a7f-2c91-4478-a1da-b92035e6adba`, SUCCESS, alias `https://chutapracanto.com`.
+- Nenhuma alteração em Worker, BSD, D1, secrets, bindings ou cron.
