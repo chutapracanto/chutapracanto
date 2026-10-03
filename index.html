@@ -845,8 +845,8 @@
         return games.find(game=>tierForItem(game)===1)||games.find(game=>tierForItem(game)===2)||null;
       };
       competitionResults.sort((a,b)=>{
-        const aFirst=priorityAnchor(a)||a.upcoming?.find(isPriority)||a.upcoming?.[0];
-        const bFirst=priorityAnchor(b)||b.upcoming?.find(isPriority)||b.upcoming?.[0];
+        const aFirst=priorityAnchor(a)||a.upcoming?.find(isPriorityTeam)||a.upcoming?.[0];
+        const bFirst=priorityAnchor(b)||b.upcoming?.find(isPriorityTeam)||b.upcoming?.[0];
         const at=aFirst?dateValue(aFirst)?.getTime()??Infinity:Infinity;
         const bt=bFirst?dateValue(bFirst)?.getTime()??Infinity:Infinity;
         const atier=aFirst?tierForItem(aFirst):99;
