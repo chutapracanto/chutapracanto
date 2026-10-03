@@ -2654,3 +2654,11 @@ Commits:
 - Commits funcionais: `0086876e7ee23670fd330e74b6b6df64528733d3` (Home) e `84e19f47f4dcd733508959e2ff8da4991ab650ea` (Nations League).
 - Production Pages deployment: `a5081a7f-2c91-4478-a1da-b92035e6adba`, SUCCESS, alias `https://chutapracanto.com`.
 - Nenhuma alteração em Worker, BSD, D1, secrets, bindings ou cron.
+
+## 2026-10-03 — CORREÇÃO FINAL DA REGRESSÃO DE CARREGAMENTO DA HOME
+- Após a correção anterior, a Home continuava em carregamento porque restavam duas referências antigas a `isPriority` dentro do comparador de ordenação de `competitionResults`; a função correta é `isPriorityTeam`.
+- Essas referências provocavam `ReferenceError` depois do `Promise.all`, interrompendo `carregarCompeticoesHome()` antes de renderizar Classificações e Próximos Jogos. O mesmo fluxo também impedia a inicialização correta do bloco LIVE.
+- Corrigido em `index.html`: ambas as referências passaram para `isPriorityTeam` e foi verificado que já não existe qualquer ocorrência de `isPriority`.
+- Commit: `4d1fc807f2ff75dd5afb656a4be2238767ad22b2`.
+- Production Pages deployment: `6788b80d-5ce4-46fc-980c-0109b2c012b0`, SUCCESS, alias `https://chutapracanto.com`.
+- Nenhuma alteração em Worker, BSD, D1, secrets, bindings ou cron.
