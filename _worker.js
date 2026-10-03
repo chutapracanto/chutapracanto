@@ -2531,7 +2531,11 @@ const CPC_FOOTBALL_COMPETITIONS = {
   "champions-league": { leagueId: 7, name: "UEFA Champions League" },
   "europa-league": { leagueId: 8, name: "UEFA Europa League" },
   "conference-league": { leagueId: 83, name: "UEFA Conference League" },
-  "nations-league": { leagueId: 64, name: "UEFA Nations League" }
+  "nations-league": { leagueId: 64, name: "UEFA Nations League" },
+  "premier-league": { leagueId: 1, name: "Premier League" },
+  "la-liga": { leagueId: 3, name: "La Liga" },
+  "serie-a": { leagueId: 4, name: "Serie A" },
+  "ligue-1": { leagueId: 6, name: "Ligue 1" }
 };
 
 function cpcSafeNumber(value) {
