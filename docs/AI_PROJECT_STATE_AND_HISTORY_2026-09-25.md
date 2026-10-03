@@ -2577,3 +2577,14 @@ Commits:
 - Commit: e35e0c4451eba3fb55a953c04ea4aea3f2d5cdbc — perf: tornar descoberta de competicao inicial mais leve.
 - Cloudflare Pages production deployment: ee772745-d1b4-4c1f-aa2b-dac919c7d22f — SUCCESS às 21:56:12 UTC; commit de produção confirmado como e35e0c4451eba3fb55a953c04ea4aea3f2d5cdbc.
 - Validação visual/medição real no domínio continua limitada nesta sessão por falha de resolução DNS; a implementação e o deployment foram confirmados.
+
+
+# 97. CORREÇÃO DAS MÉTRICAS ADMIN — 2026-10-03
+
+- Após o reset para o estado da última notícia (baf4b1b5abcd309daa71085888f4c6300402c45d), o login mobile voltou a funcionar.
+- As métricas não apareciam porque abrirMetricasAdmin() usava Promise.all() para as três fontes (likes, views, analytics); uma falha parcial fazia o painel inteiro cair no catch, mesmo existindo dados válidos nas restantes fontes.
+- D1 ARTICLE_LIKES_DB foi verificada diretamente: article_views=105, analytics_events=1520, article_likes=5.
+- Correção: substituído Promise.all() por Promise.allSettled() com fallbacks seguros por fonte, permitindo que o painel apresente os dados disponíveis mesmo se uma fonte falhar temporariamente.
+- Commit: 3c784ae0c668783ec3108ab2d1f62c094391867f — fix: tornar métricas tolerantes a fontes parciais.
+- Cloudflare Pages production deployment: 99911973-ac99-4672-97d5-c2de1550ea68 — SUCCESS; alias de produção https://chutapracanto.com.
+- Não foram alterados D1, Worker, BSD, secrets/variáveis ou cron.
