@@ -2598,3 +2598,10 @@ Commits:
 - Commit: `351494494c812a1f0346e76e67e1db841ea52c63` — `fix: interpretar respostas das APIs de métricas`.
 - Cloudflare Pages produção: deployment `c61ab227-6d33-493a-a1f7-d27959c98cfc`, commit `351494494c812a1f0346e76e67e1db841ea52c63`, estado SUCCESS, alias `https://chutapracanto.com`.
 - Não foram alterados D1, Worker, BSD, secrets/variáveis ou cron nesta correção.
+
+# 99. CORREÇÃO DO "CONTINUA A LER" — 2026-10-03
+
+- Diagnóstico: `mostrarNoticiasRelacionadas()` estava com escapes duplicados nas expressões regulares do JavaScript (`\\u`, `\\s`, `\\d`). A validação da data de publicação falhava para todas as notícias, deixando a lista de relacionadas vazia.
+- Correção em `noticia.html`: restauradas as expressões regulares para os escapes JavaScript normais (`\u`, `\s`, `\d`), incluindo a validação da data e normalização de texto.
+- Commit: `6810dd474caac6cb456502d200f18944aa45f098` — `fix: corrigir filtragem das noticias relacionadas`.
+- Cloudflare Pages produção: deployment `49411476-f424-4efa-a563-9cbd9f8b5b41`, estado SUCCESS, alias `https://chutapracanto.com`.
