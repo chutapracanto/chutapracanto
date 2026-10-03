@@ -675,7 +675,7 @@
       const standingsTabs=document.getElementById('home-standings-tabs');
       const standingsContent=document.getElementById('home-standings-content');
       const gamesGrid=document.getElementById('home-important-games-grid');
-      const priorityNames=['fc porto','porto','sl benfica','benfica','sporting cp','sporting clube de portugal','portugal','as roma','roma','ac milan','milan','juventus turin','juventus','paris saint-germain','psg','olympique lyon','lyon','strasbourg alsace','strasbourg','real madrid','fc barcelona','barcelona','atletico madrid','atlético madrid'];
+      const priorityNames=['fc porto','porto','sl benfica','benfica','sporting cp','sporting clube de portugal','sporting','portugal','as roma','roma','ac milan','milan','juventus turin','juventus','paris saint-germain','psg','olympique lyon','lyon','strasbourg alsace','strasbourg','real madrid','fc barcelona','barcelona','atletico madrid','atlético madrid'];
       const liveState={competitions:new Map(),liveKeys:new Set(),timer:null,discoveryTimer:null,refreshing:false};
       const now=Date.now();
       const limit=now+(30*24*60*60*1000);
@@ -797,8 +797,16 @@
       const dateValue=item=>{const d=new Date(item?.kickoff||item?.startAt||item?.date);return Number.isNaN(d.getTime())?null:d};
       const dateLabel=d=>d?new Intl.DateTimeFormat('pt-PT',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'}).format(d):'—';
       const normalizeTeamName=value=>String(value||'').toLocaleLowerCase('pt-PT').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim();
-      const isPriorityTeam=team=>priorityNames.includes(normalizeTeamName(team?.name));
-      const isPriority=item=>isPriorityTeam(item?.homeTeam)||isPriorityTeam(item?.awayTeam);
+      const firstPriorityNames=new Set(['fc porto','porto','sl benfica','benfica','sporting cp','sporting clube de portugal','sporting','portugal']);
+      const secondPriorityNames=new Set(priorityNames.filter(name=>!firstPriorityNames.has(name)));
+      const priorityTierTeam=team=>{
+        const name=normalizeTeamName(team?.name);
+        if(firstPriorityNames.has(name))return 1;
+        if(secondPriorityNames.has(name))return 2;
+        return 99;
+      };
+      const isPriorityTeam=team=>priorityTierTeam(team)<99;
+      const priorityTier=item=>Math.min(priorityTierTeam(item?.homeTeam),priorityTierTeam(item?.awayTeam));
       const matchLabel=game=>esc(game.homeTeam?.name||'Casa')+' vs '+esc(game.awayTeam?.name||'Fora')+' · '+dateLabel(dateValue(game));
       const competitionRank=team=>{
         const name=normalizeTeamName(team?.name);
@@ -831,14 +839,17 @@
         }catch{return {meta,data:null,upcoming:[],priority30:null}}
       }));
 
+      const tierForItem=item=>priorityTier(item);
       competitionResults.sort((a,b)=>{
         const aFirst=a.priority30?.[0]||a.upcoming?.find(isPriority)||a.upcoming?.[0];
         const bFirst=b.priority30?.[0]||b.upcoming?.find(isPriority)||b.upcoming?.[0];
         const at=aFirst?dateValue(aFirst)?.getTime()??Infinity:Infinity;
         const bt=bFirst?dateValue(bFirst)?.getTime()??Infinity:Infinity;
+        const atier=aFirst?tierForItem(aFirst):99;
+        const btier=bFirst?tierForItem(bFirst):99;
         const ar=aFirst?Math.min(competitionRank(aFirst.homeTeam),competitionRank(aFirst.awayTeam)):99;
         const br=bFirst?Math.min(competitionRank(bFirst.homeTeam),competitionRank(bFirst.awayTeam)):99;
-        return at-bt||ar-br||((a.meta?.[1]||'').localeCompare(b.meta?.[1]||'','pt-PT'));
+        return atier-btier||at-bt||ar-br||((a.meta?.[1]||'').localeCompare(b.meta?.[1]||'','pt-PT'));
       });
       const withStandings=competitionResults.filter(item=>Array.isArray(item.data?.standings)&&item.data.standings.length);
       standingsTabs.replaceChildren();
