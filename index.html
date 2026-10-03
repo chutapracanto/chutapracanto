@@ -840,9 +840,13 @@
       }));
 
       const tierForItem=item=>priorityTier(item);
+      const priorityAnchor=item=>{
+        const games=Array.isArray(item.priority30)?item.priority30:[];
+        return games.find(game=>tierForItem(game)===1)||games.find(game=>tierForItem(game)===2)||null;
+      };
       competitionResults.sort((a,b)=>{
-        const aFirst=a.priority30?.[0]||a.upcoming?.find(isPriority)||a.upcoming?.[0];
-        const bFirst=b.priority30?.[0]||b.upcoming?.find(isPriority)||b.upcoming?.[0];
+        const aFirst=priorityAnchor(a)||a.upcoming?.find(isPriority)||a.upcoming?.[0];
+        const bFirst=priorityAnchor(b)||b.upcoming?.find(isPriority)||b.upcoming?.[0];
         const at=aFirst?dateValue(aFirst)?.getTime()??Infinity:Infinity;
         const bt=bFirst?dateValue(bFirst)?.getTime()??Infinity:Infinity;
         const atier=aFirst?tierForItem(aFirst):99;
@@ -903,11 +907,14 @@
 
       const priorityCompetitions=competitionResults.filter(item=>item.priority30?.length);
       priorityCompetitions.sort((a,b)=>{
-        const ag=a.priority30[0],bg=b.priority30[0];
-        const at=dateValue(ag)?.getTime()??Infinity,bt=dateValue(bg)?.getTime()??Infinity;
-        const ar=Math.min(competitionRank(ag.homeTeam),competitionRank(ag.awayTeam));
-        const br=Math.min(competitionRank(bg.homeTeam),competitionRank(bg.awayTeam));
-        return at-bt||ar-br||String(a.meta[1]).localeCompare(String(b.meta[1]),'pt-PT');
+        const ag=priorityAnchor(a),bg=priorityAnchor(b);
+        const at=ag?dateValue(ag)?.getTime()??Infinity:Infinity;
+        const bt=bg?dateValue(bg)?.getTime()??Infinity:Infinity;
+        const atier=ag?tierForItem(ag):99;
+        const btier=bg?tierForItem(bg):99;
+        const ar=ag?Math.min(competitionRank(ag.homeTeam),competitionRank(ag.awayTeam)):99;
+        const br=bg?Math.min(competitionRank(bg.homeTeam),competitionRank(bg.awayTeam)):99;
+        return atier-btier||at-bt||ar-br||String(a.meta[1]).localeCompare(String(b.meta[1]),'pt-PT');
       });
       if(!priorityCompetitions.length){
         gamesGrid.innerHTML='<div class="home-standings-empty">Não há jogos das equipas prioritárias nos próximos 30 dias.</div>';
@@ -916,7 +923,12 @@
         const meta=item.meta;
         const selected=[];
         const usedTeams=new Set();
-        for(const game of item.priority30){
+        const orderedPriorityGames=item.priority30.slice().sort((a,b)=>{
+          return tierForItem(a)-tierForItem(b)
+            || (dateValue(a)?.getTime()??Infinity)-(dateValue(b)?.getTime()??Infinity)
+            || Math.min(competitionRank(a.homeTeam),competitionRank(a.awayTeam))-Math.min(competitionRank(b.homeTeam),competitionRank(b.awayTeam));
+        });
+        for(const game of orderedPriorityGames){
           if(selected.length>=3) break;
           const home=normalizeTeamName(game.homeTeam?.name);
           const away=normalizeTeamName(game.awayTeam?.name);
