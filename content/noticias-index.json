@@ -1,5 +1,21 @@
 [
   {
+    "slug": "o-cris-e-um-simbolo-de-portugal-jorge-jesus-aponta-a-qualificacao-frente-a-noruega-e-aborda-tema-ronaldo",
+    "path": "content/noticias/o-cris-e-um-simbolo-de-portugal-jorge-jesus-aponta-a-qualificacao-frente-a-noruega-e-aborda-tema-ronaldo.md",
+    "type": "news",
+    "title": "«O Cris é um símbolo de Portugal»: Jorge Jesus aponta à qualificação frente à Noruega e aborda tema Ronaldo",
+    "subtitle": "O selecionador perspetivou mudanças no onze devido ao desgaste físico e elogiou a qualidade técnica dos médios portugueses.",
+    "category": "Seleção Nacional",
+    "categoryId": "",
+    "categoryKind": "mixed",
+    "author": "ChutaPraCanto",
+    "authorId": "chuta-pra-canto",
+    "authorType": "Organization",
+    "published": "2026-10-03T16:59:17.726Z",
+    "publishedAt": "2026-10-03T16:59:17.726Z",
+    "image": "/images/uploads/1000135565-20261003165917816-exjw9.jpg"
+  },
+  {
     "slug": "genialidade-de-de-bruyne-com-ajuda-encarnada-e-regresso-de-lukaku-a-faturar",
     "path": "content/noticias/genialidade-de-de-bruyne-com-ajuda-encarnada-e-regresso-de-lukaku-a-faturar.md",
     "type": "news",
@@ -4083,6 +4099,22 @@
     "image": "https://framerusercontent.com/images/ycbszWojJI1w0LNN7vylumEGiQ.jpeg"
   },
   {
+    "slug": "benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe",
+    "path": "content/noticias/benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe.md",
+    "type": "news",
+    "title": "Benfica Segura Pavlidis: Encarnados Recusam Proposta Milionária do Fenerbahçe",
+    "subtitle": "O avançado grego é visto como peça-chave para atacar a nova época e a direção encarnada fechou a porta à investida turca.",
+    "category": "SL Benfica",
+    "categoryId": "sl-benfica",
+    "categoryKind": "club",
+    "author": "Chuta Pra Canto",
+    "authorId": "chuta-pra-canto",
+    "authorType": "Organization",
+    "published": "2026-08-05T12:00:00.000Z",
+    "publishedAt": "2026-08-05T12:00:00Z",
+    "image": "https://framerusercontent.com/images/yuZIWPtjI16gMkzUDJomIyCcyjA.jpg"
+  },
+  {
     "slug": "benfica-na-europa-marco-silva-perspetiva-o-aarhus-e-garante-que-o-mercado-encarnado-não-acabou",
     "path": "content/noticias/benfica-na-europa-marco-silva-perspetiva-o-aarhus-e-garante-que-o-mercado-encarnado-não-acabou.md",
     "type": "news",
@@ -4369,22 +4401,6 @@
     "publishedAt": "2026-08-05T16:16:21Z",
     "image": "https://framerusercontent.com/images/lqGiuJACPECmET6XiJBXjbf9zE.webp?width=1280&height=720",
     "sourceUrl": "https://chutapracanto.framer.website/noticias/sporting-bate-vitória-sc-em-alvalade-(3-2)-mas-volta-a-tremer-na-segunda-parte"
-  },
-  {
-    "slug": "benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe",
-    "path": "content/noticias/benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe.md",
-    "type": "news",
-    "title": "Benfica Segura Pavlidis: Encarnados Recusam Proposta Milionária do Fenerbahçe",
-    "subtitle": "O avançado grego é visto como peça-chave para atacar a nova época e a direção encarnada fechou a porta à investida turca.",
-    "category": "SL Benfica",
-    "categoryId": "sl-benfica",
-    "categoryKind": "club",
-    "author": "Chuta Pra Canto",
-    "authorId": "chuta-pra-canto",
-    "authorType": "Organization",
-    "published": "2026-08-05T12:00:00.000Z",
-    "publishedAt": "2026-08-05T12:00:00Z",
-    "image": "https://framerusercontent.com/images/yuZIWPtjI16gMkzUDJomIyCcyjA.jpg"
   },
   {
     "slug": "bomba-no-mercado-benfica-joga-a-última-cartada-por-joão-palhinha-—-tudo-ou-nada-na-luz",
