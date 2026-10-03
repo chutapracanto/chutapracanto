@@ -5,7 +5,11 @@ const COMPETITIONS = [
   "champions-league",
   "europa-league",
   "conference-league",
-  "nations-league"
+  "nations-league",
+  "premier-league",
+  "la-liga",
+  "serie-a",
+  "ligue-1"
 ];
 
 export default {
