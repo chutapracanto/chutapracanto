@@ -2621,3 +2621,15 @@ Commits:
 - PRs abertas antigas continuam não sendo produção. Em particular, #52 e #47 permanecem abertas e não devem ser tratadas como estado ativo da `main` sem merge/validação posterior.
 - Regras, Roadmap e protocolo foram relidos antes desta auditoria. A ordem vigente permanece Fase 4 / SEO-indexação como fase técnica, enquanto LIVE, métricas e correções editoriais são frentes já implementadas que só devem ser reabertas perante regressão/evidência.
 - Regra operacional reforçada: deployment SUCCESS prova publicação, não prova UX/funcionalidade; deployment skipped por `path_config` em documentação não representa regressão da produção.
+
+
+## 2026-10-03 — NOVAS COMPETIÇÕES EUROPEIAS
+
+- Solicitadas e adicionadas ao código as quatro ligas: Premier League, La Liga, Serie A e Ligue 1.
+- IDs BSD confirmados publicamente: Premier League `1`, La Liga `3`, Serie A `4`, Ligue 1 `6`.
+- `workers/football-cron/index.js`: COMPETITIONS passou de 7 para 11 competições, incluindo `premier-league`, `la-liga`, `serie-a`, `ligue-1`. O ciclo do cron passa assim a visitar cada competição a cada 55 minutos (cron continua `*/5 * * * *`).
+- `_worker.js`: adapter BSD recebeu os quatro novos competition keys e respetivos league IDs.
+- `competicoes.html` e `index.html`: listas de competições receberam as quatro ligas para que possam ser consumidas pela interface.
+- Commits gerados: `18d0293529e2ae344b87f653a7a6dca366de02e8`, `8c8df23e0aa0d0fe12b3c6158d66ae189b1480e5`, `1095c56b301d05e0f22be4ef1652cf41c0514974`, `741eba9d035a676e397136b6e6653db5f7b0130e`.
+- Verificação BSD confirmou que as quatro competições existem e estão disponíveis.
+- IMPORTANTE: o Pages publica automaticamente as alterações de `_worker.js`/HTML via GitHub, mas `cpc-football-cron` é Worker separado. A atualização do ficheiro do cron está no GitHub, porém o deployment do Worker separado ainda requer publicação Wrangler/Cloudflare. Não considerar o novo ciclo do cron ativo até essa publicação ser confirmada.
