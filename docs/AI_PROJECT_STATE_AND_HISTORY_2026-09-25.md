@@ -2588,3 +2588,13 @@ Commits:
 - Commit: 3c784ae0c668783ec3108ab2d1f62c094391867f — fix: tornar métricas tolerantes a fontes parciais.
 - Cloudflare Pages production deployment: 99911973-ac99-4672-97d5-c2de1550ea68 — SUCCESS; alias de produção https://chutapracanto.com.
 - Não foram alterados D1, Worker, BSD, secrets/variáveis ou cron.
+
+
+# 98. CORREÇÃO REAL DAS MÉTRICAS ADMIN — 2026-10-03
+
+- Diagnóstico após o painel continuar a apresentar zeros: `abrirMetricasAdmin()` usava `Promise.allSettled()` mas tratava o resultado de `apiFetch()` como se já fosse o JSON. Na realidade, `apiFetch()` devolve o objeto `Response`.
+- Consequência: `likesData.totalLikes`, `viewsData.totalViews` e `analyticsData.summary` eram lidos diretamente de `Response`, resultando em `undefined` e posteriormente em zeros, apesar de os dados existirem na D1.
+- Correção em `admin/index.html`: criada a função local `fetchMetric(path)` para executar `apiFetch()`, fazer `response.json()`, rejeitar respostas HTTP não-2xx e só então entregar os dados JSON ao `Promise.allSettled()`.
+- Commit: `351494494c812a1f0346e76e67e1db841ea52c63` — `fix: interpretar respostas das APIs de métricas`.
+- Cloudflare Pages produção: deployment `c61ab227-6d33-493a-a1f7-d27959c98cfc`, commit `351494494c812a1f0346e76e67e1db841ea52c63`, estado SUCCESS, alias `https://chutapracanto.com`.
+- Não foram alterados D1, Worker, BSD, secrets/variáveis ou cron nesta correção.
