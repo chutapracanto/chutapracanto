@@ -2633,3 +2633,16 @@ Commits:
 - Commits gerados: `18d0293529e2ae344b87f653a7a6dca366de02e8`, `8c8df23e0aa0d0fe12b3c6158d66ae189b1480e5`, `1095c56b301d05e0f22be4ef1652cf41c0514974`, `741eba9d035a676e397136b6e6653db5f7b0130e`.
 - Verificação BSD confirmou que as quatro competições existem e estão disponíveis.
 - IMPORTANTE: o Pages publica automaticamente as alterações de `_worker.js`/HTML via GitHub, mas `cpc-football-cron` é Worker separado. A atualização do ficheiro do cron está no GitHub, porém o deployment do Worker separado ainda requer publicação Wrangler/Cloudflare. Não considerar o novo ciclo do cron ativo até essa publicação ser confirmada.
+
+
+## 2026-10-03 — FILTRO DE JORNADAS E PRIORIDADES MÁXIMAS NA HOME
+
+- Nations League: o filtro da direita (`round-filter`) passa a apresentar exclusivamente jornadas (`Todas as jornadas`, `Jornada N`), sem repetir `Fase de grupos`/`Grupos`. O filtro da esquerda/intermédio (`group-filter`) continua responsável pela seleção dos grupos.
+- Home / Próximos Jogos Importantes: criada hierarquia explícita de prioridades.
+  - 1.º prioritários máximos: FC Porto, Benfica, Sporting e Portugal.
+  - 2.º prioritários: Roma, AC Milan, Juventus, PSG, Lyon, Estrasburgo, Real Madrid, Barcelona e Atlético de Madrid.
+- A ordenação dos cartões e dos jogos importantes passa primeiro pela prioridade (1.º antes de 2.º) e só depois pela data. Assim, um jogo de Benfica/Porto/Sporting/Portugal que aconteça depois de um jogo de um clube de 2.º nível continua a aparecer primeiro.
+- Dentro do mesmo nível, mantém-se a proximidade temporal e a prioridade específica do clube como desempate.
+- Não foram alterados Worker, BSD, D1, secrets, cron ou IDs de base de dados.
+- Commit frontend Nations League: `ab40316faf841dafd83dba408107c86554bcb7f6`.
+- Commit frontend Home prioridades: `384d578d6d843eb13d7a1cc60f1b2d8c9fd5d1dd`.
