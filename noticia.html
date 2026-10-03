@@ -409,7 +409,7 @@
     (() => {
       const slug = new URLSearchParams(window.location.search).get('slug');
       const container = document.getElementById('article-content');
-      if (!slug || !container || slug.includes('/') || slug.includes('\\') || slug.includes('..') || /[\\u0000-\\u001f]/.test(slug)) return;
+      if (!slug || !container || slug.includes('/') || slug.includes('\\') || slug.includes('..') || /[\u0000-\u001f]/.test(slug)) return;
 
       window.__articleIndexPromise = fetch('/content/noticias-index.json')
         .then(response => {
@@ -951,9 +951,9 @@
         const normalizarTexto = valor => String(valor || '')
           .toLowerCase()
           .normalize('NFD')
-          .replace(/[\\u0300-\\u036f]/g, '')
-          .replace(/[^a-z0-9\\s]/g, ' ')
-          .split(/\\s+/)
+          .replace(/[\u0300-\u036f]/g, '')
+          .replace(/[^a-z0-9\s]/g, ' ')
+          .split(/\s+/)
           .filter(palavra => palavra.length >= 4);
 
         const dataPublicacaoTimestamp = noticia => {
@@ -973,7 +973,7 @@
           .filter(noticia => {
             if (!noticia.slug || noticia.slug === currentSlug || (noticia.type || 'news') !== 'news') return false;
             const publicadaEm = dataPublicacao(noticia);
-            return /^\\d{4}-\\d{2}-\\d{2}$/.test(publicadaEm) && publicadaEm <= hoje;
+            return /^\d{4}-\d{2}-\d{2}$/.test(publicadaEm) && publicadaEm <= hoje;
           })
           .map(noticia => {
             const palavras = new Set([
