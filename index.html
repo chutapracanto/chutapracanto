@@ -685,7 +685,7 @@
       const leagueLogo=id=>'/api/football-image?type=league&id='+encodeURIComponent(id);
       const fixtureStatus=item=>{
         const raw=String(item?.status||'').toLowerCase().replace(/[ -]+/g,'_');
-        if(['live','in_progress','in_play','inplay','ongoing'].includes(raw))return 'live';
+        if(['live','in_progress','inprogress','in_play','inplay','ongoing'].includes(raw))return 'live';
         if(['finished','ended','ft','full_time','completed','aet','penalties'].includes(raw))return 'finished';
         const d=dateValue(item);
         return d&&d.getTime()>=Date.now()?'upcoming':'other';
@@ -833,7 +833,7 @@
           const fixtures=Array.isArray(data.fixtures)?data.fixtures:[]; 
           const upcoming=fixtures.filter(item=>{const t=dateValue(item)?.getTime();return Number.isFinite(t)&&t>=now});
           upcoming.sort((a,b)=>dateValue(a).getTime()-dateValue(b).getTime());
-          const priority=upcoming.filter(isPriorityTeam);
+          const priority=upcoming.filter(item=>isPriorityTeam(item?.homeTeam)||isPriorityTeam(item?.awayTeam));
           const priority30=priority.filter(item=>dateValue(item).getTime()<=limit);
           return {meta,data,upcoming,priority30};
         }catch{return {meta,data:null,upcoming:[],priority30:null}}
