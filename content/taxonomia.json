@@ -176,6 +176,11 @@
       "id": "selecao-nacional-liga-das-nacoes-futebol-internacional-exclusivo",
       "label": "Seleção Nacional, Liga das Nações, Futebol Internacional, Exclusivo",
       "kind": "mixed"
+    },
+    {
+      "id": "portugal-sub-21",
+      "label": "Portugal Sub-21",
+      "kind": "mixed"
     }
   ]
 }
