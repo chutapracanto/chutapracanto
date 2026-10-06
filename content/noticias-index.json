@@ -32,6 +32,22 @@
     "image": "/images/uploads/1000135647-20261006191006418-y0snh.webp"
   },
   {
+    "slug": "espanha-garante-quartos-de-final-da-liga-das-nacoes-apos-reviravolta-na-croacia-1-2",
+    "path": "content/noticias/espanha-garante-quartos-de-final-da-liga-das-nacoes-apos-reviravolta-na-croacia-1-2.md",
+    "type": "news",
+    "title": "Espanha garante quartos de final da Liga das Nações após reviravolta na Croácia (1-2)",
+    "subtitle": "Perisic adiantou os croatas e acabou expulso na segunda parte, onde a eficácia de Merino fez a diferença.",
+    "category": "Liga das Nações",
+    "categoryId": "",
+    "categoryKind": "mixed",
+    "author": "ChutaPraCanto",
+    "authorId": "chuta-pra-canto",
+    "authorType": "Organization",
+    "published": "2026-10-05T23:54:50.947Z",
+    "publishedAt": "2026-10-05T23:54:50.947Z",
+    "image": "/images/uploads/1000135656-20261006235451036-zrxft.jpg"
+  },
+  {
     "slug": "inglaterra-goleia-chequia-com-bis-de-kane-e-consolida-vice-lideranca-no-grupo-a3-da-liga-das-nacoes",
     "path": "content/noticias/inglaterra-goleia-chequia-com-bis-de-kane-e-consolida-vice-lideranca-no-grupo-a3-da-liga-das-nacoes.md",
     "type": "news",
@@ -4307,6 +4323,22 @@
     "image": "https://framerusercontent.com/images/ycbszWojJI1w0LNN7vylumEGiQ.jpeg"
   },
   {
+    "slug": "benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe",
+    "path": "content/noticias/benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe.md",
+    "type": "news",
+    "title": "Benfica Segura Pavlidis: Encarnados Recusam Proposta Milionária do Fenerbahçe",
+    "subtitle": "O avançado grego é visto como peça-chave para atacar a nova época e a direção encarnada fechou a porta à investida turca.",
+    "category": "SL Benfica",
+    "categoryId": "sl-benfica",
+    "categoryKind": "club",
+    "author": "Chuta Pra Canto",
+    "authorId": "chuta-pra-canto",
+    "authorType": "Organization",
+    "published": "2026-08-05T12:00:00.000Z",
+    "publishedAt": "2026-08-05T12:00:00Z",
+    "image": "https://framerusercontent.com/images/yuZIWPtjI16gMkzUDJomIyCcyjA.jpg"
+  },
+  {
     "slug": "benfica-na-europa-marco-silva-perspetiva-o-aarhus-e-garante-que-o-mercado-encarnado-não-acabou",
     "path": "content/noticias/benfica-na-europa-marco-silva-perspetiva-o-aarhus-e-garante-que-o-mercado-encarnado-não-acabou.md",
     "type": "news",
@@ -4593,22 +4625,6 @@
     "publishedAt": "2026-08-05T16:16:21Z",
     "image": "https://framerusercontent.com/images/lqGiuJACPECmET6XiJBXjbf9zE.webp?width=1280&height=720",
     "sourceUrl": "https://chutapracanto.framer.website/noticias/sporting-bate-vitória-sc-em-alvalade-(3-2)-mas-volta-a-tremer-na-segunda-parte"
-  },
-  {
-    "slug": "benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe",
-    "path": "content/noticias/benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe.md",
-    "type": "news",
-    "title": "Benfica Segura Pavlidis: Encarnados Recusam Proposta Milionária do Fenerbahçe",
-    "subtitle": "O avançado grego é visto como peça-chave para atacar a nova época e a direção encarnada fechou a porta à investida turca.",
-    "category": "SL Benfica",
-    "categoryId": "sl-benfica",
-    "categoryKind": "club",
-    "author": "Chuta Pra Canto",
-    "authorId": "chuta-pra-canto",
-    "authorType": "Organization",
-    "published": "2026-08-05T12:00:00.000Z",
-    "publishedAt": "2026-08-05T12:00:00Z",
-    "image": "https://framerusercontent.com/images/yuZIWPtjI16gMkzUDJomIyCcyjA.jpg"
   },
   {
     "slug": "bomba-no-mercado-benfica-joga-a-última-cartada-por-joão-palhinha-—-tudo-ou-nada-na-luz",
