@@ -181,6 +181,11 @@
       "id": "portugal-sub-21",
       "label": "Portugal Sub-21",
       "kind": "mixed"
+    },
+    {
+      "id": "sporting-cp-liga-portugal-betclic",
+      "label": "Sporting CP, Liga Portugal Betclic",
+      "kind": "mixed"
     }
   ]
 }
