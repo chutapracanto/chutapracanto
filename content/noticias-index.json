@@ -1,5 +1,21 @@
 [
   {
+    "slug": "cd-tondela-vence-torreense-no-apito-final-apos-jogo-eletrico-e-recheado-de-expulsoes-1-0",
+    "path": "content/noticias/cd-tondela-vence-torreense-no-apito-final-apos-jogo-eletrico-e-recheado-de-expulsoes-1-0.md",
+    "type": "news",
+    "title": "CD Tondela vence Torreense no apito final após jogo elétrico e recheado de expulsões (1-0)",
+    "subtitle": "Numa segunda parte recheada de expulsões e muita tensão, o camisola 7 auriverde desbloqueou o nulo em tempo de compensação.",
+    "category": "Liga Portugal 2 MeuSuper",
+    "categoryId": "",
+    "categoryKind": "mixed",
+    "author": "ChutaPraCanto",
+    "authorId": "chuta-pra-canto",
+    "authorType": "Organization",
+    "published": "2026-10-10T12:42:08.071Z",
+    "publishedAt": "2026-10-10T12:42:08.071Z",
+    "image": "/images/uploads/1000135760-20261010124208183-mscl2.jpg"
+  },
+  {
     "slug": "rui-borges-exalta-atitude-leonina-em-braga-quem-jogou-e-quem-entrou-teve-uma-grande-capacidade-competitiva",
     "path": "content/noticias/rui-borges-exalta-atitude-leonina-em-braga-quem-jogou-e-quem-entrou-teve-uma-grande-capacidade-competitiva.md",
     "type": "news",
@@ -4419,6 +4435,22 @@
     "image": "https://framerusercontent.com/images/ycbszWojJI1w0LNN7vylumEGiQ.jpeg"
   },
   {
+    "slug": "benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe",
+    "path": "content/noticias/benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe.md",
+    "type": "news",
+    "title": "Benfica Segura Pavlidis: Encarnados Recusam Proposta Milionária do Fenerbahçe",
+    "subtitle": "O avançado grego é visto como peça-chave para atacar a nova época e a direção encarnada fechou a porta à investida turca.",
+    "category": "SL Benfica",
+    "categoryId": "sl-benfica",
+    "categoryKind": "club",
+    "author": "Chuta Pra Canto",
+    "authorId": "chuta-pra-canto",
+    "authorType": "Organization",
+    "published": "2026-08-05T12:00:00.000Z",
+    "publishedAt": "2026-08-05T12:00:00Z",
+    "image": "https://framerusercontent.com/images/yuZIWPtjI16gMkzUDJomIyCcyjA.jpg"
+  },
+  {
     "slug": "benfica-na-europa-marco-silva-perspetiva-o-aarhus-e-garante-que-o-mercado-encarnado-não-acabou",
     "path": "content/noticias/benfica-na-europa-marco-silva-perspetiva-o-aarhus-e-garante-que-o-mercado-encarnado-não-acabou.md",
     "type": "news",
@@ -4705,22 +4737,6 @@
     "publishedAt": "2026-08-05T16:16:21Z",
     "image": "https://framerusercontent.com/images/lqGiuJACPECmET6XiJBXjbf9zE.webp?width=1280&height=720",
     "sourceUrl": "https://chutapracanto.framer.website/noticias/sporting-bate-vitória-sc-em-alvalade-(3-2)-mas-volta-a-tremer-na-segunda-parte"
-  },
-  {
-    "slug": "benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe",
-    "path": "content/noticias/benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe.md",
-    "type": "news",
-    "title": "Benfica Segura Pavlidis: Encarnados Recusam Proposta Milionária do Fenerbahçe",
-    "subtitle": "O avançado grego é visto como peça-chave para atacar a nova época e a direção encarnada fechou a porta à investida turca.",
-    "category": "SL Benfica",
-    "categoryId": "sl-benfica",
-    "categoryKind": "club",
-    "author": "Chuta Pra Canto",
-    "authorId": "chuta-pra-canto",
-    "authorType": "Organization",
-    "published": "2026-08-05T12:00:00.000Z",
-    "publishedAt": "2026-08-05T12:00:00Z",
-    "image": "https://framerusercontent.com/images/yuZIWPtjI16gMkzUDJomIyCcyjA.jpg"
   },
   {
     "slug": "bomba-no-mercado-benfica-joga-a-última-cartada-por-joão-palhinha-—-tudo-ou-nada-na-luz",
