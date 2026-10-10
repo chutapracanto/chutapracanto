@@ -191,6 +191,11 @@
       "id": "sl-benfica-liga-portugal-betclic",
       "label": "SL Benfica, Liga Portugal Betclic",
       "kind": "mixed"
+    },
+    {
+      "id": "fc-porto-liga-portugal-betclic",
+      "label": "FC Porto, Liga Portugal Betclic",
+      "kind": "mixed"
     }
   ]
 }
