@@ -186,6 +186,11 @@
       "id": "sporting-cp-liga-portugal-betclic",
       "label": "Sporting CP, Liga Portugal Betclic",
       "kind": "mixed"
+    },
+    {
+      "id": "sl-benfica-liga-portugal-betclic",
+      "label": "SL Benfica, Liga Portugal Betclic",
+      "kind": "mixed"
     }
   ]
 }
