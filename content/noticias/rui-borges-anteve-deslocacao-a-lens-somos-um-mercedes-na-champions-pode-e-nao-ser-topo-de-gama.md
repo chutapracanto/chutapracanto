@@ -1,7 +1,7 @@
 ---
 title: "Rui Borges antevê deslocação a Lens: «Somos um Mercedes na Champions, pode é não ser topo de gama»"
 subtitulo: "Técnico leonino destacou a intensidade do adversário francês e confirmou ausência segura de Zalazar."
-categoria: "Champions League"
+categoria: "UEFA Champions League"
 type: "news"
 date: "2026-10-12T19:59:06.681Z"
 author: "ChutaPraCanto"
