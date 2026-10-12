@@ -196,6 +196,11 @@
       "id": "fc-porto-liga-portugal-betclic",
       "label": "FC Porto, Liga Portugal Betclic",
       "kind": "mixed"
+    },
+    {
+      "id": "champions-league",
+      "label": "Champions League",
+      "kind": "mixed"
     }
   ]
 }
