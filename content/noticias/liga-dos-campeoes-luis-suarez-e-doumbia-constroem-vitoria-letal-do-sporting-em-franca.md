@@ -5,12 +5,12 @@ categoria: "Sporting, UEFA Champions League"
 type: "news"
 date: "2026-10-13T19:22:19.150Z"
 author: "ChutaPraCanto"
-imagem: "/images/uploads/1000135883-20261013192219274-08g3u.webp"
+imagem: "/images/uploads/1000135883-20261013192401174-mw519.webp"
 ---
 
 A analogia utilizada por Rui Borges na antevisão ganhou contornos de realidade em França. O Sporting visitou o Estádio Bollaert-Delelis e venceu o Lens por **0-2**, em partida a contar para a segunda jornada da fase de Liga da Liga dos Campeões. Suportando o sufoco inicial dos franceses e revelando uma eficácia cirúrgica no ataque, a equipa verde e branca carimbou a segunda vitória em dois jogos e segue de vento em popa na prova milionária.
 
-### **Estrutura mutável, estreia na baliza e 'chapeau' de Luis Suárez**
+### **Estrutura mutável, estreia na baliza e golo de classe de Luis Suárez**
 
 O técnico leonino surpreendeu no onze inicial ao lançar o jovem guarda-redes Kaique para a estreia absoluta de leão ao peito. Para além disso, desenhou uma teia tática flexível com Sergi Altimira como peça de ligação:
 
