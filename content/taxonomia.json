@@ -206,6 +206,11 @@
       "id": "sporting-uefa-champions-league",
       "label": "Sporting, UEFA Champions League",
       "kind": "mixed"
+    },
+    {
+      "id": "f-c-porto-uefa-champions-league",
+      "label": "F.C.Porto, UEFA Champions League",
+      "kind": "mixed"
     }
   ]
 }
