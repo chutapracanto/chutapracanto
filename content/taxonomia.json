@@ -201,6 +201,11 @@
       "id": "champions-league",
       "label": "Champions League",
       "kind": "mixed"
+    },
+    {
+      "id": "sporting-uefa-champions-league",
+      "label": "Sporting, UEFA Champions League",
+      "kind": "mixed"
     }
   ]
 }
