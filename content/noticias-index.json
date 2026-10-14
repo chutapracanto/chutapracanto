@@ -1,5 +1,21 @@
 [
   {
+    "slug": "psg-da-show-no-etihad-resiste-a-reacao-do-man-city-e-triunfa-em-noite-inspirada-de-vitinha-2-4",
+    "path": "content/noticias/psg-da-show-no-etihad-resiste-a-reacao-do-man-city-e-triunfa-em-noite-inspirada-de-vitinha-2-4.md",
+    "type": "news",
+    "title": "PSG dá 'show' no Etihad, resiste à reação do Man. City e triunfa em noite inspirada de Vitinha (2-4)",
+    "subtitle": "Médio internacional português brilhou com um grande golo na primeira metade em pleno Etihad Stadium.",
+    "category": "UEFA Champions League",
+    "categoryId": "",
+    "categoryKind": "mixed",
+    "author": "ChutaPraCanto",
+    "authorId": "chuta-pra-canto",
+    "authorType": "Organization",
+    "published": "2026-10-14T22:42:28.083Z",
+    "publishedAt": "2026-10-14T22:42:28.083Z",
+    "image": "/images/uploads/1000135919-20261014224228213-qwcwp.webp"
+  },
+  {
     "slug": "fc-porto-sem-pontos-na-champions-farioli-aponta-a-falta-de-eficacia-e-elogia-defesa-da-semana-de-valles",
     "path": "content/noticias/fc-porto-sem-pontos-na-champions-farioli-aponta-a-falta-de-eficacia-e-elogia-defesa-da-semana-de-valles.md",
     "type": "news",
@@ -4963,6 +4979,22 @@
     "image": "https://framerusercontent.com/images/ycbszWojJI1w0LNN7vylumEGiQ.jpeg"
   },
   {
+    "slug": "benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe",
+    "path": "content/noticias/benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe.md",
+    "type": "news",
+    "title": "Benfica Segura Pavlidis: Encarnados Recusam Proposta Milionária do Fenerbahçe",
+    "subtitle": "O avançado grego é visto como peça-chave para atacar a nova época e a direção encarnada fechou a porta à investida turca.",
+    "category": "SL Benfica",
+    "categoryId": "sl-benfica",
+    "categoryKind": "club",
+    "author": "Chuta Pra Canto",
+    "authorId": "chuta-pra-canto",
+    "authorType": "Organization",
+    "published": "2026-08-05T12:00:00.000Z",
+    "publishedAt": "2026-08-05T12:00:00Z",
+    "image": "https://framerusercontent.com/images/yuZIWPtjI16gMkzUDJomIyCcyjA.jpg"
+  },
+  {
     "slug": "benfica-na-europa-marco-silva-perspetiva-o-aarhus-e-garante-que-o-mercado-encarnado-não-acabou",
     "path": "content/noticias/benfica-na-europa-marco-silva-perspetiva-o-aarhus-e-garante-que-o-mercado-encarnado-não-acabou.md",
     "type": "news",
@@ -5249,22 +5281,6 @@
     "publishedAt": "2026-08-05T16:16:21Z",
     "image": "https://framerusercontent.com/images/lqGiuJACPECmET6XiJBXjbf9zE.webp?width=1280&height=720",
     "sourceUrl": "https://chutapracanto.framer.website/noticias/sporting-bate-vitória-sc-em-alvalade-(3-2)-mas-volta-a-tremer-na-segunda-parte"
-  },
-  {
-    "slug": "benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe",
-    "path": "content/noticias/benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe.md",
-    "type": "news",
-    "title": "Benfica Segura Pavlidis: Encarnados Recusam Proposta Milionária do Fenerbahçe",
-    "subtitle": "O avançado grego é visto como peça-chave para atacar a nova época e a direção encarnada fechou a porta à investida turca.",
-    "category": "SL Benfica",
-    "categoryId": "sl-benfica",
-    "categoryKind": "club",
-    "author": "Chuta Pra Canto",
-    "authorId": "chuta-pra-canto",
-    "authorType": "Organization",
-    "published": "2026-08-05T12:00:00.000Z",
-    "publishedAt": "2026-08-05T12:00:00Z",
-    "image": "https://framerusercontent.com/images/yuZIWPtjI16gMkzUDJomIyCcyjA.jpg"
   },
   {
     "slug": "bomba-no-mercado-benfica-joga-a-última-cartada-por-joão-palhinha-—-tudo-ou-nada-na-luz",
