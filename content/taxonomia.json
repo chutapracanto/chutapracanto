@@ -211,6 +211,11 @@
       "id": "f-c-porto-uefa-champions-league",
       "label": "F.C.Porto, UEFA Champions League",
       "kind": "mixed"
+    },
+    {
+      "id": "uefa-europa-league",
+      "label": "UEFA Europa League",
+      "kind": "mixed"
     }
   ]
 }
