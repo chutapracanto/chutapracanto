@@ -216,6 +216,11 @@
       "id": "uefa-europa-league",
       "label": "UEFA Europa League",
       "kind": "mixed"
+    },
+    {
+      "id": "taca-de-portugal",
+      "label": "Taça de Portugal",
+      "kind": "mixed"
     }
   ]
 }
