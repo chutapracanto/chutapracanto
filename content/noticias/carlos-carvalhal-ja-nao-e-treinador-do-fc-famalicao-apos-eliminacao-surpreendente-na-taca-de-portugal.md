@@ -5,7 +5,7 @@ categoria: "Liga Portugal Betclic"
 type: "news"
 date: "2026-10-19T20:31:24.994Z"
 author: "ChutaPraCanto"
-imagem: ""
+imagem: "/images/uploads/1000136040-20261019203220446-f5z94.jpg"
 ---
 
 O FC Famalicão confirmou, em comunicado oficial divulgado na tarde desta segunda-feira, a saída de **Carlos Carvalhal** do comando técnico da equipa principal. A rescisão por mútuo acordo surge no fecho de um ciclo de maus resultados, tendo a eliminação precoce na terceira eliminatória da Taça de Portugal, perante o USC Paredes, servido de "gota de água" para o desfecho da ligação.
@@ -19,4 +19,4 @@ Carlos Carvalhal, de 60 anos, tinha regressado ao ativo no início da presente t
 
 ### **Comunicado Oficial da SAD do FC Famalicão:**
 
-> _"A Futebol Clube de Famalicão – Futebol SAD e o treinador Carlos Carvalhal cessaram, por mútuo acordo, o vínculo que os ligava. A SAD do Futebol Clube de Famalicão agradece o empenho e profissionalismo que o treinador e os elementos da equipa técnica sempre empregaram ao serviço desta instituição, desejando os maiores sucessos pessoais e profissionais."_
+\> _"A Futebol Clube de Famalicão – Futebol SAD e o treinador Carlos Carvalhal cessaram, por mútuo acordo, o vínculo que os ligava. A SAD do Futebol Clube de Famalicão agradece o empenho e profissionalismo que o treinador e os elementos da equipa técnica sempre empregaram ao serviço desta instituição, desejando os maiores sucessos pessoais e profissionais."_
