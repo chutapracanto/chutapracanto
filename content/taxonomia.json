@@ -221,6 +221,11 @@
       "id": "taca-de-portugal",
       "label": "Taça de Portugal",
       "kind": "mixed"
+    },
+    {
+      "id": "sc-braga-liga-portugal-betclic",
+      "label": "SC Braga,Liga Portugal Betclic",
+      "kind": "mixed"
     }
   ]
 }
