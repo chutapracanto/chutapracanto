@@ -226,6 +226,11 @@
       "id": "sc-braga-liga-portugal-betclic",
       "label": "SC Braga,Liga Portugal Betclic",
       "kind": "mixed"
+    },
+    {
+      "id": "geral",
+      "label": "Geral",
+      "kind": "mixed"
     }
   ]
 }
