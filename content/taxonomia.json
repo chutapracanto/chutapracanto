@@ -231,6 +231,11 @@
       "id": "geral",
       "label": "Geral",
       "kind": "mixed"
+    },
+    {
+      "id": "sl-benfica-uefa-europa-league",
+      "label": "SL Benfica, UEFA Europa League",
+      "kind": "mixed"
     }
   ]
 }
