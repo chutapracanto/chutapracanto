@@ -1,7 +1,7 @@
 ---
 title: "Sporting cede perante o LASK Linz (2-3) e sofre primeira derrota da época"
 subtitulo: ""
-categoria: ""
+categoria: "Sporting CP, UEFA Champions League"
 type: "news"
 date: "2026-10-21T21:22:08.307Z"
 author: "ChutaPraCanto"
