@@ -6,13 +6,13 @@
     "title": "SC Braga bate Gent (2-0) e carimba triunfo na Conference League",
     "subtitle": "Após o desaire na ronda de abertura, minhotos bateram os belgas com golos aos 3 e aos 77 minutos.",
     "category": "SC Braga, Conference League",
-    "categoryId": "",
+    "categoryId": "sc-braga-conference-league",
     "categoryKind": "mixed",
-    "author": "ChutaPraCanto",
+    "author": "Chuta Pra Canto",
     "authorId": "chuta-pra-canto",
     "authorType": "Organization",
     "published": "2026-10-22T21:33:41.444Z",
-    "publishedAt": "2026-10-22T21:33:41.444Z",
+    "publishedAt": "2026-10-22T21:33:41.444000Z",
     "image": "/images/uploads/1000136121-20261022213341537-uhtd7.jpg"
   },
   {
@@ -5555,22 +5555,6 @@
     "image": "https://framerusercontent.com/images/ycbszWojJI1w0LNN7vylumEGiQ.jpeg"
   },
   {
-    "slug": "benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe",
-    "path": "content/noticias/benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe.md",
-    "type": "news",
-    "title": "Benfica Segura Pavlidis: Encarnados Recusam Proposta Milionária do Fenerbahçe",
-    "subtitle": "O avançado grego é visto como peça-chave para atacar a nova época e a direção encarnada fechou a porta à investida turca.",
-    "category": "SL Benfica",
-    "categoryId": "sl-benfica",
-    "categoryKind": "club",
-    "author": "Chuta Pra Canto",
-    "authorId": "chuta-pra-canto",
-    "authorType": "Organization",
-    "published": "2026-08-05T12:00:00.000Z",
-    "publishedAt": "2026-08-05T12:00:00Z",
-    "image": "https://framerusercontent.com/images/yuZIWPtjI16gMkzUDJomIyCcyjA.jpg"
-  },
-  {
     "slug": "benfica-na-europa-marco-silva-perspetiva-o-aarhus-e-garante-que-o-mercado-encarnado-não-acabou",
     "path": "content/noticias/benfica-na-europa-marco-silva-perspetiva-o-aarhus-e-garante-que-o-mercado-encarnado-não-acabou.md",
     "type": "news",
@@ -5857,6 +5841,22 @@
     "publishedAt": "2026-08-05T16:16:21Z",
     "image": "https://framerusercontent.com/images/lqGiuJACPECmET6XiJBXjbf9zE.webp?width=1280&height=720",
     "sourceUrl": "https://chutapracanto.framer.website/noticias/sporting-bate-vitória-sc-em-alvalade-(3-2)-mas-volta-a-tremer-na-segunda-parte"
+  },
+  {
+    "slug": "benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe",
+    "path": "content/noticias/benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe.md",
+    "type": "news",
+    "title": "Benfica Segura Pavlidis: Encarnados Recusam Proposta Milionária do Fenerbahçe",
+    "subtitle": "O avançado grego é visto como peça-chave para atacar a nova época e a direção encarnada fechou a porta à investida turca.",
+    "category": "SL Benfica",
+    "categoryId": "sl-benfica",
+    "categoryKind": "club",
+    "author": "Chuta Pra Canto",
+    "authorId": "chuta-pra-canto",
+    "authorType": "Organization",
+    "published": "2026-08-05T12:00:00.000Z",
+    "publishedAt": "2026-08-05T12:00:00Z",
+    "image": "https://framerusercontent.com/images/yuZIWPtjI16gMkzUDJomIyCcyjA.jpg"
   },
   {
     "slug": "bomba-no-mercado-benfica-joga-a-última-cartada-por-joão-palhinha-—-tudo-ou-nada-na-luz",
