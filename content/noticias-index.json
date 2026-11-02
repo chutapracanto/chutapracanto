@@ -1,5 +1,21 @@
 [
   {
+    "slug": "tiago-fernandes-na-antevisao-ao-shakhtar-donetsk-em-londres-o-grupo-esteve-recetivo-e-estou-mais-preparado-do-que-em-2018",
+    "path": "content/noticias/tiago-fernandes-na-antevisao-ao-shakhtar-donetsk-em-londres-o-grupo-esteve-recetivo-e-estou-mais-preparado-do-que-em-2018.md",
+    "type": "news",
+    "title": "Tiago Fernandes na antevisão ao Shakhtar Donetsk em Londres: \\\"O grupo esteve recetivo e estou mais preparado do que em 2018\\\"",
+    "subtitle": "Comandante da equipa B assume o banco dos leões em Londres com foco total na conquista da terceira vitória europeia.",
+    "category": "Sporting CP, UEFA Champions League",
+    "categoryId": "",
+    "categoryKind": "mixed",
+    "author": "ChutaPraCanto",
+    "authorId": "chuta-pra-canto",
+    "authorType": "Organization",
+    "published": "2026-11-02T22:45:12.202Z",
+    "publishedAt": "2026-11-02T22:45:12.202Z",
+    "image": "/images/uploads/1000136453-20261102224512284-fi16z.jpg"
+  },
+  {
     "slug": "gil-vicente-e-vitoria-sc-dividem-pontos-0-0-numa-partida-de-poucas-oportunidades",
     "path": "content/noticias/gil-vicente-e-vitoria-sc-dividem-pontos-0-0-numa-partida-de-poucas-oportunidades.md",
     "type": "news",
@@ -5619,6 +5635,22 @@
     "image": "https://framerusercontent.com/images/ycbszWojJI1w0LNN7vylumEGiQ.jpeg"
   },
   {
+    "slug": "benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe",
+    "path": "content/noticias/benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe.md",
+    "type": "news",
+    "title": "Benfica Segura Pavlidis: Encarnados Recusam Proposta Milionária do Fenerbahçe",
+    "subtitle": "O avançado grego é visto como peça-chave para atacar a nova época e a direção encarnada fechou a porta à investida turca.",
+    "category": "SL Benfica",
+    "categoryId": "sl-benfica",
+    "categoryKind": "club",
+    "author": "Chuta Pra Canto",
+    "authorId": "chuta-pra-canto",
+    "authorType": "Organization",
+    "published": "2026-08-05T12:00:00.000Z",
+    "publishedAt": "2026-08-05T12:00:00Z",
+    "image": "https://framerusercontent.com/images/yuZIWPtjI16gMkzUDJomIyCcyjA.jpg"
+  },
+  {
     "slug": "benfica-na-europa-marco-silva-perspetiva-o-aarhus-e-garante-que-o-mercado-encarnado-não-acabou",
     "path": "content/noticias/benfica-na-europa-marco-silva-perspetiva-o-aarhus-e-garante-que-o-mercado-encarnado-não-acabou.md",
     "type": "news",
@@ -5905,22 +5937,6 @@
     "publishedAt": "2026-08-05T16:16:21Z",
     "image": "https://framerusercontent.com/images/lqGiuJACPECmET6XiJBXjbf9zE.webp?width=1280&height=720",
     "sourceUrl": "https://chutapracanto.framer.website/noticias/sporting-bate-vitória-sc-em-alvalade-(3-2)-mas-volta-a-tremer-na-segunda-parte"
-  },
-  {
-    "slug": "benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe",
-    "path": "content/noticias/benfica-segura-pavlidis-encarnados-recusam-proposta-milionária-do-fenerbahçe.md",
-    "type": "news",
-    "title": "Benfica Segura Pavlidis: Encarnados Recusam Proposta Milionária do Fenerbahçe",
-    "subtitle": "O avançado grego é visto como peça-chave para atacar a nova época e a direção encarnada fechou a porta à investida turca.",
-    "category": "SL Benfica",
-    "categoryId": "sl-benfica",
-    "categoryKind": "club",
-    "author": "Chuta Pra Canto",
-    "authorId": "chuta-pra-canto",
-    "authorType": "Organization",
-    "published": "2026-08-05T12:00:00.000Z",
-    "publishedAt": "2026-08-05T12:00:00Z",
-    "image": "https://framerusercontent.com/images/yuZIWPtjI16gMkzUDJomIyCcyjA.jpg"
   },
   {
     "slug": "bomba-no-mercado-benfica-joga-a-última-cartada-por-joão-palhinha-—-tudo-ou-nada-na-luz",
