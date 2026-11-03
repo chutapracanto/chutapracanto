@@ -241,6 +241,11 @@
       "id": "sc-braga-conference-league",
       "label": "SC Braga, Conference League",
       "kind": "mixed"
+    },
+    {
+      "id": "fc-porto-champions-league",
+      "label": "FC Porto, Champions League",
+      "kind": "mixed"
     }
   ]
 }
