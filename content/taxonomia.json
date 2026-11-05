@@ -246,6 +246,11 @@
       "id": "fc-porto-champions-league",
       "label": "FC Porto, Champions League",
       "kind": "mixed"
+    },
+    {
+      "id": "uefa-conference-league",
+      "label": "UEFA Conference League",
+      "kind": "mixed"
     }
   ]
 }
