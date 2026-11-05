@@ -251,6 +251,11 @@
       "id": "uefa-conference-league",
       "label": "UEFA Conference League",
       "kind": "mixed"
+    },
+    {
+      "id": "uefa-europa",
+      "label": "UEFA Europa",
+      "kind": "mixed"
     }
   ]
 }
