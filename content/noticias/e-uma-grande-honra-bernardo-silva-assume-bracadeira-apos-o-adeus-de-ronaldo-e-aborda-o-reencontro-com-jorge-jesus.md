@@ -1,6 +1,6 @@
 ---
 title: "«É uma grande honra»: Bernardo Silva assume braçadeira após o adeus de Ronaldo e aborda o reencontro com Jorge Jesus"
-subtitulo: ""
+subtitulo: "Na antevisão ao duelo da Liga das Nações em Braga, o médio do Real Madrid destacou o espírito de grupo e garantiu total compromisso com as ideias do selecionador."
 categoria: "Seleção Nacional, Liga das Nações"
 type: "news"
 date: "2026-11-13T20:19:08.134Z"
@@ -23,6 +23,6 @@ Sendo o jogador mais experiente da convocatória atual com 115 internacionaliza�
 Aos 32 anos, Bernardo Silva abordou também a relação profissional com **Jorge Jesus** — recordando os tempos em que foi adaptado a lateral no Benfica —, o estatuto de suplente nos últimos encontros e a qualidade dos jovens talentos nacionais:
 
 -   **O passado no Benfica e a disponibilidade total:** «Claro que falámos sobre isso. Acabaram por fazer parte principalmente da minha caminhada e não tenho arrependimentos nenhuns de tudo o que fiz na minha carreira. Estarei disponível para jogar a qualquer posição na seleção nacional, até a guarda-redes. Não ando a fazer contas de quem será o meu treinador daqui a dois, cinco ou dez anos. O que posso dizer é que tanto eu como o mister Jorge Jesus estamos muito comprometidos em ajudar a seleção e fazer um trabalho em conjunto para que as coisas funcionem da melhor forma.»
--   **Gerir a suplência e a titularidade:** «É sempre difícil. Todos querem jogar, todos querem ser úteis. Na minha carreira sempre me habituei a ser útil, a participar. Quando não participo é óbvio que é duro. O selecionador tem 27 jogadores neste estágio, é muito, só podem jogar 11 de cada vez. \[Ser titular por estar na conferência?\] Não necessariamente. Veremos. Como disse, estou preparado para jogar 5 minutos, 30 minutos, 90 minutos. O que o mister achar necessário.»
+-   **Gerir a suplência e a titularidade:** «É sempre difícil. Todos querem jogar, todos querem ser úteis. Na minha carreira sempre me habituei a ser útil, a participar. Quando não participo é óbvio que é duro. O selecionador tem 27 jogadores neste estágio, é muito, só podem jogar 11 de cada vez. \\\[Ser titular por estar na conferência?\\\] Não necessariamente. Veremos. Como disse, estou preparado para jogar 5 minutos, 30 minutos, 90 minutos. O que o mister achar necessário.»
 -   **Evolução tática e posicionamento:** «Ao longo da minha carreira fui mudando bastante como jogador. Num início considerava-me mais irreverente, e, por isso, durante muitos anos joguei mais encostado às linhas, às vezes até como falso avançado. Agora não sei exatamente o porquê, mas sou mais conservador, mais pensador, muito diferente daquilo que era há 10 anos. Acredito que o Jorge Jesus me veja como um 8, um 10, um jogador de ligação entre defesa e ataque. E não tanto um jogador de linha.»
 -   **Elogios aos jovens valores:** «Não é preciso falarmos do talento do futebol português. Todos os anos aparecem jogadores de qualidade brutal. Os tais jovens já são jogadores a jogar em grandes clubes. O Mateus Fernandes ou Quenda jogam em dois dos melhores clubes de Inglaterra. A qualidade já não me surpreende no talento do jogador português.»
