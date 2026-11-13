@@ -256,6 +256,11 @@
       "id": "uefa-europa",
       "label": "UEFA Europa",
       "kind": "mixed"
+    },
+    {
+      "id": "selecao-nacional-liga-das-nacoes",
+      "label": "Seleção Nacional, Liga das Nações",
+      "kind": "mixed"
     }
   ]
 }
