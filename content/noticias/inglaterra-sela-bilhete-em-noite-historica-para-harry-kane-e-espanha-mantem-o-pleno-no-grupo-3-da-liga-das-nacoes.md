@@ -1,7 +1,7 @@
 ---
 title: "Inglaterra sela bilhete em noite histórica para Harry Kane e Espanha mantém o pleno no Grupo 3 da Liga das Nações"
-subtitulo: ""
-categoria: ""
+subtitulo: "A seleção dos Três Leões bateu a Croácia (2-1) com um penálti do capitão e a Roja venceu em Praga (0-2), mantendo o registo 100 por cento vitorioso."
+categoria: "Liga das Nações"
 type: "news"
 date: "2026-11-13T18:53:36.505Z"
 author: "ChutaPraCanto"
