@@ -15,7 +15,7 @@ Na sequência da derrota pesada sofrida diante da **Dinamarca (1-4)**, em Braga,
 Jorge Jesus não escondeu que a equipa perdeu o equilíbrio na etapa complementar, permitindo aos avançados dinamarqueses explorar espaços vitais junto da baliza portuguesa:
 
 -   **Fragilidades na última linha:** Analisando o que correu mal depois de sair em desvantagem ao intervalo devido a uma grande penalidade, o técnico frisou que Portugal não conseguiu travar o ímpeto ofensivo do adversário. Explicou que os jogadores dinamarqueses entraram com demasiado espaço na última linha defensiva e apontou o dedo à falta de agressividade nos dois golos sofridos de forma semelhante, através de cruzamentos.
--   **Mérito ao adversário e o impacto do terceiro golo:** Reconhecendo que a Dinamarca foi superior na pressão defensiva e mais poderosa no ataque — devolvendo o domínio que Portugal exercera em Copenhaga —, Jesus admitiu que a ansiedade por reverter o marcador acabou por expor a equipa. Segundo o selecionador, os jogadores acreditaram na reviravolta até ao 0-3, altura em que as dúvidas se instalaram e a equipa acabou por se resguardar.
+-   **Mérito ao adversário e o impacto do terceiro golo:** Reconhecendo que a Dinamarca foi superior na pressão defensiva e mais poderosa no ataque devolvendo o domínio que Portugal exercera em Copenhaga, Jesus admitiu que a ansiedade por reverter o marcador acabou por expor a equipa. Segundo o selecionador, os jogadores acreditaram na reviravolta até ao 0-3, altura em que as dúvidas se instalaram e a equipa acabou por se resguardar.
 
 ### **O olhar para o País de Gales e o adiamento da gestão de plantel**
 
