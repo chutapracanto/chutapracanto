@@ -5,7 +5,7 @@ categoria: "Liga das Nações"
 type: "news"
 date: "2026-11-17T22:23:26.384Z"
 author: "ChutaPraCanto"
-imagem: "/images/uploads/1000136857-20261117222326465-zbpgt.jpg"
+imagem: "/images/uploads/1000136855-20261117222416801-77nj3.jpg"
 ---
 
 O futebol nórdico viveu um dos episódios mais dramáticos e memoráveis da sua história recente na sexta e última jornada do Grupo A4 da **Liga das Nações**. A jogar em terreno alheio, no Estádio Parken, a **Noruega** assinou uma reviravolta monumental frente à rival **Dinamarca (2-3)** depois de se ter visto a perder por 2-0 logo no quarto de hora inicial. O triunfo ao cair do pano, selado por um penálti convertido por **Erling Haaland** e com forte protagonismo de **Andreas Schjelderup**, permitiu aos noruegueses roubar o segundo lugar e o bilhete para os quartos de final à custa do confronto direto.
