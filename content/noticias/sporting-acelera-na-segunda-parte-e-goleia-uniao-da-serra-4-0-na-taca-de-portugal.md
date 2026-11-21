@@ -8,7 +8,7 @@ author: "ChutaPraCanto"
 imagem: "/images/uploads/1000136946-20261121210220846-w93kq.webp"
 ---
 
-O **Sporting** evitou juntar-se à lista de surpresas da 4.ª eliminatória da **Taça de Portugal** ao bater o **União da Serra** por **4-0**, este sábado, no Estádio José Alvalade. Numa jornada em que emblemas da Primeira Liga como Casa Pia, Arouca e Estoril Praia caíram diante de adversários de divisões inferiores e após o próprio FC Porto ter sofrido até aos penáltis frente ao Paredes —, a equipa orientada por **Paulo Fonseca** passou por um primeiro tempo de enorme desconforto e assobios, mas resolveu a eliminatória com quatro golos num quarto de hora durante a segunda parte.
+O **Sporting** evitou juntar-se à lista de surpresas da 4.ª eliminatória da **Taça de Portugal** ao bater o **União da Serra** por **4-0**, este sábado, no Estádio José Alvalade. Numa jornada em que emblemas da Primeira Liga como Casa Pia, Arouca e Estoril Praia caíram diante de adversários de divisões inferiores e após o próprio FC Porto ter sofrido até aos penáltis frente ao Paredes, a equipa orientada por **Paulo Fonseca** passou por um primeiro tempo de enorme desconforto e assobios, mas resolveu a eliminatória com quatro golos num quarto de hora durante a segunda parte.
 
 ### **Resistência heroica do União da Serra e assobios em Alvalade ao descanso**
 
