@@ -1,6 +1,6 @@
 ---
 title: "Estreia de pesadelo para Mauricio Pochettino em Anfield: Liverpool goleia Manchester United (4-0) antes da deslocação a Alvalade"
-subtitulo: ""
+subtitulo: "Dominik Szoboszlai e Florian Wirtz marcaram logo nos 12 minutos iniciais após a expulsão de Leny Yoro, e Rio Ngumoha e Victor Muñoz completaram a goleada na etapa complementar."
 categoria: "Premier League"
 type: "news"
 date: "2026-11-22T22:46:38.497Z"
