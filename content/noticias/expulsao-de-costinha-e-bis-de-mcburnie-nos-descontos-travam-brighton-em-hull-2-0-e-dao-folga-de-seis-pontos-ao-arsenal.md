@@ -5,7 +5,7 @@ categoria: "Premier League"
 type: "news"
 date: "2026-11-22T16:54:08.248Z"
 author: "ChutaPraCanto"
-imagem: "/images/uploads/1000136968-20261122165408354-lb9pc.jpg"
+imagem: "/images/uploads/1000136970-20261122165453301-ydt25.jpg"
 ---
 
 O **Brighton & Hove Albion** deixou escapar uma ocasião de ouro na **Premier League** ao perder por **2-0** na deslocação ao reduto do **Hull City**, este domingo. Depois do empate do Arsenal na véspera em Newcastle e do deslize do Manchester City, os _seagulls_ tinham a possibilidade de encurtar distâncias para o topo e isolar-se na perseguição à liderança, mas acabaram por sucumbir já no tempo de compensação, depois de **Costinha** ter sido expulso perto do final e de **Oliver McBurnie** ter assinado dois golos decisivos.
