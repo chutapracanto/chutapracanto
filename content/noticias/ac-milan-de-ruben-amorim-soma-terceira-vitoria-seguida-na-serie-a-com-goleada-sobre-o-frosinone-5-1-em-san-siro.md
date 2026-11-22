@@ -1,6 +1,6 @@
 ---
 title: "AC Milan de Ruben Amorim soma terceira vitória seguida na Serie A com goleada sobre o Frosinone (5-1) em San Siro"
-subtitulo: ""
+subtitulo: "Depois de se adiantarem por dois golos nos primeiros 19 minutos e verem o Frosinone reduzir, os comandados de Ruben Amorim dispararam na segunda parte."
 categoria: "Serie A"
 type: "news"
 date: "2026-11-22T22:50:09.724Z"
