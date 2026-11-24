@@ -1,0 +1,25 @@
+---
+title: "Golo madrugador de Gyökeres não chega para segurar triunfo do Arsenal frente ao Borussia Dortmund (1-1) em Londres"
+subtitulo: "O Arsenal e o Borussia Dortmund repartiram pontos este terça-feira no Emirates Stadium (1-1), num duelo da quinta jornada da fase de liga da UEFA Champions League que permite a ambos os conjuntos permanecerem dentro dos oito primeiros lugares da classificação. Num encontro em que Viktor Gyökeres e Fábio Silva integraram os onzes iniciais, o antigo goleador do Sporting colocou os londrinos na frente logo nos dez minutos iniciais, mas a incapacidade dos comandados de Mikel Arteta para ampliar a vantagem acabou por sair cara na segunda metade, quando os germânicos chegaram ao empate. Com este desfecho, os gunners ocupam o 5.º posto e a formação alemã mantém-se na 7.ª posição.\n​Disparo surpreendente de Gyökeres inaugura o marcador mas domínio inglês não se traduz no 2-0\n​A jogar perante o seu público, a formação londrina entrou determinada a impor o seu ritmo e cedo encontrou caminhos para desbloquear o resultado:\n​10' — Remate potente de Viktor Gyökeres surpreende Kobel (1-0): Ainda fora da área e quase sem preparação prévia, o avançado internacional sueco recebeu a bola e desferiu um tiro forte de pé direito que apanhou Gregor Kobel desprevenido, inaugurando o marcador para o Arsenal.\n​Controlo territorial sem eficácia antes do descanso: Em vantagem, o conjunto orientado por Mikel Arteta geriu a posse e o rumo dos acontecimentos até ao intervalo, mas pecou na finalização e não conseguiu materializar o seu ascendente num segundo golo que trouxesse maior tranquilidade.\n​Arrancada de Gadou e finalização colocada de Beier selam igualdade após o intervalo\n​O desperdício ofensivo dos anfitriões viria a ser penalizado logo nos primeiros dez minutos da etapa complementar, numa transição conduzida com verticalidade pela equipa alemã:\n​55' — Beier finaliza com precisão após condução longa de Gadou (1-1): A partir do seu próprio meio-campo, Gadou arrancou em velocidade, foi superando opositores e, já junto à entrada da área inglesa, serviu Maximilian Beier; o camisola 14 rematou colocado e restabeleceu o empate no marcador.\n​Pressão final insuficiente dos gunners: Nos minutos seguintes, o Arsenal carregou no último terço em busca do golo que lhe devolvesse os três pontos, mas a organização defensiva do Borussia Dortmund resistiu até ao apito final, segurando a divisão de pontos em Londres."
+categoria: "UEFA Champions League"
+type: "news"
+date: "2026-11-24T22:27:59.806Z"
+author: "ChutaPraCanto"
+imagem: "/images/uploads/1000137056-20261124222759891-ubr8d.jpg"
+---
+
+O **Arsenal** e o **Borussia Dortmund** repartiram pontos este terça-feira no Emirates Stadium (**1-1**), num duelo da quinta jornada da fase de liga da **UEFA Champions League** que permite a ambos os conjuntos permanecerem dentro dos oito primeiros lugares da classificação. Num encontro em que **Viktor Gyökeres** e **Fábio Silva** integraram os onzes iniciais, o antigo goleador do Sporting colocou os londrinos na frente logo nos dez minutos iniciais, mas a incapacidade dos comandados de **Mikel Arteta** para ampliar a vantagem acabou por sair cara na segunda metade, quando os germânicos chegaram ao empate. Com este desfecho, os _gunners_ ocupam o **5.º posto** e a formação alemã mantém-se na **7.ª posição**.
+
+### **Disparo surpreendente de Gyökeres inaugura o marcador mas domínio inglês não se traduz no 2-0**
+
+A jogar perante o seu público, a formação londrina entrou determinada a impor o seu ritmo e cedo encontrou caminhos para desbloquear o resultado:
+
+-   **10' — Remate potente de Viktor Gyökeres surpreende Kobel (1-0):** Ainda fora da área e quase sem preparação prévia, o avançado internacional sueco recebeu a bola e desferiu um tiro forte de pé direito que apanhou **Gregor Kobel** desprevenido, inaugurando o marcador para o Arsenal.
+-   **Controlo territorial sem eficácia antes do descanso:** Em vantagem, o conjunto orientado por **Mikel Arteta** geriu a posse e o rumo dos acontecimentos até ao intervalo, mas pecou na finalização e não conseguiu materializar o seu ascendente num segundo golo que trouxesse maior tranquilidade.
+
+### **Arrancada de Gadou e finalização colocada de Beier selam igualdade após o intervalo**
+
+O desperdício ofensivo dos anfitriões viria a ser penalizado logo nos primeiros dez minutos da etapa complementar, numa transição conduzida com verticalidade pela equipa alemã:
+
+-   **55' — Beier finaliza com precisão após condução longa de Gadou (1-1):** A partir do seu próprio meio-campo, **Gadou** arrancou em velocidade, foi superando opositores e, já junto à entrada da área inglesa, serviu **Maximilian Beier**; o camisola 14 rematou colocado e restabeleceu o empate no marcador.
+-   **Pressão final insuficiente dos _gunners_:** Nos minutos seguintes, o Arsenal carregou no último terço em busca do golo que lhe devolvesse os três pontos, mas a organização defensiva do Borussia Dortmund resistiu até ao apito final, segurando a divisão de pontos em Londres.
