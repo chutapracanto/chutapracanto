@@ -1,6 +1,6 @@
 ---
 title: "Marco Silva assume responsabilidade total por «noite horrível» do Benfica na Chéquia e apela a reação rápida após 4-0"
-subtitulo: ""
+subtitulo: "À Sport TV, Marco Silva reconheceu que o jogo ficou praticamente decidido em seis ou sete minutos e que a equipa não representou o clube como devia."
 categoria: "SL Benfica, UEFA Europa League"
 type: "news"
 date: "2026-11-26T20:51:24.305Z"
